@@ -50,9 +50,9 @@ config :phoenix, :stacktrace_depth, 20
 
 # Configure your database
 config :smartcitydogs, Smartcitydogs.Repo,
-adapter: Ecto.Adapters.Postgres,
-username: System.get_env("DB_USER"),
-password: System.get_env("DB_PASSWORD"),
-database: System.get_env("DB_NAME_SMART_CITY_DOGS"),
-hostname: System.get_env("DB_HOST"),
-pool_size: 10
+  adapter: Ecto.Adapters.Postgres,
+  username: System.get_env("DB_USER"),
+  password: System.get_env("DB_PASSWORD"),
+  database: System.get_env("DB_NAME_SMART_CITY_DOGS"),
+  hostname: System.get_env("DB_HOST"),
+  pool_size: 10
