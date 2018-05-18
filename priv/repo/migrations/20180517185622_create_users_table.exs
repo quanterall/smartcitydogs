@@ -3,7 +3,6 @@ defmodule Smartcitydogs.Repo.Migrations.CreateUsersTable do
 
   def up do
     create table("users") do
-      timestamps
       add :deleted_at, :naive_datetime
       add :title, :text
       add :username, :text
@@ -12,6 +11,7 @@ defmodule Smartcitydogs.Repo.Migrations.CreateUsersTable do
       add :family, :text
       add :email, :text
       add :phone, :text
+      timestamps
     end
   end
 end
