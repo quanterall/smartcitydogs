@@ -1,7 +1,7 @@
 defmodule Smartcitydogs.Repo.Migrations.CreateUsersTable do
   use Ecto.Migration
 
-  def create do
+  def change do
     create table("users") do      
       add :title, :text
       add :username, :text
