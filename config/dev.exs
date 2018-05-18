@@ -38,7 +38,7 @@ config :smartcitydogs, SmartcitydogsWeb.Endpoint,
       ~r{priv/gettext/.*(po)$},
       ~r{lib/smartcitydogs_web/views/.*(ex)$},
       ~r{lib/smartcitydogs_web/templates/.*(eex)$}
-      ]
+    ]
   ]
 
 # Do not include metadata nor timestamps in development logs
