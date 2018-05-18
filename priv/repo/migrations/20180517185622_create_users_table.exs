@@ -2,8 +2,7 @@ defmodule Smartcitydogs.Repo.Migrations.CreateUsersTable do
   use Ecto.Migration
 
   def up do
-    create table("users") do
-      add :deleted_at, :naive_datetime
+    create table("users") do      
       add :title, :text
       add :username, :text
       add :password, :text
@@ -11,7 +10,8 @@ defmodule Smartcitydogs.Repo.Migrations.CreateUsersTable do
       add :family, :text
       add :email, :text
       add :phone, :text
-      timestamps
+      add :deleted_at, :naive_datetime
+      timestamps()
     end
   end
 end
