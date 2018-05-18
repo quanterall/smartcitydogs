@@ -32,14 +32,14 @@ config :smartcitydogs, SmartcitydogsWeb.Endpoint,
 
 # Watch static and templates for browser reloading.
 config :smartcitydogs, SmartcitydogsWeb.Endpoint,
-       live_reload: [
-         patterns: [
-           ~r{priv/static/.*(js|css|png|jpeg|jpg|gif|svg)$},
-           ~r{priv/gettext/.*(po)$},
-           ~r{lib/smartcitydogs_web/views/.*(ex)$},
-           ~r{lib/smartcitydogs_web/templates/.*(eex)$}
-         ]
-       ]
+  live_reload: [
+    patterns: [
+      ~r{priv/static/.*(js|css|png|jpeg|jpg|gif|svg)$},
+      ~r{priv/gettext/.*(po)$},
+      ~r{lib/smartcitydogs_web/views/.*(ex)$},
+      ~r{lib/smartcitydogs_web/templates/.*(eex)$}
+      ]
+  ]
 
 # Do not include metadata nor timestamps in development logs
 config :logger, :console, format: "[$level] $message\n"
