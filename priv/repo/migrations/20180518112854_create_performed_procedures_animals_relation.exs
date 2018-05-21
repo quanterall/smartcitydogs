@@ -3,7 +3,7 @@ defmodule Smartcitydogs.Repo.Migrations.CreatePerformedProceduresAnimalsRelation
 
   def change do
     alter table(:performed_procedures) do
-      add :animal_id, references(:animal)
+      add :animals_id, references(:animals)
     end
   end
 end
