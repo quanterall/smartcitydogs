@@ -11,6 +11,8 @@ defmodule Smartcitydogs.User do
     field(:phone, :string)
     field(:username, :string)
     field(:users_types_id, :id)
+    belongs_to :signals_comments, Smartcitydogs.SignalsComments
+    belongs_to :user_types, Smartcitydogs.UsersType
 
     timestamps()
   end

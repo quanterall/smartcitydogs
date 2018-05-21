@@ -12,6 +12,9 @@ defmodule Smartcitydogs.Signals do
     field(:view_count, :integer)
     field(:signals_types_id, :id)
     field(:signals_categories_id, :id)
+    has_many :signals_comments, Smartcitydogs.SignalsComments
+    belongs_to :signals_categories, Smartcitydogs.SignalsCategories
+    belongs_to :signals_types, Smartcitydogs.SignalsTypes
 
     timestamps()
   end

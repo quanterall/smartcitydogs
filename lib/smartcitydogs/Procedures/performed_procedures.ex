@@ -7,6 +7,8 @@ defmodule Smartcitydogs.PerformedProcedures do
     field(:deleted_at, :naive_datetime)
     field(:animals_id, :id)
     field(:procedure_type_id, :id)
+    belongs_to :animals, Smartcitydogs.Animals
+    belongs_to :procedure_type, Smartcitydogs.ProcedureType
 
     timestamps()
   end

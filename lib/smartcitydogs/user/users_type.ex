@@ -5,6 +5,7 @@ defmodule Smartcitydogs.UsersType do
   schema "users_types" do
     field(:deleted_at, :naive_datetime)
     field(:name, :string)
+    has_many :users, Smartcitydogs.User
 
     timestamps()
   end

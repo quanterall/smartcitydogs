@@ -6,6 +6,7 @@ defmodule Smartcitydogs.AnimalImages do
     field(:deleted_at, :naive_datetime)
     field(:url, :string)
     field(:animals_id, :id)
+    belongs_to :animals, Smartcitydogs.Animals
 
     timestamps()
   end

@@ -5,6 +5,7 @@ defmodule Smartcitydogs.ProcedureType do
   schema "procedure_type" do
     field(:deleted_at, :naive_datetime)
     field(:name, :string)
+    has_many :performed_procedures, Smartcitydogs.PerformedProcedures
 
     timestamps()
   end
