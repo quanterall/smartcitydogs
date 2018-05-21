@@ -3,7 +3,7 @@ defmodule Smartcitydogs.Repo.Migrations.CreateProcedureTypePerformedProceduresRe
 
   def change do
     alter table(:performed_procedures) do
-      add :procedure_type_id, references(:procedure_type)
+      add(:procedure_type_id, references(:procedure_type))
     end
   end
 end

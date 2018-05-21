@@ -3,8 +3,8 @@ defmodule Smartcitydogs.Repo.Migrations.CreateAnimalImages do
 
   def change do
     create table("animal_images") do
-      add :url, :text
-      add :deleted_at, :naive_datetime
+      add(:url, :text)
+      add(:deleted_at, :naive_datetime)
       timestamps()
     end
   end

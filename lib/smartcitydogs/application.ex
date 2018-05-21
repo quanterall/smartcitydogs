@@ -11,7 +11,7 @@ defmodule Smartcitydogs.Application do
       # Start the Ecto repository
       supervisor(Smartcitydogs.Repo, []),
       # Start the endpoint when the application starts
-      supervisor(SmartcitydogsWeb.Endpoint, []),
+      supervisor(SmartcitydogsWeb.Endpoint, [])
       # Start your own worker by calling: Smartcitydogs.Worker.start_link(arg1, arg2, arg3)
       # worker(Smartcitydogs.Worker, [arg1, arg2, arg3]),
     ]

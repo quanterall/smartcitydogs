@@ -3,7 +3,7 @@ defmodule Smartcitydogs.Repo.Migrations.CreateAnimalStatus do
 
   def change do
     create table("animal_status") do
-      add :name, :text
+      add(:name, :text)
       timestamps()
     end
   end
