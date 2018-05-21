@@ -2,10 +2,9 @@ defmodule Smartcitydogs.AnimalStatus do
   use Ecto.Schema
   import Ecto.Changeset
 
-
   schema "animal_status" do
-    field :deleted_at, :naive_datetime
-    field :name, :string
+    field(:deleted_at, :naive_datetime)
+    field(:name, :string)
 
     timestamps()
   end

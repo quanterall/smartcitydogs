@@ -2,10 +2,9 @@ defmodule Smartcitydogs.ProcedureType do
   use Ecto.Schema
   import Ecto.Changeset
 
-
   schema "procedure_type" do
-    field :deleted_at, :naive_datetime
-    field :name, :string
+    field(:deleted_at, :naive_datetime)
+    field(:name, :string)
 
     timestamps()
   end

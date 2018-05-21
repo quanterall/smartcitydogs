@@ -2,13 +2,12 @@ defmodule Smartcitydogs.StaticPages do
   use Ecto.Schema
   import Ecto.Changeset
 
-
   schema "static_pages" do
-    field :content, :string
-    field :deleted_at, :naive_datetime
-    field :keywords, :string
-    field :meta, :string
-    field :title, :string
+    field(:content, :string)
+    field(:deleted_at, :naive_datetime)
+    field(:keywords, :string)
+    field(:meta, :string)
+    field(:title, :string)
 
     timestamps()
   end
