@@ -3,7 +3,7 @@ defmodule Smartcitydogs.Repo.Migrations.CreateSignalsTypeRelation do
 
   def change do
     alter table(:signals) do
-      add :signals_types_id, references(:signals_types)
+      add(:signals_types_id, references(:signals_types))
     end
   end
 end
