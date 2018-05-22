@@ -9,7 +9,7 @@ defmodule Smartcitydogs.Animals do
     field(:deleted_at, :naive_datetime)
     field(:registered_at, :naive_datetime)
     field(:sex, :string)
-    field(:animal_status_id, :id)
+    #field(:animal_status_id, :id)
     has_many :animals_image, Smartcitydogs.AnimalImages
     has_many :performed_procedure, Smartcitydogs.PerformedProcedures
     has_many :rescues, Smartcitydogs.Rescues
