@@ -14,6 +14,6 @@ defmodule Smartcitydogs.SignalsTypes do
   def changeset(signals_types, attrs) do
     signals_types
     |> cast(attrs, [:name, :deleted_at])
-    |> validate_required([:name, :deleted_at])
+    |> validate_required([:name])
   end
 end

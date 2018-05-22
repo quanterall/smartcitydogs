@@ -5,14 +5,14 @@ defmodule Smartcitydogs.User do
   schema "users" do
     field(:deleted_at, :naive_datetime)
     field(:email, :string)
-    field(:first_name, :string)
+    field(:fist_name, :string)
     field(:last_name, :string)
     field(:password_hash, :string)
     field(:phone, :string)
     field(:username, :string)
-    field(:users_types_id, :id)
-    belongs_to :signals_comments, Smartcitydogs.SignalsComments
-    belongs_to :user_types, Smartcitydogs.UsersType
+  
+    has_many :signals_comments, Smartcitydogs.SignalsComments
+    belongs_to :users_types, Smartcitydogs.UsersType
 
     timestamps()
   end
@@ -23,20 +23,21 @@ defmodule Smartcitydogs.User do
     |> cast(attrs, [
       :username,
       :password_hash,
-      :first_name,
+      :fist_name,
       :last_name,
       :email,
       :phone,
-      :deleted_at
+      :deleted_at,
+      :users_types_id
     ])
     |> validate_required([
       :username,
       :password_hash,
-      :first_name,
+      :fist_name,
       :last_name,
       :email,
       :phone,
-      :deleted_at
+      :users_types_id
     ])
   end
 end
