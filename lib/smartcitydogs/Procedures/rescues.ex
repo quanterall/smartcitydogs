@@ -5,7 +5,7 @@ defmodule Smartcitydogs.Rescues do
   schema "rescues" do
     field(:deleted_at, :naive_datetime)
     field(:name, :string)
-    field(:animals_id, :id)
+    #field(:animals_id, :id)
     belongs_to :animals, Smartcitydogs.Animals
 
     timestamps()
@@ -14,7 +14,7 @@ defmodule Smartcitydogs.Rescues do
   @doc false
   def changeset(rescues, attrs) do
     rescues
-    |> cast(attrs, [:name, :deleted_at])
-    |> validate_required([:name, :deleted_at])
+    |> cast(attrs, [:name, :deleted_at, :animals_id])
+    |> validate_required([:name])
   end
 end

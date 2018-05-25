@@ -35,8 +35,7 @@ defmodule Smartcitydogs.News do
       :keywords,
       :content,
       :short_content,
-      :date,
-      :deleted_at
+      :date
     ])
   end
 end
