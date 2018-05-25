@@ -19,5 +19,7 @@ defmodule Smartcitydogs.SignalsData do
     Repo.get!(Signals,id)
   end
 
-  
+  def create_signal(args \\ %{}) do
+    
+  end
 end
