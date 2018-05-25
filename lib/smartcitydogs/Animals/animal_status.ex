@@ -14,6 +14,6 @@ defmodule Smartcitydogs.AnimalStatus do
   def changeset(animal_status, attrs) do
     animal_status
     |> cast(attrs, [:name, :deleted_at])
-    |> validate_required([:name, :deleted_at])
+    |> validate_required([:name])
   end
 end
