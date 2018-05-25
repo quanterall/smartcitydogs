@@ -14,7 +14,7 @@ defmodule Smartcitydogs.AnimalImages do
   @doc false
   def changeset(animal_images, attrs) do
     animal_images
-    |> cast(attrs, [:url, :deleted_at])
-    |> validate_required([:url, :deleted_at])
+    |> cast(attrs, [:url, :deleted_at, :animals_id])
+    |> validate_required([:url, :animals_id])
   end
 end
