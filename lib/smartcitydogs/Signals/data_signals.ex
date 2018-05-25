@@ -33,6 +33,11 @@ defmodule Smartcitydogs.DataSignals do
     Repo.get!(Signals,id)
   end
 
+  def delete_signal(id) do
+    get_signal(id)
+    |> Repo.delete()
+  end
+
   #Signals types
 
   def get_signal_type(id) do
@@ -53,6 +58,11 @@ defmodule Smartcitydogs.DataSignals do
     types
     |> SignalsTypes.changeset(args)
     |> Repo.update()
+  end
+
+  def delete_signal_type(id) do
+    get_signal_type(id)
+    |> Repo.delete()
   end
 
   #Signal comments
@@ -77,6 +87,11 @@ defmodule Smartcitydogs.DataSignals do
     |> Repo.update()
   end
 
+  def delete_signal_comment(id) do
+    get_signal_comment(id)
+    |> Repo.delete()
+  end
+
   #Signals category
 
   def get_signal_category(id) do
@@ -97,6 +112,11 @@ defmodule Smartcitydogs.DataSignals do
     category
     |> SignalsCategories.changeset(args)
     |> Repo.update()
+  end
+
+  def delete_signal_category(id) do
+    get_signal_category(id)
+    |> Repo.delete()
   end
 
 
