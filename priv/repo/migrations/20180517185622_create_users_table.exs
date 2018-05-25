@@ -5,7 +5,7 @@ defmodule Smartcitydogs.Repo.Migrations.CreateUsersTable do
     create table("users") do
       add(:username, :text)
       add(:password_hash, :text)
-      add(:fist_name, :text)
+      add(:first_name, :text)
       add(:last_name, :text)
       add(:email, :text)
       add(:phone, :text)
