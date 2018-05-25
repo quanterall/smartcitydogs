@@ -29,7 +29,9 @@ defmodule Smartcitydogs.Signals do
       :support_count,
       :chip_number,
       :description,
-      :deleted_at
+      :deleted_at,
+      :signals_categories_id,
+      :signals_types_id
     ])
     |> validate_required([
       :title,
@@ -38,7 +40,8 @@ defmodule Smartcitydogs.Signals do
       :support_count,
       :chip_number,
       :description,
-      :deleted_at
+      :signals_categories_id,
+      :signals_types_id
     ])
   end
 end

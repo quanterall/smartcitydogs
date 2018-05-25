@@ -16,7 +16,7 @@ defmodule Smartcitydogs.SignalsComments do
   @doc false
   def changeset(signals_comments, attrs) do
     signals_comments
-    |> cast(attrs, [:comment, :deleted_at])
-    |> validate_required([:comment, :deleted_at])
+    |> cast(attrs, [:comment, :deleted_at, :signals_id, :users_id])
+    |> validate_required([:comment, :signals_id, :users_id])
   end
 end
