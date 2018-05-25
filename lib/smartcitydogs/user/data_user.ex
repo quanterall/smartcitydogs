@@ -16,17 +16,11 @@ defmodule Smartcitydogs.DataUsers do
   end
 
   def create_user(args \\ %{}) do
-    get_user_type(args.users_type_id)
-    |> Ecto.build_assoc(:users, %{
-      deleted_at: args.deleted_at,
-      email: args.email,
-      first_name: args.first_name,
-      last_name: args.last_name,
-      password_hash: args.password,
-      phone: args.phone,
-      username: args.username
-    })
-    |> Repo.insert()
+    unless Repo.get_by(User, username: args[:username]) do
+      %User{}
+      |> User.changeset(args)
+      |> Repo.insert()
+    end
   end
 
   def update_user(%User{} = user, args) do
@@ -67,5 +61,4 @@ defmodule Smartcitydogs.DataUsers do
   def change_user_type(%UsersType{} = users_type) do
     UsersType.changeset(users_type, %{})
   end
-
 end

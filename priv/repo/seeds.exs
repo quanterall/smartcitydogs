@@ -42,7 +42,7 @@ end
 
 
 ############## Users #############
-users_params = %{username: "Admin", password_hash: "DDGFDDHRTEWFVFBHJKILOIUJTGERFRVRV", fist_name: "Admin", last_name: "Admin", email: "admin@test.bg", phone: "0873245473", users_types_id: 1}
+users_params = %{username: "Admin", password_hash: "DDGFDDHRTEWFVFBHJKILOIUJTGERFRVRV", first_name: "Admin", last_name: "Admin", email: "admin@test.bg", phone: "0873245473", users_types_id: 1}
 
 unless Repo.get_by(User, username: users_params[:username]) do  
  %User{} 
