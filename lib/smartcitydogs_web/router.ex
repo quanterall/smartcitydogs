@@ -18,6 +18,9 @@ defmodule SmartcitydogsWeb.Router do
     pipe_through(:browser)
 
     get("/", PageController, :index)
+    get "/user", UserController, :index
+    #resources "/all", AllController, only: [:index]
+    #get("/register", RegisterController, :index)
   end
 
   # Other scopes may use custom stacks.

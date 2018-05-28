@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>SmartCityDogs!</title>
+    <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
+  </head>
+
+  <body>
+    <!-- Social buttons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"> -->
+
+
+    <div class="container">
+      <header class="header">
+
+      <img class="mySlides" src="<%= static_path(@conn, "/images/1.jpg") %>"
+      style="display: block; height: 25vw; width: 53.5vw">
+      <img class="mySlides" src="<%= static_path(@conn, "/images/2.jpg") %>"
+      style="display: block; height: 25vw; width: 53.5vw">
+      <img class="mySlides" src="<%= static_path(@conn, "/images/3.jpg") %>"
+      style="display: block; height: 25vw; width: 53.5vw">
+      <img class="mySlides" src="<%= static_path(@conn, "/images/4.jpg") %>"
+      style="display: block; height: 25vw; width: 53.5vw">
+
+      <!-- <button class="w3-button w3-display-left" onclick="plusDivs(-1)">&#10094;</button>
+      <button class="w3-button w3-display-right" onclick="plusDivs(+1)">&#10095;</button> -->
+      <br>
+        <!-- Social buttons -->
+      <a href="#" class="fa fa-facebook"></a>
+      <a href="#" class="fa fa-twitter"></a>
+
+      <button type="button">Forgotten password</button>
+      <button type="New signal">New signal</button>
+
+      </header>
+
+      <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
+      <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
+
+      <main role="main">
+        <%= render @view_module, @view_template, assigns %>
+      </main>
+
+    </div> <!-- /container -->
+    <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
+    <script src="<%= static_path(@conn, "/js/slide.js") %>"></script>
+  </body>
+</html>

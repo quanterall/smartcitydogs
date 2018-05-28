@@ -1,0 +1,26 @@
+<html>
+
+<head>
+
+</head>
+
+<body>
+  <ul>
+    <li><button type="button">Facebook</button></li>
+    <li><button type="button">Twitter</button></li>
+    <li>Hello Name</li>
+    <li>
+      <div class="dropdown">
+  <button class="dropbtn">Dropdown</button>
+  <div class="dropdown-content">
+    <a href="#">My profile</a>
+    <a href="#">My signals</a>
+    <a href="#">Followed signals</a>
+    <a href="#">Logout</a>
+  </div>
+</div>
+    </li>
+  </ul>
+</body>
+
+</html>
