@@ -55,6 +55,10 @@ defmodule SmartcitydogsWeb do
   def channel do
     quote do
       use Phoenix.Channel
+
+      alias SmartcitydogsWeb.Repo
+      import Ecto
+      import Ecto.Query
       import SmartcitydogsWeb.Gettext
     end
   end
