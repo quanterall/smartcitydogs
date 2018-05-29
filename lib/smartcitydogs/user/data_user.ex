@@ -8,7 +8,7 @@ defmodule Smartcitydogs.DataUsers do
   import Plug.Conn
 
   def list_users do
-    Repo.all(User)
+    Repo.all(User) |>  Repo.preload(:users_types)
   end
 
   def get_user!(id) do

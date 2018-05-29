@@ -11,6 +11,8 @@ defmodule Smartcitydogs.User do
     field(:password_hash, :string)
     field(:phone, :string)
     field(:username, :string)
+   
+   # checkbox(form, :famous)
 
     has_many :signals_comments, Smartcitydogs.SignalsComments
     belongs_to :users_types, Smartcitydogs.UsersType
