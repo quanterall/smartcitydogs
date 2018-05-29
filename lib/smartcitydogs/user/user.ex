@@ -7,13 +7,13 @@ defmodule Smartcitydogs.User do
     field(:email, :string)
     field(:first_name, :string)
     field(:last_name, :string)
-    field :password, :string, virtual: true
+    field(:password, :string, virtual: true)
     field(:password_hash, :string)
     field(:phone, :string)
     field(:username, :string)
 
-    has_many :signals_comments, Smartcitydogs.SignalsComments
-    belongs_to :users_types, Smartcitydogs.UsersType
+    has_many(:signals_comments, Smartcitydogs.SignalsComments)
+    belongs_to(:users_types, Smartcitydogs.UsersType)
 
     timestamps()
   end

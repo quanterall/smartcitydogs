@@ -66,7 +66,6 @@ defmodule Smartcitydogs.DataProcedure do
     ProcedureType.changeset(procedure, %{})
   end
 
-
   ###  Rescues function 
   def list_rescues do
     Repo.all(Rescues)
@@ -95,5 +94,4 @@ defmodule Smartcitydogs.DataProcedure do
   def change_rescues(%Rescues{} = rescues) do
     Rescues.changeset(rescues, %{})
   end
-
 end

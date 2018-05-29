@@ -1,5 +1,4 @@
 defmodule Smartcitydogs.DataSignals do
-
   import Ecto.Query, warn: false
   alias Smartcitydogs.Repo
 
@@ -11,7 +10,7 @@ defmodule Smartcitydogs.DataSignals do
 
   import Plug.Conn
 
-  #Signals
+  # Signals
 
   def create_signal(args \\ %{}) do
     %Signals{}
@@ -30,7 +29,7 @@ defmodule Smartcitydogs.DataSignals do
   end
 
   def get_signal(id) do
-    Repo.get!(Signals,id)
+    Repo.get!(Signals, id)
   end
 
   def delete_signal(id) do
@@ -38,10 +37,10 @@ defmodule Smartcitydogs.DataSignals do
     |> Repo.delete()
   end
 
-  #Signals types
+  # Signals types
 
   def get_signal_type(id) do
-    Repo.get!(SignalsTypes,id)
+    Repo.get!(SignalsTypes, id)
   end
 
   def list_signal_types() do
@@ -65,10 +64,10 @@ defmodule Smartcitydogs.DataSignals do
     |> Repo.delete()
   end
 
-  #Signal comments
+  # Signal comments
 
   def get_signal_comment(id) do
-    Repo.get!(SignalsComments,id)
+    Repo.get!(SignalsComments, id)
   end
 
   def list_signal_comment() do
@@ -92,10 +91,10 @@ defmodule Smartcitydogs.DataSignals do
     |> Repo.delete()
   end
 
-  #Signals category
+  # Signals category
 
   def get_signal_category(id) do
-    Repo.get!(SignalsCategories,id)
+    Repo.get!(SignalsCategories, id)
   end
 
   def list_signal_category() do
@@ -118,6 +117,4 @@ defmodule Smartcitydogs.DataSignals do
     get_signal_category(id)
     |> Repo.delete()
   end
-
-
 end
