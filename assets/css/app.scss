@@ -10,6 +10,13 @@
   bottom: 3rem;
   z-index: 10;
 }
+// Facebook button.
+.fa {
+  font-size: 2vw;
+}
+
+
+
 
 /* Declare heights because of positioning of img element */
 .carousel-item {
@@ -24,6 +31,9 @@
   height: 32rem;
 }
 
+.ul-float {
+  display: inline;
+}
 
 /* MARKETING CONTENT
 -------------------------------------------------- */
