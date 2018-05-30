@@ -57,6 +57,14 @@ exports.config = {
   },
 
   npm: {
-    enabled: true
+    enabled: true,
+      globals: {
+          jQuery: 'jquery',
+          $: 'jquery',
+          bootstrap: 'bootstrap'
+      },
+      styles: {
+          bootstrap: ['dist/css/bootstrap.css']
+      }
   }
 };

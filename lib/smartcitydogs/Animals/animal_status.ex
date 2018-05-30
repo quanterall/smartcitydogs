@@ -5,8 +5,8 @@ defmodule Smartcitydogs.AnimalStatus do
   schema "animal_status" do
     field(:deleted_at, :naive_datetime)
     field(:name, :string)
-    has_many :animals, Smartcitydogs.Animals
-    
+    has_many(:animals, Smartcitydogs.Animals)
+
     timestamps()
   end
 

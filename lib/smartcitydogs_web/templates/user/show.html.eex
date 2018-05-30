@@ -1,3 +1,24 @@
+<<<<<<< HEAD
 <h2><%= @user.username %></h2>
 
 <p><%= @user.email %></p>
+=======
+<h2>Show User</h2>
+
+<ul>
+
+  <li>
+    <strong>Name:</strong>
+    <%= @user.first_name %>
+  </li>
+
+  <li>
+    <strong>Age:</strong>
+    <%= @user.last_name %>
+  </li>
+
+</ul>
+
+<span><%= link "Edit", to: user_path(@conn, :edit, @user) %></span>
+<span><%= link "Back", to: user_path(@conn, :index) %></span>
+>>>>>>> e1b74a8043d2f8bdf816134d73d9398c8e588c03

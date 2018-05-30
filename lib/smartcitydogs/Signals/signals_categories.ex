@@ -5,7 +5,7 @@ defmodule Smartcitydogs.SignalsCategories do
   schema "signals_categories" do
     field(:deleted_at, :naive_datetime)
     field(:name, :string)
-    has_many :signals, Smartcitydogs.Signals
+    has_many(:signals, Smartcitydogs.Signals)
 
     timestamps()
   end
