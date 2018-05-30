@@ -9,9 +9,8 @@
               <img class="first-slide" src="<%= static_path(@conn, "/images/1.jpg") %>" alt="First slide">
               <div class="container">
                 <div class="carousel-caption text-left">
-                  <h1>Example headline.</h1>
-                  <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-                  <p><a class="btn btn-lg btn-primary" href="#" role="button">Sign up today</a></p>
+                  <h1>Do you want to report a signal?</h1>
+                  <p>Save a dog's life or give it a new one! Report for a problem or make a signal now!<p><a class="btn btn-lg btn-primary" href="#" role="button">Sign up today</a></p>
                 </div>
               </div>
             </div>
