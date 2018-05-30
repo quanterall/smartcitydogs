@@ -30,12 +30,8 @@ alias Smartcitydogs.User
 alias Smartcitydogs.Signals
 alias Smartcitydogs.SignalsComments
 
-<<<<<<< HEAD
 
 ############## Users Type Admin #############
-=======
-############## Users Type #############
->>>>>>> e1b74a8043d2f8bdf816134d73d9398c8e588c03
 users_type_params = %{name: "Admin"}
 
 unless Repo.get_by(UsersType, name: users_type_params[:name]) do
@@ -44,7 +40,6 @@ unless Repo.get_by(UsersType, name: users_type_params[:name]) do
   |> Repo.insert!()
 end
 
-<<<<<<< HEAD
 ############## Users Type User #############
 users_type_params = %{name: "User"}
 
@@ -80,8 +75,6 @@ end
 
 
 
-=======
->>>>>>> e1b74a8043d2f8bdf816134d73d9398c8e588c03
 ############## Users #############
 users_params = %{
   username: "Admin",

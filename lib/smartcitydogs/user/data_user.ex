@@ -20,17 +20,9 @@ defmodule Smartcitydogs.DataUsers do
   end
 
   def create_user(args \\ %{}) do
-<<<<<<< HEAD
-    #unless Repo.get_by(User, username: args[:username]) do
-      %User{}
-      |> User.changeset(args)
-      |> Repo.insert()
-    #end
-=======
     %User{}
     |> User.changeset(args)
     |> Repo.insert()
->>>>>>> e1b74a8043d2f8bdf816134d73d9398c8e588c03
   end
 
   def update_user(%User{} = user, args) do

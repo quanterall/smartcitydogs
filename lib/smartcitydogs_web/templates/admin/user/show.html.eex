@@ -8,3 +8,6 @@
   <li>Phone: <%= @user.phone %></li>
   <li>User Type: <%= @user.users_types.name %></li>
 </ul>
+
+
+<span><a href="/admin/users">Back</a></span>

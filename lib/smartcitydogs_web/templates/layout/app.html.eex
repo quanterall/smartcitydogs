@@ -7,25 +7,97 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-<<<<<<< HEAD
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-
-
-    <title>Hello SimpleAuth!</title>
-=======
     <title>SmartCityDogs!</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
->>>>>>> e1b74a8043d2f8bdf816134d73d9398c8e588c03
     <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
   </head>
 
   <body>
-<<<<<<< HEAD
-    <div class="container">
+
+      <header>
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+          <a class="navbar-brand" href="#">
+            <a href="#" class="fa fa-facebook"></a>
+          </a>
+          <a class="navbar-brand" href="#">
+            <a href="#" class="fa fa-twitter"></a>
+          </a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav mr-auto">
+              <%= if @current_user do %>
+    <li class="nav-item"><%= @current_user.email %> (<%= @current_user.id %>)</li>
+    <li class="nav-item">
+                <a class="nav-link" href="\">Home </a>
+    </li>
+    <li class="nav-item">
+          <%= link "My signals", to: user_post_path(@conn, :index, 
+                                                  @current_user), class: "nav-link" %>
+        </li>
+        <%= if @current_user.users_types_id == 1 do %>
+      <li class="nav-item">
+        <%= link "Users", to: admin_user_path(@conn, :index), class: "nav-link" %>
+      </li>
+    <% end %>
+    <li class="nav-item">
+      <%= link "Sign out", to: session_path(@conn, :delete,
+                                            @current_user),
+                           method: "delete", class: "nav-link" %>
+    </li>
+  <% else %>  
+              <li class="nav-item">
+                <a class="nav-link" href="\">Home </a>
+              </li>
+              <li class="nav-item">
+               <%= link "Register", to: user_path(@conn, :new), class: "nav-link" %>
+                <!--a class="nav-link" href="<%=#user_url(@conn, :new)%>">Register</a-->
+              </li>
+              <li class="nav-item">
+                <%= link "Sign in", to: session_path(@conn, :new), class: "nav-link" %>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">New Signal</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link disabled" href="#">Forgotten password</a>
+              </li>
+            <% end %>
+            </ul>
+            <form class="form-inline mt-2 mt-md-0">
+              <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+              <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </form>
+          </div>
+        </nav>
+      </header>
+
+      <main role="main">
+      <div class="container mt-3">
+<%= render @view_module, @view_template, assigns %>
+</div>
+      </main>
+
+
+
+  <svg xmlns="http://www.w3.org/2000/svg" width="500" height="500" viewBox="0 0 500 500" preserveAspectRatio="none" style="display: none; visibility: hidden; position: absolute; top: -100%; left: -100%;"><defs><style type="text/css"></style></defs><text x="0" y="25" style="font-weight:bold;font-size:25pt;font-family:Arial, Helvetica, Open Sans, sans-serif">500x500</text></svg>
+
+
+
+
+
+
+
+
+    <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
+    <script src="<%= static_path(@conn, "/js/slide.js") %>"></script>
+  </body>
+</html>
+
+<!-- 
+<div class="container">
       <header class="header">
   <nav role="navigation">
     <ul class="nav nav-pills pull-right">
@@ -61,63 +133,5 @@
         <%= render @view_module, @view_template, assigns %>
       </main>
 
-    </div> <!-- /container -->
-    <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
-=======
-
-      <header>
-        <nav class="navbar navbar-expand-md navbar-dark bg-dark">
-          <a class="navbar-brand" href="#">
-            <a href="#" class="fa fa-facebook"></a>
-          </a>
-          <a class="navbar-brand" href="#">
-            <a href="#" class="fa fa-twitter"></a>
-          </a>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarCollapse">
-            <ul class="navbar-nav mr-auto">
-              <li class="nav-item">
-                <a class="nav-link" href="<%=user_url(@conn, :index)%>">Usersgit </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="<%=user_url(@conn, :new)%>">Register</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">New Signal</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link disabled" href="#">Forgotten password</a>
-              </li>
-            </ul>
-            <form class="form-inline mt-2 mt-md-0">
-              <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-              <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-            </form>
-          </div>
-        </nav>
-      </header>
-
-      <main role="main">
-      <div class="container mt-3">
-<%= render @view_module, @view_template, assigns %>
-</div>
-      </main>
-
-
-
-  <svg xmlns="http://www.w3.org/2000/svg" width="500" height="500" viewBox="0 0 500 500" preserveAspectRatio="none" style="display: none; visibility: hidden; position: absolute; top: -100%; left: -100%;"><defs><style type="text/css"></style></defs><text x="0" y="25" style="font-weight:bold;font-size:25pt;font-family:Arial, Helvetica, Open Sans, sans-serif">500x500</text></svg>
-
-
-
-
-
-
-
-
-    <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
-    <script src="<%= static_path(@conn, "/js/slide.js") %>"></script>
->>>>>>> e1b74a8043d2f8bdf816134d73d9398c8e588c03
-  </body>
-</html>
+    </div> 
+    <script src="<%= static_path(@conn, "/js/app.js") %>"></script> 

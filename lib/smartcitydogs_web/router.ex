@@ -35,7 +35,6 @@ defmodule SmartcitydogsWeb.Router do
     pipe_through([:browser, :with_session])
 
     get("/", PageController, :index)
-<<<<<<< HEAD
 
     resources("/sessions", SessionController, only: [:new, :create, :delete])
 
@@ -58,12 +57,6 @@ defmodule SmartcitydogsWeb.Router do
         end
       end
     end
-=======
-    resources("/users", UserController)
-
-    # resources "/all", AllController, only: [:index]
-    # get("/register", RegisterController, :index)
->>>>>>> e1b74a8043d2f8bdf816134d73d9398c8e588c03
   end
 
   # Other scopes may use custom stacks.
