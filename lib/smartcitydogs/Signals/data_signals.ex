@@ -28,6 +28,10 @@ defmodule Smartcitydogs.DataSignals do
     Repo.all(Signals)
   end
 
+  def change_signal(%Signals{} = signal) do
+    Signals.changeset(signal, %{})
+  end
+
   def get_signal(id) do
     Repo.get!(Signals, id)
   end
