@@ -58,6 +58,12 @@ defmodule SmartcitydogsWeb.Router do
       end
     end
   end
+  scope "/auth", SmartcitydogsWeb do
+    pipe_through :browser
+
+    get "/:provider", SessionController, :request
+    get "/:provider/callback", SessionController, :callback
+  end
 
   # Other scopes may use custom stacks.
   # scope "/api", SmartcitydogsWeb do

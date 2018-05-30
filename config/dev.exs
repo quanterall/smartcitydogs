@@ -62,3 +62,15 @@ config :smartcitydogs, Smartcitydogs.Repo,
   database: System.get_env("DB_NAME"),
   hostname: System.get_env("DB_HOST"),
   pool_size: 10
+
+config :smartcitydogs, SmartcitydogsWeb.Endpoint,
+       http: [port: 4001]
+
+config :ueberauth, Ueberauth,
+       providers: [
+         facebook: {Ueberauth.Strategy.Facebook, [profile_fields: "name,email,first_name,last_name"]}
+       ]
+
+config :ueberauth, Ueberauth.Strategy.Facebook.OAuth,
+       client_id: "2092635367474790",
+       client_secret: "291098f135cc5bcd26ed9ddb459c501b"

@@ -18,7 +18,7 @@
       <header>
         <nav class="navbar navbar-expand-md navbar-dark bg-dark">
           <a class="navbar-brand" href="#">
-            <a href="#" class="fa fa-facebook"></a>
+            <a href="/auth/facebook" class="fa fa-facebook"></a>
           </a>
           <a class="navbar-brand" href="#">
             <a href="#" class="fa fa-twitter"></a>
@@ -34,7 +34,7 @@
                 <a class="nav-link" href="\">Home </a>
     </li>
     <li class="nav-item">
-          <%= link "My signals", to: user_post_path(@conn, :index, 
+          <%= link "My signals", to: user_post_path(@conn, :index,
                                                   @current_user), class: "nav-link" %>
         </li>
         <%= if @current_user.users_types_id == 1 do %>
@@ -47,7 +47,7 @@
                                             @current_user),
                            method: "delete", class: "nav-link" %>
     </li>
-  <% else %>  
+  <% else %>
               <li class="nav-item">
                 <a class="nav-link" href="\">Home </a>
               </li>
@@ -96,42 +96,3 @@
   </body>
 </html>
 
-<!-- 
-<div class="container">
-      <header class="header">
-  <nav role="navigation">
-    <ul class="nav nav-pills pull-right">
-  <%= if @current_user do %>
-    <li><%= @current_user.email %> (<%= @current_user.id %>)</li>
-    <li>
-          <%= link "My signals", to: user_post_path(@conn, :index, 
-                                                  @current_user) %>
-        </li>
-        <%= if @current_user.users_types_id == 1 do %>
-      <li>
-        <%= link "Users", to: admin_user_path(@conn, :index) %>
-      </li>
-    <% end %>
-    <li>
-      <%= link "Sign out", to: session_path(@conn, :delete,
-                                            @current_user),
-                           method: "delete" %>
-    </li>
-  <% else %>
-    <li><%= link "Register", to: user_path(@conn, :new) %></li>
-    <li><%= link "Sign in", to: session_path(@conn, :new) %></li>
-  <% end %>
-</ul>
-  </nav>
-  <span class="logo"></span>
-</header>
-
-      <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
-      <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
-
-      <main role="main">
-        <%= render @view_module, @view_template, assigns %>
-      </main>
-
-    </div> 
-    <script src="<%= static_path(@conn, "/js/app.js") %>"></script> 
