@@ -1,5 +1,6 @@
 defmodule SmartcitydogsWeb.UserController do
   use SmartcitydogsWeb, :controller
+  
   alias Smartcitydogs.DataUsers
   alias Smartcitydogs.User
   alias Smartcitydogs.Repo

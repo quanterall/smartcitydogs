@@ -9,9 +9,8 @@
               <img class="first-slide" src="<%= static_path(@conn, "/images/1.jpg") %>" alt="First slide">
               <div class="container">
                 <div class="carousel-caption text-left">
-                  <h1>Example headline.</h1>
-                  <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-                  <p><a class="btn btn-lg btn-primary" href="#" role="button">Sign up today</a></p>
+                  <h1>Do you want to report a signal?</h1>
+                  <p>Save a dog's life or give it a new one! Report for a problem or make a signal now!<p><a class="btn btn-lg btn-primary" href="#" role="button">Sign up today</a></p>
                 </div>
               </div>
             </div>
@@ -45,15 +44,12 @@
             <span class="sr-only">Next</span>
           </a>
         </div>
-
-
         <!-- Marketing messaging and featurettes
         ================================================== -->
         <!-- Wrap the rest of the page in another container to center all the content. -->
 <h1><center>Latest signals:</center></h1>
 <br>
         <div class="container marketing">
-
           <!-- Three columns of text below the carousel -->
           <div class="row">
             <div class="col-lg-4">
@@ -135,10 +131,7 @@
               <a class="btn btn-secondary" href="#" role="button">View map »</a></p>
             </div><!-- /.col-lg-4 -->
           </div><!-- /.row -->
-
-
           <!-- START THE FEATURETTES -->
-
           <hr class="featurette-divider">
           <div class="container">
               <header>
@@ -157,15 +150,14 @@
                 </ul>
               </center></nav>
             </div>
-
             <hr class="featurette-divider">
             <div class="container marketing">
               <h1 class="featurette-heading"><center>Latest registered dogs:</center></h1><br>
-              <!-- Three columns of text below the carousel -->
               <div class="row">
                 <div class="col-lg-4">
-                  <img class="rounded-circle" src="<%= static_path(@conn, "/images/1.jpg") %>" alt="Generic placeholder image" width="140" height="140">
-
+                  <ul>
+                    <img class="rounded-circle" src="<%= static_path(@conn, "/images/4.jpg") %>" alt="Generic placeholder image" width="200" height="200">
+                  </ul>
                   <ul>
                     <p>Sex:</p>
                     <p>Chip number:</p>
@@ -175,10 +167,10 @@
                     <p><a class="btn btn-secondary" href="#" role="button">View more »</a></p>
                   </ul>
                 </div>
-
                 <div class="col-lg-4">
-                  <img class="rounded-circle" src="<%= static_path(@conn, "/images/4.jpg") %>" alt="Generic placeholder image" width="140" height="140">
-
+                  <ul>
+                    <img class="rounded-circle" src="<%= static_path(@conn, "/images/2.jpg") %>" alt="Generic placeholder image" width="200" height="200">
+                  </ul>
                   <ul>
                     <p>Sex:</p>
                     <p>Chip number:</p>
@@ -188,10 +180,10 @@
                     <p><a class="btn btn-secondary" href="#" role="button">View more »</a></p>
                   </ul>
                 </div>
-
                 <div class="col-lg-4">
-                  <img class="rounded-circle" src="<%= static_path(@conn, "/images/3.jpg") %>" alt="Generic placeholder image" width="140" height="140">
-
+                  <ul>
+                    <img class="rounded-circle" src="<%= static_path(@conn, "/images/3.jpg") %>" alt="Generic placeholder image" width="200" height="200">
+                  </ul>
                   <ul>
                     <p>Sex:</p>
                     <p>Chip number:</p>
@@ -201,30 +193,28 @@
                     <p><a class="btn btn-secondary" href="#" role="button">View more »</a></p>
                   </ul>
                 </div>
-
               </div>
-              <!-- <h1 class="featurette-heading"><center>Latest registered dogs:</center></h1>
-            <div class="container marketing">
-              <div class="row">
-                <div class="col-lg-4">
-                    <nav>
-                          <ul>
-                            <img class="rounded-circle" src="<%= static_path(@conn, "/images/3.jpg") %>" alt="Generic placeholder image" width="200" height="200">
-                            <p>Sex:</p>
-                            <p>Chip number:</p>
-                            <p>Date registered:</p>
-                            <p>Latest location:</p>
-                            <p>Status:</p>
-                            <p><a class="btn btn-secondary" href="#" role="button">View more »</a></p>
-                          </ul>
-
-                    </nav>
-                  </div>
-                </div>
-              </div> -->
-
           <hr class="featurette-divider">
-
+          <h2><center>Latest adopted dogs:</center></h2>
+          <br>
+          <div class="row">
+              <div class="col-lg-4">
+                <ul>
+                  <img class="square" src="<%= static_path(@conn, "/images/1.jpg") %>" alt="Generic placeholder image" width="200" height="200">
+                </ul>
+              </div>
+              <div class="col-lg-4">
+                <ul>
+                  <img class="square" src="<%= static_path(@conn, "/images/4.jpg") %>" alt="Generic placeholder image" width="200" height="200">
+                </ul>
+              </div>
+              <div class="col-lg-4">
+                <ul>
+                  <img class="square" src="<%= static_path(@conn, "/images/3.jpg") %>" alt="Generic placeholder image" width="200" height="200">
+                </ul>
+              </div>
+            </div>
+          <hr class="featurette-divider">
           <div class="row featurette">
             <div class="col-md-7">
               <h2 class="featurette-heading">First featurette heading. <span class="text-muted">It'll blow your mind.</span></h2>
@@ -234,9 +224,7 @@
               <img class="featurette-image img-fluid mx-auto" data-src="holder.js/500x500/auto" alt="500x500" style="width: 500px; height: 500px;" src="data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22500%22%20height%3D%22500%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20500%20500%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_163aa2aa6bd%20text%20%7B%20fill%3A%23AAAAAA%3Bfont-weight%3Abold%3Bfont-family%3AArial%2C%20Helvetica%2C%20Open%20Sans%2C%20sans-serif%2C%20monospace%3Bfont-size%3A25pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_163aa2aa6bd%22%3E%3Crect%20width%3D%22500%22%20height%3D%22500%22%20fill%3D%22%23EEEEEE%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%22185.125%22%20y%3D%22261.1%22%3E500x500%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E" data-holder-rendered="true">
             </div>
           </div>
-
           <hr class="featurette-divider">
-
           <div class="row featurette">
             <div class="col-md-7 order-md-2">
               <h2 class="featurette-heading">Oh yeah, it's that good. <span class="text-muted">See for yourself.</span></h2>
@@ -246,9 +234,7 @@
               <img class="featurette-image img-fluid mx-auto" data-src="holder.js/500x500/auto" alt="500x500" src="data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22500%22%20height%3D%22500%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20500%20500%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_163aa2aa6c0%20text%20%7B%20fill%3A%23AAAAAA%3Bfont-weight%3Abold%3Bfont-family%3AArial%2C%20Helvetica%2C%20Open%20Sans%2C%20sans-serif%2C%20monospace%3Bfont-size%3A25pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_163aa2aa6c0%22%3E%3Crect%20width%3D%22500%22%20height%3D%22500%22%20fill%3D%22%23EEEEEE%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%22185.125%22%20y%3D%22261.1%22%3E500x500%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E" data-holder-rendered="true" style="width: 500px; height: 500px;">
             </div>
           </div>
-
           <hr class="featurette-divider">
-
           <div class="row featurette">
             <div class="col-md-7">
               <h2 class="featurette-heading">And lastly, this one. <span class="text-muted">Checkmate.</span></h2>
@@ -258,14 +244,9 @@
               <img class="featurette-image img-fluid mx-auto" data-src="holder.js/500x500/auto" alt="500x500" src="data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22500%22%20height%3D%22500%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20500%20500%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_163aa2aa6c0%20text%20%7B%20fill%3A%23AAAAAA%3Bfont-weight%3Abold%3Bfont-family%3AArial%2C%20Helvetica%2C%20Open%20Sans%2C%20sans-serif%2C%20monospace%3Bfont-size%3A25pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_163aa2aa6c0%22%3E%3Crect%20width%3D%22500%22%20height%3D%22500%22%20fill%3D%22%23EEEEEE%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%22185.125%22%20y%3D%22261.1%22%3E500x500%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E" data-holder-rendered="true" style="width: 500px; height: 500px;">
             </div>
           </div>
-
           <hr class="featurette-divider">
-
           <!-- /END THE FEATURETTES -->
-
         </div><!-- /.container -->
-
-
         <!-- FOOTER -->
         <footer class="container">
           <p class="float-right"><a href="#">Back to top</a></p>
@@ -273,43 +254,3 @@
           · <a href="#">Signals</a> · <a href="#">Registered dogs</a> · <a href="#">News</a>
           · <a href="#">Help</a> · <a href="#">Contacts</a></p>
         </footer>
-
-
-<!--  
-<div class="jumbotron">
-  <h2><%= gettext "Welcome to %{name}", name: "Phoenix!" %></h2>
-  <p class="lead">A productive web framework that<br />does not compromise speed and maintainability.</p>
-</div>
-
-<div class="row marketing">
-  <div class="col-lg-6">
-    <h4>Resources</h4>
-    <ul>
-      <li>
-        <a href="http://phoenixframework.org/docs/overview">Guides</a>
-      </li>
-      <li>
-        <a href="https://hexdocs.pm/phoenix">Docs</a>
-      </li>
-      <li>
-        <a href="https://github.com/phoenixframework/phoenix">Source</a>
-      </li>
-    </ul>
-  </div>
-
-  <div class="col-lg-6">
-    <h4>Help</h4>
-    <ul>
-      <li>
-        <a href="http://groups.google.com/group/phoenix-talk">Mailing list</a>
-      </li>
-      <li>
-        <a href="http://webchat.freenode.net/?channels=elixir-lang">#elixir-lang on freenode IRC</a>
-      </li>
-      <li>
-        <a href="https://twitter.com/elixirphoenix">@elixirphoenix</a>
-      </li>
-    </ul>
-  </div>
-</div>
-  -->

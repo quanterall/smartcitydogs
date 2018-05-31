@@ -19,7 +19,7 @@ defmodule Smartcitydogs.Animals do
   end
 
   @doc false
-  def changeset(animals, attrs) do
+  def changeset(animals, attrs \\ %{}) do
     animals
     |> cast(attrs, [
       :sex,

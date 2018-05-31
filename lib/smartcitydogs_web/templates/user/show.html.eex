@@ -8,11 +8,11 @@
   </li>
 
   <li>
-    <strong>Age:</strong>
+    <strong>Last name:</strong>
     <%= @user.last_name %>
   </li>
 
 </ul>
 
-<span><%= link "Edit", to: user_path(@conn, :edit, @user) %></span>
-<span><%= link "Back", to: user_path(@conn, :index) %></span>
+<span><%= #link "Edit", to: user_path(@conn, :edit, @user) %></span>
+<span><%= #link "Back", to: user_path(@conn, :index) %></span>

@@ -1,0 +1,41 @@
+<h1>Animal Registration</h1>
+
+<%= form_for @changeset, animal_path(@conn, :create), fn f -> %>
+  <%= if @changeset.action do %>
+    <% IO.inspect(@changeset) %>
+    <div class="alert alert-danger">
+      <p>There are some errors</p>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <label>Photo</label>
+    <%= #file_input f, :photo, class: "form-control" %>
+  </div>
+  
+  <div class="form-group">
+    <%= select( f, :sex, [[key: "Мъжко", value: "M"],
+                 [key: "Женско", value: "F"] ] ) %>
+    <%= error_tag f, :sex %>
+  </div>
+
+  <div class="form-group">
+    <%= text_input f, :chip_number, placeholder: "Chip Number",
+                             class: "form-control" %>
+    <%= error_tag f, :chip_number %>
+  </div>
+  <div class="form-group">
+    <%= text_input f, :address, placeholder: "Last Location Address",
+                                     class: "form-control" %>
+    <%= error_tag f, :password %>
+  </div>
+  
+  <div class="form-group">
+    <%= select( f, :animals_status_id, [[key: "На свобода", value: "1"],
+                 [key: "Осиновено", value: "2"], [key: "В приюта", value: "3"]]) %>
+    <%= error_tag f, :email %>
+  </div>
+    
+
+  <%= submit "Register Dog", class: "btn btn-primary" %>
+<% end %>

@@ -92,8 +92,43 @@ unless Repo.get_by(User, username: users_params[:username]) do
   |> Repo.insert!()
 end
 
+############## Users #############
+users_params = %{
+  username: "Sonyft",
+  first_name: "SS",
+  last_name: "admin",
+  email: "sonyft@abv.bg",
+  password: "123456",
+  phone: "0873245473",
+  users_types_id: 1
+}
+
+unless Repo.get_by(User, username: users_params[:username]) do
+  %User{}
+  |> User.registration_changeset(users_params)
+  |> Repo.insert!()
+end
+
 ############ Animal Status ############
-animals_status_params = %{name: "Opasno"}
+animals_status_params = %{name: "На свобода"}
+
+unless Repo.get_by(AnimalStatus, name: animals_status_params[:name]) do
+  %AnimalStatus{}
+  |> AnimalStatus.changeset(animals_status_params)
+  |> Repo.insert!()
+end
+
+############ Animal Status ############
+animals_status_params = %{name: "Осиновено"}
+
+unless Repo.get_by(AnimalStatus, name: animals_status_params[:name]) do
+  %AnimalStatus{}
+  |> AnimalStatus.changeset(animals_status_params)
+  |> Repo.insert!()
+end
+
+############ Animal Status ############
+animals_status_params = %{name: "В приюта"}
 
 unless Repo.get_by(AnimalStatus, name: animals_status_params[:name]) do
   %AnimalStatus{}
