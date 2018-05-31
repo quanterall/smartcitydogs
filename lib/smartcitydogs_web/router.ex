@@ -19,7 +19,12 @@ defmodule SmartcitydogsWeb.Router do
 
     get("/", PageController, :index)
     resources("/users", UserController)
-    resources("/signals", SignalController, only: [:index, :new, :create, :show, :delete])
+
+    resources(
+      "/signals",
+      SignalController,
+      only: [:index, :new, :create, :delete, :show, :edit, :update]
+    )
 
     # resources "/all", AllController, only: [:index]
     # get("/register", RegisterController, :index)

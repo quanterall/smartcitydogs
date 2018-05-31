@@ -38,7 +38,7 @@
                 <a class="nav-link" href="/">Home</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">New Signal</a>
+                <a class="nav-link" href="/signals/new">New Signal</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link disabled" href="#">Forgotten password</a>

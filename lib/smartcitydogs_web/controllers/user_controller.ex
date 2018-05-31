@@ -15,7 +15,7 @@ defmodule SmartcitydogsWeb.UserController do
 
   def create(conn, %{"user" => user_params}) do
     user_params = user_params |> Map.put("users_types_id", 1)
-    #IO.inspect(DataUsers.create_user(user_params))
+    # IO.inspect(DataUsers.create_user(user_params))
 
     case DataUsers.create_user(user_params) do
       {:ok, user} ->

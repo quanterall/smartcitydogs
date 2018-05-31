@@ -1,0 +1,13 @@
+<h2>Show Signals</h2>
+
+<ul>
+
+  <li>
+    <strong>Title:</strong>
+    <%= @signal.title %>
+  </li>
+
+</ul>
+
+<span><%= link "Edit", to: signal_path(@conn, :edit, @signal) %></span>
+<span><%= link "Back", to: signal_path(@conn, :index) %></span>
