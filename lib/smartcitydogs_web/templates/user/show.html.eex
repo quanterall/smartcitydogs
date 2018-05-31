@@ -1,4 +1,4 @@
-<h2>Show User</h2>
+<h2>Your information is updated succesfully </h2>
 
 <ul>
 
@@ -6,13 +6,32 @@
     <strong>Name:</strong>
     <%= @user.first_name %>
   </li>
-
+<br>
   <li>
-    <strong>Age:</strong>
+    <strong>Lastname:</strong>
     <%= @user.last_name %>
   </li>
+<br>
+  <li>
+    <strong>Username:</strong>
+    <%= @user.username %>
+  </li>
+<br>
+<br>
+  <li>
+    <strong>password:</strong>
+    <%= @user.password %>
+  </li>
+<br>
 
-</ul>
+<br>
+  <li>
+    <strong>Email:</strong>
+    <%= @user.email %>
+  </li>
+<br>
 
-<span><%= link "Edit", to: user_path(@conn, :edit, @user) %></span>
-<span><%= link "Back", to: user_path(@conn, :index) %></span>
+
+<span><%= ##link "Edit", to: user_path(@conn, :edit, @user) %></span>
+ <a href="\">Back</a></span>
+<span><%= ##link "Back", to: user_path(@conn, :index) %></span>

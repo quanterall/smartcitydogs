@@ -44,7 +44,7 @@ defmodule SmartcitydogsWeb.Router do
     scope "/" do
       pipe_through([:login_required])
 
-      resources "/users", UserController, only: [:show] do
+      resources "/users", UserController do
         resources("/posts", PostController)
       end
 
@@ -52,8 +52,8 @@ defmodule SmartcitydogsWeb.Router do
       scope "/admin", Admin, as: :admin do
         pipe_through([:admin_required])
 
-        resources "/users", UserController, only: [:index, :show] do
-          resources "/posts", PostController, only: [:index, :show] 
+        resources "/users", UserController  do
+          resources "/posts", PostController 
         end
       end
     end

@@ -38,14 +38,14 @@ defmodule SmartcitydogsWeb.UserController do
 
   def create(conn, %{"user" => user_params}) do
   changeset = %User{} |> User.registration_changeset(user_params)
-  IO.inspect(changeset)
+##  IO.inspect(changeset)
   #users = Map.get(changeset, :changes)
   #IO.inspect(users)
   #case Smartcitydogs.DataUsers.create_user(users) do
    case Repo.insert(changeset) do
     {:ok, user} ->
-      IO.inspect(conn)
-      IO.puts "#{user.username}"
+   ##   IO.inspect(conn)
+   ##   IO.puts "#{user.username}"
       conn
       |> Smartcitydogs.Auth.login(user)
       |> put_flash(:info, "#{user.username} created!")
@@ -63,7 +63,8 @@ end
 
   def show(conn, %{"id" => id}) do
     user = Repo.get!(User, id) |> Repo.preload(:users_types)
-    render(conn, "show.html", user: user)
+    changeset = DataUsers.change_user(user)
+    render(conn, "show.html", user: user, changeset: changeset)
   end
 
   def edit(conn, %{"id" => id}) do
@@ -74,7 +75,9 @@ end
 
   def update(conn, %{"id" => id, "user" => user_params}) do
     user = DataUsers.get_user!(id)
-
+    IO.inspect user_params
+    IO.puts "**********************************************************"
+    IO.inspect user
     case DataUsers.update_user(user, user_params) do
       {:ok, user} ->
         conn
