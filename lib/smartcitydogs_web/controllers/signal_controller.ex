@@ -38,13 +38,15 @@ defmodule SmartcitydogsWeb.SignalController do
   def edit(conn, %{"id" => id}) do
     signal = DataSignals.get_signal(id)
     changeset = DataSignals.change_signal(signal)
+
     render(conn, "edit_signal.html", signal: signal, changeset: changeset)
+
   end
 
   def update(conn, %{"id" => id, "signal" => signal_params}) do
     signal = DataSignals.get_signal(id)
-    IO.puts "#{inspect(signal_params)}"
-    IO.puts "#{inspect(signal)}"
+    # IO.puts "#{inspect(signal)}"
+    # IO.puts "#{inspect(signal_params)}"
     case DataSignals.update_signal(signal, signal_params) do
       {:ok, signal} ->
         conn

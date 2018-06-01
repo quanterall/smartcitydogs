@@ -1,4 +1,4 @@
-<h2>Edit Signal</h2>
+<h2>Edit User</h2>
 
 <%= render "form_signal.html", Map.put(assigns, :action, signal_path(@conn, :update, @signal)) %>
 
