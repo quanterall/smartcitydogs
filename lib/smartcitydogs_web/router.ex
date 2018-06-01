@@ -22,8 +22,7 @@ defmodule SmartcitydogsWeb.Router do
 
     resources(
       "/signals",
-      SignalController,
-      only: [:index, :new, :create, :delete, :show, :edit, :update]
+      SignalController
     )
 
     # resources "/all", AllController, only: [:index]
