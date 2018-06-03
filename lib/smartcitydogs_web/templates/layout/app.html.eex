@@ -18,7 +18,7 @@
       <header>
         <nav class="navbar navbar-expand-md navbar-dark bg-dark">
           <a class="navbar-brand" href="#">
-            <a href="/auth/facebook" class="fa fa-facebook"></a>
+            <a href="#" class="fa fa-facebook"></a>
           </a>
           <a class="navbar-brand" href="#">
             <a href="#" class="fa fa-twitter"></a>

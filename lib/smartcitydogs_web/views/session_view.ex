@@ -1,3 +1,3 @@
 defmodule SmartcitydogsWeb.SessionView do
-    use SmartcitydogsWeb, :view
+  use SmartcitydogsWeb, :view
 end

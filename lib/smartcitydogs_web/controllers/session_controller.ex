@@ -1,6 +1,6 @@
 defmodule SmartcitydogsWeb.SessionController do
   use SmartcitydogsWeb, :controller
-  plug Ueberauth
+  plug(Ueberauth)
   plug(:scrub_params, "session" when action in ~w(create)a)
   import Comeonin.Bcrypt, only: [checkpw: 2, dummy_checkpw: 0]
 
@@ -59,10 +59,33 @@ defmodule SmartcitydogsWeb.SessionController do
         |> render("new.html")
     end
   end
+
   def callback(%{assigns: %{ueberauth_auth: auth}} = conn, _params) do
     IO.inspect(auth)
-    conn
+
+    case Smartcitydogs.DataUsers.get_user_by_email!(auth.info.email) do
+      nil ->
+        case Smartcitydogs.DataUsers.create_user_from_auth(auth) do
+          {:ok, user} ->
+            conn
+            |> login(user)
+            |> put_flash(:info, "You’re now signed in!")
+            |> redirect(to: "/")
+
+          {:error, changeset} ->
+            conn
+            |> put_flash(:error, "Fail to store to DB")
+            |> redirect(to: "/")
+        end
+
+      user ->
+        conn
+        |> login(user)
+        |> put_flash(:info, "You’re now signed in!")
+        |> redirect(to: "/")
+    end
   end
+
   defp login(conn, user) do
     conn
     |> Guardian.Plug.sign_in(user)

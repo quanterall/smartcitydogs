@@ -1,3 +1,3 @@
 defmodule SmartcitydogsWeb.UserView do
-    use SmartcitydogsWeb, :view
+  use SmartcitydogsWeb, :view
 end

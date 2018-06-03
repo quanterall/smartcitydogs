@@ -30,7 +30,6 @@ alias Smartcitydogs.User
 alias Smartcitydogs.Signals
 alias Smartcitydogs.SignalsComments
 
-
 ############## Users Type Admin #############
 users_type_params = %{name: "Admin"}
 
@@ -43,37 +42,38 @@ end
 ############## Users Type User #############
 users_type_params = %{name: "User"}
 
-unless Repo.get_by(UsersType, name: users_type_params[:name]) do  
- %UsersType{} 
- |>UsersType.changeset(users_type_params)                                              
- |>Repo.insert!                                                                                             
+unless Repo.get_by(UsersType, name: users_type_params[:name]) do
+  %UsersType{}
+  |> UsersType.changeset(users_type_params)
+  |> Repo.insert!()
 end
+
 ############## Users Type Zoo Police#############
 users_type_params = %{name: "zoo police"}
 
-unless Repo.get_by(UsersType, name: users_type_params[:name]) do  
- %UsersType{} 
- |>UsersType.changeset(users_type_params)                                              
- |>Repo.insert!                                                                                             
+unless Repo.get_by(UsersType, name: users_type_params[:name]) do
+  %UsersType{}
+  |> UsersType.changeset(users_type_params)
+  |> Repo.insert!()
 end
+
 ############## Users Type  representative of the municipality#############
 users_type_params = %{name: "representative of the municipality"}
 
-unless Repo.get_by(UsersType, name: users_type_params[:name]) do  
- %UsersType{} 
- |>UsersType.changeset(users_type_params)                                              
- |>Repo.insert!                                                                                             
+unless Repo.get_by(UsersType, name: users_type_params[:name]) do
+  %UsersType{}
+  |> UsersType.changeset(users_type_params)
+  |> Repo.insert!()
 end
+
 ############## Users Type  representative of a municipal shelter#############
 users_type_params = %{name: "representative of a municipal shelter"}
 
-unless Repo.get_by(UsersType, name: users_type_params[:name]) do  
- %UsersType{} 
- |>UsersType.changeset(users_type_params)                                              
- |>Repo.insert!                                                                                             
+unless Repo.get_by(UsersType, name: users_type_params[:name]) do
+  %UsersType{}
+  |> UsersType.changeset(users_type_params)
+  |> Repo.insert!()
 end
-
-
 
 ############## Users #############
 users_params = %{

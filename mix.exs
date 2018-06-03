@@ -20,7 +20,7 @@ defmodule Smartcitydogs.Mixfile do
   def application do
     [
       mod: {Smartcitydogs.Application, []},
-      extra_applications: [:logger, :runtime_tools,:ueberauth_facebook]
+      extra_applications: [:logger, :runtime_tools, :ueberauth_facebook]
     ]
   end
 
