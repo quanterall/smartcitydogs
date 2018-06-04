@@ -21,7 +21,7 @@ defmodule Smartcitydogs.DataAnimals do
   end
 
   def get_animal(id) do
-    Repo.get!(Animals, id)
+    Repo.get!(Animals, id) |> Repo.preload(:animals_status)
   end
 
   def get_animal_image(id) do

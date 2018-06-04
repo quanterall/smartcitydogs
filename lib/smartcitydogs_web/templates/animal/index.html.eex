@@ -6,7 +6,7 @@
           <div class="row">
           <%= for animal <- @animals do %>
             <div class="col-lg-4">
-            
+            <!-- "<%= static_path(@conn, "/images/4.jpg") %>" -->
               <img class="rounded-circle" src="<%= static_path(@conn, "/images/4.jpg") %>" alt="Generic placeholder image" width="140" height="140">
               <h2>Heading</h2>
               <ul>
@@ -29,7 +29,8 @@
                   Signals:
                 </li>
               </ul>
-              <p><a class="btn btn-secondary" href="#" role="button">View more »</a>
+              <p>
+              <%= link "View more »", to: animal_path(@conn, :show, animal), class: "btn btn-secondary" %>
               <a class="btn btn-secondary" href="#" role="button">View map »</a></p>
             
             </div>

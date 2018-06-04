@@ -45,13 +45,13 @@ defmodule SmartcitydogsWeb.Router do
       pipe_through([:login_required])
 
       resources "/users", UserController, only: [:show]
-      resources "/animals", AnimalController, only: [:create, :show, :new, :index]
+      resources "/animals", AnimalController
 
       # admin zone
       scope "/admin", Admin, as: :admin do
         pipe_through([:admin_required])
 
-        resources "/users", UserController, only: [:index, :show] 
+        resources "/users", UserController
       end
     end
   end
