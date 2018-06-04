@@ -236,7 +236,8 @@ signals_params = %{
   title: "Внимавайте",
   view_count: 0,
   signals_categories_id: 1,
-  signals_types_id: 1
+  signals_types_id: 1,
+  URL: "C://images"
 }
 
 %Signals{} |> Signals.changeset(signals_params) |> Repo.insert!()
