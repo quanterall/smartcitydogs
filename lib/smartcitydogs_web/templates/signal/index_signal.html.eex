@@ -1,29 +1,48 @@
-<h2>Listing Signals</h2>
+<h1><center> All signals <center></h1>
 
-<table class="table">
+<div class="container">
+          <!-- Three columns of text below the carousel -->
 
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>First name</th>
+          <div class="row">
+          <%= for signal <- @signal do %>
+            <div class="col-lg-4">
 
-      <th></th>
-    </tr>
-  </thead>
+              <img class="rounded-circle" src="<%= static_path(@conn, "/images/4.jpg") %>" alt="Generic placeholder image" width="140" height="140">
+              <h2><%=signal.title%></h2>
+              <ul>
+                <li>
+                  Category: <%=signal.signals_categories_id#.name%>
+                </li>
+                <li>
+                  Type: <%=signal.signals_types_id#.name%>
+                </li>
+                <li>
+                  Registered at: <%=signal.inserted_at%>
+                </li>
+                <li>
+                  Description: <%=signal.description%>
+                </li>
+                <li>
+                  Chip number: <%=signal.chip_number%>
+                </li>
+                <li>
+                  Support count: <%=signal.support_count%>
+                </li>
+                <li>
+                  Last location: <%=signal.address%>
+                </li>
+                <li>
+                  Views: <%=signal.view_count%>
+                </li>
+              </ul>
 
-  <tbody>
-<%= for signal <- @signal do %>
-    <tr>
-      <td><%= signal.title %></td>
+              <p><a class="btn btn-secondary" href="#" role="button">View more »</a>
+              <a class="btn btn-secondary" href="#" role="button">View map »</a></p>
 
-      <td class="text-right">
-        <span><%= link "Show", to: signal_path(@conn, :show, signal), class: "btn btn-default btn-xs" %></span>
-        <span><%= link "Edit", to: signal_path(@conn, :edit, signal), class: "btn btn-default btn-xs" %></span>
-        <span><%= link "Delete", to: signal_path(@conn, :delete, signal), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %></span>
-      </td>
+            </div>
+            <%end%>
+          </div><!-- /.row -->
 
-    </tr>
-<% end %>
-  </tbody>
 
-</table>
+
+</div>

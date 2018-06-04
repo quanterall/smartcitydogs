@@ -1,4 +1,6 @@
 %{
+  "arc": {:hex, :arc, "0.2.0", "fd5c0536fff39a624c5464d753e802b565fd2417c2fd85da35994772b1763453", [:mix], [{:ex_aws, "~> 0.4.10", [hex: :ex_aws, repo: "hexpm", optional: true]}, {:httpoison, "~> 0.7", [hex: :httpoison, repo: "hexpm", optional: true]}], "hexpm"},
+  "arc_ecto": {:hex, :arc_ecto, "0.3.2", "8893135fe4d5cf9b2a6aeb0e17bedd5c6f7ad5d89f760995805451c859bf8f89", [:mix], [{:arc, "~> 0.2", [hex: :arc, repo: "hexpm", optional: false]}, {:ecto, ">= 0.10.0", [hex: :ecto, repo: "hexpm", optional: false]}], "hexpm"},
   "calendar": {:hex, :calendar, "0.17.4", "22c5e8d98a4db9494396e5727108dffb820ee0d18fed4b0aa8ab76e4f5bc32f1", [:mix], [{:tzdata, "~> 0.5.8 or ~> 0.1.201603", [hex: :tzdata, repo: "hexpm", optional: false]}], "hexpm"},
   "certifi": {:hex, :certifi, "2.3.1", "d0f424232390bf47d82da8478022301c561cf6445b5b5fb6a84d49a9e76d2639", [:rebar3], [{:parse_trans, "3.2.0", [hex: :parse_trans, repo: "hexpm", optional: false]}], "hexpm"},
   "connection": {:hex, :connection, "1.0.4", "a1cae72211f0eef17705aaededacac3eb30e6625b04a6117c1b2db6ace7d5976", [:mix], [], "hexpm"},

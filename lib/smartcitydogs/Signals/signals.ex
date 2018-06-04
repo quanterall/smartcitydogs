@@ -39,7 +39,7 @@ defmodule Smartcitydogs.Signals do
       :title,
       # :view_count,
       :address,
-      :URL,
+      #:URL,
       # :support_count,
       :chip_number,
       :description
