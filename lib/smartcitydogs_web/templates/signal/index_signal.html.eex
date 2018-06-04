@@ -11,10 +11,16 @@
               <h2><%=signal.title%></h2>
               <ul>
                 <li>
-                  Category: <%=signal.signals_categories_id#.name%>
+                  Category: <%=signal.signals_categories_id
+                  |> Smartcitydogs.DataSignals.get_signal_category()
+                  |> Map.get(:name)
+                  %>
                 </li>
                 <li>
-                  Type: <%=signal.signals_types_id#.name%>
+                  Type: <%=signal.signals_types_id
+                  |> Smartcitydogs.DataSignals.get_signal_type()
+                  |> Map.get(:name)
+                  %>
                 </li>
                 <li>
                   Registered at: <%=signal.inserted_at%>
