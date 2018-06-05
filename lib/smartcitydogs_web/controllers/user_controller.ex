@@ -38,6 +38,7 @@ defmodule SmartcitydogsWeb.UserController do
   # end
 
   def create(conn, %{"user" => user_params}) do
+<<<<<<< HEAD
     changeset = %User{} |> User.registration_changeset(user_params)
     #IO.inspect(changeset)
     # users = Map.get(changeset, :changes)
@@ -56,6 +57,24 @@ defmodule SmartcitydogsWeb.UserController do
       {:error, changeset} ->
         render(conn, "new.html", changeset: changeset)
     end
+=======
+  changeset = %User{} |> User.registration_changeset(user_params)
+##  IO.inspect(changeset)
+  #users = Map.get(changeset, :changes)
+  #IO.inspect(users)
+  #case Smartcitydogs.DataUsers.create_user(users) do
+   case Repo.insert(changeset) do
+    {:ok, user} ->
+   ##   IO.inspect(conn)
+   ##   IO.puts "#{user.username}"
+      conn
+      |> Smartcitydogs.Auth.login(user)
+      |> put_flash(:info, "#{user.username} created!")
+      |> redirect(to: user_path(conn, :show, user))
+
+    {:error, changeset} ->
+      render(conn, "new.html", changeset: changeset)
+>>>>>>> fc1505ead1ee1a7c5caf7611e510adb33088a195
   end
 
   # def show(conn, %{"id" => id}) do
