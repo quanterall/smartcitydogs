@@ -14,7 +14,7 @@ defmodule Smartcitydogs.Signals do
     has_many(:signals_comments, Smartcitydogs.SignalsComments)
     belongs_to(:signals_categories, Smartcitydogs.SignalsCategories)
     belongs_to(:signals_types, Smartcitydogs.SignalsTypes)
-    belongs_to(:signal_images, Smartcitydogs.SignalImages)
+    has_many(:signal_images, Smartcitydogs.SignalImages)
 
     timestamps()
   end

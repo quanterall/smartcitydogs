@@ -4,7 +4,7 @@ defmodule Smartcitydogs.SignalImages do
 
   schema "signal_images" do
     field(:url, :string)
-    has_many(:signals, Smartcitydogs.Signals)
+    belongs_to(:signals, Smartcitydogs.Signals)
 
     timestamps()
   end
