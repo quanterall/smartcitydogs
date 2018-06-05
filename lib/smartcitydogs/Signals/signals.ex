@@ -10,12 +10,11 @@ defmodule Smartcitydogs.Signals do
     field(:support_count, :integer)
     field(:title, :string)
     field(:view_count, :integer)
-    field(:URL, :string)
 
     has_many(:signals_comments, Smartcitydogs.SignalsComments)
     belongs_to(:signals_categories, Smartcitydogs.SignalsCategories)
     belongs_to(:signals_types, Smartcitydogs.SignalsTypes)
-    #belongs_to(:signals_images, Smartcitydogs.SignalImages)
+    belongs_to(:signal_images, Smartcitydogs.SignalImages)
 
     timestamps()
   end
@@ -33,13 +32,12 @@ defmodule Smartcitydogs.Signals do
       :deleted_at,
       :signals_categories_id,
       :signals_types_id,
-      :URL
+      #:image_id
     ])
     |> validate_required([
       :title,
       # :view_count,
       :address,
-      :URL,
       # :support_count,
       :chip_number,
       :description
