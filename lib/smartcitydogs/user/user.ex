@@ -11,15 +11,14 @@ defmodule Smartcitydogs.User do
     field(:password_hash, :string)
     field(:phone, :string)
     field(:username, :string)
-   
-   # checkbox(form, :famous)
+
+    # checkbox(form, :famous)
 
     has_many(:signals_comments, Smartcitydogs.SignalsComments)
     belongs_to(:users_types, Smartcitydogs.UsersType)
 
     timestamps()
   end
-
 
   @required_fields ~w(email)a
   @optional_fields ~w(name is_admin)a
@@ -68,5 +67,4 @@ defmodule Smartcitydogs.User do
         changeset
     end
   end
-  
 end

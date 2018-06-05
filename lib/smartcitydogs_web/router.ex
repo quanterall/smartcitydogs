@@ -21,7 +21,7 @@ defmodule SmartcitydogsWeb.Router do
   end
 
   pipeline :admin_required do
-    plug Smartcitydogs.CheckAdmin
+    plug(Smartcitydogs.CheckAdmin)
   end
 
   pipeline :with_session do
@@ -54,6 +54,13 @@ defmodule SmartcitydogsWeb.Router do
         resources "/users", UserController
       end
     end
+  end
+
+  scope "/auth", SmartcitydogsWeb do
+    pipe_through(:browser)
+
+    get("/:provider", SessionController, :request)
+    get("/:provider/callback", SessionController, :callback)
   end
 
   # Other scopes may use custom stacks.

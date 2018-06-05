@@ -7,10 +7,16 @@ use Mix.Config
 # watchers to your application. For example, we use it
 # with brunch.io to recompile .js and .css sources.
 config :smartcitydogs, SmartcitydogsWeb.Endpoint,
-  http: [port: 4000],
   debug_errors: true,
   code_reloader: true,
   check_origin: false,
+  http: [port: 4000],
+  https: [
+    port: 4443,
+    otp_app: :smartcitydogs,
+    keyfile: "priv/keys/localhost.key",
+    certfile: "priv/keys/localhost.cert"
+  ],
   watchers: [
     node: [
       "node_modules/brunch/bin/brunch",
@@ -62,3 +68,12 @@ config :smartcitydogs, Smartcitydogs.Repo,
   database: System.get_env("DB_NAME"),
   hostname: System.get_env("DB_HOST"),
   pool_size: 10
+
+config :ueberauth, Ueberauth,
+  providers: [
+    facebook: {Ueberauth.Strategy.Facebook, [profile_fields: "name,email,first_name,last_name"]}
+  ]
+
+config :ueberauth, Ueberauth.Strategy.Facebook.OAuth,
+  client_id: "2092635367474790",
+  client_secret: "291098f135cc5bcd26ed9ddb459c501b"

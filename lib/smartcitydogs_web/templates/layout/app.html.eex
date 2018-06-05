@@ -34,8 +34,8 @@
                 <a class="nav-link" href="\">Home </a>
     </li>
     <li class="nav-item">
-          <%= #link "My signals", to: user_path(@conn, :index, 
-                                                 # @current_user), class: "nav-link" %>
+          <%= link "My signals", to: user_post_path(@conn, :index,
+                                                  @current_user), class: "nav-link" %>
         </li>
         <%= if @current_user.users_types_id == 1 do %>
       <li class="nav-item">
@@ -47,7 +47,7 @@
                                             @current_user),
                            method: "delete", class: "nav-link" %>
     </li>
-  <% else %>  
+  <% else %>
               <li class="nav-item">
                 <a class="nav-link" href="\">Home </a>
               </li>
@@ -92,7 +92,7 @@
 
 
     <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
-    <script src="<%= static_path(@conn, "/js/slide.js") %>"></script>
+
   </body>
 </html>
 
