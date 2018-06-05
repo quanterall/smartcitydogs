@@ -1,5 +1,3 @@
 defmodule SmartcitydogsWeb.AnimalView do
-    use SmartcitydogsWeb, :view
-
-
+  use SmartcitydogsWeb, :view
 end

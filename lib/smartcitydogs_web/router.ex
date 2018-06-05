@@ -44,14 +44,14 @@ defmodule SmartcitydogsWeb.Router do
     scope "/" do
       pipe_through([:login_required])
 
-      resources "/users", UserController
-      resources "/animals", AnimalController
+      resources("/users", UserController)
+      resources("/animals", AnimalController)
 
       # admin zone
       scope "/admin", Admin, as: :admin do
         pipe_through([:admin_required])
 
-        resources "/users", UserController
+        resources("/users", UserController)
       end
     end
   end
