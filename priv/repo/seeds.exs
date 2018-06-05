@@ -29,6 +29,7 @@ alias Smartcitydogs.UsersType
 alias Smartcitydogs.User
 alias Smartcitydogs.Signals
 alias Smartcitydogs.SignalsComments
+alias Smartcitydogs.SignalImages
 
 ############## Users Type #############
 users_type_params = %{name: "Admin"}
@@ -194,6 +195,15 @@ signal_type_params = %{name: "Нов"}
 unless Repo.get_by(SignalsTypes, name: signal_type_params[:name]) do
   %SignalsTypes{}
   |> SignalsTypes.changeset(signal_type_params)
+  |> Repo.insert!()
+end
+
+############## Signals Images #############
+signal_image_params = %{url: "C://images", signal_id: 1}
+
+unless Repo.get_by(SignalImages, url: signal_image_params[:url]) do
+  %SignalImages{}
+  |> SignalImages.changeset(signal_image_params)
   |> Repo.insert!()
 end
 
