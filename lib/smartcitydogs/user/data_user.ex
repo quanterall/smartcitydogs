@@ -39,7 +39,7 @@ defmodule Smartcitydogs.DataUsers do
 
   def update_user(%User{} = user, args) do
     user
-    |> User.changeset(args)
+    |> User.registration_changeset(args)
     |> Repo.update()
   end
 

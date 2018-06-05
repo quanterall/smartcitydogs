@@ -29,13 +29,18 @@
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav mr-auto">
               <%= if @current_user do %>
-    <li class="nav-item"><%= @current_user.email %> (<%= @current_user.id %>)</li>
+ <li class="nav-item">
+              
+     </li>
+     <%= link "My profile", to:  user_path(@conn, :edit, @current_user), class: "btn btn-default btn-xs" %>
+   
     <li class="nav-item">
+    
                 <a class="nav-link" href="\">Home </a>
     </li>
     <li class="nav-item">
-          <%= link "My signals", to: user_post_path(@conn, :index,
-                                                  @current_user), class: "nav-link" %>
+          <%= #link "My signals", to: user_post_path(@conn, :index,
+               #                                   @current_user), class: "nav-link" %>
         </li>
         <%= if @current_user.users_types_id == 1 do %>
       <li class="nav-item">
