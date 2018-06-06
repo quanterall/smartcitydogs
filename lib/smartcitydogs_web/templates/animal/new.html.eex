@@ -1,0 +1,5 @@
+<h1>Animal Registration</h1>
+
+<%= render "form.html", Map.put(assigns, :action, animal_path(@conn, :create)) %>
+
+<span><%= link "Back", to: animal_path(@conn, :index) %></span>

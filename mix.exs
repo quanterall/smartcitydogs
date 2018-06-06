@@ -20,7 +20,7 @@ defmodule Smartcitydogs.Mixfile do
   def application do
     [
       mod: {Smartcitydogs.Application, []},
-      extra_applications: [:logger, :runtime_tools]
+      extra_applications: [:logger, :runtime_tools, :ueberauth_facebook]
     ]
   end
 
@@ -41,7 +41,10 @@ defmodule Smartcitydogs.Mixfile do
       {:phoenix_live_reload, "~> 1.0", only: :dev},
       {:gettext, "~> 0.11"},
       {:cowboy, "~> 1.0"},
-      {:calendar, "~> 0.17.2"}
+      {:calendar, "~> 0.17.2"},
+      {:comeonin, "~> 2.5"},
+      {:guardian, "~> 0.12.0"},
+      {:ueberauth_facebook, "~> 0.3"}
     ]
   end
 

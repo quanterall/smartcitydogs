@@ -1,0 +1,102 @@
+
+
+<h1>User Registration</h1>
+
+<%= form_for @changeset, user_path(@conn, :create), fn f -> %>
+  <%= if @changeset.action do %>
+    <div class="alert alert-danger">
+      <p>There are some errors</p>
+    </div>
+  <% end %>
+
+  
+  <div class="form-group">
+    <%= text_input f, :username, placeholder: "Username",
+                             class: "form-control" %>
+    <%= error_tag f, :username %>
+  </div>
+  <div class="form-group">
+    <%= password_input f, :password, placeholder: "Password",
+                                     class: "form-control" %>
+    <%= error_tag f, :password %>
+  </div>
+  
+  <div class="form-group">
+    <%= text_input f, :email, placeholder: "Email",
+                              class: "form-control" %>
+    <%= error_tag f, :email %>
+  </div>
+  <div class="form-group">
+    <%= text_input f, :first_name, placeholder: "Firstname",
+                                     class: "form-control" %>
+    <%= error_tag f, :first_name %>
+  </div>
+   <div class="form-group">
+    <%= text_input f, :last_name, placeholder: "Lastname",
+                                     class: "form-control" %>
+    <%= error_tag f, :last_name %>
+  </div>
+   <div class="form-group">
+    <%= text_input f, :phone, placeholder: "Phone",
+                                     class: "form-control" %>
+    <%= error_tag f, :phone %>
+  </div>
+   <div class="form-group">
+    <%= text_input f, :users_types_id, placeholder: "User Type",
+                                     class: "form-control" %>
+    <%= error_tag f, :users_types_id %>
+  </div>
+
+  <div class="form-group"> 
+    <p class="form-group">  <%= checkbox f, :checked, class: "form-control1" %> I'm agreed to the rules </p>
+  </div>
+  <%= submit "Create User", class: "btn btn-primary" %>
+<% end %>
+<a href="/sessions/new">I'm already registered</a>
+
+
+<!-- Facebook connect button problem with connect to facebook stay "loading" -->
+ <!--script>
+var finished_rendering = function() {
+  console.log("finished rendering plugins");
+  var spinner = document.getElementById("spinner");
+  spinner.removeAttribute("style");
+  spinner.removeChild(spinner.childNodes[0]);
+}
+FB.Event.subscribe('xfbml.render', finished_rendering);
+
+(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = 'https://connect.facebook.net/bg_BG/sdk.js#xfbml=1&version=v3.0';
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
+</script>
+<div id="spinner"
+    style="
+        background: #4267b2;
+        border-radius: 5px;
+        color: white;
+        height: 40px;
+        text-align: center;
+        width: 250px;">
+    Loading
+    <div
+    class="fb-login-button"
+    data-max-rows="1"
+    data-size="large"
+    data-button-type="continue_with"
+    data-use-continue-as="true"
+    ></div>
+</div>
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = 'https://connect.facebook.net/bg_BG/sdk.js#xfbml=1&version=v3.0';
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+

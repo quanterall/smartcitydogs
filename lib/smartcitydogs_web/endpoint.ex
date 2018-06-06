@@ -15,6 +15,7 @@ defmodule SmartcitydogsWeb.Endpoint do
     only: ~w(css fonts images js favicon.ico robots.txt)
   )
 
+  #plug Plug.Static, at: "/animals/new", from: "/home/sonyft/smartcitydog/smartcitydogs/assets/static/images/"
   # Code reloading can be explicitly enabled under the
   # :code_reloader configuration of your endpoint.
   if code_reloading? do

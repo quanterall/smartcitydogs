@@ -8,24 +8,39 @@ defmodule Smartcitydogs.DataUsers do
   import Plug.Conn
 
   def list_users do
-    Repo.all(User)
+    Repo.all(User) |> Repo.preload(:users_types)
   end
 
   def get_user!(id) do
-    Repo.get!(User, id)
+    Repo.get!(User, id) |> Repo.preload(:users_types)
+  end
+
+  def get_user_by_email!(email) do
+    Repo.get_by(User, email: email)
   end
 
   def create_user(args \\ %{}) do
-    unless Repo.get_by(User, username: args[:username]) do
-      %User{}
-      |> User.changeset(args)
-      |> Repo.insert()
-    end
+    %User{}
+    |> User.changeset(args)
+    |> Repo.insert()
+  end
+
+  # todo: some users don't have phone
+  def create_user_from_auth(auth) do
+    create_user(%{
+      username: auth.info.email,
+      password_hash: auth.credentials.token,
+      first_name: auth.info.first_name,
+      last_name: auth.info.last_name,
+      email: auth.info.email,
+      phone: "0000000000000",
+      users_types_id: 1
+    })
   end
 
   def update_user(%User{} = user, args) do
     user
-    |> User.changeset(args)
+    |> User.registration_changeset(args)
     |> Repo.update()
   end
 
