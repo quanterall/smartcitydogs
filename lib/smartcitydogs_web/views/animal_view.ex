@@ -13,4 +13,5 @@ defmodule SmartcitydogsWeb.AnimalView do
         
     end
 
+
 end

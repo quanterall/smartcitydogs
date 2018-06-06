@@ -1,8 +1,9 @@
 <h1><%= @animals.chip_number %></h1>
 
 <ul>
-  <li>     
-     <img class="rounded-circle" src="<%= get_image_animals_id(@animals.id) %>" alt="Generic placeholder image" width="140" height="140">      
+  <li>  
+       
+     <img class="quare" src="/<%= get_image_animals_id(@animals.id) %>" alt="Generic placeholder image" width="140" height="140">      
    </li>
   <li>Chip Number: <%= @animals.chip_number %></li>
   <li>Sex: <%= @animals.sex %></li>

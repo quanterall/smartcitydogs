@@ -17,18 +17,14 @@ defmodule SmartcitydogsWeb.NewsController do
     end
 
     def create(conn, %{"news" => news_params}) do
-        #users = Map.get(changeset, :changes)
-        #IO.inspect(users)
-        # upload = Map.get(conn, :params)
-        # IO.inspect(upload) 
-        # upload = Map.get(upload, "files")
-        # IO.inspect(upload) 
-        #extension = Path.extname(upload.filename)
-        #{:error, raison} = File.cp(upload.path, "/home/sonyft/smartcitydog/smartcitydogs/assets/static/images")
-        #IO.inspect(raison)
+        upload = Map.get(conn, :params)
+        upload = Map.get(upload, "files")
+
+        extension = Path.extname(upload.filename)          
+        File.cp(upload.path, "/home/sonyft/smartcitydog/smartcitydogs/assets/static/images/#{Map.get(upload, :filename)}-profile#{extension}")
         
         news_params = Map.put(news_params, "date", DateTime.utc_now)
-        
+        news_params = Map.put(news_params, "image_url","images/#{Map.get(upload, :filename)}-profile#{extension}" )
          case DataPages.create_news(news_params) do
           {:ok, news} ->
             conn
@@ -39,6 +35,22 @@ defmodule SmartcitydogsWeb.NewsController do
             render(conn, "new.html", changeset: changeset)
         end
     end
+
+    # def upload_file(id, conn) do
+    #     upload = Map.get(conn, :params)
+    #     upload = Map.get(upload, "files")
+    #     for n <- upload do    
+    #         [head] = n
+    #         IO.puts "\n N:"
+    #         IO.inspect(n)
+
+    #         extension = Path.extname(head.filename)          
+    #         #File.cp(head.path, "/home/sonyft/smartcitydog/smartcitydogs/assets/static/images/#{Map.get(animal_params, "chip_number")}-profile#{}#{extension}")
+    #         File.cp(head.path, "/home/sonyft/smartcitydog/smartcitydogs/assets/static/images/#{Map.get(head, :filename)}-profile#{extension}")
+    #         args = %{"url" => "images/#{Map.get(head, :filename)}-profile#{extension}", "animals_id" => "#{id}"}
+    #         DataAnimals.create_animal_image(args)
+    #     end
+    # end
 
     def show(conn, %{"id" => id}) do
         news = DataPages.get_news(id)

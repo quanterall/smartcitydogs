@@ -198,7 +198,7 @@ unless Repo.get_by(Rescues, name: rescue_param[:name]) do
 end
 
 ###########   Header Slides ############
-header_params = %{image_url: "C//image.jpg", text: "Hello Phoenix"}
+header_params = %{image_url: "images/2.jpg", text: "Hello Phoenix"}
 
 unless Repo.get_by(HeaderSlides, image_url: header_params[:image_url]) do
   %HeaderSlides{}
@@ -208,8 +208,8 @@ end
 
 ############# News #####################
 news_params = %{
-  image_url: "C://image.jpg",
-  title: "Изгъбено куче!",
+  image_url: "images/2.jpg",
+  title: "Изгубено куче!",
   meta: "kuce, miss",
   keywords: "miss, lost",
   content: "Obatede se ako go namerite",

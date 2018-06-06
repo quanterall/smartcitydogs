@@ -33,6 +33,7 @@ defmodule SmartcitydogsWeb.AnimalController do
         
     end
 
+    
     def upload_file(id, conn) do
         upload = Map.get(conn, :params)
         upload = Map.get(upload, "files")
@@ -48,8 +49,8 @@ defmodule SmartcitydogsWeb.AnimalController do
             DataAnimals.create_animal_image(args)
         end
     end
-
-  def show(conn, %{"id" => id}) do
+    
+    def show(conn, %{"id" => id}) do
     # animal = Repo.get!(Animals, id) |> Repo.preload(:animals_status)
     animal = DataAnimals.get_animal(id)
     render(conn, "show.html", animals: animal)

@@ -1,7 +1,6 @@
 <h1><%= @news.title %></h1>
-
 <ul>
-  <li> <img class="rounded-circle" src="<%= static_path(@conn, "/images/4.jpg") %>" alt="Generic placeholder image" width="140" height="140"> </li>
+  <li> <img class="rounded-circle" src="/<%= @news.image_url %>" alt="Generic placeholder image" width="140" height="140"> </li>
   <li>Date: <%= @news.date %></li>
   <li>Text: <%= @news.content %></li>
   <li> Video: </li>
