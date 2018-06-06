@@ -33,6 +33,8 @@
       ]) %>
 </div>
 
+
+
 <div class="form-group">
 <%= label f, :chip_number, class: "control-label" %>
 <%= text_input f, :chip_number, class: "form-control" %>
@@ -44,6 +46,13 @@
 <%= text_input f, :description, class: "form-control" %>
 <%= error_tag f, :description %>
 </div>
+
+<div class="form-group">
+    <%= label f, :URL, class: "control-label" %>
+    <%= file_input f, :URL, class: "form-control" %>
+    <%= error_tag f, :URL %>
+  </div>
+
 <div class="form-group">
 <%= submit "Submit", class: "btn btn-primary" %>
 </div>
