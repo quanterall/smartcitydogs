@@ -10,7 +10,7 @@ defmodule Smartcitydogs.Auth do
   end
 
   def login_by_email_and_pass(conn, email, given_pass) do
-    user = Smartcitydogs.DataUsers.get_user_by_email!(email)
+    user = Smartcitydogs.DataUsers.get_user_by_email(email)
 
     cond do
       user && checkpw(given_pass, user.password_hash) ->

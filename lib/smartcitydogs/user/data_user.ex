@@ -29,9 +29,9 @@ defmodule Smartcitydogs.DataUsers do
   def create_user_from_auth(auth) do
     create_user(%{
       username: auth.info.email,
-      password_hash: auth.credentials.token,
-      first_name: auth.info.first_name,
-      last_name: auth.info.last_name,
+      password_hash: "pass",
+      first_name: String.split(auth.info.name, " ")|> List.first(),
+      last_name: String.split(auth.info.name, " ")|> List.first(),
       email: auth.info.email,
       phone: "0000000000000",
       users_types_id: 1

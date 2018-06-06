@@ -1,4 +1,3 @@
-
 defmodule Smartcitydogs.Email do
   use Bamboo.Phoenix, view: App.FeedbackView
 
@@ -7,6 +6,8 @@ defmodule Smartcitydogs.Email do
     |> to(to_email)
     |> from(System.get_env("FROM_EMAIL"))
     |> subject("Reset Password Instructions")
-    |> text_body("Please visit 192.168.0.138:4000/forgoten_password/#{token}/edit to reset your password")
+    |> text_body(
+      "Please visit 192.168.0.138:4000/forgoten_password/#{token}/edit to reset your password"
+    )
   end
 end

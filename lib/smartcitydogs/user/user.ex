@@ -13,7 +13,7 @@ defmodule Smartcitydogs.User do
     field(:username, :string)
     field(:reset_password_token, :string)
     field(:reset_token_sent_at, :naive_datetime)
-   # checkbox(form, :famous)
+    # checkbox(form, :famous)
 
     has_many(:signals_comments, Smartcitydogs.SignalsComments)
     belongs_to(:users_types, Smartcitydogs.UsersType)
@@ -72,8 +72,6 @@ defmodule Smartcitydogs.User do
   end
 
   def password_token_changeset(struct, params) do
-    IO.inspect struct
+    IO.inspect(struct)
   end
-
-  
 end

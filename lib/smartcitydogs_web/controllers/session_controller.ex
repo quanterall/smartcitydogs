@@ -46,8 +46,6 @@ defmodule SmartcitydogsWeb.SessionController do
   #   end
   # end
 
-
-
   def create(conn, %{"session" => %{"email" => email, "password" => password}}) do
     case Smartcitydogs.Auth.login_by_email_and_pass(conn, email, password) do
       {:ok, conn} ->
@@ -63,7 +61,9 @@ defmodule SmartcitydogsWeb.SessionController do
   end
 
   def callback(%{assigns: %{ueberauth_auth: auth}} = conn, _params) do
-    IO.inspect(auth)
+    IO.inspect(auth.credentials.token)
+    IO.inspect(Smartcitydogs.DataUsers.create_user_from_auth(auth) )
+
 
     case Smartcitydogs.DataUsers.get_user_by_email!(auth.info.email) do
       nil ->
