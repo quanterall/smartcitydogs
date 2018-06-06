@@ -25,6 +25,12 @@ defmodule Smartcitydogs.DataSignals do
     |> Repo.update()
   end
 
+    ### takes the support_count
+  def get_signal_support_count(signal_id) do
+    query = Ecto.Query.from(c in Signals, select: %{ count: c.support_count }, where: c.id == ^signal_id)
+    Repo.all(query)
+  end
+
   def list_signals() do
     Repo.all(Signals)
   end

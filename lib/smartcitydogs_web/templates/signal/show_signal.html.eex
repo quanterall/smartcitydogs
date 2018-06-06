@@ -22,6 +22,7 @@
         <li>
           <strong>Registered at:</strong>
           <%=@signal.inserted_at%>
+
         </li>
 
         <li>
@@ -50,8 +51,8 @@
         </li>
 
       </ul>
-
-      <p><a class="btn btn-secondary" href="#" role="button">Like</a>
+      <p>ID: <%= @signal.id %></p>
+      <p><a class="btn btn-secondary" href="<%= get_signals_support_count(@signal.id) %>" role="button">Like</a>
       <a class="btn btn-secondary" href="#" role="button">Comment</a></p>
 <span><%= link "Edit", to: signal_path(@conn, :edit, @signal) %></span>
 <span><%= link "Back", to: signal_path(@conn, :index) %></span>
