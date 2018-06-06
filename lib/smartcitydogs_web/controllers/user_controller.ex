@@ -74,12 +74,20 @@ defmodule SmartcitydogsWeb.UserController do
     render(conn, "edit.html", user: user, changeset: changeset)
   end
 
+##  def forgoten_password(conn, %{"id" => id}) do
+   ## user = DataUsers.get_user!(id)
+   ## changeset = DataUsers.change_user(user)
+  ##  render(conn, "forgoten_password.html", user: user, changeset: changeset)
+ ##     render(conn, "forgoten_password")
+ ##     conn
+ ##     |> redirect(to: user_path(conn, :fotgoten_password))
+ ## end
+
   def update(conn, %{"id" => id, "user" => user_params}) do
     user = DataUsers.get_user!(id)
-    IO.inspect(user_params)
-    IO.puts("**********************************************************")
-    IO.inspect(user)
-
+   ## IO.inspect user_params
+   ## IO.puts "**********************************************************"
+   ## IO.inspect user
     case DataUsers.update_user(user, user_params) do
       {:ok, user} ->
         conn

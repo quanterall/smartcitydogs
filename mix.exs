@@ -20,7 +20,7 @@ defmodule Smartcitydogs.Mixfile do
   def application do
     [
       mod: {Smartcitydogs.Application, []},
-      extra_applications: [:logger, :runtime_tools, :ueberauth_facebook]
+      extra_applications: [:logger, :runtime_tools, :bamboo, :timex, :bamboo_smtp, :ueberauth_facebook]
     ]
   end
 
@@ -44,7 +44,11 @@ defmodule Smartcitydogs.Mixfile do
       {:calendar, "~> 0.17.2"},
       {:comeonin, "~> 2.5"},
       {:guardian, "~> 0.12.0"},
-      {:ueberauth_facebook, "~> 0.3"}
+      {:ueberauth_facebook, "~> 0.3"},
+      {:bamboo, "~> 0.7"},
+      {:bamboo_smtp, "~> 1.4.0"},
+      {:mock, "~> 0.2.0", only: :test},
+      {:timex, "~> 3.1"}
     ]
   end
 
