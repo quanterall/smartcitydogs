@@ -1,6 +1,6 @@
 defmodule SmartcitydogsWeb.UserController do
   use SmartcitydogsWeb, :controller
-  
+
   alias Smartcitydogs.DataUsers
   alias Smartcitydogs.User
   alias Smartcitydogs.Repo
@@ -39,15 +39,14 @@ defmodule SmartcitydogsWeb.UserController do
 
   def create(conn, %{"user" => user_params}) do
     changeset = %User{} |> User.registration_changeset(user_params)
-    #IO.inspect(changeset)
+    ##  IO.inspect(changeset)
     # users = Map.get(changeset, :changes)
     # IO.inspect(users)
     # case Smartcitydogs.DataUsers.create_user(users) do
     case Repo.insert(changeset) do
       {:ok, user} ->
-       # IO.inspect(conn)
-       # IO.puts("#{user.username}")
-
+        ##   IO.inspect(conn)
+        ##   IO.puts "#{user.username}"
         conn
         |> Smartcitydogs.Auth.login(user)
         |> put_flash(:info, "#{user.username} created!")
@@ -77,9 +76,10 @@ defmodule SmartcitydogsWeb.UserController do
 
   def update(conn, %{"id" => id, "user" => user_params}) do
     user = DataUsers.get_user!(id)
-    IO.inspect user_params
-    IO.puts "**********************************************************"
-    IO.inspect user
+    IO.inspect(user_params)
+    IO.puts("**********************************************************")
+    IO.inspect(user)
+
     case DataUsers.update_user(user, user_params) do
       {:ok, user} ->
         conn

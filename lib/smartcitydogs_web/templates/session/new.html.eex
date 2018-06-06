@@ -12,4 +12,7 @@
   </div>
 
   <%= submit "Sign in", class: "btn btn-primary" %>
+  <a class="btn btn-primary pull-right" href="<%=session_url(@conn, :request,"facebook")%>" rel="no-follow">
+    <i class="fa fa-facebook-square"></i> or sign in with  Facebook
+  </a>
 <% end %>

@@ -1,20 +1,20 @@
 defmodule SmartcitydogsWeb.AnimalController do
-    use SmartcitydogsWeb, :controller
+  use SmartcitydogsWeb, :controller
 
     alias Smartcitydogs.DataAnimals
     alias Smartcitydogs.Animals
     alias Smartcitydogs.AnimalImages
     alias Smartcitydogs.Repo
 
-    def index(conn, _params) do
-        animals = DataAnimals.list_animals()
-        render(conn, "index.html", animals: animals)
-    end
+  def index(conn, _params) do
+    animals = DataAnimals.list_animals()
+    render(conn, "index.html", animals: animals)
+  end
 
-    def new(conn, _params) do
-        changeset = Animals.changeset(%Animals{})
-        render(conn, "new.html", changeset: changeset)
-    end
+  def new(conn, _params) do
+    changeset = Animals.changeset(%Animals{})
+    render(conn, "new.html", changeset: changeset)
+  end
 
     def create(conn, %{"animals" => animal_params}) do
         
@@ -49,30 +49,29 @@ defmodule SmartcitydogsWeb.AnimalController do
         end
     end
 
-    def show(conn, %{"id" => id}) do
-        #animal = Repo.get!(Animals, id) |> Repo.preload(:animals_status)
-        animal = DataAnimals.get_animal(id)
-        render(conn, "show.html", animals: animal)
+  def show(conn, %{"id" => id}) do
+    # animal = Repo.get!(Animals, id) |> Repo.preload(:animals_status)
+    animal = DataAnimals.get_animal(id)
+    render(conn, "show.html", animals: animal)
+  end
+
+  def edit(conn, %{"id" => id}) do
+    animal = DataAnimals.get_animal(id)
+    changeset = DataAnimals.change_animal(animal)
+    render(conn, "edit.html", animals: animal, changeset: changeset)
+  end
+
+  def update(conn, %{"id" => id, "animals" => animal_params}) do
+    animal = DataAnimals.get_animal(id)
+
+    case DataAnimals.update_animal(animal, animal_params) do
+      {:ok, animal} ->
+        conn
+        |> put_flash(:info, "Animal updated successfully.")
+        |> redirect(to: animal_path(conn, :show, animal))
+
+      {:error, %Ecto.Changeset{} = changeset} ->
+        render(conn, "edit.html", animal: animal, changeset: changeset)
     end
-
-    def edit(conn, %{"id" => id}) do
-        animal = DataAnimals.get_animal(id)
-        changeset = DataAnimals.change_animal(animal)
-        render(conn, "edit.html", animals: animal, changeset: changeset)
-    end
-
-    def update(conn, %{"id" => id, "animals" => animal_params}) do
-        animal = DataAnimals.get_animal(id)
-    
-        case DataAnimals.update_animal(animal, animal_params) do
-          {:ok, animal} ->
-            conn
-            |> put_flash(:info, "Animal updated successfully.")
-            |> redirect(to: animal_path(conn, :show, animal))
-    
-          {:error, %Ecto.Changeset{} = changeset} ->
-            render(conn, "edit.html", animal: animal, changeset: changeset)
-        end
-      end
-
+  end
 end

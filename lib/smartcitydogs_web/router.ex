@@ -52,7 +52,7 @@ defmodule SmartcitydogsWeb.Router do
       scope "/admin", Admin, as: :admin do
         pipe_through([:admin_required])
 
-        resources "/users", UserController
+        resources("/users", UserController)
       end
     end
   end

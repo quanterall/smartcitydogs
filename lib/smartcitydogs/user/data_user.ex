@@ -24,6 +24,7 @@ defmodule Smartcitydogs.DataUsers do
     |> User.changeset(args)
     |> Repo.insert()
   end
+
   # todo: some users don't have phone
   def create_user_from_auth(auth) do
     create_user(%{
@@ -32,7 +33,7 @@ defmodule Smartcitydogs.DataUsers do
       first_name: auth.info.first_name,
       last_name: auth.info.last_name,
       email: auth.info.email,
-      phone: "088888888888",
+      phone: "0000000000000",
       users_types_id: 1
     })
   end

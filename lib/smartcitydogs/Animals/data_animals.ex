@@ -42,7 +42,8 @@ defmodule Smartcitydogs.DataAnimals do
   end
 
   def list_animals do
-    Repo.all(Animals) |> Repo.preload(:animals_status) #> Repo.preload(:animals_image)
+    # > Repo.preload(:animals_image)
+    Repo.all(Animals) |> Repo.preload(:animals_status)
   end
 
   def list_animal_images do
@@ -74,7 +75,7 @@ defmodule Smartcitydogs.DataAnimals do
   end
 
   def create_animal(args \\ %{}) do
-    #args = Map.put_new(args, :registered_at, get_current_time())
+    # args = Map.put_new(args, :registered_at, get_current_time())
 
     %Animals{}
     |> Animals.changeset(args)
