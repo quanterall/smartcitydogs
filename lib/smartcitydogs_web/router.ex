@@ -40,6 +40,8 @@ defmodule SmartcitydogsWeb.Router do
 
     resources("/users", UserController, only: [:new, :create])
 
+    resources("/forgoten_password", ForgotenPasswordController, only: [:new, :create, :edit, :update])
+
     # registered user zone
     scope "/" do
       pipe_through([:login_required])
