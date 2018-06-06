@@ -7,6 +7,7 @@ defmodule Smartcitydogs.DataSignals do
   alias Smartcitydogs.SignalsComments
   alias Smartcitydogs.SignalsCategories
   alias Smartcitydogs.User
+  alias Smartcitydogs.SignalImages
 
   import Plug.Conn
 
@@ -38,6 +39,33 @@ defmodule Smartcitydogs.DataSignals do
 
   def delete_signal(id) do
     get_signal(id)
+    |> Repo.delete()
+  end
+
+  # Signal iamges
+
+  def get_signal_images(id) do
+    Repo.get!(SignalImages, id)
+  end
+
+  def list_signal_images() do
+    Repo.all(SignalImages)
+  end
+
+  def create_signal_images(args \\ %{}) do
+    %SignalImages{}
+    |> SignalImages.changeset(args)
+    |> Repo.insert()
+  end
+
+  def update_signal_images(%SignalImages{} = images, args) do
+    images
+    |> SignalImages.changeset(args)
+    |> Repo.update()
+  end
+
+  def delete_signal_images(id) do
+    get_signal_images(id)
     |> Repo.delete()
   end
 

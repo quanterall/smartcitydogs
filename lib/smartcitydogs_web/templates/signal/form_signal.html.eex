@@ -19,7 +19,7 @@
 
 <div class="form-group">
     <%= label f, :url, class: "control-label" %>
-    <%= file_input f, :url, class: "form-control" %>
+    <%= file_input f, :url, multiple: true, class: "form-control" %>
     <%= error_tag f, :url %>
   </div>
 
@@ -47,11 +47,6 @@
 <%= error_tag f, :description %>
 </div>
 
-<div class="form-group">
-    <%= label f, :URL, class: "control-label" %>
-    <%= file_input f, :URL, class: "form-control" %>
-    <%= error_tag f, :URL %>
-  </div>
 
 <div class="form-group">
 <%= submit "Submit", class: "btn btn-primary" %>

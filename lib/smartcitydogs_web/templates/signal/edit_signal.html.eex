@@ -2,4 +2,4 @@
 
 <%= render "form_signal.html", Map.put(assigns, :action, signal_path(@conn, :update, @signal)) %>
 
-<span><%= link "Back", to: signal_path(@conn, :index) %></span>
+<span><%= link "Back", to: signal_path(@conn, :show, @signal.id) %></span>

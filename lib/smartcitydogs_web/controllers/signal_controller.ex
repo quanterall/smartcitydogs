@@ -19,15 +19,31 @@ defmodule SmartcitydogsWeb.SignalController do
       |> Map.put("signals_types_id", 1)
 
     #IO.puts "#{inspect(conn)}"
-    IO.inspect(conn.params["signals"]["url"])
+    #IO.inspect(conn.params["signals"]["url"])
 
     #IO.puts "#{Map.get(conn, :url)}"
 
     case DataSignals.create_signal(signal_params) do
       {:ok, signal} ->
-        conn
-        |> put_flash(:info, "Signal created successfully.")
-        |> redirect(to: signal_path(conn, :show, signal))
+        upload = Map.get(conn, :params)
+       IO.inspect(upload)
+       upload = Map.get(upload, "signals")
+       IO.inspect(upload)
+       upload = Map.get(upload, "url")
+       IO.inspect(upload)
+       for n <- upload do
+           #[head] = n
+           IO.puts "\n N:"
+           IO.inspect(n)
+
+           extension = Path.extname(n.filename)
+           File.cp(n.path, "/home/hris/Elixir/smartcitydogs/assets/static/images/#{Map.get(n, :filename)}-profile#{extension}")
+           args = %{"url" => "images/#{Map.get(n, :filename)}-profile#{extension}", "signals_id" => "#{signal.id}"}
+           DataSignals.create_signal_images(args)
+       end
+        #conn
+        #|> put_flash(:info, "Signal created successfully.")
+        redirect(conn, to: signal_path(conn, :show, signal))
 
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "new_signal.html", changeset: changeset)

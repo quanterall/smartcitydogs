@@ -1,10 +1,48 @@
-<h2>Show Signals</h2>
+<h2>Signal details</h2>
 
 <ul>
 
   <li>
     <strong>Title:</strong>
     <%= @signal.title %>
+  </li>
+  <li>
+    <strong>Category:</strong>
+    <%=@signal.signals_categories_id
+    |> Smartcitydogs.DataSignals.get_signal_category()
+    |> Map.get(:name)
+    %>
+  </li>
+  <li>
+    <strong>Type:</strong>
+    <%=@signal.signals_types_id
+    |> Smartcitydogs.DataSignals.get_signal_type()
+    |> Map.get(:name)
+    %>
+  </li>
+  <li>
+    <strong>Registered at:</strong>
+    <%=@signal.inserted_at%>
+  </li>
+  <li>
+    <strong>Description:</strong>
+    <%=@signal.description%>
+  </li>
+  <li>
+    <strong>Chip number:</strong>
+    <%=@signal.chip_number%>
+  </li>
+  <li>
+    <strong>Support count:</strong>
+    <%=@signal.support_count%>
+  </li>
+  <li>
+    <strong>Last location:</strong>
+    <%=@signal.address%>
+  </li>
+  <li>
+    <strong>Views:</strong>
+    <%=@signal.view_count%>
   </li>
 
 </ul>
