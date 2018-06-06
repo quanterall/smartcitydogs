@@ -163,7 +163,7 @@ unless Repo.get_by(StaticPages, content: static_params[:content]) do
 end
 
 ############## Signals Categories #############
-signal_categori_params = %{name: "Агресивно животно"}
+signal_categori_params = %{name: "Бездомно куче"}
 
 unless Repo.get_by(SignalsCategories, name: signal_categori_params[:name]) do
   %SignalsCategories{}
@@ -172,7 +172,7 @@ unless Repo.get_by(SignalsCategories, name: signal_categori_params[:name]) do
 end
 
 ############## Signals Categories #############
-signal_categori_params = %{name: "Изгубено животно"}
+signal_categori_params = %{name: "Избягало куче"}
 
 unless Repo.get_by(SignalsCategories, name: signal_categori_params[:name]) do
   %SignalsCategories{}
@@ -181,7 +181,7 @@ unless Repo.get_by(SignalsCategories, name: signal_categori_params[:name]) do
 end
 
 ############## Signals Categories #############
-signal_categori_params = %{name: "Малтретиране на животно"}
+signal_categori_params = %{name: "Малтретиране на куче"}
 
 unless Repo.get_by(SignalsCategories, name: signal_categori_params[:name]) do
   %SignalsCategories{}
@@ -246,7 +246,7 @@ signals_params = %{
 %Signals{} |> Signals.changeset(signals_params) |> Repo.insert!()
 
 ############## Signals Images #############
-signal_image_params = %{url: "C://images", signals_id: 1}
+signal_image_params = %{url: "images/1.jpg", signals_id: 1}
 
 unless Repo.get_by(SignalImages, url: signal_image_params[:url]) do
   %SignalImages{}

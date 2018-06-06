@@ -44,6 +44,11 @@ defmodule Smartcitydogs.DataSignals do
 
   # Signal iamges
 
+  def get_signal_image_id(signals_id) do
+    query = Ecto.Query.from(c in SignalImages, where: c.signals_id == ^signals_id)
+    Repo.all(query)
+  end
+
   def get_signal_images(id) do
     Repo.get!(SignalImages, id)
   end

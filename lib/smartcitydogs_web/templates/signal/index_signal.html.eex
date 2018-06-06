@@ -7,7 +7,7 @@
           <%= for signal <- @signal do %>
             <div class="col-lg-4">
 
-              <img class="rounded-circle" src="<%= static_path(@conn, "/images/4.jpg") %>" alt="Generic placeholder image" width="140" height="140">
+              <img class="rounded-circle" src="/<%= get_signals_images(signal.id) %>" alt="Generic placeholder image" width="140" height="140">
               <h2><%=signal.title%></h2>
               <ul>
                 <li>
@@ -43,6 +43,8 @@
               </ul>
 
               <p><a class="btn btn-secondary" href="signals/<%=signal.id%>" role="button">View more »</a>
+              <a class="btn btn-secondary" href="#" role="button">Like »</a></p>
+              <p><a class="btn btn-secondary" href="#" role="button">Comment »</a>
               <a class="btn btn-secondary" href="#" role="button">View map »</a></p>
 
             </div>

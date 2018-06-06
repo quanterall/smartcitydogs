@@ -1,51 +1,57 @@
-<h2>Signal details</h2>
+      <h1><%= @signal.title %></h1>
+      <ul>
 
-<ul>
+        <img class="square" src="/<%= get_signals_images(@signal.id) %>" alt="Generic placeholder image" width="300" height="200">
 
-  <li>
-    <strong>Title:</strong>
-    <%= @signal.title %>
-  </li>
-  <li>
-    <strong>Category:</strong>
-    <%=@signal.signals_categories_id
-    |> Smartcitydogs.DataSignals.get_signal_category()
-    |> Map.get(:name)
-    %>
-  </li>
-  <li>
-    <strong>Type:</strong>
-    <%=@signal.signals_types_id
-    |> Smartcitydogs.DataSignals.get_signal_type()
-    |> Map.get(:name)
-    %>
-  </li>
-  <li>
-    <strong>Registered at:</strong>
-    <%=@signal.inserted_at%>
-  </li>
-  <li>
-    <strong>Description:</strong>
-    <%=@signal.description%>
-  </li>
-  <li>
-    <strong>Chip number:</strong>
-    <%=@signal.chip_number%>
-  </li>
-  <li>
-    <strong>Support count:</strong>
-    <%=@signal.support_count%>
-  </li>
-  <li>
-    <strong>Last location:</strong>
-    <%=@signal.address%>
-  </li>
-  <li>
-    <strong>Views:</strong>
-    <%=@signal.view_count%>
-  </li>
+        <li>
+          <strong>Category:</strong>
+          <%=@signal.signals_categories_id
+          |> Smartcitydogs.DataSignals.get_signal_category()
+          |> Map.get(:name)
+          %>
+        </li>
 
-</ul>
+        <li>
+          <strong>Status:</strong>
+          <%=@signal.signals_types_id
+          |> Smartcitydogs.DataSignals.get_signal_type()
+          |> Map.get(:name)
+          %>
+        </li>
 
+        <li>
+          <strong>Registered at:</strong>
+          <%=@signal.inserted_at%>
+        </li>
+
+        <li>
+          <strong>Description:</strong>
+          <%=@signal.description%>
+        </li>
+
+        <li>
+          <strong>Chip number:</strong>
+          <%=@signal.chip_number%>
+        </li>
+
+        <li>
+          <strong>Support count:</strong>
+          <%=@signal.support_count%>
+        </li>
+
+        <li>
+          <strong>Last location:</strong>
+          <%=@signal.address%>
+        </li>
+
+        <li>
+          <strong>Views:</strong>
+          <%=@signal.view_count%>
+        </li>
+
+      </ul>
+
+      <p><a class="btn btn-secondary" href="#" role="button">Like</a>
+      <a class="btn btn-secondary" href="#" role="button">Comment</a></p>
 <span><%= link "Edit", to: signal_path(@conn, :edit, @signal) %></span>
 <span><%= link "Back", to: signal_path(@conn, :index) %></span>

@@ -27,9 +27,9 @@
 <%= label f, :signals_categories_id, class: "control-label" %>
 <br>
 <%= select(f , :signals_categories_id, [
-      [key: "Агресивно животно", value: "1"],
-      [key: "Изгубено животно", value: "2"],
-      [key: "Малтретиране на животно", value: "3"]
+      [key: "Бездомно куче", value: "1"],
+      [key: "Избягало куче", value: "2"],
+      [key: "Малтретиране на куче", value: "3"]
       ]) %>
 </div>
 
