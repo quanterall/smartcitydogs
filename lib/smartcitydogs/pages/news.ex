@@ -16,7 +16,7 @@ defmodule Smartcitydogs.News do
   end
 
   @doc false
-  def changeset(news, attrs) do
+  def changeset(news, attrs \\ %{}) do
     news
     |> cast(attrs, [
       :image_url,
@@ -29,12 +29,9 @@ defmodule Smartcitydogs.News do
       :deleted_at
     ])
     |> validate_required([
-      :image_url,
+      #:image_url,
       :title,
-      :meta,
-      :keywords,
       :content,
-      :short_content,
       :date
     ])
   end
