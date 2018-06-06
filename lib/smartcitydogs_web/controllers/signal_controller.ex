@@ -18,7 +18,10 @@ defmodule SmartcitydogsWeb.SignalController do
       signal_params
       |> Map.put("signals_types_id", 1)
 
-    # IO.puts "#{inspect(signal_params)}"
+    #IO.puts "#{inspect(conn)}"
+    IO.inspect(conn.params["signals"]["url"])
+
+    #IO.puts "#{Map.get(conn, :url)}"
 
     case DataSignals.create_signal(signal_params) do
       {:ok, signal} ->
