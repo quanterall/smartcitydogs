@@ -198,14 +198,7 @@ unless Repo.get_by(SignalsTypes, name: signal_type_params[:name]) do
   |> Repo.insert!()
 end
 
-############## Signals Images #############
-signal_image_params = %{url: "C://images", signal_id: 1}
 
-unless Repo.get_by(SignalImages, url: signal_image_params[:url]) do
-  %SignalImages{}
-  |> SignalImages.changeset(signal_image_params)
-  |> Repo.insert!()
-end
 
 ############## Signals Types #############
 
@@ -251,6 +244,15 @@ signals_params = %{
 }
 
 %Signals{} |> Signals.changeset(signals_params) |> Repo.insert!()
+
+############## Signals Images #############
+signal_image_params = %{url: "C://images", signals_id: 1}
+
+unless Repo.get_by(SignalImages, url: signal_image_params[:url]) do
+  %SignalImages{}
+  |> SignalImages.changeset(signal_image_params)
+  |> Repo.insert!()
+end
 
 ############## Signals Comments #############
 signal_comment_params = %{

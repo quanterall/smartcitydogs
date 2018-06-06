@@ -12,7 +12,12 @@ defmodule Smartcitydogs.SignalImages do
   @doc false
   def changeset(signal_images, attrs) do
     signal_images
-    |> cast(attrs, [:url])
-    |> validate_required([:url])
+    |> cast(attrs, [
+      :url,
+      :signals_id
+    ])
+    |> validate_required([
+      :url
+    ])
   end
 end

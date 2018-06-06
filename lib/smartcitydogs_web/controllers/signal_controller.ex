@@ -17,6 +17,7 @@ defmodule SmartcitydogsWeb.SignalController do
     signal_params =
       signal_params
       |> Map.put("signals_types_id", 1)
+
     # IO.puts "#{inspect(signal_params)}"
 
     case DataSignals.create_signal(signal_params) do
@@ -40,7 +41,6 @@ defmodule SmartcitydogsWeb.SignalController do
     changeset = DataSignals.change_signal(signal)
 
     render(conn, "edit_signal.html", signal: signal, changeset: changeset)
-
   end
 
   def update(conn, %{"id" => id, "signals" => signal_params}) do
