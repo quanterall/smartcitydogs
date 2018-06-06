@@ -46,6 +46,7 @@ defmodule SmartcitydogsWeb.Router do
 
       resources "/users", UserController
       resources "/animals", AnimalController
+      resources "/news", NewsController
 
       # admin zone
       scope "/admin", Admin, as: :admin do

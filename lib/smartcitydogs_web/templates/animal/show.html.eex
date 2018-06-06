@@ -1,17 +1,19 @@
 <h1><%= @animals.chip_number %></h1>
 
 <ul>
-  <li> <img class="rounded-circle" src="<%= static_path(@conn, "/images/4.jpg") %>" alt="Generic placeholder image" width="140" height="140"> </li>
+  <li>     
+     <img class="rounded-circle" src="<%= get_image_animals_id(@animals.id) %>" alt="Generic placeholder image" width="140" height="140">      
+   </li>
   <li>Chip Number: <%= @animals.chip_number %></li>
   <li>Sex: <%= @animals.sex %></li>
   <li>Address: <%= @animals.address %></li>
   <li>Register Date: <%= @animals.registered_at %></li>
   <li>Status: <%= @animals.animals_status.name %></li>
-  <li>History (кога е прибирано)  <%=  %></li>
-  <li> Извършени процедури   </li>
+  <li>History (кога е прибирано)  <%= @animals.id %></li>
+  <li> Извършени процедури  </li>
 </ul>
 
 
-<span><a href="/animals">Back</a></span>
+<%= link "Back", to: animal_path(@conn, :index), class: "btn btn-default btn-xs" %>
 
 <%= link "Edit", to: animal_path(@conn, :edit, @animals), class: "btn btn-default btn-xs" %>

@@ -157,7 +157,7 @@ end
 # end
 
 ############# Animal Images ################
-animals_images_params = %{url: "C://images", animals_id: 1}
+animals_images_params = %{url: "images/2.jpg", animals_id: 1}
 
 unless Repo.get_by(AnimalImages, url: animals_images_params[:url]) do
   %AnimalImages{}

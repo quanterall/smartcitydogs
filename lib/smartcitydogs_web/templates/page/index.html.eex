@@ -247,10 +247,4 @@
           <hr class="featurette-divider">
           <!-- /END THE FEATURETTES -->
         </div><!-- /.container -->
-        <!-- FOOTER -->
-        <footer class="container">
-          <p class="float-right"><a href="#">Back to top</a></p>
-          <p>© 2017-2018 Company, Inc. · <a href="/">Home</a> · <a href="#">For the project</a>
-          · <a href="#">Signals</a> · <a href="#">Registered dogs</a> · <a href="#">News</a>
-          · <a href="#">Help</a> · <a href="#">Contacts</a></p>
-        </footer>
+        

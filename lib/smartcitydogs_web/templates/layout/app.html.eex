@@ -98,6 +98,13 @@
 
     <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
 
+  <!-- FOOTER -->
+        <footer class="container">
+          <p class="float-right"><a href="#">Back to top</a></p>
+          <p>© 2017-2018 Company, Inc. · <a href="/">Home</a> · <a href="#">For the project</a>
+          · <a href="#">Signals</a> · <a href="/animals">Registered dogs</a> · <a href="/news">News</a>
+          · <a href="#">Help</a> · <a href="#">Contacts</a></p>
+        </footer>
   </body>
 </html>
 
