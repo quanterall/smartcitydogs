@@ -1,0 +1,29 @@
+<%= form_for @changeset, @action, [multipart: true] ,fn f -> %>
+  <%= if @changeset.action do %>
+    <div class="alert alert-danger">
+      <p>There are some errors</p>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <p> Add Photo: </p>
+    <%= #file_input f, :photo, class: "form-control" %>
+    <%= #file_input f, :photo, muliple: true %>
+    <%= file_input f, :news_image, name: "files" %>
+  </div>
+  
+  <div class="form-group">
+    <%= text_input f, :title, placeholder: "Title",
+                             class: "form-control" %>
+    <%= error_tag f, :chip_number %>
+  </div>
+
+  <div class="form-group">
+    <%= textarea f, :content, placeholder: "Content",
+                             class: "form-control" %>
+    <%= error_tag f, :chip_number %>
+  </div>
+    
+
+  <%= submit "Add News", class: "btn btn-primary" %>
+<% end %>

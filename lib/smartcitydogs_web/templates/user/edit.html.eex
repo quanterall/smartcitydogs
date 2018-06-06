@@ -1,0 +1,12 @@
+
+<%= render "myprofile.html", Map.put(assigns, :action, user_path(@conn, :update, @user)) %>
+
+
+<br>
+<span class="link"><%= link "Back", to: user_path(@conn, :index) %></span>
+<br>
+<span class="link"><%= link "My signals", to: user_path(@conn, :index) %></span>
+<br>
+<span class="link"><%= link "Followed signals", to: user_path(@conn, :index) %></span>
+<br>
+<span class="link"><%= link "Create a signal", to: user_path(@conn, :index) %></span>

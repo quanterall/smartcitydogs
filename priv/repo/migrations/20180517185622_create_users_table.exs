@@ -5,10 +5,12 @@ defmodule Smartcitydogs.Repo.Migrations.CreateUsersTable do
     create table("users") do
       add(:username, :text)
       add(:password_hash, :text)
-      add(:fist_name, :text)
+      add(:first_name, :text)
       add(:last_name, :text)
       add(:email, :text)
       add(:phone, :text)
+      add(:reset_password_token, :text)
+      add(:reset_token_sent_at, :naive_datetime)
       add(:deleted_at, :naive_datetime)
       timestamps()
     end

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>SmartCityDogs!</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
+  </head>
+
+  <body>
+
+      <header>
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+          <a class="navbar-brand" href="#">
+            <a href="#" class="fa fa-facebook"></a>
+          </a>
+          <a class="navbar-brand" href="#">
+            <a href="#" class="fa fa-twitter"></a>
+          </a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav mr-auto">
+              <%= if @current_user do %>
+ <li class="nav-item">
+              
+     </li>
+     <%= link "My profile", to:  user_path(@conn, :edit, @current_user), class: "btn btn-default btn-xs" %>
+   
+    <li class="nav-item">
+    
+                <a class="nav-link" href="\">Home </a>
+    </li>
+    <li class="nav-item">
+          <%= #link "My signals", to: user_post_path(@conn, :index,
+               #                                   @current_user), class: "nav-link" %>
+        </li>
+        <%= if @current_user.users_types_id == 1 do %>
+      <li class="nav-item">
+        <%= link "Users", to: admin_user_path(@conn, :index), class: "nav-link" %>
+      </li>
+    <% end %>
+    <li class="nav-item">
+      <%= link "Sign out", to: session_path(@conn, :delete,
+                                            @current_user),
+                           method: "delete", class: "nav-link" %>
+    </li>
+  <% else %>
+              <li class="nav-item">
+                <a class="nav-link" href="\">Home </a>
+              </li>
+              <li class="nav-item">
+               <%= link "Register", to: user_path(@conn, :new), class: "nav-link" %>
+                <!--a class="nav-link" href="<%=#user_url(@conn, :new)%>">Register</a-->
+              </li>
+              <li class="nav-item">
+                <%= link "Sign in", to: session_path(@conn, :new), class: "nav-link" %>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">New Signal</a>
+              </li>
+              <li class="nav-item">
+                <%= link "Forgoten password", to: forgoten_password_path(@conn, :new), class: "nav-link" %> 
+              </li>
+            <% end %>
+            </ul>
+            <form class="form-inline mt-2 mt-md-0">
+              <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+              <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </form>
+          </div>
+        </nav>
+      </header>
+
+      <main role="main">
+      <div class="container mt-3">
+<%= render @view_module, @view_template, assigns %>
+</div>
+      </main>
+
+
+
+  <svg xmlns="http://www.w3.org/2000/svg" width="500" height="500" viewBox="0 0 500 500" preserveAspectRatio="none" style="display: none; visibility: hidden; position: absolute; top: -100%; left: -100%;"><defs><style type="text/css"></style></defs><text x="0" y="25" style="font-weight:bold;font-size:25pt;font-family:Arial, Helvetica, Open Sans, sans-serif">500x500</text></svg>
+
+
+
+
+
+
+
+
+    <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
+
+  <!-- FOOTER -->
+        <footer class="container">
+          <p class="float-right"><a href="#">Back to top</a></p>
+          <p>© 2017-2018 Company, Inc. · <a href="/">Home</a> · <a href="#">For the project</a>
+          · <a href="#">Signals</a> · <a href="/animals">Registered dogs</a> · <a href="/news">News</a>
+          · <a href="#">Help</a> · <a href="#">Contacts</a></p>
+        </footer>
+  </body>
+</html>
+

@@ -1,0 +1,11 @@
+<h1><%= @news.title %></h1>
+
+<ul>
+  <li> <img class="rounded-circle" src="<%= static_path(@conn, "/images/4.jpg") %>" alt="Generic placeholder image" width="140" height="140"> </li>
+  <li>Date: <%= @news.date %></li>
+  <li>Text: <%= @news.content %></li>
+  <li> Video: </li>
+</ul>
+
+<%= link "Back", to: news_path(@conn, :index), class: "btn btn-default btn-xs" %>
+<%= link "Edit", to: news_path(@conn, :edit, @news), class: "btn btn-default btn-xs" %>

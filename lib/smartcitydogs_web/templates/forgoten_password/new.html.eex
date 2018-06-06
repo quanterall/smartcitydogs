@@ -1,0 +1,26 @@
+<div>
+  <h2>Password reset</h2>
+    <%= form_for @changeset, @action, fn f -> %>
+    <div>
+      <%= label f, :username %>
+      <%= text_input f, :username %>
+      <%= error_tag f, :username %>
+    </div>
+
+    <div>
+      <%= label f, :email %>
+      <%= text_input f, :email %>
+      <%= error_tag f, :email %>
+    </div>
+
+    <div>
+      <%= label f, :phone %>
+      <%= text_input f, :phone %>
+      <%= error_tag f, :phone %>
+    </div>
+
+    <div>
+      <%= submit "Send reset link" %>
+    </div>
+  <% end %>
+</div>
