@@ -1,0 +1,30 @@
+<h1> News </h1>
+
+<div class="container">
+          <!-- Three columns of text below the carousel -->
+        
+          <div class="row">
+          <%= for news <- @news do %>
+            <div class="col-lg-4">
+            <!-- "<%= static_path(@conn, "/images/4.jpg") %>" -->
+              <img class="rounded-circle" src="<%= static_path(@conn, "/images/4.jpg") %>" alt="Generic placeholder image" width="140" height="140">
+              <h2><%= news.title%></h2>
+              <ul>
+               
+                <li>
+                  short content <%= news.short_content%>
+                </li>
+                <li>
+                  Date: <%= news.date %>
+                </li>
+              </ul>
+              <p>
+              <%= link "View more »", to: news_path(@conn, :show, news), class: "btn btn-secondary" %>
+            
+            </div>
+            <%end%>
+          </div><!-- /.row -->
+         
+           
+          
+</div>
