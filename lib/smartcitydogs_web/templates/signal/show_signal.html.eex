@@ -1,3 +1,4 @@
+      <% get_signals_view_count(@signal.id)  %>
       <h1><%= @signal.title %></h1>
       <ul>
 
@@ -52,7 +53,8 @@
 
       </ul>
       <p>ID: <%= @signal.id %></p>
-      <p><a class="btn btn-secondary" onclick="<%= #get_signals_support_count(@signal.id) %>" role="button">Like</a>
+      <%= render "_scripts.html", post: @post %>
+      <p><a id="like" class="btn btn-secondary" onclick="get_signals_support_count(<%@signal.id%>)" role="button">Like</a>
       <a class="btn btn-secondary" href="#" role="button">Comment</a></p>
 
       <span><%= link "LIKE", to: signal_path(@conn, :update, @signal) %></span>
