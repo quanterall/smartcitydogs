@@ -17,12 +17,6 @@
     <%= @user.username %>
   </li>
 <br>
-<br>
-  <li>
-    <strong>password:</strong>
-    <%= @user.password %>
-  </li>
-<br>
 
 <br>
   <li>
@@ -34,4 +28,4 @@
 
 <span><%= ##link "Edit", to: user_path(@conn, :edit, @user) %></span>
  <a href="\">Back</a></span>
-<span><%= link "Back", to: user_path(@conn, :index) %></span>
+<span><%= ##link "Back", to: user_path(@conn, :index) %></span>

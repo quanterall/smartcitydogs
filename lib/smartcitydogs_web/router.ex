@@ -50,6 +50,7 @@ defmodule SmartcitydogsWeb.Router do
       resources "/animals", AnimalController
       resources "/news", NewsController
       resources("/help", HelpController, only: [:index])
+      resources("/contact", ContactController, only: [:new, :create])
       # admin zone
       scope "/admin", Admin, as: :admin do
         pipe_through([:admin_required])

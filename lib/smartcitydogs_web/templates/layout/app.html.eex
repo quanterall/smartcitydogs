@@ -104,7 +104,7 @@
           <p>© 2017-2018 Company, Inc. · <a href="/">Home</a> · <a href="#">For the project</a>
           · <a href="#">Signals</a> · <a href="/animals">Registered dogs</a> · <a href="/news">News</a>
           · <a href="#"><%= link "Help", to: help_path(@conn, :index)%></a> ·
-           <a href="#">Contacts</a></p>
+           <a href="#"><%= link "Contacts", to: contact_path(@conn, :new)%></a> 
         </footer>
   </body>
 </html>
