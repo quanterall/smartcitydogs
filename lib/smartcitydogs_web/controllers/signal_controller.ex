@@ -68,16 +68,26 @@ defmodule SmartcitydogsWeb.SignalController do
     signal = DataSignals.get_signal(id)
     # IO.puts "#{inspect(signal)}"
     # IO.puts "#{inspect(signal)}"
+    #update_count(conn,id)
     case DataSignals.update_signal(signal, signal_params) do
       {:ok, signal} ->
         conn
         |> put_flash(:info, "Signal updated successfully.")
-        |> redirect(to: signal_path(conn, :show, signal))
+        |> render("show_signal.html", signal: signal)
+        #redirect(to: signal_path(conn, :show, signal))
 
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "edit_signal.html", signal: signal, changeset: changeset)
     end
   end
+
+  # def update_count(conn,%{"id"=> id}) do
+  #   signal = DataSignals.get_signal(id)
+  #
+  #   DataSignals.update_signal(signal,%{support_count: signal.support_count + 1})
+  #   #render(conn, "show_signal.html", signal: signal)
+  #
+  # end
 
   def delete(conn, %{"id" => id}) do
     # signal = DataSignals.get_signal(id)

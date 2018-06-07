@@ -14,15 +14,18 @@ defmodule SmartcitydogsWeb.SignalView do
 
   def get_signals_support_count(signal_id) do
     list = Smartcitydogs.DataSignals.get_signal_support_count(signal_id)
-    #IO.inspect(signal_id)
-    #IO.puts "----------------------------"
+    IO.inspect(list)
+    IO.puts "----------------------------"
     if list != [] do
       #IO.inspect(list)
       [head | tail] = list
-      #IO.inspect(head)
-      count = head.count
+      IO.inspect(head)
+      #count = head.count
       #IO.inspect(count)
-      Smartcitydogs.DataSignals.update_signal(%Signals{},%{view_count: count+1})
+      count = head.support_count
+      IO.inspect(count)
+      IO.puts "---------------------------------------"
+      Smartcitydogs.DataSignals.update_signal(head,%{support_count: count+1})
     end
   end
 end

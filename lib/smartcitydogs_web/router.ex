@@ -24,6 +24,12 @@ defmodule SmartcitydogsWeb.Router do
       "/signals",
       SignalController
     )
+    # resources(
+    #   "/",
+    #   SupportCountController
+    # )
+
+    #get("/signals/:id", SignalController, :update)
 
     # resources "/all", AllController, only: [:index]
     # get("/register", RegisterController, :index)
