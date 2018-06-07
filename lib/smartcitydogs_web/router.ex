@@ -18,8 +18,11 @@ defmodule SmartcitydogsWeb.Router do
     pipe_through(:browser)
 
     get("/", PageController, :index)
+    get("/show", PageController, :show)
     resources("/users", UserController)
 
+    get("/signals/get_signals_support_count", SignalController, :get_signals_support_count)
+    get("/signals/something_else", SignalController, :something_else)
     resources(
       "/signals",
       SignalController

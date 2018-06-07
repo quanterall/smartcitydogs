@@ -38,7 +38,7 @@
 
         <li>
           <strong>Support count:</strong>
-          <%=@signal.support_count%>
+          <span id="signal-count"><%=@signal.support_count%></span>
         </li>
 
         <li>
@@ -52,11 +52,10 @@
         </li>
 
       </ul>
-      <p>ID: <%= @signal.id %></p>
-      <%= render "_scripts.html", post: @post %>
-      <p><a id="like" class="btn btn-secondary" onclick="get_signals_support_count(<%@signal.id%>)" role="button">Like</a>
+      <p id="signal-id"><%= @signal.id %></p>
+
+      <p><a id="like" class="btn btn-secondary" role="button">Like</a>
       <a class="btn btn-secondary" href="#" role="button">Comment</a></p>
 
-      <span><%= link "LIKE", to: signal_path(@conn, :update, @signal) %></span>
 <span><%= link "Edit", to: signal_path(@conn, :edit, @signal) %></span>
 <span><%= link "Back", to: signal_path(@conn, :index) %></span>

@@ -12,22 +12,7 @@ defmodule SmartcitydogsWeb.SignalView do
 
   end
 
-  def get_signals_support_count(signal_id) do
-    list = Smartcitydogs.DataSignals.get_signal_support_count(signal_id)
-    IO.inspect(list)
-    IO.puts "----------------------------"
-    if list != [] do
-      #IO.inspect(list)
-      [head | tail] = list
-      IO.inspect(head)
-      #count = head.count
-      #IO.inspect(count)
-      count = head.support_count
-      IO.inspect(count)
-      IO.puts "---------------------------------------"
-      Smartcitydogs.DataSignals.update_signal(head,%{support_count: count+1})
-    end
-  end
+  
 
   def get_signals_view_count(signal_id) do
     list = Smartcitydogs.DataSignals.get_signal_support_count(signal_id)
