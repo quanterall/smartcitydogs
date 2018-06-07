@@ -45,7 +45,7 @@ $("#like").click(function(){
       "show-id": $("#signal-id").text()
     }
   }).then(function(data) {
-    $("#signal-id").text(data.new_count),
+    //$("#signal-id").text(data.new_count);
     $("#signal-count").text(data.new_count);
   })
 });

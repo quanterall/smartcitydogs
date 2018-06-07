@@ -96,10 +96,10 @@ defmodule SmartcitydogsWeb.SignalController do
     IO.puts "_________________________________________________"
     IO.inspect(count)
     IO.puts "_________________________________________________"
-  
+
     conn
     |> json(%{new_count: count})
-    redirect(conn, to: signal_path(conn, :show, signal))
+    #redirect(conn, to: signal_path(conn, :show, signal))
     #|> render("show_signal.html", show_id: show_id)
 
   end
