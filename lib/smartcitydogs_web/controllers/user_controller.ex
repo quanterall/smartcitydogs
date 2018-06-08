@@ -19,6 +19,7 @@ defmodule SmartcitydogsWeb.UserController do
 
   def new(conn, _params) do
     changeset = User.changeset(%User{})
+    IO.puts "********************************8"
     render(conn, "new.html", changeset: changeset)
   end
 
@@ -38,11 +39,21 @@ defmodule SmartcitydogsWeb.UserController do
   # end
 
   def create(conn, %{"user" => user_params}) do
+    IO.inspect user_params
+    IO.puts "rrrrrrrrrrrrrrrrrrrrr"
+    if user_params["checked"] != "true" do
     changeset = %User{} |> User.registration_changeset(user_params)
+    IO.puts "not checked"
+    conn
+    |> put_flash(:info, "agree with the rules") 
+    render(conn, "new.html", changeset: changeset)
+   
+  else
     ##  IO.inspect(changeset)
     # users = Map.get(changeset, :changes)
     # IO.inspect(users)
     # case Smartcitydogs.DataUsers.create_user(users) do
+   changeset = %User{} |> User.registration_changeset(user_params)
     case Repo.insert(changeset) do
       {:ok, user} ->
         ##   IO.inspect(conn)
@@ -54,6 +65,7 @@ defmodule SmartcitydogsWeb.UserController do
 
       {:error, changeset} ->
         render(conn, "new.html", changeset: changeset)
+      end      
     end
   end
 

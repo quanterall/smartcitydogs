@@ -102,7 +102,7 @@
     <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
     <%= if @current_user do %>
   <!-- FOOTER -->
-     <%= IO.inspect @current_user %>
+     
         <footer class="container">
           <p class="float-right"><a href="#">Back to top</a></p>
           <p>© 2017-2018 Company, Inc. · <a href="/">Home</a> · <a href="#">For the project</a>
