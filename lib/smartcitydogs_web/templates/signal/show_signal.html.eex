@@ -1,4 +1,4 @@
-      <% get_signals_view_count(@signal.id)  %>
+
       <h1><%= @signal.title %></h1>
       <ul>
 
@@ -52,7 +52,7 @@
 
         <li>
           <strong>Views:</strong>
-          <%=@signal.view_count%>
+          <%= get_signals_view_count(@signal.id)  %>
         </li>
 
       </ul>

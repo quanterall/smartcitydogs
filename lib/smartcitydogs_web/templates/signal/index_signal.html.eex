@@ -11,6 +11,10 @@
               <h2><%=signal.title%></h2>
               <ul>
                 <li>
+                  Signal number:
+                  <a id="signal-id"><%= signal.id %></a>
+                </li>
+                <li>
                   Category: <%=signal.signals_categories_id
                   |> Smartcitydogs.DataSignals.get_signal_category()
                   |> Map.get(:name)
@@ -32,7 +36,7 @@
                   Chip number: <%=signal.chip_number%>
                 </li>
                 <li>
-                  Support count: <%=signal.support_count%>
+                  Support count: <span id="signal-count"><%= signal.support_count %></span>
                 </li>
                 <li>
                   Last location: <%=signal.address%>
@@ -43,7 +47,7 @@
               </ul>
 
               <p><a class="btn btn-secondary" href="signals/<%=signal.id%>" role="button">View more »</a>
-              <a class="btn btn-secondary" href="#" role="button">Like »</a></p>
+              <a id="like" class="btn btn-secondary" role="button">Like</a></p>
               <p><a class="btn btn-secondary" href="#" role="button">Comment »</a>
               <a class="btn btn-secondary" href="#" role="button">View map »</a></p>
 
