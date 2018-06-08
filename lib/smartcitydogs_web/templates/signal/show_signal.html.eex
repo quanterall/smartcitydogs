@@ -3,6 +3,10 @@
       <ul>
 
         <img class="square" src="/<%= get_signals_images(@signal.id) %>" alt="Generic placeholder image" width="300" height="200">
+        <li>
+          <strong>Signal number:</strong>
+          <a id="signal-id"><%= @signal.id %></a>
+        </li>
 
         <li>
           <strong>Category:</strong>
@@ -52,7 +56,7 @@
         </li>
 
       </ul>
-      <p id="signal-id"><%= @signal.id %></p>
+
 
       <p><a id="like" class="btn btn-secondary" role="button">Like</a>
       <a class="btn btn-secondary" href="#" role="button">Comment</a></p>

@@ -39,13 +39,12 @@ $("#like").click(function(){
 
   $.ajax({
     method: "GET",
-    url: "/signals/something_else",
+    url: "/signals/update_like_count",
     data: {
       "show-count": $("#signal-count").text(),
       "show-id": $("#signal-id").text()
     }
   }).then(function(data) {
-    //$("#signal-id").text(data.new_count);
     $("#signal-count").text(data.new_count);
   })
 });

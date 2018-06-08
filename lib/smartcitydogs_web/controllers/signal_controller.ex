@@ -77,18 +77,18 @@ defmodule SmartcitydogsWeb.SignalController do
     if list != [] do
       [head | tail] = list
       count = head.support_count
-      IO.puts "---------------------------------------"
-      IO.inspect(count)
-      IO.puts "------------------------------------------"
-      Smartcitydogs.DataSignals.update_signal(head,%{support_count: count+1})
-      IO.puts "_________________________________________________"
-      IO.inspect(head.support_count)
-      IO.puts "_________________________________________________"
+       IO.puts "---------------------------------------"
+       IO.inspect(count)
+       IO.puts "------------------------------------------"
+       Smartcitydogs.DataSignals.update_signal(head,%{support_count: count+1})
+       IO.puts "_________________________________________________"
+       IO.inspect(head.support_count)
+       IO.puts "_________________________________________________"
     end
-    head.support_count
+    head.support_count + 1
   end
 
-  def something_else(conn, %{"show-count" => show_count, "show-id" => show_id}) do#, "show-id" => show_id}) do
+  def update_like_count(conn, %{"show-count" => show_count, "show-id" => show_id}) do#, "show-id" => show_id}) do
     IO.inspect(show_count, pretty: true)
     IO.inspect(show_id, pretty: true)
     signal = DataSignals.get_signal(show_id)
