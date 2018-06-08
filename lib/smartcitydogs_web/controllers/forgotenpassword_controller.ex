@@ -78,7 +78,7 @@ defmodule SmartcitydogsWeb.ForgotenPasswordController do
     def update(conn, %{"id" => token, "user" => pw_params}) do
       user = User
             |> Repo.get_by(reset_password_token: token)
-            IO.inspect token
+            
       case user do
         nil ->
           conn
