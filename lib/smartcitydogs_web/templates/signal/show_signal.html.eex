@@ -59,7 +59,17 @@
 
 
       <p><a id="like" class="btn btn-secondary" role="button">Like</a>
-      <a class="btn btn-secondary" href="#" role="button">Comment</a></p>
+        <br><br>
+        <label> Leave a comment:</label>
+        <br>
+          <input type="text" id="comment-id" value="">
+
+        <br>
+        <br>
+      <a id="comment" class="btn btn-secondary" role="button">Submit comment</a></p>
 
 <span><%= link "Edit", to: signal_path(@conn, :edit, @signal) %></span>
 <span><%= link "Back", to: signal_path(@conn, :index) %></span>
+
+
+          <strong>Comments:</strong> <% #get_signal_comment(@signal.id) %>

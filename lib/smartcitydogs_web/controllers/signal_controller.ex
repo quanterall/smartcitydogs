@@ -77,25 +77,25 @@ defmodule SmartcitydogsWeb.SignalController do
     if list != [] do
       [head | tail] = list
       count = head.support_count
-       IO.puts "---------------------------------------"
-       IO.inspect(count)
-       IO.puts "------------------------------------------"
+       #IO.puts "---------------------------------------"
+       #IO.inspect(count)
+       #IO.puts "------------------------------------------"
        Smartcitydogs.DataSignals.update_signal(head,%{support_count: count+1})
-       IO.puts "_________________________________________________"
-       IO.inspect(head.support_count)
-       IO.puts "_________________________________________________"
+       #IO.puts "_________________________________________________"
+       #IO.inspect(head.support_count)
+       #IO.puts "_________________________________________________"
     end
     head.support_count + 1
   end
 
   def update_like_count(conn, %{"show-count" => show_count, "show-id" => show_id}) do#, "show-id" => show_id}) do
-    IO.inspect(show_count, pretty: true)
-    IO.inspect(show_id, pretty: true)
+    #IO.inspect(show_count, pretty: true)
+    #IO.inspect(show_id, pretty: true)
     signal = DataSignals.get_signal(show_id)
     count = get_signals_support_count(show_id)
-    IO.puts "_________________________________________________"
-    IO.inspect(count)
-    IO.puts "_________________________________________________"
+    #IO.puts "_________________________________________________"
+    #IO.inspect(count)
+    #IO.puts "_________________________________________________"
 
     conn
     |> json(%{new_count: count})
@@ -104,6 +104,15 @@ defmodule SmartcitydogsWeb.SignalController do
 
   end
 
+  def comment(conn, %{"show-comment" => show_comment, "show-id" => show_id}) do
+    #IO.puts "______________________SSHOW_COUNT_________________________"
+    #IO.inspect(show_count)
+    #IO.inspect(show_id)
+    #IO.puts "__________________________SHOW_ID_____________________"
+
+    Smartcitydogs.DataSignals.create_signal_comment(%{comment: show_comment, signals_id: show_id})
+    redirect conn, to: "/signals/#{show_id}"
+  end
 
   def delete(conn, %{"id" => id}) do
     {:ok, _signal} = DataSignals.delete_signal(id)

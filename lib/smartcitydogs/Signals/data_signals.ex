@@ -118,6 +118,8 @@ defmodule Smartcitydogs.DataSignals do
   end
 
   def create_signal_comment(args \\ %{}) do
+    IO.inspect(args)
+    IO.puts "_________________________________________________"
     %SignalsComments{}
     |> SignalsComments.changeset(args)
     |> Repo.insert()

@@ -34,7 +34,9 @@ import $ from "jquery";
 //   })
 // });
 
-console.log("test");
+//console.log("test");
+//var a=$(".btnSignal");
+//console.log(a);
 $("#like").click(function(){
 
   $.ajax({
@@ -46,5 +48,21 @@ $("#like").click(function(){
     }
   }).then(function(data) {
     $("#signal-count").text(data.new_count);
+  })
+});
+
+//var x = document.getElementById("myText");
+//console.log(x);
+$("#comment").click(function(){
+
+  $.ajax({
+    method: "GET",
+    url: "/signals/comment",
+    data: {
+      "show-comment": $("#comment-id").val(),
+      "show-id": $("#signal-id").text()
+    }
+  }).then(function(data) {
+    $("#comment-id").val("");
   })
 });

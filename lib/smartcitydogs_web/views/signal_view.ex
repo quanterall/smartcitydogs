@@ -12,7 +12,9 @@ defmodule SmartcitydogsWeb.SignalView do
 
   end
 
-
+  def get_all_comments(comment_id) do
+    Smartcitydogs.DataSignals.list_signal_comment(comment_id)
+  end
 
   def get_signals_view_count(signal_id) do
     list = Smartcitydogs.DataSignals.get_signal_support_count(signal_id)
