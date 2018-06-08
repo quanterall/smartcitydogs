@@ -7,8 +7,16 @@ defmodule SmartcitydogsWeb.AnimalController do
   alias Smartcitydogs.Repo
 
   def index(conn, _params) do
-    animals = DataAnimals.list_animals()
+    IO.inspect _params
+    IO.puts "---------------------"
+   ## animals = DataAnimals.list_animals()
+   chip = _params["chip_number"]
+   if chip != nil do
+   animals = DataAnimals.get_animal_by_chip(chip)
     render(conn, "index.html", animals: animals)
+   end
+   animals = DataAnimals.list_animals()
+   render(conn, "index.html", animals: animals)
   end
 
   def new(conn, _params) do
