@@ -69,6 +69,9 @@
               <li class="nav-item">
               <%= link "New Signal", to: session_path(@conn, :new), class: "nav-link" %>
               </li>
+              
+
+
               <li class="nav-item">
                 <%= link "Forgoten password", to: forgoten_password_path(@conn, :new), class: "nav-link" %> 
               </li>
@@ -106,16 +109,18 @@
      
         <footer class="container">
           <p class="float-right"><a href="#">Back to top</a></p>
-          <p>© 2017-2018 Company, Inc. · <a href="/">Home</a> · <a href="#">For the project</a>
-          · <a href="#">Signals</a> · <a href="/animals">Registered dogs</a> · <a href="/news">News</a>
+          <p>© 2017-2018 Company, Inc. · <a href="/">Home</a> 
+          · <a href="#"><%= link "For the project", to: for_the_project_path(@conn, :index)%></a> ·
+           <a href="#">Signals</a> · <a href="/animals">Registered dogs</a> · <a href="/news">News</a>
           · <a href="#"><%= link "Help", to: help_path(@conn, :index)%></a> ·
            <a href="#"><%= link "Contact", to: contact_path(@conn, :edit, @current_user)%></a> 
         </footer>
       <% else %>  
               <footer class="container">
           <p class="float-right"><a href="#">Back to top</a></p>
-          <p>© 2017-2018 Company, Inc. · <a href="/">Home</a> · <a href="#">For the project</a>
-          · <a href="#">Signals</a> · <a href="/animals">Registered dogs</a> · <a href="/news">News</a>
+          <p>© 2017-2018 Company, Inc. · <a href="/">Home</a> 
+          · <a href="#"><%= link "For the project", to: for_the_project_path(@conn, :index)%></a> ·
+           <a href="#">Signals</a> · <a href="/animals">Registered dogs</a> · <a href="/news">News</a>
           · <a href="#"><%= link "Help", to: help_path(@conn, :index)%></a> ·
           <a href="#"><%= link "Contact", to: contact_path(@conn, :new)%></a> 
         </footer>

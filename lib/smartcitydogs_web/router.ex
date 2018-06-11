@@ -39,7 +39,8 @@ defmodule SmartcitydogsWeb.Router do
     resources("/sessions", SessionController, only: [:new, :create, :delete])
 
     resources("/users", UserController, only: [:new, :create])
-
+    resources("/help", HelpController, only: [:index])
+    resources("/fortheproject", ForTheProjectController, only: [:index])
     resources("/forgoten_password", ForgotenPasswordController, only: [:new, :create, :edit, :update])
     resources("/contact", ContactController, only:  [:new, :create])
     # registered user zone
