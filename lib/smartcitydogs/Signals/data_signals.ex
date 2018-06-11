@@ -117,6 +117,11 @@ defmodule Smartcitydogs.DataSignals do
     Repo.all(SignalsComments)
   end
 
+  def get_comment_signal_id(signals_id) do
+    query = Ecto.Query.from(c in SignalsComments, where: c.signals_id == ^signals_id)
+    Repo.all(query)
+  end
+
   def create_signal_comment(args \\ %{}) do
     IO.inspect(args)
     IO.puts "_________________________________________________"

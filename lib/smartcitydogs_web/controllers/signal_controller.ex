@@ -47,8 +47,9 @@ defmodule SmartcitydogsWeb.SignalController do
   end
 
   def show(conn, %{"id" => id}) do
+    comments = DataSignals.get_comment_signal_id(id)
     signal = DataSignals.get_signal(id)
-    render(conn, "show_signal.html", signal: signal)
+    render(conn, "show_signal.html", signal: signal, comments: comments)
   end
 
   def edit(conn, %{"id" => id}) do

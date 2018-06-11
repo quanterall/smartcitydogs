@@ -12,8 +12,20 @@ defmodule SmartcitydogsWeb.SignalView do
 
   end
 
-  def get_all_comments(comment_id) do
-    Smartcitydogs.DataSignals.list_signal_comment(comment_id)
+  def get_all_comments(signals_id) do
+    list = Smartcitydogs.DataSignals.get_comment_signal_id(signals_id)
+    #for comment <- list do
+      #[head | tail] = comment
+      #comment = comment.comment
+      #IO.puts "___________________COMMENTs_______________________"
+      #IO.inspect(comment)
+      #IO.puts "___________________COMMENTs_______________________"
+      list
+    #end
+  end
+
+  def get_comment_signal_id(signals_id) do
+    Smartcitydogs.DataSignals.get_comment_signal_id(signals_id)
   end
 
   def get_signals_view_count(signal_id) do

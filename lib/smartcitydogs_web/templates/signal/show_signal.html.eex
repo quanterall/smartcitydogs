@@ -62,14 +62,21 @@
         <br><br>
         <label> Leave a comment:</label>
         <br>
-          <input type="text" id="comment-id" value="">
-
+          <textarea name="message" id="comment-id" value="" rows="6" cols="40">
+          </textarea>
         <br>
         <br>
-      <a id="comment" class="btn btn-secondary" role="button">Submit comment</a></p>
+      <a id="comment" class="btn btn-secondary" href="/signals/<%= @signal.id %>" role="button">Submit comment</a></p>
 
 <span><%= link "Edit", to: signal_path(@conn, :edit, @signal) %></span>
 <span><%= link "Back", to: signal_path(@conn, :index) %></span>
+      <br>
 
-
-          <strong>Comments:</strong> <% #get_signal_comment(@signal.id) %>
+          <strong>Comments:</strong>
+          <br>
+          <hr>
+          <%= for comment <- @comments do %>
+          <strong>Username</strong>
+            <p><%= IO.inspect(comment.comment) %></p>
+          <hr>
+          <% end %>
