@@ -25,9 +25,10 @@ defmodule Smartcitydogs.DataSignals do
     |> Repo.update()
   end
 
-    ### takes the support_count
+  ### takes the support_count
   def get_signal_support_count(signal_id) do
-    query = Ecto.Query.from(c in Signals, where: c.id == ^signal_id) #select: %{ count: c.support_count },
+    # select: %{ count: c.support_count },
+    query = Ecto.Query.from(c in Signals, where: c.id == ^signal_id)
     Repo.all(query)
   end
 
@@ -124,7 +125,8 @@ defmodule Smartcitydogs.DataSignals do
 
   def create_signal_comment(args \\ %{}) do
     IO.inspect(args)
-    IO.puts "_________________________________________________"
+    IO.puts("_________________________________________________")
+
     %SignalsComments{}
     |> SignalsComments.changeset(args)
     |> Repo.insert()

@@ -17,12 +17,6 @@
     <%= @user.username %>
   </li>
 <br>
-<br>
-  <li>
-    <strong>password:</strong>
-    <%= @user.password %>
-  </li>
-<br>
 
 <br>
   <li>

@@ -37,32 +37,32 @@ import $ from "jquery";
 //console.log("test");
 //var a=$(".btnSignal");
 //console.log(a);
-$("#like").click(function(){
+$("#like").click(function() {
 
-  $.ajax({
-    method: "GET",
-    url: "/signals/update_like_count",
-    data: {
-      "show-count": $("#signal-count").text(),
-      "show-id": $("#signal-id").text()
-    }
-  }).then(function(data) {
-    $("#signal-count").text(data.new_count);
-  })
+    $.ajax({
+        method: "GET",
+        url: "/signals/update_like_count",
+        data: {
+            "show-count": $("#signal-count").text(),
+            "show-id": $("#signal-id").text()
+        }
+    }).then(function(data) {
+        $("#signal-count").text(data.new_count);
+    })
 });
 
 //var x = document.getElementById("myText");
 //console.log(x);
-$("#comment").click(function(){
+$("#comment").click(function() {
 
-  $.ajax({
-    method: "GET",
-    url: "/signals/comment",
-    data: {
-      "show-comment": $("#comment-id").val(),
-      "show-id": $("#signal-id").text()
-    }
-  }).then(function(data) {
-    $("#comment-id").val("");
-  })
+    $.ajax({
+        method: "GET",
+        url: "/signals/comment",
+        data: {
+            "show-comment": $("#comment-id").val(),
+            "show-id": $("#signal-id").text()
+        }
+    }).then(function(data) {
+        $("#comment-id").val("");
+    })
 });
