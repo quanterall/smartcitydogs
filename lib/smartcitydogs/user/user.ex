@@ -22,11 +22,9 @@ defmodule Smartcitydogs.User do
     timestamps()
 
     embeds_many :contact, Contact, on_replace: :delete do
-      field :topic, :string
-      field :text,  :string
+      field(:topic, :string)
+      field(:text, :string)
     end
-
-
   end
 
   @required_fields ~w(email)a
@@ -88,5 +86,4 @@ defmodule Smartcitydogs.User do
     schema
     |> cast(params, [:topic, :text])
   end
-
 end

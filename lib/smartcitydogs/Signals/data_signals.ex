@@ -32,7 +32,6 @@ defmodule Smartcitydogs.DataSignals do
 
   ### takes the support_count
   def get_signal_support_count(signal_id) do
-
     query = Ecto.Query.from(c in Signals, where: c.id == ^signal_id)
     Repo.all(query)
   end
@@ -127,7 +126,7 @@ defmodule Smartcitydogs.DataSignals do
     query = Ecto.Query.from(c in SignalsComments, where: c.signals_id == ^signals_id)
     comment = Repo.all(query)
     comment |> Repo.preload(:users)
-    #IO.inspect(comment)
+    # IO.inspect(comment)
   end
 
   def create_signal_comment(args \\ %{}) do

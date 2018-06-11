@@ -34,10 +34,10 @@ defmodule Smartcitydogs.DataAnimals do
   end
 
   def get_animal_by_chip(chip_number) do
-    IO.inspect chip_number
-    
+    IO.inspect(chip_number)
+
     query = Ecto.Query.from(c in Animals, where: c.chip_number == ^chip_number)
-    IO.inspect query
+    IO.inspect(query)
     Repo.all(query) |> Repo.preload(:animals_status)
   end
 

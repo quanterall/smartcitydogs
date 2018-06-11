@@ -9,7 +9,6 @@ defmodule SmartcitydogsWeb.SignalView do
       IO.inspect(head)
       head.url
     end
-
   end
 
   def get_all_signals(user_id) do
@@ -17,17 +16,16 @@ defmodule SmartcitydogsWeb.SignalView do
     list
   end
 
-
   def get_all_comments(signals_id) do
     list = Smartcitydogs.DataSignals.get_comment_signal_id(signals_id)
-    #for comment <- list do
-      #[head | tail] = comment
-      #comment = comment.comment
-      #IO.puts "___________________COMMENTs_______________________"
-      #IO.inspect(comment)
-      #IO.puts "___________________COMMENTs_______________________"
-      list
-    #end
+    # for comment <- list do
+    # [head | tail] = comment
+    # comment = comment.comment
+    # IO.puts "___________________COMMENTs_______________________"
+    # IO.inspect(comment)
+    # IO.puts "___________________COMMENTs_______________________"
+    list
+    # end
   end
 
   def get_comment_signal_id(signals_id) do
@@ -41,14 +39,14 @@ defmodule SmartcitydogsWeb.SignalView do
       [head | tail] = list
       count = head.view_count
       IO.inspect(count)
-      IO.puts "---------------------------------------"
-      Smartcitydogs.DataSignals.update_signal(head,%{view_count: count+1})
+      IO.puts("---------------------------------------")
+      Smartcitydogs.DataSignals.update_signal(head, %{view_count: count + 1})
       views = head.view_count + 1
-      IO.puts "________________________VIEWS________________________"
+      IO.puts("________________________VIEWS________________________")
       IO.inspect(views)
-      IO.puts "_________________________________________________"
-
+      IO.puts("_________________________________________________")
     end
+
     IO.inspect(views)
     views
   end

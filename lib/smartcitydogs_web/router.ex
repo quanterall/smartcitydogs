@@ -59,13 +59,12 @@ defmodule SmartcitydogsWeb.Router do
       resources("/news", NewsController)
       get("/show", PageController, :show)
 
-
       resources(
-      "/my_signals",
-      MySignalsController
+        "/my_signals",
+        MySignalsController
       )
 
-      #get("/signals/my_signals", SignalController, :my_signals)
+      # get("/signals/my_signals", SignalController, :my_signals)
       get("/signals/comment", SignalController, :comment)
       get("/signals/get_signals_support_count", SignalController, :get_signals_support_count)
       get("/signals/update_like_count", SignalController, :update_like_count)
@@ -78,7 +77,7 @@ defmodule SmartcitydogsWeb.Router do
       resources("/help", HelpController, only: [:index])
       resources("/contact", ContactController, only: [:new, :create, :edit, :update])
 
-      ############admin(zone)
+      ############ admin(zone)
 
       scope "/admin", Admin, as: :admin do
         pipe_through([:admin_required])
