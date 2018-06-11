@@ -18,7 +18,7 @@ defmodule SmartcitydogsWeb.SignalController do
       signal_params
       |> Map.put("signals_types_id", 1)
       |> Map.put("view_count", 1)
-      |> Map.put("support_count", 1)
+      |> Map.put("support_count", 0)
 
     case DataSignals.create_signal(signal_params) do
       {:ok, signal} ->
