@@ -53,7 +53,7 @@ defmodule Smartcitydogs.DataSignals do
 
   def get_signal_image_id(signals_id) do
     query = Ecto.Query.from(c in SignalImages, where: c.signals_id == ^signals_id)
-    Repo.all(query)
+    Repo.all(query) 
   end
 
   def get_signal_images(id) do
@@ -120,7 +120,9 @@ defmodule Smartcitydogs.DataSignals do
 
   def get_comment_signal_id(signals_id) do
     query = Ecto.Query.from(c in SignalsComments, where: c.signals_id == ^signals_id)
-    Repo.all(query)
+    comment = Repo.all(query) 
+    comment |> Repo.preload(:users)
+    #IO.inspect(comment)
   end
 
   def create_signal_comment(args \\ %{}) do
