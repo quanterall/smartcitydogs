@@ -17,10 +17,11 @@ defmodule Smartcitydogs.User do
 
     has_many(:signals_comments, Smartcitydogs.SignalsComments)
     belongs_to(:users_types, Smartcitydogs.UsersType)
+    has_many(:signals, Smartcitydogs.Signals)
 
     timestamps()
 
-    embeds_many :contact, Contact, on_replace: :delete do 
+    embeds_many :contact, Contact, on_replace: :delete do
       field :topic, :string
       field :text,  :string
     end
@@ -87,5 +88,5 @@ defmodule Smartcitydogs.User do
     schema
     |> cast(params, [:topic, :text])
   end
-  
+
 end

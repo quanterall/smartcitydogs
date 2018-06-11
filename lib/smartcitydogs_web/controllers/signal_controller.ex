@@ -2,6 +2,7 @@ defmodule SmartcitydogsWeb.SignalController do
   use SmartcitydogsWeb, :controller
   alias Smartcitydogs.DataSignals
   alias Smartcitydogs.Signals
+  alias Smartcitydogs.DataUser
 
   def index(conn, _params) do
     signal = DataSignals.list_signals()
@@ -15,11 +16,18 @@ defmodule SmartcitydogsWeb.SignalController do
 
   def create(conn, %{"signals" => signal_params}) do
 
+    a = conn.assigns.current_user.id
+    IO.puts"_____________________________CONN________________________"
+    IO.inspect(a)
+    IO.puts"_____________________________CONN________________________"
+
     signal_params =
       signal_params
       |> Map.put("signals_types_id", 1)
       |> Map.put("view_count", 1)
       |> Map.put("support_count", 0)
+      |> Map.put("users_id", a)
+
 
     case DataSignals.create_signal(signal_params) do
       {:ok, signal} ->
@@ -105,6 +113,12 @@ defmodule SmartcitydogsWeb.SignalController do
     #|> render("show_signal.html", show_id: show_id)
 
   end
+
+  # def my_signals(conn) do
+  #   user = conn.assigns.current_user.id
+  #   signals = DataSignals.get_user_signal(user)
+  #   render("my_signals.html", signals: signals)
+  # end
 
   def comment(conn, %{"show-comment" => show_comment, "show-id" => show_id}) do
     #IO.puts "______________________SSHOW_COUNT_________________________"
