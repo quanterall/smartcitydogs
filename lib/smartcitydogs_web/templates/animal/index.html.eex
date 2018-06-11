@@ -1,8 +1,8 @@
 <h1> Registraion Dog </h1>
 
-<div class="container">
+<div class="container" >
           <!-- Three columns of text below the carousel -->
-          <div class="form-group">
+          <div class="form-group" style="margin:auto;max-width:380px">
         
   <%= form_for @conn, animal_path(@conn, :index), [method: :get], fn f -> %>
       <%= search_input f, :chip_number %>
