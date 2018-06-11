@@ -32,8 +32,8 @@ defmodule Smartcitydogs.Signals do
       :description,
       :deleted_at,
       :signals_categories_id,
-      :signals_types_id
-      # :image_id
+      :signals_types_id,
+      :users_id
     ])
     |> validate_required([
       :title,
