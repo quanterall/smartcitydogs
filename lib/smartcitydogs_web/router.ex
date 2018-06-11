@@ -41,9 +41,16 @@ defmodule SmartcitydogsWeb.Router do
     resources("/users", UserController, only: [:new, :create])
     resources("/help", HelpController, only: [:index])
     resources("/fortheproject", ForTheProjectController, only: [:index])
-    resources("/forgoten_password", ForgotenPasswordController, only: [:new, :create, :edit, :update])
-    resources("/contact", ContactController, only:  [:new, :create])
-    # registered user zone
+
+    resources(
+      "/forgoten_password",
+      ForgotenPasswordController,
+      only: [:new, :create, :edit, :update]
+    )
+
+    resources("/contact", ContactController, only: [:new, :create])
+
+    ###### registered user zone
     scope "/" do
       pipe_through([:login_required])
 
@@ -60,9 +67,13 @@ defmodule SmartcitydogsWeb.Router do
         "/signals",
         SignalController
       )
-      resources("/help", HelpController, only: [:index])
-      resources("/contact", ContactController, only:  [:new, :create, :edit, :update])
 
+      resources("/help", HelpController, only: [:index])
+      resources("/contact", ContactController, only: [:new, :create, :edit, :update])
+
+      ############admin(zone)
+
+      scope "/admin", Admin, as: :admin do
         pipe_through([:admin_required])
 
         resources("/users", UserController)
