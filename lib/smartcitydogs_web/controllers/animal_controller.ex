@@ -1,10 +1,10 @@
 defmodule SmartcitydogsWeb.AnimalController do
   use SmartcitydogsWeb, :controller
 
-    alias Smartcitydogs.DataAnimals
-    alias Smartcitydogs.Animals
-    alias Smartcitydogs.AnimalImages
-    alias Smartcitydogs.Repo
+  alias Smartcitydogs.DataAnimals
+  alias Smartcitydogs.Animals
+  alias Smartcitydogs.AnimalImages
+  alias Smartcitydogs.Repo
 
   def index(conn, _params) do
     animals = DataAnimals.list_animals()
@@ -16,41 +16,52 @@ defmodule SmartcitydogsWeb.AnimalController do
     render(conn, "new.html", changeset: changeset)
   end
 
-    def create(conn, %{"animals" => animal_params}) do
-        
-         case DataAnimals.create_animal(animal_params) do
-          {:ok, animal} ->
-            upload_file(animal.id, conn)
-            conn
-            |> put_flash(:info, " Dog wiht chip number #{Map.get(animal_params, "chip_number")} is created!")
-            |> redirect(to: animal_path(conn, :index))
-      
-          {:error, changeset} ->
-            render(conn, "new.html", changeset: changeset)
-        end
-        
-        
-        
-    end
+  def create(conn, %{"animals" => animal_params}) do
+    case DataAnimals.create_animal(animal_params) do
+      {:ok, animal} ->
+        upload_file(animal.id, conn)
 
-    
-    def upload_file(id, conn) do
-        upload = Map.get(conn, :params)
-        upload = Map.get(upload, "files")
-        for n <- upload do    
-            [head] = n
-            IO.puts "\n N:"
-            IO.inspect(n)
+        conn
+        |> put_flash(
+          :info,
+          " Dog wiht chip number #{Map.get(animal_params, "chip_number")} is created!"
+        )
+        |> redirect(to: animal_path(conn, :index))
 
-            extension = Path.extname(head.filename)          
-            #File.cp(head.path, "/home/sonyft/smartcitydog/smartcitydogs/assets/static/images/#{Map.get(animal_params, "chip_number")}-profile#{}#{extension}")
-            File.cp(head.path, "/home/sonyft/smartcitydog/smartcitydogs/assets/static/images/#{Map.get(head, :filename)}-profile#{extension}")
-            args = %{"url" => "images/#{Map.get(head, :filename)}-profile#{extension}", "animals_id" => "#{id}"}
-            DataAnimals.create_animal_image(args)
-        end
+      {:error, changeset} ->
+        render(conn, "new.html", changeset: changeset)
     end
-    
-    def show(conn, %{"id" => id}) do
+  end
+
+  def upload_file(id, conn) do
+    upload = Map.get(conn, :params)
+    upload = Map.get(upload, "files")
+
+    for n <- upload do
+      [head] = n
+      IO.puts("\n N:")
+      IO.inspect(n)
+
+      extension = Path.extname(head.filename)
+
+      # File.cp(head.path, "/home/sonyft/smartcitydog/smartcitydogs/assets/static/images/#{Map.get(animal_params, "chip_number")}-profile#{}#{extension}")
+      File.cp(
+        head.path,
+        "/home/sonyft/smartcitydog/smartcitydogs/assets/static/images/#{Map.get(head, :filename)}-profile#{
+          extension
+        }"
+      )
+
+      args = %{
+        "url" => "images/#{Map.get(head, :filename)}-profile#{extension}",
+        "animals_id" => "#{id}"
+      }
+
+      DataAnimals.create_animal_image(args)
+    end
+  end
+
+  def show(conn, %{"id" => id}) do
     # animal = Repo.get!(Animals, id) |> Repo.preload(:animals_status)
     animal = DataAnimals.get_animal(id)
     render(conn, "show.html", animals: animal)

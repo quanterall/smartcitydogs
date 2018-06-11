@@ -46,8 +46,6 @@ defmodule SmartcitydogsWeb.SessionController do
   #   end
   # end
 
-
-
   def create(conn, %{"session" => %{"email" => email, "password" => password}}) do
     case Smartcitydogs.Auth.login_by_email_and_pass(conn, email, password) do
       {:ok, conn} ->
