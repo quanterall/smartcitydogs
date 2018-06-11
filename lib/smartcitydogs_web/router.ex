@@ -40,21 +40,46 @@ defmodule SmartcitydogsWeb.Router do
 
     resources("/users", UserController, only: [:new, :create])
 
-    resources("/forgoten_password", ForgotenPasswordController, only: [:new, :create, :edit, :update])
+    resources(
+      "/forgoten_password",
+      ForgotenPasswordController,
+      only: [:new, :create, :edit, :update]
+    )
 
     # registered user zone
     scope "/" do
       pipe_through([:login_required])
 
-      resources "/users", UserController
-      resources "/animals", AnimalController
-      resources "/news", NewsController
+      resources("/users", UserController)
+      resources("/animals", AnimalController)
+      resources("/news", NewsController)
+
+      get("/show", PageController, :show)
+
+      get("/signals/comment", SignalController, :comment)
+      get("/signals/get_signals_support_count", SignalController, :get_signals_support_count)
+      get("/signals/update_like_count", SignalController, :update_like_count)
+
+      resources(
+        "/signals",
+        SignalController
+      )
 
       # admin zone
       scope "/admin", Admin, as: :admin do
         pipe_through([:admin_required])
 
         resources("/users", UserController)
+        get("/show", PageController, :show)
+
+        get("/signals/comment", SignalController, :comment)
+        get("/signals/get_signals_support_count", SignalController, :get_signals_support_count)
+        get("/signals/update_like_count", SignalController, :update_like_count)
+
+        resources(
+          "/signals",
+          SignalController
+        )
       end
     end
   end

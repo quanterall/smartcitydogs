@@ -1,0 +1,82 @@
+
+      <h1><%= @signal.title %></h1>
+      <ul>
+
+        <img class="square" src="/<%= get_signals_images(@signal.id) %>" alt="Generic placeholder image" width="300" height="200">
+        <li>
+          <strong>Signal number:</strong>
+          <a id="signal-id"><%= @signal.id %></a>
+        </li>
+
+        <li>
+          <strong>Category:</strong>
+          <%=@signal.signals_categories_id
+          |> Smartcitydogs.DataSignals.get_signal_category()
+          |> Map.get(:name)
+          %>
+        </li>
+
+        <li>
+          <strong>Status:</strong>
+          <%=@signal.signals_types_id
+          |> Smartcitydogs.DataSignals.get_signal_type()
+          |> Map.get(:name)
+          %>
+        </li>
+
+        <li>
+          <strong>Registered at:</strong>
+          <%=@signal.inserted_at%>
+
+        </li>
+
+        <li>
+          <strong>Description:</strong>
+          <%=@signal.description%>
+        </li>
+
+        <li>
+          <strong>Chip number:</strong>
+          <%=@signal.chip_number%>
+        </li>
+
+        <li>
+          <strong>Support count:</strong>
+          <span id="signal-count"><%=@signal.support_count%></span>
+        </li>
+
+        <li>
+          <strong>Last location:</strong>
+          <%=@signal.address%>
+        </li>
+
+        <li>
+          <strong>Views:</strong>
+          <%= get_signals_view_count(@signal.id)  %>
+        </li>
+
+      </ul>
+
+
+      <p><a id="like" class="btn btn-secondary" role="button">Like</a>
+        <br><br>
+        <label> Leave a comment:</label>
+        <br>
+          <textarea name="message" id="comment-id" value="" rows="6" cols="40">
+          </textarea>
+        <br>
+        <br>
+      <a id="comment" class="btn btn-secondary" href="/signals/<%= @signal.id %>" role="button">Submit comment</a></p>
+
+<span><%= link "Edit", to: signal_path(@conn, :edit, @signal) %></span>
+<span><%= link "Back", to: signal_path(@conn, :index) %></span>
+      <br>
+
+          <strong>Comments:</strong>
+          <br>
+          <hr>
+          <%= for comment <- @comments do %>
+          <strong>Username</strong>
+            <p><%= IO.inspect(comment.comment) %></p>
+          <hr>
+          <% end %>

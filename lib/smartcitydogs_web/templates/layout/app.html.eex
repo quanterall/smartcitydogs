@@ -48,6 +48,9 @@
       </li>
     <% end %>
     <li class="nav-item">
+          <a class="nav-link" href="/signals/new">New Signal</a>
+    </li>
+    <li class="nav-item">
       <%= link "Sign out", to: session_path(@conn, :delete,
                                             @current_user),
                            method: "delete", class: "nav-link" %>
@@ -64,7 +67,7 @@
                 <%= link "Sign in", to: session_path(@conn, :new), class: "nav-link" %>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">New Signal</a>
+              <%= link "New Signal", to: session_path(@conn, :new), class: "nav-link" %>
               </li>
               <li class="nav-item">
                 <%= link "Forgoten password", to: forgoten_password_path(@conn, :new), class: "nav-link" %> 
@@ -72,8 +75,9 @@
             <% end %>
             </ul>
             <form class="form-inline mt-2 mt-md-0">
-              <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-              <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+              <input class="form-control mr-sm-2" type="text" placeholder="username" aria-label="username">
+              <input class="form-control mr-sm-2" type="text" placeholder="password" aria-label="password">
+              <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Login</button>
             </form>
           </div>
         </nav>

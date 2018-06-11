@@ -29,6 +29,7 @@ alias Smartcitydogs.UsersType
 alias Smartcitydogs.User
 alias Smartcitydogs.Signals
 alias Smartcitydogs.SignalsComments
+alias Smartcitydogs.SignalImages
 
 ############## Users Type Admin #############
 users_type_params = %{name: "Admin"}
@@ -151,9 +152,9 @@ unless Repo.get_by(Animals, chip_number: animals_params[:chip_number]) do
 end
 
 ### Insert in table Animals (animals_params)
-# unless Repo.get_by(Animals, chip_number: animals_params[:chip_number]) do    
-# %Animals{sex: "M", chip_number: "2321243242", address: "Kolio Ficheto 24",  animals_status_id: 1}           
-# |>Repo.insert!                                                                                             
+# unless Repo.get_by(Animals, chip_number: animals_params[:chip_number]) do
+# %Animals{sex: "M", chip_number: "2321243242", address: "Kolio Ficheto 24",  animals_status_id: 1}
+# |>Repo.insert!
 # end
 
 ############# Animal Images ################
@@ -233,7 +234,25 @@ unless Repo.get_by(StaticPages, content: static_params[:content]) do
 end
 
 ############## Signals Categories #############
-signal_categori_params = %{name: "Lost"}
+signal_categori_params = %{name: "Бездомно куче"}
+
+unless Repo.get_by(SignalsCategories, name: signal_categori_params[:name]) do
+  %SignalsCategories{}
+  |> SignalsCategories.changeset(signal_categori_params)
+  |> Repo.insert!()
+end
+
+############## Signals Categories #############
+signal_categori_params = %{name: "Избягало куче"}
+
+unless Repo.get_by(SignalsCategories, name: signal_categori_params[:name]) do
+  %SignalsCategories{}
+  |> SignalsCategories.changeset(signal_categori_params)
+  |> Repo.insert!()
+end
+
+############## Signals Categories #############
+signal_categori_params = %{name: "Малтретиране на куче"}
 
 unless Repo.get_by(SignalsCategories, name: signal_categori_params[:name]) do
   %SignalsCategories{}
@@ -242,7 +261,39 @@ unless Repo.get_by(SignalsCategories, name: signal_categori_params[:name]) do
 end
 
 ############## Signals Types #############
-signal_type_params = %{name: "Lost"}
+signal_type_params = %{name: "Нов"}
+
+unless Repo.get_by(SignalsTypes, name: signal_type_params[:name]) do
+  %SignalsTypes{}
+  |> SignalsTypes.changeset(signal_type_params)
+  |> Repo.insert!()
+end
+
+
+
+############## Signals Types #############
+
+signal_type_params = %{name: "Приет"}
+
+unless Repo.get_by(SignalsTypes, name: signal_type_params[:name]) do
+  %SignalsTypes{}
+  |> SignalsTypes.changeset(signal_type_params)
+  |> Repo.insert!()
+end
+
+############## Signals Types #############
+
+signal_type_params = %{name: "Изпратен към компетентен орган"}
+
+unless Repo.get_by(SignalsTypes, name: signal_type_params[:name]) do
+  %SignalsTypes{}
+  |> SignalsTypes.changeset(signal_type_params)
+  |> Repo.insert!()
+end
+
+############## Signals Types #############
+
+signal_type_params = %{name: "Приключен"}
 
 unless Repo.get_by(SignalsTypes, name: signal_type_params[:name]) do
   %SignalsTypes{}
@@ -259,10 +310,20 @@ signals_params = %{
   title: "Внимавайте",
   view_count: 0,
   signals_categories_id: 1,
-  signals_types_id: 1
+  signals_types_id: 1,
+  URL: "C://images"
 }
 
 %Signals{} |> Signals.changeset(signals_params) |> Repo.insert!()
+
+############## Signals Images #############
+signal_image_params = %{url: "images/1.jpg", signals_id: 1}
+
+unless Repo.get_by(SignalImages, url: signal_image_params[:url]) do
+  %SignalImages{}
+  |> SignalImages.changeset(signal_image_params)
+  |> Repo.insert!()
+end
 
 ############## Signals Comments #############
 signal_comment_params = %{

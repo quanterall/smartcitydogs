@@ -7,6 +7,7 @@ defmodule Smartcitydogs.DataSignals do
   alias Smartcitydogs.SignalsComments
   alias Smartcitydogs.SignalsCategories
   alias Smartcitydogs.User
+  alias Smartcitydogs.SignalImages
 
   import Plug.Conn
 
@@ -24,8 +25,18 @@ defmodule Smartcitydogs.DataSignals do
     |> Repo.update()
   end
 
+    ### takes the support_count
+  def get_signal_support_count(signal_id) do
+    query = Ecto.Query.from(c in Signals, where: c.id == ^signal_id) #select: %{ count: c.support_count },
+    Repo.all(query)
+  end
+
   def list_signals() do
     Repo.all(Signals)
+  end
+
+  def change_signal(%Signals{} = signal) do
+    Signals.changeset(signal, %{})
   end
 
   def get_signal(id) do
@@ -34,6 +45,38 @@ defmodule Smartcitydogs.DataSignals do
 
   def delete_signal(id) do
     get_signal(id)
+    |> Repo.delete()
+  end
+
+  # Signal iamges
+
+  def get_signal_image_id(signals_id) do
+    query = Ecto.Query.from(c in SignalImages, where: c.signals_id == ^signals_id)
+    Repo.all(query)
+  end
+
+  def get_signal_images(id) do
+    Repo.get!(SignalImages, id)
+  end
+
+  def list_signal_images() do
+    Repo.all(SignalImages)
+  end
+
+  def create_signal_images(args \\ %{}) do
+    %SignalImages{}
+    |> SignalImages.changeset(args)
+    |> Repo.insert()
+  end
+
+  def update_signal_images(%SignalImages{} = images, args) do
+    images
+    |> SignalImages.changeset(args)
+    |> Repo.update()
+  end
+
+  def delete_signal_images(id) do
+    get_signal_images(id)
     |> Repo.delete()
   end
 
@@ -74,7 +117,14 @@ defmodule Smartcitydogs.DataSignals do
     Repo.all(SignalsComments)
   end
 
+  def get_comment_signal_id(signals_id) do
+    query = Ecto.Query.from(c in SignalsComments, where: c.signals_id == ^signals_id)
+    Repo.all(query)
+  end
+
   def create_signal_comment(args \\ %{}) do
+    IO.inspect(args)
+    IO.puts "_________________________________________________"
     %SignalsComments{}
     |> SignalsComments.changeset(args)
     |> Repo.insert()
