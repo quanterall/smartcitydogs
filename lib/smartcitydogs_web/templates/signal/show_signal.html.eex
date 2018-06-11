@@ -76,7 +76,7 @@
           <br>
           <hr>
           <%= for comment <- @comments do %>
-          <strong>Username</strong>
-            <p><%= IO.inspect(comment.comment) %></p>
+          <strong><%= comment.users.username %></strong>
+            <p><%= comment.comment %></p>
           <hr>
           <% end %>

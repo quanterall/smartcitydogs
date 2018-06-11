@@ -14,16 +14,17 @@ defmodule SmartcitydogsWeb.SignalController do
   end
 
   def create(conn, %{"signals" => signal_params}) do
+   
     signal_params =
       signal_params
       |> Map.put("signals_types_id", 1)
       |> Map.put("view_count", 1)
       |> Map.put("support_count", 1)
-
+      
     case DataSignals.create_signal(signal_params) do
       {:ok, signal} ->
         upload = Map.get(conn, :params)
-       #IO.inspect(upload)
+       #IO.inspect(conn)
        upload = Map.get(upload, "signals")
        #IO.inspect(upload)
        upload = Map.get(upload, "url")
@@ -109,10 +110,11 @@ defmodule SmartcitydogsWeb.SignalController do
     #IO.puts "______________________SSHOW_COUNT_________________________"
     #IO.inspect(show_count)
     #IO.inspect(show_id)
-    #IO.puts "__________________________SHOW_ID_____________________"
+    user_id = conn.assigns.current_user.id
 
-    Smartcitydogs.DataSignals.create_signal_comment(%{comment: show_comment, signals_id: show_id})
-    redirect conn, to: "/signals/#{show_id}"
+    Smartcitydogs.DataSignals.create_signal_comment(%{comment: show_comment, signals_id: show_id, users_id: user_id})
+    #redirect conn, to: "/signals/#{show_id}"
+    render("show_signal.html")
   end
 
   def delete(conn, %{"id" => id}) do
