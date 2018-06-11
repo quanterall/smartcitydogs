@@ -29,7 +29,7 @@ defmodule Smartcitydogs.News do
       :deleted_at
     ])
     |> validate_required([
-      #:image_url,
+      # :image_url,
       :title,
       :content,
       :date

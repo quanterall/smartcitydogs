@@ -7,8 +7,20 @@ defmodule SmartcitydogsWeb.AnimalController do
   alias Smartcitydogs.Repo
 
   def index(conn, _params) do
+   ## IO.inspect _params
+  ##  IO.puts "---------------------"
+   ## animals = DataAnimals.list_animals()
+   chip = _params["chip_number"]
+   if chip == "" do 
     animals = DataAnimals.list_animals()
     render(conn, "index.html", animals: animals)
+   end
+   if chip != nil do
+   animals = DataAnimals.get_animal_by_chip(chip)
+    render(conn, "index.html", animals: animals)
+   end
+   animals = DataAnimals.list_animals()
+   render(conn, "index.html", animals: animals)
   end
 
   def new(conn, _params) do
@@ -47,7 +59,7 @@ defmodule SmartcitydogsWeb.AnimalController do
       # File.cp(head.path, "/home/sonyft/smartcitydog/smartcitydogs/assets/static/images/#{Map.get(animal_params, "chip_number")}-profile#{}#{extension}")
       File.cp(
         head.path,
-        "/home/sonyft/smartcitydog/smartcitydogs/assets/static/images/#{Map.get(head, :filename)}-profile#{
+        "../smartcitydogs/assets/static/images/#{Map.get(head, :filename)}-profile#{
           extension
         }"
       )

@@ -50,7 +50,6 @@ defmodule SmartcitydogsWeb.Router do
       resources("/users", UserController)
       resources("/animals", AnimalController)
       resources("/news", NewsController)
-
       get("/show", PageController, :show)
 
       get("/signals/comment", SignalController, :comment)
@@ -64,8 +63,6 @@ defmodule SmartcitydogsWeb.Router do
       resources("/help", HelpController, only: [:index])
       resources("/contact", ContactController, only:  [:new, :create, :edit, :update])
 
-      # admin zone
-      scope "/admin", Admin, as: :admin do
         pipe_through([:admin_required])
 
         resources("/users", UserController)

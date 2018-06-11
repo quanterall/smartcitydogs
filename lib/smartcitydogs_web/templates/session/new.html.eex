@@ -15,4 +15,7 @@
   <a class="btn btn-primary pull-right" href="<%=session_url(@conn, :request,"facebook")%>" rel="no-follow">
     <i class="fa fa-facebook-square"></i> or sign in with  Facebook
   </a>
+  <a class="btn btn-primary pull-right" href="<%=session_url(@conn, :request,"twitter")%>" rel="no-follow">
+      <i class="fa fa-twitter-square"></i> or sign in with  Twitter
+    </a>
 <% end %>

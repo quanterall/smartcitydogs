@@ -1,4 +1,3 @@
-
 defmodule Smartcitydogs.Email do
   use Bamboo.Phoenix, view: App.FeedbackView
 
