@@ -5,8 +5,8 @@
 <br>
 <span class="link"><%= link "Back", to: user_path(@conn, :index) %></span>
 <br>
-<span class="link"><%= link "My signals", to: user_path(@conn, :index) %></span>
+<a href="#">Followed signals</a>
 <br>
-<a href="/my_signals">Followed signals</a>
+<a href="/my_signals">My signals</a>
 <br>
 <span class="link"><%= link "For the project", to: user_path(@conn, :index) %></span>
