@@ -286,8 +286,6 @@ unless Repo.get_by(SignalsTypes, name: signal_type_params[:name]) do
   |> Repo.insert!()
 end
 
-
-
 ############## Signals Types #############
 
 signal_type_params = %{name: "Приет"}
@@ -328,7 +326,7 @@ signals_params = %{
   view_count: 0,
   signals_categories_id: 1,
   signals_types_id: 1,
-  URL: "C://images"
+  users_id: 1
 }
 
 %Signals{} |> Signals.changeset(signals_params) |> Repo.insert!()

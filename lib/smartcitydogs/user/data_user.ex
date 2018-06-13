@@ -26,15 +26,15 @@ defmodule Smartcitydogs.DataUsers do
   end
 
   def create_user_contact(id, args) do
-  ##  IO.inspect args
+    ##  IO.inspect args
     user = Repo.get!(User, id)
-  ##  IO.inspect user
+    ##  IO.inspect user
     changeset = Ecto.Changeset.change(user)
- ##   IO.inspect changeset
+    ##   IO.inspect changeset
     changeset = Ecto.Changeset.put_embed(changeset, :contact, args)
-  ##  IO.inspect changeset
-     Repo.update!(changeset).contact
-     Repo.get!(User, id)
+    ##  IO.inspect changeset
+    Repo.update!(changeset).contact
+    Repo.get!(User, id)
   end
 
   # todo: some users don't have phone
@@ -42,8 +42,8 @@ defmodule Smartcitydogs.DataUsers do
     create_user(%{
       username: auth.info.email,
       password_hash: "pass",
-      first_name: String.split(auth.info.name, " ")|> List.first(),
-      last_name: String.split(auth.info.name, " ")|> List.first(),
+      first_name: String.split(auth.info.name, " ") |> List.first(),
+      last_name: String.split(auth.info.name, " ") |> List.first(),
       email: auth.info.email,
       phone: "0000000000000",
       users_types_id: 1
