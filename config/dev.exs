@@ -40,7 +40,7 @@ config :phoenix, :stacktrace_depth, 20
 config :smartcitydogs, SmartCityDogs.Repo,
   adapter: Ecto.Adapters.Postgres,
   username: "postgres",
-  password: "postgres",
+  password: "123456",
   database: "smartcitydogs_dev",
   hostname: "localhost",
   pool_size: 10
