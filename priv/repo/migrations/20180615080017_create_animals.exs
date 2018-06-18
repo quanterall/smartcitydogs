@@ -9,7 +9,7 @@ defmodule SmartCityDogs.Repo.Migrations.CreateAnimals do
       add :deleted_at, :naive_datetime
       add :registered_at, :naive_datetime
       add :adopted_at, :naive_datetime
-     ## add :animals_status_id, references("animal_statuses")
+      add :animals_status_id, references("animal_statuses")
       timestamps()
     end
 
