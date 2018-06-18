@@ -21,6 +21,6 @@ defmodule SmartCityDogs.Animals.Animal do
   def changeset(animal, attrs) do
     animal
     |> cast(attrs, [:sex, :chip_number, :address, :deleted_at, :registered_at, :adopted_at])
-    |> validate_required([:sex, :chip_number, :address, :deleted_at, :registered_at, :adopted_at])
+    |> validate_required([:sex, :chip_number, :address])
   end
 end
