@@ -10,8 +10,8 @@ defmodule SmartCityDogs.Repo.Migrations.CreateSignals do
       add :chip_number, :text
       add :description, :text
       add :deleted_at, :naive_datetime
-      # add :signals_types_id, references("signals_types")
-      # add :signals_categories_id, references("signals_categories")
+      add :signals_types_id, references("signals_types")
+      add :signals_categories_id, references("signals_categories")
       # add :users_id, references("users")
 
       timestamps()

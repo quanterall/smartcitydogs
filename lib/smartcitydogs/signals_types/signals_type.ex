@@ -6,7 +6,7 @@ defmodule SmartCityDogs.SignalsTypes.SignalsType do
   schema "signals_types" do
     field :deleted_at, :naive_datetime
     field :name, :string
-
+    has_many :signals , SmartCityDogs.Signals.Signal
     timestamps()
   end
 

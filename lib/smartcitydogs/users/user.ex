@@ -14,8 +14,11 @@ defmodule SmartCityDogs.Users.User do
     field :reset_password_token, :string
     field :reset_password_token_sent_at, :naive_datetime
     field :username, :string
-    field :users_types_id, :integer
-
+    #field :users_types_id, :integer
+    has_many :signals_likes , SmartCityDogs.SignalsLikes.SignalsLike
+    has_many :signals_comments , SmartCityDogs.SignalsComments.SignalsComment
+    belongs_to :signals_types, SmartCityDogs.SignalsTypes.SignalsTypes
+    belongs_to :contacts, SmartCityDogs.Contacts.Contact
     timestamps()
   end
 
