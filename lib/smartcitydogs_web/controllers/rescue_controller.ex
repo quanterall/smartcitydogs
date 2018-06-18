@@ -11,14 +11,14 @@ defmodule SmartCityDogsWeb.RescueController do
     render(conn, "index.json", rescues: rescues)
   end
 
-  # def create(conn, %{"rescue" => rescue_params}) do
-  #   with {:ok, %Rescue{} = rescues} <- Rescues.create_rescue(rescue_params) do
-  #     conn
-  #     |> put_status(:created)
-  #     |> put_resp_header("location", rescue_path(conn, :show, rescues))
-  #     |> render("show.json", rescue: rescues)
-  #   end
-  # end
+  def create(conn, %{"rescue" => rescue_params}) do
+    with {:ok, %Rescue{} = rescues} <- Rescues.create_rescue(rescue_params) do
+      conn
+      |> put_status(:created)
+      |> put_resp_header("location", rescue_path(conn, :show, rescues))
+      |> render("show.json", rescue: rescues)
+    end
+  end
 
   def show(conn, %{"id" => id}) do
     rescues= Rescues.get_rescue!(id)

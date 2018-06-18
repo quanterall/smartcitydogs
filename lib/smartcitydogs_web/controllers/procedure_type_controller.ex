@@ -11,14 +11,14 @@ defmodule SmartCityDogsWeb.ProcedureTypeController do
     render(conn, "index.json", procedure_types: procedure_types)
   end
 
-  # def create(conn, %{"procedure_type" => procedure_type_params}) do
-  #   with {:ok, %ProcedureType{} = procedure_type} <- ProcedureTypes.create_procedure_type(procedure_type_params) do
-  #     conn
-  #     |> put_status(:created)
-  #     |> put_resp_header("location", procedure_type_path(conn, :show, procedure_type))
-  #     |> render("show.json", procedure_type: procedure_type)
-  #   end
-  # end
+  def create(conn, %{"procedure_type" => procedure_type_params}) do
+    with {:ok, %ProcedureType{} = procedure_type} <- ProcedureTypes.create_procedure_type(procedure_type_params) do
+      conn
+      |> put_status(:created)
+      |> put_resp_header("location", procedure_type_path(conn, :show, procedure_type))
+      |> render("show.json", procedure_type: procedure_type)
+    end
+  end
 
   def show(conn, %{"id" => id}) do
     procedure_type = ProcedureTypes.get_procedure_type!(id)

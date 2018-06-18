@@ -15,10 +15,13 @@ defmodule SmartCityDogs.Users.User do
     field :reset_password_token_sent_at, :naive_datetime
     field :username, :string
     #field :users_types_id, :integer
-    has_many :signals_likes , SmartCityDogs.SignalsLikes.SignalsLike
-    has_many :signals_comments , SmartCityDogs.SignalsComments.SignalsComment
-    belongs_to :signals_types, SmartCityDogs.SignalsTypes.SignalsTypes
-    belongs_to :contacts, SmartCityDogs.Contacts.Contact
+    has_many :signals , SmartCityDogs.Signals.Signal  #yes
+    has_many :signals_likes , SmartCityDogs.SignalsLikes.SignalsLike  #yes
+    has_many :signals_comments , SmartCityDogs.SignalsComments.SignalsComment   #yes
+    #has_many :signals_likes, SmartCityDogs.SignalsLikes.SignalsLike   #yes
+    has_many :contacts, SmartCityDogs.Contacts.Contact  #yes
+    belongs_to :users_types, SmartCityDogs.UsersTypes.UsersType   #yes
+
     timestamps()
   end
 

@@ -12,7 +12,7 @@ defmodule SmartCityDogs.Repo.Migrations.CreateSignals do
       add :deleted_at, :naive_datetime
       add :signals_types_id, references("signals_types")
       add :signals_categories_id, references("signals_categories")
-      # add :users_id, references("users")
+      add :users_id, references("users")
 
       timestamps()
     end

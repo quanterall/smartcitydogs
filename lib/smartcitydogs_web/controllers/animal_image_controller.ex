@@ -11,14 +11,14 @@ defmodule SmartCityDogsWeb.AnimalImageController do
     render(conn, "index.json", animal_images: animal_images)
   end
 
- ## def create(conn, %{"animal_image" => animal_image_params}) do
- ##   with {:ok, %AnimalImage{} = animal_image} <- AnimalImages.create_animal_image(animal_image_params) do
- ##     conn
-  ##    |> put_status(:created)
-  ##    |> put_resp_header("location", animal_image_path(conn, :show, animal_image))
-  ##    |> render("show.json", animal_image: animal_image)
-  ##  end
- ## end
+   def create(conn, %{"animal_image" => animal_image_params}) do
+     with {:ok, %AnimalImage{} = animal_image} <- AnimalImages.create_animal_image(animal_image_params) do
+       conn
+       |> put_status(:created)
+       |> put_resp_header("location", animal_image_path(conn, :show, animal_image))
+       |> render("show.json", animal_image: animal_image)
+     end
+   end
 
   def show(conn, %{"id" => id}) do
     animal_image = AnimalImages.get_animal_image!(id)

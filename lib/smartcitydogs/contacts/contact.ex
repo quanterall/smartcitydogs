@@ -6,7 +6,7 @@ defmodule SmartCityDogs.Contacts.Contact do
   schema "contacts" do
     field :text, :string
     field :topic, :string
-    has_many :signals , SmartCityDogs.Signals.Signal
+    belongs_to :users , SmartCityDogs.Users.User
 
     timestamps()
   end
