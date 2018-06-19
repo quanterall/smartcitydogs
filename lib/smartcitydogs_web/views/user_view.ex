@@ -21,7 +21,6 @@ defmodule SmartCityDogsWeb.UserView do
       reset_password_token: user.reset_password_token,
       reset_password_token_sent_at: user.reset_password_token_sent_at,
       deleted_at: user.deleted_at,
-      contact_id: user.contact_id,
       users_types_id: user.users_types_id}
   end
 end

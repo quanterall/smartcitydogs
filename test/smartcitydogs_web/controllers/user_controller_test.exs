@@ -4,9 +4,9 @@ defmodule SmartCityDogsWeb.UserControllerTest do
   alias SmartCityDogs.Users
   alias SmartCityDogs.Users.User
 
-  @create_attrs %{contact_id: 42, deleted_at: ~N[2010-04-17 14:00:00.000000], email: "some email", first_name: "some first_name", last_name: "some last_name", password_hash: "some password_hash", phone: "some phone", reset_password_token: "some reset_password_token", reset_password_token_sent_at: ~N[2010-04-17 14:00:00.000000], username: "some username", users_types_id: 42}
-  @update_attrs %{contact_id: 43, deleted_at: ~N[2011-05-18 15:01:01.000000], email: "some updated email", first_name: "some updated first_name", last_name: "some updated last_name", password_hash: "some updated password_hash", phone: "some updated phone", reset_password_token: "some updated reset_password_token", reset_password_token_sent_at: ~N[2011-05-18 15:01:01.000000], username: "some updated username", users_types_id: 43}
-  @invalid_attrs %{contact_id: nil, deleted_at: nil, email: nil, first_name: nil, last_name: nil, password_hash: nil, phone: nil, reset_password_token: nil, reset_password_token_sent_at: nil, username: nil, users_types_id: nil}
+  @create_attrs %{deleted_at: ~N[2010-04-17 14:00:00.000000], email: "some email", first_name: "some first_name", last_name: "some last_name", password_hash: "some password_hash", phone: "some phone", reset_password_token: "some reset_password_token", reset_password_token_sent_at: ~N[2010-04-17 14:00:00.000000], username: "some username", users_types_id: 42}
+  @update_attrs %{ deleted_at: ~N[2011-05-18 15:01:01.000000], email: "some updated email", first_name: "some updated first_name", last_name: "some updated last_name", password_hash: "some updated password_hash", phone: "some updated phone", reset_password_token: "some updated reset_password_token", reset_password_token_sent_at: ~N[2011-05-18 15:01:01.000000], username: "some updated username", users_types_id: 43}
+  @invalid_attrs %{deleted_at: nil, email: nil, first_name: nil, last_name: nil, password_hash: nil, phone: nil, reset_password_token: nil, reset_password_token_sent_at: nil, username: nil, users_types_id: nil}
 
   def fixture(:user) do
     {:ok, user} = Users.create_user(@create_attrs)
@@ -32,7 +32,6 @@ defmodule SmartCityDogsWeb.UserControllerTest do
       conn = get conn, user_path(conn, :show, id)
       assert json_response(conn, 200)["data"] == %{
         "id" => id,
-        "contact_id" => 42,
         "deleted_at" => ~N[2010-04-17 14:00:00.000000],
         "email" => "some email",
         "first_name" => "some first_name",
@@ -61,7 +60,6 @@ defmodule SmartCityDogsWeb.UserControllerTest do
       conn = get conn, user_path(conn, :show, id)
       assert json_response(conn, 200)["data"] == %{
         "id" => id,
-        "contact_id" => 43,
         "deleted_at" => ~N[2011-05-18 15:01:01.000000],
         "email" => "some updated email",
         "first_name" => "some updated first_name",

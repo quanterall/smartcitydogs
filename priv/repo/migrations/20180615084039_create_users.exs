@@ -12,7 +12,6 @@ defmodule SmartCityDogs.Repo.Migrations.CreateUsers do
       add :reset_password_token, :text
       add :reset_password_token_sent_at, :naive_datetime
       add :deleted_at, :naive_datetime
-      add :contact_id, references("contacts")
       add :users_types_id, references("users_types")
 
       timestamps()

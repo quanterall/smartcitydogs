@@ -31,6 +31,6 @@ defmodule SmartCityDogs.Signals.Signal do
   def changeset(signal, attrs) do
     signal
     |> cast(attrs, [:title, :view_count, :address, :support_count, :chip_number, :description, :deleted_at, :signals_types_id, :signals_categories_id, :users_id])
-    |> validate_required([:title, :view_count, :address, :support_count, :chip_number, :description, :deleted_at, :signals_types_id, :signals_categories_id, :users_id])
+    |> validate_required([:title, :address, :chip_number, :description, :signals_types_id, :signals_categories_id, :users_id])
   end
 end
