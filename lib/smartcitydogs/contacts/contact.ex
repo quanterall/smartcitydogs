@@ -14,7 +14,7 @@ defmodule SmartCityDogs.Contacts.Contact do
   @doc false
   def changeset(contact, attrs) do
     contact
-    |> cast(attrs, [:topic, :text])
-    |> validate_required([:topic, :text])
+    |> cast(attrs, [:topic, :text, :users_id])
+    |> validate_required([:topic, :text, :users_id])
   end
 end

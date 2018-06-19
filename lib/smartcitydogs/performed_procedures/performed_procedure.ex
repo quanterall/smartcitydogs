@@ -14,7 +14,7 @@ defmodule SmartCityDogs.PerformedProcedures.PerformedProcedure do
   @doc false
   def changeset(performed_procedure, attrs) do
     performed_procedure
-    |> cast(attrs, [:date, :deleted_at])
-    |> validate_required([:date])
+    |> cast(attrs, [:date, :deleted_at, :animal_id, :procedure_type_id])
+    |> validate_required([:date, :animal_id, :procedure_type_id])
   end
 end
