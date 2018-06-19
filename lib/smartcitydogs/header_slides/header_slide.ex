@@ -15,6 +15,6 @@ defmodule SmartCityDogs.HeaderSlides.HeaderSlide do
   def changeset(header_slide, attrs) do
     header_slide
     |> cast(attrs, [:image_url, :text, :deleted_at])
-    |> validate_required([:image_url, :text, :deleted_at])
+    |> validate_required([:image_url, :text])
   end
 end

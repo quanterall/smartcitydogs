@@ -26,6 +26,7 @@ defmodule SmartCityDogsWeb.Router do
     resources "/header_slides", HeaderSlideController, except: [:new, :edit]
     resources "/news", NewsSchemaController, except: [:new, :edit]
     resources "/static_pages", StaticPageController, except: [:new, :edit]
+    resources("/forgoten_password", ForgotenPasswordController, only: [:new, :create, :edit, :update])
 
   end
 end

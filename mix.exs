@@ -20,7 +20,7 @@ defmodule SmartCityDogs.Mixfile do
   def application do
     [
       mod: {SmartCityDogs.Application, []},
-      extra_applications: [:logger, :runtime_tools]
+      extra_applications: [:logger, :runtime_tools, :bamboo, :timex, :bamboo_smtp]
     ]
   end
 
@@ -38,7 +38,12 @@ defmodule SmartCityDogs.Mixfile do
       {:phoenix_ecto, "~> 3.2"},
       {:postgrex, ">= 0.0.0"},
       {:gettext, "~> 0.11"},
-      {:cowboy, "~> 1.0"}
+      {:cowboy, "~> 1.0"},
+      {:calendar, "~> 0.17.2"},
+      {:bamboo, "~> 0.7"},
+      {:bamboo_smtp, "~> 1.4.0"},
+      {:mock, "~> 0.2.0", only: :test},
+      {:timex, "~> 3.1"}
     ]
   end
 

@@ -28,6 +28,6 @@ defmodule SmartCityDogs.Users.User do
   def changeset(user, attrs) do
     user
     |> cast(attrs, [:username, :password_hash, :first_name, :last_name, :email, :phone, :reset_password_token, :reset_password_token_sent_at, :deleted_at, :users_types_id])
-    |> validate_required([:username, :password_hash, :first_name, :last_name, :email, :phone, :users_types_id])
+    |> validate_required([:username, :first_name, :last_name, :email, :phone])
   end
 end

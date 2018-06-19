@@ -20,6 +20,6 @@ defmodule SmartCityDogs.News.NewsSchema do
   def changeset(news_schema, attrs) do
     news_schema
     |> cast(attrs, [:image_url, :title, :meta, :keywords, :content, :short_content, :date, :deleted_at])
-    |> validate_required([:image_url, :title, :meta, :keywords, :content, :short_content, :date, :deleted_at])
+    |> validate_required([:image_url, :title, :meta, :keywords, :content, :short_content, :date])
   end
 end

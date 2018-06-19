@@ -14,6 +14,6 @@ defmodule SmartCityDogs.Rescues.Rescue do
   def changeset(rescues, attrs) do
     rescues
     |> cast(attrs, [:name, :deleted_at])
-    |> validate_required([:name, :deleted_at])
+    |> validate_required([:name])
   end
 end
