@@ -17,6 +17,6 @@ defmodule SmartCityDogs.StaticPages.StaticPage do
   def changeset(static_page, attrs) do
     static_page
     |> cast(attrs, [:title, :meta, :keywords, :content, :deleted_at])
-    |> validate_required([:title, :meta, :keywords, :content, :deleted_at])
+    |> validate_required([:title, :meta, :keywords, :content])
   end
 end

@@ -15,6 +15,6 @@ defmodule SmartCityDogs.SignalsCategories.SignalCategory do
   def changeset(signal_category, attrs) do
     signal_category
     |> cast(attrs, [:name, :deleted_at])
-    |> validate_required([:name, :deleted_at])
+    |> validate_required([:name])
   end
 end

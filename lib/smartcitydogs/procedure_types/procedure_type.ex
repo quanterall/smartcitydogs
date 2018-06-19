@@ -14,6 +14,6 @@ defmodule SmartCityDogs.ProcedureTypes.ProcedureType do
   def changeset(procedure_type, attrs) do
     procedure_type
     |> cast(attrs, [:name, :deleted_at])
-    |> validate_required([:name, :deleted_at])
+    |> validate_required([:name])
   end
 end

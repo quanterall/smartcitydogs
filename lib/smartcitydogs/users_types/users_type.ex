@@ -15,6 +15,6 @@ defmodule SmartCityDogs.UsersTypes.UsersType do
   def changeset(users_type, attrs) do
     users_type
     |> cast(attrs, [:name, :deleted_at])
-    |> validate_required([:name, :deleted_at])
+    |> validate_required([:name])
   end
 end

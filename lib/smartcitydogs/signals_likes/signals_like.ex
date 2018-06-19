@@ -18,6 +18,6 @@ defmodule SmartCityDogs.SignalsLikes.SignalsLike do
   def changeset(signals_like, attrs) do
     signals_like
     |> cast(attrs, [:like, :deleted_at, :signals_id, :users_id])
-    |> validate_required([:like, :deleted_at, :signals_id, :users_id])
+    |> validate_required([:like, :signals_id, :users_id])
   end
 end
