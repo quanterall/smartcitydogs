@@ -50,6 +50,7 @@ defmodule SmartCityDogs.Signals do
 
   """
   def create_signal(attrs \\ %{}) do
+    IO.inspect(attrs)
     %Signal{}
     |> Signal.changeset(attrs)
     |> Repo.insert()

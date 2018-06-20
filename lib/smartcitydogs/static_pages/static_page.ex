@@ -2,6 +2,7 @@ defmodule SmartCityDogs.StaticPages.StaticPage do
   use Ecto.Schema
   import Ecto.Changeset
 
+  @timestamps_opts([type: :naive_datetime, usec: false])
 
   schema "static_pages" do
     field :content, :string

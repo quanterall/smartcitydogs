@@ -2,6 +2,7 @@ defmodule SmartCityDogs.Contacts.Contact do
   use Ecto.Schema
   import Ecto.Changeset
 
+  @timestamps_opts([type: :naive_datetime, usec: false])
 
   schema "contacts" do
     field :text, :string
