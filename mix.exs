@@ -20,7 +20,7 @@ defmodule SmartCityDogs.Mixfile do
   def application do
     [
       mod: {SmartCityDogs.Application, []},
-      extra_applications: [:logger, :runtime_tools]
+      extra_applications: [:logger, :runtime_tools,:ueberauth_facebook]
     ]
   end
 
@@ -39,7 +39,9 @@ defmodule SmartCityDogs.Mixfile do
       {:postgrex, ">= 0.0.0"},
       {:gettext, "~> 0.11"},
       {:bcrypt_elixir, "~> 1.0"},
-      {:cowboy, "~> 1.0"}
+      {:cowboy, "~> 1.0"},
+      {:ueberauth_facebook, "~> 0.3"},
+      {:oauth, github: "tim/erlang-oauth"},
     ]
   end
 

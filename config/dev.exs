@@ -7,11 +7,17 @@ use Mix.Config
 # watchers to your application. For example, we use it
 # with brunch.io to recompile .js and .css sources.
 config :smartcitydogs, SmartCityDogsWeb.Endpoint,
-  http: [port: 4000],
-  debug_errors: true,
-  code_reloader: true,
-  check_origin: false,
-  watchers: []
+       http: [port: 4000],
+       https: [
+         port: 4443,
+         otp_app: :smartcitydogs,
+         keyfile: "priv/keys/localhost.key",
+         certfile: "priv/keys/localhost.cert"
+       ],
+       debug_errors: true,
+       code_reloader: true,
+       check_origin: false,
+       watchers: []
 
 # ## SSL Support
 #
@@ -38,9 +44,18 @@ config :phoenix, :stacktrace_depth, 20
 
 # Configure your database
 config :smartcitydogs, SmartCityDogs.Repo,
-  adapter: Ecto.Adapters.Postgres,
-  username: "postgres",
-  password: "9874123",
-  database: "smartcitydogs_dev",
-  hostname: "localhost",
-  pool_size: 10
+       adapter: Ecto.Adapters.Postgres,
+       username: System.get_env("DB_USER"),
+       password: System.get_env("DB_PASSWORD"),
+       database: System.get_env("DB_NAME"),
+       hostname: System.get_env("DB_HOST"),
+       pool_size: 10
+
+config :ueberauth, Ueberauth,
+       providers: [
+         facebook: {Ueberauth.Strategy.Facebook, [profile_fields: "name,email,first_name,last_name"]},
+       ]
+
+config :ueberauth, Ueberauth.Strategy.Facebook.OAuth,
+       client_id: System.get_env("FACEBOOK_ID"),
+       client_secret: System.get_env("FACEBOOK_SECRET")
