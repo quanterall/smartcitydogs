@@ -4,7 +4,7 @@ defmodule SmartCityDogs.PerformedProcedures.PerformedProcedure do
 
 
   schema "performed_procedure" do
-    field :date, :naive_datetime
+    field :date, :string
     field :deleted_at, :naive_datetime
     belongs_to :animal, SmartCityDogs.Animals.Animal 
     belongs_to :procedure_type, SmartCityDogs.ProcedureTypes.ProcedureType 

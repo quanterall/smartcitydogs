@@ -7,7 +7,6 @@ defmodule SmartCityDogsWeb.ForgotenPasswordView do
   end
 
   def render("show.json", %{forgoten_password: user}) do
-    IO.inspect user
     %{data: render_one(user, ForgotenPasswordView, "forgoten_password.json")}
   end
 
