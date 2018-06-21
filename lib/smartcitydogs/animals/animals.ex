@@ -18,6 +18,10 @@ defmodule SmartCityDogs.Animals do
 
   def get_animal!(id), do: Repo.get!(Animal, id)
 
+  def get_animal_by_chip(chip_number) do
+    query = Ecto.Query.from(c in Animal, where: c.chip_number == ^chip_number)
+    Repo.all(query)
+  end
 
   def create_animal(attrs \\ %{}) do
     %Animal{}
