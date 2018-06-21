@@ -12,6 +12,8 @@ defmodule SmartCityDogsWeb.SignalController do
   end
 
   def create(conn, %{"signal" => signal_params}) do
+    IO.inspect(signal_params)
+
     with {:ok, %Signal{} = signal} <- Signals.create_signal(signal_params) do
       conn
       |> put_status(:created)

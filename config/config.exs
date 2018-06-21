@@ -25,3 +25,17 @@ config :logger, :console,
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env()}.exs"
+# In your config file
+
+config :smartcitydogs, SmartCityDogs.Mailer,
+  adapter: Bamboo.SMTPAdapter,
+  server: "smtp.gmail.com",
+  ## hostname: System.get_env("SES_HOSTNAME"),
+  port: 587,
+  username: "smartcitydogs@gmail.com",
+  password: "Smartcity1",
+  # can be `:always` or `:never`
+  tls: :if_available,
+  # can be `true`
+  ssl: false,
+  retries: 4

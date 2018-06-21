@@ -17,7 +17,11 @@ defmodule SmartCityDogsWeb.UserView do
       first_name: user.first_name,
       last_name: user.last_name,
       email: user.email,
-      phone: user.phone
+      phone: user.phone,
+      reset_password_token: user.reset_password_token,
+      reset_password_token_sent_at: user.reset_password_token_sent_at,
+      deleted_at: user.deleted_at,
+      users_types_id: user.users_types_id
     }
   end
 

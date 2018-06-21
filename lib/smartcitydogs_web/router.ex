@@ -14,6 +14,11 @@ defmodule SmartCityDogsWeb.Router do
     pipe_through(:api)
 
     post("/users/sign_in", UserController, :sign_in)
+    resources(
+      "/forgoten_password",
+      ForgotenPasswordController,
+      only: [:new, :create, :edit, :update]
+    )
     resources("/users", UserController, only: [:create])
   end
 
@@ -55,5 +60,7 @@ defmodule SmartCityDogsWeb.Router do
       |> render(SmartCityDogsWeb.ErrorView, "401.json", message: "Unauthenticated user")
       |> halt()
     end
+
+    
   end
 end

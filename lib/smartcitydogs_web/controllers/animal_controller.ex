@@ -7,6 +7,19 @@ defmodule SmartCityDogsWeb.AnimalController do
   action_fallback(SmartCityDogsWeb.FallbackController)
 
   def index(conn, _params) do
+    ##  IO.inspect _params
+    chip = _params["chip_number"]
+
+    if chip == "" do
+      animals = Animals.list_animals()
+      render(conn, "index.json", animals: animals)
+    end
+
+    if chip != nil do
+      animals = Animals.get_animal_by_chip(chip)
+      render(conn, "index.json", animals: animals)
+    end
+
     animals = Animals.list_animals()
     render(conn, "index.json", animals: animals)
   end
