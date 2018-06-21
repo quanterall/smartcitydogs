@@ -29,11 +29,11 @@ import_config "#{Mix.env()}.exs"
 
 config :smartcitydogs, SmartCityDogs.Mailer,
   adapter: Bamboo.SMTPAdapter,
-  server: System.get_env("SES_SERVER"),
+  server: "smtp.gmail.com",
   ## hostname: System.get_env("SES_HOSTNAME"),
-  port: System.get_env("SES_PORT"),
-  username: System.get_env("SMTP_USERNAME"),
-  password: System.get_env("SMTP_PASSWORD"),
+  port: 587,
+  username: "smartcitydogs@gmail.com",
+  password: "Smartcity1",
   # can be `:always` or `:never`
   tls: :if_available,
   # can be `true`
