@@ -1,5 +1,4 @@
 defmodule SmartCityDogs.Animals do
-
   import Ecto.Query, warn: false
   alias SmartCityDogs.Repo
 
@@ -10,11 +9,9 @@ defmodule SmartCityDogs.Animals do
     Calendar.DateTime.now!("Europe/Sofia") |> DateTime.to_naive()
   end
 
-
   def list_animals do
     Repo.all(Animal)
   end
-
 
   def get_animal!(id), do: Repo.get!(Animal, id)
 
@@ -39,11 +36,9 @@ defmodule SmartCityDogs.Animals do
     |> Repo.update()
   end
 
-
   def delete_animal(%Animal{} = animal) do
     Repo.delete(animal)
   end
-
 
   def change_animal(%Animal{} = animal) do
     Animal.changeset(animal, %{})

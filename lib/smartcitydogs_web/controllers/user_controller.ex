@@ -4,7 +4,7 @@ defmodule SmartCityDogsWeb.UserController do
   alias SmartCityDogs.Users
   alias SmartCityDogs.Users.User
 
-  action_fallback SmartCityDogsWeb.FallbackController
+  action_fallback(SmartCityDogsWeb.FallbackController)
 
   def index(conn, _params) do
     users = Users.list_users()
@@ -35,6 +35,7 @@ defmodule SmartCityDogsWeb.UserController do
 
   def delete(conn, %{"id" => id}) do
     user = Users.get_user!(id)
+
     with {:ok, %User{}} <- Users.delete_user(user) do
       send_resp(conn, :no_content, "")
     end

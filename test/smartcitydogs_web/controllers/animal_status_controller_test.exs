@@ -19,25 +19,27 @@ defmodule SmartCityDogsWeb.AnimalStatusControllerTest do
 
   describe "index" do
     test "lists all animal_statuses", %{conn: conn} do
-      conn = get conn, animal_status_path(conn, :index)
+      conn = get(conn, animal_status_path(conn, :index))
       assert json_response(conn, 200)["data"] == []
     end
   end
 
   describe "create animal_status" do
     test "renders animal_status when data is valid", %{conn: conn} do
-      conn = post conn, animal_status_path(conn, :create), animal_status: @create_attrs
+      conn = post(conn, animal_status_path(conn, :create), animal_status: @create_attrs)
       assert %{"id" => id} = json_response(conn, 201)["data"]
 
-      conn = get conn, animal_status_path(conn, :show, id)
+      conn = get(conn, animal_status_path(conn, :show, id))
+
       assert json_response(conn, 200)["data"] == %{
-        "id" => id,
-        "deleted_at" => ~N[2010-04-17 14:00:00.000000],
-        "name" => "some name"}
+               "id" => id,
+               "deleted_at" => ~N[2010-04-17 14:00:00.000000],
+               "name" => "some name"
+             }
     end
 
     test "renders errors when data is invalid", %{conn: conn} do
-      conn = post conn, animal_status_path(conn, :create), animal_status: @invalid_attrs
+      conn = post(conn, animal_status_path(conn, :create), animal_status: @invalid_attrs)
       assert json_response(conn, 422)["errors"] != %{}
     end
   end
@@ -45,19 +47,28 @@ defmodule SmartCityDogsWeb.AnimalStatusControllerTest do
   describe "update animal_status" do
     setup [:create_animal_status]
 
-    test "renders animal_status when data is valid", %{conn: conn, animal_status: %AnimalStatus{id: id} = animal_status} do
-      conn = put conn, animal_status_path(conn, :update, animal_status), animal_status: @update_attrs
+    test "renders animal_status when data is valid", %{
+      conn: conn,
+      animal_status: %AnimalStatus{id: id} = animal_status
+    } do
+      conn =
+        put(conn, animal_status_path(conn, :update, animal_status), animal_status: @update_attrs)
+
       assert %{"id" => ^id} = json_response(conn, 200)["data"]
 
-      conn = get conn, animal_status_path(conn, :show, id)
+      conn = get(conn, animal_status_path(conn, :show, id))
+
       assert json_response(conn, 200)["data"] == %{
-        "id" => id,
-        "deleted_at" => ~N[2011-05-18 15:01:01.000000],
-        "name" => "some updated name"}
+               "id" => id,
+               "deleted_at" => ~N[2011-05-18 15:01:01.000000],
+               "name" => "some updated name"
+             }
     end
 
     test "renders errors when data is invalid", %{conn: conn, animal_status: animal_status} do
-      conn = put conn, animal_status_path(conn, :update, animal_status), animal_status: @invalid_attrs
+      conn =
+        put(conn, animal_status_path(conn, :update, animal_status), animal_status: @invalid_attrs)
+
       assert json_response(conn, 422)["errors"] != %{}
     end
   end
@@ -66,11 +77,12 @@ defmodule SmartCityDogsWeb.AnimalStatusControllerTest do
     setup [:create_animal_status]
 
     test "deletes chosen animal_status", %{conn: conn, animal_status: animal_status} do
-      conn = delete conn, animal_status_path(conn, :delete, animal_status)
+      conn = delete(conn, animal_status_path(conn, :delete, animal_status))
       assert response(conn, 204)
-      assert_error_sent 404, fn ->
-        get conn, animal_status_path(conn, :show, animal_status)
-      end
+
+      assert_error_sent(404, fn ->
+        get(conn, animal_status_path(conn, :show, animal_status))
+      end)
     end
   end
 

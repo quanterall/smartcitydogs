@@ -2,11 +2,10 @@ defmodule SmartCityDogs.AnimalImages.AnimalImage do
   use Ecto.Schema
   import Ecto.Changeset
 
-
   schema "animal_images" do
-    field :deleted_at, :naive_datetime
-    field :url, :string
-    belongs_to :animal, SmartCityDogs.Animals.Animal 
+    field(:deleted_at, :naive_datetime)
+    field(:url, :string)
+    belongs_to(:animal, SmartCityDogs.Animals.Animal)
     timestamps()
   end
 

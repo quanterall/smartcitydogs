@@ -2,11 +2,10 @@ defmodule SmartCityDogs.SignalImages.SignalImage do
   use Ecto.Schema
   import Ecto.Changeset
 
-
   schema "signal_images" do
-    #field :signals_id, :integer
-    field :url, :string
-    belongs_to :signals, SmartCityDogs.Signals.Signal
+    # field :signals_id, :integer
+    field(:url, :string)
+    belongs_to(:signals, SmartCityDogs.Signals.Signal)
 
     timestamps()
   end

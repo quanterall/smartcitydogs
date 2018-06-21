@@ -11,8 +11,6 @@ defmodule SmartCityDogsWeb.UsersTypeView do
   end
 
   def render("users_type.json", %{users_type: users_type}) do
-    %{id: users_type.id,
-      name: users_type.name,
-      deleted_at: users_type.deleted_at}
+    %{id: users_type.id, name: users_type.name, deleted_at: users_type.deleted_at}
   end
 end

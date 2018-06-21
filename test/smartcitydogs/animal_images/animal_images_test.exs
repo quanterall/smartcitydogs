@@ -49,7 +49,10 @@ defmodule SmartCityDogs.AnimalImagesTest do
 
     test "update_animal_image/2 with invalid data returns error changeset" do
       animal_image = animal_image_fixture()
-      assert {:error, %Ecto.Changeset{}} = AnimalImages.update_animal_image(animal_image, @invalid_attrs)
+
+      assert {:error, %Ecto.Changeset{}} =
+               AnimalImages.update_animal_image(animal_image, @invalid_attrs)
+
       assert animal_image == AnimalImages.get_animal_image!(animal_image.id)
     end
 

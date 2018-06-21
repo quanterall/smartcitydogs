@@ -19,25 +19,27 @@ defmodule SmartCityDogsWeb.SignalCategoryControllerTest do
 
   describe "index" do
     test "lists all signals_categories", %{conn: conn} do
-      conn = get conn, signal_category_path(conn, :index)
+      conn = get(conn, signal_category_path(conn, :index))
       assert json_response(conn, 200)["data"] == []
     end
   end
 
   describe "create signal_category" do
     test "renders signal_category when data is valid", %{conn: conn} do
-      conn = post conn, signal_category_path(conn, :create), signal_category: @create_attrs
+      conn = post(conn, signal_category_path(conn, :create), signal_category: @create_attrs)
       assert %{"id" => id} = json_response(conn, 201)["data"]
 
-      conn = get conn, signal_category_path(conn, :show, id)
+      conn = get(conn, signal_category_path(conn, :show, id))
+
       assert json_response(conn, 200)["data"] == %{
-        "id" => id,
-        "deleted_at" => ~N[2010-04-17 14:00:00.000000],
-        "name" => "some name"}
+               "id" => id,
+               "deleted_at" => ~N[2010-04-17 14:00:00.000000],
+               "name" => "some name"
+             }
     end
 
     test "renders errors when data is invalid", %{conn: conn} do
-      conn = post conn, signal_category_path(conn, :create), signal_category: @invalid_attrs
+      conn = post(conn, signal_category_path(conn, :create), signal_category: @invalid_attrs)
       assert json_response(conn, 422)["errors"] != %{}
     end
   end
@@ -45,19 +47,36 @@ defmodule SmartCityDogsWeb.SignalCategoryControllerTest do
   describe "update signal_category" do
     setup [:create_signal_category]
 
-    test "renders signal_category when data is valid", %{conn: conn, signal_category: %SignalCategory{id: id} = signal_category} do
-      conn = put conn, signal_category_path(conn, :update, signal_category), signal_category: @update_attrs
+    test "renders signal_category when data is valid", %{
+      conn: conn,
+      signal_category: %SignalCategory{id: id} = signal_category
+    } do
+      conn =
+        put(
+          conn,
+          signal_category_path(conn, :update, signal_category),
+          signal_category: @update_attrs
+        )
+
       assert %{"id" => ^id} = json_response(conn, 200)["data"]
 
-      conn = get conn, signal_category_path(conn, :show, id)
+      conn = get(conn, signal_category_path(conn, :show, id))
+
       assert json_response(conn, 200)["data"] == %{
-        "id" => id,
-        "deleted_at" => ~N[2011-05-18 15:01:01.000000],
-        "name" => "some updated name"}
+               "id" => id,
+               "deleted_at" => ~N[2011-05-18 15:01:01.000000],
+               "name" => "some updated name"
+             }
     end
 
     test "renders errors when data is invalid", %{conn: conn, signal_category: signal_category} do
-      conn = put conn, signal_category_path(conn, :update, signal_category), signal_category: @invalid_attrs
+      conn =
+        put(
+          conn,
+          signal_category_path(conn, :update, signal_category),
+          signal_category: @invalid_attrs
+        )
+
       assert json_response(conn, 422)["errors"] != %{}
     end
   end
@@ -66,11 +85,12 @@ defmodule SmartCityDogsWeb.SignalCategoryControllerTest do
     setup [:create_signal_category]
 
     test "deletes chosen signal_category", %{conn: conn, signal_category: signal_category} do
-      conn = delete conn, signal_category_path(conn, :delete, signal_category)
+      conn = delete(conn, signal_category_path(conn, :delete, signal_category))
       assert response(conn, 204)
-      assert_error_sent 404, fn ->
-        get conn, signal_category_path(conn, :show, signal_category)
-      end
+
+      assert_error_sent(404, fn ->
+        get(conn, signal_category_path(conn, :show, signal_category))
+      end)
     end
   end
 

@@ -3,11 +3,10 @@ defmodule SmartCityDogs.Repo.Migrations.CreateRescues do
 
   def change do
     create table(:rescues) do
-      add :name, :text
-      add :deleted_at, :naive_datetime
-      add :animal_id, references("animals")
+      add(:name, :text)
+      add(:deleted_at, :naive_datetime)
+      add(:animal_id, references("animals"))
       timestamps()
     end
-
   end
 end

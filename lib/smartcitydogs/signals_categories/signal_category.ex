@@ -2,11 +2,10 @@ defmodule SmartCityDogs.SignalsCategories.SignalCategory do
   use Ecto.Schema
   import Ecto.Changeset
 
-
   schema "signals_categories" do
-    field :deleted_at, :naive_datetime
-    field :name, :string
-    has_many :signals, SmartCityDogs.Signals.Signal
+    field(:deleted_at, :naive_datetime)
+    field(:name, :string)
+    has_many(:signals, SmartCityDogs.Signals.Signal)
 
     timestamps()
   end

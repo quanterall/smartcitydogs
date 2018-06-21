@@ -19,25 +19,27 @@ defmodule SmartCityDogsWeb.ContactControllerTest do
 
   describe "index" do
     test "lists all contacts", %{conn: conn} do
-      conn = get conn, contact_path(conn, :index)
+      conn = get(conn, contact_path(conn, :index))
       assert json_response(conn, 200)["data"] == []
     end
   end
 
   describe "create contact" do
     test "renders contact when data is valid", %{conn: conn} do
-      conn = post conn, contact_path(conn, :create), contact: @create_attrs
+      conn = post(conn, contact_path(conn, :create), contact: @create_attrs)
       assert %{"id" => id} = json_response(conn, 201)["data"]
 
-      conn = get conn, contact_path(conn, :show, id)
+      conn = get(conn, contact_path(conn, :show, id))
+
       assert json_response(conn, 200)["data"] == %{
-        "id" => id,
-        "text" => "some text",
-        "topic" => "some topic"}
+               "id" => id,
+               "text" => "some text",
+               "topic" => "some topic"
+             }
     end
 
     test "renders errors when data is invalid", %{conn: conn} do
-      conn = post conn, contact_path(conn, :create), contact: @invalid_attrs
+      conn = post(conn, contact_path(conn, :create), contact: @invalid_attrs)
       assert json_response(conn, 422)["errors"] != %{}
     end
   end
@@ -46,18 +48,20 @@ defmodule SmartCityDogsWeb.ContactControllerTest do
     setup [:create_contact]
 
     test "renders contact when data is valid", %{conn: conn, contact: %Contact{id: id} = contact} do
-      conn = put conn, contact_path(conn, :update, contact), contact: @update_attrs
+      conn = put(conn, contact_path(conn, :update, contact), contact: @update_attrs)
       assert %{"id" => ^id} = json_response(conn, 200)["data"]
 
-      conn = get conn, contact_path(conn, :show, id)
+      conn = get(conn, contact_path(conn, :show, id))
+
       assert json_response(conn, 200)["data"] == %{
-        "id" => id,
-        "text" => "some updated text",
-        "topic" => "some updated topic"}
+               "id" => id,
+               "text" => "some updated text",
+               "topic" => "some updated topic"
+             }
     end
 
     test "renders errors when data is invalid", %{conn: conn, contact: contact} do
-      conn = put conn, contact_path(conn, :update, contact), contact: @invalid_attrs
+      conn = put(conn, contact_path(conn, :update, contact), contact: @invalid_attrs)
       assert json_response(conn, 422)["errors"] != %{}
     end
   end
@@ -66,11 +70,12 @@ defmodule SmartCityDogsWeb.ContactControllerTest do
     setup [:create_contact]
 
     test "deletes chosen contact", %{conn: conn, contact: contact} do
-      conn = delete conn, contact_path(conn, :delete, contact)
+      conn = delete(conn, contact_path(conn, :delete, contact))
       assert response(conn, 204)
-      assert_error_sent 404, fn ->
-        get conn, contact_path(conn, :show, contact)
-      end
+
+      assert_error_sent(404, fn ->
+        get(conn, contact_path(conn, :show, contact))
+      end)
     end
   end
 

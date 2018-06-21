@@ -11,7 +11,8 @@ defmodule SmartCityDogsWeb.ForgotenPasswordView do
   end
 
   def render("forgoten_password.json", %{forgoten_password: user}) do
-    %{id: user.id,
+    %{
+      id: user.id,
       username: user.username,
       password_hash: user.password_hash,
       first_name: user.first_name,
@@ -21,7 +22,8 @@ defmodule SmartCityDogsWeb.ForgotenPasswordView do
       reset_password_token: user.reset_password_token,
       reset_password_token_sent_at: user.reset_password_token_sent_at,
       deleted_at: user.deleted_at,
-      users_types_id: user.users_types_id}
+      users_types_id: user.users_types_id
+    }
   end
 
   def render("couldnt_send_token.json", %{forgoten_password: user}) do

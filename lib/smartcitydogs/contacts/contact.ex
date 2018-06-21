@@ -2,11 +2,10 @@ defmodule SmartCityDogs.Contacts.Contact do
   use Ecto.Schema
   import Ecto.Changeset
 
-
   schema "contacts" do
-    field :text, :string
-    field :topic, :string
-    belongs_to :users , SmartCityDogs.Users.User
+    field(:text, :string)
+    field(:topic, :string)
+    belongs_to(:users, SmartCityDogs.Users.User)
 
     timestamps()
   end

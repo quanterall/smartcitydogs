@@ -11,8 +11,10 @@ defmodule SmartCityDogsWeb.PerformedProcedureView do
   end
 
   def render("performed_procedure.json", %{performed_procedure: performed_procedure}) do
-    %{id: performed_procedure.id,
+    %{
+      id: performed_procedure.id,
       date: performed_procedure.date,
-      deleted_at: performed_procedure.deleted_at}
+      deleted_at: performed_procedure.deleted_at
+    }
   end
 end

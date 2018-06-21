@@ -8,16 +8,11 @@ defmodule SmartCityDogs.AnimalImages do
 
   alias SmartCityDogs.AnimalImages.AnimalImage
 
-
-
-
   def list_animal_images do
     Repo.all(AnimalImage)
   end
 
-
   def get_animal_image!(id), do: Repo.get!(AnimalImage, id)
-
 
   def create_animal_image(attrs \\ %{}) do
     %AnimalImage{}
@@ -25,18 +20,15 @@ defmodule SmartCityDogs.AnimalImages do
     |> Repo.insert()
   end
 
-
   def update_animal_image(%AnimalImage{} = animal_image, attrs) do
     animal_image
     |> AnimalImage.changeset(attrs)
     |> Repo.update()
   end
 
-
   def delete_animal_image(%AnimalImage{} = animal_image) do
     Repo.delete(animal_image)
   end
-
 
   def change_animal_image(%AnimalImage{} = animal_image) do
     AnimalImage.changeset(animal_image, %{})

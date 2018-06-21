@@ -6,8 +6,20 @@ defmodule SmartCityDogs.StaticPagesTest do
   describe "static_pages" do
     alias SmartCityDogs.StaticPages.StaticPage
 
-    @valid_attrs %{content: "some content", deleted_at: ~N[2010-04-17 14:00:00.000000], keywords: "some keywords", meta: "some meta", title: "some title"}
-    @update_attrs %{content: "some updated content", deleted_at: ~N[2011-05-18 15:01:01.000000], keywords: "some updated keywords", meta: "some updated meta", title: "some updated title"}
+    @valid_attrs %{
+      content: "some content",
+      deleted_at: ~N[2010-04-17 14:00:00.000000],
+      keywords: "some keywords",
+      meta: "some meta",
+      title: "some title"
+    }
+    @update_attrs %{
+      content: "some updated content",
+      deleted_at: ~N[2011-05-18 15:01:01.000000],
+      keywords: "some updated keywords",
+      meta: "some updated meta",
+      title: "some updated title"
+    }
     @invalid_attrs %{content: nil, deleted_at: nil, keywords: nil, meta: nil, title: nil}
 
     def static_page_fixture(attrs \\ %{}) do
@@ -55,7 +67,10 @@ defmodule SmartCityDogs.StaticPagesTest do
 
     test "update_static_page/2 with invalid data returns error changeset" do
       static_page = static_page_fixture()
-      assert {:error, %Ecto.Changeset{}} = StaticPages.update_static_page(static_page, @invalid_attrs)
+
+      assert {:error, %Ecto.Changeset{}} =
+               StaticPages.update_static_page(static_page, @invalid_attrs)
+
       assert static_page == StaticPages.get_static_page!(static_page.id)
     end
 

@@ -2,11 +2,10 @@ defmodule SmartCityDogs.Rescues.Rescue do
   use Ecto.Schema
   import Ecto.Changeset
 
-
   schema "rescues" do
-    field :deleted_at, :naive_datetime
-    field :name, :string
-    belongs_to :animal, SmartCityDogs.Animals.Animal 
+    field(:deleted_at, :naive_datetime)
+    field(:name, :string)
+    belongs_to(:animal, SmartCityDogs.Animals.Animal)
     timestamps()
   end
 

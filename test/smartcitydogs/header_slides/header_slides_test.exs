@@ -6,8 +6,16 @@ defmodule SmartCityDogs.HeaderSlidesTest do
   describe "header_slides" do
     alias SmartCityDogs.HeaderSlides.HeaderSlide
 
-    @valid_attrs %{deleted_at: ~N[2010-04-17 14:00:00.000000], image_url: "some image_url", text: "some text"}
-    @update_attrs %{deleted_at: ~N[2011-05-18 15:01:01.000000], image_url: "some updated image_url", text: "some updated text"}
+    @valid_attrs %{
+      deleted_at: ~N[2010-04-17 14:00:00.000000],
+      image_url: "some image_url",
+      text: "some text"
+    }
+    @update_attrs %{
+      deleted_at: ~N[2011-05-18 15:01:01.000000],
+      image_url: "some updated image_url",
+      text: "some updated text"
+    }
     @invalid_attrs %{deleted_at: nil, image_url: nil, text: nil}
 
     def header_slide_fixture(attrs \\ %{}) do
@@ -51,7 +59,10 @@ defmodule SmartCityDogs.HeaderSlidesTest do
 
     test "update_header_slide/2 with invalid data returns error changeset" do
       header_slide = header_slide_fixture()
-      assert {:error, %Ecto.Changeset{}} = HeaderSlides.update_header_slide(header_slide, @invalid_attrs)
+
+      assert {:error, %Ecto.Changeset{}} =
+               HeaderSlides.update_header_slide(header_slide, @invalid_attrs)
+
       assert header_slide == HeaderSlides.get_header_slide!(header_slide.id)
     end
 

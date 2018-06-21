@@ -49,7 +49,10 @@ defmodule SmartCityDogs.SignalsTypesTest do
 
     test "update_signals_type/2 with invalid data returns error changeset" do
       signals_type = signals_type_fixture()
-      assert {:error, %Ecto.Changeset{}} = SignalsTypes.update_signals_type(signals_type, @invalid_attrs)
+
+      assert {:error, %Ecto.Changeset{}} =
+               SignalsTypes.update_signals_type(signals_type, @invalid_attrs)
+
       assert signals_type == SignalsTypes.get_signals_type!(signals_type.id)
     end
 

@@ -11,8 +11,6 @@ defmodule SmartCityDogsWeb.AnimalStatusView do
   end
 
   def render("animal_status.json", %{animal_status: animal_status}) do
-    %{id: animal_status.id,
-      name: animal_status.name,
-      deleted_at: animal_status.deleted_at}
+    %{id: animal_status.id, name: animal_status.name, deleted_at: animal_status.deleted_at}
   end
 end
