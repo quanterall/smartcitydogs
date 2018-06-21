@@ -4,7 +4,7 @@ defmodule SmartCityDogsWeb.UsersTypeController do
   alias SmartCityDogs.UsersTypes
   alias SmartCityDogs.UsersTypes.UsersType
 
-  action_fallback SmartCityDogsWeb.FallbackController
+  action_fallback(SmartCityDogsWeb.FallbackController)
 
   def index(conn, _params) do
     users_types = UsersTypes.list_users_types()
@@ -28,13 +28,15 @@ defmodule SmartCityDogsWeb.UsersTypeController do
   def update(conn, %{"id" => id, "users_type" => users_type_params}) do
     users_type = UsersTypes.get_users_type!(id)
 
-    with {:ok, %UsersType{} = users_type} <- UsersTypes.update_users_type(users_type, users_type_params) do
+    with {:ok, %UsersType{} = users_type} <-
+           UsersTypes.update_users_type(users_type, users_type_params) do
       render(conn, "show.json", users_type: users_type)
     end
   end
 
   def delete(conn, %{"id" => id}) do
     users_type = UsersTypes.get_users_type!(id)
+
     with {:ok, %UsersType{}} <- UsersTypes.delete_users_type(users_type) do
       send_resp(conn, :no_content, "")
     end

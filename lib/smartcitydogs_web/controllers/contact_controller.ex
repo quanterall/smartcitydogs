@@ -4,7 +4,7 @@ defmodule SmartCityDogsWeb.ContactController do
   alias SmartCityDogs.Contacts
   alias SmartCityDogs.Contacts.Contact
 
-  action_fallback SmartCityDogsWeb.FallbackController
+  action_fallback(SmartCityDogsWeb.FallbackController)
 
   def index(conn, _params) do
     contacts = Contacts.list_contacts()
@@ -35,6 +35,7 @@ defmodule SmartCityDogsWeb.ContactController do
 
   def delete(conn, %{"id" => id}) do
     contact = Contacts.get_contact!(id)
+
     with {:ok, %Contact{}} <- Contacts.delete_contact(contact) do
       send_resp(conn, :no_content, "")
     end

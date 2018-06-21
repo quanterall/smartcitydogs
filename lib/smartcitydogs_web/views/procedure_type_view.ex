@@ -11,8 +11,6 @@ defmodule SmartCityDogsWeb.ProcedureTypeView do
   end
 
   def render("procedure_type.json", %{procedure_type: procedure_type}) do
-    %{id: procedure_type.id,
-      name: procedure_type.name,
-      deleted_at: procedure_type.deleted_at}
+    %{id: procedure_type.id, name: procedure_type.name, deleted_at: procedure_type.deleted_at}
   end
 end

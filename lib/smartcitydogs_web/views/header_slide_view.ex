@@ -11,9 +11,11 @@ defmodule SmartCityDogsWeb.HeaderSlideView do
   end
 
   def render("header_slide.json", %{header_slide: header_slide}) do
-    %{id: header_slide.id,
+    %{
+      id: header_slide.id,
       image_url: header_slide.image_url,
       text: header_slide.text,
-      deleted_at: header_slide.deleted_at}
+      deleted_at: header_slide.deleted_at
+    }
   end
 end

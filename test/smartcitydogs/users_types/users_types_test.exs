@@ -49,7 +49,10 @@ defmodule SmartCityDogs.UsersTypesTest do
 
     test "update_users_type/2 with invalid data returns error changeset" do
       users_type = users_type_fixture()
-      assert {:error, %Ecto.Changeset{}} = UsersTypes.update_users_type(users_type, @invalid_attrs)
+
+      assert {:error, %Ecto.Changeset{}} =
+               UsersTypes.update_users_type(users_type, @invalid_attrs)
+
       assert users_type == UsersTypes.get_users_type!(users_type.id)
     end
 

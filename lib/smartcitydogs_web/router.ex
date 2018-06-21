@@ -15,8 +15,7 @@ defmodule SmartCityDogsWeb.Router do
 
     post("/users/sign_in", UserController, :sign_in)
     resources("/users", UserController, only: [:create])
-
-    end
+  end
 
   scope "/api", SmartCityDogsWeb do
     pipe_through([:api, :api_auth])
@@ -41,13 +40,13 @@ defmodule SmartCityDogsWeb.Router do
     resources("/header_slides", HeaderSlideController, except: [:new, :edit])
     resources("/news", NewsSchemaController, except: [:new, :edit])
     resources("/static_pages", StaticPageController, except: [:new, :edit])
-  
   end
 
   # Plug function
   defp ensure_authenticated(conn, _opts) do
     current_user_id = get_session(conn, :current_user_id)
-    IO.puts "Authentication!"
+    IO.puts("Authentication!")
+
     if current_user_id do
       conn
     else
@@ -57,5 +56,4 @@ defmodule SmartCityDogsWeb.Router do
       |> halt()
     end
   end
-
 end

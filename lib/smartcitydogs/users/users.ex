@@ -120,5 +120,4 @@ defmodule SmartCityDogs.Users do
       {:error, "Wrong email or password"}
     end
   end
-
 end

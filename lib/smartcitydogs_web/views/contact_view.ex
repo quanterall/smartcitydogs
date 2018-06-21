@@ -11,8 +11,6 @@ defmodule SmartCityDogsWeb.ContactView do
   end
 
   def render("contact.json", %{contact: contact}) do
-    %{id: contact.id,
-      topic: contact.topic,
-      text: contact.text}
+    %{id: contact.id, topic: contact.topic, text: contact.text}
   end
 end

@@ -2,11 +2,10 @@ defmodule SmartCityDogs.HeaderSlides.HeaderSlide do
   use Ecto.Schema
   import Ecto.Changeset
 
-
   schema "header_slides" do
-    field :deleted_at, :naive_datetime
-    field :image_url, :string
-    field :text, :string
+    field(:deleted_at, :naive_datetime)
+    field(:image_url, :string)
+    field(:text, :string)
 
     timestamps()
   end

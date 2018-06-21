@@ -11,7 +11,8 @@ defmodule SmartCityDogsWeb.SignalView do
   end
 
   def render("signal.json", %{signal: signal}) do
-    %{id: signal.id,
+    %{
+      id: signal.id,
       title: signal.title,
       view_count: signal.view_count,
       address: signal.address,
@@ -21,6 +22,7 @@ defmodule SmartCityDogsWeb.SignalView do
       deleted_at: signal.deleted_at,
       signals_types_id: signal.signals_types_id,
       signals_categories_id: signal.signals_categories_id,
-      users_id: signal.users_id}
+      users_id: signal.users_id
+    }
   end
 end

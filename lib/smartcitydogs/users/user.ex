@@ -73,13 +73,13 @@ defmodule SmartCityDogs.Users.User do
     |> validate_required([
       :username,
       :password,
-      #:first_name,
-      #:last_name,
+      # :first_name,
+      # :last_name,
       :email,
-      #:phone,
+      # :phone,
       :users_types_id
     ])
-   #|> validate_length(:password, min: 6, max: 100)
+    # |> validate_length(:password, min: 6, max: 100)
     |> unique_constraint(:email)
     |> put_password_hash()
   end
@@ -96,5 +96,4 @@ defmodule SmartCityDogs.Users.User do
   defp put_password_hash(changeset) do
     changeset
   end
-
 end

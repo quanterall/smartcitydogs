@@ -11,8 +11,6 @@ defmodule SmartCityDogsWeb.AnimalImageView do
   end
 
   def render("animal_image.json", %{animal_image: animal_image}) do
-    %{id: animal_image.id,
-      url: animal_image.url,
-      deleted_at: animal_image.deleted_at}
+    %{id: animal_image.id, url: animal_image.url, deleted_at: animal_image.deleted_at}
   end
 end

@@ -19,25 +19,27 @@ defmodule SmartCityDogsWeb.AnimalImageControllerTest do
 
   describe "index" do
     test "lists all animal_images", %{conn: conn} do
-      conn = get conn, animal_image_path(conn, :index)
+      conn = get(conn, animal_image_path(conn, :index))
       assert json_response(conn, 200)["data"] == []
     end
   end
 
   describe "create animal_image" do
     test "renders animal_image when data is valid", %{conn: conn} do
-      conn = post conn, animal_image_path(conn, :create), animal_image: @create_attrs
+      conn = post(conn, animal_image_path(conn, :create), animal_image: @create_attrs)
       assert %{"id" => id} = json_response(conn, 201)["data"]
 
-      conn = get conn, animal_image_path(conn, :show, id)
+      conn = get(conn, animal_image_path(conn, :show, id))
+
       assert json_response(conn, 200)["data"] == %{
-        "id" => id,
-        "deleted_at" => ~N[2010-04-17 14:00:00.000000],
-        "url" => "some url"}
+               "id" => id,
+               "deleted_at" => ~N[2010-04-17 14:00:00.000000],
+               "url" => "some url"
+             }
     end
 
     test "renders errors when data is invalid", %{conn: conn} do
-      conn = post conn, animal_image_path(conn, :create), animal_image: @invalid_attrs
+      conn = post(conn, animal_image_path(conn, :create), animal_image: @invalid_attrs)
       assert json_response(conn, 422)["errors"] != %{}
     end
   end
@@ -45,19 +47,28 @@ defmodule SmartCityDogsWeb.AnimalImageControllerTest do
   describe "update animal_image" do
     setup [:create_animal_image]
 
-    test "renders animal_image when data is valid", %{conn: conn, animal_image: %AnimalImage{id: id} = animal_image} do
-      conn = put conn, animal_image_path(conn, :update, animal_image), animal_image: @update_attrs
+    test "renders animal_image when data is valid", %{
+      conn: conn,
+      animal_image: %AnimalImage{id: id} = animal_image
+    } do
+      conn =
+        put(conn, animal_image_path(conn, :update, animal_image), animal_image: @update_attrs)
+
       assert %{"id" => ^id} = json_response(conn, 200)["data"]
 
-      conn = get conn, animal_image_path(conn, :show, id)
+      conn = get(conn, animal_image_path(conn, :show, id))
+
       assert json_response(conn, 200)["data"] == %{
-        "id" => id,
-        "deleted_at" => ~N[2011-05-18 15:01:01.000000],
-        "url" => "some updated url"}
+               "id" => id,
+               "deleted_at" => ~N[2011-05-18 15:01:01.000000],
+               "url" => "some updated url"
+             }
     end
 
     test "renders errors when data is invalid", %{conn: conn, animal_image: animal_image} do
-      conn = put conn, animal_image_path(conn, :update, animal_image), animal_image: @invalid_attrs
+      conn =
+        put(conn, animal_image_path(conn, :update, animal_image), animal_image: @invalid_attrs)
+
       assert json_response(conn, 422)["errors"] != %{}
     end
   end
@@ -66,11 +77,12 @@ defmodule SmartCityDogsWeb.AnimalImageControllerTest do
     setup [:create_animal_image]
 
     test "deletes chosen animal_image", %{conn: conn, animal_image: animal_image} do
-      conn = delete conn, animal_image_path(conn, :delete, animal_image)
+      conn = delete(conn, animal_image_path(conn, :delete, animal_image))
       assert response(conn, 204)
-      assert_error_sent 404, fn ->
-        get conn, animal_image_path(conn, :show, animal_image)
-      end
+
+      assert_error_sent(404, fn ->
+        get(conn, animal_image_path(conn, :show, animal_image))
+      end)
     end
   end
 

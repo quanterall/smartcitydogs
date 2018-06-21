@@ -4,7 +4,7 @@ defmodule SmartCityDogsWeb.NewsSchemaController do
   alias SmartCityDogs.News
   alias SmartCityDogs.News.NewsSchema
 
-  action_fallback SmartCityDogsWeb.FallbackController
+  action_fallback(SmartCityDogsWeb.FallbackController)
 
   def index(conn, _params) do
     news = News.list_news()
@@ -28,13 +28,15 @@ defmodule SmartCityDogsWeb.NewsSchemaController do
   def update(conn, %{"id" => id, "news_schema" => news_schema_params}) do
     news_schema = News.get_news_schema!(id)
 
-    with {:ok, %NewsSchema{} = news_schema} <- News.update_news_schema(news_schema, news_schema_params) do
+    with {:ok, %NewsSchema{} = news_schema} <-
+           News.update_news_schema(news_schema, news_schema_params) do
       render(conn, "show.json", news_schema: news_schema)
     end
   end
 
   def delete(conn, %{"id" => id}) do
     news_schema = News.get_news_schema!(id)
+
     with {:ok, %NewsSchema{}} <- News.delete_news_schema(news_schema) do
       send_resp(conn, :no_content, "")
     end

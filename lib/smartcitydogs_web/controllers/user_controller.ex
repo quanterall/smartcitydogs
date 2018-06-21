@@ -44,7 +44,7 @@ defmodule SmartCityDogsWeb.UserController do
   def sign_in(conn, %{"email" => email, "password" => password}) do
     case SmartCityDogs.Users.authenticate_user(email, password) do
       {:ok, user} ->
-        #SmartCityDogs.Users.is_active(user.id, true)
+        # SmartCityDogs.Users.is_active(user.id, true)
         System.cmd("espeak", ["Welcome"])
 
         conn
@@ -63,16 +63,17 @@ defmodule SmartCityDogsWeb.UserController do
   def logout(conn, %{"id" => id}) do
     user = SmartCityDogs.Users.get_user!(id)
 
-    #if user.is_active == true do
-      # case MyApi.Auth.authenticate_user(email, password) do
-      # {:ok, user} ->
-      #SmartCityDogs.Users.is_active(user.id, false)
-      System.cmd("espeak", ["goodbye "])
+    # if user.is_active == true do
+    # case MyApi.Auth.authenticate_user(email, password) do
+    # {:ok, user} ->
+    # SmartCityDogs.Users.is_active(user.id, false)
+    System.cmd("espeak", ["goodbye "])
 
-      conn
-      |> delete_session(:current_user_id)
-      |> put_status(:ok)
-      |> render(SmartCityDogsWeb.UserView, "logout.json", user: user)
-    #end
+    conn
+    |> delete_session(:current_user_id)
+    |> put_status(:ok)
+    |> render(SmartCityDogsWeb.UserView, "logout.json", user: user)
+
+    # end
   end
 end

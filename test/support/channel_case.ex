@@ -25,13 +25,13 @@ defmodule SmartCityDogsWeb.ChannelCase do
     end
   end
 
-
   setup tags do
     :ok = Ecto.Adapters.SQL.Sandbox.checkout(SmartCityDogs.Repo)
+
     unless tags[:async] do
       Ecto.Adapters.SQL.Sandbox.mode(SmartCityDogs.Repo, {:shared, self()})
     end
+
     :ok
   end
-
 end

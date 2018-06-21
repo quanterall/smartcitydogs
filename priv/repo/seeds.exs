@@ -105,9 +105,9 @@ end
 # }
 #
 # unless Repo.get_by(User, username: users_params[:username]) do
-  # %User{}
-  # |> User.registration_changeset(users_params)
-  # |> Repo.insert!()
+# %User{}
+# |> User.registration_changeset(users_params)
+# |> Repo.insert!()
 # end
 # ############## Users #############
 # users_params = %{

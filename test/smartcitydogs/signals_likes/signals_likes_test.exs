@@ -6,8 +6,18 @@ defmodule SmartCityDogs.SignalsLikesTest do
   describe "signals_likes" do
     alias SmartCityDogs.SignalsLikes.SignalsLike
 
-    @valid_attrs %{deleted_at: ~N[2010-04-17 14:00:00.000000], like: 42, signals_id: 42, users_id: 42}
-    @update_attrs %{deleted_at: ~N[2011-05-18 15:01:01.000000], like: 43, signals_id: 43, users_id: 43}
+    @valid_attrs %{
+      deleted_at: ~N[2010-04-17 14:00:00.000000],
+      like: 42,
+      signals_id: 42,
+      users_id: 42
+    }
+    @update_attrs %{
+      deleted_at: ~N[2011-05-18 15:01:01.000000],
+      like: 43,
+      signals_id: 43,
+      users_id: 43
+    }
     @invalid_attrs %{deleted_at: nil, like: nil, signals_id: nil, users_id: nil}
 
     def signals_like_fixture(attrs \\ %{}) do
@@ -53,7 +63,10 @@ defmodule SmartCityDogs.SignalsLikesTest do
 
     test "update_signals_like/2 with invalid data returns error changeset" do
       signals_like = signals_like_fixture()
-      assert {:error, %Ecto.Changeset{}} = SignalsLikes.update_signals_like(signals_like, @invalid_attrs)
+
+      assert {:error, %Ecto.Changeset{}} =
+               SignalsLikes.update_signals_like(signals_like, @invalid_attrs)
+
       assert signals_like == SignalsLikes.get_signals_like!(signals_like.id)
     end
 
