@@ -6,9 +6,36 @@ defmodule SmartCityDogs.NewsTest do
   describe "news" do
     alias SmartCityDogs.News.NewsSchema
 
-    @valid_attrs %{content: "some content", date: ~N[2010-04-17 14:00:00.000000], deleted_at: ~N[2010-04-17 14:00:00.000000], image_url: "some image_url", keywords: "some keywords", meta: "some meta", short_content: "some short_content", title: "some title"}
-    @update_attrs %{content: "some updated content", date: ~N[2011-05-18 15:01:01.000000], deleted_at: ~N[2011-05-18 15:01:01.000000], image_url: "some updated image_url", keywords: "some updated keywords", meta: "some updated meta", short_content: "some updated short_content", title: "some updated title"}
-    @invalid_attrs %{content: nil, date: nil, deleted_at: nil, image_url: nil, keywords: nil, meta: nil, short_content: nil, title: nil}
+    @valid_attrs %{
+      content: "some content",
+      date: ~N[2010-04-17 14:00:00.000000],
+      deleted_at: ~N[2010-04-17 14:00:00.000000],
+      image_url: "some image_url",
+      keywords: "some keywords",
+      meta: "some meta",
+      short_content: "some short_content",
+      title: "some title"
+    }
+    @update_attrs %{
+      content: "some updated content",
+      date: ~N[2011-05-18 15:01:01.000000],
+      deleted_at: ~N[2011-05-18 15:01:01.000000],
+      image_url: "some updated image_url",
+      keywords: "some updated keywords",
+      meta: "some updated meta",
+      short_content: "some updated short_content",
+      title: "some updated title"
+    }
+    @invalid_attrs %{
+      content: nil,
+      date: nil,
+      deleted_at: nil,
+      image_url: nil,
+      keywords: nil,
+      meta: nil,
+      short_content: nil,
+      title: nil
+    }
 
     def news_schema_fixture(attrs \\ %{}) do
       {:ok, news_schema} =

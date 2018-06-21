@@ -11,11 +11,13 @@ defmodule SmartCityDogsWeb.StaticPageView do
   end
 
   def render("static_page.json", %{static_page: static_page}) do
-    %{id: static_page.id,
+    %{
+      id: static_page.id,
       title: static_page.title,
       meta: static_page.meta,
       keywords: static_page.keywords,
       content: static_page.content,
-      deleted_at: static_page.deleted_at}
+      deleted_at: static_page.deleted_at
+    }
   end
 end

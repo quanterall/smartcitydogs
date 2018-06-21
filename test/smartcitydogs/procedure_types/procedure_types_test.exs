@@ -30,7 +30,9 @@ defmodule SmartCityDogs.ProcedureTypesTest do
     end
 
     test "create_procedure_type/1 with valid data creates a procedure_type" do
-      assert {:ok, %ProcedureType{} = procedure_type} = ProcedureTypes.create_procedure_type(@valid_attrs)
+      assert {:ok, %ProcedureType{} = procedure_type} =
+               ProcedureTypes.create_procedure_type(@valid_attrs)
+
       assert procedure_type.deleted_at == ~N[2010-04-17 14:00:00.000000]
       assert procedure_type.name == "some name"
     end
@@ -41,7 +43,10 @@ defmodule SmartCityDogs.ProcedureTypesTest do
 
     test "update_procedure_type/2 with valid data updates the procedure_type" do
       procedure_type = procedure_type_fixture()
-      assert {:ok, procedure_type} = ProcedureTypes.update_procedure_type(procedure_type, @update_attrs)
+
+      assert {:ok, procedure_type} =
+               ProcedureTypes.update_procedure_type(procedure_type, @update_attrs)
+
       assert %ProcedureType{} = procedure_type
       assert procedure_type.deleted_at == ~N[2011-05-18 15:01:01.000000]
       assert procedure_type.name == "some updated name"
@@ -49,14 +54,20 @@ defmodule SmartCityDogs.ProcedureTypesTest do
 
     test "update_procedure_type/2 with invalid data returns error changeset" do
       procedure_type = procedure_type_fixture()
-      assert {:error, %Ecto.Changeset{}} = ProcedureTypes.update_procedure_type(procedure_type, @invalid_attrs)
+
+      assert {:error, %Ecto.Changeset{}} =
+               ProcedureTypes.update_procedure_type(procedure_type, @invalid_attrs)
+
       assert procedure_type == ProcedureTypes.get_procedure_type!(procedure_type.id)
     end
 
     test "delete_procedure_type/1 deletes the procedure_type" do
       procedure_type = procedure_type_fixture()
       assert {:ok, %ProcedureType{}} = ProcedureTypes.delete_procedure_type(procedure_type)
-      assert_raise Ecto.NoResultsError, fn -> ProcedureTypes.get_procedure_type!(procedure_type.id) end
+
+      assert_raise Ecto.NoResultsError, fn ->
+        ProcedureTypes.get_procedure_type!(procedure_type.id)
+      end
     end
 
     test "change_procedure_type/1 returns a procedure_type changeset" do

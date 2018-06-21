@@ -30,7 +30,9 @@ defmodule SmartCityDogs.AnimalStatusesTest do
     end
 
     test "create_animal_status/1 with valid data creates a animal_status" do
-      assert {:ok, %AnimalStatus{} = animal_status} = AnimalStatuses.create_animal_status(@valid_attrs)
+      assert {:ok, %AnimalStatus{} = animal_status} =
+               AnimalStatuses.create_animal_status(@valid_attrs)
+
       assert animal_status.deleted_at == ~N[2010-04-17 14:00:00.000000]
       assert animal_status.name == "some name"
     end
@@ -41,7 +43,10 @@ defmodule SmartCityDogs.AnimalStatusesTest do
 
     test "update_animal_status/2 with valid data updates the animal_status" do
       animal_status = animal_status_fixture()
-      assert {:ok, animal_status} = AnimalStatuses.update_animal_status(animal_status, @update_attrs)
+
+      assert {:ok, animal_status} =
+               AnimalStatuses.update_animal_status(animal_status, @update_attrs)
+
       assert %AnimalStatus{} = animal_status
       assert animal_status.deleted_at == ~N[2011-05-18 15:01:01.000000]
       assert animal_status.name == "some updated name"
@@ -49,14 +54,20 @@ defmodule SmartCityDogs.AnimalStatusesTest do
 
     test "update_animal_status/2 with invalid data returns error changeset" do
       animal_status = animal_status_fixture()
-      assert {:error, %Ecto.Changeset{}} = AnimalStatuses.update_animal_status(animal_status, @invalid_attrs)
+
+      assert {:error, %Ecto.Changeset{}} =
+               AnimalStatuses.update_animal_status(animal_status, @invalid_attrs)
+
       assert animal_status == AnimalStatuses.get_animal_status!(animal_status.id)
     end
 
     test "delete_animal_status/1 deletes the animal_status" do
       animal_status = animal_status_fixture()
       assert {:ok, %AnimalStatus{}} = AnimalStatuses.delete_animal_status(animal_status)
-      assert_raise Ecto.NoResultsError, fn -> AnimalStatuses.get_animal_status!(animal_status.id) end
+
+      assert_raise Ecto.NoResultsError, fn ->
+        AnimalStatuses.get_animal_status!(animal_status.id)
+      end
     end
 
     test "change_animal_status/1 returns a animal_status changeset" do

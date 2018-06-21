@@ -11,10 +11,12 @@ defmodule SmartCityDogsWeb.SignalsLikeView do
   end
 
   def render("signals_like.json", %{signals_like: signals_like}) do
-    %{id: signals_like.id,
+    %{
+      id: signals_like.id,
       like: signals_like.like,
       deleted_at: signals_like.deleted_at,
       signals_id: signals_like.signals_id,
-      users_id: signals_like.users_id}
+      users_id: signals_like.users_id
+    }
   end
 end

@@ -49,7 +49,10 @@ defmodule SmartCityDogs.SignalImagesTest do
 
     test "update_signal_image/2 with invalid data returns error changeset" do
       signal_image = signal_image_fixture()
-      assert {:error, %Ecto.Changeset{}} = SignalImages.update_signal_image(signal_image, @invalid_attrs)
+
+      assert {:error, %Ecto.Changeset{}} =
+               SignalImages.update_signal_image(signal_image, @invalid_attrs)
+
       assert signal_image == SignalImages.get_signal_image!(signal_image.id)
     end
 

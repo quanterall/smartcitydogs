@@ -2,12 +2,12 @@ defmodule SmartCityDogs.SignalImages.SignalImage do
   use Ecto.Schema
   import Ecto.Changeset
 
-  @timestamps_opts([type: :naive_datetime, usec: false])
+  @timestamps_opts [type: :naive_datetime, usec: false]
 
   schema "signal_images" do
-    #field :signals_id, :integer
-    field :url, :string
-    belongs_to :signals, SmartCityDogs.Signals.Signal
+    # field :signals_id, :integer
+    field(:url, :string)
+    belongs_to(:signals, SmartCityDogs.Signals.Signal)
 
     timestamps()
   end

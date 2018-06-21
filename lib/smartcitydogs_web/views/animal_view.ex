@@ -11,12 +11,14 @@ defmodule SmartCityDogsWeb.AnimalView do
   end
 
   def render("animal.json", %{animal: animal}) do
-    %{id: animal.id,
+    %{
+      id: animal.id,
       sex: animal.sex,
       chip_number: animal.chip_number,
       address: animal.address,
       deleted_at: animal.deleted_at,
       registered_at: animal.registered_at,
-      adopted_at: animal.adopted_at}
+      adopted_at: animal.adopted_at
+    }
   end
 end

@@ -15,8 +15,7 @@ config :smartcitydogs, SmartCityDogsWeb.Endpoint,
   url: [host: "localhost"],
   secret_key_base: "JToVszmUmy4FiPsPYn5cQHmxxfu8GTTNsMyRJm30v7IhDV/AhIvFQ9zVm7KmRtBo",
   render_errors: [view: SmartCityDogsWeb.ErrorView, accepts: ~w(json)],
-  pubsub: [name: SmartCityDogs.PubSub,
-           adapter: Phoenix.PubSub.PG2]
+  pubsub: [name: SmartCityDogs.PubSub, adapter: Phoenix.PubSub.PG2]
 
 # Configures Elixir's Logger
 config :logger, :console,
@@ -25,4 +24,4 @@ config :logger, :console,
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
-import_config "#{Mix.env}.exs"
+import_config "#{Mix.env()}.exs"

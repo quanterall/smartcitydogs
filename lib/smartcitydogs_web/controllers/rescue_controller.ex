@@ -4,7 +4,7 @@ defmodule SmartCityDogsWeb.RescueController do
   alias SmartCityDogs.Rescues
   alias SmartCityDogs.Rescues.Rescue
 
-  action_fallback SmartCityDogsWeb.FallbackController
+  action_fallback(SmartCityDogsWeb.FallbackController)
 
   def index(conn, _params) do
     rescues = Rescues.list_rescues()
@@ -21,7 +21,7 @@ defmodule SmartCityDogsWeb.RescueController do
   end
 
   def show(conn, %{"id" => id}) do
-    rescues= Rescues.get_rescue!(id)
+    rescues = Rescues.get_rescue!(id)
     render(conn, "show.json", rescue: rescues)
   end
 
@@ -35,6 +35,7 @@ defmodule SmartCityDogsWeb.RescueController do
 
   def delete(conn, %{"id" => id}) do
     rescues = Rescues.get_rescue!(id)
+
     with {:ok, %Rescue{}} <- Rescues.delete_rescue(rescues) do
       send_resp(conn, :no_content, "")
     end

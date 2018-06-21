@@ -4,7 +4,7 @@ defmodule SmartCityDogsWeb.SignalController do
   alias SmartCityDogs.Signals
   alias SmartCityDogs.Signals.Signal
 
-  action_fallback SmartCityDogsWeb.FallbackController
+  action_fallback(SmartCityDogsWeb.FallbackController)
 
   def index(conn, _params) do
     signals = Signals.list_signals()
@@ -35,6 +35,7 @@ defmodule SmartCityDogsWeb.SignalController do
 
   def delete(conn, %{"id" => id}) do
     signal = Signals.get_signal!(id)
+
     with {:ok, %Signal{}} <- Signals.delete_signal(signal) do
       send_resp(conn, :no_content, "")
     end

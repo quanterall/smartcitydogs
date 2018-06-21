@@ -11,8 +11,6 @@ defmodule SmartCityDogsWeb.SignalCategoryView do
   end
 
   def render("signal_category.json", %{signal_category: signal_category}) do
-    %{id: signal_category.id,
-      name: signal_category.name,
-      deleted_at: signal_category.deleted_at}
+    %{id: signal_category.id, name: signal_category.name, deleted_at: signal_category.deleted_at}
   end
 end

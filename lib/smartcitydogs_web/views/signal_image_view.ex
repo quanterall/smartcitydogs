@@ -11,8 +11,6 @@ defmodule SmartCityDogsWeb.SignalImageView do
   end
 
   def render("signal_image.json", %{signal_image: signal_image}) do
-    %{id: signal_image.id,
-      url: signal_image.url,
-      signals_id: signal_image.signals_id}
+    %{id: signal_image.id, url: signal_image.url, signals_id: signal_image.signals_id}
   end
 end

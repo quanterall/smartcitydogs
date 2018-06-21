@@ -6,9 +6,30 @@ defmodule SmartCityDogs.AnimalsTest do
   describe "animals" do
     alias SmartCityDogs.Animals.Animal
 
-    @valid_attrs %{address: "some address", adopted_at: ~N[2010-04-17 14:00:00.000000], chip_number: "some chip_number", deleted_at: ~N[2010-04-17 14:00:00.000000], registered_at: ~N[2010-04-17 14:00:00.000000], sex: "some sex"}
-    @update_attrs %{address: "some updated address", adopted_at: ~N[2011-05-18 15:01:01.000000], chip_number: "some updated chip_number", deleted_at: ~N[2011-05-18 15:01:01.000000], registered_at: ~N[2011-05-18 15:01:01.000000], sex: "some updated sex"}
-    @invalid_attrs %{address: nil, adopted_at: nil, chip_number: nil, deleted_at: nil, registered_at: nil, sex: nil}
+    @valid_attrs %{
+      address: "some address",
+      adopted_at: ~N[2010-04-17 14:00:00.000000],
+      chip_number: "some chip_number",
+      deleted_at: ~N[2010-04-17 14:00:00.000000],
+      registered_at: ~N[2010-04-17 14:00:00.000000],
+      sex: "some sex"
+    }
+    @update_attrs %{
+      address: "some updated address",
+      adopted_at: ~N[2011-05-18 15:01:01.000000],
+      chip_number: "some updated chip_number",
+      deleted_at: ~N[2011-05-18 15:01:01.000000],
+      registered_at: ~N[2011-05-18 15:01:01.000000],
+      sex: "some updated sex"
+    }
+    @invalid_attrs %{
+      address: nil,
+      adopted_at: nil,
+      chip_number: nil,
+      deleted_at: nil,
+      registered_at: nil,
+      sex: nil
+    }
 
     def animal_fixture(attrs \\ %{}) do
       {:ok, animal} =
