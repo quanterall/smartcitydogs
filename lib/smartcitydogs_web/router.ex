@@ -46,6 +46,11 @@ defmodule SmartCityDogsWeb.Router do
     resources("/news", NewsSchemaController, except: [:new, :edit])
     resources("/static_pages", StaticPageController, except: [:new, :edit])
   end
+  scope "/auth", SmartCityDogsWeb do
+    pipe_through(:api)
+    get("/:provider", UserController, :request)
+    get("/:provider/callback", UserController, :callback)
+  end
 
   # Plug function
   defp ensure_authenticated(conn, _opts) do

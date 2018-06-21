@@ -15,6 +15,7 @@ defmodule SmartCityDogs.Users.User do
     field(:reset_password_token, :string)
     field(:reset_password_token_sent_at, :naive_datetime)
     field(:username, :string)
+    field(:facebook_uid, :string)
     # field :users_types_id, :integer
     # yes
     has_many(:signals, SmartCityDogs.Signals.Signal)
@@ -44,7 +45,8 @@ defmodule SmartCityDogs.Users.User do
       :reset_password_token,
       :reset_password_token_sent_at,
       :deleted_at,
-      :users_types_id
+      :users_types_id,
+      :facebook_uid
     ])
     |> validate_required([
       :username,

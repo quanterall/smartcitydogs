@@ -102,10 +102,21 @@ defmodule SmartCityDogs.Users do
     User.changeset(user, %{})
   end
 
+
+  def get_user_by_email(email) do
+    query = from(u in User, where: u.email == ^email)
+    query |> Repo.one()
+  end
+  def get_user_by_facebook_uid(facebook_uid) do
+    query = from(u in User, where: u.facebook_uid == ^facebook_uid)
+    query |> Repo.one()
+  end
+
   def authenticate_user(email, password) do
     query = from(u in User, where: u.email == ^email)
     query |> Repo.one() |> verify_password(password)
   end
+
 
   defp verify_password(nil, _) do
     # Perform a dummy check to make user enumeration more difficult

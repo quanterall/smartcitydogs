@@ -20,7 +20,7 @@ defmodule SmartCityDogs.Mixfile do
   def application do
     [
       mod: {SmartCityDogs.Application, []},
-      extra_applications: [:logger, :runtime_tools, :bamboo, :timex, :bamboo_smtp]
+      extra_applications: [:logger, :runtime_tools, :bamboo, :timex, :bamboo_smtp, :ueberauth_facebook]
     ]
   end
 
@@ -45,6 +45,8 @@ defmodule SmartCityDogs.Mixfile do
       {:bamboo_smtp, "~> 1.4.0"},
       {:mock, "~> 0.2.0", only: :test},
       {:timex, "~> 3.1"}
+      {:ueberauth_facebook, "~> 0.3"},
+      {:oauth, github: "tim/erlang-oauth"},
     ]
   end
 
