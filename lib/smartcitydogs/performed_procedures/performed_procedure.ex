@@ -2,6 +2,8 @@ defmodule SmartCityDogs.PerformedProcedures.PerformedProcedure do
   use Ecto.Schema
   import Ecto.Changeset
 
+  @timestamps_opts [type: :naive_datetime, usec: false]
+
   schema "performed_procedure" do
     field(:date, :string)
     field(:deleted_at, :naive_datetime)

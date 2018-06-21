@@ -2,6 +2,8 @@ defmodule SmartCityDogs.Animals.Animal do
   use Ecto.Schema
   import Ecto.Changeset
 
+  @timestamps_opts [type: :naive_datetime, usec: false]
+
   schema "animals" do
     field(:address, :string)
     field(:adopted_at, :naive_datetime)
