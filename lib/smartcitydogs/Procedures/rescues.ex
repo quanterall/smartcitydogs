@@ -2,6 +2,8 @@ defmodule Smartcitydogs.Rescues do
   use Ecto.Schema
   import Ecto.Changeset
 
+  @timestamps_opts [type: :utc_datetime, usec: false]
+
   schema "rescues" do
     field(:deleted_at, :naive_datetime)
     field(:name, :string)

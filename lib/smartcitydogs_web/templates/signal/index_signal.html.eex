@@ -27,7 +27,18 @@
                   %>
                 </li>
                 <li>
-                  Registered at: <%=signal.inserted_at%>
+                  Registered at: <%=
+                    signal_time = signal.inserted_at
+                    |> DateTime.truncate(:second)
+                    |> DateTime.to_string()
+                    count = String.length(signal_time)
+                    final_time = String.slice(signal_time,0..count-2)
+                    final_time
+
+                    IO.inspect(final_time)
+
+
+                    %>
                 </li>
                 <li>
                   Description: <%=signal.description%>

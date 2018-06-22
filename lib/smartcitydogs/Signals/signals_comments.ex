@@ -2,6 +2,8 @@ defmodule Smartcitydogs.SignalsComments do
   use Ecto.Schema
   import Ecto.Changeset
 
+  @timestamps_opts [type: :utc_datetime, usec: false]
+
   schema "signals_comments" do
     field(:comment, :string)
     field(:deleted_at, :naive_datetime)

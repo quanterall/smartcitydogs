@@ -2,6 +2,8 @@ defmodule Smartcitydogs.News do
   use Ecto.Schema
   import Ecto.Changeset
 
+  @timestamps_opts [type: :utc_datetime, usec: false]
+
   schema "news" do
     field(:content, :string)
     field(:date, :naive_datetime)

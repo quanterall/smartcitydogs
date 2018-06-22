@@ -2,6 +2,8 @@ defmodule Smartcitydogs.SignalImages do
   use Ecto.Schema
   import Ecto.Changeset
 
+  @timestamps_opts [type: :utc_datetime, usec: false]
+
   schema "signal_images" do
     field(:url, :string)
     belongs_to(:signals, Smartcitydogs.Signals)

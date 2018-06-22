@@ -2,6 +2,8 @@ defmodule Smartcitydogs.Signals do
   use Ecto.Schema
   import Ecto.Changeset
 
+  @timestamps_opts [type: :utc_datetime, usec: false]
+
   schema "signals" do
     field(:address, :string)
     field(:chip_number, :string)

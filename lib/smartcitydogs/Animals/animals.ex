@@ -3,6 +3,8 @@ defmodule Smartcitydogs.Animals do
   import Ecto.Changeset
   alias Smartcitydogs.Repo
 
+  @timestamps_opts [type: :utc_datetime, usec: false]
+
   schema "animals" do
     field(:address, :string)
     field(:adopted_at, :naive_datetime)
