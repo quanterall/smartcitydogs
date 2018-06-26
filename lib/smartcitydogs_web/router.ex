@@ -30,6 +30,22 @@ defmodule SmartcitydogsWeb.Router do
     plug(Smartcitydogs.CurrentUser)
   end
 
+
+  scope "/api", SmartcitydogsWeb do
+    pipe_through(:api)
+
+    post("/users/sign_in", UserControllerAPI, :sign_in)
+
+    resources(
+      "/forgoten_password",
+      ForgotenPasswordControllerAPI,
+      only: [:new, :create, :edit, :update]
+    )
+
+    resources("/users", UserControllerAPI, only: [:create])
+  end
+
+
   scope "/", SmartcitydogsWeb do
     # Use the default browser stack
     pipe_through([:browser, :with_session])

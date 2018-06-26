@@ -43,7 +43,7 @@ defmodule SmartcitydogsWeb.Endpoint do
     Plug.Session,
     store: :cookie,
     key: "_smartcitydogs_key",
-    signing_salt: "3fgc2JfG"
+    signing_salt: "aBhcdNyI"
   )
 
   plug(SmartcitydogsWeb.Router)
