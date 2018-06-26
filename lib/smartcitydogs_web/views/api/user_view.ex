@@ -1,16 +1,16 @@
-defmodule SmartcitydogsWeb.UserViewAPI do
+defmodule SmartcitydogsWeb.UserControllerAPIView do
   use SmartcitydogsWeb, :view
-  alias SmartcitydogsWeb.UserView
+  alias SmartcitydogsWeb.UserControllerAPIView
 
   def render("index.json", %{users: users}) do
-    %{data: render_many(users, UserView, "user.json")}
+    %{data: render_many(users, UserControllerAPIView, "user.json")}
   end
 
   def render("show.json", %{user: user}) do
-    %{data: render_one(user, UserView, "user.json")}
+    %{data: render_one(user, UserControllerAPIView, "user.json")}
   end
 
-  def render("user.json", %{user: user}) do
+  def render("user.json", %{user_controller_api: user}) do
     %{
       id: user.id,
       username: user.username,
@@ -19,7 +19,7 @@ defmodule SmartcitydogsWeb.UserViewAPI do
       email: user.email,
       phone: user.phone,
       reset_password_token: user.reset_password_token,
-      reset_password_token_sent_at: user.reset_password_token_sent_at,
+    ##  reset_password_token_sent_at: user.reset_password_token_sent_at,
       deleted_at: user.deleted_at,
       users_types_id: user.users_types_id
     }

@@ -7,12 +7,15 @@ defmodule SmartcitydogsWeb.UserControllerAPI do
   action_fallback(SmartcitydogsWeb.FallbackController)
 
   def index(conn, _params) do
-    users = Users.list_users()
+    users = DataUsers.list_users()
+  ##  IO.inspect users
+   ## render(SmartcitydogsWeb.UserControllerAPIView, "sign_in.json", user: user)
     render(conn, "index.json", users: users)
   end
 
   def create(conn, %{"user" => user_params}) do
-    case DataUsers.get_user_by_email(user_params["email"]) do
+    IO.inspect user_params
+    case DataUsers.get_user_by_email!(user_params["email"]) do
       nil ->
         with {:ok, %User{} = user} <- DataUsers.create_user(user_params) do
           conn
@@ -28,12 +31,12 @@ defmodule SmartcitydogsWeb.UserControllerAPI do
   end
 
   def show(conn, %{"id" => id}) do
-    user = Users.get_user!(id)
+    user = DataUsers.get_user!(id)
     render(conn, "show.json", user: user)
   end
 
   def update(conn, %{"id" => id, "user" => user_params}) do
-    user = Users.get_user!(id)
+    user = DataUsers.get_user!(id)
 
     with {:ok, %User{} = user} <- DataUsers.update_user(user, user_params) do
       render(conn, "show.json", user: user)
@@ -41,7 +44,7 @@ defmodule SmartcitydogsWeb.UserControllerAPI do
   end
 
   def delete(conn, %{"id" => id}) do
-    user = Users.get_user!(id)
+    user = DataUsers.get_user!(id)
 
     with {:ok, %User{}} <- DataUsers.delete_user(user) do
       send_resp(conn, :no_content, "")
@@ -54,8 +57,8 @@ defmodule SmartcitydogsWeb.UserControllerAPI do
         conn
         |> put_session(:current_user_id, user.id)
         |> put_status(:ok)
-        |> render(SmartcitydogsWeb.UserView, "sign_in.json", user: user)
-
+        |> render(SmartcitydogsWeb.UserControllerAPIView, "sign_in.json", user: user)
+        IO.inspect user
       {:error, message} ->
         conn
         |> delete_session(:current_user_id)
@@ -68,7 +71,7 @@ defmodule SmartcitydogsWeb.UserControllerAPI do
     conn
     |> delete_session(:current_user_id)
     |> put_status(:ok)
-    |> render(SmartcitydogsWeb.UserView, "logout.json", conn)
+    |> render(SmartcitydogsWeb.UserControllerAPIView, "logout.json", conn)
   end
 
   def callback(%{assigns: %{ueberauth_failure: _fails}} = conn, _params) do
@@ -78,7 +81,7 @@ defmodule SmartcitydogsWeb.UserControllerAPI do
   end
 
   def callback(%{assigns: %{ueberauth_auth: auth}} = conn, _params) do
-    case Smartcitydogs.Users.get_user_by_facebook_uid(auth.uid) do
+    case Smartcitydogs.DataUsers.get_user_by_facebook_uid(auth.uid) do
       nil ->
         conn
         |> redirect(to: "/")

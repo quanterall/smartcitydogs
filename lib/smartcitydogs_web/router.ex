@@ -11,6 +11,7 @@ defmodule SmartcitydogsWeb.Router do
 
   pipeline :api do
     plug(:accepts, ["json"])
+    plug(:fetch_session)
   end
 
   pipeline :login_required do
@@ -22,6 +23,10 @@ defmodule SmartcitydogsWeb.Router do
 
   pipeline :admin_required do
     plug(Smartcitydogs.CheckAdmin)
+  end
+
+  pipeline :api_auth do
+    plug(:ensure_authenticated)
   end
 
   pipeline :with_session do
@@ -45,6 +50,18 @@ defmodule SmartcitydogsWeb.Router do
     resources("/users", UserControllerAPI, only: [:create])
   end
 
+  scope "/api", SmartcitydogsWeb do
+    pipe_through([:api, :api_auth])
+    resources("/users", UserControllerAPI, except: [:new, :edit])
+    post("/users/logout", UserControllerAPI, :logout)
+
+    resources("/signals", SignalControllerAPI, except: [:new, :edit])
+    resources("/signal_images", SignalImageControllerAPI, except: [:new, :edit])
+    resources("/signals_comments", SignalsCommentControllerAPI, except: [:new, :edit])
+
+  end
+
+  
 
   scope "/", SmartcitydogsWeb do
     # Use the default browser stack
@@ -124,4 +141,20 @@ defmodule SmartcitydogsWeb.Router do
   # scope "/api", SmartcitydogsWeb do
   #   pipe_through :api
   # end
+
+  # Plug function
+  defp ensure_authenticated(conn, _opts) do
+    current_user_id = get_session(conn, :current_user_id)
+    IO.puts("Authentication!")
+
+    if current_user_id do
+      conn
+    else
+      conn
+      |> put_status(:unauthorized)
+      |> render(SmartcitydogsWeb.ErrorView, "401.json", message: "Unauthenticated user")
+      |> halt()
+    end
+  end
+
 end
