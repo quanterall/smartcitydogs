@@ -12,12 +12,12 @@ defmodule Smartcitydogs.Email do
   end
 
 
-  def send_contact_email(user, from_email, contact_params) do
-    text = contact_params["text"]
+  def send_contact_email(user, contact_params) do
+    text = contact_params.text
     new_email()
     |> to("smartcitydogs@gmail.com")
-    |> from(from_email)
-    |> subject(contact_params["topic"])
+    |> from(user.email)
+    |> subject(contact_params.topic)
     |> text_body(
       "Text is #{text} \n\n\n\n Sent from #{user.first_name} #{
         user.last_name

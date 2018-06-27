@@ -19,7 +19,7 @@ defmodule SmartcitydogsWeb.ContactControllerAPI do
     if id != "" do
       user_sender = Smartcitydogs.DataUsers.get_user!(id)
       user_email = Map.get(user_sender, :email)
-      Smartcitydogs.Email.send_contact_email(user_sender, user_email, contact_params)
+      Smartcitydogs.Email.send_contact_email(user_sender, contact_params)
       |> Smartcitydogs.Mailer.deliver_now()
     else
       Smartcitydogs.Email.send_unauth_contact_email(topic, text, contact_params)
