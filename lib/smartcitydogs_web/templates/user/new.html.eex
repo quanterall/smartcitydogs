@@ -21,32 +21,32 @@
     <label1>User Registration</label1>
     <br />
 
-    <%= text_input f, :username, placeholder: "Username", class: "form-control" %>
+    <%= text_input f, :username, placeholder: "Username", class: "form-control1" %>
     <%= error_tag f, :username %>
 
     <br />
-    <%= password_input f, :password, placeholder: "Password", class: "form-control" %>
+    <%= password_input f, :password, placeholder: "Password", class: "form-control1" %>
     <%= error_tag f, :password %>
     <br />
 
 
-    <%= text_input f, :email, placeholder: "Email", class: "form-control" %>
+    <%= text_input f, :email, placeholder: "Email", class: "form-control1" %>
     <%= error_tag f, :email %>
     <br>
 
-    <%= text_input f, :first_name, placeholder: "Firstname", class: "form-control" %>
+    <%= text_input f, :first_name, placeholder: "Firstname", class: "form-control1" %>
     <%= error_tag f, :first_name %>
 
     <br />
-    <%= text_input f, :last_name, placeholder: "Lastname", class: "form-control" %>
+    <%= text_input f, :last_name, placeholder: "Lastname", class: "form-control1" %>
     <%= error_tag f, :last_name %>
     <br />
 
-    <%= text_input f, :phone, placeholder: "Phone", class: "form-control" %>
+    <%= text_input f, :phone, placeholder: "Phone", class: "form-control1" %>
     <%= error_tag f, :phone %>
 
     <br />
-    <%= text_input f, :users_types_id, placeholder: "User Type", class: "form-control" %>
+    <%= text_input f, :users_types_id, placeholder: "User Type", class: "form-contro1l" %>
     <%= error_tag f, :users_types_id %>
     <br />
     <div class="under-form">
@@ -57,7 +57,8 @@
 
       <%= submit "Create User", class: "btn btn-submit" %>
       <br /><br />
-      <%= submit "Sign up via Facebook", class: "btn btn-face" %>
+      <a class="link-cancel" href="/">Cancel</a>
+      <%= submit "Sign up via Facebook", class: "btn btn-primary pull-right" %>
       <br /><br />
       <a href="/sessions/new"><label>I'm already registered</label></a>
     </div>

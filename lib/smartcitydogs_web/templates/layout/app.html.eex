@@ -30,12 +30,12 @@
             <ul class="navbar-nav mr-auto">
               <%= if @current_user do %>
  <li class="nav-item">
-              
+
      </li>
      <%= link "My profile", to:  user_path(@conn, :edit, @current_user), class: "btn btn-default btn-xs" %>
-   
+
     <li class="nav-item">
-    
+
                 <a class="nav-link" href="\">Home </a>
     </li>
     <li class="nav-item">
@@ -69,11 +69,11 @@
               <li class="nav-item">
               <%= link "New Signal", to: session_path(@conn, :new), class: "nav-link" %>
               </li>
-              
+
 
 
               <li class="nav-item">
-                <%= link "Forgoten password", to: forgoten_password_path(@conn, :new), class: "nav-link" %> 
+                <%= link "Forgoten password", to: forgoten_password_path(@conn, :new), class: "nav-link" %>
               </li>
             <% end %>
             </ul>
@@ -104,27 +104,6 @@
 
 
     <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
-    <%= if @current_user do %>
-  <!-- FOOTER -->
-     
-        <footer class="container">
-          <p class="float-right"><a href="#">Back to top</a></p>
-          <p>© 2017-2018 Company, Inc. · <a href="/">Home</a> 
-          · <a href="#"><%= link "For the project", to: for_the_project_path(@conn, :index)%></a> ·
-           <a href="/signals">Signals</a> · <a href="/animals">Registered dogs</a> · <a href="/news">News</a>
-          · <a href="#"><%= link "Help", to: help_path(@conn, :index)%></a> ·
-           <a href="#"><%= link "Contact", to: contact_path(@conn, :edit, @current_user)%></a> 
-        </footer>
-      <% else %>  
-              <footer class="container">
-          <p class="float-right"><a href="#">Back to top</a></p>
-          <p>© 2017-2018 Company, Inc. · <a href="/">Home</a> 
-          · <a href="#"><%= link "For the project", to: for_the_project_path(@conn, :index)%></a> ·
-           <a href="/signals">Signals</a> · <a href="/animals">Registered dogs</a> · <a href="/news">News</a>
-          · <a href="#"><%= link "Help", to: help_path(@conn, :index)%></a> ·
-          <a href="#"><%= link "Contact", to: contact_path(@conn, :new)%></a> 
-        </footer>
-         <% end %>
+    
   </body>
 </html>
-
