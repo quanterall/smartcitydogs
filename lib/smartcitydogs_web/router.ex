@@ -58,7 +58,20 @@ defmodule SmartcitydogsWeb.Router do
     resources("/signals", SignalControllerAPI, except: [:new, :edit])
     resources("/signal_images", SignalImageControllerAPI, except: [:new, :edit])
     resources("/signals_comments", SignalsCommentControllerAPI, except: [:new, :edit])
-
+    resources("/signals_types", SignalsTypeControllerAPI, except: [:new, :edit])
+    resources("/signals_categories", SignalCategoryControllerAPI, except: [:new, :edit])
+    resources("/signals_likes", SignalsLikeControllerAPI, except: [:new, :edit])
+    resources("/contacts", ContactControllerAPI, except: [:new, :edit, :delete])
+    resources("/users_types", UsersTypeControllerAPI, except: [:new, :edit])
+    resources("/performed_procedure", PerformedProcedureControllerAPI, except: [:new, :edit])
+    resources("/animal_statuses", AnimalStatusControllerAPI, except: [:new, :edit])
+    resources("/animal_images", AnimalImageControllerAPI, except: [:new, :edit])
+    resources("/rescues", RescueControllerAPI, except: [:new, :edit])
+    resources("/procedure_types", ProcedureTypeControllerAPI, except: [:new, :edit])
+    resources("/animals", AnimalControllerAPI, except: [:new, :edit])
+    resources("/header_slides", HeaderSlideControllerAPI, except: [:new, :edit])
+    resources("/news", NewsSchemaControllerAPI, except: [:new, :edit])
+    resources("/static_pages", StaticPageControllerAPI, except: [:new, :edit])
   end
 
   

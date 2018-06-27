@@ -15,18 +15,14 @@ defmodule Smartcitydogs.User do
     field(:username, :string)
     field(:reset_password_token, :string)
     field(:reset_token_sent_at, :naive_datetime)
-    # checkbox(form, :famous)
+
 
     has_many(:signals_comments, Smartcitydogs.SignalsComments)
     belongs_to(:users_types, Smartcitydogs.UsersType)
     has_many(:signals, Smartcitydogs.Signals)
-
+    has_many(:contacts, Smartcitydogs.Contact)
     timestamps()
 
-    embeds_many :contact, Contact, on_replace: :delete do
-      field(:topic, :string)
-      field(:text, :string)
-    end
   end
 
   @required_fields ~w(email)a
@@ -47,7 +43,6 @@ defmodule Smartcitydogs.User do
       :deleted_at,
       :users_types_id
     ])
-    |> cast_embed(:contact, with: &contact_changeset/2)
     |> validate_required([
       :username,
       :first_name,
@@ -84,8 +79,5 @@ defmodule Smartcitydogs.User do
     IO.inspect(struct)
   end
 
-  defp contact_changeset(schema, params) do
-    schema
-    |> cast(params, [:topic, :text])
-  end
+
 end

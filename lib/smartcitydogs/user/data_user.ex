@@ -4,6 +4,7 @@ defmodule Smartcitydogs.DataUsers do
 
   alias Smartcitydogs.User
   alias Smartcitydogs.UsersType
+  alias Smartcitydogs.Contact
 
   import Plug.Conn
 
@@ -65,6 +66,11 @@ defmodule Smartcitydogs.DataUsers do
   end
 
   # Users types functions
+
+  def list_users_types do
+    Repo.all(UsersType) 
+  end
+
   def create_user_type(args \\ %{}) do
     %UsersType{}
     |> UsersType.changeset(args)
@@ -77,7 +83,7 @@ defmodule Smartcitydogs.DataUsers do
 
   def update_users_type(%UsersType{} = users_type, args) do
     users_type
-    |> User.changeset(args)
+    |> UsersType.changeset(args)
     |> Repo.update()
   end
 
@@ -89,6 +95,28 @@ defmodule Smartcitydogs.DataUsers do
     UsersType.changeset(users_type, %{})
   end
 
+  # Contact functions
+  def list_contacts do
+    Repo.all(Contact) 
+  end
+
+  def get_contact!(id), do: Repo.get!(Contact, id)
+
+  def create_contact(attrs \\ %{}) do
+    %Contact{}
+    |> Contact.changeset(attrs)
+    |> Repo.insert()
+  end
+
+
+
+  def delete_contact(%Contact{} = contact) do
+    Repo.delete(contact)
+  end
+
+  def change_contact(%Contact{} = contact) do
+    Contact.changeset(contact, %{})
+  end
 
 
   def authenticate_user(email, password) do

@@ -8,6 +8,7 @@ defmodule Smartcitydogs.DataSignals do
   alias Smartcitydogs.SignalsCategories
   alias Smartcitydogs.User
   alias Smartcitydogs.SignalImages
+  alias Smartcitydogs.SignalsLikes
 
   import Plug.Conn
 
@@ -175,4 +176,36 @@ defmodule Smartcitydogs.DataSignals do
     get_signal_category(id)
     |> Repo.delete()
   end
+
+ 
+
+
+   # Signals likes
+
+  def get_signal_like(id) do
+    Repo.get!(SignalsLikes, id)
+  end
+
+  def list_signal_like() do
+    Repo.all(SignalsLikes)
+  end
+
+  def create_signal_like(args \\ %{}) do
+    %SignalsLikes{}
+    |> SignalsLikes.changeset(args)
+    |> Repo.insert()
+  end
+
+  def update_signal_like(%SignalsLikes{} = like, args) do
+    like
+    |> SignalsLikes.changeset(args)
+    |> Repo.update()
+  end
+
+  def delete_signal_like(id) do
+    get_signal_like(id)
+    |> Repo.delete()
+  end
+
+
 end

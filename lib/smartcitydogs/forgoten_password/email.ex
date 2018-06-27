@@ -11,20 +11,20 @@ defmodule Smartcitydogs.Email do
     )
   end
 
-  def send_contact_email(user, from_email) do
-    IO.inspect(from_email)
-    IO.inspect(user)
 
+  def send_contact_email(user, from_email, contact_params) do
+    text = contact_params["text"]
     new_email()
-    |> to(System.get_env("SMTP_USERNAME"))
+    |> to("smartcitydogs@gmail.com")
     |> from(from_email)
-    |> subject(Enum.at(user.contact, 0).topic)
+    |> subject(contact_params["topic"])
     |> text_body(
-      "Text is #{Enum.at(user.contact, 0).text} \n\n\n\n Sent from #{user.first_name} #{
+      "Text is #{text} \n\n\n\n Sent from #{user.first_name} #{
         user.last_name
       }, phone: #{user.phone}"
     )
   end
+
 
   def send_unauth_contact_email(topic, text, user_data) do
     new_email()

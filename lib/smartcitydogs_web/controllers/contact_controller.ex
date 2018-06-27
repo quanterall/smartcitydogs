@@ -30,7 +30,7 @@ defmodule SmartcitydogsWeb.ContactController do
   def update(conn, %{"id" => id, "user" => user_params}) do
     topic = Map.get(user_params, "topic")
     text = Map.get(user_params, "text")
-    contact_map = [%Smartcitydogs.User.Contact{topic: topic, text: text}]
+    contact_map = [%Smartcitydogs.Contact{topic: topic, text: text}]
     user_sender = DataUsers.create_user_contact(id, contact_map)
     user_email = Map.get(user_sender, :email)
 
