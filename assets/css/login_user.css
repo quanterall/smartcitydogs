@@ -37,7 +37,7 @@ input[type=text],input[type=password]{
 input:focus{
 
   background:rgba(255,255,255,.2);
-  -webkit-text-fill-color: white;
+  -webkit-text-fill-color: white !important;
 }
 input:focus::placeholder{
   -webkit-text-fill-color: transparent;

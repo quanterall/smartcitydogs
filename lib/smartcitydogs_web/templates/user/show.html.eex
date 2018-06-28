@@ -1,31 +1,67 @@
-<h2>Your information is updated succesfully </h2>
-
-<ul>
-
-  <li>
-    <strong>Name:</strong>
-    <%= @user.first_name %>
-  </li>
-<br>
-  <li>
-    <strong>Lastname:</strong>
-    <%= @user.last_name %>
-  </li>
-<br>
-  <li>
-    <strong>Username:</strong>
-    <%= @user.username %>
-  </li>
-<br>
-
-<br>
-  <li>
-    <strong>Email:</strong>
-    <%= @user.email %>
-  </li>
-<br>
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
+  </head>
+  <body>
+  <div class="register-photo">
+    <div class="container mt-3">
+      <div class="container-show-user">
 
 
-<span><%= ##link "Edit", to: user_path(@conn, :edit, @user) %></span>
- <a href="\">Back</a></span>
-<span><%= link "Back", to: user_path(@conn, :index) %></span>
+      <label-li-text><center>Your information: </center></label-li-text>
+      <br />
+        <ul class="list-unstyled">
+
+          <li class="user-li">
+            <label-li-text>
+              <strong class="strong-show-user">Name:</strong><br />
+              <%= @user.first_name %> <%= @user.last_name %>
+            </label-li-text>
+          </li>
+
+          <br />
+        <br>
+
+          <li class="user-li">
+            <label-li-text>
+              <strong class="strong-show-user">Username:</strong><br />
+              <%= @user.username %>
+            </label-li-text>
+          </li>
+        <br>
+
+        <br>
+        <li class="user-li">
+          <label-li-text>
+            <strong class="strong-show-user">Phone:</strong><br />
+            <%= @user.phone %> <%= link "Edit", to: user_path(@conn, :edit, @user), class: "show-user-edit" %>
+          </label-li-text>
+        </li>
+        <br />
+      <br>
+      <li class="user-li">
+        <label-li-text>
+          <strong class="strong-show-user">Password:</strong><br />
+          *************<%= link "Edit", to: user_path(@conn, :edit, @user), class: "show-user-edit" %>
+        </label-li-text>
+      </li>
+      <br />
+    <br>
+          <li class="user-li">
+            <label-li-text>
+              <strong class="strong-show-user">Email:</strong><br />
+              <%= @user.email %> <%= link "Edit", to: user_path(@conn, :edit, @user), class: "show-user-edit" %>
+            </label-li-text>
+          </li>
+        <br>
+
+
+        <!-- <span><%=# link "Edit", to: user_path(@conn, :edit, @user) %></span>
+         <a href="\">Back</a></span> -->
+         </div>
+      </div>
+    </div>
+  </body>
+</html>

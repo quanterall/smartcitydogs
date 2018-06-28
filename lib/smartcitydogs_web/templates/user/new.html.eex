@@ -59,7 +59,9 @@
           <%= submit "Create User", class: "btn btn-submit" %>
           <br /><br />
           <a class="link-cancel" href="/">Cancel</a>
-          <%= submit "Sign up via Facebook", class: "btn btn-primary pull-right" %>
+          <a class="btn btn-primary pull-right" href="<%=session_url(@conn, :request,"facebook")%>" rel="no-follow">
+            <i class="fa fa-facebook-square"></i> Facebook login</a>
+          <!-- <%= #submit "Facebook login", class: "btn btn-primary pull-right" %> -->
           <br /><br />
           <a class="already-registered-link" href="/sessions/new"><label>I'm already registered</label></a>
         </div>
