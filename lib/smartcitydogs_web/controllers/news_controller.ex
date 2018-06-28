@@ -23,7 +23,7 @@ defmodule SmartcitydogsWeb.NewsController do
 
     File.cp(
       upload.path,
-      "/home/sonyft/smartcitydog/smartcitydogs/assets/static/images/#{Map.get(upload, :filename)}-profile#{
+      "../smartcitydogs/assets/static/images/#{Map.get(upload, :filename)}-profile#{
         extension
       }"
     )

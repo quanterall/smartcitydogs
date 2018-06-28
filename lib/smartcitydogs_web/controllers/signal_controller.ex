@@ -35,7 +35,7 @@ defmodule SmartcitydogsWeb.SignalController do
 
           File.cp(
             n.path,
-            "/home/hris/Elixir/smartcitydogs/assets/static/images/#{Map.get(n, :filename)}-profile#{
+            "../smartcitydogs/assets/static/images/#{Map.get(n, :filename)}-profile#{
               extension
             }"
           )
