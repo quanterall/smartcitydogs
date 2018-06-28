@@ -9,7 +9,14 @@ defmodule SmartcitydogsWeb.UserController do
 
   def index(conn, _params) do
     users = DataUsers.list_users()
-    render(conn, "show.html", users: users)
+
+    IO.inspect(conn.assigns.current_user)
+    logged_user_id = conn.assigns.current_user.users_types.id
+    if logged_user_id != 1 do
+      render(conn, SmartcitydogsWeb.ErrorView, "401.html")
+    else
+      render(conn, "index.html", users: users)
+    end
   end
 
   # def new(conn, _params) do
@@ -19,7 +26,6 @@ defmodule SmartcitydogsWeb.UserController do
 
   def new(conn, _params) do
     changeset = User.changeset(%User{})
-    IO.puts("********************************8")
     render(conn, "new.html", changeset: changeset)
   end
 
@@ -39,8 +45,6 @@ defmodule SmartcitydogsWeb.UserController do
   # end
 
   def create(conn, %{"user" => user_params}) do
-    IO.inspect(user_params)
-    IO.puts("rrrrrrrrrrrrrrrrrrrrr")
 
     if user_params["checked"] != "true" do
       changeset = %User{} |> User.registration_changeset(user_params)
@@ -80,13 +84,27 @@ defmodule SmartcitydogsWeb.UserController do
   def show(conn, %{"id" => id}) do
     user = Repo.get!(User, id) |> Repo.preload(:users_types)
     changeset = DataUsers.change_user(user)
-    render(conn, "show.html", user: user, changeset: changeset)
+
+    logged_user_id = conn.assigns.current_user.id
+    request_user_id = user.id
+    if logged_user_id != request_user_id do
+      render(conn, SmartcitydogsWeb.ErrorView, "401.html")
+    else
+      render(conn, "show.html", user: user, changeset: changeset)
+    end
   end
 
   def edit(conn, %{"id" => id}) do
     user = DataUsers.get_user!(id)
     changeset = DataUsers.change_user(user)
-    render(conn, "edit.html", user: user, changeset: changeset)
+
+    logged_user_id = conn.assigns.current_user.id
+    request_user_id = user.id
+    if logged_user_id != request_user_id do
+      render(conn, SmartcitydogsWeb.ErrorView, "401.html")
+    else
+      render(conn, "edit.html", user: user, changeset: changeset)
+    end
   end
 
   ##  def forgoten_password(conn, %{"id" => id}) do
@@ -100,26 +118,38 @@ defmodule SmartcitydogsWeb.UserController do
 
   def update(conn, %{"id" => id, "user" => user_params}) do
     user = DataUsers.get_user!(id)
-    ## IO.inspect user_params
-    ## IO.puts "**********************************************************"
-    ## IO.inspect user
-    case DataUsers.update_user(user, user_params) do
-      {:ok, user} ->
-        conn
-        |> put_flash(:info, "User updated successfully.")
-        |> redirect(to: user_path(conn, :show, user))
+    
+    logged_user_id = conn.assigns.current_user.id
+    request_user_id = user.id
+    if logged_user_id != request_user_id do
+      render(conn, SmartcitydogsWeb.ErrorView, "401.html")
+    else
+      case DataUsers.update_user(user, user_params) do
+        {:ok, user} ->
+          conn
+          |> put_flash(:info, "User updated successfully.")
+          |> redirect(to: user_path(conn, :show, user))
 
-      {:error, %Ecto.Changeset{} = changeset} ->
-        render(conn, "edit.html", user: user, changeset: changeset)
+        {:error, %Ecto.Changeset{} = changeset} ->
+          render(conn, "edit.html", user: user, changeset: changeset)
+      
+      end
     end
   end
 
   def delete(conn, %{"id" => id}) do
     user = DataUsers.get_user!(id)
-    {:ok, _user} = DataUsers.delete_user(user)
+    
+    logged_user_id = conn.assigns.current_user.id
+    request_user_id = user.id
+    if logged_user_id != request_user_id do
+      render(conn, SmartcitydogsWeb.ErrorView, "401.html")
+    else
+      {:ok, _user} = DataUsers.delete_user(user)
 
-    conn
-    |> put_flash(:info, "User deleted successfully.")
-    |> redirect(to: user_path(conn, :index))
+      conn
+      |> put_flash(:info, "User deleted successfully.")
+      |> redirect(to: user_path(conn, :index))
+    end
   end
 end
