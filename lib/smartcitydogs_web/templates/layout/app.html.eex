@@ -86,24 +86,14 @@
         </nav>
       </header>
 
-      <main role="main">
-      <div class="container mt-3">
+      <main role="main" style="display:grid;position:absolute;padding:0;margin:0;width:100%;height:100%;">
+      <!-- <div class="container mt-3"> -->
 <%= render @view_module, @view_template, assigns %>
-</div>
+<!-- </div> -->
       </main>
 
 
-
-  <svg xmlns="http://www.w3.org/2000/svg" width="500" height="500" viewBox="0 0 500 500" preserveAspectRatio="none" style="display: none; visibility: hidden; position: absolute; top: -100%; left: -100%;"><defs><style type="text/css"></style></defs><text x="0" y="25" style="font-weight:bold;font-size:25pt;font-family:Arial, Helvetica, Open Sans, sans-serif">500x500</text></svg>
-
-
-
-
-
-
-
-
     <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
-    
+
   </body>
 </html>

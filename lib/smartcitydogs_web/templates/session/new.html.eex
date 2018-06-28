@@ -2,40 +2,43 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="<%= static_path(@conn, "/css/login_user.css") %>">
+    <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
   </head>
 
 <body>
 
+<div class="register-photo">
 
-
-
+  <div class="container mt-3">
   <%= form_for @conn, session_path(@conn, :create),
                                             [as: :session], fn f -> %>
 
-    <div class="form-group">
-      <label1>Sign in</label1>
-        <br />
-        <%= text_input f, :email, placeholder: "Email", class: "form-control1" %>
+      <div class="form-group">
+        <label1>Sign in</label1>
+          <br />
+          <%= text_input f, :email, placeholder: "Email", class: "form-control1" %>
 
-        <%= password_input f, :password, placeholder: "Password", class: "form-control1" %>
+          <%= password_input f, :password, placeholder: "Password", class: "form-control1" %>
 
-        <%= link "Forgoten password?", to: forgoten_password_path(@conn, :new), class: "nav-link" %>
+          <div class="nav-link-pass">
+            <%= link "Forgoten password?", to: forgoten_password_path(@conn, :new), class: "nav-link" %>
+          </div>
+        <div class="under-form">
 
-      <div class="under-form">
 
 
+          <%= submit "Sign in", class: "btn btn-submit" %>
+          <br />
+          <br />
+          <a class="btn btn-primary pull-right" href="<%=session_url(@conn, :request,"facebook")%>" rel="no-follow">
+            <i class="fa fa-facebook-square"></i> or sign in with  Facebook </a>
+          <br />
 
-        <%= submit "Sign in", class: "btn btn-submit" %>
-        <br />
-        <br />
-        <a class="btn btn-primary pull-right" href="<%=session_url(@conn, :request,"facebook")%>" rel="no-follow">
-          <i class="fa fa-facebook-square"></i> or sign in with  Facebook </a>
-        <br />
-
-        <a class="link-cancel" href="/">Cancel</a>
+          <a class="link-cancel" href="/">Cancel</a>
+        </div>
       </div>
     </div>
+  </div>
   <% end %>
 </body>
 </html>
