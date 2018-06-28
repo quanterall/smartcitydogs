@@ -47,8 +47,7 @@ defmodule SmartcitydogsWeb.ForgotenPasswordController do
         Smartcitydogs.Email.send_reset_email(email, user.reset_password_token)
         |> Smartcitydogs.Mailer.deliver_now()
 
-        ##   conn
-        ##  |>
+
         redirect(conn, to: session_path(conn, :new))
 
         put_flash(
@@ -96,7 +95,7 @@ defmodule SmartcitydogsWeb.ForgotenPasswordController do
       User
       |> Repo.get_by(reset_password_token: token)
 
-    IO.inspect(token)
+
 
     case user do
       nil ->

@@ -16,9 +16,6 @@ defmodule SmartcitydogsWeb.SignalController do
 
   def create(conn, %{"signals" => signal_params}) do
     a = conn.assigns.current_user.id
-    IO.puts("_____________________________CONN________________________")
-    IO.inspect(a)
-    IO.puts("_____________________________CONN________________________")
 
     signal_params =
       signal_params
@@ -30,15 +27,9 @@ defmodule SmartcitydogsWeb.SignalController do
     case DataSignals.create_signal(signal_params) do
       {:ok, signal} ->
         upload = Map.get(conn, :params)
-        # IO.inspect(conn)
         upload = Map.get(upload, "signals")
-        # IO.inspect(upload)
         upload = Map.get(upload, "url")
-        # IO.inspect(upload)
         for n <- upload do
-          # [head] = n
-          IO.puts("\n N:")
-          IO.inspect(n)
 
           extension = Path.extname(n.filename)
 
@@ -86,7 +77,7 @@ defmodule SmartcitydogsWeb.SignalController do
         |> put_flash(:info, "Signal updated successfully.")
         |> render("show_signal.html", signal: signal)
 
-      # redirect(to: signal_path(conn, :show, signal))
+
 
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "edit_signal.html", signal: signal, changeset: changeset)
@@ -99,45 +90,20 @@ defmodule SmartcitydogsWeb.SignalController do
     if list != [] do
       [head | tail] = list
       count = head.support_count
-      # IO.puts "---------------------------------------"
-      # IO.inspect(count)
-      # IO.puts "------------------------------------------"
       Smartcitydogs.DataSignals.update_signal(head, %{support_count: count + 1})
-      # IO.puts "_________________________________________________"
-      # IO.inspect(head.support_count)
-      # IO.puts "_________________________________________________"
     end
 
     head.support_count + 1
   end
 
-  # , "show-id" => show_id}) do
   def update_like_count(conn, %{"show-count" => show_count, "show-id" => show_id}) do
-    # IO.inspect(show_count, pretty: true)
-    # IO.inspect(show_id, pretty: true)
     signal = DataSignals.get_signal(show_id)
     count = get_signals_support_count(show_id)
-    # IO.puts "_________________________________________________"
-    # IO.inspect(count)
-    # IO.puts "_________________________________________________"
-
     conn
     |> json(%{new_count: count})
-
-    # redirect(conn, to: signal_path(conn, :show, signal))
-    # |> render("show_signal.html", show_id: show_id)
   end
 
-  # def my_signals(conn) do
-  #   user = conn.assigns.current_user.id
-  #   signals = DataSignals.get_user_signal(user)
-  #   render("my_signals.html", signals: signals)
-  # end
-
   def comment(conn, %{"show-comment" => show_comment, "show-id" => show_id}) do
-    # IO.puts "______________________SSHOW_COUNT_________________________"
-    # IO.inspect(show_count)
-    # IO.inspect(show_id)
     user_id = conn.assigns.current_user.id
 
     Smartcitydogs.DataSignals.create_signal_comment(%{

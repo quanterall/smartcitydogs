@@ -99,7 +99,6 @@ defmodule SmartcitydogsWeb.Router do
     ###### registered user zone
     scope "/" do
       pipe_through([:login_required])
-
       resources("/users", UserController)
       resources("/animals", AnimalController)
       resources("/news", NewsController)
@@ -122,7 +121,7 @@ defmodule SmartcitydogsWeb.Router do
 
       resources("/help", HelpController, only: [:index])
       resources("/contact", ContactController, only: [:new, :create, :edit, :update])
-
+      
       ############ admin(zone)
 
       scope "/admin", Admin, as: :admin do
@@ -150,16 +149,10 @@ defmodule SmartcitydogsWeb.Router do
     get("/:provider/callback", SessionController, :callback)
   end
 
-  # Other scopes may use custom stacks.
-  # scope "/api", SmartcitydogsWeb do
-  #   pipe_through :api
-  # end
 
   # Plug function
   defp ensure_authenticated(conn, _opts) do
     current_user_id = get_session(conn, :current_user_id)
-    IO.puts("Authentication!")
-
     if current_user_id do
       conn
     else
@@ -169,5 +162,8 @@ defmodule SmartcitydogsWeb.Router do
       |> halt()
     end
   end
+
+
+
 
 end

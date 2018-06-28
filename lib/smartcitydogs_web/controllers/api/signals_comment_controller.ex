@@ -36,8 +36,6 @@ defmodule SmartcitydogsWeb.SignalsCommentControllerAPI do
   end
 
   def delete(conn, %{"id" => id}) do
-    ##signals_comment = DataSignals.get_signal_comment(id)
-
     with {:ok, %SignalsComments{}} <- DataSignals.delete_signal_comment(id) do
       send_resp(conn, :no_content, "")
     end

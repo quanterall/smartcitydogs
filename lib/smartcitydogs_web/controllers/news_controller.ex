@@ -48,21 +48,7 @@ defmodule SmartcitydogsWeb.NewsController do
     end
   end
 
-  # def upload_file(id, conn) do
-  #     upload = Map.get(conn, :params)
-  #     upload = Map.get(upload, "files")
-  #     for n <- upload do    
-  #         [head] = n
-  #         IO.puts "\n N:"
-  #         IO.inspect(n)
 
-  #         extension = Path.extname(head.filename)          
-  #         #File.cp(head.path, "/home/sonyft/smartcitydog/smartcitydogs/assets/static/images/#{Map.get(animal_params, "chip_number")}-profile#{}#{extension}")
-  #         File.cp(head.path, "/home/sonyft/smartcitydog/smartcitydogs/assets/static/images/#{Map.get(head, :filename)}-profile#{extension}")
-  #         args = %{"url" => "images/#{Map.get(head, :filename)}-profile#{extension}", "animals_id" => "#{id}"}
-  #         DataAnimals.create_animal_image(args)
-  #     end
-  # end
 
   def show(conn, %{"id" => id}) do
     news = DataPages.get_news(id)

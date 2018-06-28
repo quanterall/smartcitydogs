@@ -7,9 +7,6 @@ defmodule SmartcitydogsWeb.AnimalController do
   alias Smartcitydogs.Repo
 
   def index(conn, _params) do
-    ## IO.inspect _params
-    ##  IO.puts "---------------------"
-    ## animals = DataAnimals.list_animals()
     chip = _params["chip_number"]
 
     if chip == "" do

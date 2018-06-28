@@ -8,13 +8,10 @@ defmodule SmartcitydogsWeb.UserControllerAPI do
 
   def index(conn, _params) do
     users = DataUsers.list_users()
-  ##  IO.inspect users
-   ## render(SmartcitydogsWeb.UserControllerAPIView, "sign_in.json", user: user)
     render(conn, "index.json", users: users)
   end
 
   def create(conn, %{"user" => user_params}) do
-    IO.inspect user_params
     case DataUsers.get_user_by_email!(user_params["email"]) do
       nil ->
         with {:ok, %User{} = user} <- DataUsers.create_user(user_params) do

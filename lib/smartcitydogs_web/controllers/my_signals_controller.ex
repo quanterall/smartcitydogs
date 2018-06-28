@@ -10,9 +10,5 @@ defmodule SmartcitydogsWeb.MySignalsController do
     render(conn, "my_signals.html", signals: signals)
   end
 
-  # def my_signals(conn) do
-  #   user = conn.assigns.current_user.id
-  #   signals = DataSignals.get_user_signal(user)
-  #   render("my_signals.html", signals: signals)
-  # end
+
 end

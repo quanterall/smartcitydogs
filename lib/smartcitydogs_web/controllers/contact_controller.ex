@@ -30,14 +30,11 @@ defmodule SmartcitydogsWeb.ContactController do
   def update(conn, %{"id" => id, "user" => user_params}) do
     topic = Map.get(user_params, "topic")
     text = Map.get(user_params, "text")
-    IO.inspect id
     contact_map = %{topic: topic, text: text, users_id: id}
     IO.inspect contact_map
     DataUsers.create_contact(contact_map)
    
     user_sender = DataUsers.get_user!(id)
-    IO.inspect user_sender
-   ## user_sender = DataUsers.create_user_contact(id, contact_map)
     user_email = Map.get(user_sender, :email)
 
     Email.send_contact_email(user_sender, contact_map)

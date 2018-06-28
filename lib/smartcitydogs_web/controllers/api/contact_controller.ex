@@ -15,7 +15,6 @@ defmodule SmartcitydogsWeb.ContactControllerAPI do
     id = contact_params["id"]
     topic =  contact_params["topic"]
     text = contact_params["text"]
-    IO.inspect text
     if id != "" do
       user_sender = Smartcitydogs.DataUsers.get_user!(id)
       user_email = Map.get(user_sender, :email)

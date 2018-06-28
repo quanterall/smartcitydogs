@@ -36,7 +36,6 @@ defmodule SmartcitydogsWeb.SignalsLikeControllerAPI do
   end
 
   def delete(conn, %{"id" => id}) do
-    ##signals_like = DataSignals.get_signal_like(id)
 
     with {:ok, %SignalsLikes{}} <- DataSignals.delete_signal_like(id) do
       send_resp(conn, :no_content, "")

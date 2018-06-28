@@ -7,7 +7,6 @@ defmodule SmartcitydogsWeb.AnimalControllerAPI do
   action_fallback(SmartCityDogsWeb.FallbackController)
 
   def index(conn, _params) do
-    ##  IO.inspect _params
     chip = _params["chip_number"]
 
     if chip == "" do

@@ -92,12 +92,6 @@ defmodule SmartcitydogsWeb.SessionController do
     |> Guardian.Plug.sign_in(user)
   end
 
-  # def delete(conn, _) do
-  #   conn
-  #   |> logout
-  #   |> put_flash(:info, "See you later!")
-  #   |> redirect(to: page_path(conn, :index))
-  # end
 
   def delete(conn, _) do
     conn

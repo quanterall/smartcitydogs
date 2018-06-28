@@ -10,7 +10,6 @@ defmodule SmartcitydogsWeb.ForgotenPasswordControllerAPI do
   use Timex
 
   def create(conn, %{"user" => pw_params}) do
-    IO.inspect(pw_params)
     email = pw_params["email"]
     phone = pw_params["phone"]
     username = pw_params["username"]
@@ -43,8 +42,6 @@ defmodule SmartcitydogsWeb.ForgotenPasswordControllerAPI do
 
         Email.send_reset_email(email, user.reset_password_token)
         |> Mailer.deliver_now()
-        IO.puts "----"
-     ##   IO.inspect(user)
         render(conn, "show.json", forgoten_password: user)
     end
   end
@@ -76,8 +73,6 @@ defmodule SmartcitydogsWeb.ForgotenPasswordControllerAPI do
     user =
       User
       |> Repo.get_by(reset_password_token: token)
-
-   ## IO.inspect(token)
 
     case user do
       nil ->

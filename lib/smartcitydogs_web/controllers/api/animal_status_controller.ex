@@ -7,9 +7,7 @@ defmodule SmartcitydogsWeb.AnimalStatusControllerAPI do
   action_fallback(SmartCityDogsWeb.FallbackController)
 
   def index(conn, _params) do
-    IO.puts "-------------"
     animal_statuses = DataAnimals.list_animal_statuses()
-    IO.inspect animal_statuses
     render(conn, "index.json", animal_statuses: animal_statuses)
   end
 
