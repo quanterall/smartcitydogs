@@ -49,88 +49,63 @@
         <!-- Wrap the rest of the page in another container to center all the content. -->
 <h1><center>Latest signals:</center></h1>
 <br>
-        <div class="container marketing">
-          <!-- Three columns of text below the carousel -->
-          <div class="row">
+       <div class="row">
+          <%= for signal <- @signal do %>
             <div class="col-lg-4">
-              <img class="rounded-circle" src="<%= static_path(@conn, "/images/4.jpg") %>" alt="Generic placeholder image" width="140" height="140">
-              <h2>Heading</h2>
+              <img class="rounded-circle" src="/<%= SmartcitydogsWeb.SignalView.get_signals_images(signal.id) %>" alt="Generic placeholder image" width="140" height="140">
+              <h2><%=signal.title%></h2>
               <ul>
                 <li>
-                  View count:
+                  Signal number:
+                  <a id="signal-id"><%= signal.id %></a>
                 </li>
                 <li>
-                  Date:
+                  Category: <%=signal.signals_categories_id
+                  |> Smartcitydogs.DataSignals.get_signal_category()
+                  |> Map.get(:name)
+                  %>
                 </li>
                 <li>
-                  Location:
+                  Type: <%=signal.signals_types_id
+                  |> Smartcitydogs.DataSignals.get_signal_type()
+                  |> Map.get(:name)
+                  %>
                 </li>
                 <li>
-                  Signal status:
+                  Registered at: <%=
+                    signal_time = signal.inserted_at
+                    |> DateTime.truncate(:second)
+                    |> DateTime.to_string()
+                    count = String.length(signal_time)
+                    final_time = String.slice(signal_time,0..count-2)
+                    final_time
+                    %>
                 </li>
                 <li>
-                  Liked by people:
+                  Description: <%=signal.description%>
                 </li>
                 <li>
-                  Comments:
+                  Chip number: <%=signal.chip_number%>
+                </li>
+                <li>
+                  Support count: <span id="signal-count"><%= signal.support_count %></span>
+                </li>
+                <li>
+                  Last location: <%=signal.address%>
+                </li>
+                <li>
+                  Views: <%=signal.view_count%>
                 </li>
               </ul>
-              <p><a class="btn btn-secondary" href="#" role="button">View more »</a>
+
+              <p><a class="btn btn-secondary" href="signals/<%=signal.id%>" role="button">View more »</a>
+              <a id="like" class="btn btn-secondary btnSignal" role="button">Like</a></p>
               <a class="btn btn-secondary" href="#" role="button">View map »</a></p>
-            </div><!-- /.col-lg-4 -->
-            <div class="col-lg-4">
-              <img class="rounded-circle" src="<%= static_path(@conn, "/images/2.jpg") %>" alt="Generic placeholder image" width="140" height="140">
-              <h2>Heading</h2>
-              <ul>
-                <li>
-                  View count:
-                </li>
-                <li>
-                  Date:
-                </li>
-                <li>
-                  Location:
-                </li>
-                <li>
-                  Signal status:
-                </li>
-                <li>
-                  Liked by people:
-                </li>
-                <li>
-                  Comments:
-                </li>
-              </ul>
-              <p><a class="btn btn-secondary" href="#" role="button">View more »</a>
-              <a class="btn btn-secondary" href="#" role="button">View map »</a></p>
-            </div><!-- /.col-lg-4 -->
-            <div class="col-lg-4">
-              <img class="rounded-circle" src="<%= static_path(@conn, "/images/1.jpg") %>" alt="Generic placeholder image" width="140" height="140">
-              <h2>Heading</h2>
-              <ul>
-                <li>
-                  View count:
-                </li>
-                <li>
-                  Date:
-                </li>
-                <li>
-                  Location:
-                </li>
-                <li>
-                  Signal status:
-                </li>
-                <li>
-                  Liked by people:
-                </li>
-                <li>
-                  Comments:
-                </li>
-              </ul>
-              <p><a class="btn btn-secondary" href="#" role="button">View more »</a>
-              <a class="btn btn-secondary" href="#" role="button">View map »</a></p>
-            </div><!-- /.col-lg-4 -->
+
+            </div>
+            <%end%>
           </div><!-- /.row -->
+
           <!-- START THE FEATURETTES -->
           <hr class="featurette-divider">
           <div class="container">
@@ -139,81 +114,65 @@
                  <br>
               </header>
               <nav><center>
-                <ul>
-                  <img class="rounded-circle" src="<%= static_path(@conn, "/images/4.jpg") %>" alt="Generic placeholder image" width="200" height="200">
-                </ul>
-                <ul>
-                  <p>Title:</p>
-                  <p>Announce:</p>
-                  <p>Date:</p>
-                  <p><a class="btn btn-secondary" href="#" role="button">View more »</a></p>
-                </ul>
+          <div class="row">
+          <%= for news <- @news do %>
+            <div class="col-lg-4">
+              <img class="rounded-circle" src="<%=  news.image_url %>" alt="Generic placeholder image" width="140" height="140">
+              <h2><%= news.title%></h2>
+              <ul>
+               
+                <li>
+                  short content <%= news.short_content%>
+                </li>
+                <li>
+                  Date: <%= news.date %>
+                </li>
+              </ul>
+              <p>
+              <%= link "View more »", to: news_path(@conn, :show, news), class: "btn btn-secondary" %>
+            
+            </div>
+            <%end%>
+          </div><!-- /.row -->
               </center></nav>
             </div>
             <hr class="featurette-divider">
             <div class="container marketing">
               <h1 class="featurette-heading"><center>Latest registered dogs:</center></h1><br>
-              <div class="row">
-                <div class="col-lg-4">
-                  <ul>
-                    <img class="rounded-circle" src="<%= static_path(@conn, "/images/4.jpg") %>" alt="Generic placeholder image" width="200" height="200">
-                  </ul>
-                  <ul>
-                    <p>Sex:</p>
-                    <p>Chip number:</p>
-                    <p>Date registered:</p>
-                    <p>Latest location:</p>
-                    <p>Status:</p>
-                    <p><a class="btn btn-secondary" href="#" role="button">View more »</a></p>
-                  </ul>
-                </div>
-                <div class="col-lg-4">
-                  <ul>
-                    <img class="rounded-circle" src="<%= static_path(@conn, "/images/2.jpg") %>" alt="Generic placeholder image" width="200" height="200">
-                  </ul>
-                  <ul>
-                    <p>Sex:</p>
-                    <p>Chip number:</p>
-                    <p>Date registered:</p>
-                    <p>Latest location:</p>
-                    <p>Status:</p>
-                    <p><a class="btn btn-secondary" href="#" role="button">View more »</a></p>
-                  </ul>
-                </div>
-                <div class="col-lg-4">
-                  <ul>
-                    <img class="rounded-circle" src="<%= static_path(@conn, "/images/3.jpg") %>" alt="Generic placeholder image" width="200" height="200">
-                  </ul>
-                  <ul>
-                    <p>Sex:</p>
-                    <p>Chip number:</p>
-                    <p>Date registered:</p>
-                    <p>Latest location:</p>
-                    <p>Status:</p>
-                    <p><a class="btn btn-secondary" href="#" role="button">View more »</a></p>
-                  </ul>
-                </div>
-              </div>
-          <hr class="featurette-divider">
-          <h2><center>Latest adopted dogs:</center></h2>
-          <br>
-          <div class="row">
-              <div class="col-lg-4">
-                <ul>
-                  <img class="square" src="<%= static_path(@conn, "/images/1.jpg") %>" alt="Generic placeholder image" width="200" height="200">
-                </ul>
-              </div>
-              <div class="col-lg-4">
-                <ul>
-                  <img class="square" src="<%= static_path(@conn, "/images/4.jpg") %>" alt="Generic placeholder image" width="200" height="200">
-                </ul>
-              </div>
-              <div class="col-lg-4">
-                <ul>
-                  <img class="square" src="<%= static_path(@conn, "/images/3.jpg") %>" alt="Generic placeholder image" width="200" height="200">
-                </ul>
-              </div>
+            <div class="row">
+          <%= for animal <- @animals do %>
+            <div class="col-lg-4">
+            
+             <img class="rounded-circle" src="<%= SmartcitydogsWeb.AnimalView.get_image_animals_id(animal.id) %>" alt="Generic placeholder image" width="140" height="140">             
+
+              <h2>Heading</h2>
+              <ul>
+                <li>
+                  Sex: <%= animal.sex%>
+                </li>
+                <li>
+                  Number of chip: <%= animal.chip_number%>
+                </li>
+                <li>
+                  Date register: <%= animal.inserted_at %>
+                </li>
+                <li>
+                  Last Location: <%= animal.address%>
+                </li>
+                <li>
+                  Status:
+                </li>
+                <li>
+                  Signals:
+                </li>
+              </ul>
+              <p>
+              <%= link "View more »", to: animal_path(@conn, :show, animal), class: "btn btn-secondary" %>
+              <a class="btn btn-secondary" href="#" role="button">View map »</a></p>
+            
             </div>
+            <%end%>
+          </div><!-- /.row -->
           <hr class="featurette-divider">
           <div class="row featurette">
             <div class="col-md-7">

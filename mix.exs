@@ -27,7 +27,8 @@ defmodule Smartcitydogs.Mixfile do
         :timex,
         :bamboo_smtp,
         :ueberauth_facebook,
-        :ueberauth_twitter
+        :ueberauth_twitter,
+        :scrivener_ecto
       ]
     ]
   end
@@ -59,7 +60,8 @@ defmodule Smartcitydogs.Mixfile do
       {:bamboo, "~> 0.7"},
       {:bamboo_smtp, "~> 1.4.0"},
       {:mock, "~> 0.2.0", only: :test},
-      {:timex, "~> 3.1"}
+      {:timex, "~> 3.1"},
+      {:scrivener_ecto, "~> 1.0"}
     ]
   end
 

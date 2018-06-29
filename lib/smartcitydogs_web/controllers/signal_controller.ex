@@ -4,10 +4,12 @@ defmodule SmartcitydogsWeb.SignalController do
   alias Smartcitydogs.Signals
   alias Smartcitydogs.DataUser
 
-  def index(conn, _params) do
-    signal = DataSignals.list_signals()
-    render(conn, "index_signal.html", signal: signal)
+  def index(conn, params) do
+   # signal = DataSignals.list_signals()
+   page = Signals |> Smartcitydogs.Repo.paginate(params)
+   render(conn, "index_signal.html", signal: page.entries, page: page)
   end
+
 
   def new(conn, _params) do
     changeset = Smartcitydogs.DataSignals.change_signal(%Signals{})
