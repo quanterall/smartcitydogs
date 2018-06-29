@@ -1,7 +1,7 @@
 body{
   margin: 0px;
   padding: 0px;
-  background-image: url("http://atfritsdoghotel.com/wp-content/uploads/2015/03/playing.jpg");
+  background-image: url("http://www.wallcoo.net/animal/MX069_Pretty_Puppies_puppy_garden_adventure/wallpapers/1680x1050/Garden_adventure_of_the_little_puppy_photos_pictures_puppy_MIL56015.jpg");
   background-size:cover;
   background-position: center;
 }
@@ -16,6 +16,7 @@ input::placeholder{
 }
 
 input[type=text],input[type=password],input[type=checked]{
+ font-family: monospace;
  color: white !important;
  width: 100%;
  padding: 10px 20px;
@@ -50,6 +51,7 @@ input:focus::placeholder{
   background-color: white;
 }
 .under-form{
+  font-family: monospace;
   color: white;
   margin: 10px;
   width: 100%
@@ -59,11 +61,13 @@ label{
   color: white;
 }
 label1{
+  font-family: monospace;
   padding: 10px;
   float:left;
   color: white;
 
 }
 .link-cancel{
+  font-family: monospace;
   color: white !important;
 }

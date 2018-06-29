@@ -15,39 +15,38 @@
               </div>
           <% end %>
 
-            <h2 align="center" style="color:white;">Hello <%= @user.first_name %> <%= @user.last_name %> </h2>
+            <h2 align="center" style="color:white;font-family:monospace;">Hello <%= @user.first_name %> <%= @user.last_name %> </h2>
+          
 
-                <strong>Name:</strong>
-                <%= @user.first_name %>
-            <br>
-                <strong>Lastname:</strong>
-                <%= @user.last_name %>
-            <br>
-                <strong>Username:</strong>
-                <%= @user.username %>
-
-            <div class="form-group">
-            <strong>New password:</strong>
-            <%= text_input f, :password, class: "form-control1" %>
-            <%= error_tag f, :password %>
-            </div>
-
-            <div class="form-group">
-            <strong>New email:</strong>
-            <%= text_input f, :email, class: "form-control1" %>
-            <%= error_tag f, :email %>
-            </div>
+              <div class="form-group">
 
 
-             <div class="form-group">
-            <strong>New phone:</strong>
-            <%= text_input f, :phone, class: "form-control1" %>
-            <%= error_tag f, :phone %>
-            </div>
+              <br />
+              <br />
+              <strong class="strong-show-user">New password:</strong>
+              <%= text_input f, :password, class: "form-control1" %>
+              <%= error_tag f, :password %>
+              <br />
+              <br />
 
-            <div class="form-group">
-            <%= submit "Submit", class: "btn btn-primary" %>
-            </div>
+              <strong class="strong-show-user">New email:</strong>
+              <%= text_input f, :email, class: "form-control1" %>
+              <%= error_tag f, :email %>
+              <br />
+              <br />
+
+
+              <strong class="strong-show-user">New phone:</strong>
+              <%= text_input f, :phone, class: "form-control1" %>
+              <%= error_tag f, :phone %>
+
+
+              <br />
+              <br />
+              <div class="under-form">
+
+                <%= submit "Submit", class: "btn btn-submit" %>
+              </div>
             <% end %>
         </div>
       </div>

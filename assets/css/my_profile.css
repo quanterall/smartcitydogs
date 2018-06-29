@@ -1,0 +1,32 @@
+.buttons-show-signals-user{
+  position: inherit;
+}
+.buttons-show-followed-signal{
+  margin-right: 5%;
+  display: inline-flex;
+
+}
+.buttons-show-followed-signal{
+  text-decoration: none;
+  opacity: 0.5;
+  font-style: italic;
+  font-size: 20px;
+  color: white;
+}
+.buttons-show-my-signals{
+  text-decoration: none;
+  opacity: 0.5;
+  font-style: italic;
+  font-size: 20px;
+  color: white;
+}
+.buttons-show-followed-signal:hover{
+  opacity: 1;
+  text-decoration: underline;
+  color: white;
+}
+.buttons-show-my-signals:hover{
+  opacity: 1;
+  text-decoration: underline;
+  color: white;
+}
