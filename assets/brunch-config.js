@@ -24,7 +24,9 @@ exports.config = {
       "css/app.css": [
           "css/login_user.css",
           "css/register_user.css",
-          "node_modules/bootstrap/dist/css/bootstrap.css"
+          "node_modules/bootstrap/dist/css/bootstrap.css",
+          "css/show_user.css",
+          "css/my_profile.css"
         ]
       }
     },

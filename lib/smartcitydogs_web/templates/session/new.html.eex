@@ -31,7 +31,7 @@
           <br />
           <br />
           <a class="btn btn-primary pull-right" href="<%=session_url(@conn, :request,"facebook")%>" rel="no-follow">
-            <i class="fa fa-facebook-square"></i> or sign in with  Facebook </a>
+            <i class="fa fa-facebook-square"></i> Facebook login</a>
           <br />
 
           <a class="link-cancel" href="/">Cancel</a>
