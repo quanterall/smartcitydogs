@@ -19,30 +19,10 @@ defmodule SmartcitydogsWeb.UserController do
     end
   end
 
-  # def new(conn, _params) do
-  #   changeset = Smartcitydogs.DataUsers.change_user(%User{})
-  #   render(conn, "new.html", changeset: changeset)
-  # end
-
   def new(conn, _params) do
     changeset = User.changeset(%User{})
     render(conn, "new.html", changeset: changeset)
   end
-
-  # def create(conn, %{"user" => user_params}) do
-  #   user_params = user_params |> Map.put("users_types_id", 1)
-  #   IO.inspect(DataUsers.create_user(user_params))
-
-  #   case DataUsers.create_user(user_params) do
-  #     {:ok, user} ->
-  #       conn
-  #       |> put_flash(:info, "User created successfully.")
-  #       |> redirect(to: user_path(conn, :show, user))
-
-  #     {:error, %Ecto.Changeset{} = changeset} ->
-  #       render(conn, "new.html", changeset: changeset)
-  #   end
-  # end
 
   def create(conn, %{"user" => user_params}) do
 
@@ -55,16 +35,11 @@ defmodule SmartcitydogsWeb.UserController do
 
       render(conn, "new.html", changeset: changeset)
     else
-      ##  IO.inspect(changeset)
-      # users = Map.get(changeset, :changes)
-      # IO.inspect(users)
-      # case Smartcitydogs.DataUsers.create_user(users) do
+   
       changeset = %User{} |> User.registration_changeset(user_params)
 
       case Repo.insert(changeset) do
         {:ok, user} ->
-          ##   IO.inspect(conn)
-          ##   IO.puts "#{user.username}"
           conn
           |> Smartcitydogs.Auth.login(user)
           |> put_flash(:info, "#{user.username} created!")
@@ -75,11 +50,6 @@ defmodule SmartcitydogsWeb.UserController do
       end
     end
   end
-
-  # def show(conn, %{"id" => id}) do
-  #   user = DataUsers.get_user!(id)
-  #   render(conn, "show.html", user: user)
-  # end
 
   def show(conn, %{"id" => id}) do
     user = Repo.get!(User, id) |> Repo.preload(:users_types)
@@ -106,15 +76,6 @@ defmodule SmartcitydogsWeb.UserController do
       render(conn, "edit.html", user: user, changeset: changeset)
     end
   end
-
-  ##  def forgoten_password(conn, %{"id" => id}) do
-  ## user = DataUsers.get_user!(id)
-  ## changeset = DataUsers.change_user(user)
-  ##  render(conn, "forgoten_password.html", user: user, changeset: changeset)
-  ##     render(conn, "forgoten_password")
-  ##     conn
-  ##     |> redirect(to: user_path(conn, :fotgoten_password))
-  ## end
 
   def update(conn, %{"id" => id, "user" => user_params}) do
     user = DataUsers.get_user!(id)

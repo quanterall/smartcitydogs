@@ -7,9 +7,6 @@ defmodule SmartcitydogsWeb.AnimalController do
   alias Smartcitydogs.Repo
 
   def index(conn, _params) do
-    ## IO.inspect _params
-    ##  IO.puts "---------------------"
-    ## animals = DataAnimals.list_animals()
     chip = _params["chip_number"]
     
     logged_user_type_id = conn.assigns.current_user.users_types.id
@@ -76,7 +73,6 @@ defmodule SmartcitydogsWeb.AnimalController do
 
       extension = Path.extname(head.filename)
 
-      # File.cp(head.path, "/home/sonyft/smartcitydog/smartcitydogs/assets/static/images/#{Map.get(animal_params, "chip_number")}-profile#{}#{extension}")
       File.cp(
         head.path,
         "../smartcitydogs/assets/static/images/#{Map.get(head, :filename)}-profile#{extension}"
@@ -92,7 +88,6 @@ defmodule SmartcitydogsWeb.AnimalController do
   end
 
   def show(conn, %{"id" => id}) do
-    # animal = Repo.get!(Animals, id) |> Repo.preload(:animals_status)
     animal = DataAnimals.get_animal(id)
     logged_user_type_id = conn.assigns.current_user.users_types.id
     if logged_user_type_id == 3 do

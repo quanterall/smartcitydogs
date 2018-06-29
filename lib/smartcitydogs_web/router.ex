@@ -101,8 +101,6 @@ defmodule SmartcitydogsWeb.Router do
       pipe_through([:login_required])
 
       resources("/users", UserController)
-      # get("/users/4/edit", UserController, [:edit, :update, :index])
-      # get("/users/@current_user.id", UserController, :show)
       get("/users", UserController, :index)
       get("/users/:id", UserController, :show)
       

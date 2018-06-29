@@ -20,7 +20,9 @@ exports.config = {
       // }
     },
     stylesheets: {
-      joinTo: "css/app.css"
+      joinTo: {
+        "css/app.css": ["node_modules/bootstrap/dist/css/bootstrap.css", "css/nav_bar.css"]
+        } 
     },
     templates: {
       joinTo: "js/app.js"

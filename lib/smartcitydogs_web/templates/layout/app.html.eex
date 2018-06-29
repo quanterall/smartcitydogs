@@ -11,90 +11,81 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
-  </head>
 
-  <body>
-
-      <header>
-        <nav class="navbar navbar-expand-md navbar-dark bg-dark">
-          <a class="navbar-brand" href="#">
-            <a href="#" class="fa fa-facebook"></a>
-          </a>
-          <a class="navbar-brand" href="#">
-            <a href="#" class="fa fa-twitter"></a>
-          </a>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarCollapse">
-            <ul class="navbar-nav mr-auto">
-              <%= if @current_user do %>
- <li class="nav-item">
-              
-     </li>
-     <%= link "My profile", to:  user_path(@conn, :edit, @current_user), class: "btn btn-default btn-xs" %>
-   
-    <li class="nav-item">
-    
-                <a class="nav-link" href="\">Home </a>
-    </li>
-    <li class="nav-item">
-          <%= #link "My signals", to: user_post_path(@conn, :index,
-               #                                   @current_user), class: "nav-link" %>
-        </li>
-        <%= if @current_user.users_types_id == 1 do %>
-      <li class="nav-item">
-        <%= link "Users", to: admin_user_path(@conn, :index), class: "nav-link" %>
+    <div class="container-fluid">
+	<div class="row "></div>
+	<div class="container">
+		<div class="row">
+		<nav class="navbar navbar-expand-lg navbar-dark bg-transperent top-navbar w-100">
+  <a class="navbar-brand bg-green pl-3 pr-3" href="#">Logo</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavDropdown">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="/">Начало</a>
       </li>
-    <% end %>
-    <li class="nav-item">
-          <a class="nav-link" href="/signals/new">New Signal</a>
-    </li>
-    <li class="nav-item">
-      <%= link "Sign out", to: session_path(@conn, :delete,
-                                            @current_user),
-                           method: "delete", class: "nav-link" %>
-    </li>
-  <% else %>
-              <li class="nav-item">
-                <a class="nav-link" href="\">Home </a>
-              </li>
-              <li class="nav-item">
-               <%= link "Register", to: user_path(@conn, :new), class: "nav-link" %>
-                <!--a class="nav-link" href="<%=#user_url(@conn, :new)%>">Register</a-->
-              </li>
-              <li class="nav-item">
-                <%= link "Sign in", to: session_path(@conn, :new), class: "nav-link" %>
-              </li>
-              <li class="nav-item">
-              <%= link "New Signal", to: session_path(@conn, :new), class: "nav-link" %>
-              </li>
-              
+      <li class="nav-item">
+      
+        <a class="nav-link" href="/fortheproject">За проекта</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/signals">Подадени сигнали</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/news">Новини</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/help">Помощ</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/contact">Контакти</a>
+      </li>
+    </ul>
+
+    <ul class="navbar-nav">
+      
+      <%= if @current_user do %>
+      <li class="nav-item ">
+        <a class="nav-link user-menu" href="#">
+        	Здравей, <b>Иван Атанасов</b> <i class="far fa-user"></i>
+
+        </a>
+      </li>
+      <% else %>
+      <li class="nav-item ">
+          <%= link "Register", to: user_path(@conn, :new), class: "nav-link" %>
+      </li>
+      <li class="nav-item ">
+          <%= link "Sign in", to: session_path(@conn, :new), class: "nav-link" %>
+      </li>
+      <% end %>
+      
+      <li class="nav-item bg-white ">
+        <a class="nav-link text-green new-signal-btn" href="#">ПОДАЙ СИГНАЛ</a>
+      </li>
+    </ul> 
+  </div>
+</nav>
+</div>
+</div>
 
 
-              <li class="nav-item">
-                <%= link "Forgoten password", to: forgoten_password_path(@conn, :new), class: "nav-link" %> 
-              </li>
-            <% end %>
-            </ul>
-            <form class="form-inline mt-2 mt-md-0">
-              <input class="form-control mr-sm-2" type="text" placeholder="username" aria-label="username">
-              <input class="form-control mr-sm-2" type="text" placeholder="password" aria-label="password">
-              <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Login</button>
-            </form>
-          </div>
-        </nav>
-      </header>
+
+
+
 
       <main role="main">
-      <div class="container mt-3">
+      <div class="container mt-0">
 <%= render @view_module, @view_template, assigns %>
 </div>
       </main>
 
 
 
-  <svg xmlns="http://www.w3.org/2000/svg" width="500" height="500" viewBox="0 0 500 500" preserveAspectRatio="none" style="display: none; visibility: hidden; position: absolute; top: -100%; left: -100%;"><defs><style type="text/css"></style></defs><text x="0" y="25" style="font-weight:bold;font-size:25pt;font-family:Arial, Helvetica, Open Sans, sans-serif">500x500</text></svg>
+  <%# <svg xmlns="http://www.w3.org/2000/svg" width="500" height="500" viewBox="0 0 500 500" preserveAspectRatio="none" style="display: none; visibility: hidden; position: absolute; top: -100%; left: -100%;"><defs><style type="text/css"></style></defs><text x="0" y="25" style="font-weight:bold;font-size:25pt;font-family:Arial, Helvetica, Open Sans, sans-serif">500x500</text></svg>
+ %>
 
 
 
@@ -102,29 +93,7 @@
 
 
 
-
-    <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
-    <%= if @current_user do %>
-  <!-- FOOTER -->
-     
-        <footer class="container">
-          <p class="float-right"><a href="#">Back to top</a></p>
-          <p>© 2017-2018 Company, Inc. · <a href="/">Home</a> 
-          · <a href="#"><%= link "For the project", to: for_the_project_path(@conn, :index)%></a> ·
-           <a href="/signals">Signals</a> · <a href="/animals">Registered dogs</a> · <a href="/news">News</a>
-          · <a href="#"><%= link "Help", to: help_path(@conn, :index)%></a> ·
-           <a href="#"><%= link "Contact", to: contact_path(@conn, :edit, @current_user)%></a> 
-        </footer>
-      <% else %>  
-              <footer class="container">
-          <p class="float-right"><a href="#">Back to top</a></p>
-          <p>© 2017-2018 Company, Inc. · <a href="/">Home</a> 
-          · <a href="#"><%= link "For the project", to: for_the_project_path(@conn, :index)%></a> ·
-           <a href="/signals">Signals</a> · <a href="/animals">Registered dogs</a> · <a href="/news">News</a>
-          · <a href="#"><%= link "Help", to: help_path(@conn, :index)%></a> ·
-          <a href="#"><%= link "Contact", to: contact_path(@conn, :new)%></a> 
-        </footer>
-         <% end %>
+    
   </body>
 </html>
 
