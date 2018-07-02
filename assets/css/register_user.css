@@ -1,0 +1,73 @@
+body{
+  margin: 0px;
+  padding: 0px;
+  background-image: url("http://www.wallcoo.net/animal/MX069_Pretty_Puppies_puppy_garden_adventure/wallpapers/1680x1050/Garden_adventure_of_the_little_puppy_photos_pictures_puppy_MIL56015.jpg");
+  background-size:cover;
+  background-position: center;
+}
+.form-group{
+    border-radius: 10px;
+    background-color: transparent;
+    padding: 20px;
+
+}
+input::placeholder{
+  color: white !important;
+}
+
+input[type=text],input[type=password],input[type=checked]{
+ font-family: monospace;
+ color: white !important;
+ width: 100%;
+ padding: 10px 20px;
+ margin: 10px;
+ display: inline-block;
+ border: none;
+ border-bottom: 1px solid white;
+ background: transparent;
+}
+input:focus{
+  background:rgba(255,255,255,.2);
+  -webkit-text-fill-color: white !important;
+}
+input:focus::placeholder{
+  -webkit-text-fill-color: transparent;
+}
+.btn-face{
+  text-align: justify;
+  float: right;
+  width: 30%%;
+  color: white;
+  background-color: blue;
+}
+.btn-submit:hover{
+  color: white;
+  background-color: green;
+}
+.btn-submit{
+  border: 1px solid white;
+  float: right;
+  color: green;
+  background-color: white;
+}
+.under-form{
+  font-family: monospace;
+  color: white;
+  margin: 10px;
+  width: 100%
+}
+label{
+  float: right;
+  color: white;
+}
+label1{
+  font-family: monospace;
+  padding: 10px;
+  float:left;
+  color: white;
+
+}
+.link-cancel{
+  font-family: monospace;
+  color: white !important;
+}

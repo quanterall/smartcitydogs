@@ -1,26 +1,37 @@
-<div>
-  <h2>Password reset</h2>
-    <%= form_for @changeset, @action, fn f -> %>
-    <div>
-      <%= label f, :username %>
-      <%= text_input f, :username %>
-      <%= error_tag f, :username %>
-    </div>
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
+  </head>
+  <body>
+    <div class="register-photo">
+      <div class="container mt-3">
+        <div class="form-group">
+          <label1>Password reset</label1>
+            <%= form_for @changeset, @action, fn f -> %>
 
-    <div>
-      <%= label f, :email %>
-      <%= text_input f, :email %>
-      <%= error_tag f, :email %>
-    </div>
+              <%= text_input f, :username, placeholder: "Username", class: "form-control1" %>
+              <%= error_tag f, :username %>
 
-    <div>
-      <%= label f, :phone %>
-      <%= text_input f, :phone %>
-      <%= error_tag f, :phone %>
-    </div>
+              <%= text_input f, :email, placeholder: "E-mail", class: "form-control1" %>
+              <%= error_tag f, :email %>
 
-    <div>
-      <%= submit "Send reset link" %>
+              <%= text_input f, :phone, placeholder: "Phone number", class: "form-control1" %>
+              <%= error_tag f, :phone %>
+
+            <div class="under-form">
+              <a class="link-cancel" href="/">Cancel</a>
+
+                <%= submit "Send reset link", class: "btn btn-submit" %>
+
+              </div>
+            </div>
+          <% end %>
+        </div>
     </div>
-  <% end %>
-</div>
+  </div>
+  </body>
+
+
+  </html>
