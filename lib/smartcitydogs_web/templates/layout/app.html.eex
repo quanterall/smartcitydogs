@@ -30,13 +30,18 @@
             <ul class="navbar-nav mr-auto">
               <%= if @current_user do %>
  <li class="nav-item">
-              
+
      </li>
+<<<<<<< HEAD
 
      <%= link "My profile", to:  user_path(@conn, :edit, @current_user), class: "btn btn-default btn-xs" %>
    
+=======
+     <%= link "My profile", to:  user_path(@conn, :show, @current_user), class: "btn btn-default btn-xs" %>
+
+>>>>>>> 7e0f17b72e7ac9e685d4fdfc100426f2a76ab714
     <li class="nav-item">
-    
+
                 <a class="nav-link" href="\">Home </a>
     </li>
     <li class="nav-item">
@@ -70,11 +75,11 @@
               <li class="nav-item">
               <%= link "New Signal", to: session_path(@conn, :new), class: "nav-link" %>
               </li>
-              
+
 
 
               <li class="nav-item">
-                <%= link "Forgoten password", to: forgoten_password_path(@conn, :new), class: "nav-link" %> 
+                <%= link "Forgoten password", to: forgoten_password_path(@conn, :new), class: "nav-link" %>
               </li>
             <% end %>
             </ul>
@@ -87,45 +92,14 @@
         </nav>
       </header>
 
-      <main role="main">
-      <div class="container mt-3">
+      <main role="main" style="display:grid;position:absolute;padding:0;margin:0;width:100%;height:100%;">
+      <!-- <div class="container mt-3"> -->
 <%= render @view_module, @view_template, assigns %>
-</div>
+<!-- </div> -->
       </main>
 
 
-
-  <svg xmlns="http://www.w3.org/2000/svg" width="500" height="500" viewBox="0 0 500 500" preserveAspectRatio="none" style="display: none; visibility: hidden; position: absolute; top: -100%; left: -100%;"><defs><style type="text/css"></style></defs><text x="0" y="25" style="font-weight:bold;font-size:25pt;font-family:Arial, Helvetica, Open Sans, sans-serif">500x500</text></svg>
-
-
-
-
-
-
-
-
     <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
-    <%= if @current_user do %>
-  <!-- FOOTER -->
-     
-        <footer class="container">
-          <p class="float-right"><a href="#">Back to top</a></p>
-          <p>© 2017-2018 Company, Inc. · <a href="/">Home</a> 
-          · <a href="#"><%= link "For the project", to: for_the_project_path(@conn, :index)%></a> ·
-           <a href="/signals">Signals</a> · <a href="/animals">Registered dogs</a> · <a href="/news">News</a>
-          · <a href="#"><%= link "Help", to: help_path(@conn, :index)%></a> ·
-           <a href="#"><%= link "Contact", to: contact_path(@conn, :edit, @current_user)%></a> 
-        </footer>
-      <% else %>  
-              <footer class="container">
-          <p class="float-right"><a href="#">Back to top</a></p>
-          <p>© 2017-2018 Company, Inc. · <a href="/">Home</a> 
-          · <a href="#"><%= link "For the project", to: for_the_project_path(@conn, :index)%></a> ·
-           <a href="/signals">Signals</a> · <a href="/animals">Registered dogs</a> · <a href="/news">News</a>
-          · <a href="#"><%= link "Help", to: help_path(@conn, :index)%></a> ·
-          <a href="#"><%= link "Contact", to: contact_path(@conn, :new)%></a> 
-        </footer>
-         <% end %>
+
   </body>
 </html>
-

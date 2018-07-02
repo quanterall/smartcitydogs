@@ -20,7 +20,15 @@ exports.config = {
       // }
     },
     stylesheets: {
-      joinTo: "css/app.css"
+      joinTo: {
+      "css/app.css": [
+          "css/login_user.css",
+          "css/register_user.css",
+          "node_modules/bootstrap/dist/css/bootstrap.css",
+          "css/show_user.css",
+          "css/my_profile.css"
+        ]
+      }
     },
     templates: {
       joinTo: "js/app.js"
