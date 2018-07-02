@@ -6,21 +6,22 @@ defmodule SmartcitydogsWeb.AnimalController do
   alias Smartcitydogs.AnimalImages
   alias Smartcitydogs.Repo
 
-  def index(conn, _params) do
-    chip = _params["chip_number"]
-
+  def index(conn, params) do
+    chip = params["chip_number"]
+    page = Animals |> Smartcitydogs.Repo.paginate(params)
     if chip == "" do
       animals = DataAnimals.list_animals()
-      render(conn, "index.html", animals: animals)
+      render(conn, "index.html", animals: page.entries, page: page)
     end
 
     if chip != nil do
       animals = DataAnimals.get_animal_by_chip(chip)
-      render(conn, "index.html", animals: animals)
+      render(conn, "index.html", animals: page.entries, page: page)
     end
 
-    animals = DataAnimals.list_animals()
-    render(conn, "index.html", animals: animals)
+    page = Animals |> Smartcitydogs.Repo.paginate(params)
+   ## animals = DataAnimals.list_animals()
+    render(conn, "index.html", animals: page.entries, page: page)
   end
 
   def new(conn, _params) do

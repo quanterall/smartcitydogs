@@ -69,5 +69,5 @@
 
 </div>
 <%= for x <- 1..@page.total_pages do %>
-  <%= link "#{x * 5 - 4} - #{x * 5}", to: signal_path(@conn, :index, page: x) %>
+  <%= link "#{x * 8 - 7} - #{x * 8}", to: signal_path(@conn, :index, page: x) %>
 <% end %>  
