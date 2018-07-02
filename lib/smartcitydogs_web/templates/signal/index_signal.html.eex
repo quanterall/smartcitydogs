@@ -1,70 +1,89 @@
-<h1><center> All signals <center></h1>
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  </head>
+  <body>
 
-<div class="container">
-          <!-- Three columns of text below the carousel -->
-
-          <div class="row">
-          <%= for signal <- @signal do %>
-            <div class="col-lg-4">
-
-              <img class="rounded-circle" src="/<%= get_signals_images(signal.id) %>" alt="Generic placeholder image" width="140" height="140">
-              <h2><%=signal.title%></h2>
-              <ul>
-                <li>
-                  Signal number:
-                  <a id="signal-id"><%= signal.id %></a>
-                </li>
-                <li>
-                  Category: <%=signal.signals_categories_id
-                  |> Smartcitydogs.DataSignals.get_signal_category()
-                  |> Map.get(:name)
-                  %>
-                </li>
-                <li>
-                  Type: <%=signal.signals_types_id
-                  |> Smartcitydogs.DataSignals.get_signal_type()
-                  |> Map.get(:name)
-                  %>
-                </li>
-                <li>
-                  Registered at: <%=
-                    signal_time = signal.inserted_at
-                    |> DateTime.truncate(:second)
-                    |> DateTime.to_string()
-                    count = String.length(signal_time)
-                    final_time = String.slice(signal_time,0..count-2)
-                    final_time
-
-                    IO.inspect(final_time)
+  <div class="container-filter-signals">
+      <div class="container-filter">
+        <p1>filter test text</p1>
+      </div>
+      <div class="container-signals">
 
 
-                    %>
-                </li>
-                <li>
-                  Description: <%=signal.description%>
-                </li>
-                <li>
-                  Chip number: <%=signal.chip_number%>
-                </li>
-                <li>
-                  Support count: <span id="signal-count"><%= signal.support_count %></span>
-                </li>
-                <li>
-                  Last location: <%=signal.address%>
-                </li>
-                <li>
-                  Views: <%=signal.view_count%>
-                </li>
-              </ul>
+                <div class="row">
+                <%= for signal <- @signal do %>
+                  <div class="col-lg-3">
+                    <div class="col-container" style="background-image: url('/<%= get_signals_images(signal.id) %>')">
+                      <div class="col-container-shadow">
 
-              <p><a class="btn btn-secondary" href="signals/<%=signal.id%>" role="button">View more »</a>
-              <a id="like" class="btn btn-secondary btnSignal" role="button">Like</a></p>
-              <a class="btn btn-secondary" href="#" role="button">View map »</a></p>
+                        <label-type><%=signal.signals_types_id
+                        |> Smartcitydogs.DataSignals.get_signal_type()
+                        |> Map.get(:name)
+                        %>
+                        </label-type>
+                        <br />
+
+                        <label-date>
+                        <%=
+                          signal_time = signal.inserted_at
+                          |> DateTime.truncate(:second)
+                          |> DateTime.to_string()
+                          count = String.length(signal_time)
+                          final_time = String.slice(signal_time,0..count-11)
+                          final_time
+                          # IO.inspect(final_time)
+                          %>
+                        <br />
+                        </label-date>
+
+                        <label-title><b><%=signal.title%></b></label-title>
+                        <br />
+
+
+                        <label-adress><%=signal.address%></label-adress>
+                        <br />
+
+                        <div class="icon-scale">
+                          <div class="fa fa-eye">
+                          </div> : <%=signal.view_count%>
+                          <br />
+                        </div>
+                        <div class="icon-scale">
+
+
+                          <div class="fa fa-thumbs-o-up">
+
+                          </div> : <span id="signal-count"><%= signal.support_count %></span>
+                        </div>
+                          <!-- <br /> -->
+                        <div class="icon-scale">
+                          <div class="fa fa-comment-o">
+                          </div> : 0
+                          <br />
+                        </div>
+                        <center>
+
+                        <div class="button-show-hide">
+                          <p class="p-button-change"><a class="btn btn-secondary" href="signals/<%=signal.id%>" role="button">Change status</a>
+                      </div></center>
+
+                        <center>
+
+                        <div class="button-show-hide">
+                          <p class="p-button-view"><a class="btn btn-secondary" href="signals/<%=signal.id%>" role="button">View more</a>
+                      </div></center>
+                      </div>
+                    </div>
+                  </div>
+                  <%end%>
+                </div>
+
 
             </div>
-            <%end%>
-          </div><!-- /.row -->
-
-
-
-</div>
+      </div>
+</body>
+</html>
