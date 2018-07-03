@@ -11,20 +11,20 @@
 </div>
 <div class="row home-bg">
 
-    <div class="homepage-slider w-50">
+    <div class="homepage-slider">
         <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
 
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                    <div class="display-4">Време е да поемем отговорност за щастиети на най-добрите ни приятели
+                    <div class="display-4">Време е да поемем отговорност за щастиетo на най-добрите ни приятели
                     </div>
                 </div>
                 <div class="carousel-item">
-                    <div class=" display-4">Време е да поемем отговорност за щастиети на най-добрите ни приятели
+                    <div class=" display-4">Време е да поемем отговорност за щастиетo на най-добрите ни приятели
                     </div>
                 </div>
                 <div class="carousel-item">
-                    <div class=" display-4">Време е да поемем отговорност за щастиети на най-добрите ни приятели
+                    <div class=" display-4">Време е да поемем отговорност за щастиетo на най-добрите ни приятели
                     </div>
 
                 </div>
@@ -34,10 +34,12 @@
                 <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
                 <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
             </ol>
-
+        
+        </div>
             <!-- Marketing messaging and featurettes
             ================================================== -->
             <!-- Wrap the rest of the page in another container to center all the content. -->
+            
             <h1 class="home_latest_signals">
                 <center>Latest signals:</center>
             </h1>
@@ -161,6 +163,8 @@
 
             </div>
             <!-- START THE FEATURETTES -->
+
+
             <hr class="featurette-divider">
             <div class="container">
                 <header>
@@ -266,5 +270,5 @@
                 </div>
 
                 <!-- /END THE FEATURETTES -->
-            </div>
-            <!-- /.container -->
+        </div>
+        <!-- /.container -->
