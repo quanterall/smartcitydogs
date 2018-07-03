@@ -20,14 +20,12 @@
 .col-container{
   font-family: monospace;
   position: relative;
-  /* color: transparent; */
-  /* padding: 5px; */
-  background-size: auto 300px;
+  background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
   border: none;
-  width: 200px;
-  height: 300px;
+  width: 18rem;
+  height: 25rem;
   color: white;
 
 }
@@ -89,4 +87,7 @@ margin-left: -10px;
 }
 .icon-scale{
   font-size: 10px;
+}
+.col-lg-3{
+    margin-top: 3%;
 }
