@@ -30,6 +30,7 @@
 
 }
 .button-show-hide{
+
   display: contents;
   margin-left: -10px;
   width: 100%;
@@ -51,27 +52,42 @@
   padding: 10px;
     box-shadow: inset 0px 0px 400px 110px rgba(0, 0, 0, .5);
 }
+.col-container-shadow:hover .btn-secondary{
+  color: #42f4a7;
+  background-color: transparent;
+
+}
+.col-container-shadow .button-show-hide{
+  background-color: transparent;
+  box-shadow: inset 0px 0px 400px 110px rgba(0, 0, 0, .5)
+}
+.col-container-shadow .btn-secondary{
+  color: transparent;
+  background-color: transparent;
+  border-color: transparent;
+}
 .signal-img{
   width: 30px;
   height: 30px;
 }
 label-type{
   color: red;
-  font-size: 12px;
+  font-size: 20px;
 }
 label-date{
   color: #c4c4c4;
-  font-size: 12px;
+  font-size: 20px;
 }
 label-adress{
   color: #c4c4c4;
-  font-size: 12px;
+  font-size: 20px;
 }
 label-title{
-  font-size: 15px;
+  font-size: 25px;
 }
 .btn-secondary{
-  font-size: 12px;
+
+  font-size: 15px;
 }
 .p-button-view{
   width: 100%;
