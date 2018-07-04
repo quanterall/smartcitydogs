@@ -1,7 +1,3 @@
-/* body{
-  padding: 0px;
-  margin: 0px;
-} */
 .register-photo{
   width: 100%;
   height: 100%;
@@ -11,8 +7,6 @@
   background-size: cover;
   background-position: 0 0;
   background-repeat: no-repeat;
-  /* width: 100vw;
-  height: 100vh; */
 }
 .form-group{
     border-radius: 10px;
@@ -33,6 +27,7 @@ input[type=text],input[type=password]{
  border: none;
  border-bottom: 1px solid white;
  background: transparent;
+ outline: none;
 }
 input:focus{
 
@@ -56,25 +51,16 @@ input:focus::placeholder{
 .nav-link-pass{
   width: 20%;
 }
-.nav-link{
-  /* text-align: left;
-  padding-left: 2.5%;
-  */
+.nav-link-pass .nav-link{
   padding-left: 10px;
-  /* display: inline-block; */
   color: white;
-  /* font-family: sans-serif; */
 }
-.nav-link:hover{
-  color: white !important;
+.nav-link-pass .nav-link:hover{
+  color: white;
   text-decoration: underline;
 }
 .link-cancel{
-  /* text-align: left;
-  padding-left: 2.5%;
-  display: inline-block; */
   color: white;
-  /* font-family: sans-serif; */
 }
 .link-cancel:hover{
   color: white !important;
@@ -85,7 +71,6 @@ input:focus::placeholder{
   color: white;
   margin: 10px;
   width: 100%;
-  /* margin-top: 25%; */
 }
 label{
   float: right;

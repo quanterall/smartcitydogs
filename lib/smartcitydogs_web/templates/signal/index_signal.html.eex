@@ -10,12 +10,15 @@
 
   <div class="container-filter-signals">
       <div class="container-filter">
-        <h>FILTER</h>
+        <b><button id="all-signals">Подадени сигнали</button></b>
         <br />
-        <button id="all-signals">Подадени сигнали</button>
         <button id="all-registered-dogs">Регистрирани кучета</button>
+        <br />
         <button id="all-adopted-dogs">Осиновени кучета</button>
+        <br />
+        <b>
         <button id="all-dogs-shelter">Кучета в приьта</button>
+        </b>
       </div>
       <div class="container-signals">
 
