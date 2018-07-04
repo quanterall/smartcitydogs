@@ -66,3 +66,27 @@ $("#comment").click(function() {
         $("#comment-id").val("");
     })
 });
+
+$(function() {
+
+  //-----------------all signals---------------- 
+  $('#all-signals').on('click', function() {
+    $('.container-signals').load('signals');
+  });
+
+  // ------------------Registered dogs----------------
+  $('#all-registered-dogs').on('click', function() {
+    $('.container-signals').load('animals');
+  });
+
+  //-----------------Adopted dogs-----------------
+  // $('#all-adopted-dogs').on('click', function() {
+  //   $('.container-signals').load('');
+  // });
+
+  // -------------Dogs under shelter----------------
+  // $('#all-dogs-shelter').on('click', function() {
+  //   $('.container-signals').load('animals');
+  // });
+
+});

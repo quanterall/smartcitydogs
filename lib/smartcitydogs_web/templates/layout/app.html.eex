@@ -49,7 +49,7 @@
       <%= if @current_user do %>
       <li class="nav-item ">
         <a class="nav-link user-menu" href="#">
-        	Здравей, <b>Иван Атанасов</b> <i class="far fa-user"></i>
+        	Здравей, <b>Иван Атанасов</b> <i class="fa fa-user"></i>
 
         </a>
       </li>
@@ -72,14 +72,12 @@
 </div>
 
 
-
-
-
-
       <main role="main">
       <div class="container mt-0">
-<%= render @view_module, @view_template, assigns %>
-</div>
+   <%= render @view_module, @view_template, assigns %> 
+
+    <%# <%= render SmartcitydogsWeb.PageView, "index.html", assigns%> %>
+<!-- </div> -->
       </main>
 
 
@@ -87,13 +85,6 @@
   <%# <svg xmlns="http://www.w3.org/2000/svg" width="500" height="500" viewBox="0 0 500 500" preserveAspectRatio="none" style="display: none; visibility: hidden; position: absolute; top: -100%; left: -100%;"><defs><style type="text/css"></style></defs><text x="0" y="25" style="font-weight:bold;font-size:25pt;font-family:Arial, Helvetica, Open Sans, sans-serif">500x500</text></svg>
  %>
 
-
-
-
-
-
-
     
   </body>
 </html>
-

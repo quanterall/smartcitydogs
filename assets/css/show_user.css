@@ -1,0 +1,26 @@
+.show-user-edit{
+  color: white;
+  float: right;
+  width: auto;
+
+}
+.show-user-edit:hover{
+  color: white !important;
+  text-decoration: underline;
+}
+.container-show-user{
+  color: white;
+  font-family: monospace;
+  width: 100%;
+}
+li.user-li{
+  list-style-position:inside;
+    border-bottom: 1px solid white;
+}
+label-li-text{
+  font-family: monospace;
+  color: white;
+}
+.strong-show-user{
+  font-size: 10px;
+}
