@@ -30,7 +30,7 @@
                     <div class="col-container" style="background-image: url('/<%= get_signals_images(signal.id) %>')">
                       <div class="col-container-shadow">
 
-                        <label-type><%=signal.signals_types_id
+                        <label-type ><%=signal.signals_types_id
                         |> Smartcitydogs.DataSignals.get_signal_type()
                         |> Map.get(:name)
                         %>

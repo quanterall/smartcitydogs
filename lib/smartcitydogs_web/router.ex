@@ -117,7 +117,8 @@ defmodule SmartcitydogsWeb.Router do
       get("/signals/comment", SignalController, :comment)
       get("/signals/get_signals_support_count", SignalController, :get_signals_support_count)
       get("/signals/update_like_count", SignalController, :update_like_count)
-
+      get("/signals/update_type", SignalController, :update_type)
+    
       resources(
         "/signals",
         SignalController

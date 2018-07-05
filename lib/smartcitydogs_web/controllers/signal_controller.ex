@@ -13,11 +13,12 @@ defmodule SmartcitydogsWeb.SignalController do
     changeset = Smartcitydogs.DataSignals.change_signal(%Signals{})
 
     logged_user_type_id = conn.assigns.current_user.users_types.id
-    IO.inspect (logged_user_type_id)
+    IO.inspect(logged_user_type_id)
+
     if logged_user_type_id == 4 || logged_user_type_id == 2 do
       render(conn, "new_signal.html", changeset: changeset)
     else
-      render(conn, SmartcitydogsWeb.ErrorView, "401.html")      
+      render(conn, SmartcitydogsWeb.ErrorView, "401.html")
     end
   end
 
@@ -67,17 +68,17 @@ defmodule SmartcitydogsWeb.SignalController do
 
         {:error, %Ecto.Changeset{} = changeset} ->
           render(conn, "new_signal.html", changeset: changeset)
-       end
+      end
     else
       render(conn, SmartcitydogsWeb.ErrorView, "401.html")
-     end
-   end
+    end
+  end
 
   def show(conn, %{"id" => id}) do
     comments = DataSignals.get_comment_signal_id(id)
     signal = DataSignals.get_signal(id)
-    
-    render(conn, "show_signal.html", signal: signal, comments: comments) 
+
+    render(conn, "show_signal.html", signal: signal, comments: comments)
   end
 
   def edit(conn, %{"id" => id}) do
@@ -128,13 +129,20 @@ defmodule SmartcitydogsWeb.SignalController do
   end
 
   def update_like_count(conn, %{"show-count" => show_count, "show-id" => show_id}) do
-     signal = DataSignals.get_signal(show_id)
+    signal = DataSignals.get_signal(show_id)
     count = get_signals_support_count(show_id)
-    
+
     conn
     |> json(%{new_count: count})
-
   end
+
+  def update_type(conn, %{"id" => id, "signals_types_id" => signals_types_id}) do
+    signal = DataSignals.get_signal(id)
+    DataSignals.update_signal(signal, %{"signals_types_id" => signals_types_id})
+
+    signals = DataSignals.list_signals()
+    render conn, "index_signals.html", signals: signals
+    end
 
   # def my_signals(conn) do
   #   user = conn.assigns.current_user.id
@@ -150,7 +158,7 @@ defmodule SmartcitydogsWeb.SignalController do
       signals_id: show_id,
       users_id: user_id
     })
-    
+
     render("show_signal.html")
   end
 

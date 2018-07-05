@@ -298,7 +298,7 @@ end
 
 ############## Signals Types #############
 
-signal_type_params = %{name: "Изпратен към компетентен орган"}
+signal_type_params = %{name: "Изпратен"}
 
 unless Repo.get_by(SignalsTypes, name: signal_type_params[:name]) do
   %SignalsTypes{}
