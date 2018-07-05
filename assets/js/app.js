@@ -51,8 +51,7 @@ $("#like").click(function() {
     })
 });
 
-//var x = document.getElementById("myText");
-//console.log(x);
+
 $("#comment").click(function() {
 
     $.ajax({
@@ -95,10 +94,12 @@ $(function(){
   // var btn = document.getElementById("button-change-status");
   var modal = document.getElementById('myModal');
   var span = document.getElementsByClassName("close")[0];
+  var id;
+  var SelectedType;
 
   $('.change-status').on('click',function() {
-    var id = $(this).attr('id');
-    console.log(id);
+    id = $(this).attr('id');
+    console.log("Buttton: "+id);
     modal.style.display = "block";
   });
   span.onclick = function() {
@@ -109,29 +110,41 @@ $(function(){
         modal.style.display = "none";
     }
   }
+  $('#type-chosen').on('click',function(){
+    // var SelectedType = $('.select-type').find(":selected").text();
+    SelectedType = $(".select-type option:selected").val()
+    console.log(SelectedType);
+    console.log("Buttton1: "+id);
+
+
+    var settings = {
+  "async": true,
+  "crossDomain": true,
+  "url": "http://localhost:4000/api/signals/"+id,
+  "method": "PUT",
+  "headers": {
+    "Content-Type": "application/x-www-form-urlencoded",
+    "Cache-Control": "no-cache",
+    "Postman-Token": "901b1893-aa01-40df-8975-c3ac6299e525"
+  },
+  "data": {
+    "signal[signals_types_id]": "2"
+  }
+}
+
+$.ajax(settings).done(function (response) {
+  console.log(response);
 });
 
+  });
+});
 
-
-// var modal = document.getElementById('myModal');
+// $(function(){
+//   $('#type-chosen').on('click',function(){
+//     // var SelectedType = $('.select-type').find(":selected").text();
+//     var SelectedType = $(".select-type option:selected").val()
+//     console.log(SelectedType);
+//     console.log("Buttton1: "+id);
 //
-//   Get the button that opens the modal
-// var btn = document.getElementById("button-change-status");
-//   var btn = document.getElementsByClassName("p-button-change");
-//   // Get the <span> element that closes the modal
-// var span = document.getElementsByClassName("close")[0];
-// for (var i = 0, len = btn.length; i < len; i++) {
-//
-//   btn[i].onclick = function() {
-//     console.log("ala bala ");
-//       modal.style.display = "block";
-//   }
-//   span.onclick = function() {
-//       modal.style.display = "none";
-//   }
-//   window.onclick = function(event) {
-//     if (event.target == modal) {
-//         modal.style.display = "none";
-//     }
-//   }
-// }
+//   });
+// });

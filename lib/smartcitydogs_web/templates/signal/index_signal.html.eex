@@ -77,7 +77,7 @@
                         <center>
 
                         <div class="button-show-hide">
-                          <p class="p-button-change"><a class="btn btn-secondary change-status" role="button">Change status</a>
+                          <p class="p-button-change"><a class="btn btn-secondary change-status" id="<%= signal.id %>" role="button">Change status</a>
                       </div></center>
                         <!--  href="<%=signal.id%>/edit" -->
 
@@ -90,10 +90,14 @@
                             <p class="modal-type">Промяна на типът на сигнала:</p>
                             <br />
                             <select class="select-type">
-                              <option value="New">Нов</option>
-                              <option value="Accepted">Приет</option>
-                              <option value="Sent">Изпратен</option>
+                              <option value="1">Нов</option>
+                              <option value="2">Приет</option>
+                              <option value="3">Изпратен</option>
+                              <option value="4">Осиновено</option>
                             </select>
+                            <br />
+                            <a class="btn btn-secondary" id="type-chosen" role="button">Промени</a>
+
                           </div>
 
                         </div>
@@ -101,7 +105,7 @@
                         <center>
 
                         <div class="button-show-hide">
-                          <p class="p-button-view"><a class="btn btn-secondary" href="<%=signal.id%>" role="button">View more</a>
+                          <p class="p-button-view"><a class="btn btn-secondary" href="signals/<%=signal.id%>" role="button">View more</a>
                       </div></center>
                       </div>
                     </div>
