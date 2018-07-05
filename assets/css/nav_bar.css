@@ -14,12 +14,36 @@
     margin: -8em auto auto auto;
 }
 
-.navbar-dark .navbar-nav .nav-link {
+/* .navbar-dark .navbar-nav .nav-link {
     color: white;
+} */
+
+.green{
+    /* background-color: green; */
+}
+
+.navbar-nav a.nav-link.black {
+    color: rgb(63, 60, 60);
+}
+
+.navbar-nav a.nav-link.black:hover {
+    color: red !important;    
+}
+
+.navbar{
+    width: 100%;
+}
+
+.bg-gray{
+	background: rgb(226, 226, 226);
 }
 
 .bg-green {
     background: rgb(0, 201, 148);
+}
+
+.text-gray{
+	color: #c6c6c6;
 }
 
 .text-green {
@@ -92,3 +116,40 @@
     width: 100%;
     flex-wrap: inherit;
 }
+
+/* ########### Slick ############## */
+.slick-prev,.slick-next{
+    position: absolute;
+        bottom: 30px;
+        z-index: 1;
+        width: 30px;
+    }
+    .slick-prev{
+        left: -15px;
+    }
+    .slick-next{
+        left: 15px;
+    }
+    .slick-card{
+        height: 400px;
+        background: no-repeat center center fixed;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+    }
+    .slick-card-status{
+        color:red;
+        font-weight: bold;
+        font-size: 12px;
+    }
+    .slick-card-small{
+        font-size: 12px;
+    }
+    .slick-card-title {
+        margin-top: 10px;
+        color: white;
+        font-size: 23px;
+        font-weight: bold;
+    }
+    /* ######## /Slick ######### */
