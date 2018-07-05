@@ -126,11 +126,11 @@ $(function(){
     })
 
     // modal.style.display ="none";
-   
+
      setTimeout(function () {
         //  location.reload()
          window.location.href = '/signals';
-     }, 500);
+     }, 1000);
 //     var form = new FormData();
 // form.append("email", "sonyft@abv.bg");
 // form.append("password", "123456");

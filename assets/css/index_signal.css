@@ -77,10 +77,10 @@
   width: 30px;
   height: 30px;
 }
-label-type{
+/* label-type{
   color: red;
   font-size: 20px;
-}
+} */
 label-date{
   color: #c4c4c4;
   font-size: 20px;
@@ -265,4 +265,17 @@ margin-left: -10px;
     color: #000;
     text-decoration: none;
     cursor: pointer;
+}
+
+.label-type-red{
+  color: red !important;
+}
+.label-type-orange{
+  color: orange !important;
+}
+.label-type-yellow{
+  color: yellow !important;
+}
+.label-type-green{
+  color: green !important;
 }
