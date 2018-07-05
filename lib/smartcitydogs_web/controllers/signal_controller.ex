@@ -247,6 +247,15 @@ defmodule SmartcitydogsWeb.SignalController do
 
 
 
+  def followed_signals(conn, params) do
+    user_like = conn.assigns.current_user.liked_signals
+    all_followed_signals = 
+    Enum.map user_like, fn elem -> 
+      String.to_integer(elem) |> DataSignals.get_signal   
+    end
+    page = Signals |> Smartcitydogs.Repo.paginate(params)
+    render(conn, "followed_signals.html", signal: all_followed_signals, page: page)
+  end
 
 
   def get_signals_support_count(signal_id) do

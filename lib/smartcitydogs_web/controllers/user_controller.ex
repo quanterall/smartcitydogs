@@ -5,6 +5,7 @@ defmodule SmartcitydogsWeb.UserController do
   alias Smartcitydogs.User
   alias Smartcitydogs.Repo
 
+  
   plug(:scrub_params, "user" when action in [:create])
 
   def index(conn, _params) do
@@ -65,6 +66,7 @@ defmodule SmartcitydogsWeb.UserController do
     end
     render(conn, "edit.html", user: user, changeset: changeset)
   end
+
 
 
 

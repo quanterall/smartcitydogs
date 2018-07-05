@@ -9,6 +9,7 @@ defmodule Smartcitydogs.DataSignals do
   alias Smartcitydogs.User
   alias Smartcitydogs.SignalImages
   alias Smartcitydogs.SignalsLikes
+  alias Smartcitydogs.DataUsers
 
   import Plug.Conn
 
@@ -59,6 +60,12 @@ defmodule Smartcitydogs.DataSignals do
     Repo.all(query)
   end
 
+  def get_all_followed_signals(user_id) do
+    user = user_id |> DataUsers.get_user! |> Map.get(:liked_signals)
+    IO.inspect user
+  ##  query = Ecto.Query.from(c in Signals, order_by: [c.id])
+   ## Repo.all(query)
+  end
 
 
   # Signal iamges
