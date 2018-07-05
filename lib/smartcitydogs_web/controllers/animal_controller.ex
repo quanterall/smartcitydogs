@@ -9,9 +9,10 @@ defmodule SmartcitydogsWeb.AnimalController do
   def index(conn, params) do
     chip = params["chip_number"]
     page = Animals |> Smartcitydogs.Repo.paginate(params)
+    sorted_animals = DataAnimals.sort_animals_by_id
     if chip == "" do
-      animals = DataAnimals.list_animals()
-      render(conn, "index.html", animals: page.entries, page: page)
+      ##animals = DataAnimals.list_animals()
+      render(conn, "index.html", animals: sorted_animals, page: page)
     end
 
     if chip != nil do
@@ -52,8 +53,8 @@ defmodule SmartcitydogsWeb.AnimalController do
 
     for n <- upload do
       [head] = n
-      IO.puts("\n N:")
-      IO.inspect(n)
+     ## IO.puts("\n N:")
+    ##  IO.inspect(n)
 
       extension = Path.extname(head.filename)
 

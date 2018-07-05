@@ -6,7 +6,7 @@ defmodule SmartcitydogsWeb.AnimalView do
 
     if list != [] do
       [head | tail] = list
-      IO.inspect(head.url)
+     ## IO.inspect(head.url)
       head.url
       # static_path(@conn, head.url)
     end

@@ -55,7 +55,7 @@ defmodule SmartcitydogsWeb.UserControllerAPI do
         |> put_session(:current_user_id, user.id)
         |> put_status(:ok)
         |> render(SmartcitydogsWeb.UserControllerAPIView, "sign_in.json", user: user)
-        IO.inspect user
+      ##  IO.inspect user
       {:error, message} ->
         conn
         |> delete_session(:current_user_id)

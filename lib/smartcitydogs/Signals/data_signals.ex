@@ -54,6 +54,13 @@ defmodule Smartcitydogs.DataSignals do
     |> Repo.delete()
   end
 
+  def sort_signal_by_id() do
+    query = Ecto.Query.from(c in Signals, order_by: [c.id])
+    Repo.all(query)
+  end
+
+
+
   # Signal iamges
 
   def get_signal_image_id(signals_id) do
@@ -116,12 +123,14 @@ defmodule Smartcitydogs.DataSignals do
   # Signal comments
 
   def get_signal_comment(id) do
-    Repo.get!(SignalsComments, id)
+    Repo.get!(SignalsComments, id) |> Repo.preload(:users)
   end
 
   def list_signal_comment() do
-    Repo.all(SignalsComments)
+    Repo.all(SignalsComments) |> Repo.preload(:users)
   end
+
+
 
   def get_comment_signal_id(signals_id) do
     query = Ecto.Query.from(c in SignalsComments, where: c.signals_id == ^signals_id)

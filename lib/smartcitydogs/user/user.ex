@@ -15,7 +15,9 @@ defmodule Smartcitydogs.User do
     field(:username, :string)
     field(:reset_password_token, :string)
     field(:reset_token_sent_at, :naive_datetime)
-
+    field :liked_signals, {:array, :string}, default: []
+    field :liked_comments, {:array, :string}, default: []
+    field :disliked_comments, {:array, :string}, default: []
 
     has_many(:signals_comments, Smartcitydogs.SignalsComments)
     belongs_to(:users_types, Smartcitydogs.UsersType)
@@ -41,7 +43,10 @@ defmodule Smartcitydogs.User do
       :reset_password_token,
       :reset_token_sent_at,
       :deleted_at,
-      :users_types_id
+      :users_types_id,
+      :liked_signals,
+      :liked_comments,
+      :disliked_comments
     ])
     |> validate_required([
       :username,
@@ -76,7 +81,7 @@ defmodule Smartcitydogs.User do
   end
 
   def password_token_changeset(struct, params) do
-    IO.inspect(struct)
+  ##  IO.inspect(struct)
   end
 
 

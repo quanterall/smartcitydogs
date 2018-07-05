@@ -48,6 +48,7 @@ $("#like").click(function() {
         }
     }).then(function(data) {
         $("#signal-count").text(data.new_count);
+       
     })
 });
 

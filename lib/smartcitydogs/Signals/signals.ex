@@ -12,6 +12,7 @@ defmodule Smartcitydogs.Signals do
     field(:support_count, :integer)
     field(:title, :string)
     field(:view_count, :integer)
+    
 
     has_many(:signals_comments, Smartcitydogs.SignalsComments)
     belongs_to(:signals_categories, Smartcitydogs.SignalsCategories)

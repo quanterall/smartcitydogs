@@ -32,14 +32,8 @@
  <li class="nav-item">
 
      </li>
-<<<<<<< HEAD
-
-     <%= link "My profile", to:  user_path(@conn, :edit, @current_user), class: "btn btn-default btn-xs" %>
-   
-=======
      <%= link "My profile", to:  user_path(@conn, :show, @current_user), class: "btn btn-default btn-xs" %>
 
->>>>>>> 7e0f17b72e7ac9e685d4fdfc100426f2a76ab714
     <li class="nav-item">
 
                 <a class="nav-link" href="\">Home </a>

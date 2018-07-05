@@ -58,7 +58,7 @@ defmodule SmartcitydogsWeb.UserController do
     user = DataUsers.get_user!(id)
     changeset = DataUsers.change_user(user)
     logged_in_user_id =  conn.assigns.current_user.id
-    IO.inspect user.id
+  ##  IO.inspect user.id
     request_user_id = user.id
     if logged_in_user_id != request_user_id do
       render(conn, SmartcitydogsWeb.ErrorView, "410.html")

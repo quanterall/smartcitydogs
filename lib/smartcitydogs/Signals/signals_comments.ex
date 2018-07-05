@@ -7,6 +7,7 @@ defmodule Smartcitydogs.SignalsComments do
   schema "signals_comments" do
     field(:comment, :string)
     field(:deleted_at, :naive_datetime)
+    field :likes_number, :integer, default: 0
     belongs_to(:users, Smartcitydogs.User)
     belongs_to(:signals, Smartcitydogs.Signals)
 
@@ -16,7 +17,7 @@ defmodule Smartcitydogs.SignalsComments do
   @doc false
   def changeset(signals_comments, attrs) do
     signals_comments
-    |> cast(attrs, [:comment, :deleted_at, :signals_id, :users_id])
+    |> cast(attrs, [:comment, :deleted_at, :likes_number, :signals_id, :users_id])
     # , :users_id
     |> validate_required([:comment, :signals_id])
   end
