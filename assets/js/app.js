@@ -69,7 +69,7 @@ $("#comment").click(function() {
 
 $(function() {
 
-  //-----------------all signals---------------- 
+  //-----------------all signals----------------
   $('#all-signals').on('click', function() {
     $('.container-signals').load('signals');
   });
@@ -88,5 +88,50 @@ $(function() {
   // $('#all-dogs-shelter').on('click', function() {
   //   $('.container-signals').load('animals');
   // });
-
 });
+
+$(function(){
+  // var modal = document.getElementById('myModal');
+  // var btn = document.getElementById("button-change-status");
+  var modal = document.getElementById('myModal');
+  var span = document.getElementsByClassName("close")[0];
+
+  $('.change-status').on('click',function() {
+    var id = $(this).attr('id');
+    console.log(id);
+    modal.style.display = "block";
+  });
+  span.onclick = function() {
+      modal.style.display = "none";
+  }
+  window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+  }
+});
+
+
+
+// var modal = document.getElementById('myModal');
+//
+//   Get the button that opens the modal
+// var btn = document.getElementById("button-change-status");
+//   var btn = document.getElementsByClassName("p-button-change");
+//   // Get the <span> element that closes the modal
+// var span = document.getElementsByClassName("close")[0];
+// for (var i = 0, len = btn.length; i < len; i++) {
+//
+//   btn[i].onclick = function() {
+//     console.log("ala bala ");
+//       modal.style.display = "block";
+//   }
+//   span.onclick = function() {
+//       modal.style.display = "none";
+//   }
+//   window.onclick = function(event) {
+//     if (event.target == modal) {
+//         modal.style.display = "none";
+//     }
+//   }
+// }

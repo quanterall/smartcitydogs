@@ -77,13 +77,31 @@
                         <center>
 
                         <div class="button-show-hide">
-                          <p class="p-button-change"><a class="btn btn-secondary" href="signals/<%=signal.id%>" role="button">Change status</a>
+                          <p class="p-button-change"><a class="btn btn-secondary change-status" role="button">Change status</a>
                       </div></center>
+                        <!--  href="<%=signal.id%>/edit" -->
+
+                      <!-- The Modal -->
+                        <div id="myModal" class="modal">
+
+                          <!-- Modal content -->
+                          <div class="modal-content">
+                            <span class="close">&times;</span>
+                            <p class="modal-type">Промяна на типът на сигнала:</p>
+                            <br />
+                            <select class="select-type">
+                              <option value="New">Нов</option>
+                              <option value="Accepted">Приет</option>
+                              <option value="Sent">Изпратен</option>
+                            </select>
+                          </div>
+
+                        </div>
 
                         <center>
 
                         <div class="button-show-hide">
-                          <p class="p-button-view"><a class="btn btn-secondary" href="signals/<%=signal.id%>" role="button">View more</a>
+                          <p class="p-button-view"><a class="btn btn-secondary" href="<%=signal.id%>" role="button">View more</a>
                       </div></center>
                       </div>
                     </div>
