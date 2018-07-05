@@ -12,7 +12,7 @@
     <%= #file_input f, :photo, muliple: true %>
     <%= file_input f, :animal_image, name: "files[]", multiple: true %>
   </div>
-  
+
   <div class="form-group">
     <%= select( f, :sex, [[key: "Мъжко", value: "M"],
                  [key: "Женско", value: "F"] ] ) %>
@@ -29,13 +29,13 @@
                                      class: "form-control" %>
     <%= error_tag f, :password %>
   </div>
-  
+
   <div class="form-group">
     <%= select( f, :animals_status_id, [[key: "На свобода", value: "1"],
                  [key: "Осиновено", value: "2"], [key: "В приюта", value: "3"]]) %>
     <%= error_tag f, :email %>
   </div>
-    
+
 
   <%= submit "Register Dog", class: "btn btn-primary" %>
 <% end %>

@@ -21,8 +21,16 @@ exports.config = {
     },
     stylesheets: {
       joinTo: {
-        "css/app.css": ["node_modules/bootstrap/dist/css/bootstrap.css", "css/nav_bar.css"]
-        } 
+      "css/app.css": [
+          "css/login_user.css",
+          "css/register_user.css",
+          "node_modules/bootstrap/dist/css/bootstrap.css",
+          "css/show_user.css",
+          "css/my_profile.css",
+          "css/index_signal.css",
+          "css/nav_bar.css"
+        ]
+      }
     },
     templates: {
       joinTo: "js/app.js"

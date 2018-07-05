@@ -79,7 +79,7 @@
       <main role="main">
       <div class="container mt-0">
 <%= render @view_module, @view_template, assigns %>
-</div>
+<!-- </div> -->
       </main>
 
 
@@ -96,4 +96,3 @@
     
   </body>
 </html>
-
