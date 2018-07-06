@@ -14,12 +14,36 @@
     margin: -8em auto auto auto;
 }
 
-.navbar-dark .navbar-nav .nav-link {
+/* .navbar-dark .navbar-nav .nav-link {
     color: white;
+} */
+
+.green{
+    /* background-color: green; */
+}
+
+.navbar-nav a.nav-link.black {
+    color: rgb(63, 60, 60);
+}
+
+.navbar-nav a.nav-link.black:hover {
+    color: red !important;    
+}
+
+.navbar{
+    width: 100%;
+}
+
+.bg-gray{
+	background: rgb(226, 226, 226);
 }
 
 .bg-green {
     background: rgb(0, 201, 148);
+}
+
+.text-gray{
+	color: #c6c6c6;
 }
 
 .text-green {

@@ -102,4 +102,5 @@ defmodule SmartcitydogsWeb.SessionController do
   defp logout(conn) do
     Guardian.Plug.sign_out(conn)
   end
+
 end

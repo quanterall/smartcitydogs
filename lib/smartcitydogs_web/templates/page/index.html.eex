@@ -34,241 +34,250 @@
                 <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
                 <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
             </ol>
-        
+
         </div>
-            <!-- Marketing messaging and featurettes
+        <!-- Marketing messaging and featurettes
             ================================================== -->
-            <!-- Wrap the rest of the page in another container to center all the content. -->
-            
-            <h1 class="home_latest_signals">
-                <center>Latest signals:</center>
-            </h1>
-            <br>
-            <div class="container home_latest_signals_div">
-                <!-- Three columns of text below the carousel -->
-                <div class="row latest_signals_row">
-                    <div class="col-lg-3 latest_signals_box">
-                         <h2>Heading</h2>
-                        <ul>
-                            <li>
-                                View count:
-                            </li>
-                            <li>
-                                Date:
-                            </li>
-                            <li>
-                                Location:
-                            </li>
-                            <li>
-                                Signal status:
-                            </li>
-                            <li>
-                                Liked by people:
-                            </li>
-                            <li>
-                                Comments:
-                            </li>
-                        </ul>
-                        <p>
-                            <a class="btn btn-secondary" href="#" role="button">View more »</a>
-                            <a class="btn btn-secondary" href="#" role="button">View map »</a>
-                        </p>
-                    </div>
-                    <!-- /.col-lg-4 -->
-                    <div class="col-lg-3 latest_signals_box ">
-                         <h2>Heading</h2>
-                        <ul>
-                            <li>
-                                View count:
-                            </li>
-                            <li>
-                                Date:
-                            </li>
-                            <li>
-                                Location:
-                            </li>
-                            <li>
-                                Signal status:
-                            </li>
-                            <li>
-                                Liked by people:
-                            </li>
-                            <li>
-                                Comments:
-                            </li>
-                        </ul>
-                        <p>
-                            <a class="btn btn-secondary" href="#" role="button">View more »</a>
-                            <a class="btn btn-secondary" href="#" role="button">View map »</a>
-                        </p>
-                    </div>
-                    <!-- /.col-lg-4 -->
-                    <div class="col-lg-3 latest_signals_box">
-                        <h2>Heading</h2>
-                        <ul>
-                            <li>
-                                View count:
-                            </li>
-                            <li>
-                                Date:
-                            </li>
-                            <li>
-                                Location:
-                            </li>
-                            <li>
-                                Signal status:
-                            </li>
-                            <li>
-                                Liked by people:
-                            </li>
-                            <li>
-                                Comments:
-                            </li>
-                        </ul>
-                        <p>
-                            <a class="btn btn-secondary" href="#" role="button">View more »</a>
-                            <a class="btn btn-secondary" href="#" role="button">View map »</a>
-                        </p>
-                    </div>
-                    <!-- /.col-lg-4 -->
-                    <div class="col-lg-3 latest_signals_box">
-                        <h2>Heading</h2>
-                        <ul>
-                            <li>
-                                View count:
-                            </li>
-                            <li>
-                                Date:
-                            </li>
-                            <li>
-                                Location:
-                            </li>
-                            <li>
-                                Signal status:
-                            </li>
-                            <li>
-                                Liked by people:
-                            </li>
-                            <li>
-                                Comments:
-                            </li>
-                        </ul>
-                        <p>
-                            <a class="btn btn-secondary" href="#" role="button">View more »</a>
-                            <a class="btn btn-secondary" href="#" role="button">View map »</a>
-                        </p>
-                    </div>
+        <!-- Wrap the rest of the page in another container to center all the content. -->
+
+        <h1 class="home_latest_signals">
+            <center>Последни сигнали</center>
+        </h1>
+        <br>
+        <div class="container home_latest_signals_div">
+            <!-- Three columns of text below the carousel -->
+            <div class="row latest_signals_row">
+                <div class="col-lg-3 latest_signals_box">
+                    <h2>Heading</h2>
+                    <ul>
+                        <li>
+                            View count:
+                        </li>
+                        <li>
+                            Date:
+                        </li>
+                        <li>
+                            Location:
+                        </li>
+                        <li>
+                            Signal status:
+                        </li>
+                        <li>
+                            Liked by people:
+                        </li>
+                        <li>
+                            Comments:
+                        </li>
+                    </ul>
+                    <p>
+                        <a class="btn btn-secondary" href="#" role="button">View more »</a>
+                        <a class="btn btn-secondary" href="#" role="button">View map »</a>
+                    </p>
                 </div>
-                <!-- /.row -->
-
+                <!-- /.col-lg-4 -->
+                <div class="col-lg-3 latest_signals_box ">
+                    <h2>Heading</h2>
+                    <ul>
+                        <li>
+                            View count:
+                        </li>
+                        <li>
+                            Date:
+                        </li>
+                        <li>
+                            Location:
+                        </li>
+                        <li>
+                            Signal status:
+                        </li>
+                        <li>
+                            Liked by people:
+                        </li>
+                        <li>
+                            Comments:
+                        </li>
+                    </ul>
+                    <p>
+                        <a class="btn btn-secondary" href="#" role="button">View more »</a>
+                        <a class="btn btn-secondary" href="#" role="button">View map »</a>
+                    </p>
+                </div>
+                <!-- /.col-lg-4 -->
+                <div class="col-lg-3 latest_signals_box">
+                    <h2>Heading</h2>
+                    <ul>
+                        <li>
+                            View count:
+                        </li>
+                        <li>
+                            Date:
+                        </li>
+                        <li>
+                            Location:
+                        </li>
+                        <li>
+                            Signal status:
+                        </li>
+                        <li>
+                            Liked by people:
+                        </li>
+                        <li>
+                            Comments:
+                        </li>
+                    </ul>
+                    <p>
+                        <a class="btn btn-secondary" href="#" role="button">View more »</a>
+                        <a class="btn btn-secondary" href="#" role="button">View map »</a>
+                    </p>
+                </div>
+                <!-- /.col-lg-4 -->
+                <div class="col-lg-3 latest_signals_box">
+                    <h2>Heading</h2>
+                    <ul>
+                        <li>
+                            View count:
+                        </li>
+                        <li>
+                            Date:
+                        </li>
+                        <li>
+                            Location:
+                        </li>
+                        <li>
+                            Signal status:
+                        </li>
+                        <li>
+                            Liked by people:
+                        </li>
+                        <li>
+                            Comments:
+                        </li>
+                    </ul>
+                    <p>
+                        <a class="btn btn-secondary" href="#" role="button">View more »</a>
+                        <a class="btn btn-secondary" href="#" role="button">View map »</a>
+                    </p>
+                </div>
             </div>
-            <!-- START THE FEATURETTES -->
+            <!-- /.row -->
+
+        </div>
+        <!-- START THE FEATURETTES -->
 
 
-            <hr class="featurette-divider">
-            <div class="container">
-                <header>
-                    <h1 class="featurette-heading">
-                        <center>News:</center>
-                    </h1>
-                    <br>
-                </header>
-                <nav>
-                    <center>
-                        <ul>
-                            <img class="rounded-circle" src="<%= #static_path(@conn, " /images/4.jpg ") %>" alt="Generic placeholder image" width="200"
-                                height="200">
-                        </ul>
-                        <ul>
-                            <p>Title:</p>
-                            <p>Announce:</p>
-                            <p>Date:</p>
-                            <p>
-                                <a class="btn btn-secondary" href="#" role="button">View more »</a>
-                            </p>
-                        </ul>
-                    </center>
-                </nav>
-            </div>
-            <hr class="featurette-divider">
-            <div class="container marketing">
+        <hr class="featurette-divider">
+        <div class="container">
+            <header>
                 <h1 class="featurette-heading">
-                    <center>Latest registered dogs:</center>
+                    <center>News:</center>
                 </h1>
                 <br>
-                <div class="row">
-                    <div class="col-lg-4">
-                        <ul>
-                            <img class="rounded-circle" src="<%=# static_path(@conn, " /images/4.jpg ") %>" alt="Generic placeholder image" width="200"
-                                height="200">
-                        </ul>
-                        <ul>
-                            <p>Sex:</p>
-                            <p>Chip number:</p>
-                            <p>Date registered:</p>
-                            <p>Latest location:</p>
-                            <p>Status:</p>
-                            <p>
-                                <a class="btn btn-secondary" href="#" role="button">View more »</a>
-                            </p>
-                        </ul>
-                    </div>
-                    <div class="col-lg-4">
-                        <ul>
-                            <img class="rounded-circle" src="<%= #static_path(@conn, " /images/2.jpg ") %>" alt="Generic placeholder image" width="200"
-                                height="200">
-                        </ul>
-                        <ul>
-                            <p>Sex:</p>
-                            <p>Chip number:</p>
-                            <p>Date registered:</p>
-                            <p>Latest location:</p>
-                            <p>Status:</p>
-                            <p>
-                                <a class="btn btn-secondary" href="#" role="button">View more »</a>
-                            </p>
-                        </ul>
-                    </div>
-                    <div class="col-lg-4">
-                        <ul>
-                            <img class="rounded-circle" src="<%= #static_path(@conn, " /images/3.jpg ") %>" alt="Generic placeholder image" width="200"
-                                height="200">
-                        </ul>
-                        <ul>
-                            <p>Sex:</p>
-                            <p>Chip number:</p>
-                            <p>Date registered:</p>
-                            <p>Latest location:</p>
-                            <p>Status:</p>
-                            <p>
-                                <a class="btn btn-secondary" href="#" role="button">View more »</a>
-                            </p>
-                        </ul>
-                    </div>
+            </header>
+            <nav>
+                <center>
+                    <ul>
+                        <img class="rounded-circle" src="<%= #static_path(@conn, " /images/4.jpg ") %>" alt="Generic placeholder image" width="200"
+                            height="200">
+                    </ul>
+                    <ul>
+                        <p>Title:</p>
+                        <p>Announce:</p>
+                        <p>Date:</p>
+                        <p>
+                            <a class="btn btn-secondary" href="#" role="button">View more »</a>
+                        </p>
+                    </ul>
+                </center>
+            </nav>
+        </div>
+        <hr class="featurette-divider">
+        <div class="container marketing">
+            <h1 class="featurette-heading">
+                <center>Latest registered dogs:</center>
+            </h1>
+            <br>
+            <div class="row">
+                <div class="col-lg-4">
+                    <ul>
+                        <img class="rounded-circle" src="<%=# static_path(@conn, " /images/4.jpg ") %>" alt="Generic placeholder image" width="200"
+                            height="200">
+                    </ul>
+                    <ul>
+                        <p>Sex:</p>
+                        <p>Chip number:</p>
+                        <p>Date registered:</p>
+                        <p>Latest location:</p>
+                        <p>Status:</p>
+                        <p>
+                            <a class="btn btn-secondary" href="#" role="button">View more »</a>
+                        </p>
+                    </ul>
                 </div>
-                <hr class="featurette-divider">
-                <h2>
-                    <center>Latest adopted dogs:</center>
-                </h2>
-                <br>
-                <div class="row">
-                    <div class="col-lg-4">
-                        <ul>
-                            <img class="square" src="<%= #static_path(@conn, " /images/1.jpg ") %>" alt="Generic placeholder image" width="200" height="200">
-                        </ul>
-                    </div>
-                    <div class="col-lg-4">
-                        <ul>
-                            <img class="square" src="<%= #static_path(@conn, " /images/4.jpg ") %>" alt="Generic placeholder image" width="200" height="200">
-                        </ul>
-                    </div>
-                    <div class="col-lg-4">
-                        <ul>
-                            <img class="square" src="<%= #static_path(@conn, " /images/3.jpg ") %>" alt="Generic placeholder image" width="200" height="200">
-                        </ul>
-                    </div>
+                <div class="col-lg-4">
+                    <ul>
+                        <img class="rounded-circle" src="<%= #static_path(@conn, " /images/2.jpg ") %>" alt="Generic placeholder image" width="200"
+                            height="200">
+                    </ul>
+                    <ul>
+                        <p>Sex:</p>
+                        <p>Chip number:</p>
+                        <p>Date registered:</p>
+                        <p>Latest location:</p>
+                        <p>Status:</p>
+                        <p>
+                            <a class="btn btn-secondary" href="#" role="button">View more »</a>
+                        </p>
+                    </ul>
                 </div>
+                <div class="col-lg-4">
+                    <ul>
+                        <img class="rounded-circle" src="<%= #static_path(@conn, " /images/3.jpg ") %>" alt="Generic placeholder image" width="200"
+                            height="200">
+                    </ul>
+                    <ul>
+                        <p>Sex:</p>
+                        <p>Chip number:</p>
+                        <p>Date registered:</p>
+                        <p>Latest location:</p>
+                        <p>Status:</p>
+                        <p>
+                            <a class="btn btn-secondary" href="#" role="button">View more »</a>
+                        </p>
+                    </ul>
+                </div>
+            </div>
+            <hr class="featurette-divider">
+            <h2>
+                <center>Latest adopted dogs:</center>
+            </h2>
+            <br>
+            <div class="row">
+                <div class="col-lg-4">
+                    <ul>
+                        <img class="square" src="<%= #static_path(@conn, " /images/1.jpg ") %>" alt="Generic placeholder image" width="200" height="200">
+                    </ul>
+                </div>
+                <div class="col-lg-4">
+                    <ul>
+                        <img class="square" src="<%= #static_path(@conn, " /images/4.jpg ") %>" alt="Generic placeholder image" width="200" height="200">
+                    </ul>
+                </div>
+                <div class="col-lg-4">
+                    <ul>
+                        <img class="square" src="<%= #static_path(@conn, " /images/3.jpg ") %>" alt="Generic placeholder image" width="200" height="200">
+                    </ul>
+                </div>
+            </div>
 
-                <!-- /END THE FEATURETTES -->
+            <!-- /END THE FEATURETTES -->
         </div>
         <!-- /.container -->
+
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+            crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+        <script type="text/javascript" src="slick/slick.min.js"></script>
+        
