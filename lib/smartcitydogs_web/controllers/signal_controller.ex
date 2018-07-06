@@ -4,9 +4,11 @@ defmodule SmartcitydogsWeb.SignalController do
   alias Smartcitydogs.Signals
   alias Smartcitydogs.DataUser
 
+  plug(:put_layout, false when action in [:filter_index])
+
   def index(conn, _params) do
     signal = DataSignals.list_signals()
-    render(conn, "index_signal.html", signal: signal)
+    render(conn, "filter_index.html", signal: signal)
   end
 
   def new(conn, _params) do
@@ -141,8 +143,8 @@ defmodule SmartcitydogsWeb.SignalController do
     DataSignals.update_signal(signal, %{"signals_types_id" => signals_types_id})
 
     signals = DataSignals.list_signals()
-    render conn, "index_signals.html", signals: signals
-    end
+    render(conn, "index_signals.html", signals: signals)
+  end
 
   # def my_signals(conn) do
   #   user = conn.assigns.current_user.id
@@ -175,5 +177,10 @@ defmodule SmartcitydogsWeb.SignalController do
       |> put_flash(:info, "Signal deleted successfully.")
       |> redirect(to: signal_path(conn, :index))
     end
+  end
+
+  def filter_index(conn, _params) do
+    signal = DataSignals.list_signals()
+    render(conn, "index_signal.html", signal: signal)
   end
 end

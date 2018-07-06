@@ -9,20 +9,6 @@
   </head>
   <body>
 
-  <div class="container-filter-signals">
-      <div class="container-filter">
-        <b><button id="all-signals">Подадени сигнали</button></b>
-        <br />
-        <button id="all-registered-dogs">Регистрирани кучета</button>
-        <br />
-        <button id="all-adopted-dogs">Осиновени кучета</button>
-        <br />
-        <b>
-        <button id="all-dogs-shelter">Кучета в приьта</button>
-        </b>
-      </div>
-      <div class="container-signals">
-
 
                 <div class="row">
                 <%= for signal <- @signal do %>
@@ -95,7 +81,7 @@
                         <div class="button-show-hide">
                           <p class="p-button-change"><a class="btn btn-secondary change-status" id="<%= signal.id %>" role="button">Change status</a></p>
                         </div></center>
-                        <!--  href="<%=signal.id%>/edit" -->
+
 
                       <!-- The Modal -->
                         <div id="myModal" class="modal">
@@ -131,7 +117,7 @@
 
 
             </div>
-      </div>
+
 
       <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
 </body>

@@ -6,14 +6,16 @@ defmodule SmartcitydogsWeb.AnimalController do
   alias Smartcitydogs.AnimalImages
   alias Smartcitydogs.Repo
 
+  plug(:put_layout, false)
+
   def index(conn, _params) do
     chip = _params["chip_number"]
-    
+
     logged_user_type_id = conn.assigns.current_user.users_types.id
-    if logged_user_type_id == 3  do
+
+    if logged_user_type_id == 3 do
       render(conn, SmartcitydogsWeb.ErrorView, "401.html")
     else
-    
       if chip == "" do
         animals = DataAnimals.list_animals()
         render(conn, "index.html", animals: animals)
@@ -33,7 +35,8 @@ defmodule SmartcitydogsWeb.AnimalController do
     changeset = Animals.changeset(%Animals{})
 
     logged_user_type_id = conn.assigns.current_user.users_types.id
-    if logged_user_type_id != 5  do
+
+    if logged_user_type_id != 5 do
       render(conn, SmartcitydogsWeb.ErrorView, "401.html")
     else
       render(conn, "new.html", changeset: changeset)
@@ -42,7 +45,8 @@ defmodule SmartcitydogsWeb.AnimalController do
 
   def create(conn, %{"animals" => animal_params}) do
     logged_user_type_id = conn.assigns.current_user.users_types.id
-    if logged_user_type_id != 5  do
+
+    if logged_user_type_id != 5 do
       render(conn, SmartcitydogsWeb.ErrorView, "401.html")
     else
       case DataAnimals.create_animal(animal_params) do
@@ -90,6 +94,7 @@ defmodule SmartcitydogsWeb.AnimalController do
   def show(conn, %{"id" => id}) do
     animal = DataAnimals.get_animal(id)
     logged_user_type_id = conn.assigns.current_user.users_types.id
+
     if logged_user_type_id == 3 do
       render(conn, SmartcitydogsWeb.ErrorView, "401.html")
     else
@@ -101,10 +106,11 @@ defmodule SmartcitydogsWeb.AnimalController do
     animal = DataAnimals.get_animal(id)
     changeset = DataAnimals.change_animal(animal)
     logged_user_type_id = conn.assigns.current_user.users_types.id
+
     if logged_user_type_id == 1 || logged_user_type_id == 5 do
       render(conn, "edit.html", animals: animal, changeset: changeset)
     else
-      render(conn, SmartcitydogsWeb.ErrorView, "401.html")      
+      render(conn, SmartcitydogsWeb.ErrorView, "401.html")
     end
   end
 
@@ -112,6 +118,7 @@ defmodule SmartcitydogsWeb.AnimalController do
     animal = DataAnimals.get_animal(id)
 
     logged_user_type_id = conn.assigns.current_user.users_types.id
+
     if logged_user_type_id == 1 || logged_user_type_id == 5 do
       case DataAnimals.update_animal(animal, animal_params) do
         {:ok, animal} ->
@@ -123,7 +130,7 @@ defmodule SmartcitydogsWeb.AnimalController do
           render(conn, "edit.html", animal: animal, changeset: changeset)
       end
     else
-      render(conn, SmartcitydogsWeb.ErrorView, "401.html")      
-    end 
+      render(conn, SmartcitydogsWeb.ErrorView, "401.html")
+    end
   end
 end

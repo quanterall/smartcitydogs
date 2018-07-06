@@ -70,7 +70,7 @@ $(function() {
 
   //-----------------all signals----------------
   $('#all-signals').on('click', function() {
-    $('.container-signals').load('signals');
+    $('.container-signals').load('signals/filter_index');
   });
 
   // ------------------Registered dogs----------------

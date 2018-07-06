@@ -68,6 +68,10 @@
   background-color: transparent;
   box-shadow: inset 0px 0px 400px 110px rgba(0, 0, 0, .5)
 }
+.col-container-shadow .btn-secondary:hover{
+  color: #42f4a7 !important;
+  opacity: 1;
+}
 .col-container-shadow a.btn-secondary{
   color: transparent;
   background-color: transparent;
@@ -83,11 +87,11 @@
 } */
 label-date{
   color: #c4c4c4;
-  font-size: 20px;
+  font-size: 15px;
 }
 label-adress{
   color: #c4c4c4;
-  font-size: 20px;
+  font-size: 15px;
 }
 label-title{
   font-size: 25px;

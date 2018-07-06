@@ -35,7 +35,6 @@ defmodule SmartcitydogsWeb.Router do
     plug(Smartcitydogs.CurrentUser)
   end
 
-
   scope "/api", SmartcitydogsWeb do
     pipe_through(:api)
 
@@ -74,8 +73,6 @@ defmodule SmartcitydogsWeb.Router do
     resources("/static_pages", StaticPageControllerAPI, except: [:new, :edit])
   end
 
-  
-
   scope "/", SmartcitydogsWeb do
     # Use the default browser stack
     pipe_through([:browser, :with_session])
@@ -103,7 +100,7 @@ defmodule SmartcitydogsWeb.Router do
       resources("/users", UserController)
       get("/users", UserController, :index)
       get("/users/:id", UserController, :show)
-      
+
       resources("/animals", AnimalController)
       resources("/news", NewsController)
       get("/show", PageController, :show)
@@ -115,10 +112,11 @@ defmodule SmartcitydogsWeb.Router do
 
       # get("/signals/my_signals", SignalController, :my_signals)
       get("/signals/comment", SignalController, :comment)
+      get("/signals/filter_index", SignalController, :filter_index)
       get("/signals/get_signals_support_count", SignalController, :get_signals_support_count)
       get("/signals/update_like_count", SignalController, :update_like_count)
       get("/signals/update_type", SignalController, :update_type)
-    
+
       resources(
         "/signals",
         SignalController
@@ -144,7 +142,6 @@ defmodule SmartcitydogsWeb.Router do
           SignalController
         )
       end
-
     end
   end
 
@@ -174,5 +171,4 @@ defmodule SmartcitydogsWeb.Router do
       |> halt()
     end
   end
-
 end
