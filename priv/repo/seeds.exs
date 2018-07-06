@@ -168,6 +168,34 @@ unless Repo.get_by(Animals, chip_number: animals_params[:chip_number]) do
   |> Repo.insert!()
 end
 
+#############  Animals #######
+animals_params = %{
+  sex: "M",
+  chip_number: "adopted234",
+  address: "Kolio Ficheto 24",
+  animals_status_id: 2
+}
+
+unless Repo.get_by(Animals, chip_number: animals_params[:chip_number]) do
+  %Animals{}
+  |> Animals.changeset(animals_params)
+  |> Repo.insert!()
+end
+
+#############  Animals #######
+animals_params = %{
+  sex: "M",
+  chip_number: "shelter789",
+  address: "Kolio Ficheto 24",
+  animals_status_id: 3
+}
+
+unless Repo.get_by(Animals, chip_number: animals_params[:chip_number]) do
+  %Animals{}
+  |> Animals.changeset(animals_params)
+  |> Repo.insert!()
+end
+
 ### Insert in table Animals (animals_params)
 # unless Repo.get_by(Animals, chip_number: animals_params[:chip_number]) do
 # %Animals{sex: "M", chip_number: "2321243242", address: "Kolio Ficheto 24",  animals_status_id: 1}

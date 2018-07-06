@@ -3,8 +3,13 @@ defmodule SmartcitydogsWeb.SignalController do
   alias Smartcitydogs.DataSignals
   alias Smartcitydogs.Signals
   alias Smartcitydogs.DataUser
+  alias Smartcitydogs.DataAnimals
+  alias Smartcitydogs.Repo
 
   plug(:put_layout, false when action in [:filter_index])
+  plug(:put_layout, false when action in [:adopted_animals])
+  plug(:put_layout, false when action in [:shelter_animals])
+  # plug :put_layout, false when action in [:filter_index]
 
   def index(conn, _params) do
     signal = DataSignals.list_signals()
@@ -183,4 +188,15 @@ defmodule SmartcitydogsWeb.SignalController do
     signal = DataSignals.list_signals()
     render(conn, "index_signal.html", signal: signal)
   end
+
+  def adopted_animals(conn, _params) do
+    animals = DataAnimals.get_adopted_animals() |> Repo.preload(:animals_status )
+    render(conn, "adopted_animals.html", animals: animals)
+  end
+
+  def shelter_animals(conn, _params) do
+    animals = DataAnimals.get_shelter_animals() |> Repo.preload(:animals_status)
+    render(conn, "shelter_animals.html", animals: animals)
+  end
+
 end

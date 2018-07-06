@@ -79,14 +79,14 @@ $(function() {
   });
 
   //-----------------Adopted dogs-----------------
-  // $('#all-adopted-dogs').on('click', function() {
-  //   $('.container-signals').load('');
-  // });
+   $('#all-adopted-dogs').on('click', function() {
+    $('.container-signals').load('signals/adopted_animals');
+   });
 
   // -------------Dogs under shelter----------------
-  // $('#all-dogs-shelter').on('click', function() {
-  //   $('.container-signals').load('animals');
-  // });
+   $('#all-dogs-shelter').on('click', function() {
+     $('.container-signals').load('signals/shelter_animals');
+   });
 });
 
 $(function(){
