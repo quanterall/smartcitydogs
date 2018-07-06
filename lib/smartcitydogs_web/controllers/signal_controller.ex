@@ -4,8 +4,6 @@ defmodule SmartcitydogsWeb.SignalController do
   alias Smartcitydogs.Signals
   alias Smartcitydogs.DataUsers
   alias Smartcitydogs.Repo
-
-  alias Smartcitydogs.DataUser
   alias Smartcitydogs.DataAnimals
   alias Smartcitydogs.Repo
 
@@ -357,9 +355,11 @@ defmodule SmartcitydogsWeb.SignalController do
     end
   end
 
-  def filter_index(conn, _params) do
-    signal = DataSignals.list_signals()
-    render(conn, "index_signal.html", signal: signal)
+  def filter_index(conn, params) do
+   ## signal = DataSignals.list_signals()
+    page = Signals |> Smartcitydogs.Repo.paginate(params)
+    sorted_signals = DataSignals.sort_signal_by_id
+    render(conn, "index_signal.html", signal: sorted_signals, page: page)
   end
 
   def adopted_animals(conn, _params) do

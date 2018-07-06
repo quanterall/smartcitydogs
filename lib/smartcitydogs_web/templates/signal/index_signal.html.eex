@@ -112,14 +112,17 @@
                           <p class="p-button-view"><a class="btn btn-secondary" href="signals/<%=signal.id%>" role="button">View more</a>
                       </div></center>
                       </div>
+
                     </div>
                   </div>
                   <%end%>
                 </div>
 
-
             </div>
-
+                      <%= for x <- 1..@page.total_pages do %>
+  <%= link "#{x * 8 - 7} - #{x * 8}", to: signal_path(@conn, :index, page: x) %>
+<% end %> 
+ 
 
       <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
 </body>
