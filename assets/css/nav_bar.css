@@ -92,3 +92,7 @@
     width: 100%;
     flex-wrap: inherit;
 }
+
+.container{
+    max-width: 100% !important;
+}
