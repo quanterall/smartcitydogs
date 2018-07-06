@@ -92,7 +92,6 @@ defmodule SmartcitydogsWeb.SessionController do
     |> Guardian.Plug.sign_in(user)
   end
 
-
   def delete(conn, _) do
     conn
     |> Smartcitydogs.Auth.logout()
@@ -103,4 +102,5 @@ defmodule SmartcitydogsWeb.SessionController do
   defp logout(conn) do
     Guardian.Plug.sign_out(conn)
   end
+
 end

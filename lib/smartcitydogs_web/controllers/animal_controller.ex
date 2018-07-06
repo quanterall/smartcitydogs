@@ -5,45 +5,66 @@ defmodule SmartcitydogsWeb.AnimalController do
   alias Smartcitydogs.Animals
   alias Smartcitydogs.AnimalImages
   alias Smartcitydogs.Repo
+  
+  plug(:put_layout, false)
 
   def index(conn, params) do
     chip = params["chip_number"]
     page = Animals |> Smartcitydogs.Repo.paginate(params)
     sorted_animals = DataAnimals.sort_animals_by_id
-    if chip == "" do
-      ##animals = DataAnimals.list_animals()
-      render(conn, "index.html", animals: sorted_animals, page: page)
-    end
+    logged_user_type_id = conn.assigns.current_user.users_types.id
 
-    if chip != nil do
-      animals = DataAnimals.get_animal_by_chip(chip)
+    if logged_user_type_id == 3 do
+      render(conn, SmartcitydogsWeb.ErrorView, "401.html")
+    else
+      if chip == "" do
+        ##animals = DataAnimals.list_animals()
+        render(conn, "index.html", animals: sorted_animals, page: page)
+      end
+
+      if chip != nil do
+        animals = DataAnimals.get_animal_by_chip(chip)
+        render(conn, "index.html", animals: page.entries, page: page)
+      end
+
+      page = Animals |> Smartcitydogs.Repo.paginate(params)
+      ## animals = DataAnimals.list_animals()
       render(conn, "index.html", animals: page.entries, page: page)
     end
-
-    page = Animals |> Smartcitydogs.Repo.paginate(params)
-   ## animals = DataAnimals.list_animals()
-    render(conn, "index.html", animals: page.entries, page: page)
   end
 
   def new(conn, _params) do
     changeset = Animals.changeset(%Animals{})
-    render(conn, "new.html", changeset: changeset)
+
+    logged_user_type_id = conn.assigns.current_user.users_types.id
+
+    if logged_user_type_id != 5 do
+      render(conn, SmartcitydogsWeb.ErrorView, "401.html")
+    else
+      render(conn, "new.html", changeset: changeset)
+    end
   end
 
   def create(conn, %{"animals" => animal_params}) do
-    case DataAnimals.create_animal(animal_params) do
-      {:ok, animal} ->
-        upload_file(animal.id, conn)
+    logged_user_type_id = conn.assigns.current_user.users_types.id
 
-        conn
-        |> put_flash(
-          :info,
-          " Dog wiht chip number #{Map.get(animal_params, "chip_number")} is created!"
-        )
-        |> redirect(to: animal_path(conn, :index))
+    if logged_user_type_id != 5 do
+      render(conn, SmartcitydogsWeb.ErrorView, "401.html")
+    else
+      case DataAnimals.create_animal(animal_params) do
+        {:ok, animal} ->
+          upload_file(animal.id, conn)
 
-      {:error, changeset} ->
-        render(conn, "new.html", changeset: changeset)
+          conn
+          |> put_flash(
+            :info,
+            " Dog wiht chip number #{Map.get(animal_params, "chip_number")} is created!"
+          )
+          |> redirect(to: animal_path(conn, :index))
+
+        {:error, changeset} ->
+          render(conn, "new.html", changeset: changeset)
+      end
     end
   end
 
@@ -58,7 +79,6 @@ defmodule SmartcitydogsWeb.AnimalController do
 
       extension = Path.extname(head.filename)
 
-      # File.cp(head.path, "/home/sonyft/smartcitydog/smartcitydogs/assets/static/images/#{Map.get(animal_params, "chip_number")}-profile#{}#{extension}")
       File.cp(
         head.path,
         "../smartcitydogs/assets/static/images/#{Map.get(head, :filename)}-profile#{extension}"
@@ -74,28 +94,45 @@ defmodule SmartcitydogsWeb.AnimalController do
   end
 
   def show(conn, %{"id" => id}) do
-    # animal = Repo.get!(Animals, id) |> Repo.preload(:animals_status)
     animal = DataAnimals.get_animal(id)
-    render(conn, "show.html", animals: animal)
+    logged_user_type_id = conn.assigns.current_user.users_types.id
+
+    if logged_user_type_id == 3 do
+      render(conn, SmartcitydogsWeb.ErrorView, "401.html")
+    else
+      render(conn, "show.html", animals: animal)
+    end
   end
 
   def edit(conn, %{"id" => id}) do
     animal = DataAnimals.get_animal(id)
     changeset = DataAnimals.change_animal(animal)
-    render(conn, "edit.html", animals: animal, changeset: changeset)
+    logged_user_type_id = conn.assigns.current_user.users_types.id
+
+    if logged_user_type_id == 1 || logged_user_type_id == 5 do
+      render(conn, "edit.html", animals: animal, changeset: changeset)
+    else
+      render(conn, SmartcitydogsWeb.ErrorView, "401.html")
+    end
   end
 
   def update(conn, %{"id" => id, "animals" => animal_params}) do
     animal = DataAnimals.get_animal(id)
 
-    case DataAnimals.update_animal(animal, animal_params) do
-      {:ok, animal} ->
-        conn
-        |> put_flash(:info, "Animal updated successfully.")
-        |> redirect(to: animal_path(conn, :show, animal))
+    logged_user_type_id = conn.assigns.current_user.users_types.id
 
-      {:error, %Ecto.Changeset{} = changeset} ->
-        render(conn, "edit.html", animal: animal, changeset: changeset)
+    if logged_user_type_id == 1 || logged_user_type_id == 5 do
+      case DataAnimals.update_animal(animal, animal_params) do
+        {:ok, animal} ->
+          conn
+          |> put_flash(:info, "Animal updated successfully.")
+          |> redirect(to: animal_path(conn, :show, animal))
+
+        {:error, %Ecto.Changeset{} = changeset} ->
+          render(conn, "edit.html", animal: animal, changeset: changeset)
+      end
+    else
+      render(conn, SmartcitydogsWeb.ErrorView, "401.html")
     end
   end
 end

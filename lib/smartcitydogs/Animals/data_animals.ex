@@ -24,6 +24,17 @@ defmodule Smartcitydogs.DataAnimals do
     Repo.get!(Animals, id) |> Repo.preload(:animals_status)
   end
 
+  def get_adopted_animals() do
+    query = Ecto.Query.from(c in Animals, where: c.animals_status_id == 2)
+    Repo.all(query)
+  end
+
+  def get_shelter_animals() do
+    query = Ecto.Query.from(c in Animals, where: c.animals_status_id == 3)
+    Repo.all(query)
+  end
+
+
   def get_animal_image(id) do
     Repo.get!(AnimalImages, id)
   end

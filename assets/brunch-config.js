@@ -26,7 +26,9 @@ exports.config = {
           "css/register_user.css",
           "node_modules/bootstrap/dist/css/bootstrap.css",
           "css/show_user.css",
-          "css/my_profile.css"
+          "css/my_profile.css",
+          "css/index_signal.css",
+          "css/nav_bar.css"
         ]
       }
     },

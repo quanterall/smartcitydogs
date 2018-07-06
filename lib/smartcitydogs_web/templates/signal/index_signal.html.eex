@@ -60,13 +60,67 @@
               <p><a class="btn btn-secondary" href="signals/<%=signal.id%>" role="button">View more »</a>
               <a class="btn btn-secondary" href="#" role="button">View map »</a></p>
 
+
+                          <div class="fa fa-thumbs-o-up">
+
+                          </div> : <span id="signal-count"><%= signal.support_count %></span>
+                        </div>
+                          <!-- <br /> -->
+                        <div class="icon-scale">
+                          <div class="fa fa-comment-o">
+                          </div> : 0
+                          <br />
+                        </div>
+                        <center>
+
+                        <div class="button-show-hide">
+                          <p class="p-button-change"><a class="btn btn-secondary change-status" id="<%= signal.id %>" role="button">Change status</a></p>
+                        </div></center>
+
+
+                      <!-- The Modal -->
+                        <div id="myModal" class="modal">
+
+                          <!-- Modal content -->
+                          <div class="modal-content">
+                            <span class="close">&times;</span>
+                            <p class="modal-type">Промяна на типът на сигнала:</p>
+                            <br />
+                            <select class="select-type">
+                              <option value="1">Нов</option>
+                              <option value="2">Приет</option>
+                              <option value="3">Изпратен</option>
+                              <option value="4">Осиновено</option>
+                            </select>
+                            <br />
+                            <a class="btn btn-secondary" id="type-chosen" role="button">Промени</a>
+
+                          </div>
+
+                        </div>
+
+                        <center>
+
+                        <div class="button-show-hide">
+                          <p class="p-button-view"><a class="btn btn-secondary" href="signals/<%=signal.id%>" role="button">View more</a>
+                      </div></center>
+                      </div>
+                    </div>
+                  </div>
+                  <%end%>
+                </div>
+
+
             </div>
-            <%end%>
-          </div><!-- /.row -->
 
 
-
+<<<<<<< HEAD
 </div>
 <%= for x <- 1..@page.total_pages do %>
   <%= link "#{x * 8 - 7} - #{x * 8}", to: signal_path(@conn, :index, page: x) %>
 <% end %>  
+=======
+      <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
+</body>
+</html>
+>>>>>>> GH-75
