@@ -65,12 +65,12 @@
 
       </ul>
 
-          
-  
+
+
         <br><br>
         <label> Leave a comment:</label>
         <br>
-          <textarea name="message" id="comment-id" value="" rows="60" cols="4000">
+          <textarea name="message" id="comment-id" value="" rows="60" cols="60">
            </textarea>
         <br>
         <br>
