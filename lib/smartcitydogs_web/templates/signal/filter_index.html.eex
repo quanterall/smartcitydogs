@@ -126,16 +126,17 @@
                       </div></center>
 
                       </div>
-                         <%= for x <- 1..@page.total_pages do %>
-                         <%= link "#{x * 8 - 7} - #{x * 8}", to: signal_path(@conn, :index, page: x) %>
-                        <% end %>  
+
                     </div>
                   </div>
                   <%end%>
                 </div>
-
+        <%= for x <- 1..@page.total_pages do %>
+                         <%= link "#{x * 8 - 7} - #{x * 8}", to: signal_path(@conn, :index, page: x) %>
+                        <% end %>  
 
             </div>
+                             
       </div>
 
       <script src="<%= static_path(@conn, "/js/app.js") %>"></script>

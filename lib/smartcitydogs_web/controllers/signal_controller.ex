@@ -6,6 +6,7 @@ defmodule SmartcitydogsWeb.SignalController do
   alias Smartcitydogs.Repo
   alias Smartcitydogs.DataAnimals
   alias Smartcitydogs.Repo
+  alias Smartcitydogs.Animals
 
   plug(:put_layout, false when action in [:filter_index])
   plug(:put_layout, false when action in [:adopted_animals])
@@ -14,8 +15,10 @@ defmodule SmartcitydogsWeb.SignalController do
   def index(conn, params) do
    # signal = DataSignals.list_signals()
    page = Signals |> Smartcitydogs.Repo.paginate(params)
+   IO.inspect page
    sorted_signals = DataSignals.sort_signal_by_id
-   render(conn, "filter_index.html", signal: sorted_signals, page: page)
+  ## IO.inspect sorted_signals
+   render(conn, "filter_index.html", signal: page.entries, page: page)
   end
 
 
@@ -359,15 +362,26 @@ defmodule SmartcitydogsWeb.SignalController do
    ## signal = DataSignals.list_signals()
     page = Signals |> Smartcitydogs.Repo.paginate(params)
     sorted_signals = DataSignals.sort_signal_by_id
-    render(conn, "index_signal.html", signal: sorted_signals, page: page)
+    IO.puts ")))))))))))))))))))))"
+    IO.inspect sorted_signals
+    render(conn, "index_signal.html", signal: page.entries, page: page)
   end
 
-  def adopted_animals(conn, _params) do
-    animals = DataAnimals.get_adopted_animals() |> Repo.preload(:animals_status )
-    render(conn, "adopted_animals.html", animals: animals)
+  def adopted_animals(conn, params) do
+    animals = DataAnimals.get_adopted_animals() |> Repo.preload(:animals_status)
+    IO.puts "**********"
+    IO.inspect params
+    page = animals |> Smartcitydogs.Repo.paginate(params) 
+   
+    IO.inspect animals
+   animals =  page.entries |> Enum.map( fn(x) -> x |> Repo.preload(:animals_status) end)
+  
+      ## animals = DataAnimals.list_animals()
+   render(conn, "adopted_animals.html", animals: page.entries, page: page)
+   ## render(conn, "adopted_animals.html", animals: animals)
   end
 
-  def shelter_animals(conn, _params) do
+  def shelter_animals(conn, params) do
     animals = DataAnimals.get_shelter_animals() |> Repo.preload(:animals_status)
     render(conn, "shelter_animals.html", animals: animals)
   end
