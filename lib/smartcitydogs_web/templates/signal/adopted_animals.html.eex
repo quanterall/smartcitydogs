@@ -40,13 +40,16 @@
                 </li>
               </ul>
               <p>
-              <%= link "View more »", to: signal_path(@conn, :show, animal), class: "btn btn-secondary" %>
+              <%= link "View more »", to: animal_path(@conn, :show, animal), class: "btn btn-secondary" %>
               <a class="btn btn-secondary" href="#" role="button">View map »</a></p>
             
             </div>
             <%end%>
           </div><!-- /.row -->
          
-           
+           <%= for x <- 1..@page.total_pages do %>
+  <%= link "#{x * 8 - 7} - #{x * 8}", to: signal_path(@conn, :adopted_animals, page: x) %>
+<% end %>  
+
           
 </div>

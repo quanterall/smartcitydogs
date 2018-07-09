@@ -61,7 +61,8 @@ defmodule Smartcitydogs.Mixfile do
       {:bamboo_smtp, "~> 1.4.0"},
       {:mock, "~> 0.2.0", only: :test},
       {:timex, "~> 3.1"},
-      {:scrivener_ecto, "~> 1.0"}
+      {:scrivener_ecto, "~> 1.0"},
+      {:scrivener_list, "~> 1.0"}
     ]
   end
 
