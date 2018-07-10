@@ -117,6 +117,7 @@ defmodule SmartcitydogsWeb.Router do
       post("/signals/add_like", SignalController, :add_like)
       post("/signals/add_comment_like", SignalController, :add_comment_like)
       post("/signals/add_comment_dislike", SignalController, :add_comment_dislike)
+      
 
       get("/signals/followed_signals", SignalController, :followed_signals)
       get("/signals/update_type", SignalController, :update_type)

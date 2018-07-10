@@ -52,6 +52,8 @@ defmodule Smartcitydogs.DataUsers do
   end
 
   def update_user(%User{} = user, args) do
+    IO.inspect args
+    IO.puts "TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT"
     user
     |> User.registration_changeset(args)
     |> Repo.update()

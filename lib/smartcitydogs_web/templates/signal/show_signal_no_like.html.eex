@@ -1,4 +1,8 @@
+<html>
+<head>
+</head>
 
+<body>
       <h1><%= @signal.title %></h1>
       <ul>
 
@@ -63,14 +67,11 @@
         </li>
 
       </ul>
-          <%= ##IO.inspect @conn%>
-          <%= signal_path =  "/signals/#{@signal.id}"%>
-        <p><a id="like" class="btn btn-secondary" role="button", >  Like </a>
         <%= button "like", to: signal_path(@conn, :add_like, %{id: @signal.id}) %>
         <br><br>
         <label> Leave a comment:</label>
         <br>
-          <textarea name="message" id="comment-id" value="" rows="6" cols="4000">
+          <textarea name="message" id="comment-id" value="" rows="6" cols="60">
            </textarea>
           <%= ##button "like", to: signal_path(@conn, :add_comment_like, %{id: @signal.id}) %>
           <%= ##button "dislike", to: signal_path(@conn, :add_comment_dislike, %{id: @signal.id}) %>
@@ -95,3 +96,7 @@
           <%= button "dislike", to: signal_path(@conn, :add_comment_dislike, %{id: comment.id, signal_id: @signal.id}) %>
           <hr>
           <% end %>
+
+          <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
+</body>
+</html>

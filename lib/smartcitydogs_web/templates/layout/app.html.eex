@@ -72,7 +72,7 @@
         nav-link
       <% else %>
          nav-link black
-      <% end %>" href="/contact">Контакти</a>
+      <% end %>" href="/contact/new">Контакти</a>
       </li>
     </ul>
 

@@ -54,7 +54,7 @@ $("#like").click(function() {
 
 
 $("#comment").click(function() {
-
+    
     $.ajax({
         method: "GET",
         url: "/signals/comment",

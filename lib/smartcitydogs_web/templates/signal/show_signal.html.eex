@@ -1,4 +1,9 @@
+      <html>
+<head>
+</head>
 
+<body>
+     
       <h1><%= ##@signal.title %></h1>
       <ul>
 
@@ -70,7 +75,7 @@
         <br><br>
         <label> Leave a comment:</label>
         <br>
-          <textarea name="message" id="comment-id" value="" rows="60" cols="4000">
+          <textarea name="message" id="comment-id" value="" rows="6" cols="60">
            </textarea>
         <br>
         <br>
@@ -91,3 +96,7 @@
           <%= button "dislike", to: signal_path(@conn, :add_comment_dislike, %{id: comment.id, signal_id: @signal.id}) %>
           <hr>
           <% end %>
+
+          <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
+</body>
+</html>

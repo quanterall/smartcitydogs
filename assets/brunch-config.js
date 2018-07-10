@@ -1,4 +1,8 @@
 exports.config = {
+  notifications: false,
+watcher: {
+    usePolling: true
+},
   // See http://brunch.io/#documentation for docs.
   files: {
     javascripts: {
@@ -76,5 +80,7 @@ exports.config = {
       styles: {
           bootstrap: ['dist/css/bootstrap.css']
       }
+      
   }
+  
 };
