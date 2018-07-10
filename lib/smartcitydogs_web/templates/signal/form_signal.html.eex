@@ -1,3 +1,11 @@
+<html>
+<head>
+  <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
+</head>
+
+<body>
+
+
 <%= form_for @changeset, @action,[multipart: true], fn f -> %>
 <%= if @changeset.action do %>
 <div class="alert alert-danger">
@@ -52,3 +60,6 @@
 <%= submit "Submit", class: "btn btn-primary" %>
 </div>
 <% end %>
+
+</body>
+</html>

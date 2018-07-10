@@ -39,7 +39,7 @@
          <% end %>   " href="/">Начало</a>
       </li>
       <li class="nav-item">
-      
+
         <a class="<%= if Path.join(["/" | @conn.path_info]) == "/" do %>
            nav-link
         <% else %>
@@ -77,7 +77,7 @@
     </ul>
 
     <ul class="navbar-nav">
-      
+
       <%= if @current_user do %>
       <li class="nav-item ">
         <a class="nav-link user-menu" href="#">
@@ -96,24 +96,34 @@
           <%= link "Sign in", to: session_path(@conn, :new), class: "nav-link" %>
       </li>
       <% end %>
-      
+
       <li class="nav-item bg-white ">
-        <a class="nav-link text-green new-signal-btn" href="#">ПОДАЙ СИГНАЛ</a>
+        <a class="nav-link text-green new-signal-btn" id="send-signal" href="#">ПОДАЙ СИГНАЛ</a>
       </li>
-    </ul> 
+    </ul>
   </div>
 </nav>
 </div>
 </div>
 
+<div id="myModal-signal" class="modal-signal">
+
+  <div class="modal-content-signal">
+    <span class="close1">&times;</span>
+    <div class="send-signal-container">
+      testbokluk
+    </div>
+  </div>
+
+</div>
+
+
       <main role="main">
       <div class="container mt-0">
 <%= render @view_module, @view_template, assigns %>
-<!-- </div> -->
+
       </main>
 
- <%# <svg xmlns="http://www.w3.org/2000/svg" width="500" height="500" viewBox="0 0 500 500" preserveAspectRatio="none" style="display: none; visibility: hidden; position: absolute; top: -100%; left: -100%;"><defs><style type="text/css"></style></defs><text x="0" y="25" style="font-weight:bold;font-size:25pt;font-family:Arial, Helvetica, Open Sans, sans-serif">500x500</text></svg>
- %>
-    
+
   </body>
 </html>

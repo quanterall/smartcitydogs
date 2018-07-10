@@ -48,7 +48,7 @@ $("#like").click(function() {
         }
     }).then(function(data) {
         $("#signal-count").text(data.new_count);
-       
+
     })
 });
 
@@ -68,6 +68,10 @@ $("#comment").click(function() {
 });
 
 $(function() {
+
+  $('#send-signal').on('click', function() {
+    $('.send-signal-container').load('signals/new');
+  })
 
   //-----------------all signals----------------
   $('#all-signals').on('click', function() {
@@ -89,6 +93,32 @@ $(function() {
      $('.container-signals').load('signals/shelter_animals');
    });
 });
+
+// $(function(){
+//
+//   var modal = document.getElementById('myModal-signal');
+//   var span = document.getElementsByClassName("close1")[0];
+//
+//
+//   $('#send-signal').on('click', function(){
+//     $('.send-signal-contaier').load('signals/new');
+//     console.log("ala bala");
+//     console.log(modal);
+//     console.log(span);
+//
+//     modal.style.display = "block";
+//   });
+//   span.onclick = function() {
+//       modal.style.display = "none";
+//   }
+//   window.onclick = function(event) {
+//     if (event.target == modal) {
+//         modal.style.display = "none";
+//     }
+//   }
+//
+//
+// });
 
 $(function(){
   // var modal = document.getElementById('myModal');
