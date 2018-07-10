@@ -67,26 +67,79 @@ $("#comment").click(function() {
     })
 });
 
+// window.onload = function() {
+//     $('.Signals').show();
+//     $('.Signals1').hide();
+//     $('.Signals2').hide();
+//     $('.Signals3').hide();
+// }
+
+
 $(function() {
+  
+  
+    //---------------nav-bar all signals-----------
+    $('#signals_all_nav').on('click', function(){
+        $('.Signals').html('<ul>  <li> Hello </li>   </ul>');
+        $('.Signals1').html('');
+        $('.Signals2').html('');
+        $('.Signals3').html('');
+            // $('.Signals').show();
+            // $('.Signals1').hide();
+            // $('.Signals2').hide();
+            // $('.Signals3').hide();
+    })
 
   //-----------------all signals----------------
   $('#all-signals').on('click', function() {
     $('.container-signals').load('signals/filter_index');
+    $('.Signals').html('<ul>  <li> Hello </li>   </ul>');
+    $('.Signals1').html('');
+    $('.Signals2').html('');
+    $('.Signals3').html('');
+    // $('.Signals').show();
+    // $('.Signals1').hide();
+    // $('.Signals2').hide();
+    // $('.Signals3').hide();
   });
 
   // ------------------Registered dogs----------------
   $('#all-registered-dogs').on('click', function() {
     $('.container-signals').load('animals');
+    $('.Signals').html('');
+    $('.Signals1').html('<ul>  <li> Hello </li>   </ul>');
+    $('.Signals2').html('');
+    $('.Signals3').html('');
+    // $('.Signals').hide();
+    // $('.Signals1').show();
+    // $('.Signals2').hide();
+    // $('.Signals3').hide();
   });
 
   //-----------------Adopted dogs-----------------
    $('#all-adopted-dogs').on('click', function() {
     $('.container-signals').load('signals/adopted_animals');
+    $('.Signals').html('');
+    $('.Signals1').html('');
+    $('.Signals2').html('<ul>  <li> Hello </li>   </ul>');
+    $('.Signals3').html('');
+    // $('.Signals').hide();
+    // $('.Signals1').hide();
+    // $('.Signals2').show();
+    // $('.Signals3').hide();
    });
 
   // -------------Dogs under shelter----------------
    $('#all-dogs-shelter').on('click', function() {
-     $('.container-signals').load('signals/shelter_animals');
+     $('.container-signals').load('signals/shelter_animals'); 
+     $('.Signals').html('');
+     $('.Signals1').html('');
+     $('.Signals2').html('');
+     $('.Signals3').html('<ul>  <li> Hello </li>   </ul>');
+    //  $('.Signals').hide();
+    // $('.Signals1').hide();
+    // $('.Signals2').hide();
+    // $('.Signals3').show();
    });
 });
 

@@ -5,20 +5,41 @@
     <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
+    
+  
   </head>
   <body>
 
   <div class="container-filter-signals">
       <div class="container-filter">
         <b><button id="all-signals">Подадени сигнали</button></b>
+        <div class="Signals"> 
+          <%# <ul>
+            <li> Hello </li>
+          </ul> %>
+        </div>
         <br />
         <button id="all-registered-dogs">Регистрирани кучета</button>
+        <div class="Signals1"> 
+          <%# <ul>
+            <li> Hello </li>
+          </ul> %>
+        </div>
         <br />
         <button id="all-adopted-dogs">Осиновени кучета</button>
+        <div class="Signals2"> 
+          <%# <ul>
+            <li> Hello </li>
+          </ul> %>
+        </div>
         <br />
         <b>
         <button id="all-dogs-shelter">Кучета в приьта</button>
+        <div class="Signals3"> 
+          <%# <ul>
+            <li> Hello </li>
+          </ul> %>
+        </div>
         </b>
       </div>
       <div class="container-signals">

@@ -51,7 +51,7 @@
         nav-link
       <% else %>
          nav-link black
-      <% end %>" href="/signals">Подадени сигнали</a>
+      <% end %>" id="signals_all_nav" href="/signals">Подадени сигнали</a>
       </li>
       <li class="nav-item">
         <a class="<%= if Path.join(["/" | @conn.path_info]) == "/" do %>

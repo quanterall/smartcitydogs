@@ -39,13 +39,15 @@
         <!-- Marketing messaging and featurettes
             ================================================== -->
         <!-- Wrap the rest of the page in another container to center all the content. -->
-<h1><center>Latest signals:</center></h1>
+      <h1 class="home_latest_signals">  
+            <center>Последни сигнали</center>
+      </h1>
 <br>
-       <div class="row">
+       <div class="container home_latest_signals_div">
+       <div class="row latest_signals_row">
           <%= for signal <- @signal do %>
-            <div class="col-lg-4">
-              <img class="rounded-circle" src="/<%= SmartcitydogsWeb.SignalView.get_signals_images(signal.id) %>" alt="Generic placeholder image" width="140" height="140">
-              <h2><%=signal.title%></h2>
+            <div class="col-lg-3 latest_signals_box">
+               <h2><%=signal.title%></h2>
               <ul>
                 <li>
                   Signal number:
@@ -90,13 +92,14 @@
                 </li>
               </ul>
 
-              <p><a class="btn btn-secondary" href="signals/<%=signal.id%>" role="button">View more »</a>
-              <a id="like" class="btn btn-secondary btnSignal" role="button">Like</a></p>
-              <a class="btn btn-secondary" href="#" role="button">View map »</a></p>
-
+              <p>
+                 <a class="btn btn-secondary" href="#" role="button">View more »</a>
+                 <a class="btn btn-secondary" href="#" role="button">View map »</a>
+              </p>
             </div>
             <%end%>
           </div><!-- /.row -->
+        </div>
 
           <!-- START THE FEATURETTES -->
           <hr class="featurette-divider">
