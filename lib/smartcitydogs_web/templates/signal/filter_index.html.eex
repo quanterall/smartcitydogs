@@ -105,7 +105,7 @@
 
                           </div> : <span id="signal-count"><%= signal.support_count %></span>
                         </div>
-                          <!-- <br /> -->
+
                         <div class="icon-scale">
                           <div class="fa fa-comment-o">
                           </div> : 0
@@ -114,7 +114,7 @@
                         <center>
 
                         <div class="button-show-hide">
-                          <p class="p-button-change"><a class="btn btn-secondary change-status" id="<%= signal.id %>" role="button">Change status</a></p>
+                          <p class="p-button-change"><a class="btn btn-secondary change-status" id="<%= signal.id %>" role="button">Промени статус</a></p>
                         </div></center>
 
 
@@ -139,26 +139,37 @@
 
                         </div>
 
+
+
                         <center>
 
 
                         <div class="button-show-hide">
-                          <p class="p-button-view"><a class="btn btn-secondary" href="signals/<%=signal.id%>" role="button">View more</a>
+                          <p class="p-button-view"><a class="btn btn-secondary" href="signals/<%=signal.id%>" role="button">Към сигнала</a>
                       </div></center>
 
                       </div>
-                         <%= for x <- 1..@page.total_pages do %>
-                         <%= link "#{x * 8 - 7} - #{x * 8}", to: signal_path(@conn, :index, page: x) %>
-                        <% end %>  
+
                     </div>
                   </div>
                   <%end%>
                 </div>
+                <div class="padination">
 
 
+                        <%= for x <- 1..@page.total_pages do %>
+                         <%= link "#{x * 8 - 7}-#{x * 8} ", to: signal_path(@conn, :index, page: x) %>
+
+
+                        <% end %>
+
+                </div>
             </div>
-      </div>
 
+      </div>
+      <div class="send-signal-container">
+        
+      </div>
       <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
 </body>
 </html>

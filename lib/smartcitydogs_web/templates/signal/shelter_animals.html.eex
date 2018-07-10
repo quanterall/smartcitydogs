@@ -47,6 +47,8 @@
             <%end%>
           </div><!-- /.row -->
          
-           
+                      <%= for x <- 1..@page.total_pages do %>
+  <%= link "#{x * 8 - 7} - #{x * 8}", to: signal_path(@conn, :shelter_animals, page: x) %>
+<% end %>  
           
 </div>

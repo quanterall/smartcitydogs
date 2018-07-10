@@ -27,7 +27,7 @@
 }
 
 .navbar-nav a.nav-link.black:hover {
-    color: red !important;    
+    color: red !important;
 }
 
 .navbar{
@@ -97,7 +97,7 @@
     display: block;
     width: 100%;
     margin: 0 auto;
-     margin-top: 12rem; 
+     margin-top: 12rem;
 }
 
 .latest_signals_box {
@@ -119,4 +119,9 @@
 
 .container{
     max-width: 100% !important;
+}
+nav.navbar.navbar-expand-lg.navbar-dark.green.bg-transperent.top-navbar.w-100{
+  -webkit-box-shadow: 0px 9px 8px -5px rgba(0,0,0,0.75);
+-moz-box-shadow: 0px 9px 8px -5px rgba(0,0,0,0.75);
+box-shadow: 0px 9px 8px -5px rgba(0,0,0,0.75);
 }
