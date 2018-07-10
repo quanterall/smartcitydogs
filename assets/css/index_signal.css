@@ -382,7 +382,7 @@ div#navbarNavDropdown{
 }
 .modal-content-signal{
   transition: 0.5s;
-  background: rgba(69,195,134,1);
+  background: rgba(47,214,50,1);
 background: -moz-linear-gradient(left, rgba(47,214,50,1) 0%, rgba(47,214,50,0.84) 74%, rgba(12,245,47,0.81) 85%, rgba(91,209,73,0.78) 100%);
 background: -webkit-gradient(left top, right top, color-stop(0%, rgba(47,214,50,1)), color-stop(74%, rgba(47,214,50,0.84)), color-stop(85%, rgba(12,245,47,0.81)), color-stop(100%, rgba(91,209,73,0.78)));
 background: -webkit-linear-gradient(left, rgba(47,214,50,1) 0%, rgba(47,214,50,0.84) 74%, rgba(12,245,47,0.81) 85%, rgba(91,209,73,0.78) 100%);
