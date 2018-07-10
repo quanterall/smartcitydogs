@@ -81,6 +81,25 @@
   width: 30px;
   height: 30px;
 }
+/* Filter menu  */
+.Signals{
+  margin-top: 2px;
+}
+
+.title_filter{
+  text-align: left;
+  color: black;
+  font-size: 20px;
+}
+
+.ul_filter{
+  color: black;
+  font-size: 13px;
+  margin-left: 13px;
+}
+
+/* end Filter menu */
+
 /* label-type{
   color: red;
   font-size: 20px;
@@ -117,7 +136,7 @@ margin-left: -10px;
 }
 @media (max-width: 4000px){
   .container-filter button{
-    margin-bottom: 30%;
+    /* margin-bottom: 30%; */
     text-align:justify;
   }
 }
