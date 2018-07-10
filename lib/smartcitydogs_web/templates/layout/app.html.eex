@@ -109,10 +109,10 @@
 <div id="myModal-signal" class="modal-signal">
 
   <div class="modal-content-signal">
-    <span class="close1">&times;</span>
+    <!-- <span class="close1">&times;</span>
     <div class="send-signal-container">
       testbokluk
-    </div>
+    </div> -->
   </div>
 
 </div>
@@ -124,6 +124,6 @@
 
       </main>
 
-
+      <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
   </body>
 </html>
