@@ -40,6 +40,10 @@ body {
     width: 100%;
 }
 
+.navbar-toggler{
+    background-color: #00c994;
+}
+
 .bg-gray {
     background: rgb(226, 226, 226);
 }
