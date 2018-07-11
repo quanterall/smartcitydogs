@@ -352,18 +352,30 @@ margin-left: -10px;
   height: 100px;
 } */
 .modal-content-signal .close1 {
-    width: 2%;
-    color: #aaaaaa;
-    float: left;
-    font-size: 28px;
-    font-weight: bold;
+  color: white;
+width: 0%;
+font-size: 20px;
+font-weight: 400;
+align-self: center;
+background-color: transparent;
+/* border: 1px solid white;
+border-color: transparent;  */
+    font-weight: 400;
 }
 
 .modal-content-signal .close1:hover,
 .modal-content-signal .close1:focus {
-    color: #000;
+    color: white;
     text-decoration: none;
     cursor: pointer;
+    transition: 0.5s;
+    background-color: transparent;
+
+    /* border: 1px solid white; */
+}
+close1.btn-primary{
+  background-color: transparent;
+
 }
 
 /* ___________________some from bootstrap fixes___________________*/
@@ -434,7 +446,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#2fd632', end
 }
 .container-new-signal .form-group{
   padding-top: 0px;
-  padding-bottom: 15px;
+  padding-bottom: 3%;
   padding-left: 5px;
   margin-bottom: 0;
 }
@@ -442,7 +454,11 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#2fd632', end
   padding-left: 5px;
   margin-bottom: 0;
 }
+.container-new-signal textarea:focus{
+  border-color: white;
+}
 .container-new-signal textarea{
+  color: white;
   width: 100%;
   background-color: transparent;
   border: 1px solid white;
@@ -465,7 +481,20 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#2fd632', end
   margin-left: 0px;
 }
 .container-new-signal .under-form{
-  display: inline-flex;
-  padding: 1%;
-  margin: 0px;
+  width: 100%;
+  /* padding-top: 1%;
+  padding-left: 1%;
+  padding-right: 4%; */
+  display: grid;
+  /* padding: 1%; */
+  margin: 0%;
+  padding: 0%
+
+}
+.container-new-signal .under-form .btn-submit:hover{
+  background-color: white;
+  color: green;
+  -webkit-box-shadow: 0px 0px 45px -4px rgba(0,0,0,0.75);
+-moz-box-shadow: 0px 0px 45px -4px rgba(0,0,0,0.75);
+box-shadow: 0px 0px 45px -4px rgba(0,0,0,0.75);
 }
