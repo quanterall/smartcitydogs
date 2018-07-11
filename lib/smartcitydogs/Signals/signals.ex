@@ -40,10 +40,10 @@ defmodule Smartcitydogs.Signals do
     |> validate_required([
       :title,
       # :view_count,
-      :address,
+      :address
       # :support_count,
-      :chip_number,
-      :description
+      # :chip_number,
+      # :description
       # :signals_categories_id,
       # :signals_types_id
     ])

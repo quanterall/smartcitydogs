@@ -39,64 +39,117 @@
         <!-- Marketing messaging and featurettes
             ================================================== -->
         <!-- Wrap the rest of the page in another container to center all the content. -->
-<h1><center>Latest signals:</center></h1>
+      <h1 class="home_latest_signals">  
+            <center>Последни сигнали</center>
+      </h1>
 <br>
-       <div class="row">
+       <div class="container home_latest_signals_div">
+       <div class="row latest_signals_row">
           <%= for signal <- @signal do %>
-            <div class="col-lg-4">
-              <img class="rounded-circle" src="/<%= SmartcitydogsWeb.SignalView.get_signals_images(signal.id) %>" alt="Generic placeholder image" width="140" height="140">
-              <h2><%=signal.title%></h2>
-              <ul>
-                <li>
-                  Signal number:
-                  <a id="signal-id"><%= signal.id %></a>
-                </li>
-                <li>
-                  Category: <%=signal.signals_categories_id
-                  |> Smartcitydogs.DataSignals.get_signal_category()
-                  |> Map.get(:name)
-                  %>
-                </li>
-                <li>
-                  Type: <%=signal.signals_types_id
-                  |> Smartcitydogs.DataSignals.get_signal_type()
-                  |> Map.get(:name)
-                  %>
-                </li>
-                <li>
-                  Registered at: <%=
-                    signal_time = signal.inserted_at
-                    |> DateTime.truncate(:second)
-                    |> DateTime.to_string()
-                    count = String.length(signal_time)
-                    final_time = String.slice(signal_time,0..count-2)
-                    final_time
-                    %>
-                </li>
-                <li>
-                  Description: <%=signal.description%>
-                </li>
-                <li>
-                  Chip number: <%=signal.chip_number%>
-                </li>
-                <li>
-                  Support count: <span id="signal-count"><%= signal.support_count %></span>
-                </li>
-                <li>
-                  Last location: <%=signal.address%>
-                </li>
-                <li>
-                  Views: <%=signal.view_count%>
-                </li>
-              </ul>
+            <div class="col-lg-3 col-last-signals">
+                    <div class="col-container" style="background-image: url('/<%= get_signals_images(signal.id) %>')">
+                      <div class="col-container-shadow">
 
-              <p><a class="btn btn-secondary" href="signals/<%=signal.id%>" role="button">View more »</a>
-              <a id="like" class="btn btn-secondary btnSignal" role="button">Like</a></p>
-              <a class="btn btn-secondary" href="#" role="button">View map »</a></p>
+                        <label-type class="
+                          <%= if signal.signals_types_id == 1 do %>
+                            label-type-red
+                          <% end %>
 
-            </div>
+                          <%= if signal.signals_types_id == 2 do %>
+                            label-type-orange
+                          <% end %>
+
+                          <%= if signal.signals_types_id == 3 do %>
+                            label-type-yellow
+                          <% end %>
+
+                          <%= if signal.signals_types_id == 4 do %>
+                            label-type-green
+                          <% end %>"><%=signal.signals_types_id
+                        |> Smartcitydogs.DataSignals.get_signal_type()
+                        |> Map.get(:name)
+                        %>
+                      </label-type>
+                        <br />
+
+                        <label-date>
+                        <%=
+                          signal_time = signal.inserted_at
+                          |> DateTime.truncate(:second)
+                          |> DateTime.to_string()
+                          count = String.length(signal_time)
+                          final_time = String.slice(signal_time,0..count-11)
+                          final_time
+                          # IO.inspect(final_time)
+                          %>
+                        <br />
+                        </label-date>
+
+                        <label-title><b><%=signal.title%></b></label-title>
+                        <br />
+
+
+                        <label-adress><%=signal.address%></label-adress>
+                        <br />
+
+                        <div class="icon-scale">
+                          <div class="fa fa-eye">
+                          </div> : <%=signal.view_count%>
+                          <br />
+                        </div>
+                        <div class="icon-scale">
+
+
+                          <div class="fa fa-thumbs-o-up">
+
+                          </div> : <span id="signal-count"><%= signal.support_count %></span>
+                        </div>
+                          <!-- <br /> -->
+                        <div class="icon-scale">
+                          <div class="fa fa-comment-o">
+                          </div> : 0
+                          <br />
+                        </div>
+                        <center>
+
+                        <div class="button-show-hide">
+                          <p class="p-button-change"><a class="btn btn-secondary change-status" id="<%= signal.id %>" role="button">Change status</a></p>
+                        </div></center>
+
+
+                      <!-- The Modal -->
+                        <div id="myModal" class="modal">
+
+                          <!-- Modal content -->
+                          <div class="modal-content">
+                            <span class="close">&times;</span>
+                            <p class="modal-type">Промяна на типът на сигнала:</p>
+                            <br />
+                            <select class="select-type">
+                              <option value="1">Нов</option>
+                              <option value="2">Приет</option>
+                              <option value="3">Изпратен</option>
+                              <option value="4">Осиновено</option>
+                            </select>
+                            <br />
+                            <a class="btn btn-secondary" id="type-chosen" role="button">Промени</a>
+
+                          </div>
+
+                        </div>
+
+                        <center>
+
+                        <div class="button-show-hide">
+                          <p class="p-button-view"><a class="btn btn-secondary" href="signals/<%=signal.id%>" role="button">View more</a>
+                      </div></center>
+                      </div>
+
+                    </div>
+                  </div>
             <%end%>
           </div><!-- /.row -->
+        </div>
 
           <!-- START THE FEATURETTES -->
           <hr class="featurette-divider">
@@ -165,16 +218,7 @@
             </div>
             <%end%>
           </div><!-- /.row -->
-          <hr class="featurette-divider">
-          <div class="row featurette">
-            <div class="col-md-7">
-              <h2 class="featurette-heading">First featurette heading. <span class="text-muted">It'll blow your mind.</span></h2>
-              <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
-            </div>
-            <div class="col-md-5">
-              <img class="featurette-image img-fluid mx-auto" data-src="holder.js/500x500/auto" alt="500x500" style="width: 500px; height: 500px;" src="data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22500%22%20height%3D%22500%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20500%20500%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_163aa2aa6bd%20text%20%7B%20fill%3A%23AAAAAA%3Bfont-weight%3Abold%3Bfont-family%3AArial%2C%20Helvetica%2C%20Open%20Sans%2C%20sans-serif%2C%20monospace%3Bfont-size%3A25pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_163aa2aa6bd%22%3E%3Crect%20width%3D%22500%22%20height%3D%22500%22%20fill%3D%22%23EEEEEE%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%22185.125%22%20y%3D%22261.1%22%3E500x500%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E" data-holder-rendered="true">
-            </div>
-
+         
             <!-- /END THE FEATURETTES -->
         </div>
         <!-- /.container -->

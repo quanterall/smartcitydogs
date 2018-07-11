@@ -144,6 +144,8 @@ defmodule SmartcitydogsWeb.Router do
         get("/signals/get_signals_support_count", SignalController, :get_signals_support_count)
         get("/signals/update_like_count", SignalController, :update_like_count)
 
+        resources("/contact", ContactController, only: [:new, :create, :edit, :update])
+
         resources(
           "/signals",
           SignalController

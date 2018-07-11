@@ -14,11 +14,17 @@
     margin: -8em auto auto auto;
 }
 
+body {
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+
+
 /* .navbar-dark .navbar-nav .nav-link {
     color: white;
 } */
 
-.green{
+.green {
     /* background-color: green; */
 }
 
@@ -30,20 +36,20 @@
     color: red !important;
 }
 
-.navbar{
+.navbar {
     width: 100%;
 }
 
-.bg-gray{
-	background: rgb(226, 226, 226);
+.bg-gray {
+    background: rgb(226, 226, 226);
 }
 
 .bg-green {
     background: rgb(0, 201, 148);
 }
 
-.text-gray{
-	color: #c6c6c6;
+.text-gray {
+    color: #c6c6c6;
 }
 
 .text-green {
@@ -85,6 +91,9 @@
     margin-right: 10px;
 }
 
+
+/* Latest Signal Home page */
+
 .latest_signals {
     margin: 2rem;
     float: left;
@@ -97,7 +106,12 @@
     display: block;
     width: 100%;
     margin: 0 auto;
-     margin-top: 12rem;
+    margin-top: 10rem;
+    /* margin-left: 10%; */
+}
+
+.col-lg-3.col-last-signals {
+    max-width: 18%;
 }
 
 .latest_signals_box {
@@ -112,16 +126,21 @@
     background-repeat: round;
 }
 
-.latest_signals_row {
-    width: 100%;
+.home_latest_signals_div .latest_signals_row {
+    width: 90%;
     flex-wrap: inherit;
+    margin-left: 10%;
 }
 
-.container{
+
+/* /end/ Latest Signal Home page */
+
+.container {
     max-width: 100% !important;
 }
-nav.navbar.navbar-expand-lg.navbar-dark.green.bg-transperent.top-navbar.w-100{
-  -webkit-box-shadow: 0px 9px 8px -5px rgba(0,0,0,0.75);
--moz-box-shadow: 0px 9px 8px -5px rgba(0,0,0,0.75);
-box-shadow: 0px 9px 8px -5px rgba(0,0,0,0.75);
+
+nav.navbar.navbar-expand-lg.navbar-dark.green.bg-transperent.top-navbar.w-100 {
+    -webkit-box-shadow: 0px 9px 8px -5px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 0px 9px 8px -5px rgba(0, 0, 0, 0.75);
+    box-shadow: 0px 9px 8px -5px rgba(0, 0, 0, 0.75);
 }
