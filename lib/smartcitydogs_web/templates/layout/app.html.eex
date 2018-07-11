@@ -80,20 +80,36 @@
 
       <%= if @current_user do %>
       <li class="nav-item ">
-        <a class="nav-link user-menu" href="#">
+        <a class="<%= if Path.join(["/" | @conn.path_info]) == "/" do %>
+        nav-link user-menu
+      <% else %>
+         nav-link user-menu black
+      <% end %>" href="#">
         	Здравей, <b><%= @current_user.first_name%></b> <i class="fa fa-user"></i>
 
         </a>
       </li>
       <li class="nav-item">
+        <%= if Path.join(["/" | @conn.path_info]) == "/" do %>
           <%= link "Sign out", to: session_path(@conn, :delete, @current_user), method: "delete", class: "nav-link" %>
+         <% else %>
+          <%= link "Sign out", to: session_path(@conn, :delete, @current_user), method: "delete", class: "nav-link black" %>
+      <% end %>
       </li>
       <% else %>
       <li class="nav-item ">
+         <%= if Path.join(["/" | @conn.path_info]) == "/" do %>
           <%= link "Register", to: user_path(@conn, :new), class: "nav-link" %>
+        <% else %>
+         <%= link "Register", to: user_path(@conn, :new), class: "nav-link black" %>
+        <% end %>
       </li>
       <li class="nav-item ">
+        <%= if Path.join(["/" | @conn.path_info]) == "/" do %>
           <%= link "Sign in", to: session_path(@conn, :new), class: "nav-link" %>
+        <% else %>
+          <%= link "Sign in", to: session_path(@conn, :new), class: "nav-link black" %>
+        <% end %>
       </li>
       <% end %>
 
@@ -109,10 +125,10 @@
 <div id="myModal-signal" class="modal-signal">
 
   <div class="modal-content-signal">
-    <span class="close1">&times;</span>
+    <!-- <span class="close1">&times;</span>
     <div class="send-signal-container">
       testbokluk
-    </div>
+    </div> -->
   </div>
 
 </div>
@@ -124,6 +140,6 @@
 
       </main>
 
-
+      <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
   </body>
 </html>

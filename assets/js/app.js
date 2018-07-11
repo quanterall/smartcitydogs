@@ -150,31 +150,37 @@ $(function() {
    });
 });
 
-// $(function(){
-//
-//   var modal = document.getElementById('myModal-signal');
-//   var span = document.getElementsByClassName("close1")[0];
-//
-//
-//   $('#send-signal').on('click', function(){
-//     $('.send-signal-contaier').load('signals/new');
-//     console.log("ala bala");
-//     console.log(modal);
-//     console.log(span);
-//
-//     modal.style.display = "block";
-//   });
-//   span.onclick = function() {
-//       modal.style.display = "none";
-//   }
-//   window.onclick = function(event) {
-//     if (event.target == modal) {
-//         modal.style.display = "none";
-//     }
-//   }
-//
-//
-// });
+$(function(){
+
+  var modal = document.getElementById('myModal-signal');
+  var span = document.getElementsByClassName("close1")[0];
+
+  window.onload = function(){
+    $('body').css("position","auto");
+  }
+
+  $('#send-signal').on('click', function(){
+    // $('.send-signal-contaier').load('signals/new');
+    $('main').css("position","fixed");
+    $('.modal-content-signal').load('signals/new');
+    // console.log("ala bala");
+    // console.log(modal);
+    // console.log(span);
+
+    modal.style.display = "block";
+  });
+  span.onclick = function() {
+      modal.style.display = "none";
+
+      setTimeout(function() {
+         //  location.reload()
+
+          location.reload();
+      }, 200);
+  }
+
+
+});
 
 $(function(){
   // var modal = document.getElementById('myModal');
@@ -188,6 +194,7 @@ $(function(){
     id = $(this).attr('id');
     console.log("Buttton: "+id);
     modal.style.display = "block";
+
   });
   span.onclick = function() {
       modal.style.display = "none";
@@ -210,11 +217,11 @@ $(function(){
             "id": id,
             "signals_types_id": SelectedType
         }
-    })
+     })
 
     // modal.style.display ="none";
 
-     setTimeout(function () {
+     setTimeout(function() {
         //  location.reload()
          window.location.href = '/signals';
      }, 1000);

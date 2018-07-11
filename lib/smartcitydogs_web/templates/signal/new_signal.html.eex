@@ -1,6 +1,14 @@
-<h2>New Signal</h2>
+<html>
+<head>
+
+</head>
+
+<body>
+
 
 
 <%= render "form_signal.html", Map.put(assigns, :action, signal_path(@conn, :create)) %>
 
-<span><%= link "Back", to: signal_path(@conn, :index) %></span>
+<script src="<%= static_path(@conn, "/js/app.js") %>"></script>
+</body>
+</html>
