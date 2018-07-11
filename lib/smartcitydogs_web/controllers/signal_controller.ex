@@ -302,14 +302,15 @@ redirect conn, to: "/signals/#{signal.id}"
     IO.puts "PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP"
     redirect conn, to: "/signals/#{signal.id}"
   ##render(conn, "show_signal_no_comment_like.html", signal: signal, comments: comment)
-  end
+
 
       render(conn, "show_signal_no_comment_like.html", signal: signal, comments: comment)
-    end
+
 
     comment = DataSignals.list_signal_comment()
     render(conn, "show_signal_no_comment_like.html", signal: signal, comments: comment)
   end
+
 
   def followed_signals(conn, params) do
     user_like = conn.assigns.current_user.liked_signals
