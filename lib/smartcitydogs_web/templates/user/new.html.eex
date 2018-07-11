@@ -19,51 +19,38 @@
 
 
       <div class="form-register">
-        <label1>User Registration</label1>
-        <br />
-
-        <%= text_input f, :username, placeholder: "Username", class: "form-control1" %>
+        <%= text_input f, :username, placeholder: "Потребителско име...", class: "form-control1" %>
         <%= error_tag f, :username %>
 
         <br />
-        <%= password_input f, :password, placeholder: "Password", class: "form-control1" %>
+        <%= password_input f, :password, placeholder: "Парола...", class: "form-control1" %>
         <%= error_tag f, :password %>
         <br />
 
 
-        <%= text_input f, :email, placeholder: "Email", class: "form-control1" %>
+        <%= text_input f, :email, placeholder: "Имейл...", class: "form-control1" %>
         <%= error_tag f, :email %>
         <br>
 
-        <%= text_input f, :first_name, placeholder: "Firstname", class: "form-control1" %>
-        <%= error_tag f, :first_name %>
-
-        <br />
-        <%= text_input f, :last_name, placeholder: "Lastname", class: "form-control1" %>
-        <%= error_tag f, :last_name %>
-        <br />
-
-        <%= text_input f, :phone, placeholder: "Phone", class: "form-control1" %>
+        <%= text_input f, :phone, placeholder: "Телефонен номер...", class: "form-control1" %>
         <%= error_tag f, :phone %>
 
         <br />
-        <%= text_input f, :users_types_id, placeholder: "User Type", class: "form-contro1l" %>
+        <%= text_input f, :users_types_id, placeholder: "Вид потребител...", class: "form-contro1l" %>
         <%= error_tag f, :users_types_id %>
         <br />
         <div class="under-form">
 
-          <%= checkbox f, :checked, class: "form-control1" %> I'm agreed to the rules </p>
+          <%= checkbox f, :checked, class: "form-control1" %> Съгласен съм с условията. </p>
 
           <br />
 
-          <%= submit "Create User", class: "btn btn-submit" %>
+          <%= submit "РЕГИСТРИРАЙ МЕ", class: "btn btn-submit" %>
           <br /><br />
-          <a class="link-cancel" href="/">Cancel</a>
+          <a class="link-cancel" href="/">ОТКАЗ</a>
           <a class="btn btn-primary pull-right" href="<%=session_url(@conn, :request,"facebook")%>" rel="no-follow">
-            <i class="fa fa-facebook-square"></i> Facebook login</a>
-          <!-- <%= #submit "Facebook login", class: "btn btn-primary pull-right" %> -->
-          <br /><br />
-          <a class="already-registered-link" href="/sessions/new"><label>I'm already registered</label></a>
+            <i class="fa fa-facebook-square"></i> ВХОД</a>
+
         </div>
       </div>
     </div>

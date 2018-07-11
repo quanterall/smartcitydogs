@@ -39,7 +39,7 @@ $("#like").click(function() {
 
 
 $("#comment").click(function() {
-    
+
     $.ajax({
         method: "GET",
         url: "/signals/comment",
@@ -52,13 +52,13 @@ $("#comment").click(function() {
     })
 });
 
-window.onload = function() {    
+window.onload = function() {
     $('.Signals').html('<ul style="list-style-type:none;">  <li class="title_filter"> Филтрирай по категория </li> ' +
-    '<li class="ul_filter"> <input  id="user_famous" name="user[famous]" type="checkbox" > Бездомно куче </li>'+  
+    '<li class="ul_filter"> <input  id="user_famous" name="user[famous]" type="checkbox" > Бездомно куче </li>'+
     '<li class="ul_filter"> <input  id="user_famous" name="user[famous]" type="checkbox" > Избягал домашен любимец </li>'+
     '<li class="ul_filter"> <input  id="user_famous" name="user[famous]" type="checkbox" > Малтретиране на животно </li>'+
     ' </ul> <ul style="list-style-type:none;">  <li class="title_filter"> Филтрирай спрямо Статус </li> ' +
-    '<li class="ul_filter"> <input  id="user_famous" name="user[famous]" type="checkbox" > Нов </li>'+  
+    '<li class="ul_filter"> <input  id="user_famous" name="user[famous]" type="checkbox" > Нов </li>'+
     '<li class="ul_filter"> <input  id="user_famous" name="user[famous]" type="checkbox" > Приет </li> '+
     '<li class="ul_filter"> <input  id="user_famous" name="user[famous]" type="checkbox" > Изпратен </li>'+
     '<li class="ul_filter"> <input  id="user_famous" name="user[famous]" type="checkbox" > Приключен </li>'+
@@ -70,12 +70,12 @@ window.onload = function() {
 
 
 $(function() {
-  
-  
+
+
     //---------------nav-bar all signals-----------
     // $('#signals_all_nav').on('click', function(){
     //     $('.Signals').html('<ul>  <li> Филтрирай по категория </li> ' +
-    //                                 '<li>  </li>'+  
+    //                                 '<li>  </li>'+
     //                                 ''+
     //                                 ' </ul>');
     //     $('.Signals1').html('');
@@ -92,11 +92,11 @@ $(function() {
   $('#all-signals').on('click', function() {
     $('.container-signals').load('signals/filter_index');
     $('.Signals').html('<ul style="list-style-type:none;">  <li class="title_filter"> Филтрирай по категория </li> ' +
-    '<li class="ul_filter"> <input  id="user_famous" name="user[famous]" type="checkbox" > Бездомно куче </li>'+  
+    '<li class="ul_filter"> <input  id="user_famous" name="user[famous]" type="checkbox" > Бездомно куче </li>'+
     '<li class="ul_filter"> <input  id="user_famous" name="user[famous]" type="checkbox" > Избягал домашен любимец </li>'+
     '<li class="ul_filter"> <input  id="user_famous" name="user[famous]" type="checkbox" > Малтретиране на животно </li>'+
     ' </ul> <ul style="list-style-type:none;">  <li class="title_filter"> Филтрирай спрямо Статус </li> ' +
-    '<li class="ul_filter"> <input  id="user_famous" name="user[famous]" type="checkbox" > Нов </li>'+  
+    '<li class="ul_filter"> <input  id="user_famous" name="user[famous]" type="checkbox" > Нов </li>'+
     '<li class="ul_filter"> <input  id="user_famous" name="user[famous]" type="checkbox" > Приет </li> '+
     '<li class="ul_filter"> <input  id="user_famous" name="user[famous]" type="checkbox" > Изпратен </li>'+
     '<li class="ul_filter"> <input  id="user_famous" name="user[famous]" type="checkbox" > Приключен </li>'+
@@ -111,12 +111,12 @@ $(function() {
     $('.container-signals').load('animals');
     $('.Signals').html('');
     $('.Signals1').html('<ul style="list-style-type:none;">  <li class="title_filter"> Филтрирай спрямо Статус </li> ' +
-    '<li class="ul_filter"> <input  id="user_famous" name="user[famous]" type="checkbox" > На свобода </li>'+  
+    '<li class="ul_filter"> <input  id="user_famous" name="user[famous]" type="checkbox" > На свобода </li>'+
     '<li class="ul_filter"> <input  id="user_famous" name="user[famous]" type="checkbox" > В приют </li>'+
     '<li class="ul_filter"> <input  id="user_famous" name="user[famous]" type="checkbox" > Осиновено </li> </ul> ');
     $('.Signals2').html('');
     $('.Signals3').html('');
-    
+
   });
 
   //-----------------Adopted dogs-----------------
@@ -124,12 +124,12 @@ $(function() {
     $('.container-signals').load('signals/adopted_animals');
     $('.Signals').html('');
     $('.Signals1').html('');
-   
+
    });
 
   // -------------Dogs under shelter----------------
    $('#all-dogs-shelter').on('click', function() {
-     $('.container-signals').load('signals/shelter_animals'); 
+     $('.container-signals').load('signals/shelter_animals');
      $('.Signals').html('');
      $('.Signals1').html('');
    });
@@ -153,6 +153,27 @@ $(function(){
 
     modal.style.display = "block";
   });
+
+  $('#nav-register').on('click', function(){
+    // $('.send-signal-contaier').load('signals/new');
+    $('main').css("position","fixed");
+    $('main').css("width","100%");
+    $('.modal-content-signal').load('users/new');
+
+
+    modal.style.display = "block";
+  });
+
+  $('#nav-sign-in').on('click', function(){
+    // $('.send-signal-contaier').load('signals/new');
+    $('main').css("position","fixed");
+    $('main').css("width","100%");
+    $('.modal-content-signal').load('sessions/new');
+
+
+    modal.style.display = "block";
+  });
+
   span.onclick = function() {
       modal.style.display = "none";
 

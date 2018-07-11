@@ -99,16 +99,20 @@
       <% else %>
       <li class="nav-item ">
          <%= if Path.join(["/" | @conn.path_info]) == "/" do %>
-          <%= link "Register", to: user_path(@conn, :new), class: "nav-link" %>
+          <a class="nav-link" id="nav-register" href="#" >Register</a>
+          <!-- <%= #link "Register", to: user_path(@conn, :new), class: "nav-link" %> -->
         <% else %>
-         <%= link "Register", to: user_path(@conn, :new), class: "nav-link black" %>
+          <a class="nav-link black" id="nav-register" href="#" >Register</a>
+         <!-- <%= #link "Register", to: user_path(@conn, :new), class: "nav-link black" %> -->
         <% end %>
       </li>
       <li class="nav-item ">
         <%= if Path.join(["/" | @conn.path_info]) == "/" do %>
-          <%= link "Sign in", to: session_path(@conn, :new), class: "nav-link" %>
+          <a class="nav-link" id="nav-sign-in" href="#" >Sign in</a>
+          <!-- <%=# link "Sign in", to: session_path(@conn, :new), class: "nav-link" %> -->
         <% else %>
-          <%= link "Sign in", to: session_path(@conn, :new), class: "nav-link black" %>
+          <a class="nav-link black" id="nav-sign-in" href="#" >Sign in</a>
+          <!-- <%= #link "Sign in", to: session_path(@conn, :new), class: "nav-link black" %> -->
         <% end %>
       </li>
       <% end %>

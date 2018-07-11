@@ -1,5 +1,7 @@
 defmodule SmartcitydogsWeb.SessionController do
   use SmartcitydogsWeb, :controller
+
+  plug(:put_layout, false when action in [:new])
   plug(Ueberauth)
   plug(:scrub_params, "session" when action in ~w(create)a)
   import Comeonin.Bcrypt, only: [checkpw: 2, dummy_checkpw: 0]
@@ -61,8 +63,8 @@ defmodule SmartcitydogsWeb.SessionController do
   end
 
   def callback(%{assigns: %{ueberauth_auth: auth}} = conn, _params) do
- ##   IO.inspect(auth.credentials.token)
- ##   IO.inspect(Smartcitydogs.DataUsers.create_user_from_auth(auth))
+    ##   IO.inspect(auth.credentials.token)
+    ##   IO.inspect(Smartcitydogs.DataUsers.create_user_from_auth(auth))
 
     case Smartcitydogs.DataUsers.get_user_by_email!(auth.info.email) do
       nil ->
@@ -102,5 +104,4 @@ defmodule SmartcitydogsWeb.SessionController do
   defp logout(conn) do
     Guardian.Plug.sign_out(conn)
   end
-
 end
