@@ -99,9 +99,9 @@ $(function() {
     // })
 
     //-----------------new signal -------------
-  $('#send-signal').on('click', function() {
-    $('.send-signal-container').load('signals/new');
-  })
+  // $('#send-signal').on('click', function() {
+  //   $('.send-signal-container').load('signals/new');
+  // })
 
   //-----------------all signals----------------
   $('#all-signals').on('click', function() {
@@ -162,6 +162,7 @@ $(function(){
   $('#send-signal').on('click', function(){
     // $('.send-signal-contaier').load('signals/new');
     $('main').css("position","fixed");
+    $('main').css("width","100%");
     $('.modal-content-signal').load('signals/new');
     // console.log("ala bala");
     // console.log(modal);
@@ -176,7 +177,7 @@ $(function(){
          //  location.reload()
 
           location.reload();
-      }, 200);
+      }, 0);
   }
 
 
