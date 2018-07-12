@@ -13,7 +13,7 @@
               <%= text_input f, :username, placeholder: "Потребителско име...", class: "form-control1" %>
               <%= error_tag f, :username %>
 
-              <%= text_input f, :email, placeholder: "Имейл...", class: "form-control1" %>
+              <%= email_input f, :email, placeholder: "E-mail", class: "form-control1" %>
               <%= error_tag f, :email %>
 
               <%= text_input f, :phone, placeholder: "Телефонен номер...", class: "form-control1" %>

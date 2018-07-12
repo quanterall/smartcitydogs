@@ -71,6 +71,7 @@ defmodule SmartcitydogsWeb.SignalController do
 
         {:error, %Ecto.Changeset{} = changeset} ->
           render(conn, "new_signal.html", changeset: changeset)
+          
       end
     else
       render(conn, SmartcitydogsWeb.ErrorView, "401.html")

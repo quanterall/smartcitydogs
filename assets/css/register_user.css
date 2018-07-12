@@ -8,7 +8,7 @@ input::placeholder{
   color: white !important;
 }
 
-input[type=text],input[type=password],input[type=checked]{
+input[type=text],input[type=password],input[type=checked],input[type=email]{
  font-family: monospace;
  color: white !important;
  width: 100%;

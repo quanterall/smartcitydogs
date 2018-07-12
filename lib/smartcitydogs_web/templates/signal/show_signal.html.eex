@@ -4,7 +4,7 @@
 
 <body>
      
-      <h1><%= ##@signal.title %></h1>
+      
       <ul>
 
         <img class="square" src="/<%= get_signals_images(@signal.id) %>" alt="Generic placeholder image" width="300" height="200">

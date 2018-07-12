@@ -22,6 +22,29 @@ import $ from "jquery";
 
 ////////////ORIGINAL//////////////
 
+
+
+// $(".form-elixir").submit(function(event){
+//     event.preventDefault(); //prevent default action 
+//     var post_url = $(this).attr("action"); //get form action url
+//     var request_method = $(this).attr("POST"); //get form GET/POST method
+//     var form_data = $(this).serialize(); //Encode form elements for submission
+//     $.ajax({
+//         url : post_url,
+//         type: request_method
+//         // data : form_data
+//     }).done(function(response){
+//         console.log(form_data);
+//         console.log(response);
+// 		alert("Success!") 
+//     }).error(function(error){
+// 		alert("ERROR!")
+//         //tuk izpisvash error
+        
+// 	});
+// });
+
+
 $("#like").click(function() {
 
     $.ajax({
