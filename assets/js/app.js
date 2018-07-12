@@ -54,14 +54,14 @@ $("#comment").click(function() {
 
 window.onload = function() {
     $('.Signals').html('<ul style="list-style-type:none;">  <li class="title_filter"> Филтрирай по категория </li> ' +
-    '<li class="ul_filter"> <input  id="user_famous" name="user[famous]" type="checkbox" > Бездомно куче </li>'+
-    '<li class="ul_filter"> <input  id="user_famous" name="user[famous]" type="checkbox" > Избягал домашен любимец </li>'+
-    '<li class="ul_filter"> <input  id="user_famous" name="user[famous]" type="checkbox" > Малтретиране на животно </li>'+
+    '<li class="ul_filter"> <input  id="sig_category" name="check[sig_category]" type="checkbox" > Бездомно куче </li>'+  
+    '<li class="ul_filter"> <input  id="sig_category" name="check[sig_category]" type="checkbox" > Избягал домашен любимец </li>'+
+    '<li class="ul_filter"> <input  id="sig_category" name="check[sig_category]" type="checkbox" > Малтретиране на животно </li>'+
     ' </ul> <ul style="list-style-type:none;">  <li class="title_filter"> Филтрирай спрямо Статус </li> ' +
-    '<li class="ul_filter"> <input  id="user_famous" name="user[famous]" type="checkbox" > Нов </li>'+
-    '<li class="ul_filter"> <input  id="user_famous" name="user[famous]" type="checkbox" > Приет </li> '+
-    '<li class="ul_filter"> <input  id="user_famous" name="user[famous]" type="checkbox" > Изпратен </li>'+
-    '<li class="ul_filter"> <input  id="user_famous" name="user[famous]" type="checkbox" > Приключен </li>'+
+    '<li class="ul_filter"> <input  id="sig_status" name="check[sig_status]" type="checkbox" > Нов </li>'+  
+    '<li class="ul_filter"> <input  id="sig_status" name="check[sig_status]" type="checkbox" > Приет </li> '+
+    '<li class="ul_filter"> <input  id="sig_status" name="check[sig_status]" type="checkbox" > Изпратен </li>'+
+    '<li class="ul_filter"> <input  id="sig_status" name="check[sig_status]" type="checkbox" > Приключен </li>'+
     ' </ul>');
     $('.Signals1').html('');
     $('.Signals2').html('');
@@ -92,14 +92,14 @@ $(function() {
   $('#all-signals').on('click', function() {
     $('.container-signals').load('signals/filter_index');
     $('.Signals').html('<ul style="list-style-type:none;">  <li class="title_filter"> Филтрирай по категория </li> ' +
-    '<li class="ul_filter"> <input  id="user_famous" name="user[famous]" type="checkbox" > Бездомно куче </li>'+
-    '<li class="ul_filter"> <input  id="user_famous" name="user[famous]" type="checkbox" > Избягал домашен любимец </li>'+
-    '<li class="ul_filter"> <input  id="user_famous" name="user[famous]" type="checkbox" > Малтретиране на животно </li>'+
+    '<li class="ul_filter"> <input  id="sig_category" name="check[sig_category]" type="checkbox" > Бездомно куче </li>'+  
+    '<li class="ul_filter"> <input  id="sig_category" name="check[sig_category]" type="checkbox" > Избягал домашен любимец </li>'+
+    '<li class="ul_filter"> <input  id="sig_category" name="check[sig_category]" type="checkbox" > Малтретиране на животно </li>'+
     ' </ul> <ul style="list-style-type:none;">  <li class="title_filter"> Филтрирай спрямо Статус </li> ' +
-    '<li class="ul_filter"> <input  id="user_famous" name="user[famous]" type="checkbox" > Нов </li>'+
-    '<li class="ul_filter"> <input  id="user_famous" name="user[famous]" type="checkbox" > Приет </li> '+
-    '<li class="ul_filter"> <input  id="user_famous" name="user[famous]" type="checkbox" > Изпратен </li>'+
-    '<li class="ul_filter"> <input  id="user_famous" name="user[famous]" type="checkbox" > Приключен </li>'+
+    '<li class="ul_filter"> <input  id="sig_status" name="check[sig_status]" type="checkbox" > Нов </li>'+  
+    '<li class="ul_filter"> <input  id="sig_status" name="check[sig_status]" type="checkbox" > Приет </li> '+
+    '<li class="ul_filter"> <input  id="sig_status" name="check[sig_status]" type="checkbox" > Изпратен </li>'+
+    '<li class="ul_filter"> <input  id="sig_status" name="check[sig_status]" type="checkbox" > Приключен </li>'+
     ' </ul>');
     $('.Signals1').html('');
     $('.Signals2').html('');
@@ -111,9 +111,9 @@ $(function() {
     $('.container-signals').load('animals');
     $('.Signals').html('');
     $('.Signals1').html('<ul style="list-style-type:none;">  <li class="title_filter"> Филтрирай спрямо Статус </li> ' +
-    '<li class="ul_filter"> <input  id="user_famous" name="user[famous]" type="checkbox" > На свобода </li>'+
-    '<li class="ul_filter"> <input  id="user_famous" name="user[famous]" type="checkbox" > В приют </li>'+
-    '<li class="ul_filter"> <input  id="user_famous" name="user[famous]" type="checkbox" > Осиновено </li> </ul> ');
+    '<li class="ul_filter"> <input  id="animal_status_chBox" name="check[animal_status_chBox]" type="checkbox" > На свобода </li>'+  
+    '<li class="ul_filter"> <input  id="animal_status_chBox" name="check[animal_status_chBox]" type="checkbox" > В приют </li>'+
+    '<li class="ul_filter"> <input  id="animal_status_chBox" name="check[animal_status_chBox]" type="checkbox" > Осиновено </li> </ul> ');
     $('.Signals2').html('');
     $('.Signals3').html('');
 
@@ -133,7 +133,24 @@ $(function() {
      $('.Signals').html('');
      $('.Signals1').html('');
    });
+
+   
+
 });
+
+
+$(document).ready(function(){
+  $('input[type="checkbox"]').click(function(){
+      if($(this).is(":checked")){
+          alert("Checkbox is checked.");
+      }
+      else if($(this).is(":not(:checked)")){
+          alert("Checkbox is unchecked.");
+      }
+  });
+});
+
+
 
 $(function(){
 
