@@ -6,6 +6,8 @@ defmodule SmartcitydogsWeb.ForgotenPasswordController do
   # Timex is a library you can use to easily change the date for checking expiry
   use Timex
 
+  plug(:put_layout, false when action in [:new,:create])
+
   def new(conn, _params) do
     changeset = User.changeset(%User{})
     render(conn, "new.html", changeset: changeset, action: forgoten_password_path(conn, :create))

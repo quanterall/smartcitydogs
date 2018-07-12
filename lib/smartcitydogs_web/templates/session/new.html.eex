@@ -9,7 +9,7 @@
 
 <div class="register-photo">
 
-  <div class="container mt-3">
+  <div class="container">
   <%= form_for @conn, session_path(@conn, :create),
                                             [as: :session], fn f -> %>
 
@@ -19,18 +19,14 @@
           <%= password_input f, :password, placeholder: "Парола...", class: "form-control1" %>
 
           <div class="nav-link-pass">
-            <%= link "Забравена парола?", to: forgoten_password_path(@conn, :new), class: "nav-link" %>
+            <a class="nav-link" id="forgotten-password" href="#">Забравена парола?</a>
           </div>
         <div class="under-form">
 
 
 
           <%= submit "ВХОД", class: "btn btn-submit" %>
-          <br />
-          <br />
-          <!-- <a class="btn btn-primary pull-right" href="<%=#session_url(@conn, :request,"facebook")%>" rel="no-follow">
-            <i class="fa fa-facebook-square"></i> Facebook login</a>
-          <br /> -->
+         <br>
 
           <a class="link-cancel" href="/">ОТКАЗ</a>
         </div>
@@ -38,5 +34,6 @@
     </div>
   </div>
   <% end %>
+  <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
 </body>
 </html>

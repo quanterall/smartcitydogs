@@ -6,7 +6,7 @@
 
   <body>
     <div class="register-photo">
-      <div class="container mt-3">
+      <div class="container">
         <div class="container-show-user">
           <%= form_for @changeset, @action, fn f -> %>
             <%= if @changeset.action do %>

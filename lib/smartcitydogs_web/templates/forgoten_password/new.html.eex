@@ -6,25 +6,24 @@
   </head>
   <body>
     <div class="register-photo">
-      <div class="container mt-3">
+      <div class="container">
         <div class="form-group">
-          <label1>Password reset</label1>
             <%= form_for @changeset, @action, fn f -> %>
 
-              <%= text_input f, :username, placeholder: "Username", class: "form-control1" %>
+              <%= text_input f, :username, placeholder: "Потребителско име...", class: "form-control1" %>
               <%= error_tag f, :username %>
 
-              <%= text_input f, :email, placeholder: "E-mail", class: "form-control1" %>
+              <%= text_input f, :email, placeholder: "Имейл...", class: "form-control1" %>
               <%= error_tag f, :email %>
 
-              <%= text_input f, :phone, placeholder: "Phone number", class: "form-control1" %>
+              <%= text_input f, :phone, placeholder: "Телефонен номер...", class: "form-control1" %>
               <%= error_tag f, :phone %>
 
             <div class="under-form">
-              <a class="link-cancel" href="/">Cancel</a>
+              
 
-                <%= submit "Send reset link", class: "btn btn-submit" %>
-
+                <%= submit "ИЗПРАТИ", class: "btn btn-submit" %><br>
+                <a class="link-cancel" href="/">ОТКАЗ</a>  
               </div>
             </div>
           <% end %>

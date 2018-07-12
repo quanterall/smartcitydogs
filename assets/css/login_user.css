@@ -1,4 +1,8 @@
 .register-photo{
+  box-shadow: inset -1px 34px 12px -25px #ABABAB;
+  -webkit-box-shadow: inset 0px 9px 8px -5px rgba(0,0,0,0.75);
+  -moz-box-shadow: inset 0px 9px 8px -5px rgba(0,0,0,0.75);
+  -o-box-shadow: inset 0px 9px 8px -5px rgba(0,0,0,0.75);
   width: 100%;
   height: 100%;
   margin: 0px;

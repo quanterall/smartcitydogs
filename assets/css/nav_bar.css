@@ -31,7 +31,9 @@ body {
 .navbar-nav a.nav-link.black {
     color: rgb(63, 60, 60);
 }
-
+.navbar-nav a.nav-link.black:focus{
+    color: red !important;
+}
 .navbar-nav a.nav-link.black:hover {
     color: red !important;
 }

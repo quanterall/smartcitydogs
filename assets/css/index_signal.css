@@ -124,7 +124,7 @@ label-title{
 
 .file-upload{
   float: left;
-  margin: 10px;
+  margin-top: 2%;
   border: 1px solid white;
    display: inline-block;
     padding: 6px 12px;
@@ -534,4 +534,20 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#2fd632', end
   -webkit-box-shadow: 0px 0px 45px -4px rgba(0,0,0,0.75);
 -moz-box-shadow: 0px 0px 45px -4px rgba(0,0,0,0.75);
 box-shadow: 0px 0px 45px -4px rgba(0,0,0,0.75);
+}
+.form-register{
+  padding: 10%;
+}
+.container-new-signal{
+  padding: 5%;
+}
+.navbar-dark.top-navbar{
+  box-shadow: 0px 9px 8px -5px rgba(0, 0, 0, 0.75);
+}
+.pull-right{
+  width: 50%;
+  float: right;
+}
+.btn-submit{
+  width: 50%;
 }

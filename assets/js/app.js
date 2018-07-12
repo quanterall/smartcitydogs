@@ -149,8 +149,7 @@ $(function(){
     $('main').css("position","fixed");
     $('main').css("width","100%");
     $('.modal-content-signal').load('signals/new');
-
-
+    // $('.navbar-dark.top-navbar').css("box-shadow","0px 9px 8px -5px rgba(0, 0, 0, 0.75)");
     modal.style.display = "block";
   });
 
@@ -174,10 +173,22 @@ $(function(){
     modal.style.display = "block";
   });
 
+  $('#forgotten-password').on('click', function(){
+    // $('.send-signal-contaier').load('signals/new');
+    $('main').css("position","fixed");
+    $('main').css("width","100%");
+    $('.modal-content-signal').load('forgoten_password/new');
+
+
+    modal.style.display = "block";
+  });
+
+
   span.onclick = function() {
       modal.style.display = "none";
 
       $('main').css("position","initial");
+    //   $('.navbar-dark.top-navbar').css("box-shadow","none");
 
   }
 
