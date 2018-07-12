@@ -34,6 +34,7 @@ defmodule SmartcitydogsWeb.AnimalController do
       list_animals = Map.get(page,:entries) |> Repo.preload(:animals_status) |> Repo.preload(:animals_image)
       
       ## animals = DataAnimals.list_animals()
+      
       render(conn, "index.html", animals: list_animals, page: page)
     end
   end
