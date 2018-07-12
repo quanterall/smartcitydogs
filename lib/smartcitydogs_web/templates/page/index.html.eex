@@ -139,7 +139,6 @@
                         </div>
 
                         <center>
-
                         <div class="button-show-hide">
                           <p class="p-button-view"><a class="btn btn-secondary" href="signals/<%=signal.id%>" role="button">View more</a>
                       </div></center>
@@ -164,8 +163,7 @@
             <div class="col-lg-4">
               <img class="rounded-circle" src="<%=  news.image_url %>" alt="Generic placeholder image" width="140" height="140">
               <h2><%= news.title%></h2>
-              <ul>
-               
+              <ul>               
                 <li>
                   short content <%= news.short_content%>
                 </li>
@@ -229,5 +227,4 @@
             crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
             crossorigin="anonymous"></script>
-        <script type="text/javascript" src="slick/slick.min.js"></script>
         

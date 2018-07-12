@@ -51,7 +51,13 @@
         nav-link
       <% else %>
          nav-link black
-      <% end %>" id="signals_all_nav" href="/signals">Подадени сигнали</a>
+      <% end %>" id="signals_all_nav" <%= if @current_user do %>
+                                         href="/signals"
+                                         <% else %>
+                                          href="#"
+                                          id="nav-sign-in"
+                                         <% end %>
+                                         >Подадени сигнали</a>
       </li>
       <li class="nav-item">
         <a class="<%= if Path.join(["/" | @conn.path_info]) == "/" do %>
