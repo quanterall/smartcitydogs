@@ -288,3 +288,16 @@ $(function(){
 
   });
 });
+
+
+window.login = function() {
+var params = { email: $("#login-email").val(), password: $("#login-password").val() };
+    $.post( "/api/users/sign_in",params)
+        .done(function() {
+            location.reload();
+        })
+        .fail(function(text) {
+           $("#login-form-errors").text("Невалиден Имейл или Парола!!!!");
+        });
+
+};

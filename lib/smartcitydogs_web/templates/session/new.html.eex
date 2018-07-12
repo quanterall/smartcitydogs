@@ -1,22 +1,12 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
-  </head>
-
-<body>
-
-<div class="register-photo">
-
+<div id="login-form-container" class="register-photo">
+<div id="login-form-errors" >
+    </div>
   <div class="container">
-  <%= form_for @conn, session_path(@conn, :create),
-                                            [as: :session], fn f -> %>
 
       <div class="form-group">
-          <%= email_input f, :email, placeholder: "Имейл...", class: "form-control1", required: true %>
+      <input id="login-email" type="email" placeholder="Имейл..." class="form-control1" required>
+      <input id="login-password" type="password" placeholder="Парола..." class="form-control1" required min="6">
 
-          <%= password_input f, :password, placeholder: "Парола...", class: "form-control1", required: true, minlength: 6 %>
 
           <div class="nav-link-pass">
             <a class="nav-link" id="forgotten-password" href="#">Забравена парола?</a>
@@ -25,7 +15,11 @@
 
 
 
-          <%= submit "ВХОД", class: "btn btn-submit" %>
+
+
+         <button class="btn btn-submit" onclick="login()">
+         ВХОД
+         </button>
          <br>
 
           <a class="link-cancel" href="/">ОТКАЗ</a>
@@ -33,7 +27,4 @@
       </div>
     </div>
   </div>
-  <% end %>
-  <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
-</body>
-</html>
+
