@@ -126,7 +126,7 @@ label-title{
   float: left;
   margin: 10px;
   border: 1px solid white;
-   display: inline-block; 
+   display: inline-block;
     padding: 6px 12px;
     cursor: pointer;
 }
@@ -355,6 +355,7 @@ margin-left: -10px;
     background-color: transparent;
 }
 .modal-content-signal {
+  padding: 0px;
   box-shadow: inset -1px 34px 12px -25px #ABABAB;
   -webkit-box-shadow: inset 0px 9px 8px -5px rgba(0,0,0,0.75);
   -moz-box-shadow: inset 0px 9px 8px -5px rgba(0,0,0,0.75);
@@ -428,6 +429,7 @@ div#navbarNavDropdown{
   margin-right: 5%;
 }
 .modal-content-signal{
+  padding: 0px;
   transition: 0.5s;
   background: rgba(47,214,50,1);
 background: -moz-linear-gradient(left, rgba(47,214,50,1) 0%, rgba(47,214,50,0.84) 74%, rgba(12,245,47,0.81) 85%, rgba(91,209,73,0.78) 100%);

@@ -46,7 +46,7 @@ defmodule Smartcitydogs.DataAnimals do
 
   def sort_animals_by_id() do
     query = Ecto.Query.from(c in Animals, order_by: [c.id])
-    Repo.all(query)
+    Repo.all(query) |> Repo.preload(:animals_status) |> Repo.preload(:animals_image)
   end
 
 

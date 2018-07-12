@@ -19,17 +19,22 @@ defmodule SmartcitydogsWeb.AnimalController do
     else
       if chip == "" do
         ##animals = DataAnimals.list_animals()
+        #list_animals = Map.get(page,:entries) |> Repo.preload(:animals_status) |> Repo.preload(:animals_image)
         render(conn, "index.html", animals: sorted_animals, page: page)
       end
 
       if chip != nil do
         animals = DataAnimals.get_animal_by_chip(chip)
-        render(conn, "index.html", animals: page.entries, page: page)
+        list_animals = Map.get(page,:entries) |> Repo.preload(:animals_status) |> Repo.preload(:animals_image)
+        render(conn, "index.html", animals: list_animals, page: page)
       end
 
       page = Animals |> Smartcitydogs.Repo.paginate(params)
+
+      list_animals = Map.get(page,:entries) |> Repo.preload(:animals_status) |> Repo.preload(:animals_image)
+      
       ## animals = DataAnimals.list_animals()
-      render(conn, "index.html", animals: page.entries, page: page)
+      render(conn, "index.html", animals: list_animals, page: page)
     end
   end
 

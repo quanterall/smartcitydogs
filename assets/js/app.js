@@ -39,7 +39,7 @@ $("#like").click(function() {
 
 
 $("#comment").click(function() {
-    
+
     $.ajax({
         method: "GET",
         url: "/signals/comment",
@@ -104,7 +104,7 @@ $(function() {
     '<li class="ul_filter"> <input  id="animal_status_chBox" name="check[animal_status_chBox]" type="checkbox" > Осиновено </li> </ul> ');
     $('.Signals2').html('');
     $('.Signals3').html('');
-    
+
   });
 
   //-----------------Adopted dogs-----------------
@@ -112,12 +112,12 @@ $(function() {
     $('.container-signals').load('signals/adopted_animals');
     $('.Signals').html('');
     $('.Signals1').html('');
-   
+
    });
 
   // -------------Dogs under shelter----------------
    $('#all-dogs-shelter').on('click', function() {
-     $('.container-signals').load('signals/shelter_animals'); 
+     $('.container-signals').load('signals/shelter_animals');
      $('.Signals').html('');
      $('.Signals1').html('');
    });
@@ -159,6 +159,47 @@ $(function(){
 
     modal.style.display = "block";
   });
+
+  $('#nav-register').on('click', function(){
+    // $('.send-signal-contaier').load('signals/new');
+    $('main').css("position","fixed");
+    $('main').css("width","100%");
+    $('.modal-content-signal').load('users/new');
+
+
+    modal.style.display = "block";
+  });
+
+  $('#nav-sign-in').on('click', function(){
+    // $('.send-signal-contaier').load('signals/new');
+    $('main').css("position","fixed");
+    $('main').css("width","100%");
+    $('.modal-content-signal').load('sessions/new');
+
+
+    modal.style.display = "block";
+  });
+
+  $('#signals_all_nav_no_user').on('click', function(){
+    // $('.send-signal-contaier').load('signals/new');
+    $('main').css("position","fixed");
+    $('main').css("width","100%");
+    $('.modal-content-signal').load('sessions/new');
+
+
+    modal.style.display = "block";
+  });
+
+  $('#send-signal-no-user').on('click', function(){
+    // $('.send-signal-contaier').load('signals/new');
+    $('main').css("position","fixed");
+    $('main').css("width","100%");
+    $('.modal-content-signal').load('sessions/new');
+
+
+    modal.style.display = "block";
+  });
+
   span.onclick = function() {
       modal.style.display = "none";
 

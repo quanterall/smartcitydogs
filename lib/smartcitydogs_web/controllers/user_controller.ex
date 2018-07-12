@@ -5,7 +5,7 @@ defmodule SmartcitydogsWeb.UserController do
   alias Smartcitydogs.User
   alias Smartcitydogs.Repo
 
-  
+  plug(:put_layout, false when action in [:new])
   plug(:scrub_params, "user" when action in [:create])
 
   def index(conn, _params) do
@@ -13,6 +13,7 @@ defmodule SmartcitydogsWeb.UserController do
 
     IO.inspect(conn.assigns.current_user)
     logged_user_id = conn.assigns.current_user.users_types.id
+
     if logged_user_id != 1 do
       render(conn, SmartcitydogsWeb.ErrorView, "401.html")
     else
@@ -25,10 +26,7 @@ defmodule SmartcitydogsWeb.UserController do
     render(conn, "new.html", changeset: changeset)
   end
 
-
   def create(conn, %{"user" => user_params}) do
-
-
     if user_params["checked"] != "true" do
       changeset = %User{} |> User.registration_changeset(user_params)
       IO.puts("not checked")
@@ -59,6 +57,7 @@ defmodule SmartcitydogsWeb.UserController do
 
     logged_user_id = conn.assigns.current_user.id
     request_user_id = user.id
+
     if logged_user_id != request_user_id do
       render(conn, SmartcitydogsWeb.ErrorView, "401.html")
     else
@@ -72,6 +71,7 @@ defmodule SmartcitydogsWeb.UserController do
 
     logged_user_id = conn.assigns.current_user.id
     request_user_id = user.id
+
     if logged_user_id != request_user_id do
       render(conn, SmartcitydogsWeb.ErrorView, "401.html")
     else
@@ -81,9 +81,10 @@ defmodule SmartcitydogsWeb.UserController do
 
   def update(conn, %{"id" => id, "user" => user_params}) do
     user = DataUsers.get_user!(id)
-    
+
     logged_user_id = conn.assigns.current_user.id
     request_user_id = user.id
+
     if logged_user_id != request_user_id do
       render(conn, SmartcitydogsWeb.ErrorView, "401.html")
     else
@@ -95,16 +96,16 @@ defmodule SmartcitydogsWeb.UserController do
 
         {:error, %Ecto.Changeset{} = changeset} ->
           render(conn, "edit.html", user: user, changeset: changeset)
-      
       end
     end
   end
 
   def delete(conn, %{"id" => id}) do
     user = DataUsers.get_user!(id)
-    
+
     logged_user_id = conn.assigns.current_user.id
     request_user_id = user.id
+
     if logged_user_id != request_user_id do
       render(conn, SmartcitydogsWeb.ErrorView, "401.html")
     else

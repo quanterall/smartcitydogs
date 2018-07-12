@@ -51,13 +51,13 @@
         nav-link
       <% else %>
          nav-link black
-      <% end %>" id="signals_all_nav" <%= if @current_user do %>
+      <% end %>"  <%= if @current_user do %> id="signals_all_nav"
                                          href="/signals"
                                          <% else %>
                                           href="#"
-                                          id="nav-sign-in"
+                                          id="signals_all_nav_no_user"
                                          <% end %>
-                                         >Подадени сигнали</a>
+                                         > Подадени сигнали</a>
       </li>
       <li class="nav-item">
         <a class="<%= if Path.join(["/" | @conn.path_info]) == "/" do %>
@@ -105,22 +105,32 @@
       <% else %>
       <li class="nav-item ">
          <%= if Path.join(["/" | @conn.path_info]) == "/" do %>
-          <%= link "Register", to: user_path(@conn, :new), class: "nav-link" %>
+          <a class="nav-link" id="nav-register" href="#" >Register</a>
+          <!-- <%= #link "Register", to: user_path(@conn, :new), class: "nav-link" %> -->
         <% else %>
-         <%= link "Register", to: user_path(@conn, :new), class: "nav-link black" %>
+          <a class="nav-link black" id="nav-register" href="#" >Register</a>
+         <!-- <%= #link "Register", to: user_path(@conn, :new), class: "nav-link black" %> -->
         <% end %>
       </li>
       <li class="nav-item ">
         <%= if Path.join(["/" | @conn.path_info]) == "/" do %>
-          <%= link "Sign in", to: session_path(@conn, :new), class: "nav-link" %>
+          <a class="nav-link" id="nav-sign-in" href="#" >Sign in</a>
+          <!-- <%=# link "Sign in", to: session_path(@conn, :new), class: "nav-link" %> -->
         <% else %>
-          <%= link "Sign in", to: session_path(@conn, :new), class: "nav-link black" %>
+          <a class="nav-link black" id="nav-sign-in" href="#" >Sign in</a>
+          <!-- <%= #link "Sign in", to: session_path(@conn, :new), class: "nav-link black" %> -->
         <% end %>
       </li>
       <% end %>
 
       <li class="nav-item bg-white ">
-        <a class="nav-link text-green new-signal-btn" id="send-signal" href="#">ПОДАЙ СИГНАЛ</a>
+        <a class="nav-link text-green new-signal-btn"  <%= if @current_user do %> 
+                                         href="#"
+                                         id="send-signal"
+                                         <% else %>
+                                          href="#"
+                                          id="send-signal-no-user"
+                                         <% end %> >ПОДАЙ СИГНАЛ</a>
       </li>
     </ul>
   </div>
