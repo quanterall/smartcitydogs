@@ -14,7 +14,7 @@
               <%= text_input f, :username, placeholder: "Username", class: "form-control1" %>
               <%= error_tag f, :username %>
 
-              <%= text_input f, :email, placeholder: "E-mail", class: "form-control1" %>
+              <%= email_input f, :email, placeholder: "E-mail", class: "form-control1" %>
               <%= error_tag f, :email %>
 
               <%= text_input f, :phone, placeholder: "Phone number", class: "form-control1" %>

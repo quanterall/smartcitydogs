@@ -14,7 +14,7 @@
                                             [as: :session], fn f -> %>
 
       <div class="form-group">
-          <%= text_input f, :email, placeholder: "Имейл...", class: "form-control1", required: true %>
+          <%= email_input f, :email, placeholder: "Имейл...", class: "form-control1", required: true %>
 
           <%= password_input f, :password, placeholder: "Парола...", class: "form-control1", required: true, minlength: 6 %>
 
