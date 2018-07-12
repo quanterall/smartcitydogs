@@ -9,14 +9,14 @@
 
 <div class="register-photo">
 
-  <div class="container mt-3">
+  <div class="container">
   <%= form_for @conn, session_path(@conn, :create),
                                             [as: :session], fn f -> %>
 
       <div class="form-group">
-          <%= text_input f, :email, placeholder: "Имейл...", class: "form-control1" %>
+          <%= text_input f, :email, placeholder: "Имейл...", class: "form-control1", required: true %>
 
-          <%= password_input f, :password, placeholder: "Парола...", class: "form-control1" %>
+          <%= password_input f, :password, placeholder: "Парола...", class: "form-control1", required: true, minlength: 6 %>
 
           <div class="nav-link-pass">
             <%= link "Забравена парола?", to: forgoten_password_path(@conn, :new), class: "nav-link" %>

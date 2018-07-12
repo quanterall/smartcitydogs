@@ -8,7 +8,7 @@
 </head>
 <body>
 <div class="register-photo">
-  <div class="container mt-3">
+  <div class="container">
     <%= form_for @changeset, user_path(@conn, :create), fn f -> %>
       <%= if @changeset.action do %>
         <div class="alert alert-danger">
@@ -19,29 +19,29 @@
 
 
       <div class="form-register">
-        <%= text_input f, :username, placeholder: "Потребителско име...", class: "form-control1" %>
+        <%= text_input f, :username, placeholder: "Потребителско име...", class: "form-control1", required: true %>
         <%= error_tag f, :username %>
 
         <br />
-        <%= password_input f, :password, placeholder: "Парола...", class: "form-control1" %>
+        <%= password_input f, :password, placeholder: "Парола...", class: "form-control1", required: true, minlength: 6 %>
         <%= error_tag f, :password %>
         <br />
 
 
-        <%= text_input f, :email, placeholder: "Имейл...", class: "form-control1" %>
+        <%= text_input f, :email, placeholder: "Имейл...", class: "form-control1", required: true %>
         <%= error_tag f, :email %>
         <br>
 
-        <%= text_input f, :phone, placeholder: "Телефонен номер...", class: "form-control1" %>
+        <%= text_input f, :phone, placeholder: "Телефонен номер...", class: "form-control1", required: true, minlength: 10, maxlength: 10 %>
         <%= error_tag f, :phone %>
 
         <br />
-        <%= text_input f, :users_types_id, placeholder: "Вид потребител...", class: "form-contro1l" %>
+        <%= text_input f, :users_types_id, placeholder: "Вид потребител...", class: "form-contro1l", required: true %>
         <%= error_tag f, :users_types_id %>
         <br />
         <div class="under-form">
 
-          <%= checkbox f, :checked, class: "form-control1" %> Съгласен съм с условията. </p>
+          <%= checkbox f, :checked, class: "form-control1", required: true %> Съгласен съм с условията. </p>
 
           <br />
 

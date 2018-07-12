@@ -7,49 +7,39 @@
     <div class="container-new-signal">
     <center><label-signal>Подаване на сигнал към зоо полиция</label-signal></center>
 
-    <%= form_for @changeset, @action,[multipart: true], fn f -> %>
-    <%= if @changeset.action do %>
-    <div class="alert alert-danger">
-    <p>Oops, something went wrong! Please fill the form below.</p>
-    </div>
-    <% end %>
+    <%= form_for @changeset, @action,[multipart: true, class: "form-elixir"], fn f -> %>
     <label-1>1.Изберете категория на сигнала</label-1>
-    <div class="form-group">
-    <!-- <%= #label f, :signals_categories_id, class: "control-label" %> -->
-    <%= select(f , :signals_categories_id, [
-          [key: "Бездомно куче", value: "1"],
-          [key: "Избягало куче", value: "2"],
-          [key: "Малтретиране на куче", value: "3"]
-          ]) %>
-    </div>
+      <div class="form-group">
+        <%= select(f , :signals_categories_id, [
+              [key: "Бездомно куче", value: "1"],
+              [key: "Избягало куче", value: "2"],
+              [key: "Малтретиране на куче", value: "3"]
+              ]) %>
+      </div>
     <label-2>2.Въведете местоположение</label-2>
-    <div class="form-group">
-    <!--  <%= #label f, :address, class: "control-label" %> -->
-    <%= text_input f, :address, class: "form-control1" %>
-    <%= error_tag f, :address %>
-    </div>
+      <div class="form-group">
+        <%= text_input f, :address, class: "form-control1", required: true, minlength: 2 %>
+        <%= error_tag f, :address %>
+      </div>
     <label-3>3.Заглавие на сигнала</label-3>
-    <div class="form-group">
-    <!--  <%=# label f, :title, class: "control-label" %> -->
-    <%= text_input f, :title, class: "form-control1" %>
-    <%= error_tag f, :title %>
-    </div>
+      <div class="form-group">
+        <%= text_input f, :title, class: "form-control1", required: true, minlength: 2 %>
+        <%= error_tag f, :title %>
+      </div>
     <label-4>4.Качете налични снимки/видео</label-4>
-    <div class="form-group">
-        <%# <%= label f, :url, class: "control-label" %> 
-        <label for="signals_url" class="file-upload">
-          Качи снимки
-        </label>
-        <%= file_input f, :url, multiple: true, class: "form-control1", id: "signals_url" %>
-        <%= error_tag f, :url %>
+      <div class="form-group">
+          <label for="signals_url" class="file-upload">
+            Качи снимки
+          </label>
+          <%= file_input f, :url, multiple: true, class: "form-control1", id: "signals_url" %>
+          <%= error_tag f, :url %>
       </div>
     <br><br>
     <label-5>5.Опишете ситуацията</label-5>
-     <div class="form-group">
-    <!-- <%= #label f, :description, class: "control-label" %> -->
-    <%= textarea f, :description, class: "form-control1" %>
-    <%= error_tag f, :description %>
-    </div>
+      <div class="form-group">
+       <%= textarea f, :description, class: "form-control1" %>
+       <%= error_tag f, :description %>
+      </div>
 
 
     <div class="form-group">
@@ -58,10 +48,10 @@
 
 
     <%= submit "ПОДАЙ СИГНАЛ", class: "btn btn-submit" %> <br /><br />
-    <div class="close1 btn-primary">ОТКАЗ</div>
+      <div class="close1 btn-primary">ОТКАЗ</div>
+      </div>
     </div>
-    </div>
-    <% end %>
+      <% end %>
     </div>
 
 </body>
