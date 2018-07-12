@@ -57,8 +57,8 @@ defmodule SmartcitydogsWeb.SessionController do
 
       {:error, _reason, conn} ->
         conn
+        |> redirect(to: ("/"))
         |> put_flash(:error, "Invalid email/password combination")
-        |> render("new.html")
     end
   end
 
