@@ -75,7 +75,9 @@ $("#comment").click(function() {
     })
 });
 
-window.onload = function() {
+// ############# Load Page Open Last Signal Filter ###############
+
+window.onload = function() {    
     $('.Signals').html('<ul style="list-style-type:none;">  <li class="title_filter"> Филтрирай по категория </li> ' +
     '<li class="ul_filter"> <input  id="sig_category" name="check[sig_category]" type="checkbox" > Бездомно куче </li>'+  
     '<li class="ul_filter"> <input  id="sig_category" name="check[sig_category]" type="checkbox" > Избягал домашен любимец </li>'+
@@ -91,25 +93,11 @@ window.onload = function() {
     $('.Signals3').html('');
 }
 
+// ########### /Load Page #########################
 
+
+// ################ Filter Menu Options #####################
 $(function() {
-
-
-    //---------------nav-bar all signals-----------
-    // $('#signals_all_nav').on('click', function(){
-    //     $('.Signals').html('<ul>  <li> Филтрирай по категория </li> ' +
-    //                                 '<li>  </li>'+
-    //                                 ''+
-    //                                 ' </ul>');
-    //     $('.Signals1').html('');
-    //     $('.Signals2').html('');
-    //     $('.Signals3').html('');
-    // })
-
-    //-----------------new signal -------------
-  // $('#send-signal').on('click', function() {
-  //   $('.send-signal-container').load('signals/new');
-  // })
 
   //-----------------all signals----------------
   $('#all-signals').on('click', function() {
@@ -160,8 +148,9 @@ $(function() {
    
 
 });
+// ################ /Filter Menu Options #####################
 
-
+// ############# Filter Checkbox ##############
 $(document).ready(function(){
   $('input[type="checkbox"]').click(function(){
       if($(this).is(":checked")){
@@ -173,7 +162,7 @@ $(document).ready(function(){
   });
 });
 
-
+// ################# / Filter Checkbox #############
 
 $(function(){
 
@@ -219,10 +208,28 @@ $(function(){
     $('main').css("width","100%");
     $('.modal-content-signal').load('forgoten_password/new');
 
+    modal.style.display = "block";
+  });
+  
+  $('#signals_all_nav_no_user').on('click', function(){
+    // $('.send-signal-contaier').load('signals/new');
+    $('main').css("position","fixed");
+    $('main').css("width","100%");
+    $('.modal-content-signal').load('sessions/new');
+
 
     modal.style.display = "block";
   });
 
+  $('#send-signal-no-user').on('click', function(){
+    // $('.send-signal-contaier').load('signals/new');
+    $('main').css("position","fixed");
+    $('main').css("width","100%");
+    $('.modal-content-signal').load('sessions/new');
+
+
+    modal.style.display = "block";
+  });
 
   span.onclick = function() {
       modal.style.display = "none";
