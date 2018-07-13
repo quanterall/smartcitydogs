@@ -24,26 +24,6 @@ import $ from "jquery";
 
 
 
-// $(".form-elixir").submit(function(event){
-//     event.preventDefault(); //prevent default action 
-//     var post_url = $(this).attr("action"); //get form action url
-//     var request_method = $(this).attr("POST"); //get form GET/POST method
-//     var form_data = $(this).serialize(); //Encode form elements for submission
-//     $.ajax({
-//         url : post_url,
-//         type: request_method
-//         // data : form_data
-//     }).done(function(response){
-//         console.log(form_data);
-//         console.log(response);
-// 		alert("Success!") 
-//     }).error(function(error){
-// 		alert("ERROR!")
-//         //tuk izpisvash error
-        
-// 	});
-// });
-
 
 $("#like").click(function() {
 
@@ -89,27 +69,28 @@ window.onload = function() {
     $('.Signals1').html('');
     $('.Signals2').html('');
     $('.Signals3').html('');
+
+    
+    $('body').css("position","auto");
+    $('main').css("position","initial");
+    $('.form1').load('signals/new');
+    $('.form2').load('users/new');
+    $('.form3').load('sessions/new');
+    $('.form4').load('forgoten_password/new');
+
+    $('.modal-signal').hide();
+    $('.form1').hide();
+    $('.form2').hide();
+    $('.form3').hide();
+    $('.form4').hide();
+
+
 }
 
 
 $(function() {
 
 
-    //---------------nav-bar all signals-----------
-    // $('#signals_all_nav').on('click', function(){
-    //     $('.Signals').html('<ul>  <li> Филтрирай по категория </li> ' +
-    //                                 '<li>  </li>'+
-    //                                 ''+
-    //                                 ' </ul>');
-    //     $('.Signals1').html('');
-    //     $('.Signals2').html('');
-    //     $('.Signals3').html('');
-    // })
-
-    //-----------------new signal -------------
-  // $('#send-signal').on('click', function() {
-  //   $('.send-signal-container').load('signals/new');
-  // })
 
   //-----------------all signals----------------
   $('#all-signals').on('click', function() {
@@ -177,60 +158,66 @@ $(document).ready(function(){
 
 $(function(){
 
-  var modal = document.getElementById('myModal-signal');
-  var span = document.getElementsByClassName("close1")[0];
-
-  window.onload = function(){
-    $('body').css("position","auto");
-  }
+  
+    var modal = document.getElementById('myModal-signal');
+    // var span = document.getElementsByClassName("close1")[0];
+  
 
   $('#send-signal').on('click', function(){
-    // $('.send-signal-contaier').load('signals/new');
     $('main').css("position","fixed");
     $('main').css("width","100%");
-    $('.modal-content-signal').load('signals/new');
-    // $('.navbar-dark.top-navbar').css("box-shadow","0px 9px 8px -5px rgba(0, 0, 0, 0.75)");
+    $('.form2').hide();
+    $('.form3').hide();
+    $('.form4').hide();
+    $('.form1').show();
     modal.style.display = "block";
   });
 
   $('#nav-register').on('click', function(){
-    // $('.send-signal-contaier').load('signals/new');
     $('main').css("position","fixed");
     $('main').css("width","100%");
-    $('.modal-content-signal').load('users/new');
+    
+    $('.form1').hide();
+    $('.form3').hide();
+    $('.form4').hide();
+    $('.form2').show();
 
 
     modal.style.display = "block";
   });
 
   $('#nav-sign-in').on('click', function(){
-    // $('.send-signal-contaier').load('signals/new');
     $('main').css("position","fixed");
     $('main').css("width","100%");
-    $('.modal-content-signal').load('sessions/new');
+    $('.form2').hide();
+    $('.form1').hide();
+    $('.form4').hide();
+    $('.form3').show();
 
 
     modal.style.display = "block";
   });
 
   $('#forgotten-password').on('click', function(){
-    // $('.send-signal-contaier').load('signals/new');
     $('main').css("position","fixed");
     $('main').css("width","100%");
-    $('.modal-content-signal').load('forgoten_password/new');
+    $('.form2').hide();
+    $('.form1').hide();
+    $('.form3').hide();
+    $('.form4').show();
 
 
     modal.style.display = "block";
   });
 
 
-  span.onclick = function() {
-      modal.style.display = "none";
+  $('.close1').on('click', function() {
+    //   modal.style.display = "none";
+    this.hide();
 
       $('main').css("position","initial");
-    //   $('.navbar-dark.top-navbar').css("box-shadow","none");
 
-  }
+  });
 
 
 });
