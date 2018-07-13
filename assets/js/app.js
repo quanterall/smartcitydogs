@@ -169,10 +169,47 @@ $(function(){
 
   
     var modal = document.getElementById('myModal-signal');
-    // var span = document.getElementsByClassName("close1")[0];
-  
+    // var like = document.getElementById('submit-like1');
+    // var like_text = document.getElementById('submit-like').text();
+  $('#submit-like1').on('click',function(){
+    //   console.log("ala bala")
+        var a = $('#submit-like1').text();
+        console.log(a);
+      if(a == "like"){
 
-  $('#send-signal').on('click', function(){
+        $.ajax({
+            method: "GET",
+            url: "/signals/update_like_count",
+            data: {
+                "show-count": $("#signal-count").text(),
+                "show-id": $("#signal-id").text()
+            }
+        }).then(function(data) {
+            $("#signal-count").text(data.new_count);
+    
+        })
+
+        $('#submit-like1').text("unlike");
+      }
+      else{
+
+        $.ajax({
+            method: "GET",
+            url: "/signals/remove_like",
+            data: {
+                "show-count": $("#signal-count").text(),
+                "show-id": $("#signal-id").text()
+            }
+        }).then(function(data) {
+            $("#signal-count").text(data.new_count);
+    
+        })
+
+        $('#submit-like1').text("like");
+      }
+  });
+
+   $('#send-signal').on('click', function(){
     $('main').css("position","fixed");
     $('main').css("width","100%");
     $('.form2').hide();
@@ -242,8 +279,11 @@ $(function(){
 
   $('.close1').on('click', function() {
     //   modal.style.display = "none";
-    this.hide();
-
+    $('.form2').hide();
+    $('.form1').hide();
+    $('.form4').hide();
+    $('.form3').hide();
+    $('.modal-signal').hide();
       $('main').css("position","initial");
 
   });
@@ -254,7 +294,7 @@ $(function(){
 $(function(){
 
   var modal = document.getElementById('myModal');
-  var span = document.getElementsByClassName("close")[0];
+//   var span = document.getElementsByClassName("close")[0];
   var id;
   var SelectedType;
 
@@ -264,9 +304,11 @@ $(function(){
     modal.style.display = "block";
 
   });
-  span.onclick = function() {
+  $('.close').on('click', function(){
+      {
       modal.style.display = "none";
-  }
+      }
+  });
   window.onclick = function(event) {
     if (event.target == modal) {
         modal.style.display = "none";

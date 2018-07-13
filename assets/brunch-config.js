@@ -32,7 +32,8 @@ watcher: {
           "css/show_user.css",
           "css/my_profile.css",
           "css/index_signal.css",
-          "css/nav_bar.css"
+          "css/nav_bar.css",
+          "css/show_signal.css"
         ]
       }
     },

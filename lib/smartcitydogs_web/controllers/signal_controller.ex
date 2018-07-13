@@ -343,6 +343,31 @@ redirect conn, to: "/signals/#{signal.id}"
     head.support_count + 1
   end
 
+  def get_signals_support_count_minus(signal_id) do
+    list = Smartcitydogs.DataSignals.get_signal_support_count(signal_id)
+
+    if list != [] do
+      [head | tail] = list
+      count = head.support_count
+      Smartcitydogs.DataSignals.update_signal(head, %{support_count: count - 1})
+    end
+
+    head.support_count - 1
+  end
+
+  def remove_like(conn, %{"show-count" => show_count, "show-id" => show_id}) do
+    ## IO.inspect show_id
+    signal = DataSignals.get_signal(show_id)
+    ## IO.inspect signal
+     IO.puts "_____________________________________________REMOVE_LIKE_________________________"
+    user_id = conn.assigns.current_user.id
+    ##  IO.inspect user_id
+    DataUsers.remove_liked_signal(user_id, show_id)
+    count = get_signals_support_count_minus(show_id)
+
+    conn
+    |> json(%{new_count: count})
+  end
   def update_like_count(conn, %{"show-count" => show_count, "show-id" => show_id}) do
     ## IO.inspect show_id
     signal = DataSignals.get_signal(show_id)

@@ -80,8 +80,6 @@
         <br>
       <a id="comment" class="btn btn-secondary" href="/signals/<%= @signal.id %>" role="button">Submit comment</a></p>
 
-<span><%= link "Edit", to: signal_path(@conn, :edit, @signal) %></span>
-<span><%= link "Back", to: signal_path(@conn, :index) %></span>
       <br>
 
           <strong>Comments:</strong>
