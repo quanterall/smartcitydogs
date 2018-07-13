@@ -48,7 +48,7 @@ defmodule SmartcitydogsWeb.SignalController do
       signal_params =
         signal_params
         |> Map.put("signals_types_id", 1)
-        |> Map.put("view_count", 1)
+        |> Map.put("view_count", 0)
         |> Map.put("support_count", 0)
         |> Map.put("users_id", a)
 
