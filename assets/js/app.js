@@ -79,12 +79,18 @@ window.onload = function() {
     $('.form2').load('users/new');
     $('.form3').load('sessions/new');
     $('.form4').load('forgoten_password/new');
+    $('.form5').load('forgoten_password/new');
+    $('.form6').load('forgoten_password/new');
+
+
 
     $('.modal-signal').hide();
     $('.form1').hide();
     $('.form2').hide();
     $('.form3').hide();
     $('.form4').hide();
+    $('.form5').hide();
+    $('.form6').hide();
 
 
 }
@@ -213,21 +219,23 @@ $(function(){
   });
   
   $('#signals_all_nav_no_user').on('click', function(){
-    // $('.send-signal-contaier').load('signals/new');
     $('main').css("position","fixed");
     $('main').css("width","100%");
-    $('.modal-content-signal').load('sessions/new');
-
+    $('.form2').hide();
+    $('.form1').hide();
+    $('.form4').hide();
+    $('.form3').show();
 
     modal.style.display = "block";
   });
 
   $('#send-signal-no-user').on('click', function(){
-    // $('.send-signal-contaier').load('signals/new');
     $('main').css("position","fixed");
     $('main').css("width","100%");
-    $('.modal-content-signal').load('sessions/new');
-
+    $('.form2').hide();
+    $('.form1').hide();
+    $('.form4').hide();
+    $('.form3').show();
 
     modal.style.display = "block";
   });
