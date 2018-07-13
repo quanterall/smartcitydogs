@@ -14,11 +14,17 @@ defmodule SmartcitydogsWeb.SignalController do
   plug(:put_layout, false when action in [:shelter_animals])
   plug(:put_layout, false when action in [:new])
 
-  def index(conn, params) do
+ def index(conn, params) do
+    page = Signals |> Smartcitydogs.Repo.paginate(params)
+    sorted_signals = DataSignals.sort_signal_by_id()
+    render(conn, "index2_signal.html", signal: page.entries, page: page)
+  end 
+
+  def index_home_minicipality(conn, params) do
     page = Signals |> Smartcitydogs.Repo.paginate(params)
     sorted_signals = DataSignals.sort_signal_by_id()
     render(conn, "filter_index.html", signal: page.entries, page: page)
-  end
+  end 
 
   def new(conn, _params) do
     changeset = Smartcitydogs.DataSignals.change_signal(%Signals{})

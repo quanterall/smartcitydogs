@@ -95,7 +95,6 @@ window.onload = function() {
 
 // ########### /Load Page #########################
 
-
 // ################ Filter Menu Options #####################
 $(function() {
 

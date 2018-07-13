@@ -59,6 +59,19 @@
                                          <% end %>
                                          > Подадени сигнали</a>
       </li>
+       <li class="nav-item">
+        <a class="<%= if Path.join(["/" | @conn.path_info]) == "/" do %>
+        nav-link
+      <% else %>
+         nav-link black
+      <% end %>"  <%= if @current_user do %> id="animals_all_nav"
+                                         href="/animals"
+                                         <% else %>
+                                          href="#"
+                                          id="animals_all_nav_no_user"
+                                         <% end %>
+                                         > Регистрирани кучета</a>
+      </li>
       <li class="nav-item">
         <a class="<%= if Path.join(["/" | @conn.path_info]) == "/" do %>
         nav-link
