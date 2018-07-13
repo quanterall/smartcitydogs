@@ -146,6 +146,7 @@
 </nav>
 </div>
 </div>
+<% IO.inspect(@conn) %>
 
 <div id="myModal-signal" class="modal-signal">
 
