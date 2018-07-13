@@ -51,7 +51,26 @@
         nav-link
       <% else %>
          nav-link black
-      <% end %>" id="signals_all_nav" href="/signals">Подадени сигнали</a>
+      <% end %>"  <%= if @current_user do %> id="signals_all_nav"
+                                         href="/signals"
+                                         <% else %>
+                                          href="#"
+                                          id="signals_all_nav_no_user"
+                                         <% end %>
+                                         > Подадени сигнали</a>
+      </li>
+       <li class="nav-item">
+        <a class="<%= if Path.join(["/" | @conn.path_info]) == "/" do %>
+        nav-link
+      <% else %>
+         nav-link black
+      <% end %>"  <%= if @current_user do %> id="animals_all_nav"
+                                         href="/animals"
+                                         <% else %>
+                                          href="#"
+                                          id="animals_all_nav_no_user"
+                                         <% end %>
+                                         > Регистрирани кучета</a>
       </li>
       <li class="nav-item">
         <a class="<%= if Path.join(["/" | @conn.path_info]) == "/" do %>
@@ -114,7 +133,13 @@
       <% end %>
 
       <li class="nav-item bg-white ">
-        <a class="nav-link text-green new-signal-btn" id="send-signal" href="#">ПОДАЙ СИГНАЛ</a>
+        <a class="nav-link text-green new-signal-btn"  <%= if @current_user do %> 
+                                         href="#"
+                                         id="send-signal"
+                                         <% else %>
+                                          href="#"
+                                          id="send-signal-no-user"
+                                         <% end %> >ПОДАЙ СИГНАЛ</a>
       </li>
     </ul>
   </div>

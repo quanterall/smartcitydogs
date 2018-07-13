@@ -55,7 +55,9 @@ $("#comment").click(function() {
     })
 });
 
-window.onload = function() {
+// ############# Load Page Open Last Signal Filter ###############
+
+window.onload = function() {    
     $('.Signals').html('<ul style="list-style-type:none;">  <li class="title_filter"> Филтрирай по категория </li> ' +
     '<li class="ul_filter"> <input  id="sig_category" name="check[sig_category]" type="checkbox" > Бездомно куче </li>'+  
     '<li class="ul_filter"> <input  id="sig_category" name="check[sig_category]" type="checkbox" > Избягал домашен любимец </li>'+
@@ -87,10 +89,10 @@ window.onload = function() {
 
 }
 
+// ########### /Load Page #########################
 
+// ################ Filter Menu Options #####################
 $(function() {
-
-
 
   //-----------------all signals----------------
   $('#all-signals').on('click', function() {
@@ -141,8 +143,9 @@ $(function() {
    
 
 });
+// ################ /Filter Menu Options #####################
 
-
+// ############# Filter Checkbox ##############
 $(document).ready(function(){
   $('input[type="checkbox"]').click(function(){
       if($(this).is(":checked")){
@@ -154,7 +157,7 @@ $(document).ready(function(){
   });
 });
 
-
+// ################# / Filter Checkbox #############
 
 $(function(){
 
@@ -206,10 +209,28 @@ $(function(){
     $('.form3').hide();
     $('.form4').show();
 
+    modal.style.display = "block";
+  });
+  
+  $('#signals_all_nav_no_user').on('click', function(){
+    // $('.send-signal-contaier').load('signals/new');
+    $('main').css("position","fixed");
+    $('main').css("width","100%");
+    $('.modal-content-signal').load('sessions/new');
+
 
     modal.style.display = "block";
   });
 
+  $('#send-signal-no-user').on('click', function(){
+    // $('.send-signal-contaier').load('signals/new');
+    $('main').css("position","fixed");
+    $('main').css("width","100%");
+    $('.modal-content-signal').load('sessions/new');
+
+
+    modal.style.display = "block";
+  });
 
   $('.close1').on('click', function() {
     //   modal.style.display = "none";
@@ -268,3 +289,16 @@ $(function(){
 
   });
 });
+
+
+window.login = function() {
+var params = { email: $("#login-email").val(), password: $("#login-password").val() };
+    $.post( "/api/users/sign_in",params)
+        .done(function() {
+            location.reload();
+        })
+        .fail(function(text) {
+           $("#login-form-errors").text("Невалиден Имейл или Парола!!!!");
+        });
+
+};
