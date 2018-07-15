@@ -59,14 +59,14 @@ $("#comment").click(function() {
 
 window.onload = function() {    
     $('.Signals').html('<ul style="list-style-type:none;">  <li class="title_filter"> Филтрирай по категория </li> ' +
-    '<li class="ul_filter"> <input  id="sig_category" name="check[sig_category]" type="checkbox" > Бездомно куче </li>'+  
-    '<li class="ul_filter"> <input  id="sig_category" name="check[sig_category]" type="checkbox" > Избягал домашен любимец </li>'+
-    '<li class="ul_filter"> <input  id="sig_category" name="check[sig_category]" type="checkbox" > Малтретиране на животно </li>'+
+    '<li class="ul_filter"> <input  id="sig_category" name="sig_category" type="checkbox" value = 1 > Бездомно куче </li>'+  
+    '<li class="ul_filter"> <input  id="sig_category" name="sig_category" type="checkbox" value = 2 > Избягал домашен любимец </li>'+
+    '<li class="ul_filter"> <input  id="sig_category" name="sig_category" type="checkbox" value = 3 > Малтретиране на животно </li>'+
     ' </ul> <ul style="list-style-type:none;">  <li class="title_filter"> Филтрирай спрямо Статус </li> ' +
-    '<li class="ul_filter"> <input  id="sig_status" name="check[sig_status]" type="checkbox" > Нов </li>'+  
-    '<li class="ul_filter"> <input  id="sig_status" name="check[sig_status]" type="checkbox" > Приет </li> '+
-    '<li class="ul_filter"> <input  id="sig_status" name="check[sig_status]" type="checkbox" > Изпратен </li>'+
-    '<li class="ul_filter"> <input  id="sig_status" name="check[sig_status]" type="checkbox" > Приключен </li>'+
+    '<li class="ul_filter"> <input  id="sig_status" name="sig_status" type="checkbox" value = 1 > Нов </li>'+  
+    '<li class="ul_filter"> <input  id="sig_status" name="sig_status" type="checkbox" value = 2 > Приет </li> '+
+    '<li class="ul_filter"> <input  id="sig_status" name="sig_status" type="checkbox" value = 3 > Изпратен </li>'+
+    '<li class="ul_filter"> <input  id="sig_status" name="sig_status" type="checkbox" value = 4 > Приключен </li>'+
     ' </ul>');
     $('.Signals1').html('');
     $('.Signals2').html('');
@@ -75,22 +75,27 @@ window.onload = function() {
     
     $('body').css("position","auto");
     $('main').css("position","initial");
-    $('.form1').load('signals/new');
-    $('.form2').load('users/new');
-    $('.form3').load('sessions/new');
-    $('.form4').load('forgoten_password/new');
-    $('.form5').load('forgoten_password/new');
-    $('.form6').load('forgoten_password/new');
 
-
-
-    $('.modal-signal').hide();
-    $('.form1').hide();
-    $('.form2').hide();
-    $('.form3').hide();
-    $('.form4').hide();
-    $('.form5').hide();
-    $('.form6').hide();
+    $('input[type="checkbox"]').click(function() {
+        var obj = {};
+        $('input[type=checkbox]:checked').each(function() {
+            if (!obj.hasOwnProperty(this.name)) 
+                obj[this.name] = [this.value];
+            else 
+                obj[this.name].push(this.value);
+        });
+       console.log(obj)
+        $.ajax({
+            method: "GET",
+            url: "signals/filter_index",
+            data: {
+                obj,
+            },
+            success: function(msg){
+                $('.container-signals').html(msg);
+            }
+        });
+    });
 
 
 }
@@ -104,18 +109,42 @@ $(function() {
   $('#all-signals').on('click', function() {
     $('.container-signals').load('signals/filter_index');
     $('.Signals').html('<ul style="list-style-type:none;">  <li class="title_filter"> Филтрирай по категория </li> ' +
-    '<li class="ul_filter"> <input  id="sig_category" name="check[sig_category]" type="checkbox" > Бездомно куче </li>'+  
-    '<li class="ul_filter"> <input  id="sig_category" name="check[sig_category]" type="checkbox" > Избягал домашен любимец </li>'+
-    '<li class="ul_filter"> <input  id="sig_category" name="check[sig_category]" type="checkbox" > Малтретиране на животно </li>'+
+    '<li class="ul_filter"> <input  id="sig_category" name="sig_category" type="checkbox" value = 1 > Бездомно куче </li>'+  
+    '<li class="ul_filter"> <input  id="sig_category" name="sig_category" type="checkbox" value = 2 > Избягал домашен любимец </li>'+
+    '<li class="ul_filter"> <input  id="sig_category" name="sig_category" type="checkbox" value = 3 > Малтретиране на животно </li>'+
     ' </ul> <ul style="list-style-type:none;">  <li class="title_filter"> Филтрирай спрямо Статус </li> ' +
-    '<li class="ul_filter"> <input  id="sig_status" name="check[sig_status]" type="checkbox" > Нов </li>'+  
-    '<li class="ul_filter"> <input  id="sig_status" name="check[sig_status]" type="checkbox" > Приет </li> '+
-    '<li class="ul_filter"> <input  id="sig_status" name="check[sig_status]" type="checkbox" > Изпратен </li>'+
-    '<li class="ul_filter"> <input  id="sig_status" name="check[sig_status]" type="checkbox" > Приключен </li>'+
+    '<li class="ul_filter"> <input  id="sig_status" name="sig_status" type="checkbox" value = 1 > Нов </li>'+  
+    '<li class="ul_filter"> <input  id="sig_status" name="sig_status" type="checkbox" value = 2 > Приет </li> '+
+    '<li class="ul_filter"> <input  id="sig_status" name="sig_status" type="checkbox" value = 3 > Изпратен </li>'+
+    '<li class="ul_filter"> <input  id="sig_status" name="sig_status" type="checkbox" value = 4 > Приключен </li>'+
     ' </ul>');
     $('.Signals1').html('');
     $('.Signals2').html('');
     $('.Signals3').html('');
+
+
+    $('input[type="checkbox"]').click(function() {
+        var obj = {};
+        $('input[type=checkbox]:checked').each(function() {
+            if (!obj.hasOwnProperty(this.name)) 
+                obj[this.name] = [this.value];
+            else 
+                obj[this.name].push(this.value);
+        });
+       console.log(obj)
+        $.ajax({
+            method: "GET",
+            url: "signals/filter_index",
+            data: {
+                obj,
+            },
+            success: function(msg){
+                $('.container-signals').html(msg);
+            }
+        });
+    });
+
+
   });
 
   // ------------------Registered dogs----------------
@@ -123,11 +152,35 @@ $(function() {
     $('.container-signals').load('animals');
     $('.Signals').html('');
     $('.Signals1').html('<ul style="list-style-type:none;">  <li class="title_filter"> Филтрирай спрямо Статус </li> ' +
-    '<li class="ul_filter"> <input  id="animal_status_chBox" name="check[animal_status_chBox]" type="checkbox" > На свобода </li>'+  
-    '<li class="ul_filter"> <input  id="animal_status_chBox" name="check[animal_status_chBox]" type="checkbox" > В приют </li>'+
-    '<li class="ul_filter"> <input  id="animal_status_chBox" name="check[animal_status_chBox]" type="checkbox" > Осиновено </li> </ul> ');
+    '<li class="ul_filter"> <input  id="freed_animals" name="check[animal_status_chBox]" type="checkbox" value = 1 > На свобода </li>'+  
+    '<li class="ul_filter"> <input  id="shelter_animals" name="check[animal_status_chBox]" type="checkbox"  value = 2 > В приют </li>'+
+    '<li class="ul_filter"> <input  id="adopted_animals" name="check[animal_status_chBox]" type="checkbox" value = 3 > Осиновено </li> </ul> ');
     $('.Signals2').html('');
     $('.Signals3').html('');
+
+
+    $('input[type="checkbox"]').click(function() {
+        var obj = {};
+        
+        $('input[type=checkbox]:checked').each(function() {
+            if (!obj.hasOwnProperty(this.name)) 
+                obj[this.name] = [this.value];
+            else 
+                obj[this.name].push(this.value);
+        });
+       
+        $.ajax({
+            method: "GET",
+            url: "signals/filter_animals/",
+            data: {
+                 obj,
+            },
+            success: function(msg){
+                $('.container-signals').html(msg);
+            }
+        });
+    });
+    
 
   });
 
@@ -155,10 +208,10 @@ $(function() {
 $(document).ready(function(){
   $('input[type="checkbox"]').click(function(){
       if($(this).is(":checked")){
-          alert("Checkbox is checked.");
+
       }
       else if($(this).is(":not(:checked)")){
-          alert("Checkbox is unchecked.");
+
       }
   });
 });

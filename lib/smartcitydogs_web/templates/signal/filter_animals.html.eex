@@ -1,0 +1,55 @@
+<h1> Freed dogs</h1>
+
+<div class="container" >
+          <!-- Three columns of text below the carousel -->
+          <div class="form-group" style="margin:auto;max-width:380px;padding:10px">
+        
+  <%= form_for @conn, animal_path(@conn, :index), [method: :get], fn f -> %>
+      <%= search_input f, :chip_number, placeholder: "Chip number" %>
+    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    <% end %>
+  
+   
+  </div>
+             
+          <div class="row">
+          <%= for animal <- @animals do %>
+            <div class="col-lg-4">
+            
+             <img class="rounded-circle" src="<%= SmartcitydogsWeb.AnimalView.get_image_animals_id(animal.id) %>" alt="Generic placeholder image" width="140" height="140">             
+
+              <h2>Heading</h2>
+              <ul>
+                <li>
+                  Sex: <%= animal.sex%>
+                </li>
+                <li>
+                  Number of chip: <%= animal.chip_number%>
+                </li>
+                <li>
+                  Date register: <%= animal.inserted_at %>
+                </li>
+                <li>
+                  Last Location: <%= animal.address%>
+                </li>
+                <li>
+                  Status: <%= animal.animals_status.name%>
+                </li>
+                <li>
+                  Signals:
+                </li>
+              </ul>
+              <p>
+              <%= link "View more »", to: animal_path(@conn, :show, animal), class: "btn btn-secondary" %>
+              <a class="btn btn-secondary" href="#" role="button">View map »</a></p>
+            
+            </div>
+            <%end%>
+          </div><!-- /.row -->
+         
+           <%= for x <- 1..@page.total_pages do %>
+  <%= link "#{x * 8 - 7} - #{x * 8}", to: signal_path(@conn, :adopted_animals, page: x) %>
+<% end %>  
+
+          
+</div>

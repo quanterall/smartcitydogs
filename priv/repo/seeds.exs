@@ -127,6 +127,24 @@ unless Repo.get_by(User, username: users_params[:username]) do
   |> Repo.insert!()
 end
 
+############## Users #############
+users_params = %{
+  username: "todor_municipaty",
+  first_name: "Todor",
+  last_name: "Todorov",
+  email: "todor_municipaty@gmail.com",
+  password: "password",
+  phone: "0896230250",
+  users_types_id: 1
+}
+
+unless Repo.get_by(User, username: users_params[:username]) do
+  %User{}
+  |> User.registration_changeset(users_params)
+  |> Repo.insert!()
+end
+
+
 ############ Animal Status ############
 animals_status_params = %{name: "На свобода"}
 

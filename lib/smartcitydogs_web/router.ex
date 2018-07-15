@@ -110,7 +110,7 @@ defmodule SmartcitydogsWeb.Router do
       )
 
       # get("/signals/my_signals", SignalController, :my_signals)
-      get("/home_minicipalyti", SignalController, :index_home_minicipality)
+      get("/index_home_minicipality", SignalController, :index_home_minicipality)
       get("/signals/comment", SignalController, :comment)
       get("/signals/filter_index", SignalController, :filter_index)
       get("/signals/get_signals_support_count", SignalController, :get_signals_support_count)
@@ -124,6 +124,7 @@ defmodule SmartcitydogsWeb.Router do
       get("/signals/update_type", SignalController, :update_type)
       get("/signals/adopted_animals", SignalController, :adopted_animals)
       get("/signals/shelter_animals", SignalController, :shelter_animals)
+      get("/signals/filter_animals", SignalController, :filter_animals)
 
       resources(
         "/signals",
