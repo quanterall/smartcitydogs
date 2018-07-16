@@ -91,7 +91,7 @@ defmodule SmartcitydogsWeb.SignalController do
     xaa = Enum.find(conn.assigns.current_user.liked_signals, fn(elem) -> elem == to_string(signal.id) end)
     ##signal is liked by user
    if xaa == nil do 
-      render(conn, "show_signal_no_like.html", signal: signal, comments: comments)
+      render(conn, "show_signal.html", signal: signal, comments: comments)
 
    else
     render(conn, "show_signal.html", signal: signal, comments: comments)
@@ -275,7 +275,7 @@ redirect conn, to: "/signals/#{signal.id}"
         ## conn
        ##   |> render("show_signal_no_comment_like.html", signal: signal, comments: all_comments)
           {:error, %Ecto.Changeset{} = changeset} ->
-            render(conn, "show_signal_no_like.html.html", signal: signal, comments: changeset)
+            render(conn, "show_signal.html", signal: signal, comments: changeset)
     end
  ## conn |> Map.get(:assigns) |> Map.get(:current_user) |> Map.get(:liked_comments) 
   ## DataUsers.update_user(user, user_change)
@@ -312,11 +312,11 @@ redirect conn, to: "/signals/#{signal.id}"
   ##render(conn, "show_signal_no_comment_like.html", signal: signal, comments: comment)
 
 
-      render(conn, "show_signal_no_comment_like.html", signal: signal, comments: comment)
+      render(conn, "show_signal.html", signal: signal, comments: comment)
 
 
     comment = DataSignals.list_signal_comment()
-    render(conn, "show_signal_no_comment_like.html", signal: signal, comments: comment)
+    render(conn, "show_signal.html", signal: signal, comments: comment)
   end
 
 

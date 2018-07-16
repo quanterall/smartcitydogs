@@ -1,10 +1,9 @@
-      <html>
+<html>
 <head>
 </head>
 
 <body>
-     
-      
+      <h1><%= @signal.title %></h1>
       <ul>
 
         <img class="square" src="/<%= get_signals_images(@signal.id) %>" alt="Generic placeholder image" width="300" height="200">
@@ -62,21 +61,21 @@
           <%=@signal.address%>
         </li>
 
-
         <li>
           <strong>Views:</strong>
           <%= get_signals_view_count(@signal.id)  %>
         </li>
 
       </ul>
-
-
-
+        <%= button "like", to: signal_path(@conn, :add_like, %{id: @signal.id}) %>
         <br><br>
         <label> Leave a comment:</label>
         <br>
           <textarea name="message" id="comment-id" value="" rows="6" cols="60">
            </textarea>
+          <%= ##button "like", to: signal_path(@conn, :add_comment_like, %{id: @signal.id}) %>
+          <%= ##button "dislike", to: signal_path(@conn, :add_comment_dislike, %{id: @signal.id}) %>
+        
         <br>
         <br>
       <a id="comment" class="btn btn-secondary" href="/signals/<%= @signal.id %>" role="button">Submit comment</a></p>
@@ -91,7 +90,8 @@
           <%= for comment <- @comments do %>
           <strong><%= comment.users.username %></strong>
             <p><%= comment.comment %></p>
-            <p><%= comment.likes_number %></p>
+
+                        <p><%= comment.likes_number %></p>
              <%= button "like", to: signal_path(@conn, :add_comment_like, %{id: comment.id, signal_id: @signal.id}) %>
           <%= button "dislike", to: signal_path(@conn, :add_comment_dislike, %{id: comment.id, signal_id: @signal.id}) %>
           <hr>
