@@ -103,7 +103,7 @@
         nav-link user-menu
       <% else %>
          nav-link user-menu black
-      <% end %>" href="#">
+      <% end %>" href="/users/<%= @current_user.id%>">
         	Здравей, <b><%= @current_user.first_name%></b> <i class="fa fa-user"></i>
 
         </a>

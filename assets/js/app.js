@@ -75,6 +75,25 @@ window.onload = function() {
     
     $('body').css("position","auto");
     $('main').css("position","initial");
+        
+  
+    $('.form1').load('signals/new');
+    $('.form2').load('users/new');
+    $('.form3').load('sessions/new');
+    $('.form4').load('forgoten_password/new');
+    $('.form5').load('forgoten_password/new');
+    $('.form6').load('forgoten_password/new');
+
+
+
+    $('.modal-signal').hide();
+    $('.form1').hide();
+    $('.form2').hide();
+    $('.form3').hide();
+    $('.form4').hide();
+    $('.form5').hide();
+    $('.form6').hide();
+
 
     $('input[type="checkbox"]').click(function() {
         var obj = {};
@@ -121,7 +140,22 @@ $(function() {
     $('.Signals1').html('');
     $('.Signals2').html('');
     $('.Signals3').html('');
+    $('.form1').load('signals/new');
+    $('.form2').load('users/new');
+    $('.form3').load('sessions/new');
+    $('.form4').load('forgoten_password/new');
+    $('.form5').load('forgoten_password/new');
+    $('.form6').load('forgoten_password/new');
 
+
+
+    $('.modal-signal').hide();
+    $('.form1').hide();
+    $('.form2').hide();
+    $('.form3').hide();
+    $('.form4').hide();
+    $('.form5').hide();
+    $('.form6').hide();
 
     $('input[type="checkbox"]').click(function() {
         var obj = {};
