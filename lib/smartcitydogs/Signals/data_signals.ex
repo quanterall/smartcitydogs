@@ -60,6 +60,11 @@ defmodule Smartcitydogs.DataSignals do
     Repo.all(query)
   end
 
+  def sort_signal_comment_by_id() do
+    query = Ecto.Query.from(c in SignalsComments, order_by: [desc: c.inserted_at])
+    Repo.all(query)  |> Repo.preload(:users)
+  end
+
   def get_all_followed_signals(user_id) do
     user = user_id |> DataUsers.get_user! |> Map.get(:liked_signals)
     IO.inspect user

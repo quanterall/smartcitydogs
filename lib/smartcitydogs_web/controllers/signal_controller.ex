@@ -90,11 +90,12 @@ defmodule SmartcitydogsWeb.SignalController do
     signal = DataSignals.get_signal(id)
     xaa = Enum.find(conn.assigns.current_user.liked_signals, fn(elem) -> elem == to_string(signal.id) end)
     ##signal is liked by user
+    sorted_comments = DataSignals.sort_signal_comment_by_id
+      ##IO.inspect kkkkk
    if xaa == nil do 
-      render(conn, "show_signal.html", signal: signal, comments: comments)
-
+      render(conn, "show_signal.html", signal: signal, comments: sorted_comments)
    else
-    render(conn, "show_signal.html", signal: signal, comments: comments)
+    render(conn, "show_signal.html", signal: signal, comments: sorted_comments)
    end
   end
 
