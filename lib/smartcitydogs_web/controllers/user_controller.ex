@@ -29,7 +29,6 @@ defmodule SmartcitydogsWeb.UserController do
   def create(conn, %{"user" => user_params}) do
     if user_params["checked"] != "true" do
       changeset = %User{} |> User.registration_changeset(user_params)
-      IO.puts("not checked")
 
       conn
       |> put_flash(:info, "agree with the rules")
@@ -37,7 +36,6 @@ defmodule SmartcitydogsWeb.UserController do
       render(conn, "new.html", changeset: changeset)
     else
       changeset = %User{} |> User.registration_changeset(user_params)
-
       case Repo.insert(changeset) do
         {:ok, user} ->
           conn

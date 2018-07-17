@@ -50,8 +50,8 @@ defmodule Smartcitydogs.User do
     ])
     |> validate_required([
       :username,
-      :first_name,
-      :last_name,
+    ##  :first_name,
+    ##  :last_name,
       :email,
       :phone,
       :users_types_id
