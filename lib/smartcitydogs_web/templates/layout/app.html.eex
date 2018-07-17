@@ -52,10 +52,11 @@
       <% else %>
          nav-link black
       <% end %>"  <%= if @current_user do %> id="signals_all_nav"
-                                         href="/signals"
+                                         href="/index_home_minicipality"
                                          <% else %>
-                                          href="#"
-                                          id="signals_all_nav_no_user"
+                                         
+                                          href="/signals"
+                                          id="signals_all_nav"
                                          <% end %>
                                          > Подадени сигнали</a>
       </li>
@@ -64,11 +65,10 @@
         nav-link
       <% else %>
          nav-link black
-      <% end %>"  <%= if @current_user do %> id="animals_all_nav"
+      <% end %>" id="animals_all_nav" <%= if @current_user do %> 
                                          href="/animals"
                                          <% else %>
-                                          href="#"
-                                          id="animals_all_nav_no_user"
+                                          href="/animals/filter_index"
                                          <% end %>
                                          > Регистрирани кучета</a>
       </li>
@@ -103,7 +103,7 @@
         nav-link user-menu
       <% else %>
          nav-link user-menu black
-      <% end %>" href="#">
+      <% end %>" href="/users/<%= @current_user.id%>">
         	Здравей, <b><%= @current_user.first_name%></b> <i class="fa fa-user"></i>
 
         </a>

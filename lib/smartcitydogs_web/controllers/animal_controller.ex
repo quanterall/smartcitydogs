@@ -6,7 +6,8 @@ defmodule SmartcitydogsWeb.AnimalController do
   alias Smartcitydogs.AnimalImages
   alias Smartcitydogs.Repo
   
-  plug(:put_layout, false)
+  # plug(:put_layout, false)
+  plug(:put_layout, false when action in [:index])
 
   def index(conn, params) do
     chip = params["chip_number"]
@@ -37,6 +38,32 @@ defmodule SmartcitydogsWeb.AnimalController do
       
       render(conn, "index.html", animals: list_animals, page: page)
     end
+  end
+
+  def filter_index(conn, params) do
+    chip = params["chip_number"]
+    page = Animals |> Smartcitydogs.Repo.paginate(params)
+    sorted_animals = DataAnimals.sort_animals_by_id
+   
+      if chip == "" do
+        ##animals = DataAnimals.list_animals()
+        #list_animals = Map.get(page,:entries) |> Repo.preload(:animals_status) |> Repo.preload(:animals_image)
+        render(conn, "index.html", animals: sorted_animals, page: page)
+      end
+
+      if chip != nil do
+        animals = DataAnimals.get_animal_by_chip(chip)
+        list_animals = Map.get(page,:entries) |> Repo.preload(:animals_status) |> Repo.preload(:animals_image)
+        render(conn, "index.html", animals: list_animals, page: page)
+      end
+
+      page = Animals |> Smartcitydogs.Repo.paginate(params)
+
+      list_animals = Map.get(page,:entries) |> Repo.preload(:animals_status) |> Repo.preload(:animals_image)
+      
+      ## animals = DataAnimals.list_animals()
+      
+      render(conn, "index.html", animals: list_animals, page: page)
   end
 
   def new(conn, _params) do

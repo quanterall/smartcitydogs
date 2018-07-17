@@ -78,6 +78,12 @@ defmodule SmartcitydogsWeb.Router do
     pipe_through([:browser, :with_session])
 
     get("/", PageController, :index)
+    get("/signals", SignalController, :index)
+    get("/signals/filter_index", SignalController, :filter_index)
+
+    get("/animals/filter_index", AnimalController, :filter_index)
+    get("/animals" , AnimalController, :index)
+    
 
     resources("/sessions", SessionController, only: [:new, :create, :delete])
 
@@ -110,9 +116,9 @@ defmodule SmartcitydogsWeb.Router do
       )
 
       # get("/signals/my_signals", SignalController, :my_signals)
-      get("/home_minicipalyti", SignalController, :index_home_minicipality)
+      get("/index_home_minicipality", SignalController, :index_home_minicipality)
       get("/signals/comment", SignalController, :comment)
-      get("/signals/filter_index", SignalController, :filter_index)
+      
       get("/signals/get_signals_support_count", SignalController, :get_signals_support_count)
       get("/signals/update_like_count", SignalController, :update_like_count)
       post("/signals/add_like", SignalController, :add_like)
@@ -124,6 +130,7 @@ defmodule SmartcitydogsWeb.Router do
       get("/signals/update_type", SignalController, :update_type)
       get("/signals/adopted_animals", SignalController, :adopted_animals)
       get("/signals/shelter_animals", SignalController, :shelter_animals)
+      get("/signals/filter_animals", SignalController, :filter_animals)
 
       resources(
         "/signals",

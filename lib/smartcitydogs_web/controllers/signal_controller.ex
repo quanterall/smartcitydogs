@@ -12,6 +12,7 @@ defmodule SmartcitydogsWeb.SignalController do
   plug(:put_layout, false when action in [:filter_index])
   plug(:put_layout, false when action in [:adopted_animals])
   plug(:put_layout, false when action in [:shelter_animals])
+  plug(:put_layout, false when action in [:filter_animals])
   plug(:put_layout, false when action in [:new])
 
  def index(conn, params) do
@@ -48,7 +49,7 @@ defmodule SmartcitydogsWeb.SignalController do
       signal_params =
         signal_params
         |> Map.put("signals_types_id", 1)
-        |> Map.put("view_count", 1)
+        |> Map.put("view_count", 0)
         |> Map.put("support_count", 0)
         |> Map.put("users_id", a)
 
@@ -89,11 +90,12 @@ defmodule SmartcitydogsWeb.SignalController do
     signal = DataSignals.get_signal(id)
     xaa = Enum.find(conn.assigns.current_user.liked_signals, fn(elem) -> elem == to_string(signal.id) end)
     ##signal is liked by user
+    sorted_comments = DataSignals.sort_signal_comment_by_id
+      ##IO.inspect kkkkk
    if xaa == nil do 
-      render(conn, "show_signal_no_like.html", signal: signal, comments: comments)
-
+      render(conn, "show_signal.html", signal: signal, comments: sorted_comments)
    else
-    render(conn, "show_signal.html", signal: signal, comments: comments)
+    render(conn, "show_signal.html", signal: signal, comments: sorted_comments)
    end
   end
 
@@ -274,7 +276,7 @@ redirect conn, to: "/signals/#{signal.id}"
         ## conn
        ##   |> render("show_signal_no_comment_like.html", signal: signal, comments: all_comments)
           {:error, %Ecto.Changeset{} = changeset} ->
-            render(conn, "show_signal_no_like.html.html", signal: signal, comments: changeset)
+            render(conn, "show_signal.html", signal: signal, comments: changeset)
     end
  ## conn |> Map.get(:assigns) |> Map.get(:current_user) |> Map.get(:liked_comments) 
   ## DataUsers.update_user(user, user_change)
@@ -311,11 +313,11 @@ redirect conn, to: "/signals/#{signal.id}"
   ##render(conn, "show_signal_no_comment_like.html", signal: signal, comments: comment)
 
 
-      render(conn, "show_signal_no_comment_like.html", signal: signal, comments: comment)
+      render(conn, "show_signal.html", signal: signal, comments: comment)
 
 
     comment = DataSignals.list_signal_comment()
-    render(conn, "show_signal_no_comment_like.html", signal: signal, comments: comment)
+    render(conn, "show_signal.html", signal: signal, comments: comment)
   end
 
 
@@ -393,7 +395,35 @@ redirect conn, to: "/signals/#{signal.id}"
   end
 
   def filter_index(conn, params) do
-    ## signal = DataSignals.list_signals()
+    
+    params = params["obj"]
+    IO.inspect params
+    cond do
+     params["sig_category"]  -> 
+      all_query = []
+        x = 
+      Enum.map(params["sig_category"] , fn(x)-> struct = from(p in Signals, where: p.signals_categories_id == ^String.to_integer(x))  
+      all_query = all_query ++ Repo.all(struct) end)
+      x = List.flatten(x)
+      page = Smartcitydogs.Repo.paginate(x, page: 1, page_size: 8)
+      render(conn, "index_signal.html", signal: page.entries, page: page)
+     params["sig_status"]  ->
+        all_query = []
+        x = 
+      Enum.map(params["sig_status"] , fn(x)-> struct = from(p in Signals, where: p.signals_types_id == ^String.to_integer(x))  
+      all_query = all_query ++ Repo.all(struct) end)
+      x = List.flatten(x)
+      page = Smartcitydogs.Repo.paginate(x, page: 1, page_size: 8)
+      render(conn, "index_signal.html", signal: page.entries, page: page)
+     params["type"] == nil ->
+        x = DataSignals.list_signals
+        page = Smartcitydogs.Repo.paginate(x, page: 1, page_size: 8)
+        render(conn, "index_signal.html", signal: page.entries, page: page)
+     params == %{} ->
+        x = DataSignals.list_signals
+        page = Smartcitydogs.Repo.paginate(x, page: 1, page_size: 8)
+        render(conn, "index_signal.html", signal: page.entries, page: page)
+    end
     page = Signals |> Smartcitydogs.Repo.paginate(params)
     sorted_signals = DataSignals.sort_signal_by_id()
     render(conn, "index_signal.html", signal: page.entries, page: page)
@@ -412,4 +442,29 @@ redirect conn, to: "/signals/#{signal.id}"
     page = Smartcitydogs.Repo.paginate(all_adopted, page: 1, page_size: 8)
     render(conn, "shelter_animals.html", animals: page.entries, page: page)
   end
+
+
+  def filter_animals(conn, params) do
+    if params == %{} do
+      x = DataAnimals.list_animals
+      page = Smartcitydogs.Repo.paginate(x, page: 1, page_size: 8)
+      render(conn, "filter_animals.html", animals: x, page: page)
+    end
+    params = Map.values(params)    
+    [inner_map] =  params
+    inner_map = Map.values(inner_map)
+    [id] = inner_map
+    all_query = []
+    x = 
+    Enum.map(id, fn(x)-> struct = from(p in Animals, where: p.animals_status_id == ^String.to_integer(x))  
+    all_query = all_query ++ Repo.all(struct) |> Repo.preload(:animals_status)   end)
+    x = List.flatten(x)
+    page = Smartcitydogs.Repo.paginate(x, page: 1, page_size: 8)
+    render(conn, "filter_animals.html", animals: x, page: page)
+  end
+
+
+
+
+
 end
