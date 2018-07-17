@@ -106,20 +106,6 @@
           <br><br>
           <label> Leave a comment:</label>
           <br>
-<<<<<<< HEAD
-          <hr>
-          <%= for comment <- @comments do %>
-          <strong><%= comment.users.username %></strong>
-            <p><%= comment.comment %></p>
-
-                        <p><%= comment.likes_number %></p>
-             <%= button "like", to: signal_path(@conn, :add_comment_like, %{id: comment.id, signal_id: @signal.id}) %>
-          <%= button "dislike", to: signal_path(@conn, :add_comment_dislike, %{id: comment.id, signal_id: @signal.id}) %>
-          <hr>
-          <% end %>
-
-          <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
-=======
             <textarea name="message" id="comment-id" value="" rows="6" cols="60">
             </textarea>
           <br>
@@ -142,6 +128,5 @@
     </div>
   </div>
           
->>>>>>> 5374d59668e365c63c1c070ccc745e3d44d86c40
 </body>
 </html>
