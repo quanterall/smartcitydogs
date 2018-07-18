@@ -48,7 +48,7 @@
             <br>
 
             <show-signal-label-adress>
-              <div class="fa fa-map-marker"></div><div class="address-style"><%=@signal.address%></div>
+              <div class="fa fa-map-marker"></div><div class="address-style" id="signals_address"><%=@signal.address%></div>
             </show-signal-label-adress>
             <a id="show-map" href="#">ВИЖ НА КАРТА</a>
            
