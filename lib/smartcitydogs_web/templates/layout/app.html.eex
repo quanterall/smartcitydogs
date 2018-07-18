@@ -52,10 +52,11 @@
       <% else %>
          nav-link black
       <% end %>"  <%= if @current_user do %> id="signals_all_nav"
-                                         href="/signals"
+                                         href="/index_home_minicipality"
                                          <% else %>
-                                          href="#"
-                                          id="signals_all_nav_no_user"
+                                         
+                                          href="/signals"
+                                          id="signals_all_nav"
                                          <% end %>
                                          > Подадени сигнали</a>
       </li>
@@ -64,11 +65,10 @@
         nav-link
       <% else %>
          nav-link black
-      <% end %>"  <%= if @current_user do %> id="animals_all_nav"
+      <% end %>" id="animals_all_nav" <%= if @current_user do %> 
                                          href="/animals"
                                          <% else %>
-                                          href="#"
-                                          id="animals_all_nav_no_user"
+                                          href="/animals/filter_index"
                                          <% end %>
                                          > Регистрирани кучета</a>
       </li>
@@ -146,6 +146,7 @@
 </nav>
 </div>
 </div>
+<% IO.inspect(@conn) %>
 
 <div id="myModal-signal" class="modal-signal">
 
