@@ -144,8 +144,6 @@ $(function() {
     $('.form2').load('users/new');
     $('.form3').load('sessions/new');
     $('.form4').load('forgoten_password/new');
-    $('.form5').load('forgoten_password/new');
-    $('.form6').load('forgoten_password/new');
 
 
 
