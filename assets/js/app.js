@@ -388,9 +388,14 @@ $(function(){
 
 window.login = function() {
 var params = { email: $("#login-email").val(), password: $("#login-password").val() };
-    $.post( "/api/users/sign_in",params)
-        .done(function() {
-            location.reload();
+    $.post("/api/users/sign_in",params)
+        .done(function(data) {
+            if ( (data.users_types_id == 4) || (data.users_types_id == 5) ) {
+                window.location.href = "index_home_minicipality";
+            }
+            else {
+                location.reload();
+            }
         })
         .fail(function(text) {
            $("#login-form-errors").text("Невалиден Имейл или Парола!!!!");

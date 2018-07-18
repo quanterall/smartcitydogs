@@ -1,6 +1,14 @@
 defmodule SmartcitydogsWeb.SignalControllerAPIView do
   use SmartcitydogsWeb, :view
   alias SmartcitydogsWeb.SignalControllerAPIView
+  alias  Smartcitydogs.SignalView 
+
+  def render("filter_index.html", params) do
+    IO.inspect params
+    IO.puts "((((((((((("
+    Phoenix.View.render(SmartcitydogsWeb.SignalControllerView, "filter_index.html", params)
+  end
+
 
   def render("index.json", %{signals: signals}) do
     %{data: render_many(signals, SignalControllerAPIView, "signal.json")}

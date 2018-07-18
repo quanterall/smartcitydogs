@@ -22,6 +22,8 @@ defmodule SmartcitydogsWeb.SignalController do
   end 
 
   def index_home_minicipality(conn, params) do
+    IO.inspect params
+    IO.puts "REEEEEEEEEEEEEEEEEEE"
     page = Signals |> Smartcitydogs.Repo.paginate(params)
     sorted_signals = DataSignals.sort_signal_by_id()
     render(conn, "filter_index.html", signal: page.entries, page: page)
@@ -34,7 +36,7 @@ defmodule SmartcitydogsWeb.SignalController do
     ##IO.inspect(logged_user_type_id)
 
     if logged_user_type_id == 4 || logged_user_type_id == 2 do
-      IO.inspect(conn)
+     ## IO.inspect(conn)
       render(conn, "new_signal.html", changeset: changeset)
     else
       render(conn, SmartcitydogsWeb.ErrorView, "401.html")

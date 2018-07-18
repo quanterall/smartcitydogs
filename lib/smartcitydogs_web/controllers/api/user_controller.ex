@@ -2,9 +2,12 @@ defmodule SmartcitydogsWeb.UserControllerAPI do
   use SmartcitydogsWeb, :controller
   alias Smartcitydogs.User
   alias Smartcitydogs.DataUsers
+  alias Smartcitydogs.Signals
+  alias Smartcitydogs.SignalController
+  alias SmartcitydogsWeb.SignalView
   plug(Ueberauth)
 
-  action_fallback(SmartcitydogsWeb.FallbackController)
+ ## action_fallback(SmartcitydogsWeb.FallbackController)
 
   def index(conn, _params) do
     users = DataUsers.list_users()
@@ -52,12 +55,17 @@ defmodule SmartcitydogsWeb.UserControllerAPI do
     case Smartcitydogs.Auth.login_by_email_and_pass(conn,email, password) do
       {:ok, conn} ->
         user =  Guardian.Plug.current_resource(conn)
-
+       if user.users_types_id == 4 || user.users_types_id == 5 do
+       conn
+       |> put_session(:current_user_id, user.id)
+       |> put_status(:ok)
+       |> render(SmartcitydogsWeb.UserControllerAPIView, "municipality_sign_in.json", user: user)
+       else
         conn
         |> put_session(:current_user_id, user.id)
         |> put_status(:ok)
         |> render(SmartcitydogsWeb.UserControllerAPIView, "sign_in.json", user: user)
-      ##  IO.inspect user
+       end
       {:error, message,conn} ->
         conn
         |> delete_session(:current_user_id)

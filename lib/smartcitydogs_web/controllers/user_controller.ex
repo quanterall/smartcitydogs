@@ -11,7 +11,7 @@ defmodule SmartcitydogsWeb.UserController do
   def index(conn, _params) do
     users = DataUsers.list_users()
 
-    IO.inspect(conn.assigns.current_user)
+  ##  IO.inspect(conn.assigns.current_user)
     logged_user_id = conn.assigns.current_user.users_types.id
 
     if logged_user_id != 1 do
