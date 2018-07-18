@@ -15,7 +15,7 @@ defmodule Smartcitydogs.Repo.Migrations.CreateUsersTable do
       add(:liked_signals, {:array, :string})
       add(:liked_comments, {:array, :string})
       add(:disliked_comments, {:array, :string})
-      ##add(:contact, :json)
+      ## add(:contact, :json)
       timestamps()
     end
   end

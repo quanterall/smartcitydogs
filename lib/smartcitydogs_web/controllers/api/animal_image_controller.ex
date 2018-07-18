@@ -13,7 +13,7 @@ defmodule SmartcitydogsWeb.AnimalImageControllerAPI do
 
   def create(conn, %{"animal_image" => animal_image_params}) do
     with {:ok, %AnimalImages{} = animal_image} <-
-      DataAnimals.create_animal_image(animal_image_params) do
+           DataAnimals.create_animal_image(animal_image_params) do
       conn
       |> put_status(:created)
       |> put_resp_header("location", animal_image_controller_api_path(conn, :show, animal_image))
@@ -30,7 +30,7 @@ defmodule SmartcitydogsWeb.AnimalImageControllerAPI do
     animal_image = DataAnimals.get_animal_image(id)
 
     with {:ok, %AnimalImages{} = animal_image} <-
-      DataAnimals.update_animal_image(animal_image, animal_image_params) do
+           DataAnimals.update_animal_image(animal_image, animal_image_params) do
       render(conn, "show.json", animal_image: animal_image)
     end
   end

@@ -6,7 +6,7 @@ defmodule SmartcitydogsWeb.ForgotenPasswordController do
   # Timex is a library you can use to easily change the date for checking expiry
   use Timex
 
-  plug(:put_layout, false when action in [:new,:create])
+  plug(:put_layout, false when action in [:new, :create])
 
   def new(conn, _params) do
     changeset = User.changeset(%User{})
@@ -48,7 +48,6 @@ defmodule SmartcitydogsWeb.ForgotenPasswordController do
 
         Smartcitydogs.Email.send_reset_email(email, user.reset_password_token)
         |> Smartcitydogs.Mailer.deliver_now()
-
 
         redirect(conn, to: session_path(conn, :new))
 
@@ -96,8 +95,6 @@ defmodule SmartcitydogsWeb.ForgotenPasswordController do
     user =
       User
       |> Repo.get_by(reset_password_token: token)
-
-
 
     case user do
       nil ->

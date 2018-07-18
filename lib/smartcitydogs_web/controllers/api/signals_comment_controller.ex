@@ -13,10 +13,13 @@ defmodule SmartcitydogsWeb.SignalsCommentControllerAPI do
 
   def create(conn, %{"signals_comment" => signals_comment_params}) do
     with {:ok, %SignalsComments{} = signals_comment} <-
-      DataSignals.create_signal_comment(signals_comment_params) do
+           DataSignals.create_signal_comment(signals_comment_params) do
       conn
       |> put_status(:created)
-      |> put_resp_header("location", signals_comment_controller_api_path(conn, :show, signals_comment))
+      |> put_resp_header(
+        "location",
+        signals_comment_controller_api_path(conn, :show, signals_comment)
+      )
       |> render("show.json", signals_comment: signals_comment)
     end
   end
@@ -30,7 +33,7 @@ defmodule SmartcitydogsWeb.SignalsCommentControllerAPI do
     signals_comment = DataSignals.get_signal_comment(id)
 
     with {:ok, %SignalsComments{} = signals_comment} <-
-      DataSignals.update_signal_comment(signals_comment, signals_comment_params) do
+           DataSignals.update_signal_comment(signals_comment, signals_comment_params) do
       render(conn, "show.json", signals_comment: signals_comment)
     end
   end

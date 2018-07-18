@@ -52,8 +52,9 @@ defmodule Smartcitydogs.DataUsers do
   end
 
   def update_user(%User{} = user, args) do
-    IO.inspect args
-    IO.puts "TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT"
+    IO.inspect(args)
+    IO.puts("TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT")
+
     user
     |> User.registration_changeset(args)
     |> Repo.update()
@@ -69,29 +70,36 @@ defmodule Smartcitydogs.DataUsers do
 
   def add_liked_signal(user_id, signal_id) do
     user = Repo.get!(User, user_id)
-    User.changeset(user, %{liked_signals: user.liked_signals ++ [to_string(signal_id)]}) |> Repo.update
+
+    User.changeset(user, %{liked_signals: user.liked_signals ++ [to_string(signal_id)]})
+    |> Repo.update()
   end
 
   def remove_liked_signal(user_id, signal_id) do
     user = Repo.get!(User, user_id)
-    User.changeset(user, %{liked_signals: user.liked_signals -- [to_string(signal_id)]}) |> Repo.update
+
+    User.changeset(user, %{liked_signals: user.liked_signals -- [to_string(signal_id)]})
+    |> Repo.update()
   end
 
   def add_liked_signal_comment(user_id, comment_id) do
     user = Repo.get!(User, user_id)
-    User.changeset(user, %{liked_comments: user.liked_comments ++ [to_string(comment_id)]}) |> Repo.update
+
+    User.changeset(user, %{liked_comments: user.liked_comments ++ [to_string(comment_id)]})
+    |> Repo.update()
   end
 
   def add_disliked_signal_comment(user_id, comment_id) do
     user = Repo.get!(User, user_id)
-    User.changeset(user, %{disliked_comments: user.liked_comments ++ [to_string(comment_id)]}) |> Repo.update
-  end
 
+    User.changeset(user, %{disliked_comments: user.liked_comments ++ [to_string(comment_id)]})
+    |> Repo.update()
+  end
 
   # Users types functions
 
   def list_users_types do
-    Repo.all(UsersType) 
+    Repo.all(UsersType)
   end
 
   def create_user_type(args \\ %{}) do
@@ -120,7 +128,7 @@ defmodule Smartcitydogs.DataUsers do
 
   # Contact functions
   def list_contacts do
-    Repo.all(Contact) 
+    Repo.all(Contact)
   end
 
   def get_contact!(id), do: Repo.get!(Contact, id)
@@ -131,8 +139,6 @@ defmodule Smartcitydogs.DataUsers do
     |> Repo.insert()
   end
 
-
-
   def delete_contact(%Contact{} = contact) do
     Repo.delete(contact)
   end
@@ -140,7 +146,6 @@ defmodule Smartcitydogs.DataUsers do
   def change_contact(%Contact{} = contact) do
     Contact.changeset(contact, %{})
   end
-
 
   def authenticate_user(email, password) do
     query = from(u in User, where: u.email == ^email)

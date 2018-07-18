@@ -25,7 +25,7 @@
     function initialize() {
 
         autocomplete = new google.maps.places.Autocomplete(document.getElementById('autocomplete'));
-
+        console.log(autocomplete);
         google.maps.event.addListener(autocomplete, 'place_changed', function () {
             var place = autocomplete.getPlace();
            // console.log(place.formatted_address);

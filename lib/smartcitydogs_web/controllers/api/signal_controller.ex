@@ -12,7 +12,7 @@ defmodule SmartcitydogsWeb.SignalControllerAPI do
   end
 
   def create(conn, %{"signal" => signal_params}) do
-   ## IO.inspect(signal_params)
+    ## IO.inspect(signal_params)
 
     with {:ok, %Signals{} = signal} <- DataSignals.create_signal(signal_params) do
       conn

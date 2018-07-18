@@ -13,7 +13,7 @@ defmodule SmartcitydogsWeb.SignalsTypeControllerAPI do
 
   def create(conn, %{"signals_type" => signals_type_params}) do
     with {:ok, %SignalsTypes{} = signals_type} <-
-      DataSignals.create_signal_type(signals_type_params) do
+           DataSignals.create_signal_type(signals_type_params) do
       conn
       |> put_status(:created)
       |> put_resp_header("location", signals_type_controller_api_path(conn, :show, signals_type))
@@ -30,7 +30,7 @@ defmodule SmartcitydogsWeb.SignalsTypeControllerAPI do
     signals_type = DataSignals.get_signal_type(id)
 
     with {:ok, %SignalsTypes{} = signals_type} <-
-      DataSignals.update_signal_type(signals_type, signals_type_params) do
+           DataSignals.update_signal_type(signals_type, signals_type_params) do
       render(conn, "show.json", signals_type: signals_type)
     end
   end

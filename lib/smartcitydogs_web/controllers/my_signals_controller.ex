@@ -9,6 +9,4 @@ defmodule SmartcitydogsWeb.MySignalsController do
     signals = DataSignals.get_user_signal(user)
     render(conn, "my_signals.html", signals: signals)
   end
-
-
 end

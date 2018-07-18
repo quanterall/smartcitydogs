@@ -15,23 +15,23 @@ defmodule SmartcitydogsWeb.SignalController do
   plug(:put_layout, false when action in [:filter_animals])
   plug(:put_layout, false when action in [:new])
 
- def index(conn, params) do
+  def index(conn, params) do
     page = Signals |> Smartcitydogs.Repo.paginate(params)
     sorted_signals = DataSignals.sort_signal_by_id()
     render(conn, "index2_signal.html", signal: page.entries, page: page)
-  end 
+  end
 
   def index_home_minicipality(conn, params) do
     page = Signals |> Smartcitydogs.Repo.paginate(params)
     sorted_signals = DataSignals.sort_signal_by_id()
     render(conn, "filter_index.html", signal: page.entries, page: page)
-  end 
+  end
 
   def new(conn, _params) do
     changeset = Smartcitydogs.DataSignals.change_signal(%Signals{})
 
     logged_user_type_id = conn.assigns.current_user.users_types.id
-    ##IO.inspect(logged_user_type_id)
+    ## IO.inspect(logged_user_type_id)
 
     if logged_user_type_id == 4 || logged_user_type_id == 2 do
       IO.inspect(conn)
@@ -61,6 +61,7 @@ defmodule SmartcitydogsWeb.SignalController do
           upload = Map.get(conn, :params)
           upload = Map.get(upload, "signals")
           upload = Map.get(upload, "url")
+
           for n <- upload do
             extension = Path.extname(n.filename)
 
@@ -81,7 +82,6 @@ defmodule SmartcitydogsWeb.SignalController do
 
         {:error, %Ecto.Changeset{} = changeset} ->
           render(conn, "new_signal.html", changeset: changeset)
-          
       end
     else
       render(conn, SmartcitydogsWeb.ErrorView, "401.html")
@@ -91,20 +91,26 @@ defmodule SmartcitydogsWeb.SignalController do
   def show(conn, %{"id" => id}) do
     comments = DataSignals.get_comment_signal_id(id)
     signal = DataSignals.get_signal(id)
-    xaa = Enum.find(conn.assigns.current_user.liked_signals, fn(elem) -> elem == to_string(signal.id) end)
-    ##signal is liked by user
-    sorted_comments = DataSignals.sort_signal_comment_by_id
-      ##IO.inspect kkkkk
-   if xaa == nil do 
+
+    xaa =
+      Enum.find(conn.assigns.current_user.liked_signals, fn elem ->
+        elem == to_string(signal.id)
+      end)
+
+    ## signal is liked by user
+    sorted_comments = DataSignals.sort_signal_comment_by_id()
+    ## IO.inspect kkkkk
+    if xaa == nil do
       render(conn, "show_signal.html", signal: signal, comments: sorted_comments)
-   else
-    render(conn, "show_signal.html", signal: signal, comments: sorted_comments)
-   end
+    else
+      render(conn, "show_signal.html", signal: signal, comments: sorted_comments)
+    end
   end
 
   def edit(conn, %{"id" => id}) do
     signal = DataSignals.get_signal(id)
     logged_user_type_id = conn.assigns.current_user.users_types.id
+
     if logged_user_type_id == 2 do
       render(conn, SmartcitydogsWeb.ErrorView, "401.html")
     else
@@ -125,6 +131,7 @@ defmodule SmartcitydogsWeb.SignalController do
           conn
           |> put_flash(:info, "Signal updated successfully.")
           |> render("show_signal.html", signal: signal)
+
         {:error, %Ecto.Changeset{} = changeset} ->
           render(conn, "edit_signal.html", signal: signal, changeset: changeset)
       end
@@ -143,74 +150,95 @@ defmodule SmartcitydogsWeb.SignalController do
     if xaa == nil do
       user_id = conn.assigns.current_user.id
       sup = Map.get(signal, :support_count)
-      signal_params = %{support_count: sup+1}
+      signal_params = %{support_count: sup + 1}
       DataUsers.add_liked_signal(user_id, signal.id)
 
       case DataSignals.update_signal(signal, signal_params) do
         {:ok, signal} ->
-        redirect conn, to: "/signals/#{params["id"]}"
+          redirect(conn, to: "/signals/#{params["id"]}")
+
         {:error, %Ecto.Changeset{} = changeset} ->
-          redirect conn, to: "/signals/#{params["id"]}"
-        end
-   end
-   redirect conn, to: "/signals/#{params["id"]}"
+          redirect(conn, to: "/signals/#{params["id"]}")
+      end
+    end
+
+    redirect(conn, to: "/signals/#{params["id"]}")
   end
 
   def add_comment_like(conn, params) do
     comment = DataSignals.get_signal_comment(params["id"])
-  ##  IO.inspect comment
+    ##  IO.inspect comment
     signal = DataSignals.get_signal(params["signal_id"])
-    xaa = Enum.find(conn.assigns.current_user.liked_comments, fn(elem) -> elem == to_string(comment.id) end)
-    IO.puts "))))))"
-     xaa2 = Enum.find(conn.assigns.current_user.disliked_comments, fn(elem) -> elem == to_string(comment.id) end)
-     IO.inspect xaa
-     IO.inspect xaa2
 
-    if xaa != nil do ##if the comment was liked before
+    xaa =
+      Enum.find(conn.assigns.current_user.liked_comments, fn elem ->
+        elem == to_string(comment.id)
+      end)
 
+    IO.puts("))))))")
+
+    xaa2 =
+      Enum.find(conn.assigns.current_user.disliked_comments, fn elem ->
+        elem == to_string(comment.id)
+      end)
+
+    IO.inspect(xaa)
+    IO.inspect(xaa2)
+
+    ## if the comment was liked before
+    if xaa != nil do
     end
 
+    ## if the comment was disliked before and not liked before
+    if xaa2 != nil && xaa == nil do
+      disliked_list =
+        conn.assigns.current_user.id |> DataUsers.get_user!() |> Map.get(:disliked_comments)
 
-     if xaa2 != nil && xaa == nil do ##if the comment was disliked before and not liked before
-     disliked_list =  conn.assigns.current_user.id |> DataUsers.get_user! |> Map.get(:disliked_comments)
-     liked_list =  conn.assigns.current_user.id |> DataUsers.get_user! |> Map.get(:liked_comments)
-      IO.puts "0000000000000000000000000000000000000000000"
-      IO.inspect disliked_list
-      IO.inspect liked_list
-      IO.puts "0000000000000000000000000000000000000000000"
-      disliked_list =  disliked_list |> List.delete(to_string(comment.id))
-     ## liked_list = liked_list |> List.delete(to_string(comment.id))
-      IO.inspect disliked_list
-    user =  conn.assigns.current_user.id |> DataUsers.get_user! 
-    user_change = %{disliked_comments: disliked_list}
-    sup = Map.get(comment, :likes_number)
-    signal_params = %{likes_number: sup+1}
-    DataUsers.add_liked_signal_comment(user.id, comment.id)
-   ## comment = comment |> Map.delete(:likes_number) |> Map.merge(signal_params)
-    IO.inspect comment
-    IO.inspect signal_params
-    userrr = DataUsers.update_user(conn.assigns.current_user.id |> DataUsers.get_user!, user_change) 
-    
-    IO.inspect userrr
-    IO.inspect "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-    case DataSignals.update_signal_comment(comment, signal_params) do
-      {:ok, comment} ->
-      
-      all_comments = DataSignals.get_comment_signal_id(signal.id)           
-      IO.inspect all_comments 
-      IO.puts "RRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR"      
-      redirect conn, to: "/signals/#{signal.id}"                                                       
-      ##   conn
-       ##   |> render("show_signal_no_comment_like.html", signal: signal, comments: all_comments)
-          {:error, %Ecto.Changeset{} = changeset} ->
-            redirect conn, to: "/signals/#{signal.id}" 
+      liked_list =
+        conn.assigns.current_user.id |> DataUsers.get_user!() |> Map.get(:liked_comments)
+
+      IO.puts("0000000000000000000000000000000000000000000")
+      IO.inspect(disliked_list)
+      IO.inspect(liked_list)
+      IO.puts("0000000000000000000000000000000000000000000")
+      disliked_list = disliked_list |> List.delete(to_string(comment.id))
+      ## liked_list = liked_list |> List.delete(to_string(comment.id))
+      IO.inspect(disliked_list)
+      user = conn.assigns.current_user.id |> DataUsers.get_user!()
+      user_change = %{disliked_comments: disliked_list}
+      sup = Map.get(comment, :likes_number)
+      signal_params = %{likes_number: sup + 1}
+      DataUsers.add_liked_signal_comment(user.id, comment.id)
+      ## comment = comment |> Map.delete(:likes_number) |> Map.merge(signal_params)
+      IO.inspect(comment)
+      IO.inspect(signal_params)
+
+      userrr =
+        DataUsers.update_user(conn.assigns.current_user.id |> DataUsers.get_user!(), user_change)
+
+      IO.inspect(userrr)
+      IO.inspect("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
+
+      case DataSignals.update_signal_comment(comment, signal_params) do
+        {:ok, comment} ->
+          all_comments = DataSignals.get_comment_signal_id(signal.id)
+          IO.inspect(all_comments)
+          IO.puts("RRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR")
+          redirect(conn, to: "/signals/#{signal.id}")
+
+        ##   conn
+        ##   |> render("show_signal_no_comment_like.html", signal: signal, comments: all_comments)
+        {:error, %Ecto.Changeset{} = changeset} ->
+          redirect(conn, to: "/signals/#{signal.id}")
           ##  render(conn, "show_signal_no_like.html.html", signal: signal, comments: changeset)
-    end
- ## conn |> Map.get(:assigns) |> Map.get(:current_user) |> Map.get(:liked_comments) 
-  ## DataUsers.update_user(user, user_change)
+      end
+
+      ## conn |> Map.get(:assigns) |> Map.get(:current_user) |> Map.get(:liked_comments) 
+      ## DataUsers.update_user(user, user_change)
     end
 
-    if xaa == nil && xaa2 == nil do ## if the comment was not liked before
+    ## if the comment was not liked before
+    if xaa == nil && xaa2 == nil do
       user_id = conn.assigns.current_user.id
       sup = Map.get(comment, :likes_number)
       signal_params = %{likes_number: sup + 1}
@@ -218,74 +246,102 @@ defmodule SmartcitydogsWeb.SignalController do
       comment = comment |> Map.delete(:likes_number) |> Map.merge(signal_params)
 
       case DataSignals.update_signal_comment(comment, signal_params) do
-      {:ok, comment} ->
-##        IO.puts "------------------------------"
-        all_comments2 = DataSignals.get_comment_signal_id(signal.id) |> Enum.find(fn(x) -> if x.id == comment.id  do x =  x |> DataSignals.update_signal_comment(signal_params) end end) 
-        all_comments = DataSignals.get_comment_signal_id(signal.id)                            
-##        IO.inspect all_comments     
-redirect conn, to: "/signals/#{signal.id}"                                             
-         ##conn
-        ##  |> render("show_signal_no_comment_like.html", signal: signal, comments: all_comments)
-      {:error, %Ecto.Changeset{} = changeset} ->
-##        IO.inspect changeset
-redirect conn, to: "/signals/#{signal.id}"
-         ## render(conn, "show_signal_no_like.html.html", signal: signal, comments: changeset)
-       end
-##       IO.inspect comment
-redirect conn, to: "/signals/#{signal.id}"
-     ##  render(conn, "show_signal_no_comment_like.html", signal: signal, comments: comment)
-     end
-##     IO.puts ":::::::::::::::::::::::::::::::::::::::::"
-##     IO.inspect comment
+        {:ok, comment} ->
+          ##        IO.puts "------------------------------"
+          all_comments2 =
+            DataSignals.get_comment_signal_id(signal.id)
+            |> Enum.find(fn x ->
+              if x.id == comment.id do
+                x = x |> DataSignals.update_signal_comment(signal_params)
+              end
+            end)
 
-redirect conn, to: "/signals/#{signal.id}"
- ##  render(conn, "show_signal_no_comment_like.html", signal: signal, comments: [comment])
+          all_comments = DataSignals.get_comment_signal_id(signal.id)
+          ##        IO.inspect all_comments     
+          redirect(conn, to: "/signals/#{signal.id}")
+
+        ## conn
+        ##  |> render("show_signal_no_comment_like.html", signal: signal, comments: all_comments)
+        {:error, %Ecto.Changeset{} = changeset} ->
+          ##        IO.inspect changeset
+          redirect(conn, to: "/signals/#{signal.id}")
+          ## render(conn, "show_signal_no_like.html.html", signal: signal, comments: changeset)
+      end
+
+      ##       IO.inspect comment
+      redirect(conn, to: "/signals/#{signal.id}")
+      ##  render(conn, "show_signal_no_comment_like.html", signal: signal, comments: comment)
+    end
+
+    ##     IO.puts ":::::::::::::::::::::::::::::::::::::::::"
+    ##     IO.inspect comment
+
+    redirect(conn, to: "/signals/#{signal.id}")
+    ##  render(conn, "show_signal_no_comment_like.html", signal: signal, comments: [comment])
   end
 
   def add_comment_dislike(conn, params) do
     comment = DataSignals.get_signal_comment(params["id"])
     signal = DataSignals.get_signal(params["signal_id"])
-    disliked_list = Enum.find(conn.assigns.current_user.disliked_comments, fn(elem) -> elem == to_string(comment.id) end)
-    liked_list = Enum.find(conn.assigns.current_user.liked_comments, fn(elem) -> elem == to_string(comment.id) end)
-    IO.puts "0000000000000000000000000000000000000000000"
-      IO.inspect disliked_list
-      IO.inspect liked_list
-      IO.puts "0000000000000000000000000000000000000000000"
 
-    if liked_list != nil && disliked_list == nil do ##if the comment was liked before
-     liked_comments =  conn.assigns.current_user.id |> DataUsers.get_user! |> Map.get(:liked_comments)
-     IO.puts "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"
-     IO.inspect liked_comments
-     IO.puts "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"
-     liked_comments =  liked_comments |> List.delete(to_string(comment.id))
-     IO.inspect liked_comments
-    user =  conn.assigns.current_user.id |> DataUsers.get_user! 
-    user_change = %{liked_comments: liked_comments}
-    userrr = DataUsers.update_user(conn.assigns.current_user.id |> DataUsers.get_user!, user_change) 
-    IO.inspect userrr
-    IO.puts "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<"
-    IO.inspect user_change
-    sup = Map.get(comment, :likes_number)
-    signal_params = %{likes_number: sup-1}
-   ## DataUsers.add_disliked_signal_comment(user.id, comment.id)
-   ## comment = comment |> Map.delete(:likes_number) |> Map.merge(signal_params)
-    IO.inspect comment
-    IO.inspect signal_params
-    case DataSignals.update_signal_comment(comment, signal_params) do
-      {:ok, comment} ->
-      all_comments = DataSignals.get_comment_signal_id(signal.id)           
-      IO.inspect all_comments       
-      redirect conn, to: "/signals/#{signal.id}"                                                      
+    disliked_list =
+      Enum.find(conn.assigns.current_user.disliked_comments, fn elem ->
+        elem == to_string(comment.id)
+      end)
+
+    liked_list =
+      Enum.find(conn.assigns.current_user.liked_comments, fn elem ->
+        elem == to_string(comment.id)
+      end)
+
+    IO.puts("0000000000000000000000000000000000000000000")
+    IO.inspect(disliked_list)
+    IO.inspect(liked_list)
+    IO.puts("0000000000000000000000000000000000000000000")
+
+    ## if the comment was liked before
+    if liked_list != nil && disliked_list == nil do
+      liked_comments =
+        conn.assigns.current_user.id |> DataUsers.get_user!() |> Map.get(:liked_comments)
+
+      IO.puts("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
+      IO.inspect(liked_comments)
+      IO.puts("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
+      liked_comments = liked_comments |> List.delete(to_string(comment.id))
+      IO.inspect(liked_comments)
+      user = conn.assigns.current_user.id |> DataUsers.get_user!()
+      user_change = %{liked_comments: liked_comments}
+
+      userrr =
+        DataUsers.update_user(conn.assigns.current_user.id |> DataUsers.get_user!(), user_change)
+
+      IO.inspect(userrr)
+      IO.puts("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<")
+      IO.inspect(user_change)
+      sup = Map.get(comment, :likes_number)
+      signal_params = %{likes_number: sup - 1}
+      ## DataUsers.add_disliked_signal_comment(user.id, comment.id)
+      ## comment = comment |> Map.delete(:likes_number) |> Map.merge(signal_params)
+      IO.inspect(comment)
+      IO.inspect(signal_params)
+
+      case DataSignals.update_signal_comment(comment, signal_params) do
+        {:ok, comment} ->
+          all_comments = DataSignals.get_comment_signal_id(signal.id)
+          IO.inspect(all_comments)
+          redirect(conn, to: "/signals/#{signal.id}")
+
         ## conn
-       ##   |> render("show_signal_no_comment_like.html", signal: signal, comments: all_comments)
-          {:error, %Ecto.Changeset{} = changeset} ->
-            render(conn, "show_signal.html", signal: signal, comments: changeset)
-    end
- ## conn |> Map.get(:assigns) |> Map.get(:current_user) |> Map.get(:liked_comments) 
-  ## DataUsers.update_user(user, user_change)
+        ##   |> render("show_signal_no_comment_like.html", signal: signal, comments: all_comments)
+        {:error, %Ecto.Changeset{} = changeset} ->
+          render(conn, "show_signal.html", signal: signal, comments: changeset)
+      end
+
+      ## conn |> Map.get(:assigns) |> Map.get(:current_user) |> Map.get(:liked_comments) 
+      ## DataUsers.update_user(user, user_change)
     end
 
-    if disliked_list == nil do 
+    if disliked_list == nil do
       user_id = conn.assigns.current_user.id
       sup = Map.get(comment, :likes_number)
       signal_params = %{likes_number: sup - 1}
@@ -294,35 +350,41 @@ redirect conn, to: "/signals/#{signal.id}"
       conn |> Map.get(:assigns) |> Map.get(:current_user) |> Map.get(:liked_comments)
 
       case DataSignals.update_signal_comment(comment, signal_params) do
-      {:ok, comment} ->
-        all_comments2 = DataSignals.get_comment_signal_id(signal.id) |> Enum.find(fn(x) -> if x.id == comment.id  do x =  x |> DataSignals.update_signal_comment(signal_params) end end) 
-        all_comments = DataSignals.get_comment_signal_id(signal.id)                     
-        redirect conn, to: "/signals/#{signal.id}"                                                   
-       ## conn
-       ##   |> render("show_signal_no_comment_like.html", signal: signal, comments: all_comments)
-      {:error, %Ecto.Changeset{} = changeset} ->
-        redirect conn, to: "/signals/#{signal.id}"
-        ##  render(conn, "show_signal_no_like.html.html", signal: signal, comments: changeset)
-       end
-       redirect conn, to: "/signals/#{signal.id}"
+        {:ok, comment} ->
+          all_comments2 =
+            DataSignals.get_comment_signal_id(signal.id)
+            |> Enum.find(fn x ->
+              if x.id == comment.id do
+                x = x |> DataSignals.update_signal_comment(signal_params)
+              end
+            end)
+
+          all_comments = DataSignals.get_comment_signal_id(signal.id)
+          redirect(conn, to: "/signals/#{signal.id}")
+
+        ## conn
+        ##   |> render("show_signal_no_comment_like.html", signal: signal, comments: all_comments)
+        {:error, %Ecto.Changeset{} = changeset} ->
+          redirect(conn, to: "/signals/#{signal.id}")
+          ##  render(conn, "show_signal_no_like.html.html", signal: signal, comments: changeset)
+      end
+
+      redirect(conn, to: "/signals/#{signal.id}")
       ## render(conn, "show_signal_no_comment_like.html", signal: signal, comments: comment)
-     end
+    end
 
     ## redirect conn, to: "/signals/#{signal.id}"
-    comment = DataSignals.list_signal_comment
-    IO.inspect comment
-    IO.puts "PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP"
-    redirect conn, to: "/signals/#{signal.id}"
-  ##render(conn, "show_signal_no_comment_like.html", signal: signal, comments: comment)
+    comment = DataSignals.list_signal_comment()
+    IO.inspect(comment)
+    IO.puts("PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP")
+    redirect(conn, to: "/signals/#{signal.id}")
+    ## render(conn, "show_signal_no_comment_like.html", signal: signal, comments: comment)
 
-
-      render(conn, "show_signal.html", signal: signal, comments: comment)
-
+    render(conn, "show_signal.html", signal: signal, comments: comment)
 
     comment = DataSignals.list_signal_comment()
     render(conn, "show_signal.html", signal: signal, comments: comment)
   end
-
 
   def followed_signals(conn, params) do
     user_like = conn.assigns.current_user.liked_signals
@@ -364,7 +426,7 @@ redirect conn, to: "/signals/#{signal.id}"
     ## IO.inspect show_id
     signal = DataSignals.get_signal(show_id)
     ## IO.inspect signal
-     IO.puts "_____________________________________________REMOVE_LIKE_________________________"
+    IO.puts("_____________________________________________REMOVE_LIKE_________________________")
     user_id = conn.assigns.current_user.id
     ##  IO.inspect user_id
     DataUsers.remove_liked_signal(user_id, show_id)
@@ -373,6 +435,7 @@ redirect conn, to: "/signals/#{signal.id}"
     conn
     |> json(%{new_count: count})
   end
+
   def update_like_count(conn, %{"show-count" => show_count, "show-id" => show_id}) do
     ## IO.inspect show_id
     signal = DataSignals.get_signal(show_id)
@@ -423,35 +486,47 @@ redirect conn, to: "/signals/#{signal.id}"
   end
 
   def filter_index(conn, params) do
-    
     params = params["obj"]
-    IO.inspect params
+    IO.inspect(params)
+
     cond do
-     params["sig_category"]  -> 
-      all_query = []
-        x = 
-      Enum.map(params["sig_category"] , fn(x)-> struct = from(p in Signals, where: p.signals_categories_id == ^String.to_integer(x))  
-      all_query = all_query ++ Repo.all(struct) end)
-      x = List.flatten(x)
-      page = Smartcitydogs.Repo.paginate(x, page: 1, page_size: 8)
-      render(conn, "index_signal.html", signal: page.entries, page: page)
-     params["sig_status"]  ->
+      params["sig_category"] ->
         all_query = []
-        x = 
-      Enum.map(params["sig_status"] , fn(x)-> struct = from(p in Signals, where: p.signals_types_id == ^String.to_integer(x))  
-      all_query = all_query ++ Repo.all(struct) end)
-      x = List.flatten(x)
-      page = Smartcitydogs.Repo.paginate(x, page: 1, page_size: 8)
-      render(conn, "index_signal.html", signal: page.entries, page: page)
-     params["type"] == nil ->
-        x = DataSignals.list_signals
+
+        x =
+          Enum.map(params["sig_category"], fn x ->
+            struct = from(p in Signals, where: p.signals_categories_id == ^String.to_integer(x))
+            all_query = all_query ++ Repo.all(struct)
+          end)
+
+        x = List.flatten(x)
         page = Smartcitydogs.Repo.paginate(x, page: 1, page_size: 8)
         render(conn, "index_signal.html", signal: page.entries, page: page)
-     params == %{} ->
-        x = DataSignals.list_signals
+
+      params["sig_status"] ->
+        all_query = []
+
+        x =
+          Enum.map(params["sig_status"], fn x ->
+            struct = from(p in Signals, where: p.signals_types_id == ^String.to_integer(x))
+            all_query = all_query ++ Repo.all(struct)
+          end)
+
+        x = List.flatten(x)
+        page = Smartcitydogs.Repo.paginate(x, page: 1, page_size: 8)
+        render(conn, "index_signal.html", signal: page.entries, page: page)
+
+      params["type"] == nil ->
+        x = DataSignals.list_signals()
+        page = Smartcitydogs.Repo.paginate(x, page: 1, page_size: 8)
+        render(conn, "index_signal.html", signal: page.entries, page: page)
+
+      params == %{} ->
+        x = DataSignals.list_signals()
         page = Smartcitydogs.Repo.paginate(x, page: 1, page_size: 8)
         render(conn, "index_signal.html", signal: page.entries, page: page)
     end
+
     page = Signals |> Smartcitydogs.Repo.paginate(params)
     sorted_signals = DataSignals.sort_signal_by_id()
     render(conn, "index_signal.html", signal: page.entries, page: page)
@@ -471,28 +546,27 @@ redirect conn, to: "/signals/#{signal.id}"
     render(conn, "shelter_animals.html", animals: page.entries, page: page)
   end
 
-
   def filter_animals(conn, params) do
     if params == %{} do
-      x = DataAnimals.list_animals
+      x = DataAnimals.list_animals()
       page = Smartcitydogs.Repo.paginate(x, page: 1, page_size: 8)
       render(conn, "filter_animals.html", animals: x, page: page)
     end
-    params = Map.values(params)    
-    [inner_map] =  params
+
+    params = Map.values(params)
+    [inner_map] = params
     inner_map = Map.values(inner_map)
     [id] = inner_map
     all_query = []
-    x = 
-    Enum.map(id, fn(x)-> struct = from(p in Animals, where: p.animals_status_id == ^String.to_integer(x))  
-    all_query = all_query ++ Repo.all(struct) |> Repo.preload(:animals_status)   end)
+
+    x =
+      Enum.map(id, fn x ->
+        struct = from(p in Animals, where: p.animals_status_id == ^String.to_integer(x))
+        all_query = (all_query ++ Repo.all(struct)) |> Repo.preload(:animals_status)
+      end)
+
     x = List.flatten(x)
     page = Smartcitydogs.Repo.paginate(x, page: 1, page_size: 8)
     render(conn, "filter_animals.html", animals: x, page: page)
   end
-
-
-
-
-
 end
