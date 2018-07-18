@@ -10,13 +10,13 @@
         <div class="form-group">
             <%= form_for @changeset, @action, fn f -> %>
 
-              <%= text_input f, :username, placeholder: "Потребителско име...", class: "form-control1" %>
+              <%= text_input f, :username, placeholder: "Потребителско име...",id: "username-f-pass", class: "form-control1" %>
               <%= error_tag f, :username %>
 
-              <%= email_input f, :email, placeholder: "E-mail", class: "form-control1" %>
+              <%= email_input f, :email, placeholder: "E-mail",id: "email-f-pass", class: "form-control1" %>
               <%= error_tag f, :email %>
 
-              <%= text_input f, :phone, placeholder: "Телефонен номер...", class: "form-control1" %>
+              <%= text_input f, :phone, placeholder: "Телефонен номер...",id: "phone-f-pass", class: "form-control1" %>
               <%= error_tag f, :phone %>
 
             <div class="under-form">

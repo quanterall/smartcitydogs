@@ -12,6 +12,8 @@ defmodule Smartcitydogs.Signals do
     field(:support_count, :integer)
     field(:title, :string)
     field(:view_count, :integer)
+    field(:address_B, :float)
+    field(:address_F, :float)
 
     has_many(:signals_comments, Smartcitydogs.SignalsComments)
     belongs_to(:signals_categories, Smartcitydogs.SignalsCategories)
@@ -35,7 +37,9 @@ defmodule Smartcitydogs.Signals do
       :deleted_at,
       :signals_categories_id,
       :signals_types_id,
-      :users_id
+      :users_id,
+      :address_B,
+      :address_F
     ])
     |> validate_required([
       :title,

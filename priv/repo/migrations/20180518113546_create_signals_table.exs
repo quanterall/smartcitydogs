@@ -10,6 +10,8 @@ defmodule Smartcitydogs.Repo.Migrations.CreateSignalsTable do
       add(:chip_number, :text)
       add(:description, :text)
       add(:deleted_at, :naive_datetime)
+      add(:address_B, :float)
+      add(:address_F, :float)
       timestamps()
     end
   end
