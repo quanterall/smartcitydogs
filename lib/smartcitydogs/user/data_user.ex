@@ -72,6 +72,10 @@ defmodule Smartcitydogs.DataUsers do
     User.changeset(user, %{liked_signals: user.liked_signals ++ [to_string(signal_id)]}) |> Repo.update
   end
 
+  def remove_liked_signal(user_id, signal_id) do
+    user = Repo.get!(User, user_id)
+    User.changeset(user, %{liked_signals: user.liked_signals -- [to_string(signal_id)]}) |> Repo.update
+  end
 
   def add_liked_signal_comment(user_id, comment_id) do
     user = Repo.get!(User, user_id)

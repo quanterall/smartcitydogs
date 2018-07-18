@@ -116,7 +116,8 @@ defmodule SmartcitydogsWeb.Router do
       )
 
       # get("/signals/my_signals", SignalController, :my_signals)
-      get("/index_home_minicipality", SignalController, :index_home_minicipality)
+      get("/signals/remove_like", SignalController, :remove_like)
+      get("/home_minicipalyti", SignalController, :index_home_minicipality)
       get("/signals/comment", SignalController, :comment)
       
       get("/signals/get_signals_support_count", SignalController, :get_signals_support_count)
