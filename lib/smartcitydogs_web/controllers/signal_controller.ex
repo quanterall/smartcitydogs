@@ -42,6 +42,9 @@ defmodule SmartcitydogsWeb.SignalController do
   end
 
   def create(conn, %{"signals" => signal_params}) do
+    IO.puts"_____________________SIGNAL_PARAMS_____________________"
+    IO.inspect(conn)
+    IO.puts"_____________________SIGNAL_PARAMS_____________________"
     a = conn.assigns.current_user.id
     logged_user_type_id = conn.assigns.current_user.users_types.id
 

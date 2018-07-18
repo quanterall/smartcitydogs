@@ -136,3 +136,12 @@ show-signal-label-description{
     font-weight: bold;
     font-size: 30px;
 }
+.hidden-form-group{
+    display: none;
+}
+#cor-b{
+    display: none;
+}
+#cor-a{
+    display: none;
+}

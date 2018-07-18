@@ -16,7 +16,38 @@
       </div>
     </div>
     <div class="show-signal-right-container">
-        
+       <div id="cor-a"><%= @signal.address_F %></div>
+       <div id="cor-b"><%= @signal.address_B %></div>
+       <div id="show_map" style="width:400px;height:400px;background:yellow"></div>
+      
+
+      <script>
+        var cor_a = $('#cor-a').text();
+        var cor_b = $('#cor-b').text();
+        function ShowMap() {
+          console.log(cor_a);
+          console.log(cor_b);
+          var mapCanvas = document.getElementById("show_map");
+          var myCenter = new google.maps.LatLng(cor_a, cor_b);
+          var mapOptions = {
+              center: myCenter,
+              zoom: 16
+              //mapTypeId: google.maps.MapTypeId.ROADMAP
+          };
+          
+          var map = new google.maps.Map(mapCanvas, mapOptions);
+          var marker = new google.maps.Marker({
+            positiong: myCenter,
+            animation: google.maps.Animation.BOUNCE
+          });
+          marker.setMap(map);
+        }
+      </script>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDAnp2RXJIJARIGKIcxtUVdHD7-TyFCfe4&callback=ShowMap"></script>
+
+
+
             <show-signal-label-status class="
                           <%= if @signal.signals_types_id == 1 do %>
                             label-type-red
@@ -48,7 +79,7 @@
             <br>
 
             <show-signal-label-adress>
-              <div class="fa fa-map-marker"></div><div class="address-style"><%=@signal.address%></div>
+              <div class="fa fa-map-marker"></div><div class="address-style" id="test-address"><%=@signal.address%></div>
             </show-signal-label-adress>
             <a id="show-map" href="#">ВИЖ НА КАРТА</a>
            

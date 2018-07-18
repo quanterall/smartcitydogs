@@ -41,6 +41,7 @@ $("#like").click(function() {
 });
 
 
+
 $("#comment").click(function() {
 
     $.ajax({

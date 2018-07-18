@@ -21,14 +21,22 @@
 
   <script type="text/javascript">
     var placeSearch, autocomplete;
-
+    var Cordinate_a, Cordinate_b;
     function initialize() {
 
         autocomplete = new google.maps.places.Autocomplete(document.getElementById('autocomplete'));
 
         google.maps.event.addListener(autocomplete, 'place_changed', function () {
             var place = autocomplete.getPlace();
-            console.log(place.formatted_address);
+           // console.log(place.formatted_address);
+           // console.log(place);
+           
+           // console.log(place.geometry.viewport.f.b);
+           // console.log(place.geometry.viewport.b.b);
+            Cordinate_a = place.geometry.viewport.f.b;
+            Cordinate_b = place.geometry.viewport.b.b;
+            $('#address_F').val(Cordinate_a);
+            $('#address_B').val(Cordinate_b);
         });
     }
 
@@ -43,6 +51,13 @@
         <%= text_input f, :address, class: "form-control1", id: "autocomplete", required: true, minlength: 2 %>
         <%= error_tag f, :address %>
       </div>
+
+      <div class="hidden-form-group">
+        <%= hidden_input f, :address_F, id: "address_F" %>
+        <%= hidden_input f, :address_B, id: "address_B" %>
+      </div>
+
+
     <label-3>3.Заглавие на сигнала</label-3>
       <div class="form-group">
         <%= text_input f, :title, class: "form-control1", required: true, minlength: 2 %>
