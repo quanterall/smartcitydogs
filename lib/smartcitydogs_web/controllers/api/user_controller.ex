@@ -49,16 +49,17 @@ defmodule SmartcitydogsWeb.UserControllerAPI do
   end
 
   def sign_in(conn, %{"email" => email, "password" => password}) do
-    case Smartcitydogs.Auth.login_by_email_and_pass(conn,email, password) do
+    case Smartcitydogs.Auth.login_by_email_and_pass(conn, email, password) do
       {:ok, conn} ->
-        user =  Guardian.Plug.current_resource(conn)
+        user = Guardian.Plug.current_resource(conn)
 
         conn
         |> put_session(:current_user_id, user.id)
         |> put_status(:ok)
         |> render(SmartcitydogsWeb.UserControllerAPIView, "sign_in.json", user: user)
+
       ##  IO.inspect user
-      {:error, message,conn} ->
+      {:error, message, conn} ->
         conn
         |> delete_session(:current_user_id)
         |> put_status(:unauthorized)

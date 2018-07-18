@@ -3,7 +3,9 @@ defmodule SmartcitydogsWeb.SignalsCommentControllerAPIView do
   alias SmartcitydogsWeb.SignalsCommentControllerAPIView
 
   def render("index.json", %{signals_comments: signals_comments}) do
-    %{data: render_many(signals_comments, SignalsCommentControllerAPIView, "signals_comment.json")}
+    %{
+      data: render_many(signals_comments, SignalsCommentControllerAPIView, "signals_comment.json")
+    }
   end
 
   def render("show.json", %{signals_comment: signals_comment}) do

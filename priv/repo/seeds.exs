@@ -144,7 +144,6 @@ unless Repo.get_by(User, username: users_params[:username]) do
   |> Repo.insert!()
 end
 
-
 ############ Animal Status ############
 animals_status_params = %{name: "На свобода"}
 

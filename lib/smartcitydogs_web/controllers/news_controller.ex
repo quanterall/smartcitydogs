@@ -23,9 +23,7 @@ defmodule SmartcitydogsWeb.NewsController do
 
     File.cp(
       upload.path,
-      "../smartcitydogs/assets/static/images/#{Map.get(upload, :filename)}-profile#{
-        extension
-      }"
+      "../smartcitydogs/assets/static/images/#{Map.get(upload, :filename)}-profile#{extension}"
     )
 
     news_params = Map.put(news_params, "date", DateTime.utc_now())
@@ -47,8 +45,6 @@ defmodule SmartcitydogsWeb.NewsController do
         render(conn, "new.html", changeset: changeset)
     end
   end
-
-
 
   def show(conn, %{"id" => id}) do
     news = DataPages.get_news(id)

@@ -13,7 +13,7 @@ defmodule SmartcitydogsWeb.SignalsLikeControllerAPI do
 
   def create(conn, %{"signals_like" => signals_like_params}) do
     with {:ok, %SignalsLikes{} = signals_like} <-
-      DataSignals.create_signal_like(signals_like_params) do
+           DataSignals.create_signal_like(signals_like_params) do
       conn
       |> put_status(:created)
       |> put_resp_header("location", signals_like_controller_api_path(conn, :show, signals_like))
@@ -30,13 +30,12 @@ defmodule SmartcitydogsWeb.SignalsLikeControllerAPI do
     signals_like = DataSignals.get_signal_like(id)
 
     with {:ok, %SignalsLikes{} = signals_like} <-
-      DataSignals.update_signal_like(signals_like, signals_like_params) do
+           DataSignals.update_signal_like(signals_like, signals_like_params) do
       render(conn, "show.json", signals_like: signals_like)
     end
   end
 
   def delete(conn, %{"id" => id}) do
-
     with {:ok, %SignalsLikes{}} <- DataSignals.delete_signal_like(id) do
       send_resp(conn, :no_content, "")
     end

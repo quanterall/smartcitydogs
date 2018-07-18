@@ -5,37 +5,41 @@ defmodule SmartcitydogsWeb.AnimalController do
   alias Smartcitydogs.Animals
   alias Smartcitydogs.AnimalImages
   alias Smartcitydogs.Repo
-  
+
   # plug(:put_layout, false)
   plug(:put_layout, false when action in [:index])
 
   def index(conn, params) do
     chip = params["chip_number"]
     page = Animals |> Smartcitydogs.Repo.paginate(params)
-    sorted_animals = DataAnimals.sort_animals_by_id
+    sorted_animals = DataAnimals.sort_animals_by_id()
     logged_user_type_id = conn.assigns.current_user.users_types.id
 
     if logged_user_type_id == 3 do
       render(conn, SmartcitydogsWeb.ErrorView, "401.html")
     else
       if chip == "" do
-        ##animals = DataAnimals.list_animals()
-        #list_animals = Map.get(page,:entries) |> Repo.preload(:animals_status) |> Repo.preload(:animals_image)
+        ## animals = DataAnimals.list_animals()
+        # list_animals = Map.get(page,:entries) |> Repo.preload(:animals_status) |> Repo.preload(:animals_image)
         render(conn, "index.html", animals: sorted_animals, page: page)
       end
 
       if chip != nil do
         animals = DataAnimals.get_animal_by_chip(chip)
-        list_animals = Map.get(page,:entries) |> Repo.preload(:animals_status) |> Repo.preload(:animals_image)
+
+        list_animals =
+          Map.get(page, :entries) |> Repo.preload(:animals_status) |> Repo.preload(:animals_image)
+
         render(conn, "index.html", animals: list_animals, page: page)
       end
 
       page = Animals |> Smartcitydogs.Repo.paginate(params)
 
-      list_animals = Map.get(page,:entries) |> Repo.preload(:animals_status) |> Repo.preload(:animals_image)
-      
+      list_animals =
+        Map.get(page, :entries) |> Repo.preload(:animals_status) |> Repo.preload(:animals_image)
+
       ## animals = DataAnimals.list_animals()
-      
+
       render(conn, "index.html", animals: list_animals, page: page)
     end
   end
@@ -43,27 +47,31 @@ defmodule SmartcitydogsWeb.AnimalController do
   def filter_index(conn, params) do
     chip = params["chip_number"]
     page = Animals |> Smartcitydogs.Repo.paginate(params)
-    sorted_animals = DataAnimals.sort_animals_by_id
-   
-      if chip == "" do
-        ##animals = DataAnimals.list_animals()
-        #list_animals = Map.get(page,:entries) |> Repo.preload(:animals_status) |> Repo.preload(:animals_image)
-        render(conn, "index.html", animals: sorted_animals, page: page)
-      end
+    sorted_animals = DataAnimals.sort_animals_by_id()
 
-      if chip != nil do
-        animals = DataAnimals.get_animal_by_chip(chip)
-        list_animals = Map.get(page,:entries) |> Repo.preload(:animals_status) |> Repo.preload(:animals_image)
-        render(conn, "index.html", animals: list_animals, page: page)
-      end
-
-      page = Animals |> Smartcitydogs.Repo.paginate(params)
-
-      list_animals = Map.get(page,:entries) |> Repo.preload(:animals_status) |> Repo.preload(:animals_image)
-      
+    if chip == "" do
       ## animals = DataAnimals.list_animals()
-      
+      # list_animals = Map.get(page,:entries) |> Repo.preload(:animals_status) |> Repo.preload(:animals_image)
+      render(conn, "index.html", animals: sorted_animals, page: page)
+    end
+
+    if chip != nil do
+      animals = DataAnimals.get_animal_by_chip(chip)
+
+      list_animals =
+        Map.get(page, :entries) |> Repo.preload(:animals_status) |> Repo.preload(:animals_image)
+
       render(conn, "index.html", animals: list_animals, page: page)
+    end
+
+    page = Animals |> Smartcitydogs.Repo.paginate(params)
+
+    list_animals =
+      Map.get(page, :entries) |> Repo.preload(:animals_status) |> Repo.preload(:animals_image)
+
+    ## animals = DataAnimals.list_animals()
+
+    render(conn, "index.html", animals: list_animals, page: page)
   end
 
   def new(conn, _params) do
@@ -107,8 +115,8 @@ defmodule SmartcitydogsWeb.AnimalController do
 
     for n <- upload do
       [head] = n
-     ## IO.puts("\n N:")
-    ##  IO.inspect(n)
+      ## IO.puts("\n N:")
+      ##  IO.inspect(n)
 
       extension = Path.extname(head.filename)
 

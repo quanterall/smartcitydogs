@@ -7,13 +7,14 @@ defmodule SmartcitydogsWeb.ForgotenPasswordControllerAPIView do
   end
 
   def render("show.json", %{forgoten_password: user}) do
-    IO.puts "//////"
+    IO.puts("//////")
     render("forgoten_password.json", %{forgoten_password: user})
-  ##  %{data: render_one(user, ForgotenPasswordControllerAPIView, "forgoten_password.json")}
+    ##  %{data: render_one(user, ForgotenPasswordControllerAPIView, "forgoten_password.json")}
   end
 
   def render("forgoten_password.json", %{forgoten_password: user}) do
-    IO.puts "*********"
+    IO.puts("*********")
+
     %{
       id: user.id,
       username: user.username,
@@ -23,7 +24,7 @@ defmodule SmartcitydogsWeb.ForgotenPasswordControllerAPIView do
       email: user.email,
       phone: user.phone,
       reset_password_token: user.reset_password_token,
-     ## reset_password_token_sent_at: user.reset_password_token_sent_at,
+      ## reset_password_token_sent_at: user.reset_password_token_sent_at,
       deleted_at: user.deleted_at,
       users_types_id: user.users_types_id
     }

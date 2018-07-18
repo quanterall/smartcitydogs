@@ -13,10 +13,13 @@ defmodule SmartcitydogsWeb.PerformedProcedureControllerAPI do
 
   def create(conn, %{"performed_procedure" => performed_procedure_params}) do
     with {:ok, %PerformedProcedures{} = performed_procedure} <-
-      DataProcedure.create_performed_procedure(performed_procedure_params) do
+           DataProcedure.create_performed_procedure(performed_procedure_params) do
       conn
       |> put_status(:created)
-      |> put_resp_header("location", performed_procedure_controller_api_path(conn, :show, performed_procedure))
+      |> put_resp_header(
+        "location",
+        performed_procedure_controller_api_path(conn, :show, performed_procedure)
+      )
       |> render("show.json", performed_procedure: performed_procedure)
     end
   end
@@ -30,7 +33,7 @@ defmodule SmartcitydogsWeb.PerformedProcedureControllerAPI do
     performed_procedure = DataProcedure.get_performed_procedure!(id)
 
     with {:ok, %PerformedProcedures{} = performed_procedure} <-
-      DataProcedure.update_performed_procedure(
+           DataProcedure.update_performed_procedure(
              performed_procedure,
              performed_procedure_params
            ) do
@@ -42,7 +45,7 @@ defmodule SmartcitydogsWeb.PerformedProcedureControllerAPI do
     performed_procedure = DataProcedure.get_performed_procedure!(id)
 
     with {:ok, %PerformedProcedures{}} <-
-      DataProcedure.delete_performed_procedure(performed_procedure) do
+           DataProcedure.delete_performed_procedure(performed_procedure) do
       send_resp(conn, :no_content, "")
     end
   end

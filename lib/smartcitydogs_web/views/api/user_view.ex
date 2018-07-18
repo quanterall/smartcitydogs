@@ -19,7 +19,7 @@ defmodule SmartcitydogsWeb.UserControllerAPIView do
       email: user.email,
       phone: user.phone,
       reset_password_token: user.reset_password_token,
-    ##  reset_password_token_sent_at: user.reset_password_token_sent_at,
+      ##  reset_password_token_sent_at: user.reset_password_token_sent_at,
       deleted_at: user.deleted_at,
       users_types_id: user.users_types_id
     }

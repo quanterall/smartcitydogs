@@ -7,7 +7,7 @@ defmodule SmartcitydogsWeb.NewsSchemaControllerAPI do
   action_fallback(SmartcitydogsWeb.FallbackController)
 
   def index(conn, _params) do
-    news = DataPages.list_news
+    news = DataPages.list_news()
     render(conn, "index.json", news: news)
   end
 
@@ -28,8 +28,7 @@ defmodule SmartcitydogsWeb.NewsSchemaControllerAPI do
   def update(conn, %{"id" => id, "news_schema" => news_schema_params}) do
     news_schema = DataPages.get_news(id)
 
-    with {:ok, %News{} = news_schema} <-
-      DataPages.update_news(news_schema, news_schema_params) do
+    with {:ok, %News{} = news_schema} <- DataPages.update_news(news_schema, news_schema_params) do
       render(conn, "show.json", news_schema: news_schema)
     end
   end

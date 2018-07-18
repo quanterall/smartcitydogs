@@ -13,6 +13,7 @@ defmodule SmartcitydogsWeb.ForgotenPasswordControllerAPI do
     email = pw_params["email"]
     phone = pw_params["phone"]
     username = pw_params["username"]
+
     user =
       cond do
         String.trim(email) != "" ->
@@ -42,6 +43,7 @@ defmodule SmartcitydogsWeb.ForgotenPasswordControllerAPI do
 
         Email.send_reset_email(email, user.reset_password_token)
         |> Mailer.deliver_now()
+
         render(conn, "show.json", forgoten_password: user)
     end
   end

@@ -13,7 +13,7 @@ defmodule SmartcitydogsWeb.HeaderSlideControllerAPI do
 
   def create(conn, %{"header_slide" => header_slide_params}) do
     with {:ok, %HeaderSlides{} = header_slide} <-
-      DataPages.create_header_slide(header_slide_params) do
+           DataPages.create_header_slide(header_slide_params) do
       conn
       |> put_status(:created)
       |> put_resp_header("location", header_slide_controller_api_path(conn, :show, header_slide))
@@ -30,7 +30,7 @@ defmodule SmartcitydogsWeb.HeaderSlideControllerAPI do
     header_slide = DataPages.get_header_slides(id)
 
     with {:ok, %HeaderSlides{} = header_slide} <-
-      DataPages.update_header_slide(header_slide, header_slide_params) do
+           DataPages.update_header_slide(header_slide, header_slide_params) do
       render(conn, "show.json", header_slide: header_slide)
     end
   end
