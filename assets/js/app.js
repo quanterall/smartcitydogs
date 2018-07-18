@@ -81,8 +81,7 @@ window.onload = function() {
     $('.form2').load('users/new');
     $('.form3').load('sessions/new');
     $('.form4').load('forgoten_password/new');
-    $('.form5').load('forgoten_password/new');
-    $('.form6').load('forgoten_password/new');
+
 
 
 
@@ -91,8 +90,7 @@ window.onload = function() {
     $('.form2').hide();
     $('.form3').hide();
     $('.form4').hide();
-    $('.form5').hide();
-    $('.form6').hide();
+  
 
 
     $('input[type="checkbox"]').click(function() {
@@ -144,8 +142,7 @@ $(function() {
     $('.form2').load('users/new');
     $('.form3').load('sessions/new');
     $('.form4').load('forgoten_password/new');
-    $('.form5').load('forgoten_password/new');
-    $('.form6').load('forgoten_password/new');
+    
 
 
 
@@ -154,8 +151,7 @@ $(function() {
     $('.form2').hide();
     $('.form3').hide();
     $('.form4').hide();
-    $('.form5').hide();
-    $('.form6').hide();
+   
 
     $('input[type="checkbox"]').click(function() {
         var obj = {};
@@ -332,12 +328,14 @@ $(function(){
   });
 
   $('#forgotten-password').on('click', function(){
+      console.log("a");
     $('main').css("position","fixed");
     $('main').css("width","100%");
     $('.form2').hide();
     $('.form1').hide();
-    $('.form3').hide();
     $('.form4').show();
+    $('.form3').hide();
+
 
     modal.style.display = "block";
   });

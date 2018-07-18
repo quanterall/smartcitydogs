@@ -1,4 +1,4 @@
-<html>
+      <html>
 <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
@@ -17,91 +17,123 @@
     </div>
     <div class="show-signal-right-container">
         
-            <show-signal-label-status>
+            <show-signal-label-status class="
+                          <%= if @signal.signals_types_id == 1 do %>
+                            label-type-red
+                          <% end %>
+
+                          <%= if @signal.signals_types_id == 2 do %>
+                            label-type-orange
+                          <% end %>
+
+                          <%= if @signal.signals_types_id == 3 do %>
+                            label-type-yellow
+                          <% end %>
+
+                          <%= if @signal.signals_types_id == 4 do %>
+                            label-type-green
+                          <% end %>">
               <%=@signal.signals_types_id
               |> Smartcitydogs.DataSignals.get_signal_type()
               |> Map.get(:name)
               %>
             </show-signal-label-status>
             <br>
-
+            <br>
             <show-signal-label-title>
               <%=@signal.title%>
             </show-signal-label-title>
             <br>
+            <br>
+            <br>
 
             <show-signal-label-adress>
-              <%=@signal.address%>
+              <div class="fa fa-map-marker"></div><div class="address-style"><%=@signal.address%></div>
             </show-signal-label-adress>
             <a id="show-map" href="#">ВИЖ НА КАРТА</a>
            
+            <br>
+            <br>
             <br>
 
             <show-signal-label-description>
               <%=@signal.description%>
             </show-signal-label-description>
             <br>
+            <br>
+            <br>
 
             <div class="show-signal-under-description">
               <div class="show-signal-under-description-title">
-                <label-title-registered>
-                </label-title-registered>
+               <table class="table-under-form-signal">
 
-                <label-title-view-count>
-                </label-title-view-count>
+                <tr>
+                  <td class="title-table-td"> 
+                    <label-title-registered>
+                      ДАТА НА ПУСКАНЕ
+                    </label-title-registered>
+                  </td>
+                  <td class="title-table-td">
 
-                <label-title-support-count>
-                </label-title-support-count>
-
-                <label-title-comments>
-                </label-title-comments>
-                
-              </div>
-              </div class="show-signal-under-description-text">
+                    <label-title-view-count>
+                      ПРЕГЛЕЖДАНИЯ
+                    </label-title-view-count>
+                  </td>
+                  <td  class="title-table-td">
+                    <label-title-support-count>
+                      ПОДКРЕПИ
+                    </label-title-support-count>
+                  </td>
+                  <td  class="title-table-td">
+                    <label-title-comments>
+                      КОМЕНТАРИ
+                    </label-title-comments>
+                  </td>
+                </tr>
+                              
               
-              </div>
+              
+                <tr>
+                  <td class="green-td">
+                    <label-description-registered>
+                      <%=
+                      signal_time = @signal.inserted_at
+                              |> DateTime.truncate(:second)
+                              |> DateTime.to_string()
+                              count = String.length(signal_time)
+                              final_time = String.slice(signal_time,0..count-11)
+                              final_time
+                      %>
+                    </label-description-registered>
+                  </td>
+                  <td class="green-td">
+                    <label-description-view-count>
+                      <%= get_signals_view_count(@signal.id)  %>
+                    </label-description-view-count>
+                  </td>
+                  <td class="green-td">  
+                    <label-description-support-count>
+                      <a id="signal-count"><%=@signal.support_count%></a>
+                    </label-description-support-count>
+                  </td>
+                  <td class="green-td">
+                    <label-description-comments>
+                      <%# <%= Smartcitydogs.DataSignals.get_max_id(@signal.id)%> 
+                      <%= Enum.count(@comments)%>
+                    </label-description-comments>
+                  </td>
+                  </tr>
+                </table>  
+              
             </div>
-
-            <strong>Signal number:</strong>
+            <br><br>
+            <div class="buttons-for-signal">
+              <a id="submit-like1">like</a><a id="comment" href="/signals/<%= @signal.id %>" role="button">Submit comment</a>
+            </div>
             <a id="signal-id"><%= @signal.id %></a>
+            <%# class="btn btn-secondary" %>
+
           
-            
-
-            <strong>Category:</strong>
-            <%=@signal.signals_categories_id
-            |> Smartcitydogs.DataSignals.get_signal_category()
-            |> Map.get(:name)
-            %>
-          
-            <strong>Status:</strong>
-            
-         
-            <strong>Registered at:</strong>
-            <%=
-              signal_time = @signal.inserted_at
-              |> DateTime.truncate(:second)
-              |> DateTime.to_string()
-              count = String.length(signal_time)
-              final_time = String.slice(signal_time,0..count-2)
-              final_time
-            %>
-
-         
-            <strong>Description:</strong>
-            
-         
-            <strong>Chip number:</strong>
-            <%=@signal.chip_number%>
-        
-            <strong>Support count:</strong>
-            <span id="signal-count"><%=@signal.support_count%></span>
-
-         
-            <strong>Views:</strong>
-            <%= get_signals_view_count(@signal.id)  %>
-        
-
-          <button id="submit-like1">like</button>
 
           <br><br>
           <label> Leave a comment:</label>
@@ -110,19 +142,27 @@
             </textarea>
           <br>
           <br>
-        <a id="comment" class="btn btn-secondary" href="/signals/<%= @signal.id %>" role="button">Submit comment</a></p>
+       
 
         <br>
 
-            <strong>Comments:</strong>
+            <p class="comments-count">Коментари(<%= Enum.count(@comments)%>)</p>
             <br>
+            
             <hr>
             <%= for comment <- @comments do %>
-            <strong><%= comment.users.username %></strong>
-              <p><%= comment.comment %></p>
-              <p><%= comment.likes_number %></p>
-              <%= button "like", to: signal_path(@conn, :add_comment_like, %{id: comment.id, signal_id: @signal.id}) %>
-            <%= button "dislike", to: signal_path(@conn, :add_comment_dislike, %{id: comment.id, signal_id: @signal.id}) %>
+            <p class="username-comments-signal"><%= comment.users.username %></p><p class="date-comments-signal">
+             <%=
+                      signal_time = @signal.inserted_at
+                              |> DateTime.truncate(:second)
+                              |> DateTime.to_string()
+                              count = String.length(signal_time)
+                              final_time = String.slice(signal_time,0..count-11)
+                              final_time
+                      %>
+                      </p>
+                      <br><br>
+              <p class="username-comment-on-signal"><%= comment.comment %></p> 
             <hr>
             <% end %>
     </div>
