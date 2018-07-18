@@ -1,6 +1,8 @@
 <html>
 <head>
   <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
+
+
 </head>
 
 <body>
@@ -16,9 +18,29 @@
               [key: "Малтретиране на куче", value: "3"]
               ]) %>
       </div>
+
+  <script type="text/javascript">
+    var placeSearch, autocomplete;
+
+    function initialize() {
+
+        autocomplete = new google.maps.places.Autocomplete(document.getElementById('autocomplete'));
+
+        google.maps.event.addListener(autocomplete, 'place_changed', function () {
+            var place = autocomplete.getPlace();
+            console.log(place.formatted_address);
+        });
+    }
+
+    initialize();
+
+  </script>
+  <!-- <input id="autocomplete" placeholder="Enter your address" type="text"></input> -->
+
+
     <label-2>2.Въведете местоположение</label-2>
       <div class="form-group">
-        <%= text_input f, :address, class: "form-control1", required: true, minlength: 2 %>
+        <%= text_input f, :address, class: "form-control1", id: "autocomplete", required: true, minlength: 2 %>
         <%= error_tag f, :address %>
       </div>
     <label-3>3.Заглавие на сигнала</label-3>

@@ -7,6 +7,10 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=
+AIzaSyDAnp2RXJIJARIGKIcxtUVdHD7-TyFCfe4
+&signed_in=true&libraries=places"></script>
+
     <title>SmartCityDogs!</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
@@ -66,7 +70,7 @@
       <% else %>
          nav-link black
       <% end %>" id="animals_all_nav" <%= if @current_user do %> 
-                                         href="/animals"
+                                         href="/animals/filter_index"
                                          <% else %>
                                           href="/animals/filter_index"
                                          <% end %>
