@@ -31,15 +31,16 @@
           var myCenter = new google.maps.LatLng(cor_a, cor_b);
           var mapOptions = {
               center: myCenter,
-              zoom: 16
-              //mapTypeId: google.maps.MapTypeId.ROADMAP
+              zoom: 18,
+              mapTypeId: google.maps.MapTypeId.ROADMAP
           };
           
           var map = new google.maps.Map(mapCanvas, mapOptions);
           var marker = new google.maps.Marker({
-            positiong: myCenter,
+            position: myCenter,
             animation: google.maps.Animation.BOUNCE
           });
+          console.log(marker);
           marker.setMap(map);
         }
       </script>
