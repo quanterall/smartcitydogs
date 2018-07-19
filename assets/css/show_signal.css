@@ -1,15 +1,16 @@
 .show-signal-left-container{
+    display: inline-block;
     position: fixed;
-    top: 10.5vh;
     padding-left: 0px;
-    padding-right: 5%;
-    padding-top: 5%;
-    padding-bottom: 5%;
-    width: 50%;
-    bottom: 2vh;
+    top: 8rem;
+    left: 0%;
+    width:50%;
+    height:70vh;
+    background:yellow;
 }
-div .show-signal-right-container{
-    padding-right: 10%;
+div.show-signal-right-container{
+    padding-left: 5%;
+    padding-right: 5%;
     margin-top: 11vh;
     margin-left: 50%;
     width: 50%;
@@ -38,12 +39,8 @@ show-signal-label-title{
     color: #00c790;
     margin-right: 2%;
 }
-/* show-signal-label-adress{
-    display: inline-block;
-} */
 #show-map{
     float: right;
-    /* margin-right: 25%; */
 }
 .address-style{
     color: grey;
@@ -56,12 +53,7 @@ show-signal-label-title{
     font-weight: bold;
 }
 #show-map:hover{
-    /* color: white; */
-    /* background-color: green; */
-    /* border-color: transparent; */
     text-decoration: none;
-    /* transition: 0.5s; */
-    /* color: aqua; */
 }
 .show-signal-under-description-text{
     color: #00c790;
@@ -144,4 +136,40 @@ show-signal-label-description{
 }
 #cor-a{
     display: none;
+}
+#show_map{
+    
+    display: inline-block;
+    position: fixed !important;
+    padding-left: 0px;
+    top: 8rem;
+    left: 50%;
+    width:50%;
+    height:70vh;
+    background:yellow;
+}
+.close2{
+    margin-top: 10%;
+    background-color: green;
+    height: 50px;
+    width: 50px;
+    display: inline-block;
+    position: fixed;
+    top: 0;
+    /* top: -24rem; */
+    /* left: 50rem;  */
+    /* color: red; */
+  font-size: 20px;
+  font-weight: 400;
+  align-self: center;
+  font-weight: 400;
+}
+.close2:hover,
+.close2:focus{
+      color: green !important;
+      text-decoration: none;
+      cursor: pointer;
+      transition: 0.5s;
+      background-color: transparent;
+  
 }

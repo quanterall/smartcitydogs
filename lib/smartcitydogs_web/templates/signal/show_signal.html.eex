@@ -9,45 +9,30 @@
   </head>
 <body>
 
+  <div id="cor-a"><%= @signal.address_F %></div>
+       <div id="cor-b"><%= @signal.address_B %></div>
+       
+        
+
   <div class="show-signal-container">
     <div class="show-signal-left-container">
       <div class="signal-photo-container">
         <img class="photo-single-signal" src="/<%= get_signals_images(@signal.id) %>" alt="Generic placeholder image" width="300" height="200">
       </div>
     </div>
-    <div class="show-signal-right-container">
-       <div id="cor-a"><%= @signal.address_F %></div>
-       <div id="cor-b"><%= @signal.address_B %></div>
-       <div id="show_map" style="width:400px;height:400px;background:yellow"></div>
+
+    
+
       
 
-      <script>
-        var cor_a = $('#cor-a').text();
-        var cor_b = $('#cor-b').text();
-        function ShowMap() {
-          console.log(cor_a);
-          console.log(cor_b);
-          var mapCanvas = document.getElementById("show_map");
-          var myCenter = new google.maps.LatLng(cor_a, cor_b);
-          var mapOptions = {
-              center: myCenter,
-              zoom: 18,
-              mapTypeId: google.maps.MapTypeId.ROADMAP
-          };
-          
-          var map = new google.maps.Map(mapCanvas, mapOptions);
-          var marker = new google.maps.Marker({
-            position: myCenter,
-            animation: google.maps.Animation.BOUNCE
-          });
-          console.log(marker);
-          marker.setMap(map);
-        }
-      </script>
-
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDAnp2RXJIJARIGKIcxtUVdHD7-TyFCfe4&callback=ShowMap"></script>
-
-
+    <div class="show-signal-right-container">
+       
+            <div id="show_map" style="position: relative;">
+            </div>
+       
+      
+        <div class="close2">
+        </div>
 
             <show-signal-label-status class="
                           <%= if @signal.signals_types_id == 1 do %>
@@ -201,6 +186,36 @@
             <% end %>
     </div>
   </div>
+
+  <script>
+        $('#show_map').hide();
+        $('.close2').hide();
+        var cor_a = $('#cor-a').text();
+        var cor_b = $('#cor-b').text();
+        function ShowMap() {
+          console.log(cor_a);
+          console.log(cor_b);
+          var mapCanvas = document.getElementById("show_map");
+          var myCenter = new google.maps.LatLng(cor_a, cor_b);
+          var mapOptions = {
+              center: myCenter,
+              zoom: 18,
+              mapTypeId: google.maps.MapTypeId.ROADMAP
+          };
+          
+          var map = new google.maps.Map(mapCanvas, mapOptions);
+          var marker = new google.maps.Marker({
+            position: myCenter,
+            animation: google.maps.Animation.BOUNCE
+          });
+          console.log(marker);
+          marker.setMap(map);
+        }
+      </script>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDAnp2RXJIJARIGKIcxtUVdHD7-TyFCfe4&callback=ShowMap"></script>
+
            <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
+
 </body>
 </html>

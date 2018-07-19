@@ -40,7 +40,18 @@ $("#like").click(function() {
     })
 });
 
+$('.close2').click(function() {
+    $('#show_map').hide();
+    $('.close2').hide();
 
+})
+$('#show-map').click(function() {
+    $('#show_map').show();
+    $('.close2').show();
+    // $('body').css("p","");
+    
+    
+})
 
 $("#comment").click(function() {
 
