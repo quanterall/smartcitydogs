@@ -53,7 +53,20 @@ $('#show-map').click(function() {
     
 })
 
-$("#comment").click(function() {
+$('#comment').click(function() {
+    
+    $('#comment').hide();
+    $('.comment_section').show();
+});
+
+$('.close_comment').click(function() {
+    
+    $('#comment').show();
+    $('.comment_section').hide();
+});
+
+
+$(".submit_comment").click(function() {
 
     $.ajax({
         method: "GET",
@@ -83,7 +96,7 @@ window.onload = function() {
     $('.Signals1').html('');
     $('.Signals2').html('');
     $('.Signals3').html('');
-
+    // $('.comment_section').hide();
     
     $('body').css("position","auto");
     $('main').css("position","initial");

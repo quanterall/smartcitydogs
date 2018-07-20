@@ -148,7 +148,8 @@ show-signal-label-description{
     height:70vh;
     background:yellow;
 }
-.close2{
+/* .close2{
+    color: white !important;
     margin-top: 10%;
     background-color: green;
     height: 50px;
@@ -156,9 +157,7 @@ show-signal-label-description{
     display: inline-block;
     position: fixed;
     top: 0;
-    /* top: -24rem; */
-    /* left: 50rem;  */
-    /* color: red; */
+   
   font-size: 20px;
   font-weight: 400;
   align-self: center;
@@ -166,10 +165,67 @@ show-signal-label-description{
 }
 .close2:hover,
 .close2:focus{
-      color: green !important;
+      color: white !important;
       text-decoration: none;
       cursor: pointer;
       transition: 0.5s;
       background-color: transparent;
   
+} */
+
+.fa-window-close{
+    position: fixed;
+    background-color: transparent;
+    color: #00c790;
+    font-size: 40px;
+    left: 50%;
+    top: 8rem;
+}
+.fa-window-close:hover,
+.fa-window-close:focus{
+      text-decoration: none;
+      cursor: pointer;
+      transition: 0.5s;
+      background-color: transparent;
+  
+}
+.gmnoprint{
+    display: none;
+}
+.under_comment{
+    width: 100%;
+    display: inline-block;
+}
+.close_comment{
+    color: white;
+    background-color: #00c790;
+    padding-top: 10px;
+    padding-bottom: 10px; 
+    padding-left: 20%;
+    width: 50%;
+    border: 1px solid white;
+    display: inline-block;
+}
+.submit_comment{
+    color: white;
+    background-color: #00c790;
+    padding-top: 10px;
+    padding-bottom: 10px; 
+    padding-left: 15%;
+    width: 50%;
+    border: 1px solid white;
+    display: inline-block;
+}
+.submit_comment:hover,
+.submit_comment:focus,
+.close_comment:hover,
+.close_comment:focus{
+    border-color: #00c790;
+    background-color: white;
+    color: #00c790;
+    transition: 0.5s;
+    cursor: pointer;
+}
+#comment:hover{
+    cursor: pointer;
 }

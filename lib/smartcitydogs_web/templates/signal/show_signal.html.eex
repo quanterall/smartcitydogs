@@ -4,7 +4,7 @@
     <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/all.css" integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ" crossorigin="anonymous">
   
   </head>
 <body>
@@ -27,12 +27,13 @@
 
     <div class="show-signal-right-container">
        
-            <div id="show_map" style="position: relative;">
+            <div id="show_map" style="position: relative; display: none;">
             </div>
        
       
-        <div class="close2">
-        </div>
+        <%# <div class="close2"><i class="far fa-times"></i>
+        </div> %>
+        <i class="far fa-window-close close2"></i>
 
             <show-signal-label-status class="
                           <%= if @signal.signals_types_id == 1 do %>
@@ -65,7 +66,7 @@
             <br>
 
             <show-signal-label-adress>
-              <div class="fa fa-map-marker"></div><div class="address-style" id="test-address"><%=@signal.address%></div>
+              <div class="fa fa-map-marker" aria-hidden="true"></div><div class="address-style" id="test-address"><%=@signal.address%></div>
             </show-signal-label-adress>
             <a id="show-map" href="#">ВИЖ НА КАРТА</a>
            
@@ -145,7 +146,7 @@
             </div>
             <br><br>
             <div class="buttons-for-signal">
-              <a id="submit-like1">like</a><a id="comment" href="/signals/<%= @signal.id %>" role="button">Submit comment</a>
+              <a id="submit-like1">like</a><div id="comment" >КОМЕНТИРАЙ</div>
             </div>
             <a id="signal-id"><%= @signal.id %></a>
             <%# class="btn btn-secondary" %>
@@ -153,10 +154,14 @@
           
 
           <br><br>
-          <label> Leave a comment:</label>
-          <br>
+          <br><br>
+          <div class="comment_section" style="display: none;">
             <textarea name="message" id="comment-id" value="" rows="6" cols="60">
             </textarea>
+            <div class="under_comment">
+            <div class="close_comment">ОТКАЗ</div><a class="submit_comment" href="/signals/<%= @signal.id %>" role="button">ПУБЛИКУВАЙ</a>
+            </div>
+            </div>
           <br>
           <br>
        
@@ -215,7 +220,6 @@
 
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDAnp2RXJIJARIGKIcxtUVdHD7-TyFCfe4&callback=ShowMap"></script>
 
-           <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
 
 </body>
 </html>
