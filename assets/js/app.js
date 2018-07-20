@@ -298,8 +298,7 @@ $(function(){
 
         $('#submit-like1').text("unlike");
       }
-      else{
-
+     else{
         $.ajax({
             method: "GET",
             url: "/signals/remove_like",
@@ -311,7 +310,7 @@ $(function(){
             $("#signal-count").text(data.new_count);
     
         })
-
+        console.log(a);
         $('#submit-like1').text("like");
       }
   });
