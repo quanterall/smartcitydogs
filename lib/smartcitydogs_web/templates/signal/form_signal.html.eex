@@ -19,46 +19,7 @@
               ]) %>
       </div>
 
-  <script type="text/javascript">
-    var placeSearch, autocomplete;
-    var Cordinate_a, Cordinate_b;
-    function initialize() {
-
-        autocomplete = new google.maps.places.Autocomplete(document.getElementById('autocomplete'));
-        console.log(autocomplete);
-        google.maps.event.addListener(autocomplete, 'place_changed', function () {
-            var place = autocomplete.getPlace();
-           // console.log(place.formatted_address);
-           // console.log(place);
-            console.log(place);
-           // console.log(place.geometry.viewport.f.b);
-           // console.log(place.geometry.viewport.b.b);
-           var a_a = place.geometry.viewport.f.b;
-           var a_b = place.geometry.viewport.f.f;
-           var b_a = place.geometry.viewport.b.b;
-           var b_b = place.geometry.viewport.b.f;
-           //console.log(a_a);
-           //console.log(a_b);
-           //console.log(b_a);
-           //console.log(b_b);
-           var res_a = (a_a + a_b)/2;
-           var res_b = (b_a+b_b)/2; 
-           //console.log(res_a);
-           //console.log(res_b);
-           Cordinate_a = res_a//place.geometry.viewport.f.b;
-           Cordinate_b = res_b//place.geometry.viewport.b.b;
-            //Cordinate_a = place.geometry.location.lat["[[Scopes]]"]["0"].a;
-            //Cordinate_b = place.geometry.location.lat["[[Scopes]]"]["0"].b;
-            console.log(Cordinate_a);
-          console.log(Cordinate_b);
-            $('#address_F').val(Cordinate_a);
-            $('#address_B').val(Cordinate_b);
-        });
-    }
-
-    initialize();
-
-  </script>
+  
   <!-- <input id="autocomplete" placeholder="Enter your address" type="text"></input> -->
 
 
@@ -106,6 +67,47 @@
     </div>
       <% end %>
     </div>
+
+  <script type="text/javascript">
+    var placeSearch, autocomplete;
+    var Cordinate_a, Cordinate_b;
+    function initialize() {
+
+        autocomplete = new google.maps.places.Autocomplete(document.getElementById('autocomplete'));
+        console.log(autocomplete);
+        google.maps.event.addListener(autocomplete, 'place_changed', function () {
+            var place = autocomplete.getPlace();
+           // console.log(place.formatted_address);
+           // console.log(place);
+            console.log(place);
+           // console.log(place.geometry.viewport.f.b);
+           // console.log(place.geometry.viewport.b.b);
+           var a_a = place.geometry.viewport.f.b;
+           var a_b = place.geometry.viewport.f.f;
+           var b_a = place.geometry.viewport.b.b;
+           var b_b = place.geometry.viewport.b.f;
+           //console.log(a_a);
+           //console.log(a_b);
+           //console.log(b_a);
+           //console.log(b_b);
+           var res_a = (a_a + a_b)/2;
+           var res_b = (b_a+b_b)/2; 
+           //console.log(res_a);
+           //console.log(res_b);
+           Cordinate_a = res_a//place.geometry.viewport.f.b;
+           Cordinate_b = res_b//place.geometry.viewport.b.b;
+            //Cordinate_a = place.geometry.location.lat["[[Scopes]]"]["0"].a;
+            //Cordinate_b = place.geometry.location.lat["[[Scopes]]"]["0"].b;
+            console.log(Cordinate_a);
+          console.log(Cordinate_b);
+            $('#address_F').val(Cordinate_a);
+            $('#address_B').val(Cordinate_b);
+        });
+    }
+
+    initialize();
+
+  </script>
 
 </body>
 </html>
