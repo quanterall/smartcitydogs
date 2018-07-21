@@ -19,7 +19,7 @@ defmodule SmartcitydogsWeb.PageController do
     if length(signal) <= 3 do
       last_signals =  signal
     else 
-      last_signals = Enum.slice(signal, -3..-1)
+      last_signals = Enum.slice(signal, -6..-1)
     end 
 
     if length(news) <= 3 do

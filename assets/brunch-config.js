@@ -26,9 +26,11 @@ watcher: {
     stylesheets: {
       joinTo: {
       "css/app.css": [
+          "css/app.css",
           "css/login_user.css",
           "css/register_user.css",
           "node_modules/bootstrap/dist/css/bootstrap.css",
+          "node_modules/slick-carousel/slick/slick.css",
           "css/show_user.css",
           "css/my_profile.css",
           "css/index_signal.css",
@@ -78,7 +80,8 @@ watcher: {
           bootstrap: 'bootstrap'
       },
       styles: {
-          bootstrap: ['dist/css/bootstrap.css']
+          bootstrap: ['dist/css/bootstrap.css'],
+          "slick-carousel": ['slick/slick.css']
       }
       
   }
