@@ -168,7 +168,7 @@
               <a id="submit-like1">
                <% list_of_liked_signals = @conn.assigns.current_user.liked_signals %>
                <%   id = Integer.to_string(@signal.id) %>
-                <%=   if Enum.member?(list_of_liked_signals,id) do %>>unlike<% else %>like<%end%>
+                <%=   if Enum.member?(list_of_liked_signals,id) do %>unlike<% else %>like<%end%>
                 
                 
                 
