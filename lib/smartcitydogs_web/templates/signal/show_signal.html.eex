@@ -139,8 +139,7 @@
                   </td>
                   <td class="green-td">
                     <label-description-comments>
-                      <%# <%= Smartcitydogs.DataSignals.get_max_id(@signal.id)%> 
-                      <%= Enum.count(@comments)%>
+                      <%= Enum.count(@comments_count) %>
                     </label-description-comments>
                   </td>
                   </tr>
@@ -155,8 +154,8 @@
                 IO.inspect(list_of_liked_signals)
                 IO.inspect(id)
                %>
-                <%=   if Enum.member?(list_of_liked_signals,id) do %><a id="submit-like1">unlike</a>
-                <% else %><a id="submit-like1">like</a><%end%><div id="comment" >КОМЕНТИРАЙ</div>
+                <%=   if Enum.member?(list_of_liked_signals,id) do %><a id="submit-like1">ОТСЛЕДВАЙ</a>
+                <% else %><a id="submit-like1">ПОСЛЕДВАЙ</a><%end%><div id="comment" >КОМЕНТИРАЙ</div>
             </div>
             <a id="signal-id"><%= @signal.id %></a>
             <%# class="btn btn-secondary" %>
@@ -180,7 +179,7 @@
 
          
 
-            <p class="comments-count">Коментари(<%= Enum.count(@comments)%>)</p>
+            <p class="comments-count">Коментари(<%= Enum.count(@comments_count)%>)</p>
             <br>
             
             <hr>

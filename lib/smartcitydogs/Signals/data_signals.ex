@@ -139,14 +139,14 @@ defmodule Smartcitydogs.DataSignals do
 
   def list_signal_comment() do
     Repo.all(SignalsComments) |> Repo.preload(:users)
-  end
+  end    
 
   def get_comment_signal_id(signals_id) do
     query = Ecto.Query.from(c in SignalsComments, where: c.signals_id == ^signals_id)
     comment = Repo.all(query)
     #comment_signal = comment.comment
     
-    
+
     #comment |> Repo.preload(:users)
     IO.inspect(comment)
   end

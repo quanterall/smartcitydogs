@@ -103,9 +103,9 @@ defmodule SmartcitydogsWeb.SignalController do
     sorted_comments = DataSignals.sort_signal_comment_by_id()
     ## IO.inspect kkkkk
     if xaa == nil do
-      render(conn, "show_signal.html", signal: signal, comments: sorted_comments)
+      render(conn, "show_signal.html", signal: signal, comments: sorted_comments, comments_count: comments)
     else
-      render(conn, "show_signal.html", signal: signal, comments: sorted_comments)
+      render(conn, "show_signal.html", signal: signal, comments: sorted_comments, comments_count: comments)
     end
   end
 
