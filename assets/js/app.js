@@ -276,14 +276,10 @@ $(function(){
 
   
     var modal = document.getElementById('myModal-signal');
-    // var like = document.getElementById('submit-like1');
-    // var like_text = document.getElementById('submit-like').text();
   $('#submit-like1').on('click',function(){
-    //   console.log("ala bala")
         var a = $('#submit-like1').text();
         console.log(a);
       if(a == "like"){
-
         $.ajax({
             method: "GET",
             url: "/signals/update_like_count",
@@ -310,7 +306,6 @@ $(function(){
             $("#signal-count").text(data.new_count);
     
         })
-        console.log(a);
         $('#submit-like1').text("like");
       }
   });

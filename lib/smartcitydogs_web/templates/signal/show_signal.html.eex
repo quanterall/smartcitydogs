@@ -149,17 +149,14 @@
             </div>
             <br><br>
             <div class="buttons-for-signal">
-              <a id="submit-like1">
                <% list_of_liked_signals = @conn.assigns.current_user.liked_signals %>
                <%   id = Integer.to_string(@signal.id) %>
-                <%=   if Enum.member?(list_of_liked_signals,id) do %>unlike<% else %>like<%end%>
-                
-                
-                
-              
-              
-              
-              </a><div id="comment" >КОМЕНТИРАЙ</div>
+               <%
+                IO.inspect(list_of_liked_signals)
+                IO.inspect(id)
+               %>
+                <%=   if Enum.member?(list_of_liked_signals,id) do %><a id="submit-like1">unlike</a>
+                <% else %><a id="submit-like1">like</a><%end%><div id="comment" >КОМЕНТИРАЙ</div>
             </div>
             <a id="signal-id"><%= @signal.id %></a>
             <%# class="btn btn-secondary" %>
