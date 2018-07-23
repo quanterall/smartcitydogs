@@ -22,7 +22,7 @@
          </button>
          <br>
 
-          <a class="link-cancel" href="/">ОТКАЗ</a>
+          <a class="close-modal" href="#">ОТКАЗ</a>
         </div>
       </div>
     </div>

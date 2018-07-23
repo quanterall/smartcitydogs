@@ -413,20 +413,7 @@ close1.btn-primary{
 
 }
 
-/* ___________________some from bootstrap fixes___________________*/
-.container{
-  padding: 0px;
-}
-.navbar-dark .navbar-brand{
-  margin-left: 5%;
-}
-.container-fluid{
-  padding-left: 0px;
-  padding-right: 0px;
-}
-div#navbarNavDropdown{
-  margin-right: 5%;
-}
+
 .modal-content-signal{
   padding: 0px;
   transition: 0.5s;
@@ -540,9 +527,7 @@ box-shadow: 0px 0px 45px -4px rgba(0,0,0,0.75);
 .container-new-signal{
   padding: 5%;
 }
-.navbar-dark.top-navbar{
-  box-shadow: 0px 9px 8px -5px rgba(0, 0, 0, 0.75);
-}
+
 .pull-right{
   width: 50%;
   float: right;

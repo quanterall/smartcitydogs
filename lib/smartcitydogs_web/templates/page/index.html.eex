@@ -1,230 +1,100 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="500" height="500" viewBox="0 0 500 500" preserveAspectRatio="none" style="display: none; visibility: hidden; position: absolute; top: -100%; left: -100%;">
-    <defs>
-        <style type="text/css"></style>
-    </defs>
-    <text x="0" y="25" style="font-weight:bold;font-size:25pt;font-family:Arial, Helvetica, Open Sans, sans-serif">500x500</text>
-</svg>
-
-
-
+<div class="home-bg">
 </div>
+<div class="row">
+    <div class="col-lg-12 mt-5">
+        <div class="homepage-slider ">
+            <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <h1 class="">Време е да поемем<br> отговорност за щастието на<br> най-добрите ни
+                            приятели
+                        </h1>
+                    </div>
+                    <div class="carousel-item">
+                        <h1 class="">Време е да поемем<br> отговорност за щастието на<br> най-добрите ни
+                            приятели
+                        </h1>
+                    </div>
+                    <div class="carousel-item">
+                        <h1 class="">Време е да поемем<br> отговорност за щастието на<br> най-добрите ни
+                            приятели
+                        </h1>
+                    </div>
+                </div>
+                <ol class="carousel-indicators">
+                    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                </ol>
+            </div>
+        </div>
+    </div>
 </div>
-<div class="row home-bg">
-
-    <div class="homepage-slider">
-        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-
-            <div class="carousel-inner">
-                <div class="carousel-item active">
-                    <div class="display-4">Време е да поемем отговорност за щастиетo на най-добрите ни приятели
-                    </div>
+<div class="row mt-5 mb-3">
+    <div class="col">
+        <h3 class="text-white">Новини</h3>
+    </div>
+</div>
+<div class="row slick ">
+    <%= for signal <- @signal do %>
+    <div class="col-lg-12">
+        <div class="card slick-card w-100"
+             style="background:  linear-gradient(rgba(0, 0, 0, 0.5),rgba(0, 0, 0, 0.5)),  no-repeat center center url('https://topdoghub.com/wp-content/uploads/2017/12/Best-Tough-Toys-For-Dogs-1140x624.jpg')">
+            <div class="card-body">
+                <div class="slick-card-status">
+                    <%=signal.signals_types_id
+                    |> Smartcitydogs.DataSignals.get_signal_type()
+                    |> Map.get(:name)
+                    %>
                 </div>
-                <div class="carousel-item">
-                    <div class=" display-4">Време е да поемем отговорност за щастиетo на най-добрите ни приятели
-                    </div>
+                <div class="slick-card-small text-gray">
+                    <%=DateTime.to_date(signal.inserted_at) %>
                 </div>
-                <div class="carousel-item">
-                    <div class=" display-4">Време е да поемем отговорност за щастиетo на най-добрите ни приятели
-                    </div>
-
+                <div class="slick-card-title">
+                    <%=signal.title%>
                 </div>
-            </div>
-            <ol class="carousel-indicators">
-                <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-                <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-                <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-            </ol>
+                <div class="slick-card-small text-gray mt-3">
+                    <%=signal.address%>
+                </div>
+                <div class="slick-card-small text-white mt-3">
+                    <i class="fas fa-search"></i> <%=signal.view_count%>
+                </div>
+                <div class="slick-card-small text-white">
+                    <i class="fas fa-arrow-up"></i> <%=signal.support_count%>
+                </div>
+                <div class="slick-card-small text-white">
+                    <i class="far fa-comment fa-flip-horizontal"></i> <%=signal.view_count%>
+                </div>
 
+            </div>
         </div>
-        <!-- Marketing messaging and featurettes
-            ================================================== -->
-        <!-- Wrap the rest of the page in another container to center all the content. -->
-      <h1 class="home_latest_signals">  
-            <center>Последни сигнали</center>
-      </h1>
-<br>
-       <div class="container home_latest_signals_div">
-       <div class="row latest_signals_row">
-          <%= for signal <- @signal do %>
-            <div class="col-lg-3 col-last-signals">
-                    <div class="col-container" style="background-image: url('/<%= get_signals_images(signal.id) %>')">
-                      <div class="col-container-shadow">
-
-                        <label-type class="
-                          <%= if signal.signals_types_id == 1 do %>
-                            label-type-red
-                          <% end %>
-
-                          <%= if signal.signals_types_id == 2 do %>
-                            label-type-orange
-                          <% end %>
-
-                          <%= if signal.signals_types_id == 3 do %>
-                            label-type-yellow
-                          <% end %>
-
-                          <%= if signal.signals_types_id == 4 do %>
-                            label-type-green
-                          <% end %>"><%=signal.signals_types_id
-                        |> Smartcitydogs.DataSignals.get_signal_type()
-                        |> Map.get(:name)
-                        %>
-                      </label-type>
-                        <br />
-
-                        <label-date>
-                        <%=
-                          signal_time = signal.inserted_at
-                          |> DateTime.truncate(:second)
-                          |> DateTime.to_string()
-                          count = String.length(signal_time)
-                          final_time = String.slice(signal_time,0..count-11)
-                          final_time
-                          # IO.inspect(final_time)
-                          %>
-                        <br />
-                        </label-date>
-
-                        <label-title><b><%=signal.title%></b></label-title>
-                        <br />
-
-
-                        <label-adress><%=signal.address%></label-adress>
-                        <br />
-
-                        <div class="icon-scale">
-                          <div class="fa fa-eye">
-                          </div> : <%=signal.view_count%>
-                          <br />
-                        </div>
-                        <div class="icon-scale">
-
-
-                          <div class="fa fa-thumbs-o-up">
-
-                          </div> : <span id="signal-count"><%= signal.support_count %></span>
-                        </div>
-                          <!-- <br /> -->
-                        <div class="icon-scale">
-                          <div class="fa fa-comment-o">
-                          </div> : 0
-                          <br />
-                        </div>
-                        <center>
-
-                        <div class="button-show-hide">
-                          <p class="p-button-change"><a class="btn btn-secondary change-status" id="<%= signal.id %>" role="button">Change status</a></p>
-                        </div></center>
-
-
-                      <!-- The Modal -->
-                        <div id="myModal" class="modal">
-
-                          <!-- Modal content -->
-                          <div class="modal-content">
-                            <span class="close">&times;</span>
-                            <p class="modal-type">Промяна на типът на сигнала:</p>
-                            <br />
-                            <select class="select-type">
-                              <option value="1">Нов</option>
-                              <option value="2">Приет</option>
-                              <option value="3">Изпратен</option>
-                              <option value="4">Осиновено</option>
-                            </select>
-                            <br />
-                            <a class="btn btn-secondary" id="type-chosen" role="button">Промени</a>
-
-                          </div>
-
-                        </div>
-
-                        <center>
-                        <div class="button-show-hide">
-                          <p class="p-button-view"><a class="btn btn-secondary" href="signals/<%=signal.id%>" role="button">View more</a>
-                      </div></center>
-                      </div>
-
-                    </div>
-                  </div>
-            <%end%>
-          </div><!-- /.row -->
+    </div>
+    <%= end %>
+</div>
+<div class="row mt-5 mb-3">
+    <div class="col">
+        <h3 class="text-green">Новини</h3>
+    </div>
+</div>
+<div class="row">
+    <%= for news <- @news do %>
+    <div class="col-lg-3">
+        <div class="card">
+            <img class="card-img-top"
+                 src="https://topdoghub.com/wp-content/uploads/2017/12/Best-Tough-Toys-For-Dogs-1140x624.jpg"
+                 alt="Card image cap">
+            <div class="card-body">
+                <p class="text-dark">
+                    <small>
+                        <%=NaiveDateTime.to_date( news.date) %>
+                    </small>
+                </p>
+                <h5 class="card-title">Card title</h5>
+                <p class="card-text"><%= news.short_content%></p>
+                <%= link "Виж повече »", to: news_path(@conn, :show, news), class: "btn btn-default float-right
+                text-green" %>
+            </div>
         </div>
-
-          <!-- START THE FEATURETTES -->
-          <hr class="featurette-divider">
-          <div class="container">
-              <header>
-                 <h1 class="featurette-heading"><center>News:</center></h1>
-                 <br>
-              </header>
-              <nav><center>
-          <div class="row">
-          <%= for news <- @news do %>
-            <div class="col-lg-4">
-              <img class="rounded-circle" src="<%=  news.image_url %>" alt="Generic placeholder image" width="140" height="140">
-              <h2><%= news.title%></h2>
-              <ul>               
-                <li>
-                  short content <%= news.short_content%>
-                </li>
-                <li>
-                  Date: <%= news.date %>
-                </li>
-              </ul>
-              <p>
-              <%= link "View more »", to: news_path(@conn, :show, news), class: "btn btn-secondary" %>
-            
-            </div>
-            <%end%>
-          </div><!-- /.row -->
-              </center></nav>
-            </div>
-            <hr class="featurette-divider">
-            <div class="container marketing">
-              <h1 class="featurette-heading"><center>Latest registered dogs:</center></h1><br>
-            <div class="row">
-          <%= for animal <- @animals do %>
-            <div class="col-lg-4">
-            
-             <img class="rounded-circle" src="<%= SmartcitydogsWeb.AnimalView.get_image_animals_id(animal.id) %>" alt="Generic placeholder image" width="140" height="140">             
-
-              <h2>Heading</h2>
-              <ul>
-                <li>
-                  Sex: <%= animal.sex%>
-                </li>
-                <li>
-                  Number of chip: <%= animal.chip_number%>
-                </li>
-                <li>
-                  Date register: <%= animal.inserted_at %>
-                </li>
-                <li>
-                  Last Location: <%= animal.address%>
-                </li>
-                <li>
-                  Status:
-                </li>
-                <li>
-                  Signals:
-                </li>
-              </ul>
-              <p>
-              <%= link "View more »", to: animal_path(@conn, :show, animal), class: "btn btn-secondary" %>
-              <a class="btn btn-secondary" href="#" role="button">View map »</a></p>
-            
-            </div>
-            <%end%>
-          </div><!-- /.row -->
-         
-            <!-- /END THE FEATURETTES -->
-        </div>
-        <!-- /.container -->
-
-        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-            crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-            crossorigin="anonymous"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-            crossorigin="anonymous"></script>
-        
+    </div>
+    <%= end %>
+</div>
