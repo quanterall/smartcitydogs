@@ -62,16 +62,15 @@ defmodule Smartcitydogs.DataSignals do
 
   def sort_signal_comment_by_id() do
     query = Ecto.Query.from(c in SignalsComments, order_by: [desc: c.inserted_at])
-    Repo.all(query)  |> Repo.preload(:users)
+    Repo.all(query) |> Repo.preload(:users)
   end
 
   def get_all_followed_signals(user_id) do
-    user = user_id |> DataUsers.get_user! |> Map.get(:liked_signals)
-    IO.inspect user
-  ##  query = Ecto.Query.from(c in Signals, order_by: [c.id])
-   ## Repo.all(query)
+    user = user_id |> DataUsers.get_user!() |> Map.get(:liked_signals)
+    IO.inspect(user)
+    ##  query = Ecto.Query.from(c in Signals, order_by: [c.id])
+    ## Repo.all(query)
   end
-
 
   # Signal iamges
 
@@ -140,15 +139,16 @@ defmodule Smartcitydogs.DataSignals do
 
   def list_signal_comment() do
     Repo.all(SignalsComments) |> Repo.preload(:users)
-  end
-
-
+  end    
 
   def get_comment_signal_id(signals_id) do
     query = Ecto.Query.from(c in SignalsComments, where: c.signals_id == ^signals_id)
     comment = Repo.all(query)
-    comment |> Repo.preload(:users)
-    # IO.inspect(comment)
+    #comment_signal = comment.comment
+    
+
+    #comment |> Repo.preload(:users)
+    IO.inspect(comment)
   end
 
   def create_signal_comment(args \\ %{}) do
@@ -195,8 +195,7 @@ defmodule Smartcitydogs.DataSignals do
     |> Repo.delete()
   end
 
-
-   # Signals likes
+  # Signals likes
 
   def get_signal_like(id) do
     Repo.get!(SignalsLikes, id)
@@ -222,6 +221,4 @@ defmodule Smartcitydogs.DataSignals do
     get_signal_like(id)
     |> Repo.delete()
   end
-
-
 end

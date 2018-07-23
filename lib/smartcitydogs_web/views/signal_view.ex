@@ -6,10 +6,12 @@ defmodule SmartcitydogsWeb.SignalView do
 
     if list != [] do
       [head | tail] = list
-   ##   IO.inspect(head)
+      ##   IO.inspect(head)
       head.url
     end
   end
+
+ 
 
   def get_all_signals(user_id) do
     list = Smartcitydogs.DataSignals.get_user_signal(user_id)

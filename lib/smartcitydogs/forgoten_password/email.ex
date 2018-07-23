@@ -11,20 +11,19 @@ defmodule Smartcitydogs.Email do
     )
   end
 
-
   def send_contact_email(user, contact_params) do
     text = contact_params.text
+
     new_email()
     |> to("smartcitydogs@gmail.com")
     |> from(user.email)
     |> subject(contact_params.topic)
     |> text_body(
-      "Text is #{text} \n\n\n\n Sent from #{user.first_name} #{
-        user.last_name
-      }, phone: #{user.phone}"
+      "Text is #{text} \n\n\n\n Sent from #{user.first_name} #{user.last_name}, phone: #{
+        user.phone
+      }"
     )
   end
-
 
   def send_unauth_contact_email(topic, text, user_data) do
     new_email()

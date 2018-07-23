@@ -52,7 +52,7 @@ defmodule SmartcitydogsWeb.UserControllerAPI do
   end
 
   def sign_in(conn, %{"email" => email, "password" => password}) do
-    case Smartcitydogs.Auth.login_by_email_and_pass(conn,email, password) do
+    case Smartcitydogs.Auth.login_by_email_and_pass(conn, email, password) do
       {:ok, conn} ->
         user =  Guardian.Plug.current_resource(conn)
        if user.users_types_id == 4 || user.users_types_id == 5 do

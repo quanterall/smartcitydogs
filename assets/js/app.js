@@ -39,8 +39,67 @@ $("#like").click(function () {
     })
 });
 
+$('.close2').click(function() {
+    $('#show_map').hide();
+    $('.close2').hide();
 
-$("#comment").click(function () {
+})
+$('#show-map').click(function() {
+    $('#show_map').show();
+    $('.close2').show();
+    // $('body').css("p","");
+    
+    
+})
+
+$('#submit-like1').on('click',function(){
+    var a = $('#submit-like1').text();
+    console.log(a);
+  if(a == "ПОСЛЕДВАЙ"){
+    $.ajax({
+        method: "GET",
+        url: "/signals/update_like_count",
+        data: {
+            "show-count": $("#signal-count").text(),
+            "show-id": $("#signal-id").text()
+        }
+    }).then(function(data) {
+        $("#signal-count").text(data.new_count);
+
+    })
+
+    $('#submit-like1').text("ОТСЛЕДВАЙ");
+  }
+ else{
+    $.ajax({
+        method: "GET",
+        url: "/signals/remove_like",
+        data: {
+            "show-count": $("#signal-count").text(),
+            "show-id": $("#signal-id").text()
+        }
+    }).then(function(data) {
+        $("#signal-count").text(data.new_count);
+
+    })
+    $('#submit-like1').text("ПОСЛЕДВАЙ");
+  }
+});
+
+$('#comment').click(function() {
+    
+    $('#comment').hide();
+    $('.comment_section').show();
+});
+
+$('.close_comment').click(function() {
+    
+    $('#comment').show();
+    $('.comment_section').hide();
+});
+
+
+$(".submit_comment").click(function() {
 
     $.ajax({
         method: "GET",
@@ -49,11 +108,10 @@ $("#comment").click(function () {
             "show-comment": $("#comment-id").val(),
             "show-id": $("#signal-id").text()
         }
-    }).then(function (data) {
+    }).then(function(data) {
         $("#comment-id").val("");
     })
 });
-
 
 
 window.login = function () {

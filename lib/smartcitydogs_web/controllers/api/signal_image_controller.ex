@@ -13,7 +13,7 @@ defmodule SmartcitydogsWeb.SignalImageControllerAPI do
 
   def create(conn, %{"signal_image" => signal_image_params}) do
     with {:ok, %SignalImages{} = signal_image} <-
-      DataSignals.create_signal_images(signal_image_params) do
+           DataSignals.create_signal_images(signal_image_params) do
       conn
       |> put_status(:created)
       |> put_resp_header("location", signal_image_controller_api_path(conn, :show, signal_image))
@@ -30,13 +30,12 @@ defmodule SmartcitydogsWeb.SignalImageControllerAPI do
     signal_image = DataSignals.get_signal_images(id)
 
     with {:ok, %SignalImages{} = signal_image} <-
-      DataSignals.update_signal_images(signal_image, signal_image_params) do
+           DataSignals.update_signal_images(signal_image, signal_image_params) do
       render(conn, "show.json", signal_image: signal_image)
     end
   end
 
   def delete(conn, %{"id" => id}) do
-
     with {:ok, %SignalImages{}} <- DataSignals.delete_signal_images(id) do
       send_resp(conn, :no_content, "")
     end
