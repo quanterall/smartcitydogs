@@ -1,13 +1,8 @@
-<html>
-<head>
-  <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
-</head>
 
-<body>
     <div class="container-new-signal">
     <center><label-signal>Подаване на сигнал към зоо полиция</label-signal></center>
 
-    <%= form_for @changeset, @action,[multipart: true, class: "form-elixir"], fn f -> %>
+    <%= form_for @conn, signal_path(@conn, :create),[multipart: true, class: "form-elixir"], fn f -> %>
     <label-1>1.Изберете категория на сигнала</label-1>
       <div class="form-group">
         <%= select(f , :signals_categories_id, [
@@ -53,6 +48,3 @@
     </div>
       <% end %>
     </div>
-
-</body>
-</html>

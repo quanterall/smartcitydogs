@@ -13,6 +13,7 @@
 // to also remove its path from "config.paths.watched".
 import "phoenix_html";
 import $ from "jquery";
+import "slick-carousel";
 // Import local files
 //
 // Local files can be imported directly using relative
@@ -23,9 +24,7 @@ import $ from "jquery";
 ////////////ORIGINAL//////////////
 
 
-
-
-$("#like").click(function() {
+$("#like").click(function () {
 
     $.ajax({
         method: "GET",
@@ -34,14 +33,14 @@ $("#like").click(function() {
             "show-count": $("#signal-count").text(),
             "show-id": $("#signal-id").text()
         }
-    }).then(function(data) {
+    }).then(function (data) {
         $("#signal-count").text(data.new_count);
 
     })
 });
 
 
-$("#comment").click(function() {
+$("#comment").click(function () {
 
     $.ajax({
         method: "GET",
@@ -50,348 +49,99 @@ $("#comment").click(function() {
             "show-comment": $("#comment-id").val(),
             "show-id": $("#signal-id").text()
         }
-    }).then(function(data) {
+    }).then(function (data) {
         $("#comment-id").val("");
     })
 });
 
-// ############# Load Page Open Last Signal Filter ###############
-
-window.onload = function() {    
-    $('.Signals').html('<ul style="list-style-type:none;">  <li class="title_filter"> Филтрирай по категория </li> ' +
-    '<li class="ul_filter"> <input  id="sig_category" name="sig_category" type="checkbox" value = 1 > Бездомно куче </li>'+  
-    '<li class="ul_filter"> <input  id="sig_category" name="sig_category" type="checkbox" value = 2 > Избягал домашен любимец </li>'+
-    '<li class="ul_filter"> <input  id="sig_category" name="sig_category" type="checkbox" value = 3 > Малтретиране на животно </li>'+
-    ' </ul> <ul style="list-style-type:none;">  <li class="title_filter"> Филтрирай спрямо Статус </li> ' +
-    '<li class="ul_filter"> <input  id="sig_status" name="sig_status" type="checkbox" value = 1 > Нов </li>'+  
-    '<li class="ul_filter"> <input  id="sig_status" name="sig_status" type="checkbox" value = 2 > Приет </li> '+
-    '<li class="ul_filter"> <input  id="sig_status" name="sig_status" type="checkbox" value = 3 > Изпратен </li>'+
-    '<li class="ul_filter"> <input  id="sig_status" name="sig_status" type="checkbox" value = 4 > Приключен </li>'+
-    ' </ul>');
-    $('.Signals1').html('');
-    $('.Signals2').html('');
-    $('.Signals3').html('');
-
-    
-    $('body').css("position","auto");
-    $('main').css("position","initial");
-        
-  
-    $('.form1').load('signals/new');
-    $('.form2').load('users/new');
-    $('.form3').load('sessions/new');
-    $('.form4').load('forgoten_password/new');
-    $('.form5').load('forgoten_password/new');
-    $('.form6').load('forgoten_password/new');
 
 
-
-    $('.modal-signal').hide();
-    $('.form1').hide();
-    $('.form2').hide();
-    $('.form3').hide();
-    $('.form4').hide();
-    $('.form5').hide();
-    $('.form6').hide();
-
-
-    $('input[type="checkbox"]').click(function() {
-        var obj = {};
-        $('input[type=checkbox]:checked').each(function() {
-            if (!obj.hasOwnProperty(this.name)) 
-                obj[this.name] = [this.value];
-            else 
-                obj[this.name].push(this.value);
-        });
-       console.log(obj)
-        $.ajax({
-            method: "GET",
-            url: "signals/filter_index",
-            data: {
-                obj,
-            },
-            success: function(msg){
-                $('.container-signals').html(msg);
+window.login = function () {
+    var params = {email: $("#login-email").val(), password: $("#login-password").val()};
+    $.post("/api/users/sign_in", params)
+        .done(function (data) {
+            if ((data.users_types_id == 4) || (data.users_types_id == 5)) {
+                window.location.href = "index_home_minicipality";
             }
-        });
-    });
-
-
-}
-
-// ########### /Load Page #########################
-
-// ################ Filter Menu Options #####################
-$(function() {
-
-  //-----------------all signals----------------
-  $('#all-signals').on('click', function() {
-    $('.container-signals').load('signals/filter_index');
-    $('.Signals').html('<ul style="list-style-type:none;">  <li class="title_filter"> Филтрирай по категория </li> ' +
-    '<li class="ul_filter"> <input  id="sig_category" name="sig_category" type="checkbox" value = 1 > Бездомно куче </li>'+  
-    '<li class="ul_filter"> <input  id="sig_category" name="sig_category" type="checkbox" value = 2 > Избягал домашен любимец </li>'+
-    '<li class="ul_filter"> <input  id="sig_category" name="sig_category" type="checkbox" value = 3 > Малтретиране на животно </li>'+
-    ' </ul> <ul style="list-style-type:none;">  <li class="title_filter"> Филтрирай спрямо Статус </li> ' +
-    '<li class="ul_filter"> <input  id="sig_status" name="sig_status" type="checkbox" value = 1 > Нов </li>'+  
-    '<li class="ul_filter"> <input  id="sig_status" name="sig_status" type="checkbox" value = 2 > Приет </li> '+
-    '<li class="ul_filter"> <input  id="sig_status" name="sig_status" type="checkbox" value = 3 > Изпратен </li>'+
-    '<li class="ul_filter"> <input  id="sig_status" name="sig_status" type="checkbox" value = 4 > Приключен </li>'+
-    ' </ul>');
-    $('.Signals1').html('');
-    $('.Signals2').html('');
-    $('.Signals3').html('');
-    $('.form1').load('signals/new');
-    $('.form2').load('users/new');
-    $('.form3').load('sessions/new');
-    $('.form4').load('forgoten_password/new');
-
-
-
-    $('.modal-signal').hide();
-    $('.form1').hide();
-    $('.form2').hide();
-    $('.form3').hide();
-    $('.form4').hide();
-    $('.form5').hide();
-    $('.form6').hide();
-
-    $('input[type="checkbox"]').click(function() {
-        var obj = {};
-        $('input[type=checkbox]:checked').each(function() {
-            if (!obj.hasOwnProperty(this.name)) 
-                obj[this.name] = [this.value];
-            else 
-                obj[this.name].push(this.value);
-        });
-       console.log(obj)
-        $.ajax({
-            method: "GET",
-            url: "signals/filter_index",
-            data: {
-                obj,
-            },
-            success: function(msg){
-                $('.container-signals').html(msg);
+            else {
+                location.reload();
             }
-        });
-    });
-
-
-  });
-
-  // ------------------Registered dogs----------------
-  $('#all-registered-dogs').on('click', function() {
-    $('.container-signals').load('animals');
-    $('.Signals').html('');
-    $('.Signals1').html('<ul style="list-style-type:none;">  <li class="title_filter"> Филтрирай спрямо Статус </li> ' +
-    '<li class="ul_filter"> <input  id="freed_animals" name="check[animal_status_chBox]" type="checkbox" value = 1 > На свобода </li>'+  
-    '<li class="ul_filter"> <input  id="shelter_animals" name="check[animal_status_chBox]" type="checkbox"  value = 2 > В приют </li>'+
-    '<li class="ul_filter"> <input  id="adopted_animals" name="check[animal_status_chBox]" type="checkbox" value = 3 > Осиновено </li> </ul> ');
-    $('.Signals2').html('');
-    $('.Signals3').html('');
-
-
-    $('input[type="checkbox"]').click(function() {
-        var obj = {};
-        
-        $('input[type=checkbox]:checked').each(function() {
-            if (!obj.hasOwnProperty(this.name)) 
-                obj[this.name] = [this.value];
-            else 
-                obj[this.name].push(this.value);
-        });
-       
-        $.ajax({
-            method: "GET",
-            url: "signals/filter_animals/",
-            data: {
-                 obj,
-            },
-            success: function(msg){
-                $('.container-signals').html(msg);
-            }
-        });
-    });
-    
-
-  });
-
-  //-----------------Adopted dogs-----------------
-   $('#all-adopted-dogs').on('click', function() {
-    $('.container-signals').load('signals/adopted_animals');
-    $('.Signals').html('');
-    $('.Signals1').html('');
-
-   });
-
-  // -------------Dogs under shelter----------------
-   $('#all-dogs-shelter').on('click', function() {
-     $('.container-signals').load('signals/shelter_animals');
-     $('.Signals').html('');
-     $('.Signals1').html('');
-   });
-
-   
-
-});
-// ################ /Filter Menu Options #####################
-
-// ############# Filter Checkbox ##############
-$(document).ready(function(){
-  $('input[type="checkbox"]').click(function(){
-      if($(this).is(":checked")){
-
-      }
-      else if($(this).is(":not(:checked)")){
-
-      }
-  });
-});
-
-// ################# / Filter Checkbox #############
-
-$(function(){
-
-  
-    var modal = document.getElementById('myModal-signal');
-    // var span = document.getElementsByClassName("close1")[0];
-  
-
-  $('#send-signal').on('click', function(){
-    $('main').css("position","fixed");
-    $('main').css("width","100%");
-    $('.form2').hide();
-    $('.form3').hide();
-    $('.form4').hide();
-    $('.form1').show();
-    modal.style.display = "block";
-  });
-
-  $('#nav-register').on('click', function(){
-    $('main').css("position","fixed");
-    $('main').css("width","100%");
-    
-    $('.form1').hide();
-    $('.form3').hide();
-    $('.form4').hide();
-    $('.form2').show();
-
-
-    modal.style.display = "block";
-  });
-
-  $('#nav-sign-in').on('click', function(){
-    $('main').css("position","fixed");
-    $('main').css("width","100%");
-    $('.form2').hide();
-    $('.form1').hide();
-    $('.form4').hide();
-    $('.form3').show();
-
-
-    modal.style.display = "block";
-  });
-
-  $('#forgotten-password').on('click', function(){
-    $('main').css("position","fixed");
-    $('main').css("width","100%");
-    $('.form2').hide();
-    $('.form1').hide();
-    $('.form3').hide();
-    $('.form4').show();
-
-    modal.style.display = "block";
-  });
-  
-  $('#signals_all_nav_no_user').on('click', function(){
-    $('main').css("position","fixed");
-    $('main').css("width","100%");
-    $('.form2').hide();
-    $('.form1').hide();
-    $('.form4').hide();
-    $('.form3').show();
-
-    modal.style.display = "block";
-  });
-
-  $('#send-signal-no-user').on('click', function(){
-    $('main').css("position","fixed");
-    $('main').css("width","100%");
-    $('.form2').hide();
-    $('.form1').hide();
-    $('.form4').hide();
-    $('.form3').show();
-
-    modal.style.display = "block";
-  });
-
-  $('.close1').on('click', function() {
-    //   modal.style.display = "none";
-    this.hide();
-
-      $('main').css("position","initial");
-
-  });
-
-
-});
-
-$(function(){
-
-  var modal = document.getElementById('myModal');
-  var span = document.getElementsByClassName("close")[0];
-  var id;
-  var SelectedType;
-
-  $('.change-status').on('click',function() {
-    id = $(this).attr('id');
-    console.log("Buttton: "+id);
-    modal.style.display = "block";
-
-  });
-  span.onclick = function() {
-      modal.style.display = "none";
-  }
-  window.onclick = function(event) {
-    if (event.target == modal) {
-        modal.style.display = "none";
-    }
-  }
-  $('#type-chosen').on('click',function(){
-
-    SelectedType = $(".select-type option:selected").val()
-    console.log(SelectedType);
-    console.log("Buttton1: "+id);
-
-    $.ajax({
-        method: "GET",
-        url: "/signals/update_type",
-        data: {
-            "id": id,
-            "signals_types_id": SelectedType
-        }
-     })
-
-
-
-     setTimeout(function() {
-        //  location.reload()
-         window.location.href = '/signals';
-     }, 1000);
-
-
-  });
-});
-
-
-window.login = function() {
-var params = { email: $("#login-email").val(), password: $("#login-password").val() };
-    $.post( "/api/users/sign_in",params)
-        .done(function() {
-            location.reload();
         })
-        .fail(function(text) {
-           $("#login-form-errors").text("Невалиден Имейл или Парола!!!!");
+        .fail(function (text) {
+            $("#login-form-errors").text("Невалиден Имейл или Парола!!!!");
         });
 
 };
+
+
+$('.slick').slick({
+    slidesToShow: 4,
+    slidesToScroll: 1,
+    prevArrow: `<button class="slick-prev bg-gray border-0"><i class="fas fa-chevron-left"></i></button>`,
+    nextArrow: `<button class="slick-next bg-green border-0 text-white"><i class="fas fa-chevron-right"></i></button>`,
+    responsive: [
+        {
+            breakpoint: 1200,
+            settings: {
+                slidesToShow: 4,
+                slidesToScroll: 1,
+                infinite: true,
+            }
+        },
+        {
+            breakpoint: 1024,
+            settings: {
+                slidesToShow: 3,
+                slidesToScroll: 1,
+                infinite: true,
+            }
+        },
+        {
+            breakpoint: 800,
+            settings: {
+                slidesToShow: 2,
+                slidesToScroll: 2,
+                infinite: true,
+            }
+        },
+        {
+            breakpoint: 480,
+            settings: {
+                slidesToShow: 1,
+                slidesToScroll: 1,
+                infinite: true,
+            }
+        }
+    ]
+});
+
+window.showModalForm = function (formId) {
+    event.preventDefault();
+    if ($("#" + formId).is(":visible")) {
+        $("#modal-forms-container" ).hide();
+    } else {
+        $(".modal-form").hide();
+        $("#modal-forms-container" ).show();
+        $("#" + formId).show();
+
+    }
+};
+$('.close-modal').on('click', function () {
+    event.preventDefault();
+    $("#modal-forms-container" ).hide();
+});
+
+$(window).scroll(function(e){
+    if ( window.location.pathname == '/' ) {
+        if ($(document).scrollTop() == 0) {
+            $(".top-navbar").addClass("navbar-home");
+            $("#top-navbar-container").removeClass("bg-white");
+        } else {
+            $(".top-navbar").removeClass("navbar-home");
+            $("#top-navbar-container").addClass("bg-white");
+        }
+    }
+});
+$('.navbar-collapse').on('show.bs.collapse', function() {
+    $(".top-navbar").removeClass("navbar-home");
+});

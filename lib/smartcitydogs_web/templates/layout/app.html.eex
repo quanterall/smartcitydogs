@@ -1,178 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-
     <title>SmartCityDogs!</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
-    <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
-
-    <div class="container-fluid">
-	<div class="row "></div>
-	<div class="container">
-		<div class="row">
-		<nav class="<%= if Path.join(["/" | @conn.path_info]) == "/" do %>
-        navbar navbar-expand-lg navbar-dark bg-transperent top-navbar w-100
-      <% else %>
-       navbar navbar-expand-lg navbar-dark green bg-transperent top-navbar w-100
-     <% end %>">
-  <a class="navbar-brand bg-green pl-3 pr-3" href="#">Logo</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarNavDropdown">
-    <ul class="<%= if Path.join(["/" | @conn.path_info]) == "/" do %>
-        navbar-nav mr-auto
-      <% else %>
-         navbar-nav mr-auto
-      <% end %> ">
-      <li class="nav-item ">
-        <a class="<%= if Path.join(["/" | @conn.path_info]) == "/" do %>
-           nav-link
-        <% else %>
-         nav-link black
-         <% end %>   " href="/">Начало</a>
-      </li>
-      <li class="nav-item">
-
-        <a class="<%= if Path.join(["/" | @conn.path_info]) == "/" do %>
-           nav-link
-        <% else %>
-         nav-link black
-      <% end %>" href="/fortheproject">За проекта</a>
-      </li>
-      <li class="nav-item">
-        <a class="<%= if Path.join(["/" | @conn.path_info]) == "/" do %>
-        nav-link
-      <% else %>
-         nav-link black
-      <% end %>"  <%= if @current_user do %> id="signals_all_nav"
-                                         href="/index_home_minicipality"
-                                         <% else %>
-                                         
-                                          href="/signals"
-                                          id="signals_all_nav"
-                                         <% end %>
-                                         > Подадени сигнали</a>
-      </li>
-       <li class="nav-item">
-        <a class="<%= if Path.join(["/" | @conn.path_info]) == "/" do %>
-        nav-link
-      <% else %>
-         nav-link black
-      <% end %>" id="animals_all_nav" <%= if @current_user do %> 
-                                         href="/animals"
-                                         <% else %>
-                                          href="/animals/filter_index"
-                                         <% end %>
-                                         > Регистрирани кучета</a>
-      </li>
-      <li class="nav-item">
-        <a class="<%= if Path.join(["/" | @conn.path_info]) == "/" do %>
-        nav-link
-      <% else %>
-         nav-link black
-      <% end %>" href="/news">Новини</a>
-      </li>
-      <li class="nav-item">
-        <a class="<%= if Path.join(["/" | @conn.path_info]) == "/" do %>
-        nav-link
-      <% else %>
-         nav-link black
-      <% end %>" href="/help">Помощ</a>
-      </li>
-      <li class="nav-item">
-        <a class="<%= if Path.join(["/" | @conn.path_info]) == "/" do %>
-        nav-link
-      <% else %>
-         nav-link black
-      <% end %>" href="/contact/new">Контакти</a>
-      </li>
-    </ul>
-
-    <ul class="navbar-nav">
-
-      <%= if @current_user do %>
-      <li class="nav-item ">
-        <a class="<%= if Path.join(["/" | @conn.path_info]) == "/" do %>
-        nav-link user-menu
-      <% else %>
-         nav-link user-menu black
-      <% end %>" href="/users/<%= @current_user.id%>">
-        	Здравей, <b><%= @current_user.first_name%></b> <i class="fa fa-user"></i>
-
-        </a>
-      </li>
-      <li class="nav-item">
-        <%= if Path.join(["/" | @conn.path_info]) == "/" do %>
-          <%= link "Sign out", to: session_path(@conn, :delete, @current_user), method: "delete", class: "nav-link" %>
-         <% else %>
-          <%= link "Sign out", to: session_path(@conn, :delete, @current_user), method: "delete", class: "nav-link black" %>
-      <% end %>
-      </li>
-      <% else %>
-      <li class="nav-item ">
-         <%= if Path.join(["/" | @conn.path_info]) == "/" do %>
-          <a class="nav-link" id="nav-register" href="#" >Регистрация</a>
-        <% else %>
-          <a class="nav-link black" id="nav-register" href="#" >Регистрация</a>
-        <% end %>
-      </li>
-      <li class="nav-item ">
-        <%= if Path.join(["/" | @conn.path_info]) == "/" do %>
-          <a class="nav-link" id="nav-sign-in" href="#" >Вход</a>
-        <% else %>
-          <a class="nav-link black" id="nav-sign-in" href="#" >Вход</a>
-        <% end %>
-      </li>
-      <% end %>
-
-      <li class="nav-item bg-white ">
-        <a class="nav-link text-green new-signal-btn"  <%= if @current_user do %> 
-                                         href="#"
-                                         id="send-signal"
-                                         <% else %>
-                                          href="#"
-                                          id="send-signal-no-user"
-                                         <% end %> >ПОДАЙ СИГНАЛ</a>
-      </li>
-    </ul>
-  </div>
-</nav>
-</div>
-</div>
-<% IO.inspect(@conn) %>
-
-<div id="myModal-signal" class="modal-signal">
-
-  <div class="modal-content-signal form1">
-    
-  </div>
-  <div class="modal-content-signal form2">
-    
-  </div>
-  <div class="modal-content-signal form3">
-    
-  </div>
-  <div class="modal-content-signal form4">
-    
-  </div>
- 
-
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css"
+          integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+    <link rel="stylesheet" href='<%= static_path(@conn, "/css/app.css") %>'>
+</head>
+<body>
+<div class="container-fluid">
+    <%= render("navbar.html", %{conn: @conn,current_user: @current_user}) %>
+    <div class="container">
+        <main role="main" class="content-container">
+            <%= render @view_module, @view_template, assigns %>
+        </main>
+    </div>
 </div>
 
-
-      <main role="main">
-      <div class="container mt-0">
-<%= render @view_module, @view_template, assigns %>
-
-      </main>
-
-      <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
-  </body>
+<script src='<%= static_path(@conn, "/js/app.js") %>'></script>
+</body>
 </html>

@@ -49,8 +49,10 @@ defmodule SmartcitydogsWeb.SessionController do
   # end
 
   def create(conn, %{"session" => %{"email" => email, "password" => password}}) do
+    IO.puts "BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB"
     case Smartcitydogs.Auth.login_by_email_and_pass(conn, email, password) do
       {:ok, conn} ->
+        
         conn
         |> put_flash(:info, "You’re now signed in!")
         |> redirect(to: page_path(conn, :index))
