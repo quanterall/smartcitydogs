@@ -9,23 +9,7 @@
   </head>
 <body>
 
-  <%=
-  IO.puts"_______________________________________________________________________________" 
-  IO.inspect(@conn.assigns.current_user.liked_signals) %>
-  <%= IO.inspect(Integer.to_string(@signal.id)) 
-  IO.puts"_______________________________________________________________________________"%>
-  <%= 
-    list_of_liked_signals = @conn.assigns.current_user.liked_signals
-    id = Integer.to_string(@signal.id)
-    if Enum.member?(list_of_liked_signals,id) do
-      IO.puts "TRUE"
-    else
-      IO.puts "FALSE"
-
-    end
-  
-  
-  %>
+ 
 
   
   <div id="cor-a"><%= @signal.address_F %></div>
