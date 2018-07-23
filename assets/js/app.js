@@ -173,7 +173,7 @@ $('.slick').slick({
     ]
 });
 
-window.showModalForm = function (formId) {
+window.showModalForm = function (event, formId) {
     event.preventDefault();
     if ($("#" + formId).is(":visible")) {
         $("#modal-forms-container" ).hide();
@@ -184,7 +184,7 @@ window.showModalForm = function (formId) {
 
     }
 };
-$('.close-modal').on('click', function () {
+$('.close-modal').on('click', function (event) {
     event.preventDefault();
     $("#modal-forms-container" ).hide();
 });

@@ -6,7 +6,7 @@ defmodule SmartcitydogsWeb.UserController do
   alias Smartcitydogs.Repo
 
   plug(:put_layout, false when action in [:new])
-  plug(:scrub_params, "user" when action in [:create])
+  #plug(:scrub_params, "user" when action in [:create])
 
   def index(conn, _params) do
     users = DataUsers.list_users()
@@ -26,7 +26,7 @@ defmodule SmartcitydogsWeb.UserController do
     render(conn, "new.html", changeset: changeset)
   end
 
-  def create(conn, %{"user" => user_params}) do
+  def create(conn,  user_params) do
     if user_params["checked"] != "true" do
       changeset = %User{} |> User.registration_changeset(user_params)
 

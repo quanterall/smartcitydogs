@@ -43,10 +43,10 @@ defmodule SmartcitydogsWeb.SignalController do
     end
   end
 
-  def create(conn, %{"signals" => signal_params}) do
-    IO.puts"_____________________SIGNAL_PARAMS_____________________"
-    IO.inspect(conn)
-    IO.puts"_____________________SIGNAL_PARAMS_____________________"
+  def create(conn, signal_params) do
+    # IO.puts"_____________________SIGNAL_PARAMS_____________________"
+    # IO.inspect(conn)
+    # IO.puts"_____________________SIGNAL_PARAMS_____________________"
     a = conn.assigns.current_user.id
     logged_user_type_id = conn.assigns.current_user.users_types.id
 
@@ -61,7 +61,7 @@ defmodule SmartcitydogsWeb.SignalController do
       case DataSignals.create_signal(signal_params) do
         {:ok, signal} ->
           upload = Map.get(conn, :params)
-          upload = Map.get(upload, "signals")
+
           upload = Map.get(upload, "url")
 
           for n <- upload do
