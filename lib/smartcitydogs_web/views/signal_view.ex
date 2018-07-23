@@ -11,6 +11,8 @@ defmodule SmartcitydogsWeb.SignalView do
     end
   end
 
+ 
+
   def get_all_signals(user_id) do
     list = Smartcitydogs.DataSignals.get_user_signal(user_id)
     list

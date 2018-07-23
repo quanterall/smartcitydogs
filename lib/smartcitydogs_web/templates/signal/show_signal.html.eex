@@ -184,20 +184,27 @@
             <br>
             
             <hr>
+            <% 
+           # IO.puts "__________________________COMMENTS___________________________"
+           # IO.inspect(@comments) 
+           # IO.puts "__________________________COMMENTS___________________________"
+            %>
             <%= for comment <- @comments do %>
-            <p class="username-comments-signal"><%= comment.users.username %></p><p class="date-comments-signal">
-             <%=
-                      signal_time = @signal.inserted_at
-                              |> DateTime.truncate(:second)
-                              |> DateTime.to_string()
-                              count = String.length(signal_time)
-                              final_time = String.slice(signal_time,0..count-11)
-                              final_time
-                      %>
-                      </p>
-                      <br><br>
-              <p class="username-comment-on-signal"><%= comment.comment %></p> 
-            <hr>
+            <%= if @signal.id == comment.signals_id do %>
+                <p class="username-comments-signal"><%= comment.users.username %></p><p class="date-comments-signal">
+                <%=
+                          signal_time = comment.inserted_at
+                                  |> DateTime.truncate(:second)
+                                  |> DateTime.to_string()
+                                  count = String.length(signal_time)
+                                  final_time = String.slice(signal_time,0..count-11)
+                                  final_time
+                          %>
+                          </p>
+                          <br><br>
+                  <p class="username-comment-on-signal"><%= comment.comment #Smartcitydogs.DataSignals.get_comment_signal_id(@signal.id)  %></p> 
+                <hr>
+                <% end %>
             <% end %>
     </div>
   </div>
