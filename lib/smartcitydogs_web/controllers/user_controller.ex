@@ -36,6 +36,7 @@ defmodule SmartcitydogsWeb.UserController do
       render(conn, "new.html", changeset: changeset)
     else
       changeset = %User{} |> User.registration_changeset(user_params)
+
       case Repo.insert(changeset) do
         {:ok, user} ->
           conn

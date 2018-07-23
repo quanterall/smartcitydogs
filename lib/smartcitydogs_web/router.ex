@@ -82,8 +82,7 @@ defmodule SmartcitydogsWeb.Router do
     get("/signals/filter_index", SignalController, :filter_index)
 
     get("/animals/filter_index", AnimalController, :filter_index)
-    get("/animals" , AnimalController, :index)
-    
+    get("/animals", AnimalController, :index)
 
     resources("/sessions", SessionController, only: [:new, :create, :delete])
 
@@ -116,15 +115,15 @@ defmodule SmartcitydogsWeb.Router do
       )
 
       # get("/signals/my_signals", SignalController, :my_signals)
+      get("/signals/remove_like", SignalController, :remove_like)
       get("/index_home_minicipality", SignalController, :index_home_minicipality)
       get("/signals/comment", SignalController, :comment)
-      
+
       get("/signals/get_signals_support_count", SignalController, :get_signals_support_count)
       get("/signals/update_like_count", SignalController, :update_like_count)
       post("/signals/add_like", SignalController, :add_like)
       post("/signals/add_comment_like", SignalController, :add_comment_like)
       post("/signals/add_comment_dislike", SignalController, :add_comment_dislike)
-      
 
       get("/signals/followed_signals", SignalController, :followed_signals)
       get("/signals/update_type", SignalController, :update_type)
@@ -139,7 +138,7 @@ defmodule SmartcitydogsWeb.Router do
 
       resources("/help", HelpController, only: [:index])
       resources("/contact", ContactController, only: [:new, :create, :edit, :update])
-      
+
       ############ admin(zone)
 
       scope "/admin", Admin, as: :admin do
@@ -169,10 +168,10 @@ defmodule SmartcitydogsWeb.Router do
     get("/:provider/callback", SessionController, :callback)
   end
 
-
   # Plug function
   defp ensure_authenticated(conn, _opts) do
     current_user_id = get_session(conn, :current_user_id)
+
     if current_user_id do
       conn
     else

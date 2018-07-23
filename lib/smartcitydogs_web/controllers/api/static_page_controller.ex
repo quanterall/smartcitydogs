@@ -29,7 +29,7 @@ defmodule SmartcitydogsWeb.StaticPageControllerAPI do
     static_page = DataPages.get_static_pages(id)
 
     with {:ok, %StaticPages{} = static_page} <-
-      DataPages.update_static_page(static_page, static_page_params) do
+           DataPages.update_static_page(static_page, static_page_params) do
       render(conn, "show.json", static_page: static_page)
     end
   end

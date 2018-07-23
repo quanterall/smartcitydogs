@@ -34,7 +34,6 @@ defmodule Smartcitydogs.DataAnimals do
     Repo.all(query)
   end
 
-
   def get_animal_image(id) do
     Repo.get!(AnimalImages, id)
   end
@@ -49,12 +48,11 @@ defmodule Smartcitydogs.DataAnimals do
     Repo.all(query) |> Repo.preload(:animals_status) |> Repo.preload(:animals_image)
   end
 
-
   def get_animal_by_chip(chip_number) do
-  ##  IO.inspect(chip_number)
+    ##  IO.inspect(chip_number)
 
     query = Ecto.Query.from(c in Animals, where: c.chip_number == ^chip_number)
-   ## IO.inspect(query)
+    ## IO.inspect(query)
     Repo.all(query) |> Repo.preload(:animals_status)
   end
 

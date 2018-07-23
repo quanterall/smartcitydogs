@@ -27,8 +27,9 @@ defmodule SmartcitydogsWeb.UsersTypeControllerAPI do
 
   def update(conn, %{"id" => id, "users_type" => users_type_params}) do
     users_type = DataUsers.get_user_type(id)
+
     with {:ok, %UsersType{} = users_type} <-
-      DataUsers.update_users_type(users_type, users_type_params) do
+           DataUsers.update_users_type(users_type, users_type_params) do
       render(conn, "show.json", users_type: users_type)
     end
   end

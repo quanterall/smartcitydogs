@@ -7,7 +7,7 @@ defmodule Smartcitydogs.SignalsComments do
   schema "signals_comments" do
     field(:comment, :string)
     field(:deleted_at, :naive_datetime)
-    field :likes_number, :integer, default: 0
+    field(:likes_number, :integer, default: 0)
     belongs_to(:users, Smartcitydogs.User)
     belongs_to(:signals, Smartcitydogs.Signals)
 
