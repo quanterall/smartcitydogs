@@ -154,7 +154,7 @@ unless Repo.get_by(AnimalStatus, name: animals_status_params[:name]) do
 end
 
 ############ Animal Status ############
-animals_status_params = %{name: "Осиновено"}
+animals_status_params = %{name: "В приюта"}
 
 unless Repo.get_by(AnimalStatus, name: animals_status_params[:name]) do
   %AnimalStatus{}
@@ -163,13 +163,15 @@ unless Repo.get_by(AnimalStatus, name: animals_status_params[:name]) do
 end
 
 ############ Animal Status ############
-animals_status_params = %{name: "В приюта"}
+animals_status_params = %{name: "Осиновено"}
 
 unless Repo.get_by(AnimalStatus, name: animals_status_params[:name]) do
   %AnimalStatus{}
   |> AnimalStatus.changeset(animals_status_params)
   |> Repo.insert!()
 end
+
+
 
 #############  Animals #######
 animals_params = %{

@@ -105,6 +105,7 @@ defmodule SmartcitydogsWeb.Router do
       get("/users", UserController, :index)
       get("/users/:id", UserController, :show)
 
+      get("/minicipality_registered", AnimalController, :minicipality_registered)
       resources("/animals", AnimalController)
       resources("/news", NewsController)
       get("/show", PageController, :show)
@@ -115,6 +116,11 @@ defmodule SmartcitydogsWeb.Router do
       )
 
       # get("/signals/my_signals", SignalController, :my_signals)
+
+      get("/minicipality_shelter", SignalController, :minicipality_shelter)
+      get("/minicipality_adopted", SignalController, :minicipality_adopted)
+      
+      get("/minicipality_signals", SignalController, :minicipality_signals)
       get("/signals/remove_like", SignalController, :remove_like)
       get("/index_home_minicipality", SignalController, :index_home_minicipality)
       get("/signals/comment", SignalController, :comment)

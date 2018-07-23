@@ -7,7 +7,51 @@ defmodule SmartcitydogsWeb.AnimalController do
   alias Smartcitydogs.Repo
 
   # plug(:put_layout, false)
-  plug(:put_layout, false when action in [:index])
+  # plug(:put_layout, false when action in [:index])
+
+  def minicipality_registered(conn, params) do
+    
+    chip = params["chip_number"]
+    # IO.puts"_______________CHIP__________________"
+    # IO.inspect(chip)
+    # IO.puts"_______________CHIP__________________"
+    page = Animals |> Smartcitydogs.Repo.paginate(params)
+    sorted_animals = DataAnimals.sort_animals_by_id()
+    logged_user_type_id = conn.assigns.current_user.users_types.id
+
+    if logged_user_type_id == 3 do
+      render(conn, SmartcitydogsWeb.ErrorView, "401.html")
+    else
+      if chip == "" do
+        page = Smartcitydogs.Repo.paginate(sorted_animals)
+        render(conn, "minicipality_registered.html", animals: page.entries, page: page)
+      end
+
+      if chip != nil do
+        animals = DataAnimals.get_animal_by_chip(chip)
+        page = Map.delete(page, :entries) |> Map.delete(:total_entries)
+        page = Map.put(page, :entries, animals) |> Map.put(:total_entries, length(animals))
+        list_animals =
+          Map.get(page, :entries) |> Repo.preload(:animals_status) |> Repo.preload(:animals_image)
+          IO.puts "_______________________PAGE_______________________"
+          IO.inspect(page)
+          IO.puts "_______________________PAGE_______________________"
+        # render(conn, "minicipality_registered.html", animals: list_animals, page: page)
+        page = Smartcitydogs.Repo.paginate(animals)
+       render(conn, "minicipality_registered.html", animals: page.entries, page: page)
+      end
+
+      page = Animals |> Smartcitydogs.Repo.paginate(params)
+
+      list_animals =
+        Map.get(page, :entries) |> Repo.preload(:animals_status) |> Repo.preload(:animals_image)
+
+      ## animals = DataAnimals.list_animals()
+
+      render(conn, "minicipality_registered.html", animals: list_animals, page: page)
+    end
+
+  end
 
   def index(conn, params) do
     chip = params["chip_number"]

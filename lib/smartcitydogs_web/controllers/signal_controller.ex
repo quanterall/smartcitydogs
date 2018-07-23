@@ -21,6 +21,31 @@ defmodule SmartcitydogsWeb.SignalController do
     render(conn, "index2_signal.html", signal: page.entries, page: page)
   end
 
+
+  def minicipality_shelter(conn, params) do
+    struct = from(p in Animals, where: p.animals_status_id == 3)
+    all_adopted = Repo.all(struct) |> Repo.preload(:animals_status)
+    page = Smartcitydogs.Repo.paginate(all_adopted, page: 1, page_size: 8)
+    render(conn, "minicipality_shelter.html", animals: page.entries, page: page)
+  end
+
+  def minicipality_adopted(conn, params) do
+    struct = from(p in Animals, where: p.animals_status_id == 2)
+      all_adopted = Repo.all(struct) |> Repo.preload(:animals_status)
+      page = Smartcitydogs.Repo.paginate(all_adopted, page: 1, page_size: 8)
+      render(conn, "minicipality_adopted.html", animals: page.entries, page: page)
+  end
+
+ 
+
+  # All signals page 
+  def minicipality_signals(conn, params) do
+    page = Signals |> Smartcitydogs.Repo.paginate(params)
+    sorted_signals = DataSignals.sort_signal_by_id()
+    render(conn, "minicipality_signals.html", signal: page.entries, page: page)
+  end
+
+
   def index_home_minicipality(conn, params) do
     IO.inspect params
     IO.puts "REEEEEEEEEEEEEEEEEEE"
