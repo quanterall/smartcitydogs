@@ -16,8 +16,18 @@ defmodule SmartcitydogsWeb.SignalController do
   plug(:put_layout, false when action in [:new])
 
   def index(conn, params) do
-    page = Signals |> Smartcitydogs.Repo.paginate(params)
+    # comments = DataSignals.get_comment_signal_id(params["id"])
+    IO.puts "______________ID____________________"
+    IO.inspect(params)
+    IO.puts "______________ID____________________"
+    # page = Signals |> Smartcitydogs.Repo.paginate(params)
+    
     sorted_signals = DataSignals.sort_signal_by_id()
+    
+    page = Smartcitydogs.Repo.paginate(sorted_signals, page: 1, page_size: 8)
+    IO.puts "____________________________PAGE_____________________"
+    IO.inspect(page)
+    IO.puts "____________________________PAGE_____________________"
     render(conn, "index2_signal.html", signal: page.entries, page: page)
   end
 
@@ -25,14 +35,14 @@ defmodule SmartcitydogsWeb.SignalController do
   def minicipality_shelter(conn, params) do
     struct = from(p in Animals, where: p.animals_status_id == 3)
     all_adopted = Repo.all(struct) |> Repo.preload(:animals_status)
-    page = Smartcitydogs.Repo.paginate(all_adopted, page: 1, page_size: 8)
+    page = Smartcitydogs.Repo.paginate(all_adopted, page: 1, page_size: 9)
     render(conn, "minicipality_shelter.html", animals: page.entries, page: page)
   end
 
   def minicipality_adopted(conn, params) do
     struct = from(p in Animals, where: p.animals_status_id == 2)
       all_adopted = Repo.all(struct) |> Repo.preload(:animals_status)
-      page = Smartcitydogs.Repo.paginate(all_adopted, page: 1, page_size: 8)
+      page = Smartcitydogs.Repo.paginate(all_adopted, page: 1, page_size: 9)
       render(conn, "minicipality_adopted.html", animals: page.entries, page: page)
   end
 
@@ -512,71 +522,24 @@ defmodule SmartcitydogsWeb.SignalController do
     end
   end
 
-  def filter_index(conn, params) do
-    params = params["obj"]
-    IO.inspect(params)
-
-    cond do
-      params["sig_category"] ->
-        all_query = []
-
-        x =
-          Enum.map(params["sig_category"], fn x ->
-            struct = from(p in Signals, where: p.signals_categories_id == ^String.to_integer(x))
-            all_query = all_query ++ Repo.all(struct)
-          end)
-
-        x = List.flatten(x)
-        page = Smartcitydogs.Repo.paginate(x, page: 1, page_size: 8)
-        render(conn, "index_signal.html", signal: page.entries, page: page)
-
-      params["sig_status"] ->
-        all_query = []
-
-        x =
-          Enum.map(params["sig_status"], fn x ->
-            struct = from(p in Signals, where: p.signals_types_id == ^String.to_integer(x))
-            all_query = all_query ++ Repo.all(struct)
-          end)
-
-        x = List.flatten(x)
-        page = Smartcitydogs.Repo.paginate(x, page: 1, page_size: 8)
-        render(conn, "index_signal.html", signal: page.entries, page: page)
-
-      params["type"] == nil ->
-        x = DataSignals.list_signals()
-        page = Smartcitydogs.Repo.paginate(x, page: 1, page_size: 8)
-        render(conn, "index_signal.html", signal: page.entries, page: page)
-
-      params == %{} ->
-        x = DataSignals.list_signals()
-        page = Smartcitydogs.Repo.paginate(x, page: 1, page_size: 8)
-        render(conn, "index_signal.html", signal: page.entries, page: page)
-    end
-
-    page = Signals |> Smartcitydogs.Repo.paginate(params)
-    sorted_signals = DataSignals.sort_signal_by_id()
-    render(conn, "index_signal.html", signal: page.entries, page: page)
-  end
-
   def adopted_animals(conn, params) do
     struct = from(p in Animals, where: p.animals_status_id == 2)
     all_adopted = Repo.all(struct) |> Repo.preload(:animals_status)
-    page = Smartcitydogs.Repo.paginate(all_adopted, page: 1, page_size: 8)
+    page = Smartcitydogs.Repo.paginate(all_adopted, page: 1, page_size: 9)
     render(conn, "adopted_animals.html", animals: page.entries, page: page)
   end
 
   def shelter_animals(conn, params) do
     struct = from(p in Animals, where: p.animals_status_id == 3)
     all_adopted = Repo.all(struct) |> Repo.preload(:animals_status)
-    page = Smartcitydogs.Repo.paginate(all_adopted, page: 1, page_size: 8)
+    page = Smartcitydogs.Repo.paginate(all_adopted, page: 1, page_size: 9)
     render(conn, "shelter_animals.html", animals: page.entries, page: page)
   end
 
   def filter_animals(conn, params) do
     if params == %{} do
       x = DataAnimals.list_animals()
-      page = Smartcitydogs.Repo.paginate(x, page: 1, page_size: 8)
+      page = Smartcitydogs.Repo.paginate(x, page: 1, page_size: 9)
       render(conn, "filter_animals.html", animals: x, page: page)
     end
 
@@ -593,7 +556,7 @@ defmodule SmartcitydogsWeb.SignalController do
       end)
 
     x = List.flatten(x)
-    page = Smartcitydogs.Repo.paginate(x, page: 1, page_size: 8)
+    page = Smartcitydogs.Repo.paginate(x, page: 1, page_size: 9)
     render(conn, "filter_animals.html", animals: x, page: page)
   end
 end

@@ -116,7 +116,7 @@ label-adress{
   font-size: 15px;
 }
 label-title{
-  font-size: 25px;
+  font-size: 20px;
 }
 
 /* File upload */
@@ -583,4 +583,8 @@ label-text-white{
 #all-dogs-shelter{
   color: black;
   font-weight: bold;
+}
+.container-signals .container {
+  margin: 0px;
+  max-width: 100%;
 }
