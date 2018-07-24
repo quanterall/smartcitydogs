@@ -100,7 +100,7 @@
 
                         <div class="icon-scale">
                           <div class="fa fa-comment-o">
-                          </div> : 0
+                          </div> : <%= Enum.count(Smartcitydogs.DataSignals.get_comment_signal_id(signal.id)) %>
                           <br />
                         </div>
                         <center>
@@ -150,7 +150,7 @@
 
 
                         <%= for x <- 1..@page.total_pages do %>
-                         <%= link "#{x * 8 - 7}-#{x * 8} ", to: signal_path(@conn, :minicipality_signals, page: x) %>
+                         <%= link "#{x * 9 -8}-#{x * 9} ", to: signal_path(@conn, :minicipality_signals, page: x) %>
 
 
                         <% end %>

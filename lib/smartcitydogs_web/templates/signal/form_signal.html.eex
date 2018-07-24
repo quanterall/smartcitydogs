@@ -1,7 +1,7 @@
     <div class="container-new-signal">
     <center><label-signal>Подаване на сигнал към зоо полиция</label-signal></center>
 
-    <%= form_for @conn, signal_path(@conn, :create),[multipart: true, class: "form-elixir"], fn f -> %>
+    <%= form_for @conn, signal_path(@conn, :create),[multipart: true, class: "form-elixir register-form-class"], fn f -> %>
     <label-1>1.Изберете категория на сигнала</label-1>
       <div class="form-group">
         <%= select(f , :signals_categories_id, [

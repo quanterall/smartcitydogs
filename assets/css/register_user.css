@@ -4,11 +4,11 @@
     padding: 10%;
 
 }
-input::placeholder{
+.register-form-class input::placeholder{
   color: white !important;
 }
 
-input[type=text],input[type=password],input[type=checked],input[type=email]{
+.register-form-class input[type=text],input[type=password],input[type=checked],input[type=email]{
  font-family: monospace;
  color: white !important;
  width: 100%;
@@ -20,11 +20,11 @@ input[type=text],input[type=password],input[type=checked],input[type=email]{
  background: transparent;
  outline: none;
 }
-input:focus{
+.register-form-class input:focus{
   background:rgba(255,255,255,.2);
   -webkit-text-fill-color: white !important;
 }
-input:focus::placeholder{
+.register-form-class input:focus::placeholder{
   -webkit-text-fill-color: transparent;
 }
 .btn-face{

@@ -36,16 +36,7 @@
           <div class="container-signals">
 
             <div class="container" >
-                <div class="search-tab">
-                    <%# <div class="form-group" style="margin:auto;max-width:380px;padding:0px"> %>
-                    
-                    <%# <%= form_for @conn, animal_path(@conn, :minicipality_registered), [method: :get], fn f -> %> 
-                        <%# <%= search_input f, :chip_number, placeholder: "Chip number", id: "search-placeholder" %> 
-                        <%# <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button> %>
-                        <%# <% end %> 
-                <%# </div> %>
-            
-            </div>
+                
                         
             <div class="row">
             <%= for animal <- @animals do %>
@@ -129,7 +120,7 @@
                     
                       <div class="padination">
             <%= for x <- 1..@page.total_pages do %>
-            <%= link "#{x * 8 - 7} - #{x * 8}", to: animal_path(@conn, :minicipality_registered, page: x) %>
+            <%= link "#{x * 9 - 8} - #{x * 9}", to: animal_path(@conn, :minicipality_registered, page: x) %>
             <% end %>  
             </div>
                     

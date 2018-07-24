@@ -14,8 +14,18 @@ defmodule SmartcitydogsWeb.SignalController do
   plug(:put_layout, false when action in [:new])
 
   def index(conn, params) do
-    page = Signals |> Smartcitydogs.Repo.paginate(params)
+    # comments = DataSignals.get_comment_signal_id(params["id"])
+    IO.puts "______________ID____________________"
+    IO.inspect(params)
+    IO.puts "______________ID____________________"
+    # page = Signals |> Smartcitydogs.Repo.paginate(params)
+    
     sorted_signals = DataSignals.sort_signal_by_id()
+    
+    page = Smartcitydogs.Repo.paginate(sorted_signals, page: 1, page_size: 8)
+    IO.puts "____________________________PAGE_____________________"
+    IO.inspect(page)
+    IO.puts "____________________________PAGE_____________________"
     render(conn, "index2_signal.html", signal: page.entries, page: page)
   end
 

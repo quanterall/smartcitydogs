@@ -17,7 +17,6 @@ defmodule SmartcitydogsWeb.AnimalController do
     page = Animals |> Smartcitydogs.Repo.paginate(params)
     sorted_animals = DataAnimals.sort_animals_by_id()
     logged_user_type_id = conn.assigns.current_user.users_types.id
-
     if logged_user_type_id == 3 do
       render(conn, SmartcitydogsWeb.ErrorView, "401.html")
     else
@@ -25,7 +24,6 @@ defmodule SmartcitydogsWeb.AnimalController do
         page = Smartcitydogs.Repo.paginate(sorted_animals)
         render(conn, "minicipality_registered.html", animals: page.entries, page: page)
       end
-
       if chip != nil do
         animals = DataAnimals.get_animal_by_chip(chip)
         page = Map.delete(page, :entries) |> Map.delete(:total_entries)
@@ -35,17 +33,14 @@ defmodule SmartcitydogsWeb.AnimalController do
           Map.get(page, :entries) |> Repo.preload(:animals_status) |> Repo.preload(:animals_image)
 
         # render(conn, "minicipality_registered.html", animals: list_animals, page: page)
+      ##  page = Map.delete(page, :entries) |> Map.delete(:total_entries)
+     ##   page = Map.put(page, :entries, animals) |> Map.put(:total_entries, length(animals))
         page = Smartcitydogs.Repo.paginate(animals)
         render(conn, "minicipality_registered.html", animals: page.entries, page: page)
       end
-
       page = Animals |> Smartcitydogs.Repo.paginate(params)
-
       list_animals =
         Map.get(page, :entries) |> Repo.preload(:animals_status) |> Repo.preload(:animals_image)
-
-      ## animals = DataAnimals.list_animals()
-
       render(conn, "minicipality_registered.html", animals: list_animals, page: page)
     end
   end
@@ -71,32 +66,21 @@ defmodule SmartcitydogsWeb.AnimalController do
     page = Animals |> Smartcitydogs.Repo.paginate(params)
     sorted_animals = DataAnimals.sort_animals_by_id()
     logged_user_type_id = conn.assigns.current_user.users_types.id
-
     if logged_user_type_id == 3 do
       render(conn, SmartcitydogsWeb.ErrorView, "401.html")
     else
       if chip == "" do
-        ## animals = DataAnimals.list_animals()
-        # list_animals = Map.get(page,:entries) |> Repo.preload(:animals_status) |> Repo.preload(:animals_image)
-        render(conn, "index.html", animals: sorted_animals, page: page)
+        page = Smartcitydogs.Repo.paginate(sorted_animals)
+        render(conn, "index.html", animals: page.entries, page: page)
       end
-
       if chip != nil do
         animals = DataAnimals.get_animal_by_chip(chip)
-
-        list_animals =
-          Map.get(page, :entries) |> Repo.preload(:animals_status) |> Repo.preload(:animals_image)
-
-        render(conn, "index.html", animals: list_animals, page: page)
+        page = Smartcitydogs.Repo.paginate(animals)
+        render(conn, "index.html", animals: page.entries, page: page)
       end
-
       page = Animals |> Smartcitydogs.Repo.paginate(params)
-
       list_animals =
         Map.get(page, :entries) |> Repo.preload(:animals_status) |> Repo.preload(:animals_image)
-
-      ## animals = DataAnimals.list_animals()
-
       render(conn, "index.html", animals: list_animals, page: page)
     end
   end

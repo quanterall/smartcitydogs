@@ -43,4 +43,13 @@ defmodule SmartcitydogsWeb.SignalsCommentControllerAPI do
       send_resp(conn, :no_content, "")
     end
   end
+
+  def like(conn, %{"id" => id}) do
+  
+  end
+
+
+
+
+
 end
