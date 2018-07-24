@@ -1,87 +1,105 @@
-<h1> Registraion Dog </h1>
+
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 
 <div class="container" >
-          <!-- Three columns of text below the carousel -->
-          <div class="form-group" style="margin:auto;max-width:380px;padding:10px">
+    <%# <div class="search-tab"> %>
+    <div class="col-sm-6 col-sm-offset-3">
+      <div id="imaginary_container">
+        <div class="input-group stylish-input-group", style="padding: 0px;"> 
         
-  <%= form_for @conn, animal_path(@conn, :index), [method: :get], fn f -> %>
-      <%= search_input f, :chip_number, placeholder: "Chip number" %>
-    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    <% end %>
-  
-   
-  </div>
-             
-          <div class="row">
-          <%= for animal <- @animals do %>
-
-            <div class="col-lg-3">
-                    <div class="col-container" style="background-image: url('/<%= get_image_animals_id(animal.id) %>')">
-                      <div class="col-container-shadow">
-
-                        <label-type class="
-                          <%= if animal.animals_status_id == 1 do %>
-                            label-type-red
-                          <% end %>
-
-                          <%= if animal.animals_status_id == 2 do %>
-                            label-type-orange
-                          <% end %>
-
-                          <%= if animal.animals_status_id == 3 do %>
-                            label-type-green
-                          <% end %>"><%= animal.animals_status.name %>
-                      </label-type>
-                        <br />
-
-                        <label-date>
-                        <%=
-                          signal_time = animal.inserted_at
-                          |> DateTime.truncate(:second)
-                          |> DateTime.to_string()
-                          count = String.length(signal_time)
-                          final_time = String.slice(signal_time,0..count-11)
-                          final_time
-                          # IO.inspect(final_time)
-                          %>
-                        <br />
-                        </label-date>
-
-                        <label-chip-number>
-                           Number of chip: <%= animal.chip_number%>
-                         </label-chip-number>
-
-                        <label-title><b>Sex: <%= animal.sex%></b></label-title>
-                        <br />
-
-
-                        <label-adress> Last Location: <%= animal.address%></label-adress>
-                        <br />
-
-                        <center>
-
-                        <div class="button-show-hide">
-                          <!-- <p class="p-button-change"><a class="btn btn-secondary change-status" id="<%= #signal.id %>" role="button">Change status</a></p> -->
-                        </div></center>
-                      <!-- The Modal -->
-                        
-                        <center>
-
-                        <div class="button-show-hide">
-                        <%= link "View more »", to: animal_path(@conn, :show, animal), class: "btn btn-secondary" %>
-                          <!-- <p class="p-button-view"><a class="btn btn-secondary" href="signals/<%=#signal.id%>" role="button">View more</a> -->
-                      </div></center>
-                      </div>
-
-                    </div>
-                  </div>
-
-            <%end%>
-          </div><!-- /.row -->
-         
-           
+          <%= form_for @conn, animal_path(@conn, :index), [method: :get], fn f -> %>
+              <%= search_input f, :chip_number, placeholder: "Chip number",class: "form-control", id: "search-placeholder" %>
+              <span class="input-group-addon">
+                <button type="submit">
+                  <span class="glyphicon glyphicon-search"></span>
+                </button>
+              </span>
+          <% end %>
+        </div>
+      </div>  
+    </div>    
+    <div class="registered-dogs-div">
+      <div class="row">
+        <%= for animal <- @animals do %>
           
+            <div class="col-lg-3">
+              <div class="col-container" style="background-image: url('/<%= SmartcitydogsWeb.AnimalView.get_image_animals_id(animal.id) %>')">
+                <div class="col-container-shadow">
+
+                  <label-type class="
+                    <%= if animal.animals_status_id == 1 do %>
+                        label-type-red
+                    <% end %>
+
+                    <%= if animal.animals_status_id == 2 do %>
+                        label-type-orange
+                    <% end %>
+
+                    <%= if animal.animals_status_id == 3 do %>
+                        label-type-green
+                    <% end %>"><%= animal.animals_status.name %>
+                  </label-type>
+                  <br />
+
+                  <label-text-grey>
+                    ПОЛ
+                  </label-text-grey>
+                  <br>
+                  <label-text-white>
+                    <%= animal.sex %>
+                  </label-text-white>
+                  <br><br>
+                  <label-text-grey>
+                    НОМЕР НА МАРКА/ЧИП
+                  </label-text-grey>
+                  <br>
+                  <label-text-white>
+                    <%= animal.chip_number %>
+                  </label-text-white>
+                  <br><br>
+                  <label-text-grey>
+                    ДАТА НА РЕГИСТРАЦИЯ
+                  </label-text-grey><br>
+                  <label-text-white>
+                  <%=
+                    signal_time = animal.inserted_at
+                    |> DateTime.truncate(:second)
+                    |> DateTime.to_string()
+                    count = String.length(signal_time)
+                    final_time = String.slice(signal_time,0..count-11)
+                    final_time
+                  %>
+                  </label-text-white>
+                  <br><br>
+                  <label-text-grey>
+                    ПОСЛЕДНА ЛОКАЦИЯ
+                  </label-text-grey>
+                  <br>
+                  <label-text-white>
+                    <%= animal.address %>
+                  </label-text-white>
+
+                    <center>
+                      <div class="button-show-hide">
+                        <div class="adopted_button">
+                          <%= link "Виж още »", to: animal_path(@conn, :show, animal), class: "btn btn-secondary" %>
+                        </div>
+                      </div>
+                    </center>
+                </div>
+              </div>
+            </div>
+          
+        <%end%>
+      </div>
+      
+      
+    <div class="padination">
+      <%= for x <- 1..@page.total_pages do %>
+      <%= link "#{x * 8 - 7} - #{x * 8}", to: animal_path(@conn, :index, page: x) %>
+      <% end %>  
+    </div>
+    </div>
 </div>
-<%= for x <- 1..@page.total_pages do %>
-  <%= link "#{x * 8 - 7} - #{x * 8}", to: animal_path(@conn, :index, page: x) %>
-<% end %>  

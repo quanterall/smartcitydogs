@@ -1,0 +1,21 @@
+.registered-dogs-div{
+    margin: 7%;
+}
+.search-tab{
+    margin-left: 5.5%;
+}
+.stylish-input-group .input-group-addon{
+    display: inline-block;
+   background: white; 
+}
+.stylish-input-group input#search-placeholder{
+    width: 90%;
+    border-right:0; 
+    box-shadow:0 0 0; 
+    border-color:#ccc;
+}
+.stylish-input-group button{
+    width: 10%;
+   border:0;
+   background:transparent;
+}
