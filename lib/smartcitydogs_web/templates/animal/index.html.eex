@@ -82,6 +82,8 @@
            
           
 </div>
-<%= for x <- 1..@page.total_pages do %>
+<%= if @page.total_pages > 0 do %>
+ <%= for x <- 1..@page.total_pages do %>
   <%= link "#{x * 8 - 7} - #{x * 8}", to: animal_path(@conn, :index, page: x) %>
-<% end %>  
+ <% end %>  
+<%= end %>

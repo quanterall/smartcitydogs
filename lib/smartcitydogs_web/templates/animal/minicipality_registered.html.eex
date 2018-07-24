@@ -112,9 +112,11 @@
                                 </div><!-- /.row -->
                                 
                                  <div class="padination">
-                        <%= for x <- 1..@page.total_pages do %>
-                        <%= link "#{x * 8 - 7} - #{x * 8}", to: animal_path(@conn, :minicipality_registered, page: x) %>
-                        <% end %>  
+                        <%= if @page.total_pages > 0 do %>
+                            <%= for x <- 1..@page.total_pages do %>
+                            <%= link "#{x * 8 - 7} - #{x * 8}", to: animal_path(@conn, :minicipality_registered, page: x) %>
+                            <% end %>  
+                        <%= end %>
                         </div>
                                 
                         </div>

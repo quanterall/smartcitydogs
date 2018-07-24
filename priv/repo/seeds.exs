@@ -135,7 +135,7 @@ users_params = %{
   email: "todor_municipaty@gmail.com",
   password: "password",
   phone: "0896230250",
-  users_types_id: 1
+  users_types_id: 4
 }
 
 unless Repo.get_by(User, username: users_params[:username]) do
