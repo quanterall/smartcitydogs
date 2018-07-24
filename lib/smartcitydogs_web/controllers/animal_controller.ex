@@ -5,16 +5,15 @@ defmodule SmartcitydogsWeb.AnimalController do
   alias Smartcitydogs.Animals
   alias Smartcitydogs.AnimalImages
   alias Smartcitydogs.Repo
+  import Ecto.Query
 
-  # plug(:put_layout, false)
-  # plug(:put_layout, false when action in [:index])
+  plug(:put_layout, false when action in [:adopted_animals])
+  plug(:put_layout, false when action in [:shelter_animals])
+
+  ############################# Minicipality Home Page Animals ################################
 
   def minicipality_registered(conn, params) do
-    
     chip = params["chip_number"]
-    # IO.puts"_______________CHIP__________________"
-    # IO.inspect(chip)
-    # IO.puts"_______________CHIP__________________"
     page = Animals |> Smartcitydogs.Repo.paginate(params)
     sorted_animals = DataAnimals.sort_animals_by_id()
     logged_user_type_id = conn.assigns.current_user.users_types.id
@@ -31,14 +30,13 @@ defmodule SmartcitydogsWeb.AnimalController do
         animals = DataAnimals.get_animal_by_chip(chip)
         page = Map.delete(page, :entries) |> Map.delete(:total_entries)
         page = Map.put(page, :entries, animals) |> Map.put(:total_entries, length(animals))
+
         list_animals =
           Map.get(page, :entries) |> Repo.preload(:animals_status) |> Repo.preload(:animals_image)
-          IO.puts "_______________________PAGE_______________________"
-          IO.inspect(page)
-          IO.puts "_______________________PAGE_______________________"
+
         # render(conn, "minicipality_registered.html", animals: list_animals, page: page)
         page = Smartcitydogs.Repo.paginate(animals)
-       render(conn, "minicipality_registered.html", animals: page.entries, page: page)
+        render(conn, "minicipality_registered.html", animals: page.entries, page: page)
       end
 
       page = Animals |> Smartcitydogs.Repo.paginate(params)
@@ -50,8 +48,23 @@ defmodule SmartcitydogsWeb.AnimalController do
 
       render(conn, "minicipality_registered.html", animals: list_animals, page: page)
     end
-
   end
+
+  def minicipality_shelter(conn, params) do
+    struct = from(p in Animals, where: p.animals_status_id == 3)
+    all_adopted = Repo.all(struct) |> Repo.preload(:animals_status)
+    page = Smartcitydogs.Repo.paginate(all_adopted, page: 1, page_size: 8)
+    render(conn, "minicipality_shelter.html", animals: page.entries, page: page)
+  end
+
+  def minicipality_adopted(conn, params) do
+    struct = from(p in Animals, where: p.animals_status_id == 2)
+    all_adopted = Repo.all(struct) |> Repo.preload(:animals_status)
+    page = Smartcitydogs.Repo.paginate(all_adopted, page: 1, page_size: 8)
+    render(conn, "minicipality_adopted.html", animals: page.entries, page: page)
+  end
+
+  ############################# /Minicipality Home Page Animals ################################
 
   def index(conn, params) do
     chip = params["chip_number"]
@@ -86,36 +99,6 @@ defmodule SmartcitydogsWeb.AnimalController do
 
       render(conn, "index.html", animals: list_animals, page: page)
     end
-  end
-
-  def filter_index(conn, params) do
-    chip = params["chip_number"]
-    page = Animals |> Smartcitydogs.Repo.paginate(params)
-    sorted_animals = DataAnimals.sort_animals_by_id()
-
-    if chip == "" do
-      ## animals = DataAnimals.list_animals()
-      # list_animals = Map.get(page,:entries) |> Repo.preload(:animals_status) |> Repo.preload(:animals_image)
-      render(conn, "index.html", animals: sorted_animals, page: page)
-    end
-
-    if chip != nil do
-      animals = DataAnimals.get_animal_by_chip(chip)
-
-      list_animals =
-        Map.get(page, :entries) |> Repo.preload(:animals_status) |> Repo.preload(:animals_image)
-
-      render(conn, "index.html", animals: list_animals, page: page)
-    end
-
-    page = Animals |> Smartcitydogs.Repo.paginate(params)
-
-    list_animals =
-      Map.get(page, :entries) |> Repo.preload(:animals_status) |> Repo.preload(:animals_image)
-
-    ## animals = DataAnimals.list_animals()
-
-    render(conn, "index.html", animals: list_animals, page: page)
   end
 
   def new(conn, _params) do
