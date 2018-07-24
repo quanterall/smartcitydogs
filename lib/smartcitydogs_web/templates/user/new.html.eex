@@ -1,6 +1,6 @@
 <div class="register">
     <div class="container">
-        <%= form_for @conn, user_path(@conn, :create), fn f -> %>
+        <%= form_for @conn, user_path(@conn, :create),[class: "register-form-class"], fn f -> %>
 
         <div class="form-register">
             <%= text_input f, :username, placeholder: "Потребителско име...", class: "form-control1", required: true %>

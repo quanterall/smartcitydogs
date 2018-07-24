@@ -1,21 +1,45 @@
-.registered-dogs-div{
-    margin: 7%;
+ .registered-dogs-div{
+     position: absolute;
+     margin-right: 13%;
+     margin-top: 5%;
+    /* margin: 7%; */
 }
-.search-tab{
-    margin-left: 5.5%;
+.col-12 .input-group{
+    width: 40%;
+    position: fixed;
+    z-index: 1;
+    /* margin-left: 4%; */
 }
-.stylish-input-group .input-group-addon{
-    display: inline-block;
-   background: white; 
+.input-group-append{
+    background-color: white;
 }
-.stylish-input-group input#search-placeholder{
-    width: 90%;
-    border-right:0; 
-    box-shadow:0 0 0; 
-    border-color:#ccc;
+.input-group-append:hover{
+    background-color: rgb(0,201,148) !important;
 }
-.stylish-input-group button{
-    width: 10%;
-   border:0;
-   background:transparent;
+.input.form-control.border-secondary.py-2:focus{
+    -webkit-text-fill-color: black !important;
+}
+.btn-outline-secondary:hover{
+    color: white;
+}
+.container{
+    max-width: 80%;
+}
+.input-group-append .btn-outline-secondary:hover{
+    background-color: rgb(0,201,148);
+}
+/* .input-group-append .fa-search:hover{
+    color: white;
+} */
+.registered-dogs-div .col-container-shadow{
+    opacity: 0;
+}
+.registered-dogs-div .col-container-shadow:hover{
+    transition: 0.5s;
+    opacity: 1;
+}
+.last-signals-dogs-div{
+    position: absolute;
+    margin-right: 12%;
+    margin-left: 9%;
 }

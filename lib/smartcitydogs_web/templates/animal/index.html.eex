@@ -1,25 +1,26 @@
 
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 
 <div class="container" >
-    <%# <div class="search-tab"> %>
-    <div class="col-sm-6 col-sm-offset-3">
-      <div id="imaginary_container">
-        <div class="input-group stylish-input-group", style="padding: 0px;"> 
-        
-          <%= form_for @conn, animal_path(@conn, :index), [method: :get], fn f -> %>
-              <%= search_input f, :chip_number, placeholder: "Chip number",class: "form-control", id: "search-placeholder" %>
-              <span class="input-group-addon">
-                <button type="submit">
-                  <span class="glyphicon glyphicon-search"></span>
-                </button>
-              </span>
-          <% end %>
+
+
+
+
+    <div class="row">
+        <div class="col-12">
+                <%= form_for @conn, animal_path(@conn, :index), [method: :get, class: "input-group"], fn f -> %>
+                  <%= search_input f, :chip_number, placeholder: "Chip number",class: "form-control border-secondary py-2" %>
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" type="submit">
+                        <i class="fa fa-search"></i>
+                    </button>
+                </div>
+               <% end %>
         </div>
-      </div>  
-    </div>    
+    </div>
+
+    
     <div class="registered-dogs-div">
       <div class="row">
         <%= for animal <- @animals do %>
@@ -98,8 +99,9 @@
       
     <div class="padination">
       <%= for x <- 1..@page.total_pages do %>
-      <%= link "#{x * 8 - 7} - #{x * 8}", to: animal_path(@conn, :index, page: x) %>
+      <%= link "#{x * 8 - 7} - #{x * 8}  ", to: animal_path(@conn, :index, page: x) %>
       <% end %>  
     </div>
     </div>
+    <br>
 </div>
