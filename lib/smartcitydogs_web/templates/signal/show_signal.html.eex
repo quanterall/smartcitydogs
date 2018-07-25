@@ -150,10 +150,7 @@
             <div class="buttons-for-signal">
                <% list_of_liked_signals = @conn.assigns.current_user.liked_signals %>
                <%   id = Integer.to_string(@signal.id) %>
-               <%
-                IO.inspect(list_of_liked_signals)
-                IO.inspect(id)
-               %>
+               
                 <%=   if Enum.member?(list_of_liked_signals,id) do %><a id="submit-like1">ОТСЛЕДВАЙ</a>
                 <% else %><a id="submit-like1">ПОСЛЕДВАЙ</a><%end%><div id="comment" >КОМЕНТИРАЙ</div>
             </div>
@@ -183,11 +180,7 @@
             <br>
             
             <hr>
-            <% 
-           # IO.puts "__________________________COMMENTS___________________________"
-           # IO.inspect(@comments) 
-           # IO.puts "__________________________COMMENTS___________________________"
-            %>
+           
             <%= for comment <- @comments do %>
             <%= if @signal.id == comment.signals_id do %>
                 <p class="username-comments-signal"><%= comment.users.username %></p><p class="date-comments-signal">

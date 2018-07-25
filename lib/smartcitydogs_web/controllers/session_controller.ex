@@ -65,9 +65,7 @@ defmodule SmartcitydogsWeb.SessionController do
   end
 
   def callback(%{assigns: %{ueberauth_auth: auth}} = conn, _params) do
-    ##   IO.inspect(auth.credentials.token)
-    ##   IO.inspect(Smartcitydogs.DataUsers.create_user_from_auth(auth))
-
+  
     case Smartcitydogs.DataUsers.get_user_by_email!(auth.info.email) do
       nil ->
         case Smartcitydogs.DataUsers.create_user_from_auth(auth) do

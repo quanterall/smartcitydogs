@@ -6,12 +6,12 @@ defmodule SmartcitydogsWeb.UserController do
   alias Smartcitydogs.Repo
 
   plug(:put_layout, false when action in [:new])
-  #plug(:scrub_params, "user" when action in [:create])
+  
 
   def index(conn, _params) do
     users = DataUsers.list_users()
 
-  ##  IO.inspect(conn.assigns.current_user)
+  
     logged_user_id = conn.assigns.current_user.users_types.id
 
     if logged_user_id != 1 do

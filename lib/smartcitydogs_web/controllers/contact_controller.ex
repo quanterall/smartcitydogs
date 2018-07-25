@@ -31,7 +31,7 @@ defmodule SmartcitydogsWeb.ContactController do
     topic = Map.get(user_params, "topic")
     text = Map.get(user_params, "text")
     contact_map = %{topic: topic, text: text, users_id: id}
-    ## IO.inspect contact_map
+    
     DataUsers.create_contact(contact_map)
 
     user_sender = DataUsers.get_user!(id)

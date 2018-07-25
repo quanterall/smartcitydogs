@@ -73,7 +73,7 @@
                           count = String.length(signal_time)
                           final_time = String.slice(signal_time,0..count-11)
                           final_time
-                          # IO.inspect(final_time)
+                         
                           %>
                         <br />
                         </label-date>

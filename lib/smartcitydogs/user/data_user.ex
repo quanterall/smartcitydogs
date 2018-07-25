@@ -27,13 +27,13 @@ defmodule Smartcitydogs.DataUsers do
   end
 
   def create_user_contact(id, args) do
-    ##  IO.inspect args
+    
     user = Repo.get!(User, id)
-    ##  IO.inspect user
+    
     changeset = Ecto.Changeset.change(user)
-    ##   IO.inspect changeset
+    
     changeset = Ecto.Changeset.put_embed(changeset, :contact, args)
-    ##  IO.inspect changeset
+    
     Repo.update!(changeset).contact
     Repo.get!(User, id)
   end
@@ -52,8 +52,6 @@ defmodule Smartcitydogs.DataUsers do
   end
 
   def update_user(%User{} = user, args) do
-   ## IO.inspect args
-   ## IO.puts "TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT"
     user
     |> User.registration_changeset(args)
     |> Repo.update()
