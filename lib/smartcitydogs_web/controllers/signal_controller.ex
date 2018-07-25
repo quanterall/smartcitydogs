@@ -14,18 +14,15 @@ defmodule SmartcitydogsWeb.SignalController do
   plug(:put_layout, false when action in [:new])
 
   def index(conn, params) do
-    # comments = DataSignals.get_comment_signal_id(params["id"])
-    IO.puts "______________ID____________________"
-    IO.inspect(params)
-    IO.puts "______________ID____________________"
-    # page = Signals |> Smartcitydogs.Repo.paginate(params)
+    if params == %{} do
+      x = 1
+    else
+      IO.inspect(params["page"])
+      x = String.to_integer(params["page"])
+    end
     
     sorted_signals = DataSignals.sort_signal_by_id()
-    
-    page = Smartcitydogs.Repo.paginate(sorted_signals, page: 1, page_size: 8)
-    IO.puts "____________________________PAGE_____________________"
-    IO.inspect(page)
-    IO.puts "____________________________PAGE_____________________"
+    page = Smartcitydogs.Repo.paginate(sorted_signals, page: x, page_size: 8)
     render(conn, "index2_signal.html", signal: page.entries, page: page)
   end
 
@@ -37,8 +34,7 @@ defmodule SmartcitydogsWeb.SignalController do
   end
 
   def index_home_minicipality(conn, params) do
-    IO.inspect(params)
-    IO.puts("REEEEEEEEEEEEEEEEEEE")
+    
     page = Signals |> Smartcitydogs.Repo.paginate(params)
     sorted_signals = DataSignals.sort_signal_by_id()
     render(conn, "filter_index.html", signal: page.entries, page: page)
@@ -50,7 +46,7 @@ defmodule SmartcitydogsWeb.SignalController do
     logged_user_type_id = conn.assigns.current_user.users_types.id
 
     if logged_user_type_id == 4 || logged_user_type_id == 2 do
-      ## IO.inspect(conn)
+     
       render(conn, "new_signal.html", changeset: changeset)
     else
       render(conn, SmartcitydogsWeb.ErrorView, "401.html")
@@ -200,12 +196,10 @@ defmodule SmartcitydogsWeb.SignalController do
   end
 
   def remove_like(conn, %{"show-count" => show_count, "show-id" => show_id}) do
-    ## IO.inspect show_id
+   
     signal = DataSignals.get_signal(show_id)
-    ## IO.inspect signal
-    IO.puts("_____________________________________________REMOVE_LIKE_________________________")
     user_id = conn.assigns.current_user.id
-    ##  IO.inspect user_id
+    
     DataUsers.remove_liked_signal(user_id, show_id)
     count = get_signals_support_count_minus(show_id)
 

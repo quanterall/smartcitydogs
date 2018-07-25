@@ -79,7 +79,4 @@ defmodule Smartcitydogs.User do
     end
   end
 
-  def password_token_changeset(struct, params) do
-    ##  IO.inspect(struct)
-  end
 end

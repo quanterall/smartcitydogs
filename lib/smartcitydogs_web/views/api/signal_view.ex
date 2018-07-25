@@ -4,8 +4,7 @@ defmodule SmartcitydogsWeb.SignalControllerAPIView do
   alias  Smartcitydogs.SignalView 
 
   def render("filter_index.html", params) do
-    IO.inspect params
-    IO.puts "((((((((((("
+   
     Phoenix.View.render(SmartcitydogsWeb.SignalControllerView, "filter_index.html", params)
   end
 

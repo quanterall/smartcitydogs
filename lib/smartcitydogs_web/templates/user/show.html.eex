@@ -16,7 +16,7 @@
       <br>
         <div class="buttons-show-signals-user"> <center>
           <a class="buttons-show-followed-signal" href="#">
-          <%= ##IO.inspect @users%>
+          
             <%= link "Followed signals", to: signal_path(@conn, :followed_signals), class: "show-user-edit" %>
           </a>
           

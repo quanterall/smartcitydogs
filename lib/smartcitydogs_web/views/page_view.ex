@@ -6,7 +6,7 @@ defmodule SmartcitydogsWeb.PageView do
 
     if list != [] do
       [head | tail] = list
-      ##   IO.inspect(head)
+      
       head.url
     end
   end
