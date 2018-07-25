@@ -86,21 +86,15 @@
                         <br />
 
                         <div class="icon-scale">
-                          <div class="fa fa-eye">
-                          </div> : <%=signal.view_count%>
+                          <i class="fas fa-search"></i> : <%=signal.view_count%>
                           <br />
                         </div>
                         <div class="icon-scale">
-
-
-                          <div class="fa fa-thumbs-o-up">
-
-                          </div> : <span id="signal-count"><%= signal.support_count %></span>
+                          <i class="fas fa-arrow-up"></i> : <span id="signal-count"><%= signal.support_count %></span>
                         </div>
 
                         <div class="icon-scale">
-                          <div class="fa fa-comment-o">
-                          </div> : <%= Enum.count(Smartcitydogs.DataSignals.get_comment_signal_id(signal.id)) %>
+                          <i class="far fa-comment fa-flip-horizontal"></i> : <%= Enum.count(Smartcitydogs.DataSignals.get_comment_signal_id(signal.id)) %>
                           <br />
                         </div>
                         <center>

@@ -39,76 +39,86 @@
                                 <%= for animal <- @animals do %>
 
                                     <div class="col-lg-3">
-                                            <div class="col-container" style="background-image: url('/<%= get_image_animals_id(animal.id) %>')">
-                                            <div class="col-container-shadow">
+              <div class="col-container" style="background-image: url('/<%= SmartcitydogsWeb.AnimalView.get_image_animals_id(animal.id) %>')">
+                <div class="col-container-shadow">
 
-                                                <label-type class="
-                                                <%= if animal.animals_status_id == 1 do %>
-                                                    label-type-red
-                                                <% end %>
+                  <label-type class="
+                    <%= if animal.animals_status_id == 1 do %>
+                        label-type-red
+                    <% end %>
 
-                                                <%= if animal.animals_status_id == 2 do %>
-                                                    label-type-orange
-                                                <% end %>
+                    <%= if animal.animals_status_id == 2 do %>
+                        label-type-orange
+                    <% end %>
 
-                                                <%= if animal.animals_status_id == 3 do %>
-                                                    label-type-green
-                                                <% end %>"><%= animal.animals_status.name %>
-                                            </label-type>
-                                                <br />
+                    <%= if animal.animals_status_id == 3 do %>
+                        label-type-green
+                    <% end %>"><%= animal.animals_status.name %>
+                  </label-type>
+                  <br />
 
-                                                <label-date>
-                                                <%=
-                                                signal_time = animal.inserted_at
-                                                |> DateTime.truncate(:second)
-                                                |> DateTime.to_string()
-                                                count = String.length(signal_time)
-                                                final_time = String.slice(signal_time,0..count-11)
-                                                final_time
-                                                %>
-                                                <br />
-                                                </label-date>
+                  <label-text-grey>
+                    ПОЛ
+                  </label-text-grey>
+                  <br>
+                  <label-text-white>
+                    <%= animal.sex %>
+                  </label-text-white>
+                  <br><br>
+                  <label-text-grey>
+                    НОМЕР НА МАРКА/ЧИП
+                  </label-text-grey>
+                  <br>
+                  <label-text-white>
+                    <%= animal.chip_number %>
+                  </label-text-white>
+                  <br><br>
+                  <label-text-grey>
+                    ДАТА НА РЕГИСТРАЦИЯ
+                  </label-text-grey><br>
+                  <label-text-white>
+                  <%=
+                    signal_time = animal.inserted_at
+                    |> DateTime.truncate(:second)
+                    |> DateTime.to_string()
+                    count = String.length(signal_time)
+                    final_time = String.slice(signal_time,0..count-11)
+                    final_time
+                  %>
+                  </label-text-white>
+                  <br><br>
+                  <label-text-grey>
+                    ПОСЛЕДНА ЛОКАЦИЯ
+                  </label-text-grey>
+                  <br>
+                  <label-text-white>
+                    <%= animal.address %>
+                  </label-text-white>
 
-                                                <label-chip-number>
-                                                Number of chip: <%= animal.chip_number%>
-                                                </label-chip-number>
-
-                                                <label-title><b>Sex: <%= animal.sex%></b></label-title>
-                                                <br />
-
-
-                                                <label-adress> Last Location: <%= animal.address%></label-adress>
-                                                <br />
-
-                                                <center>
-
-                                                <div class="button-show-hide">
-                                                </div></center>
-                                            <!-- The Modal -->
-                                                
-                                                <center>
-
-                                                <div class="button-show-hide">
-                                                <%= link "Вижте повече »", to: animal_path(@conn, :show, animal), class: "btn btn-secondary" %>
-                                            </div></center>
-                                            </div>
-
-                                            </div>
-                                        </div>
-
-                                    <%end%>
-                                </div><!-- /.row -->
-                                
-                                 <div class="padination">
-                        <%= if @page.total_pages > 0 do %>
-                            <%= for x <- 1..@page.total_pages do %>
-                            <%= link "#{x * 9 - 8} - #{x * 9}", to: animal_path(@conn, :minicipality_registered, page: x) %>
-                            <% end %>  
-                        <%= end %>
+                    <center>
+                      <div class="button-show-hide">
+                        <div class="adopted_button">
+                          <%= link "Виж още »", to: animal_path(@conn, :show, animal), class: "btn btn-secondary" %>
                         </div>
-                                
-                        </div>
-                       
-                        </div>
-                    </body>
-                    </html>
+                      </div>
+                    </center>
+                </div>
+              </div>
+            </div>
+          
+        <%end%>
+        </div><!-- /.row -->
+        
+            <div class="padination">
+<%= if @page.total_pages > 0 do %>
+    <%= for x <- 1..@page.total_pages do %>
+    <%= link "#{x * 9 - 8} - #{x * 9}", to: animal_path(@conn, :minicipality_registered, page: x) %>
+    <% end %>  
+<%= end %>
+</div>
+        
+</div>
+
+</div>
+</body>
+</html>
