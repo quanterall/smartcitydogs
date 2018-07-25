@@ -11,10 +11,6 @@
               ]) %>
       </div>
 
-  
-  <!-- <input id="autocomplete" placeholder="Enter your address" type="text"></input> -->
-
-
     <label-2>2.Въведете местоположение</label-2>
       <div class="form-group">
         <%= text_input f, :address, class: "form-control1", id: "autocomplete", required: true, minlength: 2, placeholder: "Въведете адрес....." %>
@@ -26,12 +22,6 @@
         <%= hidden_input f, :address_B, id: "address_B" %>
       </div>
 
-
-    <!-- <label-3>3.Заглавие на сигнала</label-3>
-      <div class="form-group">
-        <%= text_input f, :title, class: "form-control1", required: true, minlength: 2 %>
-        <%= error_tag f, :title %>
-      </div> -->
     <label-4>3.Качете налични снимки/видео</label-4>
       <div class="form-group">
           <label for="signals_url" class="file-upload">
@@ -60,9 +50,8 @@
       <% end %>
     </div>
 
-    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyDAnp2RXJIJARIGKIcxtUVdHD7-TyFCfe4&signed_in=true&libraries=places"></script>
-
-
+    
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDAnp2RXJIJARIGKIcxtUVdHD7-TyFCfe4&libraries=places">
   <script type="text/javascript">
     var placeSearch, autocomplete;
     var Cordinate_a, Cordinate_b;
@@ -72,8 +61,8 @@
         console.log(autocomplete);
         google.maps.event.addListener(autocomplete, 'place_changed', function () {
             var place = autocomplete.getPlace();
-           // console.log(place.formatted_address);
-           // console.log(place);
+            console.log(place.formatted_address);
+            console.log(place);
             console.log(place);
            // console.log(place.geometry.viewport.f.b);
            // console.log(place.geometry.viewport.b.b);
