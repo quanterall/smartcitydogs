@@ -12,12 +12,12 @@
       </div>
 
   
-  <input id="autocomplete" placeholder="Enter your address" type="text"></input>
+  <!-- <input id="autocomplete" placeholder="Enter your address" type="text"></input> -->
 
 
     <label-2>2.Въведете местоположение</label-2>
       <div class="form-group">
-        <%= text_input f, :address, class: "form-control1", id: "autocomplete", required: true, minlength: 2 %>
+        <%= text_input f, :address, class: "form-control1", id: "autocomplete", required: true, minlength: 2, placeholder: "Въведете адрес....." %>
         <%= error_tag f, :address %>
       </div>
 
@@ -27,23 +27,23 @@
       </div>
 
 
-    <label-3>3.Заглавие на сигнала</label-3>
+    <!-- <label-3>3.Заглавие на сигнала</label-3>
       <div class="form-group">
         <%= text_input f, :title, class: "form-control1", required: true, minlength: 2 %>
         <%= error_tag f, :title %>
-      </div>
-    <label-4>4.Качете налични снимки/видео</label-4>
+      </div> -->
+    <label-4>3.Качете налични снимки/видео</label-4>
       <div class="form-group">
           <label for="signals_url" class="file-upload">
-            Качи снимки
+            Качи снимки / видео
           </label>
           <%= file_input f, :url, multiple: true, class: "form-control1", id: "signals_url" %>
           <%= error_tag f, :url %>
       </div>
     <br><br>
-    <label-5>5.Опишете ситуацията</label-5>
+    <label-5>4.Опишете ситуацията</label-5>
       <div class="form-group">
-       <%= textarea f, :description, class: "form-control1" %>
+       <%= textarea f, :description, class: "form-control1", placeholder: "Въведете описание...." %>
        <%= error_tag f, :description %>
       </div>
 
@@ -53,8 +53,8 @@
 
 
 
-    <%= submit "ПОДАЙ СИГНАЛ", class: "btn btn-submit" %> <br /><br />
-      <div class="close1 btn-primary">ОТКАЗ</div>
+    <%= submit "ПОДАЙ СИГНАЛ", class: "btn btn-submit" %> <br>
+      <div class="close-modal ">ОТКАЗ</div>
       </div>
     </div>
       <% end %>

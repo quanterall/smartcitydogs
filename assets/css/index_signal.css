@@ -49,6 +49,10 @@
   /* margin-bottom: 0px; */
 
 }
+.close-modal{
+  cursor: pointer;
+  float: right;
+}
 .col-container:hover{
 
   transition: 0.5s;
@@ -153,12 +157,14 @@ margin-left: -10px;
 .icon-scale{
   font-size: 10px;
 }
+
 @media (max-width: 4000px){
   .container-filter button{
     /* margin-bottom: 30%; */
     text-align:justify;
   }
 }
+
 @media (max-width:1366px){
   .col-container{
     width: 200px;
@@ -168,6 +174,7 @@ margin-left: -10px;
       margin-top: 20%;
   }
 }
+
 @media (max-width: 700px){
   .send-signal-container{
     min-width: 100%;
@@ -176,6 +183,7 @@ margin-left: -10px;
     min-width: 100%;
   }
 }
+
 @media (min-width: 750px){
 .col-lg-3 {
     -ms-flex: 0 0 25%;
@@ -183,6 +191,7 @@ margin-left: -10px;
     max-width: 45%;
   }
 }
+
 @media (min-width: 570px) and (max-width: 820px){
 .container-filter{
     width: 40%;
@@ -198,6 +207,7 @@ margin-left: -10px;
     margin-bottom: 30%;
   }
 }
+
 @media (max-width: 570px){
 .container-filter-signals{
   display: block;
@@ -233,6 +243,7 @@ margin-left: -10px;
   height: 350px;
 }
 }
+
 .col-lg-3{
     margin-top: 3%;
 }
@@ -442,6 +453,7 @@ close1.btn-primary{
 
 }
 
+/* ##############  New Signal Modal Window ####################*/
 
 .modal-content-signal{
   padding: 0px;
@@ -501,10 +513,15 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#2fd632', end
   padding-bottom: 3%;
   padding-left: 5px;
   margin-bottom: 0;
+  margin: 1%;
+  margin-top: 2vh;
+}
+input#autocomplete{
+  margin-left: 0px;
 }
 .container-new-signal .form-group .form-control{
   padding-left: 5px;
-  margin-bottom: 0;
+  margin-bottom: 0; 
 }
 .container-new-signal textarea:focus{
   border-color: white;
@@ -537,11 +554,11 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#2fd632', end
   /* padding-top: 1%;
   padding-left: 1%;
   padding-right: 4%; */
-  display: grid;
+  display: inline-block;
   /* padding: 1%; */
   margin: 0%;
   padding: 0%
-
+  
 }
 .container-new-signal .under-form .btn-submit:hover{
   background-color: white;
@@ -563,6 +580,8 @@ box-shadow: 0px 0px 45px -4px rgba(0,0,0,0.75);
 }
 .btn-submit{
   width: 50%;
+  display: inline-block;
+  float: left;
 }
 label-text-grey{
   color: white;
