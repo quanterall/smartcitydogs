@@ -51,7 +51,7 @@
     </div>
 
     
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDAnp2RXJIJARIGKIcxtUVdHD7-TyFCfe4&libraries=places">
+   
   <script type="text/javascript">
     var placeSearch, autocomplete;
     var Cordinate_a, Cordinate_b;

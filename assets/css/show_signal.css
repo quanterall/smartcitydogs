@@ -10,7 +10,7 @@
 }
 div.show-signal-right-container{
     padding-left: 5%;
-    padding-right: 5%;
+    /* padding-right: 5%; */
     margin-top: 11vh;
     margin-left: 50%;
     width: 50%;
@@ -35,7 +35,7 @@ show-signal-label-title{
     font-weight: bold;
     font-size: 40px;
 }
-.fa-map-marker{
+.fa-map-marker-alt{
     color: #00c790;
     margin-right: 2%;
 }
@@ -75,6 +75,7 @@ show-signal-label-title{
     
 }
 .title-table-td{
+    font-size: 10px;
     color: grey;
 }
 .show-signal-right-container #signal-id{
@@ -229,4 +230,17 @@ show-signal-label-description{
 }
 #comment:hover{
     cursor: pointer;
+}
+#submit-adoption{
+    width: 35%;
+    text-align: center;
+    padding: 10px 0;
+    border: 1px solid #00c790;
+    background-color: #00c790;
+    color: white;
+    cursor: pointer;
+    float: right;
+}
+.fa-check{
+    color: #00c790;
 }

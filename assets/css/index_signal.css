@@ -361,15 +361,19 @@ input#search-placeholder:focus{
 }
 
 .label-type-red{
+  font-weight: bold;
   color: red !important;
 }
 .label-type-orange{
+  font-weight: bold;
   color: orange !important;
 }
 .label-type-yellow{
+  font-weight: bold;
   color: yellow !important;
 }
 .label-type-green{
+  font-weight: bold;
   color: green !important;
 }
 .padination a{

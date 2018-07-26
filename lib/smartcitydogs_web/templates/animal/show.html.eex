@@ -1,21 +1,154 @@
-<h1><%= @animals.chip_number %></h1>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/all.css" integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ" crossorigin="anonymous">
+  
+  </head>
+  <body>
+      <div class="show-signal-container">
+        <div class="show-signal-left-container">
+          <div class="signal-photo-container">
+            <img class="photo-single-signal" src="/<%= get_image_animals_id(@animals.id) %>" alt="Generic placeholder image" width="300" height="200">
+          </div>
+        </div>
+        <div class="show-signal-right-container">
+            <div id="show_map" style="position: relative; display: none;">
+            </div>
+          <i class="far fa-window-close close2"></i>
+            <show-signal-label-status class="
+              <%= if @animals.animals_status_id == 1 do %>
+                            label-type-red
+                          <% end %>
+
+                          <%= if @animals.animals_status_id == 2 do %>
+                            label-type-green
+                          <% end %>
+
+                          <%= if @animals.animals_status_id == 3 do %>
+                            label-type-orange
+                          <% end %>
+            ">
+             <%# 
+            IO.puts "_______________________________________________ANIMALS__________________________"
+             IO.inspect(@animals)
+             IO.puts "_______________________________________________ANIMALS__________________________"
+              %>  
+              <%= @animals.animals_status_id
+                |> Smartcitydogs.DataAnimals.get_animal_status()
+                |> Map.get(:name)
+              %>
+            </show-signal-label-status>
+            <br>
+            <br>
+            <br>
+            <show-signal-label-adress>
+              <div class="fa fa-map-marker-alt" aria-hidden="false"></div><div class="address-style" id="test-address"><%=@animals.address%></div>
+            </show-signal-label-adress>
+            <a id="show-map" href="#">ВИЖ НА КАРТА</a>
+            <br><br><br>
+            
+            <show-signal-label-description>
+              <%=@animals.description%>
+            </show-signal-label-description>
+
+            <br><br><br>
+            <table class="table-under-form-signal">
+
+                <tr>
+                  <td class="title-table-td"> 
+                    <label-title-registered>
+                      ПОЛ
+                    </label-title-registered>
+                  </td>
+                  <td class="title-table-td">
+
+                    <label-title-view-count>
+                      ПНОМЕР НА ЧИП
+                    </label-title-view-count>
+                  </td>
+                  <td  class="title-table-td">
+                    <label-title-support-count>
+                      ДАТА НА РЕГИСТРИРАНЕ
+                    </label-title-support-count>
+                  </td>
+                </tr>
+              
+                <tr>
+                  <td class="green-td">
+                    <label-description-registered>
+                      <%= @animals.sex %>
+                    </label-description-registered>
+                  </td>
+                  <td class="green-td">
+                    <label-description-view-count>
+                      <%= @animals.chip_number %>
+                    </label-description-view-count>
+                  </td>
+                  <td class="green-td">  
+                    <label-description-support-count>
+                      <%=
+                      animal_time = @animals.inserted_at
+                              |> DateTime.truncate(:second)
+                              |> DateTime.to_string()
+                              count = String.length(animal_time)
+                              final_time = String.slice(animal_time,0..count-11)
+                              final_time
+                      %>
+                    </label-description-support-count>
+                  </td>
+                  </tr>
+                </table>  
+                <br>
+                
+                <div class="div-procedures">
+                  Извършени процедури <br> <br>
+                  <div class="procedures-all">
+                    <i class="fa fa-check"></i> Кастрирано<br>
+                    <i class="fa fa-check"></i> Обезпаразитено <br>
+                  </div>
+                </div> 
+                <br>
+                <br>
+                <div class="buttons-for-signal">
+                <a id="submit-adoption"><i class="fa fa-home"></i> ОСИНОВИ </a>
+                <div>
 
 
-<ul>
-  <li>  
-       
-     <img class="quare" src="/<%= get_image_animals_id(@animals.id) %>" alt="Generic placeholder image" width="140" height="140">      
-   </li>
-  <li>Chip Number: <%= @animals.chip_number %></li>
-  <li>Sex: <%= @animals.sex %></li>
-  <li>Address: <%= @animals.address %></li>
-  <li>Register Date: <%= @animals.registered_at %></li>
-  <li>Status: <%= @animals.animals_status.name %></li>
-  <li>History (кога е прибирано)  <%= @animals.id %></li>
-  <li> Извършени процедури  </li>
-</ul>
+
+          <%# <%= link "Edit", to: animal_path(@conn, :edit, @animals), class: "btn btn-default btn-xs" %> 
+        </div>
 
 
-<%= link "Back", to: animal_path(@conn, :index), class: "btn btn-default btn-xs" %>
 
-<%= link "Edit", to: animal_path(@conn, :edit, @animals), class: "btn btn-default btn-xs" %>
+        <script>
+        $('#show_map').hide();
+        $('.close2').hide();
+        var cor_a = $('#cor-a').text();
+        var cor_b = $('#cor-b').text();
+        function ShowMap() {
+          console.log(cor_a);
+          console.log(cor_b);
+          var mapCanvas = document.getElementById("show_map");
+          var myCenter = new google.maps.LatLng(cor_a, cor_b);
+          var mapOptions = {
+              center: myCenter,
+              zoom: 18,
+              mapTypeId: google.maps.MapTypeId.ROADMAP
+          };
+          
+          var map = new google.maps.Map(mapCanvas, mapOptions);
+          var marker = new google.maps.Marker({
+            position: myCenter,
+            animation: google.maps.Animation.BOUNCE
+          });
+          console.log(marker);
+          marker.setMap(map);
+        }
+      </script>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDAnp2RXJIJARIGKIcxtUVdHD7-TyFCfe4&callback=ShowMap"></script>
+  </body>
+</html>

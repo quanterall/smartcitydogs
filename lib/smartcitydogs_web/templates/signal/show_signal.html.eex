@@ -8,36 +8,18 @@
   
   </head>
 <body>
-
- 
-
-  
   <div id="cor-a"><%= @signal.address_F %></div>
        <div id="cor-b"><%= @signal.address_B %></div>
-       
-        
-
   <div class="show-signal-container">
     <div class="show-signal-left-container">
       <div class="signal-photo-container">
         <img class="photo-single-signal" src="/<%= get_signals_images(@signal.id) %>" alt="Generic placeholder image" width="300" height="200">
       </div>
     </div>
-
-    
-
-      
-
     <div class="show-signal-right-container">
-       
             <div id="show_map" style="position: relative; display: none;">
             </div>
-       
-      
-        <%# <div class="close2"><i class="far fa-times"></i>
-        </div> %>
         <i class="far fa-window-close close2"></i>
-
             <show-signal-label-status class="
                           <%= if @signal.signals_types_id == 1 do %>
                             label-type-red
@@ -69,13 +51,15 @@
             <br>
 
             <show-signal-label-adress>
-              <div class="fa fa-map-marker" aria-hidden="true"></div><div class="address-style" id="test-address"><%=@signal.address%></div>
+              <div class="fa fa-map-marker-alt" aria-hidden="true"></div><div class="address-style" id="test-address"><%=@signal.address%></div>
             </show-signal-label-adress>
             <a id="show-map" href="#">ВИЖ НА КАРТА</a>
            
             <br>
             <br>
             <br>
+            
+           
 
             <show-signal-label-description>
               <%=@signal.description%>
@@ -155,10 +139,6 @@
                 <% else %><a id="submit-like1">ПОСЛЕДВАЙ</a><%end%><div id="comment" >КОМЕНТИРАЙ</div>
             </div>
             <a id="signal-id"><%= @signal.id %></a>
-            <%# class="btn btn-secondary" %>
-
-          
-
           <br><br>
           <br><br>
           <div class="comment_section" style="display: none;">
@@ -170,17 +150,10 @@
             </div>
           <br>
           <br>
-       
-
         <br>
-
-         
-
             <p class="comments-count">Коментари(<%= Enum.count(@comments_count)%>)</p>
             <br>
-            
             <hr>
-           
             <%= for comment <- @comments do %>
             <%= if @signal.id == comment.signals_id do %>
                 <p class="username-comments-signal"><%= comment.users.username %></p><p class="date-comments-signal">
@@ -227,8 +200,6 @@
         }
       </script>
 
-<%# <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDAnp2RXJIJARIGKIcxtUVdHD7-TyFCfe4&callback=ShowMap"></script> %>
-
-
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDAnp2RXJIJARIGKIcxtUVdHD7-TyFCfe4&callback=ShowMap"></script>
 </body>
 </html>

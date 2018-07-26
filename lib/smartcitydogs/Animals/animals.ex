@@ -7,10 +7,11 @@ defmodule Smartcitydogs.Animals do
 
   schema "animals" do
     field(:address, :string)
-    field(:adopted_at, :naive_datetime)
+    field(:address_B, :float)
+    field(:address_F, :float)
+    field(:description, :string)
     field(:chip_number, :string)
     field(:deleted_at, :naive_datetime)
-    field(:registered_at, :naive_datetime)
     field(:sex, :string)
     has_many(:animals_image, Smartcitydogs.AnimalImages)
     has_many(:performed_procedure, Smartcitydogs.PerformedProcedures)
@@ -24,12 +25,13 @@ defmodule Smartcitydogs.Animals do
   def changeset(animals, attrs \\ %{}) do
     animals
     |> cast(attrs, [
+      :address_B,
+      :address_F,
+      :description,
       :sex,
       :chip_number,
       :address,
       :deleted_at,
-      :registered_at,
-      :adopted_at,
       :animals_status_id
     ])
     |> validate_required([:sex, :chip_number, :address])
