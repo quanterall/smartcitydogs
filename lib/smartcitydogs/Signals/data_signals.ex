@@ -27,6 +27,22 @@ defmodule Smartcitydogs.DataSignals do
     |> Repo.update()
   end
 
+  def follow_signal(id) do
+    signal = get_signal(id)
+    follow_number = Map.get(signal, :support_count)
+    signal
+    |> Signals.changeset(%{support_count: follow_number + 1})
+    |> Repo.update()
+  end
+
+  def unfollow_signal(id) do
+    signal = get_signal(id)
+    follow_number = Map.get(signal, :support_count)
+    signal
+    |> Signals.changeset(%{support_count: follow_number - 1})
+    |> Repo.update()
+  end
+
   def get_user_signal(users_id) do
     query = Ecto.Query.from(c in Signals, where: c.users_id == ^users_id)
     Repo.all(query)

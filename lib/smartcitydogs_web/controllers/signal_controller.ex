@@ -13,6 +13,9 @@ defmodule SmartcitydogsWeb.SignalController do
   plug(:put_layout, false when action in [:filter_animals])
   plug(:put_layout, false when action in [:new])
 
+  action_fallback(SmartCityDogsWeb.FallbackController)
+
+  
   def index(conn, params) do
     if params == %{} do
       x = 1
@@ -195,6 +198,11 @@ defmodule SmartcitydogsWeb.SignalController do
 
   def remove_like(conn, %{"show-count" => show_count, "show-id" => show_id}) do
     signal = DataSignals.get_signal(show_id)
+##    show_count = String.to_integer(show_count)
+    show_id = String.to_integer(show_id)
+   ## signal = DataSignals.get_signal(show_id)
+    ## IO.inspect signal
+  ##  IO.puts("_____________________________________________REMOVE_LIKE_________________________")
     user_id = conn.assigns.current_user.id
 
     DataUsers.remove_liked_signal(user_id, show_id)
@@ -205,7 +213,14 @@ defmodule SmartcitydogsWeb.SignalController do
   end
 
   def update_like_count(conn, %{"show-count" => show_count, "show-id" => show_id}) do
+    show_count = String.to_integer(show_count)
+    show_id = String.to_integer(show_id)
+    IO.inspect show_count
+    IO.inspect show_id
+    ## IO.inspect show_id
     signal = DataSignals.get_signal(show_id)
+    ## IO.inspect signal
+     IO.puts "rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr"
     user_id = conn.assigns.current_user.id
     DataUsers.add_liked_signal(user_id, show_id)
     count = get_signals_support_count(show_id)
