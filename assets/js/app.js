@@ -119,7 +119,7 @@ window.login = function () {
     $.post("/api/users/sign_in", params)
         .done(function (data) {
             if ((data.users_types_id == 4) || (data.users_types_id == 5)) {
-                window.location.href = "index_home_minicipality";
+                window.location.href = "minicipality_signals";
             }
             else {
                 location.reload();
