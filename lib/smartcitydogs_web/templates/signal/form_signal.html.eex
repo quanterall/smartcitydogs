@@ -11,7 +11,9 @@
               ]) %>
       </div>
 
-  
+<!-- <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyDAnp2RXJIJARIGKIcxtUVdHD7-TyFCfe4
+&signed_in=true&libraries=places"></script>
+   -->
   <!-- <input id="autocomplete" placeholder="Enter your address" type="text"></input> -->
 
 
@@ -60,8 +62,8 @@
       <% end %>
     </div>
 
-    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyDAnp2RXJIJARIGKIcxtUVdHD7-TyFCfe4&signed_in=true&libraries=places"></script>
-
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDAnp2RXJIJARIGKIcxtUVdHD7-TyFCfe4&libraries=places"></script>
+    <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDAnp2RXJIJARIGKIcxtUVdHD7-TyFCfe4&libraries=places&language=en" ></script> -->
 
   <script type="text/javascript">
     var placeSearch, autocomplete;
@@ -70,10 +72,12 @@
 
         autocomplete = new google.maps.places.Autocomplete(document.getElementById('autocomplete'));
         console.log(autocomplete);
+        console.log("AUTOCOPLETE!!!!")
         google.maps.event.addListener(autocomplete, 'place_changed', function () {
             var place = autocomplete.getPlace();
            // console.log(place.formatted_address);
            // console.log(place);
+           console.log("PLACE!!!!")
             console.log(place);
            // console.log(place.geometry.viewport.f.b);
            // console.log(place.geometry.viewport.b.b);
@@ -100,9 +104,11 @@
         });
     }
 
-    initialize();
+    //initialize();
 
   </script>
+
+
 
 </body>
 </html>

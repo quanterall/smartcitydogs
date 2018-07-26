@@ -203,3 +203,6 @@ $(window).scroll(function(e){
 $('.navbar-collapse').on('show.bs.collapse', function() {
     $(".top-navbar").removeClass("navbar-home");
 });
+
+
+    
