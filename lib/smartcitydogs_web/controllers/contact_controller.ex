@@ -10,7 +10,8 @@ defmodule SmartcitydogsWeb.ContactController do
     changeset = User.changeset(%User{})
     if conn.assigns.current_user != nil do
       changeset = User.changeset(conn.assigns.current_user)
-      render(conn, "newcontact.html", changeset: changeset, action: contact_path(conn, :create))
+      id = conn.assigns.current_user.id
+      render(conn, "newcontact.html", changeset: changeset, action: contact_path(conn, :update, id))
     else
     render(conn, "new.html", changeset: changeset, action: contact_path(conn, :create))
     end

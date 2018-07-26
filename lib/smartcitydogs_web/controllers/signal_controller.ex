@@ -196,7 +196,6 @@ defmodule SmartcitydogsWeb.SignalController do
   end
 
   def remove_like(conn, %{"show-count" => show_count, "show-id" => show_id}) do
-   
     signal = DataSignals.get_signal(show_id)
     user_id = conn.assigns.current_user.id
     

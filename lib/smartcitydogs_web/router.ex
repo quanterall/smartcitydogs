@@ -130,7 +130,7 @@ defmodule SmartcitydogsWeb.Router do
 
       get("/signals/get_signals_support_count", SignalController, :get_signals_support_count)
       get("/signals/update_like_count", SignalController, :update_like_count)
-      
+      get("/signals/remove_like", SignalController, :remove_like)
 
       get("/signals/followed_signals", SignalController, :followed_signals)
       get("/signals/update_type", SignalController, :update_type)
@@ -151,7 +151,8 @@ defmodule SmartcitydogsWeb.Router do
         get("/signals/comment", SignalController, :comment)
         get("/signals/get_signals_support_count", SignalController, :get_signals_support_count)
         get("/signals/update_like_count", SignalController, :update_like_count)
-
+        get("/signals/remove_like", SignalController, :remove_like)
+        
         resources("/contact", ContactController, only: [:new, :create, :edit, :update])
 
         resources("/signals", SignalController)
