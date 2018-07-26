@@ -21,7 +21,6 @@
         </div>
     </div>
 
-    <%= x = []%>
     <div class="registered-dogs-div">
       <div class="row">
         <%= for animal <- @animals do %>
@@ -44,7 +43,6 @@
                     <% end %>"><%= animal.animals_status.name %>
                   </label-type>
                   <br />
-     <%= x = animal.chip_number %>
                   <label-text-grey>
                     ПОЛ
                   </label-text-grey>
@@ -93,7 +91,6 @@
                 </div>
               </div>
             </div>
-          
         <%end%>
       </div>
       

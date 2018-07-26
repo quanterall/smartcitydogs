@@ -1,29 +1,149 @@
-<h1> News </h1>
+<meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <title>Document</title>
+        
+    <link rel="stylesheet" type="text/css" href="/css/news.css"/>
+
+</head>
 
 <div class="container">
-          <!-- Three columns of text below the carousel -->
+
+    <div class="row">
+    
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+      
         
-          <div class="row">
-          <%= for news <- @news do %>
-            <div class="col-lg-4">
-              <img class="rounded-circle" src="<%=  news.image_url %>" alt="Generic placeholder image" width="140" height="140">
-              <h2><%= news.title%></h2>
-              <ul>
-               
-                <li>
-                  short content <%= news.short_content%>
-                </li>
-                <li>
-                  Date: <%= news.date %>
-                </li>
-              </ul>
-              <p>
-              <%= link "View more »", to: news_path(@conn, :show, news), class: "btn btn-secondary" %>
+            
+          <div class="carousel-inner">
+          <p class="carousel-caption2">04May18</p>
+          <div class="carousel-caption"> Example text of something</div>
+          <p style="color: white;" class="carousel-caption3">04May18</p>
+            <div class="item"> <img class="img-responsive" src="images/1.jpg" alt="thumb">
+            
             
             </div>
-            <%end%>
-          </div><!-- /.row -->
-         
-           
-          
+            
+            <div class="item active"> <img class="img-responsive" src="images/1.jpg" alt="thumb">
+            
+              <div class="carousel-caption"></div>
+              
+            </div>
+            
+            <div class="item">
+            
+              <div class="carousel-caption"></div>
+              
+            </div>
+            
+          </div>
+     
+      </div>
+      
+      </div>
+      
+      
+ <div class="container">
+     <br></br>
+      <div class="UnderMain1  varnaright"> 
+      <div class="col-container-shadow">
+      <div class="containernews">
+     
+      <div  class=>04 MAY18</div>
+      <div  class="">Example Headline of the latest news article</div>
+  <button class="ifformnews" type="submit">See more</button>
+  </div>
+  </div>
+      </div>
+      <div class="UnderMain2  varnaleft">
+       <div class="col-container-shadow">
+       <div class="containernews">
+      <div  class=>04 MAY18</div>
+      <div  class="">Example Headline of the latest news article</div>
+  <button class="ifformnews" type="submit">See more</button>
+  </div>
+  </div>
+      </div>
+
+<br></br>
+<br></br>
+  <div style="clear:both" class="row text-center">
+  
+    <div class="col-sm-4 col-md-4 col-lg-4 col-xs-6">
+      <div class="thumbnail"> <img src="images/church.jpg" alt="Thumbnail Image 1" class="img-responsive">
+        <div class="caption">
+        <p>04 MAY 18</p>
+          <h2>Headline of a news article</h2>
+          <p>Some Text TEXT TEXT TEXT TEXT TEXT TEXT TEXT TECT TEXT TEXT TEXT TEXT</p>
+        </div>
+      </div>
+    </div>
+     <div class="col-sm-4 col-md-4 col-lg-4 col-xs-6">
+      <div class="thumbnail"> <img src="images/church.jpg" alt="Thumbnail Image 1" class="img-responsive">
+        <div class="caption">
+        <p>04 MAY 18</p>
+          <h2>Headline of a news article</h2>
+          <p>Some Text TEXT TEXT TEXT TEXT TEXT TEXT TEXT TECT TEXT TEXT TEXT TEXT</p>
+        </div>
+      </div>
+    </div>
+    
+   <div class="col-sm-4 col-md-4 col-lg-4 col-xs-6">
+      <div class="thumbnail"> <img src="images/church.jpg" alt="Thumbnail Image 1" class="img-responsive">
+        <div class="caption">
+        <p>04 MAY 18</p>
+          <h2>Headline of a news article</h2>
+          <p>Some Text TEXT TEXT TEXT TEXT TEXT TEXT TEXT TECT TEXT TEXT TEXT TEXT</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-4 col-md-4 col-lg-4 col-xs-6">
+      <div class="thumbnail"> <img src="images/church.jpg" alt="Thumbnail Image 1" class="img-responsive">
+        <div class="caption">
+        <p>04 MAY 18</p>
+          <h2>Headline of a news article</h2>
+          <p>Some Text TEXT TEXT TEXT TEXT TEXT TEXT TEXT TECT TEXT TEXT TEXT TEXT</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-4 col-md-4 col-lg-4 col-xs-6">
+      <div class="thumbnail"> <img src="images/church.jpg" alt="Thumbnail Image 1" class="img-responsive">
+        <div class="caption">
+        <p>04 MAY 18</p>
+          <h2>Headline of a news article</h2>
+          <p>Some Text TEXT TEXT TEXT TEXT TEXT TEXT TEXT TECT TEXT TEXT TEXT TEXT</p>
+        </div>
+      </div>
+    </div>
+  
+  <div class="col-sm-4 col-md-4 col-lg-4 col-xs-6">
+      <div class="thumbnail"> <img src="images/church.jpg" alt="Thumbnail Image 1" class="img-responsive">
+        <div class="caption">
+        <p>04 MAY 18</p>
+          <h2>Headline of a news article</h2>
+          <p>Some Text TEXT TEXT TEXT TEXT TEXT TEXT TEXT TECT TEXT TEXT TEXT TEXT</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+      <div class="thumbnail"> <img src="images/church.jpg" alt="Thumbnail Image 1" class="img-responsive">
+        <div class="caption">
+        <p>04 MAY 18</p>
+          <h2>Headline of a news article</h2>
+          <p>Some Text TEXT TEXT TEXT TEXT TEXT TEXT TEXT TECT TEXT TEXT TEXT TEXT</p>
+        </div>
+      </div>
+    </div>
+  <div class="col-sm-4 col-md-4 col-lg-4 col-xs-6">
+      <div class="thumbnail"> <img src="images/church.jpg" alt="Thumbnail Image 1" class="img-responsive">
+        <div class="caption">
+        <p>04 MAY 18</p>
+          <h2>Headline of a news article</h2>
+          <p>Some Text TEXT TEXT TEXT TEXT TEXT TEXT TEXT TECT TEXT TEXT TEXT TEXT</p>
+        </div>
+      </div>
+    </div>
+    </div>
+    
 </div>
