@@ -199,6 +199,11 @@ defmodule SmartcitydogsWeb.SignalController do
    
     signal = DataSignals.get_signal(show_id)
     user_id = conn.assigns.current_user.id
+    IO.puts "______________________REMOVE_LIKE_CHECK_________________________________"
+    IO.inspect(signal)
+    IO.puts "______________________REMOVE_LIKE_CHECK_________________________________"
+    IO.inspect(user_id)
+    IO.puts "______________________REMOVE_LIKE_CHECK_________________________________"
     
     DataUsers.remove_liked_signal(user_id, show_id)
     count = get_signals_support_count_minus(show_id)

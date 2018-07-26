@@ -25,6 +25,27 @@ defmodule Smartcitydogs.Email do
     )
   end
 
+  def send_email(data) do
+    new_email()
+    |> to("smartcitydogs@gmail.com")
+    |> from(data["user_email"])
+    |> subject("Заявка за осиновяване.")
+    |> text_body(
+      "
+      Желая да осиновя куче с номер на чипа: #{data["chip_number"]} .
+
+      Данни:
+
+      Име: #{data["user_name"]},
+      Фамилия: #{data["user_last_name"]},
+      Имейл: #{data["user_email"]},
+      Телефонен номер: #{data["user_phone"]}
+      "
+    )
+    |> Smartcitydogs.Mailer.deliver_now()
+    
+  end
+
   def send_unauth_contact_email(topic, text, user_data) do
     new_email()
     |> to(System.get_env("SMTP_USERNAME"))

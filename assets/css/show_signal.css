@@ -244,3 +244,6 @@ show-signal-label-description{
 .fa-check{
     color: #00c790;
 }
+.hide_for_ajax{
+    display: none;
+}
