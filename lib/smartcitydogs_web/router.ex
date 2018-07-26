@@ -72,9 +72,8 @@ defmodule SmartcitydogsWeb.Router do
     resources("/news", NewsSchemaControllerAPI, except: [:new, :edit])
     resources("/static_pages", StaticPageControllerAPI, except: [:new, :edit])
 
-
-      # post("/signals/add_comment_like", SignalController, :add_comment_like)
-      # post("/signals/add_comment_dislike", SignalController, :add_comment_dislike)
+    # post("/signals/add_comment_like", SignalController, :add_comment_like)
+    # post("/signals/add_comment_dislike", SignalController, :add_comment_dislike)
   end
 
   scope "/", SmartcitydogsWeb do
@@ -109,8 +108,6 @@ defmodule SmartcitydogsWeb.Router do
       get("/users", UserController, :index)
       get("/users/:id", UserController, :show)
 
-      
-
       resources("/animals", AnimalController)
       resources("/news", NewsController)
       get("/show", PageController, :show)
@@ -125,12 +122,11 @@ defmodule SmartcitydogsWeb.Router do
       get("/minicipality_adopted", AnimalController, :minicipality_adopted)
       get("/minicipality_signals", SignalController, :minicipality_signals)
       #########################  /Minicipality Home Page ########################
-         
+
       get("/signals/comment", SignalController, :comment)
 
       get("/signals/get_signals_support_count", SignalController, :get_signals_support_count)
       get("/signals/update_like_count", SignalController, :update_like_count)
-      
 
       get("/signals/followed_signals", SignalController, :followed_signals)
       get("/signals/update_type", SignalController, :update_type)

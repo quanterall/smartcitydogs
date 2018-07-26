@@ -49,10 +49,10 @@ defmodule SmartcitydogsWeb.SessionController do
   # end
 
   def create(conn, %{"session" => %{"email" => email, "password" => password}}) do
-    IO.puts "BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB"
+    IO.puts("BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB")
+
     case Smartcitydogs.Auth.login_by_email_and_pass(conn, email, password) do
       {:ok, conn} ->
-        
         conn
         |> put_flash(:info, "You’re now signed in!")
         |> redirect(to: page_path(conn, :index))
@@ -65,7 +65,6 @@ defmodule SmartcitydogsWeb.SessionController do
   end
 
   def callback(%{assigns: %{ueberauth_auth: auth}} = conn, _params) do
-  
     case Smartcitydogs.DataUsers.get_user_by_email!(auth.info.email) do
       nil ->
         case Smartcitydogs.DataUsers.create_user_from_auth(auth) do

@@ -24,15 +24,10 @@
       </div>
     </div>
 
-    
-
-      
-
     <div class="show-signal-right-container">
        
-            <div id="show_map" style="position: relative; display: none;">
-            </div>
-       
+      <div id="show_map" style="position: relative; display: none;">
+      </div>
       
         <%# <div class="close2"><i class="far fa-times"></i>
         </div> %>
@@ -59,30 +54,23 @@
               |> Map.get(:name)
               %>
             </show-signal-label-status>
-            <br>
-            <br>
+            <br> <br>
             <show-signal-label-title>
               <%=@signal.title%>
             </show-signal-label-title>
-            <br>
-            <br>
-            <br>
+            <br> <br> <br>
 
             <show-signal-label-adress>
               <div class="fa fa-map-marker" aria-hidden="true"></div><div class="address-style" id="test-address"><%=@signal.address%></div>
             </show-signal-label-adress>
             <a id="show-map" href="#">ВИЖ НА КАРТА</a>
            
-            <br>
-            <br>
-            <br>
+            <br> <br> <br>
 
             <show-signal-label-description>
               <%=@signal.description%>
             </show-signal-label-description>
-            <br>
-            <br>
-            <br>
+            <br> <br> <br>
 
             <div class="show-signal-under-description">
               <div class="show-signal-under-description-title">
@@ -111,9 +99,6 @@
                     </label-title-comments>
                   </td>
                 </tr>
-                              
-              
-              
                 <tr>
                   <td class="green-td">
                     <label-description-registered>
@@ -157,10 +142,7 @@
             <a id="signal-id"><%= @signal.id %></a>
             <%# class="btn btn-secondary" %>
 
-          
-
-          <br><br>
-          <br><br>
+          <br><br><br><br>
           <div class="comment_section" style="display: none;">
             <textarea name="message" id="comment-id" value="" rows="6" cols="60">
             </textarea>
@@ -168,13 +150,7 @@
             <div class="close_comment">ОТКАЗ</div><a class="submit_comment" href="/signals/<%= @signal.id %>" role="button">ПУБЛИКУВАЙ</a>
             </div>
             </div>
-          <br>
-          <br>
-       
-
-        <br>
-
-         
+          <br> <br> <br>
 
             <p class="comments-count">Коментари(<%= Enum.count(@comments_count)%>)</p>
             <br>
@@ -227,7 +203,7 @@
         }
       </script>
 
-<!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDAnp2RXJIJARIGKIcxtUVdHD7-TyFCfe4&callback=ShowMap"></script> -->
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDAnp2RXJIJARIGKIcxtUVdHD7-TyFCfe4&callback=ShowMap"></script>
 
 
 </body>
