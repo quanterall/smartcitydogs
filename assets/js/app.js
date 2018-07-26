@@ -54,7 +54,7 @@ $('#show-map').click(function() {
 
 $('#submit-like1').on('click',function(){
     var a = $('#submit-like1').text();
-    console.log(a);
+
   if(a == "ПОСЛЕДВАЙ"){
     $.ajax({
         method: "GET",
@@ -65,7 +65,6 @@ $('#submit-like1').on('click',function(){
         }
     }).then(function(data) {
         $("#signal-count").text(data.new_count);
-
     })
 
     $('#submit-like1').text("ОТСЛЕДВАЙ");

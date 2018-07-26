@@ -12,9 +12,9 @@ defmodule Smartcitydogs.Repo.Migrations.CreateUsersTable do
       add(:reset_password_token, :text)
       add(:reset_token_sent_at, :naive_datetime)
       add(:deleted_at, :naive_datetime)
-      add(:liked_signals, {:array, :string})
-      add(:liked_comments, {:array, :string})
-      add(:disliked_comments, {:array, :string})
+      add(:liked_signals, {:array, :integer})
+      add(:liked_comments, {:array, :integer})
+      add(:disliked_comments, {:array, :integer})
       ## add(:contact, :json)
       timestamps()
     end
