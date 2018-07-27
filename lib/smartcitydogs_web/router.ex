@@ -83,10 +83,13 @@ defmodule SmartcitydogsWeb.Router do
 
     get("/", PageController, :index)
     get("/signals", SignalController, :index)
+    get("/signals/:id", SignalController, :show)
+    #  resources("/animals", SignalController, only: [:show, :index])
     get("/signals/filter_index", SignalController, :filter_index)
 
     get("/animals/filter_index", AnimalController, :filter_index)
     get("/animals", AnimalController, :index)
+    get("/animals/:id", AnimalController, :show)
 
     resources("/sessions", SessionController, only: [:new, :create, :delete])
 

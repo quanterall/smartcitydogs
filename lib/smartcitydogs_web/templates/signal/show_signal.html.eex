@@ -76,68 +76,68 @@
               <div class="show-signal-under-description-title">
                <table class="table-under-form-signal">
 
-              <tr>
-                <td class="title-table-td"> 
-                  <label-title-registered>
-                    ДАТА НА ПУСКАНЕ
-                  </label-title-registered>
-                </td>
-                <td class="title-table-td">
+                <tr>
+                  <td class="title-table-td"> 
+                    <label-title-registered>
+                      ДАТА НА ПУСКАНЕ
+                    </label-title-registered>
+                  </td>
+                  <td class="title-table-td">
 
-                  <label-title-view-count>
-                    ПРЕГЛЕЖДАНИЯ
-                  </label-title-view-count>
-                </td>
-                <td  class="title-table-td">
-                  <label-title-support-count>
-                    ПОДКРЕПИ
-                  </label-title-support-count>
-                </td>
-                <td  class="title-table-td">
-                  <label-title-comments>
-                    КОМЕНТАРИ
-                  </label-title-comments>
-                </td>
-              </tr>
-              <tr>
-              <td class="green-td">
-                <label-description-registered>
-                  <%=
-                  signal_time = @signal.inserted_at
-                          |> DateTime.truncate(:second)
-                          |> DateTime.to_string()
-                          count = String.length(signal_time)
-                          final_time = String.slice(signal_time,0..count-11)
-                          final_time
-                  %>
-                </label-description-registered>
-              </td>
-              <td class="green-td">
-                <label-description-view-count>
-                  <%= get_signals_view_count(@signal.id)  %>
-                </label-description-view-count>
-              </td>
-              <td class="green-td">  
-                <label-description-support-count>
-                  <a id="signal-count"><%=@signal.support_count%></a>
-                </label-description-support-count>
-              </td>
-              <td class="green-td">
-                <label-description-comments>
-                  <%= Enum.count(@comments_count) %>
-                </label-description-comments>
-              </td>
-            </tr>
-          </table>  
+                    <label-title-view-count>
+                      ПРЕГЛЕЖДАНИЯ
+                    </label-title-view-count>
+                  </td>
+                  <td  class="title-table-td">
+                    <label-title-support-count>
+                      ПОДКРЕПИ
+                    </label-title-support-count>
+                  </td>
+                  <td  class="title-table-td">
+                    <label-title-comments>
+                      КОМЕНТАРИ
+                    </label-title-comments>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="green-td">
+                    <label-description-registered>
+                      <%=
+                      signal_time = @signal.inserted_at
+                              |> DateTime.truncate(:second)
+                              |> DateTime.to_string()
+                              count = String.length(signal_time)
+                              final_time = String.slice(signal_time,0..count-11)
+                              final_time
+                      %>
+                    </label-description-registered>
+                  </td>
+                  <td class="green-td">
+                    <label-description-view-count>
+                      <%= get_signals_view_count(@signal.id)  %>
+                    </label-description-view-count>
+                  </td>
+                  <td class="green-td">  
+                    <label-description-support-count>
+                      <a id="signal-count"><%=@signal.support_count%></a>
+                    </label-description-support-count>
+                  </td>
+                  <td class="green-td">
+                    <label-description-comments>
+                      <%= Enum.count(@comments_count) %>
+                    </label-description-comments>
+                  </td>
+                  </tr>
+                </table>  
               
-          </div>
-          <br><br>
-          <div class="buttons-for-signal">
-              <% list_of_liked_signals = @conn.assigns.current_user.liked_signals %>
-              <%= if Enum.member?(list_of_liked_signals,@signal.id) do %><a id="submit-like1">ОТСЛЕДВАЙ</a>
-              <% else %><a id="submit-like1">ПОСЛЕДВАЙ</a><%end%><div id="comment" >КОМЕНТИРАЙ</div>
-          </div>
-          <a id="signal-id"><%= @signal.id %></a>
+            </div>
+            <br><br>
+            <div class="buttons-for-signal">
+               <% list_of_liked_signals = @conn.assigns.current_user.liked_signals %>
+                <%= if Enum.member?(list_of_liked_signals,@signal.id) do %><a id="submit-like1">ОТСЛЕДВАЙ</a>
+                <% else %><a id="submit-like1">ПОСЛЕДВАЙ</a><%end%><div id="comment" >КОМЕНТИРАЙ</div>
+            </div>
+            <a id="signal-id"><%= @signal.id %></a>
             <%# class="btn btn-secondary" %>
 
           <br><br><br><br>
@@ -145,9 +145,9 @@
             <textarea name="message" id="comment-id" value="" rows="6" cols="60">
             </textarea>
             <div class="under_comment">
-             <div class="close_comment">ОТКАЗ</div><a class="submit_comment" href="/signals/<%= @signal.id %>" role="button">ПУБЛИКУВАЙ</a>
+            <div class="close_comment">ОТКАЗ</div><a class="submit_comment" href="/signals/<%= @signal.id %>" role="button">ПУБЛИКУВАЙ</a>
             </div>
-          </div>
+            </div>
           <br> <br> <br>
 
             <p class="comments-count">Коментари(<%= Enum.count(@comments_count)%>)</p>
@@ -159,15 +159,15 @@
             <%= if @signal.id == comment.signals_id do %>
                 <p class="username-comments-signal"><%= comment.users.username %></p><p class="date-comments-signal">
                 <%=
-                  signal_time = comment.inserted_at
-                          |> DateTime.truncate(:second)
-                          |> DateTime.to_string()
-                          count = String.length(signal_time)
-                          final_time = String.slice(signal_time,0..count-11)
-                          final_time
-                  %>
-                  </p>
-                  <br><br>
+                signal_time = comment.inserted_at
+                        |> DateTime.truncate(:second)
+                        |> DateTime.to_string()
+                        count = String.length(signal_time)
+                        final_time = String.slice(signal_time,0..count-11)
+                        final_time
+                %>
+                </p>
+                <br><br>
                   <p class="username-comment-on-signal"><%= comment.comment #Smartcitydogs.DataSignals.get_comment_signal_id(@signal.id)  %></p> 
                 <hr>
                 <% end %>

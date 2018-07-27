@@ -189,11 +189,15 @@ defmodule SmartcitydogsWeb.AnimalController do
   end
 
   def show(conn, %{"id" => id}) do
-    animal = DataAnimals.get_animal(id)
-    logged_user_type_id = conn.assigns.current_user.users_types.id
+    animal = DataAnimals.get_animal(id)    
 
-    if logged_user_type_id == 3 do
-      render(conn, SmartcitydogsWeb.ErrorView, "401.html")
+    if conn.assigns.current_user != nil do
+    logged_user_type_id = conn.assigns.current_user.users_types.id
+      if logged_user_type_id == 3 do
+        render(conn, SmartcitydogsWeb.ErrorView, "401.html")
+      else
+        render(conn, "show.html", animals: animal)
+      end
     else
       render(conn, "show.html", animals: animal)
     end
