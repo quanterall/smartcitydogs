@@ -11,7 +11,9 @@
               ]) %>
       </div>
 
-  
+<!-- <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyDAnp2RXJIJARIGKIcxtUVdHD7-TyFCfe4
+&signed_in=true&libraries=places"></script>
+   -->
   <!-- <input id="autocomplete" placeholder="Enter your address" type="text"></input> -->
 
 
@@ -93,6 +95,8 @@
         }
     </script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDAnp2RXJIJARIGKIcxtUVdHD7-TyFCfe4&libraries=places&callback=initialize" async defer></script>
+
+
 
 </body>
 </html>
