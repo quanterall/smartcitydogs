@@ -8,7 +8,13 @@ defmodule SmartcitydogsWeb.ContactController do
 
   def new(conn, _params) do
     changeset = User.changeset(%User{})
+    if conn.assigns.current_user != nil do
+      changeset = User.changeset(conn.assigns.current_user)
+      id = conn.assigns.current_user.id
+      render(conn, "newcontact.html", changeset: changeset, action: contact_path(conn, :update, id))
+    else
     render(conn, "new.html", changeset: changeset, action: contact_path(conn, :create))
+    end
   end
 
   def create(conn, %{"user" => user_params}) do
@@ -31,7 +37,7 @@ defmodule SmartcitydogsWeb.ContactController do
     topic = Map.get(user_params, "topic")
     text = Map.get(user_params, "text")
     contact_map = %{topic: topic, text: text, users_id: id}
-    
+
     DataUsers.create_contact(contact_map)
 
     user_sender = DataUsers.get_user!(id)

@@ -5,6 +5,7 @@ defmodule SmartcitydogsWeb.SessionController do
   plug(Ueberauth)
   plug(:scrub_params, "session" when action in ~w(create)a)
   import Comeonin.Bcrypt, only: [checkpw: 2, dummy_checkpw: 0]
+  import Logger
 
   alias Smartcitydogs.User
 
@@ -49,10 +50,10 @@ defmodule SmartcitydogsWeb.SessionController do
   # end
 
   def create(conn, %{"session" => %{"email" => email, "password" => password}}) do
-    IO.puts "BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB"
+    IO.puts("BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB")
+
     case Smartcitydogs.Auth.login_by_email_and_pass(conn, email, password) do
       {:ok, conn} ->
-        
         conn
         |> put_flash(:info, "You’re now signed in!")
         |> redirect(to: page_path(conn, :index))
@@ -64,8 +65,14 @@ defmodule SmartcitydogsWeb.SessionController do
     end
   end
 
+  def callback(conn = %{assigns: %{ueberauth_failure: _fails}}, _params) do
+    Logger.warn("Authentication failed", conn: conn)
+
+    conn
+      |> redirect(to: "/session/new")
+  end
+
   def callback(%{assigns: %{ueberauth_auth: auth}} = conn, _params) do
-  
     case Smartcitydogs.DataUsers.get_user_by_email!(auth.info.email) do
       nil ->
         case Smartcitydogs.DataUsers.create_user_from_auth(auth) do

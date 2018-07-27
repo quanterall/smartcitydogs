@@ -15,9 +15,9 @@ defmodule Smartcitydogs.User do
     field(:username, :string)
     field(:reset_password_token, :string)
     field(:reset_token_sent_at, :naive_datetime)
-    field(:liked_signals, {:array, :string}, default: [])
-    field(:liked_comments, {:array, :string}, default: [])
-    field(:disliked_comments, {:array, :string}, default: [])
+    field(:liked_signals, {:array, :integer}, default: [])
+    field(:liked_comments, {:array, :integer}, default: [])
+    field(:disliked_comments, {:array, :integer}, default: [])
 
     has_many(:signals_comments, Smartcitydogs.SignalsComments)
     belongs_to(:users_types, Smartcitydogs.UsersType)
