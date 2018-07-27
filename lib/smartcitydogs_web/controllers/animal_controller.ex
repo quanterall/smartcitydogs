@@ -68,55 +68,65 @@ defmodule SmartcitydogsWeb.AnimalController do
 
   def index(conn, params) do
     sorted_animals = DataAnimals.sort_animals_by_id()
-    logged_user_type_id = conn.assigns.current_user.users_types.id
+    IO.inspect(conn)
 
-    if logged_user_type_id == 3 do
-      render(conn, SmartcitydogsWeb.ErrorView, "401.html")
-    else
-      cond do
-        params == %{} || (params["page"] == nil && params["chip_number"] == "") ->
-          x = 1
-          page = Smartcitydogs.Repo.paginate(sorted_animals, page: x, page_size: 8)
+    if conn.assigns.current_user != nil do
+      logged_user_type_id = conn.assigns.current_user.users_types.id
 
-          list_animals =
-            Map.get(page, :entries)
-            |> Repo.preload(:animals_status)
-            |> Repo.preload(:animals_image)
-
-          render(
-            conn,
-            "index.html",
-            animals: list_animals,
-            page: page,
-            chip_number: params["chip_number"]
-          )
-
-        params != %{} && params["page"] != nil ->
-          x = String.to_integer(params["page"])
-          animals = DataAnimals.get_animal_by_chip(params["chip_number"])
-          page = Smartcitydogs.Repo.paginate(animals, page: x, page_size: 8)
-
-          render(
-            conn,
-            "index.html",
-            animals: page.entries,
-            page: page,
-            chip_number: params["chip_number"]
-          )
-
-        params["chip_number"] != nil ->
-          chip = params["chip_number"]
-          animals = DataAnimals.get_animal_by_chip(chip)
-          page = Smartcitydogs.Repo.paginate(animals, page_size: 8)
-
-          render(
-            conn,
-            "index.html",
-            animals: page.entries,
-            page: page,
-            chip_number: params["chip_number"]
-          )
+      if logged_user_type_id == 3 do
+        render(conn, SmartcitydogsWeb.ErrorView, "401.html")
+      else
+        index_rendering(conn, params, sorted_animals)
       end
+    else
+      index_rendering(conn, params, sorted_animals)
+    end
+  end
+
+  defp index_rendering(conn, params, sorted_animals) do
+    cond do
+      params == %{} || (params["page"] == nil && params["chip_number"] == "") ->
+        x = 1
+        page = Smartcitydogs.Repo.paginate(sorted_animals, page: x, page_size: 8)
+
+        list_animals =
+          Map.get(page, :entries)
+          |> Repo.preload(:animals_status)
+          |> Repo.preload(:animals_image)
+
+        render(
+          conn,
+          "index.html",
+          animals: list_animals,
+          page: page,
+          chip_number: params["chip_number"]
+        )
+
+      params != %{} && params["page"] != nil ->
+        x = String.to_integer(params["page"])
+        animals = DataAnimals.get_animal_by_chip(params["chip_number"])
+        page = Smartcitydogs.Repo.paginate(animals, page: x, page_size: 8)
+
+        render(
+          conn,
+          "index.html",
+          animals: page.entries,
+          page: page,
+          chip_number: params["chip_number"]
+        )
+
+      params["chip_number"] != nil ->
+        chip = params["chip_number"]
+        animals = DataAnimals.get_animal_by_chip(chip)
+        page = Smartcitydogs.Repo.paginate(animals, page_size: 8)
+
+        render(
+          conn,
+          "index.html",
+          animals: page.entries,
+          page: page,
+          chip_number: params["chip_number"]
+        )
     end
   end
 

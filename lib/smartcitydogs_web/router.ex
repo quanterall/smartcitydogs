@@ -17,7 +17,7 @@ defmodule SmartcitydogsWeb.Router do
   pipeline :login_required do
     plug(
       Guardian.Plug.EnsureAuthenticated,
-      handler: SmartcitydogsWeb.GuardianErrorHandler
+      handler: Smartcitydogs.GuardianErrorHandler
     )
   end
 
