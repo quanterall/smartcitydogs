@@ -17,6 +17,7 @@ defmodule Smartcitydogs.Animals do
     has_many(:performed_procedure, Smartcitydogs.PerformedProcedures)
     has_many(:rescues, Smartcitydogs.Rescues)
     belongs_to(:animals_status, Smartcitydogs.AnimalStatus)
+    has_many(:adopt, Smartcitydogs.Adopt)
 
     timestamps()
   end

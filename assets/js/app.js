@@ -25,17 +25,6 @@ import "slick-carousel";
 
 
 $('#submit-adoption').click(function(){
-    console.log("ala bala");
-    var a = $("#chip_number").text();
-    var a1 = $("#user_name").text();
-    var a2 = $("#user_last_name").text();
-    var a3 = $("#user_email").text();
-    var a4 = $("#user_phone").text();
-    console.log(a);
-    console.log(a1);
-    console.log(a2);
-    console.log(a3);
-    console.log(a4);
     $.ajax({
         method: "GET",
         url: "/animals/send_email",
@@ -45,9 +34,12 @@ $('#submit-adoption').click(function(){
             "user_last_name": $("#user_last_name").text(),
             "user_email": $("#user_email").text(),
             "user_phone": $("#user_phone").text(),
-            "animal_id": $("#animal_id").text()
+            "animal_id": $("#animal_id").text(),
+            "user_id": $("#user_id").text()
         }
-    })
+    }).done(function(){
+		location.reload();
+	})
 });
 
 $("#like").click(function () {

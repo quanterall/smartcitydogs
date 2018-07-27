@@ -167,7 +167,7 @@
                           %>
                           </p>
                           <br><br>
-                  <p class="username-comment-on-signal"><%= comment.comment #Smartcitydogs.DataSignals.get_comment_signal_id(@signal.id)  %></p> 
+                  <p class="username-comment-on-signal"><%= comment.comment %></p> 
                 <hr>
                 <% end %>
             <% end %>

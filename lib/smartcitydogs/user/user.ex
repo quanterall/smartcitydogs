@@ -23,6 +23,7 @@ defmodule Smartcitydogs.User do
     belongs_to(:users_types, Smartcitydogs.UsersType)
     has_many(:signals, Smartcitydogs.Signals)
     has_many(:contacts, Smartcitydogs.Contact)
+    has_many(:adopt, Smartcitydogs.Adopt)
     timestamps()
   end
 

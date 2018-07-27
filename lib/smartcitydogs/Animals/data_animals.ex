@@ -8,6 +8,7 @@ defmodule Smartcitydogs.DataAnimals do
   alias Smartcitydogs.PerformedProcedures
   alias Smartcitydogs.Rescues
   alias Smartcitydogs.AnimalStatus
+  alias Smartcitydogs.Adopt
 
   import Plug.Conn
 
@@ -170,4 +171,44 @@ defmodule Smartcitydogs.DataAnimals do
   def change_animal_image(%AnimalImages{} = animal_image) do
     AnimalImages.changeset(animal_image, %{})
   end
+
+  ################ ADOPT INSERT #####################
+
+  def insert_adopt(conn,users_id, animals_id) do
+    %Adopt{}
+    |> Adopt.changeset(%{users_id: users_id, animals_id: animals_id})
+    |> Repo.insert!()
+    # SmartcitydogsWeb.AnimalController.show(conn, %{"id" => animals_id})
+  end
+
+  def check_adopt(users_id, animals_id) do
+    query_user = Ecto.Query.from(c in Adopt, where: c.users_id == ^users_id)
+    list = Repo.all(query_user)
+    IO.inspect(list)
+    check_list(list, animals_id)
+    
+    
+    
+  end
+  
+  def check_list([],animals_id) do
+    false
+  end
+
+  def check_list([head | tail], animals_id) do
+    
+    if head == [] do
+      false
+      
+    else
+      if head.animals_id == animals_id do
+        true
+      
+      else
+        check_list(tail, animals_id)
+      end
+    end
+  
+  end
+
 end

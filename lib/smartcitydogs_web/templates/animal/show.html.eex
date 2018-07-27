@@ -24,18 +24,14 @@
                           <% end %>
 
                           <%= if @animals.animals_status_id == 2 do %>
-                            label-type-green
+                            label-type-orange
                           <% end %>
 
                           <%= if @animals.animals_status_id == 3 do %>
-                            label-type-orange
+                            label-type-green
                           <% end %>
             ">
-             <%# 
-            IO.puts "_______________________________________________ANIMALS__________________________"
-             IO.inspect(@animals)
-             IO.puts "_______________________________________________ANIMALS__________________________"
-              %>  
+            
               <%= @animals.animals_status_id
                 |> Smartcitydogs.DataAnimals.get_animal_status()
                 |> Map.get(:name)
@@ -120,23 +116,24 @@
                     <p id="user_email"><%= @conn.assigns.current_user.email %></p>
                     <p id="user_phone"><%= @conn.assigns.current_user.phone %></p>
                     <p id="animal_id"><%= @animals.id %></p>
+                    <p id="user_id"><%= @conn.assigns.current_user.id %></p>
                   
                   </div>
-                <a input type="button" id="submit-adoption"><i class="fa fa-home"></i> ОСИНОВИ </a>
+                  
+                  <%= if @animals.animals_status_id == 3 do %>
+                    <a input type="button" id="adoption-done"></a>
+                  <% else %>
+                    <% check = Smartcitydogs.DataAnimals.check_adopt(@conn.assigns.current_user.id, @animals.id) %>
+                    
+                    <% IO.inspect(check) %>
+                    <%= if check == false do %>
+                      <a input type="button" id="submit-adoption"><i class="fa fa-home"></i> ОСИНОВИ </a>
+                    <% else %>
+                       <a id="sent-adoption"><i class="fa fa-check check-class"></i> ИЗПРАТЕНА ЗАЯВКА </a>
+                    <% end %>
+                  <% end %>
+                  
                 </div>
-                <%
-                IO.puts "____________________________________DATA__________________________________"
-                  IO.inspect(@animals.chip_number)
-                  IO.inspect(@conn.assigns.current_user.first_name)
-                  IO.inspect(@conn.assigns.current_user.last_name)
-                  IO.inspect(@conn.assigns.current_user.email)
-                  IO.inspect(@conn.assigns.current_user.phone)
-                IO.puts "____________________________________DATA__________________________________"
-                
-                %>
-
-
-          <%# <%= link "Edit", to: animal_path(@conn, :edit, @animals), class: "btn btn-default btn-xs" %> 
         </div>
 
 

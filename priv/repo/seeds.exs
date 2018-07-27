@@ -30,6 +30,10 @@ alias Smartcitydogs.User
 alias Smartcitydogs.Signals
 alias Smartcitydogs.SignalsComments
 alias Smartcitydogs.SignalImages
+alias Smartcitydogs.Adopt
+
+
+
 
 ############## Users Type Admin #############
 users_type_params = %{name: "Admin"}
@@ -422,3 +426,13 @@ Repo.all(AnimalStatus)
 Repo.all(AnimalImages)
 Repo.all(PerformedProcedures)
 Repo.all(ProcedureType)
+
+
+################## Adopt ####################
+adopt_params = %{users_id: 1, animals_id: 1}
+
+unless Repo.get_by(Adopt, users_id: adopt_params.users_id, animals_id: adopt_params.animals_id) do
+  %Adopt{}
+  |> Adopt.changeset(adopt_params)
+  |> Repo.insert!()
+end
