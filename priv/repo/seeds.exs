@@ -129,6 +129,23 @@ end
 
 ############## Users #############
 users_params = %{
+  username: "hris",
+  first_name: "Hristislav",
+  last_name: "Gospodinov",
+  email: "test@abv.bg",
+  password: "123456",
+  phone: "0896230250",
+  users_types_id: 2
+}
+
+unless Repo.get_by(User, username: users_params[:username]) do
+  %User{}
+  |> User.registration_changeset(users_params)
+  |> Repo.insert!()
+end
+
+############## Users #############
+users_params = %{
   username: "todor_municipaty",
   first_name: "Todor",
   last_name: "Todorov",
@@ -195,6 +212,7 @@ animals_params = %{
   sex: "M",
   chip_number: "dsfdsfs2",
   address: "Kolio Ficheto 24",
+  description: "ala bala 1",
   animals_status_id: 1
 }
 
@@ -209,6 +227,7 @@ animals_params = %{
   sex: "M",
   chip_number: "adopted234",
   address: "Kolio Ficheto 24",
+  description: "ala bala 2",
   animals_status_id: 2
 }
 
@@ -223,6 +242,7 @@ animals_params = %{
   sex: "M",
   chip_number: "shelter789",
   address: "Kolio Ficheto 24",
+  description: "ala bala 3",
   animals_status_id: 3
 }
 

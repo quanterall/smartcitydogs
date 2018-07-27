@@ -8,31 +8,18 @@
   
   </head>
 <body>
-
- 
-
-  
   <div id="cor-a"><%= @signal.address_F %></div>
        <div id="cor-b"><%= @signal.address_B %></div>
-       
-        
-
   <div class="show-signal-container">
     <div class="show-signal-left-container">
       <div class="signal-photo-container">
         <img class="photo-single-signal" src="/<%= get_signals_images(@signal.id) %>" alt="Generic placeholder image" width="300" height="200">
       </div>
     </div>
-
     <div class="show-signal-right-container">
-       
-      <div id="show_map" style="position: relative; display: none;">
-      </div>
-      
-        <%# <div class="close2"><i class="far fa-times"></i>
-        </div> %>
+            <div id="show_map" style="position: relative; display: none;">
+            </div>
         <i class="far fa-window-close close2"></i>
-
             <show-signal-label-status class="
                           <%= if @signal.signals_types_id == 1 do %>
                             label-type-red
@@ -61,11 +48,15 @@
             <br> <br> <br>
 
             <show-signal-label-adress>
-              <div class="fa fa-map-marker" aria-hidden="true"></div><div class="address-style" id="test-address"><%=@signal.address%></div>
+              <div class="fa fa-map-marker-alt" aria-hidden="true"></div><div class="address-style" id="test-address"><%=@signal.address%></div>
             </show-signal-label-adress>
             <a id="show-map" href="#">ВИЖ НА КАРТА</a>
            
-            <br> <br> <br>
+            <br>
+            <br>
+            <br>
+            
+           
 
             <show-signal-label-description>
               <%=@signal.description%>
@@ -130,31 +121,28 @@
             </tr>
           </table>  
               
-          </div>
+            </div>
+            <br><br>
+            <div class="buttons-for-signal">
+               <% list_of_liked_signals = @conn.assigns.current_user.liked_signals %>
+                <%=   if Enum.member?(list_of_liked_signals,@signal.id) do %><a id="submit-like1">ОТСЛЕДВАЙ</a>
+                <% else %><a id="submit-like1">ПОСЛЕДВАЙ</a><%end%><div id="comment" >КОМЕНТИРАЙ</div>
+            </div>
+            <a id="signal-id"><%= @signal.id %></a>
           <br><br>
-          <div class="buttons-for-signal">
-              <% list_of_liked_signals = @conn.assigns.current_user.liked_signals %>
-              <%= if Enum.member?(list_of_liked_signals,@signal.id) do %><a id="submit-like1">ОТСЛЕДВАЙ</a>
-              <% else %><a id="submit-like1">ПОСЛЕДВАЙ</a><%end%><div id="comment" >КОМЕНТИРАЙ</div>
-          </div>
-          <a id="signal-id"><%= @signal.id %></a>
-            <%# class="btn btn-secondary" %>
-
-          <br><br><br><br>
+          <br><br>
           <div class="comment_section" style="display: none;">
             <textarea name="message" id="comment-id" value="" rows="6" cols="60">
             </textarea>
             <div class="under_comment">
              <div class="close_comment">ОТКАЗ</div><a class="submit_comment" href="/signals/<%= @signal.id %>" role="button">ПУБЛИКУВАЙ</a>
             </div>
-          </div>
-          <br> <br> <br>
-
+          <br>
+          <br>
+        <br>
             <p class="comments-count">Коментари(<%= Enum.count(@comments_count)%>)</p>
             <br>
-            
             <hr>
-           
             <%= for comment <- @comments do %>
             <%= if @signal.id == comment.signals_id do %>
                 <p class="username-comments-signal"><%= comment.users.username %></p><p class="date-comments-signal">
@@ -202,7 +190,5 @@
       </script>
 
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDAnp2RXJIJARIGKIcxtUVdHD7-TyFCfe4&callback=ShowMap"></script>
-
-
 </body>
 </html>

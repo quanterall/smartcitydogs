@@ -204,7 +204,6 @@ defmodule SmartcitydogsWeb.SignalController do
     ## IO.inspect signal
   ##  IO.puts("_____________________________________________REMOVE_LIKE_________________________")
     user_id = conn.assigns.current_user.id
-
     DataUsers.remove_liked_signal(user_id, show_id)
     count = get_signals_support_count_minus(show_id)
 

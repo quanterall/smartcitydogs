@@ -28,12 +28,6 @@
         <%= hidden_input f, :address_B, id: "address_B" %>
       </div>
 
-
-    <!-- <label-3>3.Заглавие на сигнала</label-3>
-      <div class="form-group">
-        <%= text_input f, :title, class: "form-control1", required: true, minlength: 2 %>
-        <%= error_tag f, :title %>
-      </div> -->
     <label-4>3.Качете налични снимки/видео</label-4>
       <div class="form-group">
           <label for="signals_url" class="file-upload">

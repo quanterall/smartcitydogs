@@ -1,6 +1,7 @@
 defmodule SmartcitydogsWeb.AnimalController do
   use SmartcitydogsWeb, :controller
 
+  
   alias Smartcitydogs.DataAnimals
   alias Smartcitydogs.Animals
   alias Smartcitydogs.AnimalImages
@@ -9,6 +10,17 @@ defmodule SmartcitydogsWeb.AnimalController do
 
   plug(:put_layout, false when action in [:adopted_animals])
   plug(:put_layout, false when action in [:shelter_animals])
+
+
+  ###### Send E-mail ########
+
+  def send_email(conn,data) do
+    IO.puts "____________________________________"
+    IO.inspect(data["animal_id"])
+    int = String.to_integer(data["animal_id"])
+    Smartcitydogs.Email.send_email(data)
+    redirect conn, to: "/animals/#{int}"
+  end
 
   ############################# Minicipality Home Page Animals ################################
 
