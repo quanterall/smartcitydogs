@@ -85,12 +85,16 @@ show-signal-label-description{
     color: grey;
 }
 .buttons-for-signal{
+    /* float: right; */
     margin-left: 50%;
     margin-top: 10%;
     width: 100%;
     height: 100px;;
     display: inline;
     
+}
+.buttons-for-signal1 .buttons-for-signal{
+    float: right;
 }
 
 .buttons-for-signal #comment{

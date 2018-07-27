@@ -123,10 +123,12 @@
               
             </div>
             <br><br>
-            <div class="buttons-for-signal">
-               <% list_of_liked_signals = @conn.assigns.current_user.liked_signals %>
-                <%=   if Enum.member?(list_of_liked_signals,@signal.id) do %><a id="submit-like1">ОТСЛЕДВАЙ</a>
-                <% else %><a id="submit-like1">ПОСЛЕДВАЙ</a><%end%><div id="comment" >КОМЕНТИРАЙ</div>
+            <div class="buttons-for-signal1">
+              <div class="buttons-for-signal">
+                <% list_of_liked_signals = @conn.assigns.current_user.liked_signals %>
+                  <%=   if Enum.member?(list_of_liked_signals,@signal.id) do %><a id="submit-like1">ОТСЛЕДВАЙ</a>
+                  <% else %><a id="submit-like1">ПОСЛЕДВАЙ</a><%end%><div id="comment" >КОМЕНТИРАЙ</div>
+              </div>
             </div>
             <a id="signal-id"><%= @signal.id %></a>
           <br><br>

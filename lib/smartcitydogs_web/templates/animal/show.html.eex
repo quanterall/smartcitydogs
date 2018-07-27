@@ -110,6 +110,7 @@
                 <br>
                 <div class="buttons-for-signal">
                   <div class="hide_for_ajax">
+                  
                     <p id="chip_number"><%= @animals.chip_number %></p>
                     <p id="user_name"><%= @conn.assigns.current_user.first_name %></p>
                     <p id="user_last_name"><%= @conn.assigns.current_user.last_name %></p>

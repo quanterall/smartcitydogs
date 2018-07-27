@@ -79,7 +79,7 @@ defmodule Smartcitydogs.DataUsers do
 
   def add_liked_signal_comment(user_id, comment_id) do
     user = Repo.get!(User, user_id)
-
+    
     User.changeset(user, %{liked_comments: user.liked_comments ++ [comment_id]})
     |> Repo.update()
   end
