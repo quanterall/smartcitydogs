@@ -6,7 +6,6 @@ defmodule Smartcitydogs.DataProcedure do
   alias Smartcitydogs.ProcedureType
   alias Smartcitydogs.Rescues
 
-  import Plug.Conn
 
   ### Performed Procedures function
   def list_performed_procedure do

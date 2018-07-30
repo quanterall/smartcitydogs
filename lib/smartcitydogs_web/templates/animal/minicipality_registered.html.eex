@@ -114,7 +114,7 @@
     <%= for x <- 1..@page.total_pages do %>
     <%= link "#{x * 9 - 8} - #{x * 9}", to: animal_path(@conn, :minicipality_registered, page: x) %>
     <% end %>  
-<%= end %>
+<% end %>
 </div>
         
 </div>

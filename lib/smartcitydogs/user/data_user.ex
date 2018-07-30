@@ -6,7 +6,6 @@ defmodule Smartcitydogs.DataUsers do
   alias Smartcitydogs.UsersType
   alias Smartcitydogs.Contact
 
-  import Plug.Conn
 
   def list_users do
     Repo.all(User) |> Repo.preload(:users_types)

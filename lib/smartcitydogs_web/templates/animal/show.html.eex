@@ -126,7 +126,6 @@
                   <% else %>
                     <% check = Smartcitydogs.DataAnimals.check_adopt(@conn.assigns.current_user.id, @animals.id) %>
                     
-                    <% IO.inspect(check) %>
                     <%= if check == false do %>
                       <a input type="button" id="submit-adoption"><i class="fa fa-home"></i> ОСИНОВИ </a>
                     <% else %>

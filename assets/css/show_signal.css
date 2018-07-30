@@ -155,32 +155,8 @@ show-signal-label-description{
     height:70vh;
     background:yellow;
 }
-/* .close2{
-    color: white !important;
-    margin-top: 10%;
-    background-color: green;
-    height: 50px;
-    width: 50px;
-    display: inline-block;
-    position: fixed;
-    top: 0;
-   
-  font-size: 20px;
-  font-weight: 400;
-  align-self: center;
-  font-weight: 400;
-}
-.close2:hover,
-.close2:focus{
-      color: white !important;
-      text-decoration: none;
-      cursor: pointer;
-      transition: 0.5s;
-      background-color: transparent;
-  
-} */
-
 .fa-window-close{
+    /* display: none !important; */
     position: fixed;
     background-color: transparent;
     color: #00c790;
@@ -270,4 +246,7 @@ input[type="button"]:disabled {
 .check-class{
     margin-right: 5%;
     color: white;
+}
+.bg-test{
+    background-color: #00c790;
 }

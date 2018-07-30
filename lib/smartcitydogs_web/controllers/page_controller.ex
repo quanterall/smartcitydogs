@@ -3,7 +3,6 @@ defmodule SmartcitydogsWeb.PageController do
   alias Smartcitydogs.DataSignals
   alias Smartcitydogs.DataPages
   alias Smartcitydogs.DataAnimals
-  alias Smartcitydogs.SignalController
 
   def index(conn, _params) do
     signal = DataSignals.list_signals()

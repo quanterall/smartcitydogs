@@ -27,8 +27,8 @@ defmodule Smartcitydogs.User do
     timestamps()
   end
 
-  @required_fields ~w(email)a
-  @optional_fields ~w(name is_admin)a
+  # @required_fields ~w(email)a
+  # @optional_fields ~w(name is_admin)a
 
   @doc false
   def changeset(user, attrs \\ %{}) do

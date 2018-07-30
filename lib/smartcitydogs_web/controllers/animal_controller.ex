@@ -15,11 +15,9 @@ defmodule SmartcitydogsWeb.AnimalController do
   ###### Send E-mail ########
 
   def send_email(conn,data) do
-    IO.puts "____________________________________"
-    IO.inspect(data)
     int = String.to_integer(data["animal_id"])
     Smartcitydogs.Email.send_email(data)
-    DataAnimals.insert_adopt(conn,data["user_id"], data["animal_id"])
+    DataAnimals.insert_adopt(data["user_id"], data["animal_id"])
     redirect conn, to: "/animals/#{int}"
   end
 
@@ -81,7 +79,6 @@ defmodule SmartcitydogsWeb.AnimalController do
 
   def index(conn, params) do
     sorted_animals = DataAnimals.sort_animals_by_id()
-    IO.inspect(conn)
 
     if conn.assigns.current_user != nil do
       logged_user_type_id = conn.assigns.current_user.users_types.id
@@ -156,6 +153,27 @@ defmodule SmartcitydogsWeb.AnimalController do
   end
 
   def create(conn, %{"animals" => animal_params}) do
+    IO.inspect(animal_params)
+
+    map_procedures = %{
+      "Кастрирано" => animal_params["Кастрирано"],
+      "Обезпаразитено" => animal_params["Обезпаразитено"],
+      "Ваксинирано" => animal_params["Ваксинирано"]
+    }
+    IO.inspect map_procedures
+
+    Enum.each(map_procedures, fn(x) -> 
+      case x do 
+        {_, "true"} -> IO.inspect(x)
+        _ -> IO.puts ""
+      end 
+    
+    end)
+
+    # get_procedure_by_name()
+
+    
+
     logged_user_type_id = conn.assigns.current_user.users_types.id
 
     if logged_user_type_id != 5 do

@@ -6,11 +6,9 @@ defmodule Smartcitydogs.DataAnimals do
   alias Smartcitydogs.AnimalImages
   alias Smartcitydogs.AnimalStatus
   alias Smartcitydogs.PerformedProcedures
-  alias Smartcitydogs.Rescues
   alias Smartcitydogs.AnimalStatus
   alias Smartcitydogs.Adopt
 
-  import Plug.Conn
 
   ## gets the current time in Sofia
   def get_current_time() do
@@ -172,17 +170,15 @@ defmodule Smartcitydogs.DataAnimals do
 
   ################ ADOPT INSERT #####################
 
-  def insert_adopt(conn,users_id, animals_id) do
+  def insert_adopt(users_id, animals_id) do
     %Adopt{}
     |> Adopt.changeset(%{users_id: users_id, animals_id: animals_id})
     |> Repo.insert!()
-    # SmartcitydogsWeb.AnimalController.show(conn, %{"id" => animals_id})
   end
 
   def check_adopt(users_id, animals_id) do
     query_user = Ecto.Query.from(c in Adopt, where: c.users_id == ^users_id)
     list = Repo.all(query_user)
-    IO.inspect(list)
     check_list(list, animals_id)
     
     

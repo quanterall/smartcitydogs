@@ -1,13 +1,11 @@
-      <html>
-<head>
+
     <meta charset="utf-8">
     <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/all.css" integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ" crossorigin="anonymous">
   
-  </head>
-<body>
+
   <div id="cor-a"><%= @signal.address_F %></div>
        <div id="cor-b"><%= @signal.address_B %></div>
   <div class="show-signal-container">
@@ -168,7 +166,6 @@
 
   <script>
         $('#show_map').hide();
-        $('.close2').hide();
         var cor_a = $('#cor-a').text();
         var cor_b = $('#cor-b').text();
         function ShowMap() {
@@ -193,5 +190,3 @@
       </script>
 
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDAnp2RXJIJARIGKIcxtUVdHD7-TyFCfe4&callback=ShowMap"></script>
-</body>
-</html>

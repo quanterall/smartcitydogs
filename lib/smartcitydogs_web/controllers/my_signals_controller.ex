@@ -1,8 +1,6 @@
 defmodule SmartcitydogsWeb.MySignalsController do
   use SmartcitydogsWeb, :controller
   alias Smartcitydogs.DataSignals
-  alias Smartcitydogs.Signals
-  alias Smartcitydogs.DataUser
 
   def index(conn, _params) do
     user = conn.assigns.current_user.id
