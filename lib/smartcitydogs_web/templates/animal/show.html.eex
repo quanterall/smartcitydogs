@@ -43,7 +43,7 @@
             <show-signal-label-adress>
               <div class="fa fa-map-marker-alt" aria-hidden="false"></div><div class="address-style" id="test-address"><%=@animals.address%></div>
             </show-signal-label-adress>
-            <a id="show-map" href="#">ВИЖ НА КАРТА</a>
+            <a id="show-map" >ВИЖ НА КАРТА</a>
             <br><br><br>
             
             <show-signal-label-description>

@@ -50,7 +50,7 @@
             <show-signal-label-adress>
               <div class="fa fa-map-marker-alt" aria-hidden="true"></div><div class="address-style" id="test-address"><%=@signal.address%></div>
             </show-signal-label-adress>
-            <a id="show-map" href="#">ВИЖ НА КАРТА</a>
+            <a id="show-map">ВИЖ НА КАРТА</a>
            
             <br>
             <br>
@@ -139,6 +139,7 @@
             <div class="under_comment">
              <div class="close_comment">ОТКАЗ</div><a class="submit_comment" href="/signals/<%= @signal.id %>" role="button">ПУБЛИКУВАЙ</a>
             </div>
+          </div>
           <br>
           <br>
         <br>

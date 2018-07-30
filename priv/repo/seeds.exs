@@ -272,7 +272,25 @@ unless Repo.get_by(AnimalImages, url: animals_images_params[:url]) do
 end
 
 ########     Procedure Type   ###############
-procedure_type_prams = %{name: "Kill"}
+procedure_type_prams = %{name: "Кастрирано"}
+
+unless Repo.get_by(ProcedureType, name: procedure_type_prams[:name]) do
+  %ProcedureType{}
+  |> ProcedureType.changeset(procedure_type_prams)
+  |> Repo.insert!()
+end
+
+########     Procedure Type   ###############
+procedure_type_prams = %{name: "Обезпаразитено"}
+
+unless Repo.get_by(ProcedureType, name: procedure_type_prams[:name]) do
+  %ProcedureType{}
+  |> ProcedureType.changeset(procedure_type_prams)
+  |> Repo.insert!()
+end
+
+########     Procedure Type   ###############
+procedure_type_prams = %{name: "Ваксинирано"}
 
 unless Repo.get_by(ProcedureType, name: procedure_type_prams[:name]) do
   %ProcedureType{}
