@@ -166,6 +166,7 @@
 
   <script>
         $('#show_map').hide();
+        $('.close2').hide();
         var cor_a = $('#cor-a').text();
         var cor_b = $('#cor-b').text();
         function ShowMap() {

@@ -97,9 +97,14 @@
         <br>
         <% 
           procedures = Smartcitydogs.DataAnimals.get_procedures(@animals.id)
+          
         %>
         <div class="div-procedures">
+        <%= if procedures != [] do %>
           <b>Извършени процедури</b> <br> <br>
+          <% else %>
+
+          <% end %>
             <%= for procedure <- procedures do %>
             <div class="procedures-all">
             <i class="fa fa-check"></i> <%= 
