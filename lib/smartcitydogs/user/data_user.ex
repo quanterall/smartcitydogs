@@ -79,15 +79,25 @@ defmodule Smartcitydogs.DataUsers do
 
   def add_liked_signal_comment(user_id, comment_id) do
     user = Repo.get!(User, user_id)
-
     User.changeset(user, %{liked_comments: user.liked_comments ++ [comment_id]})
     |> Repo.update()
   end
 
   def add_disliked_signal_comment(user_id, comment_id) do
     user = Repo.get!(User, user_id)
+    User.changeset(user, %{disliked_comments: user.disliked_comments ++ [comment_id]})
+    |> Repo.update()
+  end
 
-    User.changeset(user, %{disliked_comments: user.liked_comments ++ [comment_id]})
+  def remove_liked_signal_comment(user_id, comment_id) do
+    user = Repo.get!(User, user_id)
+    User.changeset(user, %{liked_comments: user.liked_comments -- [comment_id]})
+    |> Repo.update()
+  end
+
+  def remove_disliked_signal_comment(user_id, comment_id) do
+    user = Repo.get!(User, user_id)
+    User.changeset(user, %{disliked_comments: user.disliked_comments -- [comment_id]})
     |> Repo.update()
   end
 

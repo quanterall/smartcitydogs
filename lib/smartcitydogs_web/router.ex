@@ -58,6 +58,8 @@ defmodule SmartcitydogsWeb.Router do
     put("/signals/unfollow", SignalControllerAPI, :unfollow)
     resources("/signal_images", SignalImageControllerAPI, except: [:new, :edit])
     resources("/signals_comments", SignalsCommentControllerAPI, except: [:new, :edit])
+    put("/signals_comments/follow", SignalsCommentControllerAPI,:follow)
+    put("/signals_comments/unfollow", SignalsCommentControllerAPI, :unfollow)
     resources("/signals_types", SignalsTypeControllerAPI, except: [:new, :edit])
     resources("/signals_categories", SignalCategoryControllerAPI, except: [:new, :edit])
     resources("/signals_likes", SignalsLikeControllerAPI, except: [:new, :edit])

@@ -13,8 +13,6 @@ defmodule SmartcitydogsWeb.SignalControllerAPI do
   end
 
   def create(conn, %{"signal" => signal_params}) do
-     IO.inspect(signal_params)
-
     with {:ok, %Signals{} = signal} <- DataSignals.create_signal(signal_params) do
       conn
       |> put_status(:created)
@@ -68,15 +66,15 @@ defmodule SmartcitydogsWeb.SignalControllerAPI do
     id = String.to_integer(id)
     user_id = conn.private.plug_session["current_user_id"]
     user_liked_signals = DataUsers.get_user!(user_id) |> Map.get(:liked_signals)
-    IO.inspect user_liked_signals
     cond do
       Enum.member?(user_liked_signals, id) -> 
         DataUsers.remove_liked_signal(user_id, id)
         {:ok, signal} = DataSignals.unfollow_signal(id)
         render(conn, "unfollowed.json", signal: signal)
+
       Enum.member?(user_liked_signals, id) == false ->
         signal = DataSignals.get_signal(id)
-          render(conn, "already_unfollowed.json", signal: signal)
+        render(conn, "already_unfollowed.json", signal: signal)
     end 
   end
 
