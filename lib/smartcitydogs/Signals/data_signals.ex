@@ -11,6 +11,12 @@ defmodule Smartcitydogs.DataSignals do
   alias Smartcitydogs.DataUsers
 
 
+
+  def get_animal_by_chip(chip_number) do
+    query = Ecto.Query.from(c in Signals, where: c.chip_number == ^chip_number)
+    Repo.all(query)
+  end
+
   # Signals
 
   def create_signal(args \\ %{}) do
