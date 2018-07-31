@@ -11,7 +11,9 @@
               ]) %>
       </div>
 
-  
+<!-- <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyDAnp2RXJIJARIGKIcxtUVdHD7-TyFCfe4
+&signed_in=true&libraries=places"></script>
+   -->
   <!-- <input id="autocomplete" placeholder="Enter your address" type="text"></input> -->
 
 
@@ -51,8 +53,6 @@
     <div class="form-group">
       <div class="under-form">
 
-
-
     <%= submit "ПОДАЙ СИГНАЛ", class: "btn btn-submit" %> <br>
       <div class="close-modal ">ОТКАЗ</div>
       </div>
@@ -62,21 +62,18 @@
 
     <script>
 
+      var placeSearch, autocomplete;
+      var Cordinate_a, Cordinate_b;
+      function initialize() {
+      console.log(document.getElementById('autocomplete'));
+          autocomplete = new google.maps.places.Autocomplete(
+              /** @type {!HTMLInputElement} */(document.getElementById('autocomplete')),
+              {types: ['geocode']});
 
-
-
-        var placeSearch, autocomplete;
-        var Cordinate_a, Cordinate_b;
-        function initialize() {
-console.log(document.getElementById('autocomplete'));
-            autocomplete = new google.maps.places.Autocomplete(
-                /** @type {!HTMLInputElement} */(document.getElementById('autocomplete')),
-                {types: ['geocode']});
-
-            // When the user selects an address from the dropdown, populate the address
-            // fields in the form.
-            autocomplete.addListener('place_changed', placeAlabala);
-            console.log(autocomplete);
+          // When the user selects an address from the dropdown, populate the address
+          // fields in the form.
+          autocomplete.addListener('place_changed', placeAlabala);
+          console.log(autocomplete);
         }
 
         function placeAlabala(){
@@ -98,6 +95,8 @@ console.log(document.getElementById('autocomplete'));
         }
     </script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDAnp2RXJIJARIGKIcxtUVdHD7-TyFCfe4&libraries=places&callback=initialize" async defer></script>
+
+
 
 </body>
 </html>

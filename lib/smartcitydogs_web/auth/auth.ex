@@ -1,5 +1,6 @@
 defmodule Smartcitydogs.Auth do
   import Comeonin.Bcrypt, only: [checkpw: 2, dummy_checkpw: 0]
+  import Logger
 
   alias Smartcitydogs.User
   alias Smartcitydogs.Repo
@@ -28,4 +29,6 @@ defmodule Smartcitydogs.Auth do
   def logout(conn) do
     Guardian.Plug.sign_out(conn)
   end
+
+ 
 end

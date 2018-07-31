@@ -83,7 +83,6 @@ defmodule Smartcitydogs.DataSignals do
 
   def get_all_followed_signals(user_id) do
     user = user_id |> DataUsers.get_user!() |> Map.get(:liked_signals)
-   
   end
 
   # Signal iamges
@@ -153,7 +152,7 @@ defmodule Smartcitydogs.DataSignals do
 
   def list_signal_comment() do
     Repo.all(SignalsComments) |> Repo.preload(:users)
-  end    
+  end
 
   def get_comment_signal_id(signals_id) do
     query = Ecto.Query.from(c in SignalsComments, where: c.signals_id == ^signals_id)

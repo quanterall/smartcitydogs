@@ -17,7 +17,7 @@ defmodule SmartcitydogsWeb.Router do
   pipeline :login_required do
     plug(
       Guardian.Plug.EnsureAuthenticated,
-      handler: SmartcitydogsWeb.GuardianErrorHandler
+      handler: Smartcitydogs.GuardianErrorHandler
     )
   end
 
@@ -75,9 +75,8 @@ defmodule SmartcitydogsWeb.Router do
     resources("/news", NewsSchemaControllerAPI, except: [:new, :edit])
     resources("/static_pages", StaticPageControllerAPI, except: [:new, :edit])
 
-
-      # post("/signals/add_comment_like", SignalController, :add_comment_like)
-      # post("/signals/add_comment_dislike", SignalController, :add_comment_dislike)
+    # post("/signals/add_comment_like", SignalController, :add_comment_like)
+    # post("/signals/add_comment_dislike", SignalController, :add_comment_dislike)
   end
 
   scope "/", SmartcitydogsWeb do
@@ -86,10 +85,13 @@ defmodule SmartcitydogsWeb.Router do
 
     get("/", PageController, :index)
     get("/signals", SignalController, :index)
+    get("/signals/:id", SignalController, :show)
+    #  resources("/animals", SignalController, only: [:show, :index])
     get("/signals/filter_index", SignalController, :filter_index)
 
     get("/animals/filter_index", AnimalController, :filter_index)
     get("/animals", AnimalController, :index)
+    get("/animals/:id", AnimalController, :show)
 
     resources("/sessions", SessionController, only: [:new, :create, :delete])
 
@@ -112,8 +114,6 @@ defmodule SmartcitydogsWeb.Router do
       get("/users", UserController, :index)
       get("/users/:id", UserController, :show)
 
-      
-
       resources("/animals", AnimalController)
       resources("/news", NewsController)
       get("/show", PageController, :show)
@@ -128,7 +128,7 @@ defmodule SmartcitydogsWeb.Router do
       get("/minicipality_adopted", AnimalController, :minicipality_adopted)
       get("/minicipality_signals", SignalController, :minicipality_signals)
       #########################  /Minicipality Home Page ########################
-         
+
       get("/signals/comment", SignalController, :comment)
 
       get("/signals/get_signals_support_count", SignalController, :get_signals_support_count)
