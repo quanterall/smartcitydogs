@@ -45,9 +45,6 @@ defmodule SmartcitydogsWeb.AnimalController do
         list_animals =
           Map.get(page, :entries) |> Repo.preload(:animals_status) |> Repo.preload(:animals_image)
 
-        # render(conn, "minicipality_registered.html", animals: list_animals, page: page)
-        ##  page = Map.delete(page, :entries) |> Map.delete(:total_entries)
-        ##   page = Map.put(page, :entries, animals) |> Map.put(:total_entries, length(animals))
         page = Smartcitydogs.Repo.paginate(animals)
         render(conn, "minicipality_registered.html", animals: page.entries, page: page)
       end
@@ -162,16 +159,17 @@ defmodule SmartcitydogsWeb.AnimalController do
     }
     IO.inspect map_procedures
 
-    Enum.each(map_procedures, fn(x) -> 
+    
+    list_procedures = Enum.map(map_procedures, fn(x) -> 
       case x do 
-        {_, "true"} -> IO.inspect(x)
-        _ -> IO.puts ""
+        {_, "true"} -> DataAnimals.get_procedure_id_by_name(x)
+        _ -> nil
       end 
     
     end)
+    
 
-    # get_procedure_by_name()
-
+    
     
 
     logged_user_type_id = conn.assigns.current_user.users_types.id
@@ -183,11 +181,9 @@ defmodule SmartcitydogsWeb.AnimalController do
         {:ok, animal} ->
           upload_file(animal.id, conn)
 
+          DataAnimals.insert_performed_procedure(list_procedures, animal.id)
+
           conn
-          |> put_flash(
-            :info,
-            " Dog wiht chip number #{Map.get(animal_params, "chip_number")} is created!"
-          )
           |> redirect(to: animal_path(conn, :index))
 
         {:error, changeset} ->

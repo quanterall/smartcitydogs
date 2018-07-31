@@ -98,13 +98,24 @@
                   </tr>
                 </table>  
                 <br>
-                
+                <% 
+                procedures = Smartcitydogs.DataAnimals.get_procedures(@animals.id)
+                IO.puts "______________________PROCEDURES_______________________"
+                IO.inspect(procedures)
+                IO.puts "______________________PROCEDURES_______________________"
+                %>
                 <div class="div-procedures">
                   <b>Извършени процедури</b> <br> <br>
+                  <%= for procedure <- procedures do %>
                   <div class="procedures-all">
-                    <i class="fa fa-check"></i> Кастрирано<br>
-                    <i class="fa fa-check"></i> Обезпаразитено <br>
+                    <i class="fa fa-check"></i> <%= 
+                    procedure.procedure_type_id  
+                    |> Smartcitydogs.DataProcedure.get_procedure_type!()
+                    |> Map.get(:name)
+                     %> <br>
+                    
                   </div>
+                  <% end %>
                 </div> 
                 <br>
                 <br>

@@ -8,12 +8,46 @@ defmodule Smartcitydogs.DataAnimals do
   alias Smartcitydogs.PerformedProcedures
   alias Smartcitydogs.AnimalStatus
   alias Smartcitydogs.Adopt
+  alias Smartcitydogs.ProcedureType
 
 
   ## gets the current time in Sofia
   def get_current_time() do
     Calendar.DateTime.now!("Europe/Sofia") |> DateTime.to_naive()
   end
+
+  def get_procedure_id_by_name(name) do
+    {name_query,_} = name
+    name_query = "%#{name_query}%"
+    query = Ecto.Query.from(c in ProcedureType, where: ilike(c.name, ^name_query))
+    [procedure] = Repo.all(query) 
+    procedure |> Map.get(:id)
+  end
+
+  
+
+  def get_procedures(id) do
+    query = Ecto.Query.from(c in PerformedProcedures, where: c.animals_id == ^id)
+    Repo.all(query)
+  end
+
+  def insert_performed_procedure(procedure_list, animal_id) do
+    IO.inspect(procedure_list)
+    IO.inspect(animal_id)
+    for procedure <- procedure_list do 
+      if procedure != nil do
+        %PerformedProcedures{}
+        |> PerformedProcedures.changeset(
+          %{
+            animals_id: animal_id,
+            procedure_type_id: procedure
+           })
+        |> Repo.insert()
+      end
+      
+    end
+  end
+
 
   def get_animal_status(id) do
     Repo.get!(AnimalStatus, id)
