@@ -1,46 +1,55 @@
 <div class="bg-test">
-  <div class="container-new-signal">
-    <%= form_for @changeset, @action, [multipart: true] ,fn f -> %>
-    
-      <div class="form-group">
-        <p> Add Photo: </p>
-        <%= file_input f, :animal_image, name: "files[]", multiple: true %>
-      </div>
+  <div class="container-new-signal1">
+    <div class="col-lg-10">
+      <%= form_for @changeset, @action, [multipart: true] ,fn f -> %>
+      
+        <label-add-photo>1.Добавете снимка: </label-add-photo>
+        <div class="form-group">
+          <label for="signals_url" class="file-upload">
+              Качи снимки / видео
+            </label>
+          <%= file_input f, :animal_image, name: "files[]", multiple: true, class: "form-control1", id: "signals_url" %>
+        </div>
+        <br><br>
+        <label-1>2.Извършени процедури:</label-1><br>
+        <div class="form-group">
+          <p> <%= checkbox f, :Кастрирано, checked: true %> Кастрирано</p>
+          <p>  <%= checkbox f, :Обезпаразитено %> Обезпаразитено</p>
+          <p>  <%= checkbox f, :Ваксинирано %> Ваксинирано</p>
+          
+        </div>
 
-      <div class="form-group">
-        <p> <%= checkbox f, :Кастрирано, checked: true %> Кастрирано</p>
-        <p>  <%= checkbox f, :Обезпаразитено %> Обезпаразитено</p>
-        <p>  <%= checkbox f, :Ваксинирано %> Ваксинирано</p>
-        
-      </div>
+        <label-2>3.Пол:</label-2><br>
+        <div class="form-group">
+          <%= select( f, :sex, [[key: "Мъжко", value: "M"],
+                      [key: "Женско", value: "F"] ] ) %>
+          <%= error_tag f, :sex %>
+        </div>
 
-      <div class="form-group">
-        <%= select( f, :sex, [[key: "Мъжко", value: "M"],
-                    [key: "Женско", value: "F"] ] ) %>
-        <%= error_tag f, :sex %>
-      </div>
+        <label-3>4.Номер на чип:</label-3><br>
+        <div class="form-group">
+          <%= text_input f, :chip_number, placeholder: "Номер на чип...",
+                                  class: "form-control1" %>
+          <%= error_tag f, :chip_number %>
+        </div>
 
-      <div class="form-group">
-        <%= text_input f, :chip_number, placeholder: "Chip Number",
-                                class: "form-control" %>
-        <%= error_tag f, :chip_number %>
-      </div>
-      <div class="form-group">
-        <%= text_input f, :address, placeholder: "Last Location Address",
-                                        class: "form-control" %>
-        <%= error_tag f, :password %>
-      </div>
+        <label-4>5.Последен адрес:</label-4><br>
+        <div class="form-group">
+          <%= text_input f, :address, id: "autocomplete", placeholder: "Последна локация...",
+                                          class: "form-control1" %>
+        </div>
 
-      <div class="form-group">
-        <%= select( f, :animals_status_id, [
-          [key: "На свобода", value: "1"],
-          [key: "Осиновено", value: "3"], 
-          [key: "В приюта", value: "2"]]) %>
-        <%= error_tag f, :email %>
-      </div>
+        <label-5>6.Статус на кучето:</label-5><br>
+        <div class="form-group">
+          <%= select( f, :animals_status_id, [
+            [key: "На свобода", value: "1"],
+            [key: "Осиновено", value: "3"], 
+            [key: "В приюта", value: "2"]]) %>
+        </div>
 
 
-      <%= submit "Register Dog", class: "btn btn-primary" %>
-    <% end %>
+        <%= submit "Register Dog", class: "btn btn-primary" %>
+      <% end %>
+      </div>
   </div>
   </div>

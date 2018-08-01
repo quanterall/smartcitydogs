@@ -8,6 +8,7 @@ defmodule SmartcitydogsWeb.AnimalController do
   alias Smartcitydogs.Repo
   import Ecto.Query
 
+  # plug(:put_layout, false when action in [:new, :create])
   plug(:put_layout, false when action in [:adopted_animals])
   plug(:put_layout, false when action in [:shelter_animals])
 
