@@ -128,7 +128,9 @@ label-title{
   display: none;
   margin: 10px;
 }
-
+input#signals_url1{
+  display: none;
+}
 .file-upload{
   float: left;
   margin-top: 2%;
@@ -680,4 +682,34 @@ label-text-white{
   margin-bottom: 0;
   margin: 1%;
   margin-top: 2vh;
+}
+.registered-group label.file-upload{
+  padding-left: 5%;
+}
+.registered-group label.file-upload,
+select#animals_animals_status_id,
+select#animals_sex,
+input#animals_chip_number,
+button.btn.btn-primary.submit-register-dog{
+  width: 32vh;
+}
+.registered-group select#animals_sex{
+  padding-left: 10vh;
+}
+
+.registered-group select#animals_animals_status_id{
+  padding-left: 8vh;
+}
+.submit-register-dog{
+  background-color: #42f4a7;
+  border-color: #42f4a7;
+  font-weight: bold;
+}
+.submit-register-dog:hover{
+  transition: 0.5s;
+  cursor: pointer;
+  background-color: white;;
+  border-color: #42f4a7;
+  font-weight: bold;
+  color: #42f4a7;
 }
