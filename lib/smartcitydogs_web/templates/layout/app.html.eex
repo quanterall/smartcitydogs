@@ -15,20 +15,35 @@
     
 </head>
 <body>
+<% IO.inspect @current_user %>
 <div class="container-fluid">
-    <%= if @conn.assigns.current_user.users_types_id == 5 do %>
-      <%= render("navbar_shelter.html", %{conn: @conn,current_user: @current_user}) %>
-    <% end %>
-    <%= if @conn.assigns.current_user == nil || @conn.assigns.current_user.users_types_id == 2 do %>
-      <%= render("navbar.html", %{conn: @conn,current_user: @current_user}) %>
-    <% end %>
-    <%= if @conn.assigns.current_user.users_types_id == 4 || @conn.assigns.current_user.users_types_id == 5 do %>
-      <%= render("navbar-municipality.html", %{conn: @conn,current_user: @current_user}) %>
-    <% end %>
-    <%= if @conn.assigns.current_user.users_types_id == 3 do %>
-      <%= render("navbar-zoo.html", %{conn: @conn,current_user: @current_user}) %>
-    <% end %>
-    
+
+    <%= 
+      if @current_user do
+        cond do 
+          @current_user.users_types_id == 1 ->
+            render("navbar_municipality.html", %{conn: @conn,current_user: @current_user})
+
+          @current_user.users_types_id == 2 ->
+            render("navbar.html", %{conn: @conn,current_user: @current_user})
+
+          @current_user.users_types_id == 3 ->
+            render("navbar_zoo.html", %{conn: @conn,current_user: @current_user})
+
+          @current_user.users_types_id == 4 || @conn.assigns.current_user.users_types_id == 5 ->
+            render("navbar_municipality.html", %{conn: @conn,current_user: @current_user})
+
+          
+            
+        end
+
+      else
+        render("navbar_no_user.html", %{conn: @conn, current_user: @current_user})
+
+      end
+    %>
+
+
     <div class="container">
         <main role="main" class="content-container">
             <%= render @view_module, @view_template, assigns %>
