@@ -15,7 +15,6 @@
     
 </head>
 <body>
-<% IO.inspect @current_user %>
 <div class="container-fluid">
 
     <%= 

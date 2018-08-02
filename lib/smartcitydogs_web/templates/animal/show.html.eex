@@ -130,17 +130,21 @@
             <p id="user_id"><%= @conn.assigns.current_user.id %></p>
 
             </div>
-
+            
             <%= if @animals.animals_status_id == 3 do %>
             <a input type="button" id="adoption-done"></a>
             <% else %>
-            <% check = Smartcitydogs.DataAnimals.check_adopt(@conn.assigns.current_user.id, @animals.id) %>
+              
+              <%= if @current_user == nil || @current_user.users_types_id == 2 do %>
+                <% check = Smartcitydogs.DataAnimals.check_adopt(@conn.assigns.current_user.id, @animals.id) %>
+                <%= if check == false do %>
+                <a input type="button" id="submit-adoption"><i class="fa fa-home"></i> ОСИНОВИ </a>
+                <% else %>
+                <a id="sent-adoption"><i class="fa fa-check check-class"></i> ИЗПРАТЕНА ЗАЯВКА </a>
+                <% end %>
+              <% else %>
 
-            <%= if check == false do %>
-            <a input type="button" id="submit-adoption"><i class="fa fa-home"></i> ОСИНОВИ </a>
-            <% else %>
-            <a id="sent-adoption"><i class="fa fa-check check-class"></i> ИЗПРАТЕНА ЗАЯВКА </a>
-            <% end %>
+              <% end %>
             <% end %>
             
           </div>
