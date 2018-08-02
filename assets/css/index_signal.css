@@ -684,7 +684,7 @@ label-text-white{
   margin-top: 2vh;
 }
 .registered-group label.file-upload{
-  padding-left: 5%;
+  padding-left: 3.5vh;
 }
 .registered-group label.file-upload,
 select#animals_animals_status_id,
