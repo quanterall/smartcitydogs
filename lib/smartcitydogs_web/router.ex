@@ -98,7 +98,7 @@ defmodule SmartcitydogsWeb.Router do
     resources("/users", UserController, only: [:new, :create])
     resources("/help", HelpController, only: [:index])
     resources("/fortheproject", ForTheProjectController, only: [:index])
-
+    resources("/news", NewsController)
     resources(
       "/forgoten_password",
       ForgotenPasswordController,

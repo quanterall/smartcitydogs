@@ -7,35 +7,23 @@
     <link rel="stylesheet" type="text/css" href="/css/news.css"/>
 
 </head>
-
+ <div class="carousel-caption"> <%=@last_news.content %> </div>
 <div class="container">
 
     <div class="row">
     
       <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-      
-        
-            
+
           <div class="carousel-inner">
-          <p class="carousel-caption2">04May18</p>
-          <div class="carousel-caption"> Example text of something</div>
-          <p style="color: white;" class="carousel-caption3">04May18</p>
-            <div class="item"> <img class="img-responsive" src="images/1.jpg" alt="thumb">
+          <p class="carousel-caption2"> <%=@last_news.date |> NaiveDateTime.to_date() |> Date.to_string() %> </p>
+         
+         <div class="carousel-caption"> <%=@last_news.title %> </div>
+            <div class="item"> <img class="img-responsive" src="/<%= @last_news.image_url %>" alt="thumb">
             
             
             </div>
             
-            <div class="item active"> <img class="img-responsive" src="images/1.jpg" alt="thumb">
-            
-              <div class="carousel-caption"></div>
-              
-            </div>
-            
-            <div class="item">
-            
-              <div class="carousel-caption"></div>
-              
-            </div>
+          
             
           </div>
      
@@ -43,107 +31,89 @@
       
       </div>
       
-      
- <div class="container">
-     <br></br>
-      <div class="UnderMain1  varnaright"> 
-      <div class="col-container-shadow">
-      <div class="containernews">
-     
-      <div  class=>04 MAY18</div>
-      <div  class="">Example Headline of the latest news article</div>
-  <button class="ifformnews" type="submit">See more</button>
-  </div>
-  </div>
-      </div>
-      <div class="UnderMain2  varnaleft">
-       <div class="col-container-shadow">
-       <div class="containernews">
-      <div  class=>04 MAY18</div>
-      <div  class="">Example Headline of the latest news article</div>
-  <button class="ifformnews" type="submit">See more</button>
-  </div>
-  </div>
-      </div>
-
-<br></br>
-<br></br>
-  <div style="clear:both" class="row text-center">
-  
-    <div class="col-sm-4 col-md-4 col-lg-4 col-xs-6">
-      <div class="thumbnail"> <img src="images/church.jpg" alt="Thumbnail Image 1" class="img-responsive">
-        <div class="caption">
-        <p>04 MAY 18</p>
-          <h2>Headline of a news article</h2>
-          <p>Some Text TEXT TEXT TEXT TEXT TEXT TEXT TEXT TECT TEXT TEXT TEXT TEXT</p>
-        </div>
-      </div>
-    </div>
-     <div class="col-sm-4 col-md-4 col-lg-4 col-xs-6">
-      <div class="thumbnail"> <img src="images/church.jpg" alt="Thumbnail Image 1" class="img-responsive">
-        <div class="caption">
-        <p>04 MAY 18</p>
-          <h2>Headline of a news article</h2>
-          <p>Some Text TEXT TEXT TEXT TEXT TEXT TEXT TEXT TECT TEXT TEXT TEXT TEXT</p>
-        </div>
-      </div>
-    </div>
-    
-   <div class="col-sm-4 col-md-4 col-lg-4 col-xs-6">
-      <div class="thumbnail"> <img src="images/church.jpg" alt="Thumbnail Image 1" class="img-responsive">
-        <div class="caption">
-        <p>04 MAY 18</p>
-          <h2>Headline of a news article</h2>
-          <p>Some Text TEXT TEXT TEXT TEXT TEXT TEXT TEXT TECT TEXT TEXT TEXT TEXT</p>
-        </div>
-      </div>
-    </div>
-    <div class="col-sm-4 col-md-4 col-lg-4 col-xs-6">
-      <div class="thumbnail"> <img src="images/church.jpg" alt="Thumbnail Image 1" class="img-responsive">
-        <div class="caption">
-        <p>04 MAY 18</p>
-          <h2>Headline of a news article</h2>
-          <p>Some Text TEXT TEXT TEXT TEXT TEXT TEXT TEXT TECT TEXT TEXT TEXT TEXT</p>
-        </div>
-      </div>
-    </div>
-    <div class="col-sm-4 col-md-4 col-lg-4 col-xs-6">
-      <div class="thumbnail"> <img src="images/church.jpg" alt="Thumbnail Image 1" class="img-responsive">
-        <div class="caption">
-        <p>04 MAY 18</p>
-          <h2>Headline of a news article</h2>
-          <p>Some Text TEXT TEXT TEXT TEXT TEXT TEXT TEXT TECT TEXT TEXT TEXT TEXT</p>
-        </div>
-      </div>
-    </div>
-  
-  <div class="col-sm-4 col-md-4 col-lg-4 col-xs-6">
-      <div class="thumbnail"> <img src="images/church.jpg" alt="Thumbnail Image 1" class="img-responsive">
-        <div class="caption">
-        <p>04 MAY 18</p>
-          <h2>Headline of a news article</h2>
-          <p>Some Text TEXT TEXT TEXT TEXT TEXT TEXT TEXT TECT TEXT TEXT TEXT TEXT</p>
-        </div>
-      </div>
-    </div>
-    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-      <div class="thumbnail"> <img src="images/church.jpg" alt="Thumbnail Image 1" class="img-responsive">
-        <div class="caption">
-        <p>04 MAY 18</p>
-          <h2>Headline of a news article</h2>
-          <p>Some Text TEXT TEXT TEXT TEXT TEXT TEXT TEXT TECT TEXT TEXT TEXT TEXT</p>
-        </div>
-      </div>
-    </div>
-  <div class="col-sm-4 col-md-4 col-lg-4 col-xs-6">
-      <div class="thumbnail"> <img src="images/church.jpg" alt="Thumbnail Image 1" class="img-responsive">
-        <div class="caption">
-        <p>04 MAY 18</p>
-          <h2>Headline of a news article</h2>
-          <p>Some Text TEXT TEXT TEXT TEXT TEXT TEXT TEXT TECT TEXT TEXT TEXT TEXT</p>
-        </div>
-      </div>
-    </div>
-    </div>
-    
+      <div class="home-bg">
 </div>
+<div class="row">
+    <div class="col-lg-12 mt-5">
+        <div class="homepage-slider ">
+            <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <h1 class="">Време е да поемем<br> отговорност за щастието на<br> най-добрите ни
+                            приятели
+                        </h1>
+                    </div>
+                    <div class="carousel-item">
+                        <h1 class="">Време е да поемем<br> отговорност за щастието на<br> най-добрите ни
+                            приятели
+                        </h1>
+                    </div>
+                    <div class="carousel-item">
+                        <h1 class="">Време е да поемем<br> отговорност за щастието на<br> най-добрите ни
+                            приятели
+                        </h1>
+                    </div>
+                </div>
+                <ol class="carousel-indicators">
+                    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row mt-5 mb-3">
+    <div class="col">
+        <h3 class="text-white">Последни сигнали</h3>
+    </div>
+</div>
+<div class="row slick ">
+    <%= for news <- @news do %>
+    <div class="col-lg-12">
+        <div class="card slick-card w-100"
+             style="background:  linear-gradient(rgba(0, 0, 0, 0.5),rgba(0, 0, 0, 0.5)),  no-repeat center center url('https://topdoghub.com/wp-content/uploads/2017/12/Best-Tough-Toys-For-Dogs-1140x624.jpg')">
+            <div class="card-body">
+                <div class="slick-card-status">
+                    <%=news.title
+                    %>
+                </div>
+                <div class="slick-card-small text-gray">
+                    <%=news.content %>
+                </div>
+                <div class="slick-card-title">
+                    <%=news.short_content%>
+                </div>
+            </div>
+        </div>
+    </div>
+    <%= end %>
+</div>
+<div class="row mt-5 mb-3">
+    <div class="col">
+        <h3 class="text-green">Новини</h3>
+    </div>
+</div>
+<div class="row">
+    <%= for news <- @news do %>
+    <div class="col-lg-3">
+        <div class="card">
+            <img class="card-img-top"
+                 src="https://topdoghub.com/wp-content/uploads/2017/12/Best-Tough-Toys-For-Dogs-1140x624.jpg"
+                 alt="Card image cap">
+            <div class="card-body">
+                <p class="text-dark">
+                    <small>
+                        <%=NaiveDateTime.to_date( news.date) %>
+                    </small>
+                </p>
+                <h5 class="card-title">Card title</h5>
+                <p class="card-text"><%= news.short_content%></p>
+                <%= link "Виж повече »", to: news_path(@conn, :show, news), class: "btn btn-default float-right
+                text-green" %>
+            </div>
+        </div>
+    </div>
+    <%= end %>
+</div>
+ 
