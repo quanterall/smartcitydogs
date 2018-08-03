@@ -54,7 +54,7 @@ $('#show-map').click(function() {
 
 $('#submit-like1').on('click',function(){
     var a = $('#submit-like1').text();
-    console.log(a);
+
   if(a == "ПОСЛЕДВАЙ"){
     $.ajax({
         method: "GET",
@@ -65,7 +65,6 @@ $('#submit-like1').on('click',function(){
         }
     }).then(function(data) {
         $("#signal-count").text(data.new_count);
-
     })
 
     $('#submit-like1').text("ОТСЛЕДВАЙ");
@@ -119,7 +118,7 @@ window.login = function () {
     $.post("/api/users/sign_in", params)
         .done(function (data) {
             if ((data.users_types_id == 4) || (data.users_types_id == 5)) {
-                window.location.href = "index_home_minicipality";
+                window.location.href = "minicipality_signals";
             }
             else {
                 location.reload();
@@ -203,3 +202,6 @@ $(window).scroll(function(e){
 $('.navbar-collapse').on('show.bs.collapse', function() {
     $(".top-navbar").removeClass("navbar-home");
 });
+
+
+    

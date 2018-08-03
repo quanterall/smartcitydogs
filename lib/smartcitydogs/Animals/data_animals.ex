@@ -49,10 +49,8 @@ defmodule Smartcitydogs.DataAnimals do
   end
 
   def get_animal_by_chip(chip_number) do
-    
-
-    query = Ecto.Query.from(c in Animals, where: c.chip_number == ^chip_number)
-    
+    chip_number = "%#{chip_number}%"
+    query = Ecto.Query.from(c in Animals, where: ilike(c.chip_number, ^chip_number ))                                                
     Repo.all(query) |> Repo.preload(:animals_status)
   end
 

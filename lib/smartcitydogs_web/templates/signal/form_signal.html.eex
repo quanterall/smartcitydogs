@@ -13,8 +13,8 @@
 
     <label-2>2.Въведете местоположение</label-2>
       <div class="form-group">
-        <%= text_input f, :address, class: "form-control1", id: "autocomplete", required: true, minlength: 2, placeholder: "Въведете адрес....." %>
-        <%= error_tag f, :address %>
+          <input  class="form-control1" id="autocomplete" minlength="2" name="address" placeholder="Въведете адрес....." type="text" required="">
+          <%= error_tag f, :address %>
       </div>
 
       <div class="hidden-form-group">
@@ -41,8 +41,6 @@
     <div class="form-group">
       <div class="under-form">
 
-
-
     <%= submit "ПОДАЙ СИГНАЛ", class: "btn btn-submit" %> <br>
       <div class="close-modal ">ОТКАЗ</div>
       </div>
@@ -50,48 +48,43 @@
       <% end %>
     </div>
 
-    
-   
-  <script type="text/javascript">
-    var placeSearch, autocomplete;
-    var Cordinate_a, Cordinate_b;
-    function initialize() {
+    <script>
 
-        autocomplete = new google.maps.places.Autocomplete(document.getElementById('autocomplete'));
-        console.log(autocomplete);
-        google.maps.event.addListener(autocomplete, 'place_changed', function () {
+      var placeSearch, autocomplete;
+      var Cordinate_a, Cordinate_b;
+      function initialize() {
+      console.log(document.getElementById('autocomplete'));
+          autocomplete = new google.maps.places.Autocomplete(
+              /** @type {!HTMLInputElement} */(document.getElementById('autocomplete')),
+              {types: ['geocode']});
+
+          // When the user selects an address from the dropdown, populate the address
+          // fields in the form.
+          autocomplete.addListener('place_changed', placeAlabala);
+          console.log(autocomplete);
+        }
+
+        function placeAlabala(){
             var place = autocomplete.getPlace();
-            console.log(place.formatted_address);
             console.log(place);
-            console.log(place);
-           // console.log(place.geometry.viewport.f.b);
-           // console.log(place.geometry.viewport.b.b);
-           var a_a = place.geometry.viewport.f.b;
-           var a_b = place.geometry.viewport.f.f;
-           var b_a = place.geometry.viewport.b.b;
-           var b_b = place.geometry.viewport.b.f;
-           //console.log(a_a);
-           //console.log(a_b);
-           //console.log(b_a);
-           //console.log(b_b);
-           var res_a = (a_a + a_b)/2;
-           var res_b = (b_a+b_b)/2; 
-           //console.log(res_a);
-           //console.log(res_b);
-           Cordinate_a = res_a//place.geometry.viewport.f.b;
-           Cordinate_b = res_b//place.geometry.viewport.b.b;
-            //Cordinate_a = place.geometry.location.lat["[[Scopes]]"]["0"].a;
-            //Cordinate_b = place.geometry.location.lat["[[Scopes]]"]["0"].b;
+            var a_a = place.geometry.viewport.f.b;
+            var a_b = place.geometry.viewport.f.f;
+            var b_a = place.geometry.viewport.b.b;
+            var b_b = place.geometry.viewport.b.f;
+            var res_a = (a_a + a_b)/2;
+            var res_b = (b_a+b_b)/2;
+            Cordinate_a = res_a  //place.geometry.viewport.f.b;
+            Cordinate_b = res_b   //place.geometry.viewport.b.b;
             console.log(Cordinate_a);
-          console.log(Cordinate_b);
+            console.log(Cordinate_b);
             $('#address_F').val(Cordinate_a);
             $('#address_B').val(Cordinate_b);
-        });
-    }
 
-    initialize();
+        }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDAnp2RXJIJARIGKIcxtUVdHD7-TyFCfe4&libraries=places&callback=initialize" async defer></script>
 
-  </script>
+
 
 </body>
 </html>
