@@ -1,14 +1,26 @@
 defmodule SmartcitydogsWeb.AnimalController do
   use SmartcitydogsWeb, :controller
 
+  
   alias Smartcitydogs.DataAnimals
   alias Smartcitydogs.Animals
   alias Smartcitydogs.AnimalImages
   alias Smartcitydogs.Repo
   import Ecto.Query
 
+  # plug(:put_layout, false when action in [:new, :create])
   plug(:put_layout, false when action in [:adopted_animals])
   plug(:put_layout, false when action in [:shelter_animals])
+
+
+  ###### Send E-mail ########
+
+  def send_email(conn,data) do
+    int = String.to_integer(data["animal_id"])
+    Smartcitydogs.Email.send_email(data)
+    DataAnimals.insert_adopt(data["user_id"], data["animal_id"])
+    redirect conn, to: "/animals/#{int}"
+  end
 
   ############################# Minicipality Home Page Animals ################################
 
@@ -34,9 +46,6 @@ defmodule SmartcitydogsWeb.AnimalController do
         list_animals =
           Map.get(page, :entries) |> Repo.preload(:animals_status) |> Repo.preload(:animals_image)
 
-        # render(conn, "minicipality_registered.html", animals: list_animals, page: page)
-        ##  page = Map.delete(page, :entries) |> Map.delete(:total_entries)
-        ##   page = Map.put(page, :entries, animals) |> Map.put(:total_entries, length(animals))
         page = Smartcitydogs.Repo.paginate(animals)
         render(conn, "minicipality_registered.html", animals: page.entries, page: page)
       end
@@ -68,7 +77,6 @@ defmodule SmartcitydogsWeb.AnimalController do
 
   def index(conn, params) do
     sorted_animals = DataAnimals.sort_animals_by_id()
-    IO.inspect(conn)
 
     if conn.assigns.current_user != nil do
       logged_user_type_id = conn.assigns.current_user.users_types.id
@@ -143,6 +151,28 @@ defmodule SmartcitydogsWeb.AnimalController do
   end
 
   def create(conn, %{"animals" => animal_params}) do
+    IO.inspect(animal_params)
+
+    map_procedures = %{
+      "Кастрирано" => animal_params["Кастрирано"],
+      "Обезпаразитено" => animal_params["Обезпаразитено"],
+      "Ваксинирано" => animal_params["Ваксинирано"]
+    }
+    IO.inspect map_procedures
+
+    
+    list_procedures = Enum.map(map_procedures, fn(x) -> 
+      case x do 
+        {_, "true"} -> DataAnimals.get_procedure_id_by_name(x)
+        _ -> nil
+      end 
+    
+    end)
+    
+
+    
+    
+
     logged_user_type_id = conn.assigns.current_user.users_types.id
 
     if logged_user_type_id != 5 do
@@ -152,11 +182,9 @@ defmodule SmartcitydogsWeb.AnimalController do
         {:ok, animal} ->
           upload_file(animal.id, conn)
 
+          DataAnimals.insert_performed_procedure(list_procedures, animal.id)
+
           conn
-          |> put_flash(
-            :info,
-            " Dog wiht chip number #{Map.get(animal_params, "chip_number")} is created!"
-          )
           |> redirect(to: animal_path(conn, :index))
 
         {:error, changeset} ->

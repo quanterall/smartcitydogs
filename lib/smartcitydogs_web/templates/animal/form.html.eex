@@ -1,41 +1,91 @@
+<div class="bg-test">
+  <div class="container-new-signal1">
+    <div class="col-lg-10">
+      <%= form_for @changeset, @action, [multipart: true] ,fn f -> %>
+      
+        <label-add-photo>1.Добавете снимка: </label-add-photo>
+        <div class="form-group registered-group">
+          <label for="signals_url1" class="file-upload">
+              Качи снимки / видео
+            </label>
+          <%= file_input f, :animal_image, name: "files[]", multiple: true, class: "form-control1", id: "signals_url1" %>
+        </div>
+        <br><br>
+        <label-1>2.Извършени процедури:</label-1><br>
+        <div class="form-group registered-group">
+          <p> <%= checkbox f, :Кастрирано, checked: true %> Кастрирано</p>
+          <p>  <%= checkbox f, :Обезпаразитено %> Обезпаразитено</p>
+          <p>  <%= checkbox f, :Ваксинирано %> Ваксинирано</p>
+          
+        </div>
 
-<%= form_for @changeset, @action, [multipart: true] ,fn f -> %>
-  <%= if @changeset.action do %>
-    <div class="alert alert-danger">
-      <p>There are some errors</p>
-    </div>
-  <% end %>
+        <label-2>3.Пол:</label-2><br>
+        <div class="form-group registered-group">
+          <%= select( f, :sex, [[key: "Мъжко", value: "M"],
+                      [key: "Женско", value: "F"] ] ) %>
+          <%= error_tag f, :sex %>
+        </div>
 
-  <div class="form-group">
-    <p> Add Photo: </p>
-    <%= #file_input f, :photo, class: "form-control" %>
-    <%= #file_input f, :photo, muliple: true %>
-    <%= file_input f, :animal_image, name: "files[]", multiple: true %>
+        <label-3>4.Номер на чип:</label-3><br>
+        <div class="form-group registered-group">
+          <%= text_input f, :chip_number, placeholder: "Номер на чип...",
+                                  class: "form-control1" %>
+          <%= error_tag f, :chip_number %>
+        </div>
+
+        <label-4>5.Последен адрес:</label-4><br>
+        <div class="form-group registered-group">
+          <%= text_input f, :address, id: "autocomplete1", placeholder: "Последна локация...",
+                                          class: "form-control1" %>
+        </div>
+
+        <label-5>6.Статус на кучето:</label-5><br>
+        <div class="form-group registered-group">
+          <%= select( f, :animals_status_id, [
+            [key: "На свобода", value: "1"],
+            [key: "Осиновено", value: "3"], 
+            [key: "В приюта", value: "2"]]) %>
+        </div>
+
+        <div class="form-group registered-group">
+        <%= submit "Register Dog", class: "btn btn-primary submit-register-dog" %>
+        </div>
+      <% end %>
+      </div>
   </div>
-
-  <div class="form-group">
-    <%= select( f, :sex, [[key: "Мъжко", value: "M"],
-                 [key: "Женско", value: "F"] ] ) %>
-    <%= error_tag f, :sex %>
   </div>
+  <script>
 
-  <div class="form-group">
-    <%= text_input f, :chip_number, placeholder: "Chip Number",
-                             class: "form-control" %>
-    <%= error_tag f, :chip_number %>
-  </div>
-  <div class="form-group">
-    <%= text_input f, :address, placeholder: "Last Location Address",
-                                     class: "form-control" %>
-    <%= error_tag f, :password %>
-  </div>
+      var placeSearch, autocomplete;
+      var Cordinate_a, Cordinate_b;
+      function initialize() {
+      console.log(document.getElementById('autocomplete1'));
+          autocomplete = new google.maps.places.Autocomplete(
+              /** @type {!HTMLInputElement} */(document.getElementById('autocomplete1')),
+              {types: ['geocode']});
 
-  <div class="form-group">
-    <%= select( f, :animals_status_id, [[key: "На свобода", value: "1"],
-                 [key: "Осиновено", value: "2"], [key: "В приюта", value: "3"]]) %>
-    <%= error_tag f, :email %>
-  </div>
+          // When the user selects an address from the dropdown, populate the address
+          // fields in the form.
+          autocomplete.addListener('place_changed', placeAlabala);
+          console.log(autocomplete);
+        }
 
+        function placeAlabala(){
+            var place = autocomplete.getPlace();
+            console.log(place);
+            var a_a = place.geometry.viewport.f.b;
+            var a_b = place.geometry.viewport.f.f;
+            var b_a = place.geometry.viewport.b.b;
+            var b_b = place.geometry.viewport.b.f;
+            var res_a = (a_a + a_b)/2;
+            var res_b = (b_a+b_b)/2;
+            Cordinate_a = res_a  //place.geometry.viewport.f.b;
+            Cordinate_b = res_b   //place.geometry.viewport.b.b;
+            console.log(Cordinate_a);
+            console.log(Cordinate_b);
+            $('#address_F').val(Cordinate_a);
+            $('#address_B').val(Cordinate_b);
 
-  <%= submit "Register Dog", class: "btn btn-primary" %>
-<% end %>
+        }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDAnp2RXJIJARIGKIcxtUVdHD7-TyFCfe4&libraries=places&callback=initialize" async defer></script>

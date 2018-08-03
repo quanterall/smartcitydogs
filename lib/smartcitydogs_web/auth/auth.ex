@@ -1,9 +1,6 @@
 defmodule Smartcitydogs.Auth do
   import Comeonin.Bcrypt, only: [checkpw: 2, dummy_checkpw: 0]
-  import Logger
 
-  alias Smartcitydogs.User
-  alias Smartcitydogs.Repo
 
   def login(conn, user) do
     conn

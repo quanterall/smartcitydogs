@@ -1,0 +1,59 @@
+<div class="fixed-top-costom">
+    <nav class='navbar navbar-expand-lg bg-transperent top-navbar w-100
+            <%= if length(@conn.path_info) == 0 do %>
+                navbar-home
+            <% end %>'>
+        <div class="container">
+
+
+        <a class="navbar-brand bg-green pl-3 pr-3 " href="/">SmartCityDogs</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+                aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="fas fa-bars"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav mr-auto text-nowrap">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/">Начало</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/animals/new">Регистриране на куче</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/signals">Подадени сигнали</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/animals">Регистрирани кучета</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/news">Новини</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav text-nowrap">
+                <%= if @current_user do %>
+                <li class="nav-item ">
+                    <a class="nav-link user-menu" href="#">
+                        Здравей, <b><%= @current_user.first_name%></b>
+                        <i class="fa fa-user"></i>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <%= link "Sign out", to: session_path(@conn, :delete, @current_user), method: "delete", class:
+                    "nav-link" %>
+                </li>
+                <% else %>
+                <li class="nav-item ">
+                    <a class="nav-link  <%= if length(@conn.path_info) == 0 do  %> black <% end %>" id="nav-register"
+                       href="#" onclick="showModalForm(event, 'register-form')">Регистрация</a>
+                </li>
+                <li class="nav-item ">
+                    <a class="nav-link" id="nav-sign-in"
+                       href="#" onclick="showModalForm(event, 'login-form')">Вход</a>
+                </li>
+                <% end %>
+            </ul>
+        </div>
+        </div>
+    </nav>
+    <%= render("modal_forms.html", %{conn: @conn,current_user: @current_user}) %>
+</div>

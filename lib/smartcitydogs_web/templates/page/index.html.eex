@@ -69,7 +69,7 @@
             </div>
         </div>
     </div>
-    <%= end %>
+    <% end %>
 </div>
 <div class="row mt-5 mb-3">
     <div class="col">
@@ -96,5 +96,5 @@
             </div>
         </div>
     </div>
-    <%= end %>
+    <% end %>
 </div>

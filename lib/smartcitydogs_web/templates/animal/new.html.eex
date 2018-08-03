@@ -1,5 +1,3 @@
-<h1>Animal Registration</h1>
+<link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
 
 <%= render "form.html", Map.put(assigns, :action, animal_path(@conn, :create)) %>
-
-<span><%= link "Back", to: animal_path(@conn, :index) %></span>

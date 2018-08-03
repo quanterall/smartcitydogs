@@ -11,6 +11,8 @@
               ]) %>
       </div>
 
+
+
     <label-2>2.Въведете местоположение</label-2>
       <div class="form-group">
           <input  class="form-control1" id="autocomplete" minlength="2" name="address" placeholder="Въведете адрес....." type="text" required="">
@@ -83,8 +85,3 @@
         }
     </script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDAnp2RXJIJARIGKIcxtUVdHD7-TyFCfe4&libraries=places&callback=initialize" async defer></script>
-
-
-
-</body>
-</html>

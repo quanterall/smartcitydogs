@@ -24,6 +24,24 @@ import "slick-carousel";
 ////////////ORIGINAL//////////////
 
 
+$('#submit-adoption').click(function(){
+    $.ajax({
+        method: "GET",
+        url: "/animals/send_email",
+        data: {
+            "chip_number": $("#chip_number").text(),
+            "user_name": $("#user_name").text(),
+            "user_last_name": $("#user_last_name").text(),
+            "user_email": $("#user_email").text(),
+            "user_phone": $("#user_phone").text(),
+            "animal_id": $("#animal_id").text(),
+            "user_id": $("#user_id").text()
+        }
+    }).done(function(){
+		location.reload();
+	})
+});
+
 $("#like").click(function () {
 
     $.ajax({

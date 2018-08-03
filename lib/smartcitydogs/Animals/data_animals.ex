@@ -6,14 +6,51 @@ defmodule Smartcitydogs.DataAnimals do
   alias Smartcitydogs.AnimalImages
   alias Smartcitydogs.AnimalStatus
   alias Smartcitydogs.PerformedProcedures
-  alias Smartcitydogs.Rescues
   alias Smartcitydogs.AnimalStatus
+  alias Smartcitydogs.Adopt
+  alias Smartcitydogs.ProcedureType
 
-  import Plug.Conn
 
   ## gets the current time in Sofia
   def get_current_time() do
     Calendar.DateTime.now!("Europe/Sofia") |> DateTime.to_naive()
+  end
+
+  def get_procedure_id_by_name(name) do
+    {name_query,_} = name
+    name_query = "%#{name_query}%"
+    query = Ecto.Query.from(c in ProcedureType, where: ilike(c.name, ^name_query))
+    [procedure] = Repo.all(query) 
+    procedure |> Map.get(:id)
+  end
+
+  
+
+  def get_procedures(id) do
+    query = Ecto.Query.from(c in PerformedProcedures, where: c.animals_id == ^id)
+    Repo.all(query)
+  end
+
+  def insert_performed_procedure(procedure_list, animal_id) do
+    IO.inspect(procedure_list)
+    IO.inspect(animal_id)
+    for procedure <- procedure_list do 
+      if procedure != nil do
+        %PerformedProcedures{}
+        |> PerformedProcedures.changeset(
+          %{
+            animals_id: animal_id,
+            procedure_type_id: procedure
+           })
+        |> Repo.insert()
+      end
+      
+    end
+  end
+
+  def get_animal_by_chip(chip_number) do
+    query = Ecto.Query.from(c in Animals, where: c.chip_number == ^chip_number)
+    Repo.all(query)
   end
 
   def get_animal_status(id) do
@@ -168,4 +205,42 @@ defmodule Smartcitydogs.DataAnimals do
   def change_animal_image(%AnimalImages{} = animal_image) do
     AnimalImages.changeset(animal_image, %{})
   end
+
+  ################ ADOPT INSERT #####################
+
+  def insert_adopt(users_id, animals_id) do
+    %Adopt{}
+    |> Adopt.changeset(%{users_id: users_id, animals_id: animals_id})
+    |> Repo.insert!()
+  end
+
+  def check_adopt(users_id, animals_id) do
+    query_user = Ecto.Query.from(c in Adopt, where: c.users_id == ^users_id)
+    list = Repo.all(query_user)
+    check_list(list, animals_id)
+    
+    
+    
+  end
+  
+  def check_list([],animals_id) do
+    false
+  end
+
+  def check_list([head | tail], animals_id) do
+    
+    if head == [] do
+      false
+      
+    else
+      if head.animals_id == animals_id do
+        true
+      
+      else
+        check_list(tail, animals_id)
+      end
+    end
+  
+  end
+
 end

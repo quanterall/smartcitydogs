@@ -6,7 +6,6 @@ defmodule Smartcitydogs.DataPages do
   alias Smartcitydogs.StaticPages
   alias Smartcitydogs.HeaderSlides
 
-  import Plug.Conn
 
   def get_news(id) do
     Repo.get!(News, id)

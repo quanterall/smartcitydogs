@@ -6,6 +6,8 @@ defmodule SmartcitydogsWeb.AnimalControllerAPI do
 
   action_fallback(SmartCityDogsWeb.FallbackController)
 
+  
+
   def index(conn, _params) do
     chip = _params["chip_number"]
 
@@ -24,6 +26,7 @@ defmodule SmartcitydogsWeb.AnimalControllerAPI do
   end
 
   def create(conn, %{"animal" => animal_params}) do
+   
     with {:ok, %Animals{} = animal} <- DataAnimals.create_animal(animal_params) do
       conn
       |> put_status(:created)

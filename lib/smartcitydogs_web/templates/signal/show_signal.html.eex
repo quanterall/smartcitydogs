@@ -1,13 +1,11 @@
-      <html>
-<head>
+
     <meta charset="utf-8">
     <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/all.css" integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ" crossorigin="anonymous">
   
-  </head>
-<body>
+
   <div id="cor-a"><%= @signal.address_F %></div>
        <div id="cor-b"><%= @signal.address_B %></div>
   <div class="show-signal-container">
@@ -50,7 +48,7 @@
             <show-signal-label-adress>
               <div class="fa fa-map-marker-alt" aria-hidden="true"></div><div class="address-style" id="test-address"><%=@signal.address%></div>
             </show-signal-label-adress>
-            <a id="show-map" href="#">ВИЖ НА КАРТА</a>
+            <a id="show-map">ВИЖ НА КАРТА</a>
            
             <br>
             <br>
@@ -123,10 +121,12 @@
               
             </div>
             <br><br>
-            <div class="buttons-for-signal">
-               <% list_of_liked_signals = @conn.assigns.current_user.liked_signals %>
-                <%= if Enum.member?(list_of_liked_signals,@signal.id) do %><a id="submit-like1">ОТСЛЕДВАЙ</a>
-                <% else %><a id="submit-like1">ПОСЛЕДВАЙ</a><%end%><div id="comment" >КОМЕНТИРАЙ</div>
+            <div class="buttons-for-signal1">
+              <div class="buttons-for-signal">
+                <% list_of_liked_signals = @conn.assigns.current_user.liked_signals %>
+                  <%=   if Enum.member?(list_of_liked_signals,@signal.id) do %><a id="submit-like1">ОТСЛЕДВАЙ</a>
+                  <% else %><a id="submit-like1">ПОСЛЕДВАЙ</a><%end%><div id="comment" >КОМЕНТИРАЙ</div>
+              </div>
             </div>
             <a id="signal-id"><%= @signal.id %></a>
           <br><br>
@@ -138,6 +138,7 @@
             <div class="close_comment">ОТКАЗ</div><a class="submit_comment" href="/signals/<%= @signal.id %>" role="button">ПУБЛИКУВАЙ</a>
             </div>
             </div>
+          </div>
           <br>
           <br>
         <br>
@@ -148,16 +149,16 @@
             <%= if @signal.id == comment.signals_id do %>
                 <p class="username-comments-signal"><%= comment.users.username %></p><p class="date-comments-signal">
                 <%=
-                signal_time = comment.inserted_at
-                        |> DateTime.truncate(:second)
-                        |> DateTime.to_string()
-                        count = String.length(signal_time)
-                        final_time = String.slice(signal_time,0..count-11)
-                        final_time
-                %>
-                </p>
-                <br><br>
-                  <p class="username-comment-on-signal"><%= comment.comment #Smartcitydogs.DataSignals.get_comment_signal_id(@signal.id)  %></p> 
+                          signal_time = comment.inserted_at
+                                  |> DateTime.truncate(:second)
+                                  |> DateTime.to_string()
+                                  count = String.length(signal_time)
+                                  final_time = String.slice(signal_time,0..count-11)
+                                  final_time
+                          %>
+                          </p>
+                          <br><br>
+                  <p class="username-comment-on-signal"><%= comment.comment %></p> 
                 <hr>
                 <% end %>
             <% end %>
@@ -191,5 +192,3 @@
       </script>
 
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDAnp2RXJIJARIGKIcxtUVdHD7-TyFCfe4&callback=ShowMap"></script>
-</body>
-</html>

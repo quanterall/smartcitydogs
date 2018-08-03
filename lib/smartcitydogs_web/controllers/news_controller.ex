@@ -1,7 +1,6 @@
 defmodule SmartcitydogsWeb.NewsController do
   use SmartcitydogsWeb, :controller
 
-  alias Smartcitydogs.Repo
   alias Smartcitydogs.News
   alias Smartcitydogs.DataPages
   import Ecto.Query

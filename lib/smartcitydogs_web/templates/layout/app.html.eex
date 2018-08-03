@@ -16,7 +16,33 @@
 </head>
 <body>
 <div class="container-fluid">
-    <%= render("navbar.html", %{conn: @conn,current_user: @current_user}) %>
+
+    <%= 
+      if @current_user do
+        cond do 
+          @current_user.users_types_id == 1 ->
+            render("navbar_municipality.html", %{conn: @conn,current_user: @current_user})
+
+          @current_user.users_types_id == 2 ->
+            render("navbar.html", %{conn: @conn,current_user: @current_user})
+
+          @current_user.users_types_id == 3 ->
+            render("navbar_zoo.html", %{conn: @conn,current_user: @current_user})
+
+          @current_user.users_types_id == 4 || @conn.assigns.current_user.users_types_id == 5 ->
+            render("navbar_municipality.html", %{conn: @conn,current_user: @current_user})
+
+          
+            
+        end
+
+      else
+        render("navbar_no_user.html", %{conn: @conn, current_user: @current_user})
+
+      end
+    %>
+
+
     <div class="container">
         <main role="main" class="content-container">
             <%= render @view_module, @view_template, assigns %>

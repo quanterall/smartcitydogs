@@ -128,7 +128,9 @@ label-title{
   display: none;
   margin: 10px;
 }
-
+input#signals_url1{
+  display: none;
+}
 .file-upload{
   float: left;
   margin-top: 2%;
@@ -579,7 +581,9 @@ box-shadow: 0px 0px 45px -4px rgba(0,0,0,0.75);
   padding: 10%;
 }
 .container-new-signal{
-  padding: 5%;
+  background-color: #42f4a7;
+  padding: 2.5%;
+  margin: 0px;
 }
 
 .pull-right{
@@ -614,4 +618,98 @@ label-text-white{
 .container-signals .container {
   margin: 0px;
   max-width: 100%;
+}
+.container-new-signal1{
+  width: 100%;
+  padding: 5%;
+  background-color: white;
+}
+.container-new-signal1 .file-upload{
+  float: left;
+  margin-top: 2%;
+  border: 1px solid black;
+   display: inline-block;
+    padding: 6px 12px;
+    cursor: pointer;
+    color: black;
+}
+.container-new-signal1 label-add-photo{
+  font-size: 15px;
+  color: black;
+  font-family: monospace;
+  font-weight: bold;
+  margin-left: 1%;
+}
+.container-new-signal1 label-1{
+  font-size: 15px;
+  color: black;
+  font-family: monospace;
+  font-weight: bold;
+  margin-left: 1%;
+}
+.container-new-signal1 label-2{
+  font-size: 15px;
+  margin-left: 1%;
+  font-weight: bold;
+  color: black;
+  font-family: monospace;
+}
+.container-new-signal1 label-3{
+  margin-left: 1%;
+  font-size: 15px;
+  font-weight: bold;
+  color: black;
+  font-family: monospace;
+}
+.container-new-signal1 label-4{
+  margin-left: 1%;
+  font-size: 15px;
+  font-weight: bold;
+  color: black;
+  font-family: monospace;
+}
+.container-new-signal1 label-5{
+  margin-left: 1%;
+  font-size: 15px;
+  font-weight: bold;
+  color: black;
+  font-family: monospace;
+}
+.container-new-signal1 .form-group{
+  padding-top: 0px;
+  padding-bottom: 3%;
+  padding-left: 0px;
+  margin-bottom: 0;
+  margin: 1%;
+  margin-top: 2vh;
+}
+.registered-group label.file-upload{
+  padding-left: 3.5vh;
+}
+.registered-group label.file-upload,
+select#animals_animals_status_id,
+select#animals_sex,
+input#animals_chip_number,
+button.btn.btn-primary.submit-register-dog{
+  width: 32vh;
+}
+.registered-group select#animals_sex{
+  padding-left: 10vh;
+}
+
+.registered-group select#animals_animals_status_id{
+  padding-left: 8vh;
+}
+.submit-register-dog{
+  background-color: #42f4a7;
+  border-color: #42f4a7;
+  font-weight: bold;
+}
+.submit-register-dog:hover{
+  transition: 0.5s;
+  cursor: pointer;
+  background-color: white;;
+  border-color: #42f4a7;
+  font-weight: bold;
+  color: #42f4a7;
 }

@@ -1,7 +1,6 @@
 defmodule Smartcitydogs.GuardianSerializer do
   @behaviour Guardian.Serializer
 
-  alias Smartcitydogs.Repo
   alias Smartcitydogs.User
 
   def for_token(user = %User{}), do: {:ok, "User:#{user.id}"}
