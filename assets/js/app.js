@@ -25,10 +25,13 @@ import "slick-carousel";
 
 
 $('#submit-adoption').click(function(){
+    
     $.ajax({
-        method: "GET",
-        url: "/animals/send_email",
-        data: {
+        method: "POST",
+        url: "/animals/:id/send_email",
+        headers: new window.Headers({'x-csrf-token': window.csrfToken}),
+        credentials: 'same-origin',
+        data: JSON.stringify({
             "chip_number": $("#chip_number").text(),
             "user_name": $("#user_name").text(),
             "user_last_name": $("#user_last_name").text(),
@@ -36,7 +39,21 @@ $('#submit-adoption').click(function(){
             "user_phone": $("#user_phone").text(),
             "animal_id": $("#animal_id").text(),
             "user_id": $("#user_id").text()
-        }
+        }),
+        success: function (msg) {
+            // console.log(msg);
+            if (msg.response != "Ok") {
+                alert("Грешка при изпращането!");
+              }
+              else {
+                alert("Имейлът ви беше успешно изпратен!");
+              }
+        
+        },
+        error: function (xhr, status) {
+           alert("ГРЕШКА!");
+          }
+    
     }).done(function(){
 		location.reload();
 	})

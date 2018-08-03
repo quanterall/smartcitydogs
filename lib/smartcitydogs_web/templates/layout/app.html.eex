@@ -54,5 +54,19 @@
 
 <script src='<%= static_path(@conn, "/js/app.js") %>'></script>
 
+<script>
+
+window.csrfToken = '<%= get_csrf_token(@conn) %>'
+
+//$.ajaxSetup({
+//headers: {
+//'x-csrf-token': '<% Map.get(@conn.req_cookies, "_csrf_token") %>'
+//}
+//});
+
+</script>
+
+
+
 </body>
 </html>

@@ -97,8 +97,21 @@ show-signal-label-description{
 .buttons-for-signal1 .buttons-for-signal{
     float: right;
 }
-
+#register-comment-button:hover{
+    cursor: pointer;
+}
+#register-comment-button{
+    font-weight: bold;
+    text-align: center;
+    border: 1px solid #00c790;
+    background-color: transparent;
+    color: #00c790;
+    float: right;
+    padding: 10px 0;
+    width: 35%;
+}
 .buttons-for-signal #comment{
+    font-weight: bold;
     text-align: center;
     border: 1px solid #00c790;
     background-color: transparent;
@@ -212,6 +225,17 @@ show-signal-label-description{
 }
 #comment:hover{
     cursor: pointer;
+}
+#register-submit-adoption{
+    font-weight: bold;
+    width: 35%;
+    text-align: center;
+    padding: 10px 0;
+    border: 1px solid #00c790;
+    background-color: #00c790;
+    color: white;
+    cursor: pointer;
+    float: right;
 }
 #submit-adoption{
     font-weight: bold;

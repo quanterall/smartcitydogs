@@ -119,38 +119,50 @@
           <br>
           <br>
           <div class="buttons-for-signal">
-            <div class="hide_for_ajax">
 
-            <p id="chip_number"><%= @animals.chip_number %></p>
-            <p id="user_name"><%= @conn.assigns.current_user.first_name %></p>
-            <p id="user_last_name"><%= @conn.assigns.current_user.last_name %></p>
-            <p id="user_email"><%= @conn.assigns.current_user.email %></p>
-            <p id="user_phone"><%= @conn.assigns.current_user.phone %></p>
-            <p id="animal_id"><%= @animals.id %></p>
-            <p id="user_id"><%= @conn.assigns.current_user.id %></p>
+          <%=  cond do %>
+          
+          <%= @current_user == nil -> %>
+            <%= if @animals.animals_status_id == 3 do %>
+              <a input type="button" id="adoption-done"></a>
+              <% else %>
+              <a input type="button" id="register-submit-adoption" onclick="showModalForm(event, 'register-form')"><i class="fa fa-home"></i> ОСИНОВИ </a>
+            <% end %>
 
-            </div>
+          <%= @current_user.users_types_id == 2 -> %>
+              <div class="hide_for_ajax">
+
+              <% 
+                IO.inspect @current_user
+              %>
+              <p id="chip_number"><%= @animals.chip_number %></p>
+              <p id="user_name"><%= @current_user.first_name %></p>
+              <p id="user_last_name"><%= @current_user.last_name %></p>
+              <p id="user_email"><%= @current_user.email %></p>
+              <p id="user_phone"><%= @current_user.phone %></p>
+              <p id="animal_id"><%= @animals.id %></p>
+              <p id="user_id"><%= @current_user.id %></p>
+
+              </div>
             
             <%= if @animals.animals_status_id == 3 do %>
-            <a input type="button" id="adoption-done"></a>
+              <a input type="button" id="adoption-done"></a>
             <% else %>
-              
-              <%= if @current_user == nil || @current_user.users_types_id == 2 do %>
-                <% check = Smartcitydogs.DataAnimals.check_adopt(@conn.assigns.current_user.id, @animals.id) %>
-                <%= if check == false do %>
-                <a input type="button" id="submit-adoption"><i class="fa fa-home"></i> ОСИНОВИ </a>
-                <% else %>
-                <a id="sent-adoption"><i class="fa fa-check check-class"></i> ИЗПРАТЕНА ЗАЯВКА </a>
-                <% end %>
-              <% else %>
+                <% check = Smartcitydogs.DataAnimals.check_adopt(@current_user.id, @animals.id) %>
+                  <%= if check == false do %>
+                    <a input type="button" id="submit-adoption"><i class="fa fa-home"></i> ОСИНОВИ </a>
+                  <% else %>
+                    <a id="sent-adoption"><i class="fa fa-check check-class"></i> ИЗПРАТЕНА ЗАЯВКА </a>
+                  <% end %>
 
               <% end %>
-            <% end %>
+          <%= @current_user.users_types_id == 3 || @current_user.users_types_id == 4 || @current_user.users_types_id == 5 ->%>
+          <% end %>
+            
             
           </div>
             <%
              show_under = Smartcitydogs.DataSignals.get_animal_by_chip(@animals.chip_number) 
-            IO.inspect show_under
             %>
             <div class="bg-test-signals-dog">
               <%= if show_under != [] do %>

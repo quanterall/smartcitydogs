@@ -51,7 +51,7 @@ defmodule SmartcitydogsWeb.Router do
 
   scope "/api", SmartcitydogsWeb do
     pipe_through([:api, :api_auth])
-    post("/animals/send_email", AnimalControllerAPI, :send_email)
+   # post("/animals/send_email", AnimalControllerAPI, :send_email)
     resources("/users", UserControllerAPI, except: [:new, :edit])
     post("/users/logout", UserControllerAPI, :logout)
     resources("/signals", SignalControllerAPI, except: [:new, :edit])
@@ -115,8 +115,8 @@ defmodule SmartcitydogsWeb.Router do
       get("/users", UserController, :index)
       get("/users/:id", UserController, :show)
 
-      
-      get("/animals/send_email", AnimalController, :send_email)
+      post "/animals/:id/send_email", AnimalController, :send_email
+      # get("/animals/send_email", AnimalController, :send_email)
       resources("/animals", AnimalController)
       resources("/news", NewsController)
       get("/show", PageController, :show)

@@ -123,9 +123,23 @@
             <br><br>
             <div class="buttons-for-signal1">
               <div class="buttons-for-signal">
-                <% list_of_liked_signals = @conn.assigns.current_user.liked_signals %>
-                  <%=   if Enum.member?(list_of_liked_signals,@signal.id) do %><a id="submit-like1">ОТСЛЕДВАЙ</a>
-                  <% else %><a id="submit-like1">ПОСЛЕДВАЙ</a><%end%><div id="comment" >КОМЕНТИРАЙ</div>
+                <% IO.inspect @current_user%>
+                <%= cond do%>
+                  <%= @current_user == nil -> %>
+                    <a id="register-submit-adoption" onclick="showModalForm(event, 'register-form')">ПОСЛЕДВАЙ</a>
+                    <div id="register-comment-button" onclick="showModalForm(event, 'register-form')">КОМЕНТИРАЙ</div>
+                  <%= @current_user.users_types_id == 2 -> %>
+                    <% list_of_liked_signals = @conn.assigns.current_user.liked_signals %>
+                    <%= if Enum.member?(list_of_liked_signals,@signal.id) do %>
+                      <a id="submit-like1">ОТСЛЕДВАЙ</a>
+                    <% else %>
+                      <a id="submit-like1">ПОСЛЕДВАЙ</a>
+                    <% end %>
+                    <div id="comment" >КОМЕНТИРАЙ</div>
+                  <%= @current_user.users_types_id == 3 || @current_user.users_types_id == 4 || @current_user.users_types_id == 5 -> %>
+                <% end %>
+                  
+                  
               </div>
             </div>
             <a id="signal-id"><%= @signal.id %></a>

@@ -58,6 +58,7 @@ defmodule Smartcitydogs.DataAnimals do
   end
 
   def get_animal(id) do
+    IO.inspect(id)
     Repo.get!(Animals, id) |> Repo.preload(:animals_status)
   end
 

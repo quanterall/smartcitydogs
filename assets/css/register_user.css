@@ -4,9 +4,6 @@
     padding: 10%;
 
 }
-.register-form-class{
-  margin-top: 5vh;
-}
 .register-form-class input::placeholder{
   color: white !important;
 }

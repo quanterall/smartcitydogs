@@ -16,6 +16,8 @@ defmodule SmartcitydogsWeb.AnimalController do
   ###### Send E-mail ########
 
   def send_email(conn,data) do
+    IO.inspect conn
+    IO.puts "BOKLUK"
     int = String.to_integer(data["animal_id"])
     Smartcitydogs.Email.send_email(data)
     DataAnimals.insert_adopt(data["user_id"], data["animal_id"])
@@ -216,18 +218,28 @@ defmodule SmartcitydogsWeb.AnimalController do
     end
   end
 
-  def show(conn, %{"id" => id}) do
-    animal = DataAnimals.get_animal(id)    
-
-    if conn.assigns.current_user != nil do
-    logged_user_type_id = conn.assigns.current_user.users_types.id
-      if logged_user_type_id == 3 do
-        render(conn, SmartcitydogsWeb.ErrorView, "401.html")
+  def show(conn, map) do
+    id_map = map["id"]
+    if id_map == "send_email" do
+      send_email(conn,map)
+    else
+      IO.inspect(map)
+      id = String.to_integer(map["id"])
+      IO.inspect(id)
+      animal = DataAnimals.get_animal(id)    
+      IO.inspect id
+      IO.puts "EEEEEEEEEEEEEEEEEEEEEEEEEE"
+      
+      if conn.assigns.current_user != nil do
+      logged_user_type_id = conn.assigns.current_user.users_types.id
+        if logged_user_type_id == 3 do
+          render(conn, SmartcitydogsWeb.ErrorView, "401.html")
+        else
+          render(conn, "show.html", animals: animal)
+        end
       else
         render(conn, "show.html", animals: animal)
       end
-    else
-      render(conn, "show.html", animals: animal)
     end
   end
 

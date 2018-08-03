@@ -8,7 +8,7 @@ defmodule SmartcitydogsWeb.PageController do
     signal = DataSignals.list_signals()
     news = DataPages.list_news()
     animal = DataAnimals.list_animals()
-
+    
     if length(animal) <= 3 do
       last_animals = animal
     else
