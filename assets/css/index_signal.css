@@ -53,6 +53,12 @@
   cursor: pointer;
   float: right;
 }
+.shadow-on{
+  -webkit-box-shadow: inset 0px 45px 7px -45px rgba(0,0,0,0.75);
+}
+.shadow-off{
+  -webkit-box-shadow: inset 0px 0px 0px 0px rgba(0,0,0,0.75);
+}
 .col-container:hover{
 
   transition: 0.5s;
@@ -585,7 +591,7 @@ box-shadow: 0px 0px 45px -4px rgba(0,0,0,0.75);
   padding: 10%;
 }
 .container-new-signal{
-  -webkit-box-shadow: inset 0px 45px 7px -45px rgba(0,0,0,0.75);
+  /* -webkit-box-shadow: inset 0px 45px 7px -45px rgba(0,0,0,0.75); */
   background-color: rgb(0,201,148);
   padding: 2.5%;
   margin: 0px;

@@ -227,8 +227,13 @@ $(window).scroll(function(e){
     if ( window.location.pathname == '/' ) {
         if ($(document).scrollTop() == 0) {
             $(".top-navbar").addClass("navbar-home");
+            $(".modal-form").addClass("shadow-off");
+            $(".container-new-signal").addClass("shadow-off");
             $("#top-navbar-container").removeClass("bg-white");
         } else {
+            $(".modal-form").removeClass("shadow-off");
+            $(".container-new-signal").removeClass("shadow-off");
+            $(".container-new-signal").addClass("shadow-on");
             $(".top-navbar").removeClass("navbar-home");
             $("#top-navbar-container").addClass("bg-white");
         }
