@@ -27,6 +27,11 @@ defmodule SmartcitydogsWeb.PageController do
       last_news = Enum.slice(news, -3..-1)
     end
 
-    render(conn, "index.html", signal: last_signals, news: last_news, animals: last_animals)
+    render(
+      conn, "index.html", 
+      signal: last_signals, 
+      news: last_news, 
+      animals: last_animals 
+    )
   end
 end

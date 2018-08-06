@@ -16,7 +16,7 @@ defmodule SmartcitydogsWeb.AnimalController do
   ###### Send E-mail ########
 
   def send_email(conn,data) do
-    IO.inspect conn
+    # IO.inspect conn
     IO.puts "BOKLUK"
     int = String.to_integer(data["animal_id"])
     Smartcitydogs.Email.send_email(data)

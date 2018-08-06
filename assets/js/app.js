@@ -29,7 +29,6 @@ $('#submit-adoption').click(function(){
     $.ajax({
         method: "POST",
         url: "/animals/:id/send_email",
-        headers: new window.Headers({'x-csrf-token': window.csrfToken}),
         credentials: 'same-origin',
         data: JSON.stringify({
             "chip_number": $("#chip_number").text(),

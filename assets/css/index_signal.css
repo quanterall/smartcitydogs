@@ -728,3 +728,6 @@ label-signals-categories{
 .close-modal {
   font-weight: bold;
 }
+#get_token{
+  display: none;
+}

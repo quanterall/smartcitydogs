@@ -53,17 +53,16 @@
 
 
 <script src='<%= static_path(@conn, "/js/app.js") %>'></script>
-
+<% IO.inspect @conn.private.plug_session["_csrf_token"] %>
+<p id="get_token"><%= @conn.private.plug_session["_csrf_token"] %>
 <script>
-
-window.csrfToken = '<%= get_csrf_token(@conn) %>'
-
-//$.ajaxSetup({
-//headers: {
-//'x-csrf-token': '<% Map.get(@conn.req_cookies, "_csrf_token") %>'
-//}
-//});
-
+//var token = $("#get_token").text();
+//console.log(token);
+$.ajaxSetup({
+        beforeSend: function(xhr, settings) {
+            xhr.setRequestHeader("_csrf_token", "<%= @conn.private.plug_session["_csrf_token"] %>" );
+        }
+   });
 </script>
 
 
