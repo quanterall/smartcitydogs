@@ -54,6 +54,7 @@ defmodule SmartcitydogsWeb.SignalController do
   end
 
   def create(conn, signal_params) do
+    signals_categories_id = String.to_integer(signal_params["signals_categories_id"])
     a = conn.assigns.current_user.id
     logged_user_type_id = conn.assigns.current_user.users_types.id
 
