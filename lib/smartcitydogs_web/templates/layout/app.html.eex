@@ -53,14 +53,16 @@
 
 
 <script src='<%= static_path(@conn, "/js/app.js") %>'></script>
-<% IO.inspect @conn.private.plug_session["_csrf_token"] %>
-<p id="get_token"><%= @conn.private.plug_session["_csrf_token"] %>
+<% IO.inspect Plug.CSRFProtection.get_csrf_token() %>
+<p id="get_token">
+
+</p>
 <script>
 //var token = $("#get_token").text();
 //console.log(token);
 $.ajaxSetup({
         beforeSend: function(xhr, settings) {
-            xhr.setRequestHeader("_csrf_token", "<%= @conn.private.plug_session["_csrf_token"] %>" );
+            xhr.setRequestHeader("x-csrf-token", "<%=Plug.CSRFProtection.get_csrf_token() %>" );
         }
    });
 </script>

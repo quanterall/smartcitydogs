@@ -30,7 +30,7 @@ $('#submit-adoption').click(function(){
         method: "POST",
         url: "/animals/:id/send_email",
         credentials: 'same-origin',
-        data: JSON.stringify({
+        data: {
             "chip_number": $("#chip_number").text(),
             "user_name": $("#user_name").text(),
             "user_last_name": $("#user_last_name").text(),
@@ -38,7 +38,7 @@ $('#submit-adoption').click(function(){
             "user_phone": $("#user_phone").text(),
             "animal_id": $("#animal_id").text(),
             "user_id": $("#user_id").text()
-        }),
+        },
         success: function (msg) {
             // console.log(msg);
             if (msg.response != "Ok") {
