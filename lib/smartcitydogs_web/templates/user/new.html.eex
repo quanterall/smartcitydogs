@@ -35,12 +35,10 @@
                 <br/>
 
                 <%= submit "РЕГИСТРИРАЙ МЕ", class: "btn btn-submit" %>
-                <br>
-                <br><br>
-
+                <br><br><br>
                 <a class="btn btn-primary pull-right" href='<%=session_url(@conn, :request,"facebook")%>'
                    rel="no-follow">
-                    <i class="fa fa-facebook-square"></i> FACEBOOK ВХОД</a>
+                    <i class="fab fa-facebook-f"></i> FACEBOOK ВХОД</a>
                 <br>
                 <a class="close-modal" href="#">ОТКАЗ</a>
             </div>

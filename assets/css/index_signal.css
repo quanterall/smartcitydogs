@@ -49,7 +49,13 @@
   /* margin-bottom: 0px; */
 
 }
+a.close-modal{
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
 .close-modal{
+  font-weight: bold;
   cursor: pointer;
   float: right;
 }
@@ -580,9 +586,9 @@ input#autocomplete{
   padding: 0%
   
 }
-.container-new-signal .under-form .btn-submit:hover{
+.btn-submit:hover{
   background-color: white;
-  color: green;
+  color: rgb(0,201,148);
   -webkit-box-shadow: 0px 0px 45px -4px rgba(0,0,0,0.75);
 -moz-box-shadow: 0px 0px 45px -4px rgba(0,0,0,0.75);
 box-shadow: 0px 0px 45px -4px rgba(0,0,0,0.75);
@@ -598,13 +604,17 @@ box-shadow: 0px 0px 45px -4px rgba(0,0,0,0.75);
 }
 
 .pull-right{
-  width: 50%;
-  float: right;
+  font-weight: bold;
+  width: 51%;
+  float: left;
 }
 .btn-submit{
-  width: 50%;
+  width: 51%;
   display: inline-block;
   float: left;
+}
+.fa-facebook{
+  color: red;
 }
 label-text-grey{
   color: white;
