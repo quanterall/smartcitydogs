@@ -39,6 +39,7 @@
   background-color: green;
 }
 .btn-submit{
+  font-weight: bold;
   border: 1px solid white;
   float: right;
   color: green;

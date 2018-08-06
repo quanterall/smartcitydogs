@@ -3,15 +3,12 @@
 
     <%= form_for @conn, signal_path(@conn, :create),[multipart: true, class: "form-elixir register-form-class"], fn f -> %>
     <label-1>1.Изберете категория на сигнала</label-1>
+      
       <div class="form-group">
-        <%= select(f , :signals_categories_id, [
-              [key: "Бездомно куче", value: "1"],
-              [key: "Избягало куче", value: "2"],
-              [key: "Малтретиране на куче", value: "3"]
-              ]) %>
+        <input type="radio" name="signals_categories_id" value="1" checked="true"> <label-signals-categories>Бездомно куче</label-signals-categories>
+        <input type="radio" name="signals_categories_id" value="2"> <label-signals-categories>Избягало куче</label-signals-categories>
+        <input type="radio" name="signals_categories_id" value="3"> <label-signals-categories>Малтретиране на куче</label-signals-categories>
       </div>
-
-
 
     <label-2>2.Въведете местоположение</label-2>
       <div class="form-group">

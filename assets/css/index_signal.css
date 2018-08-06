@@ -79,6 +79,10 @@
   color: #42f4a7 !important;
   opacity: 1;
 }
+.col-container-shadow a.btn-secondary:focus{
+  border-color: transparent;
+  background-color: transparent;
+}
 .col-container-shadow a.btn-secondary{
   color: transparent;
   background-color: transparent;
@@ -713,4 +717,14 @@ button.btn.btn-primary.submit-register-dog{
   border-color: #42f4a7;
   font-weight: bold;
   color: #42f4a7;
+}
+textarea.form-control1::placeholder{
+  color: white;
+}
+label-signals-categories{
+  color: white;
+  margin-right: 5%;
+}
+.close-modal {
+  font-weight: bold;
 }
