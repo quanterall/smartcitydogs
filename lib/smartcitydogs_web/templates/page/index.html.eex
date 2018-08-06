@@ -30,17 +30,20 @@
         </div>
     </div>
 </div>
+
 <div class="row mt-5 mb-3">
     <div class="col">
         <h3 class="text-white">Последни сигнали</h3>
     </div>
 </div>
+
 <div class="row slick ">
     <%= for signal <- @signal do %>
     <div class="col-lg-12">
         <div class="card slick-card w-100"
              style="background:  linear-gradient(rgba(0, 0, 0, 0.5),rgba(0, 0, 0, 0.5)),  no-repeat center center url('https://topdoghub.com/wp-content/uploads/2017/12/Best-Tough-Toys-For-Dogs-1140x624.jpg')">
             <div class="card-body">
+                
                 <div class="slick-card-status">
                     <%=signal.signals_types_id
                     |> Smartcitydogs.DataSignals.get_signal_type()
@@ -66,11 +69,16 @@
                     <i class="far fa-comment fa-flip-horizontal"></i> <%=signal.view_count%>
                 </div>
 
+                  <div class="adopted_button"> 
+                   <%= link "", to: signal_path(@conn, :show, signal), class: "fa fa-map-marker-alt" %>
+                          <%= link "Виж още »", to: signal_path(@conn, :show, signal), class: "btn btn-secondary" %>
+                  </div>
             </div>
         </div>
     </div>
     <% end %>
 </div>
+
 <div class="row mt-5 mb-3">
     <div class="col">
         <h3 class="text-green">Новини</h3>
@@ -81,7 +89,7 @@
     <div class="col-lg-3">
         <div class="card">
             <img class="card-img-top"
-                 src="https://topdoghub.com/wp-content/uploads/2017/12/Best-Tough-Toys-For-Dogs-1140x624.jpg"
+                 src="<%= news.image_url%>"
                  alt="Card image cap">
             <div class="card-body">
                 <p class="text-dark">
@@ -89,10 +97,116 @@
                         <%=NaiveDateTime.to_date( news.date) %>
                     </small>
                 </p>
-                <h5 class="card-title">Card title</h5>
+                <h5 class="card-title"><%=  news.title %></h5>
                 <p class="card-text"><%= news.short_content%></p>
                 <%= link "Виж повече »", to: news_path(@conn, :show, news), class: "btn btn-default float-right
                 text-green" %>
+            </div>
+        </div>
+    </div>
+    <% end %>
+    </div>
+<div class="row mt-5 mb-3">
+    <div class="col">
+        <h3 class="text-green">Последни регистрирани кучета</h3>
+    </div>
+</div>
+
+
+<div class="row slick ">
+    <%= for animal <- @animals do %>
+    <div class="col-lg-12">
+        <div class="col-container" style="background-image: url('/<%= SmartcitydogsWeb.AnimalView.get_image_animals_id(animal.id) %>')">
+                <div class="col-container-shadow">
+                               <label-type class="
+                    <%= if animal.animals_status_id == 1 do %>
+                        label-type-red
+                    <% end %>
+
+                    <%= if animal.animals_status_id == 2 do %>
+                        label-type-orange
+                    <% end %>
+
+                    <%= if animal.animals_status_id == 3 do %>
+                        label-type-green
+                    <% end %>"><%= animal.animals_status.name %>
+                  </label-type>
+                <div class="slick-card-small text-gray">
+                    <%= animal.sex  %>
+                </div>
+                <div class="slick-card-title">
+                    <%=animal.chip_number %>
+                </div>
+                <div class="slick-card-small text-gray mt-3">
+                    <%=signal_time = animal.inserted_at
+                    |> DateTime.truncate(:second)
+                    |> DateTime.to_string()
+                    count = String.length(signal_time)
+                    final_time = String.slice(signal_time,0..count-11)
+                    final_time%>
+                </div>
+                <div class="slick-card-small text-white mt-3">
+                    <i class="fas fa-search"></i> <%=animal.address %>
+                </div>
+
+             <div class="button-show-hide">
+                        <div class="adopted_button">
+                          <%= link "Виж още »", to: animal_path(@conn, :show, animal), class: "btn btn-secondary" %>
+                        </div>
+                      </div>
+            </div>
+        </div>
+    </div>
+    <% end %>
+</div>
+
+<div class="row mt-5 mb-3">
+    <div class="col">
+        <h3 class="text-green">Последно осиновени кучета</h3>
+    </div>
+</div>
+
+<div class="row slick ">
+    <%= for animal <- @adopted_animals do %>
+    <div class="col-lg-12">
+        <div class="col-container" style="background-image: url('/<%= SmartcitydogsWeb.AnimalView.get_image_animals_id(animal.id) %>')">
+                <div class="col-container-shadow">
+                               <label-type class="
+                    <%= if animal.animals_status_id == 1 do %>
+                        label-type-red
+                    <% end %>
+
+                    <%= if animal.animals_status_id == 2 do %>
+                        label-type-orange
+                    <% end %>
+
+                    <%= if animal.animals_status_id == 3 do %>
+                        label-type-green
+                    <% end %>"><%= animal.animals_status.name %>
+                  </label-type>
+                <div class="slick-card-small text-gray">
+                    <%= animal.sex  %>
+                </div>
+                <div class="slick-card-title">
+                    <%=animal.chip_number %>
+                </div>
+                <div class="slick-card-small text-gray mt-3">
+                    <%=signal_time = animal.inserted_at
+                    |> DateTime.truncate(:second)
+                    |> DateTime.to_string()
+                    count = String.length(signal_time)
+                    final_time = String.slice(signal_time,0..count-11)
+                    final_time%>
+                </div>
+                <div class="slick-card-small text-white mt-3">
+                    <i class="fas fa-search"></i> <%=animal.address %>
+                </div>
+
+             <div class="button-show-hide">
+                        <div class="adopted_button">
+                          <%= link "Виж още »", to: animal_path(@conn, :show, animal), class: "btn btn-secondary" %>
+                        </div>
+                      </div>
             </div>
         </div>
     </div>

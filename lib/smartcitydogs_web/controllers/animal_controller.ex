@@ -16,6 +16,7 @@ defmodule SmartcitydogsWeb.AnimalController do
   ###### Send E-mail ########
 
   def send_email(conn,data) do
+    IO.inspect data
     int = String.to_integer(data["animal_id"])
     Smartcitydogs.Email.send_email(data)
     DataAnimals.insert_adopt(data["user_id"], data["animal_id"])
@@ -217,6 +218,9 @@ defmodule SmartcitydogsWeb.AnimalController do
   end
 
   def show(conn, %{"id" => id}) do
+    IO.puts "RRRRRRRRRRR"
+    IO.inspect id
+    IO.puts "RRRRRRRRRRR"
     animal = DataAnimals.get_animal(id)
     logged_user_type_id = conn.assigns.current_user.users_types.id
 
