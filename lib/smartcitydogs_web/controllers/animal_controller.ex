@@ -16,8 +16,6 @@ defmodule SmartcitydogsWeb.AnimalController do
   ###### Send E-mail ########
 
   def send_email(conn,data) do
-    # IO.inspect conn
-    IO.puts "BOKLUK"
     int = String.to_integer(data["animal_id"])
     Smartcitydogs.Email.send_email(data)
     DataAnimals.insert_adopt(data["user_id"], data["animal_id"])
@@ -153,14 +151,12 @@ defmodule SmartcitydogsWeb.AnimalController do
   end
 
   def create(conn, %{"animals" => animal_params}) do
-    IO.inspect(animal_params)
 
     map_procedures = %{
       "Кастрирано" => animal_params["Кастрирано"],
       "Обезпаразитено" => animal_params["Обезпаразитено"],
       "Ваксинирано" => animal_params["Ваксинирано"]
     }
-    IO.inspect map_procedures
 
     
     list_procedures = Enum.map(map_procedures, fn(x) -> 
@@ -223,12 +219,8 @@ defmodule SmartcitydogsWeb.AnimalController do
     if id_map == "send_email" do
       send_email(conn,map)
     else
-      IO.inspect(map)
       id = String.to_integer(map["id"])
-      IO.inspect(id)
       animal = DataAnimals.get_animal(id)    
-      IO.inspect id
-      IO.puts "EEEEEEEEEEEEEEEEEEEEEEEEEE"
       
       if conn.assigns.current_user != nil do
       logged_user_type_id = conn.assigns.current_user.users_types.id

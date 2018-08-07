@@ -1,12 +1,18 @@
 <div id="modal-forms-container" class="col-lg-6 col-md-8 col-sm-12 col-xs-12" >
 
-    <div class="modal-form" id="login-form">
+    <div class="modal-form <%= if length(@conn.path_info) == 0 do %>
+                shadow-off
+            <% end %>'>" id="login-form">
         <%= render SmartcitydogsWeb.SessionView, "new.html", assigns %>
     </div>
-    <div class="modal-form" id="register-form">
+    <div class="modal-form <%= if length(@conn.path_info) == 0 do %>
+                shadow-off
+            <% end %>" id="register-form">
         <%= render SmartcitydogsWeb.UserView, "new.html", assigns %>
     </div>
-    <div class="modal-form" id="signal-form">
+    <div class="modal-form <%= if length(@conn.path_info) == 0 do %>
+                shadow-off
+            <% end %>" id="signal-form">
         <%= render SmartcitydogsWeb.SignalView, "form_signal.html", assigns %>
     </div>
     <div class="modal-form form4">

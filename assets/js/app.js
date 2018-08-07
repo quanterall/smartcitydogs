@@ -126,7 +126,6 @@ $('.close_comment').click(function() {
 
 
 $(".submit_comment").click(function() {
-
     $.ajax({
         method: "GET",
         url: "/signals/comment",
@@ -134,8 +133,8 @@ $(".submit_comment").click(function() {
             "show-comment": $("#comment-id").val(),
             "show-id": $("#signal-id").text()
         }
-    }).then(function(data) {
-        $("#comment-id").val("");
+    }).done(function(){
+		location.reload();
     })
 });
 
@@ -219,8 +218,13 @@ $(window).scroll(function(e){
     if ( window.location.pathname == '/' ) {
         if ($(document).scrollTop() == 0) {
             $(".top-navbar").addClass("navbar-home");
+            $(".modal-form").addClass("shadow-off");
+            $(".container-new-signal").addClass("shadow-off");
             $("#top-navbar-container").removeClass("bg-white");
         } else {
+            $(".modal-form").removeClass("shadow-off");
+            $(".container-new-signal").removeClass("shadow-off");
+            $(".container-new-signal").addClass("shadow-on");
             $(".top-navbar").removeClass("navbar-home");
             $("#top-navbar-container").addClass("bg-white");
         }

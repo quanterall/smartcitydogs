@@ -203,7 +203,7 @@ show-signal-label-description{
     display: inline-block;
 }
 .submit_comment{
-    color: white;
+    color: white !important;
     background-color: #00c790;
     padding-top: 10px;
     padding-bottom: 10px; 
@@ -219,7 +219,7 @@ show-signal-label-description{
 .close_comment:focus{
     text-decoration: none;
     background-color: white;
-    color: #00c790;
+    color: #00c790 !important;
     transition: 0.5s;
     cursor: pointer;
 }

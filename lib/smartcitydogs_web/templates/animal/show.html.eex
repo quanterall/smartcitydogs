@@ -132,9 +132,6 @@
           <%= @current_user.users_types_id == 2 -> %>
               <div class="hide_for_ajax">
 
-              <% 
-                IO.inspect @current_user
-              %>
               <p id="chip_number"><%= @animals.chip_number %></p>
               <p id="user_name"><%= @current_user.first_name %></p>
               <p id="user_last_name"><%= @current_user.last_name %></p>

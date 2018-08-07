@@ -32,8 +32,6 @@ defmodule Smartcitydogs.DataAnimals do
   end
 
   def insert_performed_procedure(procedure_list, animal_id) do
-    IO.inspect(procedure_list)
-    IO.inspect(animal_id)
     for procedure <- procedure_list do 
       if procedure != nil do
         %PerformedProcedures{}
@@ -58,7 +56,6 @@ defmodule Smartcitydogs.DataAnimals do
   end
 
   def get_animal(id) do
-    IO.inspect(id)
     Repo.get!(Animals, id) |> Repo.preload(:animals_status)
   end
 
