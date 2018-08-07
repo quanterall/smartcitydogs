@@ -18,8 +18,24 @@
                     <br />
                     <a href="minicipality_registered" id="all-registered-dogs">Регистрирани кучета</a>
                     <div class="Signals1"> 
-                    
+                    <ul style="list-style-type:none;">  
+                    <li class="title_filter"> Филтрирай спрямо Статус </li> 
+                <%= form_for @conn, animal_path(@conn, :filter_registered),[multipart: true, class: "form-elixir register-form-class", method: :get], fn f -> %>
+              <%= checkbox(f, :animal_status1, checked_value: 1, value:    if Enum.find(@data, fn x -> x == "1" end)  != nil do Enum.find(@data, fn x -> x == "1" end) |> String.to_integer() 
+                                                                                        else  0 end )%>Бездомно куче</br>
+              <%= checkbox(f, :animal_status2, checked_value: 2, value: if Enum.find(@data, fn x -> x == "2" end)  != nil do Enum.find(@data, fn x -> x == "2" end) |> String.to_integer() 
+                                                                                        else  0 end )%>Избягал домашен любимец</br>
+              <%= checkbox(f, :animal_status3, checked_value: 3, value: if Enum.find(@data, fn x -> x == "3" end)  != nil do Enum.find(@data, fn x -> x == "3" end) |> String.to_integer() 
+                                                                                        else  0 end )%>Малтретиране на животно
                     </div>
+                          </ul>   
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" type="submit">
+                        <i class="fa fa-search"></i>
+                         <%= submit "Търси", class: "btn btn-submit" %> <br>
+                          <% end %>
+                    </button>
+                </div>
                     <br />
                     <a href="/minicipality_adopted" id="all-adopted-dogs">Осиновени кучета</a>
                     <div class="Signals2"> 
@@ -39,6 +55,7 @@
                                 <%= for animal <- @animals do %>
 
                                     <div class="col-lg-3">
+                                    
               <div class="col-container" style="background-image: url('/<%= SmartcitydogsWeb.AnimalView.get_image_animals_id(animal.id) %>')">
                 <div class="col-container-shadow">
 
@@ -108,11 +125,11 @@
           
         <%end%>
         </div><!-- /.row -->
-        
             <div class="padination">
+         
 <%= if @page.total_pages > 0 do %>
     <%= for x <- 1..@page.total_pages do %>
-    <%= link "#{x * 9 - 8} - #{x * 9}", to: animal_path(@conn, :minicipality_registered, page: x) %>
+    <%= link "#{x * 9 - 8} - #{x * 9}", to: animal_path(@conn, :minicipality_registered, page: x, animal_status: @data ) %>
     <% end %>  
 <% end %>
 </div>
