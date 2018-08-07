@@ -243,15 +243,24 @@ defmodule SmartcitydogsWeb.AnimalController do
     end
   end
 
-  ##Show one animal
-  def show(conn, %{"id" => id}) do
-    animal = DataAnimals.get_animal(id)
-    logged_user_type_id = conn.assigns.current_user.users_types.id
-
-    if logged_user_type_id == 3 do
-      render(conn, SmartcitydogsWeb.ErrorView, "401.html")
+  def show(conn, map) do
+    id_map = map["id"]
+    if id_map == "send_email" do
+      send_email(conn,map)
     else
-      render(conn, "show.html", animals: animal)
+      id = String.to_integer(map["id"])
+      animal = DataAnimals.get_animal(id)    
+      
+      if conn.assigns.current_user != nil do
+      logged_user_type_id = conn.assigns.current_user.users_types.id
+        if logged_user_type_id == 3 do
+          render(conn, SmartcitydogsWeb.ErrorView, "401.html")
+        else
+          render(conn, "show.html", animals: animal)
+        end
+      else
+        render(conn, "show.html", animals: animal)
+      end
     end
   end
 

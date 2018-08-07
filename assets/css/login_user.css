@@ -1,8 +1,4 @@
 .register-photo{
-  box-shadow: inset -1px 34px 12px -25px #ABABAB;
-  -webkit-box-shadow: inset 0px 9px 8px -5px rgba(0,0,0,0.75);
-  -moz-box-shadow: inset 0px 9px 8px -5px rgba(0,0,0,0.75);
-  -o-box-shadow: inset 0px 9px 8px -5px rgba(0,0,0,0.75);
   width: 100%;
   height: 100%;
   margin: 0px;
@@ -45,10 +41,20 @@
   color: white;
   background-color: green;
 }
+.fa-facebook-f{
+  padding-left: 5%;
+  float: left;
+}
+.pull-right:hover{
+  -webkit-box-shadow: 0px 0px 45px -4px rgba(0,0,0,0.75);
+  -moz-box-shadow: 0px 0px 45px -4px rgba(0,0,0,0.75);
+  box-shadow: 0px 0px 45px -4px rgba(0,0,0,0.75);
+}
 .btn-submit{
+  font-weight: bold;
   border: 1px solid white;
   float: right;
-  color: green;
+  color: rgb(0,201,148);
   background-color: white;
 }
 .nav-link-pass{

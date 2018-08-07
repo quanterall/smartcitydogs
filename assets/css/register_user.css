@@ -4,9 +4,6 @@
     padding: 10%;
 
 }
-.register-form-class{
-  margin-top: 5vh;
-}
 .register-form-class input::placeholder{
   color: white !important;
 }
@@ -30,6 +27,9 @@
 .register-form-class input:focus::placeholder{
   -webkit-text-fill-color: transparent;
 }
+button.btn.btn-submit{
+  font-weight: bold;
+}
 .btn-face{
   text-align: justify;
   float: right;
@@ -42,9 +42,10 @@
   background-color: green;
 }
 .btn-submit{
+  font-weight: bold;
   border: 1px solid white;
   float: right;
-  color: green;
+  color: rgb(0,201,148);;
   background-color: white;
 }
 .under-form{

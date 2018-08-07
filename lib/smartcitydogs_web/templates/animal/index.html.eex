@@ -40,7 +40,10 @@
 
                     <%= if animal.animals_status_id == 3 do %>
                         label-type-green
-                    <% end %>"><%= animal.animals_status.name %>
+                    <% end %>"><%= animal.animals_status_id 
+                    |> Smartcitydogs.DataAnimals.get_animal_status
+                    |> Map.get(:name)
+                    %>
                   </label-type>
                   <br />
                   <label-text-grey>

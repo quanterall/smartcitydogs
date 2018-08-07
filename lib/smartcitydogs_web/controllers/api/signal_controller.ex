@@ -19,7 +19,6 @@ defmodule SmartcitydogsWeb.SignalControllerAPI do
   end
 
   def create(conn, %{"signal" => signal_params}) do
-
     with {:ok, %Signals{} = signal} <- DataSignals.create_signal(signal_params) do
       conn
       |> put_status(:created)
@@ -78,9 +77,10 @@ defmodule SmartcitydogsWeb.SignalControllerAPI do
         DataUsers.remove_liked_signal(user_id, id)
         {:ok, signal} = DataSignals.unfollow_signal(id)
         render(conn, "unfollowed.json", signal: signal)
+
       Enum.member?(user_liked_signals, id) == false ->
         signal = DataSignals.get_signal(id)
-          render(conn, "already_unfollowed.json", signal: signal)
+        render(conn, "already_unfollowed.json", signal: signal)
     end 
   end
 

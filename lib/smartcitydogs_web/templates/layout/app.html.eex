@@ -8,7 +8,6 @@
     <meta name="author" content="">
     <title>SmartCityDogs!</title>
     
-    
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css"
           integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
     <link rel="stylesheet" href='<%= static_path(@conn, "/css/app.css") %>'>
@@ -53,6 +52,19 @@
 
 
 <script src='<%= static_path(@conn, "/js/app.js") %>'></script>
+<% IO.inspect Plug.CSRFProtection.get_csrf_token() %>
+<p id="get_token">
+
+</p>
+<script>
+$.ajaxSetup({
+        beforeSend: function(xhr, settings) {
+            xhr.setRequestHeader("x-csrf-token", "<%=Plug.CSRFProtection.get_csrf_token() %>" );
+        }
+   });
+</script>
+
+
 
 </body>
 </html>

@@ -25,9 +25,11 @@ import "slick-carousel";
 
 
 $('#submit-adoption').click(function(){
+    
     $.ajax({
-        method: "GET",
-        url: "/animals/send_email",
+        method: "POST",
+        url: "/animals/:id/send_email",
+        credentials: 'same-origin',
         data: {
             "chip_number": $("#chip_number").text(),
             "user_name": $("#user_name").text(),
@@ -36,7 +38,14 @@ $('#submit-adoption').click(function(){
             "user_phone": $("#user_phone").text(),
             "animal_id": $("#animal_id").text(),
             "user_id": $("#user_id").text()
-        }
+        },
+        success: function (msg) {
+                alert("Имейлът ви беше успешно изпратен!");
+        },
+        error: function (xhr, status) {
+           alert("ГРЕШКА!");
+          }
+    
     }).done(function(){
 		location.reload();
 	})
@@ -117,7 +126,6 @@ $('.close_comment').click(function() {
 
 
 $(".submit_comment").click(function() {
-
     $.ajax({
         method: "GET",
         url: "/signals/comment",
@@ -125,8 +133,8 @@ $(".submit_comment").click(function() {
             "show-comment": $("#comment-id").val(),
             "show-id": $("#signal-id").text()
         }
-    }).then(function(data) {
-        $("#comment-id").val("");
+    }).done(function(){
+		location.reload();
     })
 });
 
@@ -210,8 +218,13 @@ $(window).scroll(function(e){
     if ( window.location.pathname == '/' ) {
         if ($(document).scrollTop() == 0) {
             $(".top-navbar").addClass("navbar-home");
+            $(".modal-form").addClass("shadow-off");
+            $(".container-new-signal").addClass("shadow-off");
             $("#top-navbar-container").removeClass("bg-white");
         } else {
+            $(".modal-form").removeClass("shadow-off");
+            $(".container-new-signal").removeClass("shadow-off");
+            $(".container-new-signal").addClass("shadow-on");
             $(".top-navbar").removeClass("navbar-home");
             $("#top-navbar-container").addClass("bg-white");
         }

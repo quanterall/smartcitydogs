@@ -10,4 +10,9 @@ defmodule SmartcitydogsWeb.PageView do
       head.url
     end
   end
+
+  def get_csrf_token(conn) do
+    Plug.Conn.get_session(conn, :csrf_token)
+  end
+
 end
