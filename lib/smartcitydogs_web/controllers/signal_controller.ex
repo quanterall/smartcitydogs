@@ -36,10 +36,11 @@ defmodule SmartcitydogsWeb.SignalController do
 
   #All signals page with the checkbox filters, function for the first rendering
   def minicipality_signals(conn, params) do
+    IO.inspect params
      data_status = 
      case Map.fetch(params, "page") do
         {:ok, num} -> {params["data_status"], params["data_category"], num}
-        _ -> {[], "1"}
+        _ -> {[], [], "1"}
      end
      SignalController.get_ticked_checkboxes(conn, data_status)
   data_category =  
@@ -89,6 +90,7 @@ defmodule SmartcitydogsWeb.SignalController do
 
   ##When the search button is clicked, for rendering the first page of the query.
   def filter_signals(conn, params) do
+    IO.inspect params
     data_status =  
       for  {k , v}  <- params do
         cond do 
@@ -138,7 +140,16 @@ defmodule SmartcitydogsWeb.SignalController do
 
   ##Get all of the ticked checkboxes from the filters, handle redirection to pagination pages.
   def get_ticked_checkboxes(conn, params) do
+    IO.inspect params
     {data_status, data_category, num} = params
+    case data_status do
+      nil -> []
+      _ -> data_status
+    end
+    case data_category do
+      nil -> []
+      _ -> data_category
+    end
     num = String.to_integer(num)
     cond do
       data_status != []->
