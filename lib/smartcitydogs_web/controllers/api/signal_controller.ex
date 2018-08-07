@@ -7,6 +7,12 @@ defmodule SmartcitydogsWeb.SignalControllerAPI do
 
   action_fallback(SmartcitydogsWeb.FallbackController)
 
+  plug(:put_layout, false when action in [:minicipality_signals])
+  plug(:put_layout, false when action in [:minicipality_registered])
+  plug(:put_layout, false when action in [:minicipality_adopted])
+  plug(:put_layout, false when action in [:minicipality_shelter])
+  plug(:put_layout, false when action in [:new])
+
   def index(conn, _params) do
     signals = DataSignals.list_signals()
     render(conn, "index.json", signals: signals)

@@ -13,8 +13,39 @@
   <div class="container-filter-signals">
         <div class="container-filter">
             <b><a href="/minicipality_signals" id="all-signals">Подадени сигнали</a></b>
+
             <div class="Signals"> 
-            
+            <div class="Signals-filter"> 
+            <ul style="list-style-type:none;">  <li class="title_filter"> Филтрирай по категория </li> 
+             <%= form_for @conn, signal_path(@conn, :filter_signals),[multipart: true, class: "form-elixir register-form-class", method: :get], fn f -> %>
+              <%= checkbox(f, :sig_category1, checked_value: 1, value:    if Enum.find(@data_category, fn x -> x == "1" end)  != nil do Enum.find(@data_category, fn x -> x == "1" end) |> String.to_integer() 
+                                                                                        else  0 end ) %>Бездомно куче</br>
+              <%= checkbox(f, :sig_category2, checked_value: 2, value:    if Enum.find(@data_category, fn x -> x == "2" end)  != nil do Enum.find(@data_category, fn x -> x == "2" end) |> String.to_integer() 
+                                                                                        else  0 end ) %>Избягал домашен любимец</br>
+              <%= checkbox(f, :sig_category3, checked_value: 3, value:    if Enum.find(@data_category, fn x -> x == "3" end)  != nil do Enum.find(@data_category, fn x -> x == "3" end) |> String.to_integer() 
+                                                                                        else  0 end )%>Малтретиране на животно
+           
+    </ul> <ul style="list-style-type:none;">  <li class="title_filter"> Филтрирай спрямо Статус </li> 
+              <%= checkbox(f, :sig_status1, checked_value: 1, value: if Enum.find(@data_status, fn x -> x == "1" end)  != nil do Enum.find(@data_status, fn x -> x == "1" end) |> String.to_integer() 
+                                                                                        else  0 end )%>Нов</br>
+              <%= checkbox(f, :sig_status2, checked_value: 2, value:    if Enum.find(@data_status, fn x -> x == "2" end)  != nil do Enum.find(@data_status, fn x -> x == "2" end) |> String.to_integer() 
+                                                                                        else  0 end )%>Приет</br>
+              <%= checkbox(f, :sig_status3, checked_value: 3, value:    if Enum.find(@data_status, fn x -> x == "3" end)  != nil do Enum.find(@data_status, fn x -> x == "3" end) |> String.to_integer() 
+                                                                                        else  0 end )%>Изпратен</br>
+              <%= checkbox(f, :sig_status4, checked_value: 4, value:    if Enum.find(@data_status, fn x -> x == "4" end)  != nil do Enum.find(@data_status, fn x -> x == "4" end) |> String.to_integer() 
+                                                                                        else  0 end )%>Приключен
+   
+     
+      </ul>   
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" type="submit">
+                        <i class="fa fa-search"></i>
+                         <%= submit "Търси", class: "btn btn-submit" %> <br>
+                           <% end %>
+                    </button>
+                </div>
+               
+        </div>
             </div>
             <br />
             <a href="minicipality_registered" id="all-registered-dogs">Регистрирани кучета</a>
@@ -39,6 +70,7 @@
 
                 <div class="row">
                 <%= for signal <- @signal do %>
+                
                   <div class="col-lg-3">
                     <div class="col-container" style="background-image: url('/<%= get_signals_images(signal.id) %>')">
                       <div class="col-container-shadow">
@@ -141,12 +173,10 @@
                   <%end%>
                 </div>
                 <div class="padination">
-
-
+                      <%= if @page.total_pages > 0 do %>
                         <%= for x <- 1..@page.total_pages do %>
-                         <%= link "#{x * 9 -8}-#{x * 9} ", to: signal_path(@conn, :minicipality_signals, page: x) %>
-
-
+                         <%= link "#{x * 9 -8}-#{x * 9} ", to: signal_path(@conn, :minicipality_signals, page: x, data_category: @data_category,  data_status: @data_status ) %>
+                        <% end %>
                         <% end %>
 
                 </div>
@@ -157,5 +187,7 @@
         
       </div>
       <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
+      
 </body>
 </html>
+<script>     

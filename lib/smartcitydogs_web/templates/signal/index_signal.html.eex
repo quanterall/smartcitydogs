@@ -112,7 +112,7 @@
   <div class="padination">
 
             <%= for x <- 1..@page.total_pages do %>
-            <%= link "#{x * 8 - 7}-#{x * 8} ", to: signal_path(@conn, :index_home_minicipality, page: x) %>
+            <%= link "#{x * 8 - 7}-#{x * 8} ", to: signal_path(@conn, :minicipality_signals, page: x) %>
           <% end %>
   </div>
 

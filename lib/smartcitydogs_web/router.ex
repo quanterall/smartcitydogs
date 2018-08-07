@@ -127,9 +127,11 @@ defmodule SmartcitydogsWeb.Router do
 
       #########################  Minicipality Home Page ########################
       get("/minicipality_registered", AnimalController, :minicipality_registered)
+      get("/filter_registered", AnimalController, :filter_registered)
       get("/minicipality_shelter", AnimalController, :minicipality_shelter)
       get("/minicipality_adopted", AnimalController, :minicipality_adopted)
       get("/minicipality_signals", SignalController, :minicipality_signals)
+      get("/filter_signals", SignalController, :filter_signals)
       #########################  /Minicipality Home Page ########################
 
       get("/signals/comment", SignalController, :comment)
