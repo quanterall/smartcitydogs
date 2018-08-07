@@ -606,7 +606,7 @@ box-shadow: 0px 0px 45px -4px rgba(0,0,0,0.75);
 .pull-right{
   font-weight: bold;
   width: 51%;
-  float: left;
+  float: left !important;
 }
 .btn-submit{
   width: 51%;

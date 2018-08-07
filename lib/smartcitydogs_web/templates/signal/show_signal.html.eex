@@ -123,7 +123,6 @@
             <br><br>
             <div class="buttons-for-signal1">
               <div class="buttons-for-signal">
-                <% IO.inspect @current_user%>
                 <%= cond do%>
                   <%= @current_user == nil -> %>
                     <a id="register-submit-adoption" onclick="showModalForm(event, 'register-form')">ПОСЛЕДВАЙ</a>
@@ -146,10 +145,10 @@
           <br><br>
           <br><br>
           <div class="comment_section" style="display: none;">
-            <textarea name="message" id="comment-id" value="" rows="6" cols="60">
-            </textarea>
+            <textarea name="message" id="comment-id" value="" rows="6" cols="60"></textarea>
+            
             <div class="under_comment">
-            <div class="close_comment">ОТКАЗ</div><a class="submit_comment" href="/signals/<%= @signal.id %>" role="button">ПУБЛИКУВАЙ</a>
+            <div class="close_comment">ОТКАЗ</div><a class="submit_comment" role="button">ПУБЛИКУВАЙ</a>
             </div>
             </div>
           </div>

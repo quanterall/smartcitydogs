@@ -134,7 +134,6 @@ $('.close_comment').click(function() {
 
 
 $(".submit_comment").click(function() {
-
     $.ajax({
         method: "GET",
         url: "/signals/comment",
@@ -142,8 +141,8 @@ $(".submit_comment").click(function() {
             "show-comment": $("#comment-id").val(),
             "show-id": $("#signal-id").text()
         }
-    }).then(function(data) {
-        $("#comment-id").val("");
+    }).done(function(){
+		location.reload();
     })
 });
 

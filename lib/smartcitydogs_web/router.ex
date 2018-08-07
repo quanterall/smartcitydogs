@@ -153,7 +153,7 @@ defmodule SmartcitydogsWeb.Router do
         resources("/users", UserController)
         get("/show", PageController, :show)
 
-        get("/signals/comment", SignalController, :comment)
+        # get("/signals/comment", SignalController, :comment)
         get("/signals/get_signals_support_count", SignalController, :get_signals_support_count)
         get("/signals/update_like_count", SignalController, :update_like_count)
         get("/signals/remove_like", SignalController, :remove_like)
