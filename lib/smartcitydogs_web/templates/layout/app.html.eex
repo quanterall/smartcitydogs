@@ -58,8 +58,6 @@
 
 </p>
 <script>
-//var token = $("#get_token").text();
-//console.log(token);
 $.ajaxSetup({
         beforeSend: function(xhr, settings) {
             xhr.setRequestHeader("x-csrf-token", "<%=Plug.CSRFProtection.get_csrf_token() %>" );

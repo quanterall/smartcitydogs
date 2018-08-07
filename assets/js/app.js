@@ -40,14 +40,7 @@ $('#submit-adoption').click(function(){
             "user_id": $("#user_id").text()
         },
         success: function (msg) {
-            // console.log(msg);
-            if (msg.response != "Ok") {
-                alert("Грешка при изпращането!");
-              }
-              else {
                 alert("Имейлът ви беше успешно изпратен!");
-              }
-        
         },
         error: function (xhr, status) {
            alert("ГРЕШКА!");
