@@ -319,6 +319,24 @@ linked-signals{
     #register-comment-button{
         width: 30%;
     }
+    #show_map {
+        display: inline-block;
+        position: absolute !important;
+        padding-left: 0px;
+        top: 29.5rem;
+        left: 12.5%;
+        width: 75%;
+        height: 70vh;
+        background: yellow;
+    }
+    .fa-window-close{
+        position: absolute;
+        background-color: transparent;
+        color: #00c790;
+        font-size: 40px;
+        left: 13%;
+        top: 30rem;
+    }
 }
 @media (max-width: 550px){
     .fa-window-close {
