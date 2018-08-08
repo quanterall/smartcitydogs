@@ -1,2 +1,101 @@
-<h1>Help page</h1>
 
+<!DOCTYPE html>
+<head>
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<link rel="shortcut icon" href="/images/help-page/fav.png">
+	<meta name="keywords" content="">
+	<meta charset="UTF-8">
+
+	<link href="https://fonts.googleapis.com/css?family=Poppins:300,500,600" rel="stylesheet">
+
+		<link rel="stylesheet" href="/css/help-page/linearicons.css">
+		<link rel="stylesheet" href="/css/help-page/owl.carousel.css">
+		<link rel="stylesheet" href="/css/help-page/font-awesome.min.css">
+		<link rel="stylesheet" href="/css/help-page/nice-select.css">
+		<link rel="stylesheet" href="/css/help-page/magnific-popup.css">
+		<link rel="stylesheet" href="/css/help-page/bootstrap.css">
+		<link rel="stylesheet" href="/css/help-page/main.css">
+	</head>
+	<body>
+			<div class="hero-area relative">
+				<header>
+					<div class="container">
+									</nav>
+								</div>
+							</div>
+						</div>
+					</div>
+				</header>
+				<div class="banner-area">
+					<div class="container">
+					
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="main-wrapper">
+			<div class="working-process-area">
+				<div class="container">
+					<div class="row justify-content-center">
+						<div class="col-lg-6">
+							<div class="section-title text-center">
+								<h2 style="color: #00cc99;">Как да подадем сигнал?</h2>
+								<p>Страхувате ли се от улични кучета? Страх ли ви е да бъдете нападнати? С най - новата ни система вашите опасения са напълно излишни! Само подайте сигнал и ние ще се погрижим.</p>
+							</div>
+						</div>
+					</div>
+					<div class="total-work-process d-flex flex-wrap justify-content-around align-items-center">
+						<div class="single-work-process">
+							<div class="work-icon-box">
+								<span class="fas fa-user-circle"></span>
+							</div>
+							<h4 style="width:140px;" class="caption caption2">1. Направете си акаунт, ако вече нямате и се логнете.</h4>
+						</div>
+						<div class="work-arrow">
+							<img src="images/help-page/elements/work-arrow.png" alt="">
+						</div>
+						<div class="single-work-process">
+							<div class="work-icon-box">
+								<span class="fas fa-mobile-alt"></span>
+							</div>
+							<h4 class="caption caption2">2. Подайте сигнал от телефона си, за кучето което ви притеснява</h4>
+						</div>
+						<div class="work-arrow">
+							<img src="images/help-page/elements/work-arrow.png" alt="">
+						</div>
+						<div class="single-work-process">
+							<div class="work-icon-box">
+								<span class="fas fa-spinner"></span>
+							</div>
+							<h4 class="caption caption2">3. Сигнала ще бъде обработен и мерки ще се вземат веднага</h4>
+						</div>
+						<div class="work-arrow">
+							<img src="images/help-page/elements/work-arrow.png" alt="">
+						</div>
+						<div class="single-work-process">
+							<div class="work-icon-box">
+								<span class="fas fa-paw"></span>
+							</div>
+							<h4 class="caption caption2">4. Кучето ще бъде маркирано и прибрано в приюта</h4>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="main-wrapper">
+		
+
+
+
+
+		<script src="/js/help-page/vendor/jquery-2.2.4.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+		<script src="/js/help-page/bootstrap.min.js"></script>
+		<script src="/js/help-page/jquery.ajaxchimp.min.js"></script>
+		<script src="/js/help-page/owl.carousel.min.js"></script>
+		<script src="/js/help-page/jquery.nice-select.min.js"></script>
+		<script src="/js/help-page/jquery.magnific-popup.min.js"></script>
+		<script src="/js/help-page/main.js"></script>
+	</body>
+</html>
