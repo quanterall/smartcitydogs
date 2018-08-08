@@ -181,16 +181,6 @@ defmodule SmartcitydogsWeb.SignalController do
       end
   end
 
-
-
-
-
-  
-  # def index_home_minicipality(conn, params) do
-  #   page = Signals |> Smartcitydogs.Repo.paginate(params)
-  #   render(conn, "filter_index.html", signal: page.entries, page: page)
-  # end
-
   def new(conn, _params) do
     changeset = Smartcitydogs.DataSignals.change_signal(%Signals{})
 
@@ -416,32 +406,6 @@ defmodule SmartcitydogsWeb.SignalController do
     end
   end
   
-  # def filter_animals(conn, params) do
-  #   IO.puts "TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT"
-  #  ## IO.inspect filter_animals
-  #   if params == %{} do
-  #     x = DataAnimals.list_animals()
-  #     page = Smartcitydogs.Repo.paginate(x, page: 1, page_size: 8)
-  #     render(conn, "filter_animals.html", animals: x, page: page)
-  #   end
-  
-  #   params = Map.values(params)
-  #   [inner_map] = params
-  #   inner_map = Map.values(inner_map)
-  #   [id] = inner_map
-  #   all_query = []
-  
-  #   x =
-  #     Enum.map(id, fn x ->
-  #       struct = from(p in Animals, where: p.animals_status_id == ^String.to_integer(x))
-  #       all_query = (all_query ++ Repo.all(struct)) |> Repo.preload(:animals_status)
-  #     end)
-  
-  #   x = List.flatten(x)
-  #   page = Smartcitydogs.Repo.paginate(x, page: 1, page_size: 8)
-  #   render(conn, "filter_animals.html", animals: x, page: page)
-  # end
-
 
 end
 
