@@ -1,5 +1,3 @@
-<%# <% IO.inspect @conn.path_info%> 
-<%# <%= if @conn.path_info == ["contact", "new"] do %> 
 <style>
   .top-navbar{
     padding-left: 12%;
@@ -15,9 +13,6 @@
     max-width: 100%;
   }
 </style>
-<%# <% else %> 
-
-<%# <% end %> 
 
 <div class="main-contact-page">
   <h2 align="center">Здравей, <%= @current_user.first_name %> <%= @current_user.last_name %>! </h2>

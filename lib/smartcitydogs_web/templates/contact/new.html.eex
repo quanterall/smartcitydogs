@@ -1,42 +1,68 @@
-<h1>Contact page</h1>
+  <style>
+  .top-navbar{
+    padding-left: 12%;
+    padding-right: 8%;
+  }
+  .container-fluid{
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+  .container{
+    padding-left: 0px;
+    padding-right: 0px;
+    max-width: 100%;
+  }
+</style>
 
-<%= form_for @changeset, contact_path(@conn, :create), fn f -> %>
-  <%= if @changeset.action do %>
-    <div class="alert alert-danger">
-      <p>There are some errors</p>
+<div class="main-contact-page">
+  <h2 align="center">Здравей!</h2>
+
+  <div class="contact-page-container">
+    <div class="contacts-left">
+
+      <h1 align="center">Връзка с нас: </h1> 
+      <i class="fab fa-facebook-f"></i><p class="contact-text-info">www.facebook.com/smartcitydogs</p>
+      <br><br>
+      <i class="fa fa-phone"></i><p class="contact-text-info">+359 / 878892610</p>
+      <br><br>
+      <i class="fa fa-envelope"></i><p class="contact-text-info">smartcitydogs@gmail.com</p>
+
     </div>
-  <% end %>
+    <div class="contacts-right">
 
+      <h1 align="center">Изпратете ни съобщение: </h1>
 
-  <div class="form-group">
-    <%= text_input f, :first_name, placeholder: "Firstname",
-                                     class: "form-control" %>
-    <%= error_tag f, :first_name %>
-  </div>
-   <div class="form-group">
-    <%= text_input f, :last_name, placeholder: "Lastname",
-                                     class: "form-control" %>
-    <%= error_tag f, :last_name %>
-  </div>
-   <div class="form-group">
-    <%= text_input f, :phone, placeholder: "Phone",
-                                     class: "form-control" %>
-    <%= error_tag f, :phone %>
-  </div>
+      <%= form_for @changeset, contact_path(@conn, :create), fn f -> %>
 
-      <div>
-      <%= label f, :topic %>
-      <%= text_input f, :topic %>
-      <%= error_tag f, :firstname %>
+      
+
+          <div class="contacts-right-form">
+            <label>Име:</label>
+            <%= text_input f, :first_name %>
+            <%= error_tag f, :first_name %>
+        <br>
+        <br>
+            <label>Фамилия:</label>
+            <%= text_input f, :last_name %>
+            <%= error_tag f, :last_name %>
+        <br>
+        <br>
+            <label>Телефонен номер:</label>
+            <%= text_input f, :phone %>
+            <%= error_tag f, :phone %>
+        <br>
+        <br>
+            <label>Заглавие:</label>
+            <%= text_input f, :topic %>
+            <%= error_tag f, :topic %>
+        <br>
+        <br>
+          <label>Текст:</label>
+          <%= textarea f, :text, [class: "form-control",  required: nil] %>
+          
+
+      <%= submit "ИЗПРАТИ", class: "btn btn-primary" %>
+      <% end %>
     </div>
-
-    <div>
-     <%= label f, :text %>
-     <%= textarea f, :text, [class: "form-control",  required: nil] %>
-    </div>
-
-    <br>
-
-  <%= submit "Send", class: "btn btn-primary" %>
-<% end %>
-<%= link "Back", to: page_path(@conn, :index), class: "btn btn-default btn-xs" %>
+  </div>
+</div>
