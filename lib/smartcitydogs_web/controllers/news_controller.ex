@@ -1,14 +1,20 @@
 defmodule SmartcitydogsWeb.NewsController do
   use SmartcitydogsWeb, :controller
 
+  import Ecto.Query
   alias Smartcitydogs.News
   alias Smartcitydogs.DataPages
-  import Ecto.Query
+  alias Smartcitydogs.Repo
+
 
   def index(conn, _params) do
     news = DataPages.list_news()
+    IO.inspect news
+    IO.puts "______________________"
     news2 = Enum.slice(news, -3..-2)
-    last_news = Repo.one(from x in Smartcitydogs.News, order_by: [desc: x.id], limit: 1)
+    last_news = Repo.one(from x in News, order_by: [desc: x.id], limit: 1)
+    news = Enum.drop(news, -3)
+    IO.inspect news
     render(conn, "index.html", news: news, last_news: last_news, news2: news2)
   end
 

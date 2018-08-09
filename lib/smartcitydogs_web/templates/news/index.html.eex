@@ -1,105 +1,173 @@
-<meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <title>Document</title>
-        
-    <link rel="stylesheet" type="text/css" href="/css/news.css"/>
 
-</head>
- <div class="carousel-caption"> <%=@last_news.content %> </div>
-<div class="container">
+<div class="latest-bg" style="background-image: url('/<%= @last_news.image_url %>')">
 
-    <div class="row">
-    
-      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+  <div class="empty-to-center" >
+  </div>
 
-          <div class="carousel-inner">
-          <p class="carousel-caption2"> <%=@last_news.date |> NaiveDateTime.to_date() |> Date.to_string() %> </p>
-         
-         <div class="carousel-caption"> <%=@last_news.title %> </div>
-            <div class="item"> <img class="img-responsive" src="/<%= @last_news.image_url %>" alt="thumb">
-            
-            
-            </div>
-            
-          
-            
-          </div>
-     
-      </div>
-      
-      </div>
-      
-      <div class="home-bg">
-</div>
-<div class="row">
-    <div class="col-lg-12 mt-5">
-        <div class="homepage-slider ">
-            <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-                <div class="carousel-inner">
-                    <div class="carousel-item active">
-                        <h1 class="">Време е да поемем<br> отговорност за щастието на<br> най-добрите ни
-                            приятели
-                        </h1>
-                    </div>
-                    <div class="carousel-item">
-                        <h1 class="">Време е да поемем<br> отговорност за щастието на<br> най-добрите ни
-                            приятели
-                        </h1>
-                    </div>
-                    <div class="carousel-item">
-                        <h1 class="">Време е да поемем<br> отговорност за щастието на<br> най-добрите ни
-                            приятели
-                        </h1>
-                    </div>
-                </div>
-                <ol class="carousel-indicators">
-                    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-                    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-                    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-                </ol>
-            </div>
-        </div>
+  <div class=latest-news-data>
+
+    <div class="latest-date" style="color: grey;" >
+     <%=NaiveDateTime.to_date( @last_news.date) %>
     </div>
-</div>
-<div class="row mt-5 mb-3">
-    <div class="col">
-        <h3 class="text-white">Последни сигнали</h3>
+
+  <br>
+  <br>
+
+    <div class="latest-text" style="color: white; font-size: 35px;">
+     <b><%=@last_news.title %></b>
     </div>
-</div>
-<div class="row slick ">
-    <%= for news <- @news do %>
-    <div class="col-lg-12">
-        <div class="card slick-card w-100"
-             style="background:  linear-gradient(rgba(0, 0, 0, 0.5),rgba(0, 0, 0, 0.5)),  no-repeat center center url('https://topdoghub.com/wp-content/uploads/2017/12/Best-Tough-Toys-For-Dogs-1140x624.jpg')">
-            <div class="card-body">
-                <div class="slick-card-status">
-                    <%=news.title
-                    %>
-                </div>
-                <div class="slick-card-small text-gray">
-                    <%=news.content %>
-                </div>
-                <div class="slick-card-title">
-                    <%=news.short_content%>
-                </div>
-            </div>
-        </div>
+
+    <div class="latest-text" style="color: white; font-size: 18px;">
+     <%=@last_news.content %>
     </div>
-    <%= end %>
+  
+  <br>
+  
+    <b> <%= link "Виж още", to: news_path(@conn, :show, @last_news), style: "color: rgb(0,201,148); font-size: 18px;"%>
+    </b>
+
+ </div>
+
 </div>
-<div class="row mt-5 mb-3">
-    <div class="col">
-        <h3 class="text-green">Новини</h3>
+
+<style>
+.latest-bg {
+  top: 0px;
+  width: 100%;
+  background-size: cover;
+  background-position-x: center;
+  height: 620px;
+}
+
+.second-bg {
+  width: 45%;
+  background-size: cover;
+  height: 500px;
+  
+}
+
+.third-bg {
+  width: 55%;
+  background-size: cover;
+  border-left: solid 15px white;
+  height: 500px;
+}
+
+.empty-to-center{
+    height:290px;
+}
+
+.empty-to-center2{
+    height:190px;
+}
+
+.latest-news-data{
+   padding-left: 50px;
+}
+
+.nonlatest-news-data{
+   padding-left: 10px;
+}
+
+.row{
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.row -d{
+  margin-left: 0;
+  margin-right: 0;
+}
+
+
+.content-container{
+  margin-top: 0px;
+}
+
+h5, .h5 {
+  font-size: 16px;
+   font-weight: bold;
+}
+
+.nnn{
+   padding-left: 10%;
+}
+
+</style>
+ <br>
+ <br>
+
+ <div class="row">
+
+<div class="second-bg" style="background-image: url('/<%= Enum.at(@news2,0).image_url %>')">
+ <div class="empty-to-center2" >
+ </div>
+
+  <div class=nonlatest-news-data>
+
+    <div class="latest-date" style="color: grey;" >
+     <%=NaiveDateTime.to_date( Enum.at(@news2,0).date) %>
     </div>
+
+  <br>
+  <br>
+
+    <div class="latest-text" style="color: white; font-size: 35px;">
+     <b><%=Enum.at(@news2,0).title %></b>
+    </div>
+
+    <div class="latest-text" style="color: white; font-size: 18px;">
+     <%=Enum.at(@news2,0).content %>
+    </div>
+  
+  <br>
+  
+    <b> <%= link "Виж още", to: news_path(@conn, :show, Enum.at(@news2,0)), style: "color: rgb(0,201,148); font-size: 18px;"%>
+    </b>
+
+  </div>
 </div>
+
+
+<div class="third-bg" style="background-image: url('/<%= Enum.at(@news2,1).image_url %>')">
+ <div class="empty-to-center2" >
+ </div>
+
+  <div class=nonlatest-news-data>
+
+    <div class="latest-date" style="color: grey;" >
+    <%=NaiveDateTime.to_date( Enum.at(@news2,1).date) %>
+    </div>
+
+  <br>
+  <br>
+
+    <div class="latest-text" style="color: white; font-size: 35px;">
+    <b><%=Enum.at(@news2,1).title %></b>
+    </div>
+
+    <div class="latest-text" style="color: white; font-size: 18px;">
+    <%=Enum.at(@news2,1).content %>
+    </div>
+  
+  <br>
+  
+    <b> <%= link "Виж още", to: news_path(@conn, :show, Enum.at(@news2,1)), style: "color: rgb(0,201,148); font-size: 18px;"%>
+    </b>
+
+  </div>
+</div>
+
+ </div>
+</div>
+
+<div class= "nnn">
 <div class="row">
     <%= for news <- @news do %>
     <div class="col-lg-3">
         <div class="card">
             <img class="card-img-top"
-                 src="https://topdoghub.com/wp-content/uploads/2017/12/Best-Tough-Toys-For-Dogs-1140x624.jpg"
+                 src="<%= news.image_url%>"
                  alt="Card image cap">
             <div class="card-body">
                 <p class="text-dark">
@@ -107,13 +175,15 @@
                         <%=NaiveDateTime.to_date( news.date) %>
                     </small>
                 </p>
-                <h5 class="card-title">Card title</h5>
+                <h5 class="card-title"><%=  news.title %></h5>
                 <p class="card-text"><%= news.short_content%></p>
                 <%= link "Виж повече »", to: news_path(@conn, :show, news), class: "btn btn-default float-right
                 text-green" %>
             </div>
-        </div>
+        </div>  
     </div>
-    <%= end %>
+    <% end %>
+    </div>
 </div>
- 
+
+

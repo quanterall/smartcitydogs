@@ -12,7 +12,7 @@ defmodule SmartcitydogsWeb.Endpoint do
     at: "/",
     from: :smartcitydogs,
     gzip: false,
-    only: ~w(css fonts images js favicon.ico robots.txt)
+    only: ~w(css fonts images js favicon.ico robots.txt ckeditor5-build-classic)
   )
 
   # plug Plug.Static, at: "/animals/new", from: "/home/sonyft/smartcitydog/smartcitydogs/assets/static/images/"
