@@ -1,2 +1,14 @@
-<h1>For the project page</h1>
+ 
+ <html>
+ <link rel="stylesheet" href="<%= static_path(@conn, "/css/project.css") %>">
 
+
+<head>
+</head>
+<body>
+<div class="project">
+</div>
+</body>
+
+
+</html>
