@@ -237,6 +237,19 @@ $('.navbar-collapse').on('show.bs.collapse', function() {
 
     
 
+ClassicEditor
+    .create( document.querySelector( '#editor' ) )
+   
+    .then( editor => {
+        config.extraPlugins = 'image';
+        config.extraPlugins = 'dialog';
+        image: {
+            toolbar: [ 'imageTextAlternative' ]
+        }
+    } )
+    .catch( error => {
+        console.error( error );
+    } );
 
 
 

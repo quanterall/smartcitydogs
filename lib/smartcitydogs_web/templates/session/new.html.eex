@@ -9,7 +9,7 @@
 
 
           <div class="nav-link-pass">
-            <a class="nav-link" id="forgotten-password" href="#">Забравена парола?</a>
+              <%= link "Забравена парола?", to: forgoten_password_path(@conn, :new) %>
           </div>
         <div class="under-form">
 

@@ -64,7 +64,9 @@ defmodule Smartcitydogs.Mixfile do
       {:timex, "~> 3.1"},
       {:scrivener_ecto, "~> 1.0"},
       {:scrivener_list, "~> 1.0"},
-      {:httpoison, "~> 1.0", override: true}
+      {:httpoison, "~> 1.0", override: true},
+      {:html_entities, "~> 0.4"},
+      {:cmark, "~> 0.7"}
     ]
   end
 

@@ -5,16 +5,13 @@ defmodule SmartcitydogsWeb.NewsController do
   alias Smartcitydogs.News
   alias Smartcitydogs.DataPages
   alias Smartcitydogs.Repo
-
+  alias Smartcitydogs.Markdown
 
   def index(conn, _params) do
     news = DataPages.list_news()
-    IO.inspect news
-    IO.puts "______________________"
     news2 = Enum.slice(news, -3..-2)
     last_news = Repo.one(from x in News, order_by: [desc: x.id], limit: 1)
     news = Enum.drop(news, -3)
-    IO.inspect news
     render(conn, "index.html", news: news, last_news: last_news, news2: news2)
   end
 
@@ -43,6 +40,13 @@ defmodule SmartcitydogsWeb.NewsController do
         "images/#{Map.get(upload, :filename)}-profile#{extension}"
       )
 
+    {:safe, xxx} =
+     news_params["content"]
+     |> Markdown.to_html()
+     |> Phoenix.HTML.raw() # Convert to {:safe, iodata} tuple
+
+     IO.inspect xxx
+     news_params |> Map.delete("content") |> Map.put("content", xxx)
     case DataPages.create_news(news_params) do
       {:ok, news} ->
         conn
@@ -56,6 +60,7 @@ defmodule SmartcitydogsWeb.NewsController do
 
   def show(conn, %{"id" => id}) do
     news = DataPages.get_news(id)
+    IO.inspect news
     render(conn, "show.html", news: news)
   end
 

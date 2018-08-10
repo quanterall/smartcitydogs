@@ -1,10 +1,9 @@
 <h1><%= @news.title %></h1>
 <ul>
   <li> <img class="rounded-circle" src="/<%= @news.image_url %>" alt="Generic placeholder image" width="140" height="140"> </li>
-  <li>Date: <%= @news.date %></li>
-  <li>Text: <%= @news.content %></li>
+  <li>Date: <%= NaiveDateTime.to_date( @news.date) %></li>
+ Text: <%= render_markdown @news.content %>
   <li> Video: </li>
 </ul>
 
 <%= link "Back", to: news_path(@conn, :index), class: "btn btn-default btn-xs" %>
-<%= link "Edit", to: news_path(@conn, :edit, @news), class: "btn btn-default btn-xs" %>

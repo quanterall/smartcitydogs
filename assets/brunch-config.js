@@ -60,6 +60,7 @@ watcher: {
     public: "../priv/static"
   },
 
+  
   // Configure your plugins
   plugins: {
     babel: {
