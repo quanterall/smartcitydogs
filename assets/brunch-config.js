@@ -36,7 +36,8 @@ watcher: {
           "css/index_signal.css",
           "css/nav_bar.css",
           "css/show_signal.css",
-          "css/registered_dogs.css"
+          "css/registered_dogs.css",
+          "css/contact.css"
         ]
       }
     },

@@ -105,8 +105,7 @@ defmodule SmartcitydogsWeb.Router do
       ForgotenPasswordController,
       only: [:new, :create, :edit, :update]
     )
-
-    resources("/contact", ContactController, only: [:new, :create])
+    resources("/contact", ContactController, only: [:index, :new, :create])
 
     ###### registered user zone
     scope "/" do
