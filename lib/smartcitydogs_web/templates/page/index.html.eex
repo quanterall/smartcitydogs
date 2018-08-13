@@ -106,7 +106,8 @@
             <center>
 
             <div class="button-show-hide">
-              <p class="p-button-view"><a class="btn btn-secondary" href="signals/<%=signal.id%>" role="button">Виж още</a>
+            
+              <p class="p-button-view"><%= link "", to: signal_path(@conn, :show, signal), class: "fa fa-map-marker-alt" %><a class="btn btn-secondary" href="signals/<%=signal.id%>" role="button">Виж още</a>
             </div></center>
           </div>
 
@@ -114,7 +115,6 @@
     </div>
     <% end %>
 </div>
-<%# <%= link "", to: signal_path(@conn, :show, signal), class: "fa fa-map-marker-alt" %> 
 
 <div class="row mt-5 mb-3">
     <div class="col">
