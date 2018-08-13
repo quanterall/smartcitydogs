@@ -69,11 +69,12 @@
     border-color: rgba(51,201,149,1);
 }
 .contacts-right-form label{
-    padding-top: 5%;
+    padding-top: 2.5%;
     font-weight: bold;
     color: white;
     float: left;
     margin-bottom: 0px;
+    clear: left;
 } 
 .contacts-right-form .btn-primary{
     margin-top: 10%;
