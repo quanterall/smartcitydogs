@@ -1,11 +1,6 @@
 .main-contact-page{
-    padding-top: 1%;
     width: 100%;
     height: 100%;
-    background: -moz-linear-gradient(top, rgba(54,201,149,1) 0%, rgba(51,201,149,1) 26%, rgba(49,201,149,0.82) 43%, rgba(49,201,149,0.7) 55%, rgba(49,201,149,0) 100%); /* FF3.6-15 */
-background: -webkit-linear-gradient(top, rgba(54,201,149,1) 0%,rgba(51,201,149,1) 26%,rgba(49,201,149,0.82) 43%,rgba(49,201,149,0.7) 55%,rgba(49,201,149,0) 100%); /* Chrome10-25,Safari5.1-6 */
-background: linear-gradient(to bottom, rgba(54,201,149,1) 0%,rgba(51,201,149,1) 26%,rgba(49,201,149,0.82) 43%,rgba(49,201,149,0.7) 55%,rgba(49,201,149,0) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#36c995', endColorstr='#0031c995',GradientType=0 );
 }
 .contact-page-container{
     width: 100%;
@@ -18,55 +13,51 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#36c995', end
     width: 49%;
 }
 .contacts-right{
+    height: 100vh;
+    background-color: rgba(51,201,149,1);
     padding: 1%;
-    /* display: inline-block; */
     width: 49%;    
 }
 .fa-circle{
     font-weight: 500;
     font-size: 100px;
 }
-i.fa-facebook-f{
-    width: 12%;
+.contacts-left i.fa-facebook-f{
+    padding-left: 0px;
+    width: 10%;
     display: inline-block;
-    font-size: 50px;
+    font-size: 30px;
     border-radius: 60px;
-    box-shadow: 0px 0px 10px black;
-    padding: 0.2em 0.5em;
   }
-i.fa-phone{
-    margin-top: 1%;
-    width: 12%;
+.contacts-left i.fa-phone{
+    width: 10%;
     display: inline-block;
-    font-size: 45px;
+    font-size: 30px;
     border-radius: 60px;
-    box-shadow: 0px 0px 10px black;
-    padding: 0.3em 0.35em;
 }
-i.fa-envelope{
-    width: 12%;
-    font-size: 45px;
+.contacts-left i.fa-envelope{
+    width: 10%;
+    font-size: 30px;
     display: inline-block;
     border-radius: 60px;
-    box-shadow: 0px 0px 10px black;
-    padding: 0.3em 0.35em;
 }
 .contact-text-info{
     display: inline-table;
-    width: 88%;
+    width: 90%;
     height: 10%;
-    padding: 3%;
-    font-size: 25px;
+    padding-left: 5%;
+    padding-top: 2%; 
+    font-size: 20px;
     font-weight: bold;
 }
 .contacts-right form{
-    padding-top: 5%;
+
+    padding-top: 10%;
     padding-left: 10%;
     padding-right: 10%;
 }
 .contacts-right-form input[type=text]{
     border: 2px solid rgba(51,201,149,1);
-    /* border-color: rgba(51,201,149,1); */
     float: right;
     width: 50%;
 } 
@@ -78,24 +69,61 @@ i.fa-envelope{
     border-color: rgba(51,201,149,1);
 }
 .contacts-right-form label{
+    padding-top: 5%;
     font-weight: bold;
-    color: black;
+    color: white;
     float: left;
     margin-bottom: 0px;
 } 
 .contacts-right-form .btn-primary{
-    margin-top: 5%;
+    margin-top: 10%;
     width: 50%;
     background-color: white;
     color: rgba(51,201,149,1);
     font-weight: bold;
     border-color: rgba(51,201,149,1);
+    /* margin-bottom: 10vh; */
 }
 .contacts-right-form .btn-primary:hover{
     cursor: pointer;
     transition: 0.5s;
     background-color: white;
     color: rgba(51,201,149,1);
-    box-shadow: 0px 0px 45px -4px rgba(0,0,0,0.75);
     
+}
+.contacts-right-form textarea#user_text{
+    background: transparent;
+    border: 1px solid white;
+    color: white;
+}
+.contacts-right-form input#user_topic,
+input#user_phone, input#user_last_name,
+input#user_first_name{
+    background: transparent;
+    border-bottom: 1px solid white;
+    color: white;
+}
+
+.top-contacts-right{
+    color: white;
+    padding-left: 10%;
+    padding-top: 5%;
+    font-size: 25px;
+    font-weight: bold;
+}
+.top-contacts-left{
+    margin-bottom: 10%;
+    color: black;
+    padding-left: 10%;
+    padding-top: 5%;
+    font-size: 25px;
+    font-weight: bold;
+}
+.facebook-icon{
+    width: 100%;
+
+    border: 1px solid black;
+}
+.form-control:focus{
+    box-shadow: none;
 }

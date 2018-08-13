@@ -32,7 +32,7 @@
                     <a class="nav-link" href="/help">Помощ</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/contact/new">Контакти</a>
+                    <a class="nav-link" href="/contact">Контакти</a>
                 </li>
             </ul>
             <ul class="navbar-nav text-nowrap">

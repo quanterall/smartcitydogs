@@ -5,6 +5,17 @@ defmodule SmartcitydogsWeb.ContactController do
   alias Smartcitydogs.DataUsers
   alias Smartcitydogs.Email
 
+  def index(conn, _params) do
+    changeset = User.changeset(%User{})
+    if conn.assigns.current_user != nil do
+      changeset = User.changeset(conn.assigns.current_user)
+      id = conn.assigns.current_user.id
+      render(conn, "newcontact.html", changeset: changeset, action: contact_path(conn, :update, id))
+    else
+    render(conn, "newcontact.html", changeset: changeset, action: contact_path(conn, :create))
+    end
+  end
+
   ##Render the two different forms based on logged or not user.
   def new(conn, _params) do
     changeset = User.changeset(%User{})
@@ -13,7 +24,7 @@ defmodule SmartcitydogsWeb.ContactController do
       id = conn.assigns.current_user.id
       render(conn, "newcontact.html", changeset: changeset, action: contact_path(conn, :update, id))
     else
-    render(conn, "new.html", changeset: changeset, action: contact_path(conn, :create))
+    render(conn, "newcontact.html", changeset: changeset, action: contact_path(conn, :create))
     end
   end
 

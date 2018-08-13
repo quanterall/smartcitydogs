@@ -20,7 +20,7 @@
                     <a class="nav-link" href="/signals">Подадени сигнали</a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link" href="/contacts">Контакти</a>
+                    <a class="nav-link" href="/contact">Контакти</a>
                 </li>
             </ul>
             <ul class="navbar-nav text-nowrap">
