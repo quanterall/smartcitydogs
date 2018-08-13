@@ -52,19 +52,6 @@
     transition: 0.5s;
     opacity: 1;
 }
-/* .slick-slide.slick-current.slick-active{
-    width: 6% !important;
-}
-.slick-slide.slick-active{
-    width: 6% !important;
-} */
-/* .slick-slide{
-    width: 6% !important;
-} */
-
-/* .slick-active{
-    width: 6% !important;
-} */
 .row.slick{
     margin-bottom: 50px;
 }
