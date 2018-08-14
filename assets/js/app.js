@@ -23,6 +23,10 @@ import "slick-carousel";
 
 ////////////ORIGINAL//////////////
 
+function myOnLoadCallback() {
+    alert("Captcha is OK");
+  }
+
 
 $('#submit-adoption').click(function(){
     

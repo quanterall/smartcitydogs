@@ -20,6 +20,11 @@ config :logger, :console,
   format: "$time $metadata[$level] $message\n",
   metadata: [:user_id]
 
+# RECAPTCHA
+config :recaptcha,
+  public_key: {:system, "6LeC1mkUAAAAAEX_aVOwFFByXgT3FNnMLnfdR0gf"},
+  secret: {:system, "6LeC1mkUAAAAAEaLMesIocRsy2oKwHHZZJjv3dA3"}
+
 config :guardian, Guardian,
   issuer: "SimpleAuth.#{Mix.env()}",
   ttl: {30, :days},

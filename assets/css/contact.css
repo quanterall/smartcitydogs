@@ -23,26 +23,25 @@
     font-size: 100px;
 }
 .contacts-left i.fa-facebook-f{
+    padding-top: 2%;
     padding-left: 0px;
     width: 10%;
-    display: inline-block;
     font-size: 30px;
     border-radius: 60px;
   }
 .contacts-left i.fa-phone{
+    padding-top: 2%;
     width: 10%;
-    display: inline-block;
     font-size: 30px;
     border-radius: 60px;
 }
 .contacts-left i.fa-envelope{
+    padding-top: 2%;
     width: 10%;
     font-size: 30px;
-    display: inline-block;
     border-radius: 60px;
 }
 .contact-text-info{
-    display: inline-table;
     width: 90%;
     height: 10%;
     padding-left: 5%;
@@ -52,7 +51,7 @@
 }
 .contacts-right form{
 
-    padding-top: 10%;
+    padding-top: 2vh;
     padding-left: 10%;
     padding-right: 10%;
 }
@@ -77,7 +76,7 @@
     clear: left;
 } 
 .contacts-right-form .btn-primary{
-    margin-top: 10%;
+    margin-top: 3vh;
     width: 50%;
     background-color: white;
     color: rgba(51,201,149,1);
@@ -128,4 +127,21 @@ input#user_first_name{
 }
 .form-control:focus{
     box-shadow: none;
+}
+.g-recaptcha{
+    margin-top: 5%;
+}
+/* .g-recaptcha iframe{
+    width: 100% !important;
+}
+.g-recaptcha div{
+    width: 100% !important;
+}
+.rc-anchor-normal{
+    width: 100% !important;
+} */
+.contact-icons{
+    width: 100%;
+    display: flex;
+    margin-top: 10%;
 }
