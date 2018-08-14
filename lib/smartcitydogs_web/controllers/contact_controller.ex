@@ -29,13 +29,27 @@ defmodule SmartcitydogsWeb.ContactController do
   end
 
   ##When a not logged in user sneds email
-  def create(conn, %{"user" => user_params}) do
-    topic = Map.get(user_params, "topic")
-    text = Map.get(user_params, "text")
-    Email.send_unauth_contact_email(topic, text, user_params)
-    |> Smartcitydogs.Mailer.deliver_now()
+  def create(conn, params) do
+    # IO.puts "_______________________TEST___________________"
+    # IO.inspect params
+    # IO.puts "_______________________TEST___________________"
+    {:system, secret} = Application.get_env(:recaptcha, :secret)
+    case Recaptcha.verify(params["g-recaptcha-response"],[secret: secret]) do
+      {:ok, response} -> 
+        user_params = Map.get(params, "user")
+        topic = Map.get(user_params, "topic")
+        text = Map.get(user_params, "text")
+        Email.send_unauth_contact_email(topic, text, user_params)
+        |> Smartcitydogs.Mailer.deliver_now()
 
-    redirect(conn, to: page_path(conn, :index))
+        IO.inspect response
+
+        redirect(conn, to: page_path(conn, :index))
+        
+      {:error, errors} -> 
+        IO.inspect errors
+        redirect(conn, to: contact_path(conn, :index))
+      end
   end
 
   def edit(conn, %{"id" => id}) do

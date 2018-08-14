@@ -16,6 +16,7 @@ body {
       
       <i class="fa fa-envelope"></i><p class="contact-text-info"><a href="mailto:smartcitydogs@gmail.com">smartcitydogs@gmail.com</a></p>
 
+      
     </div>
     <div class="contacts-right">
 
@@ -67,10 +68,18 @@ body {
         <br>
           <label>Текст:</label>
           <%= textarea f, :text, [class: "form-control",  required: nil] %>
-          
+          <% {:system, public_key} = Application.get_env(:recaptcha, :public_key) %>
+
+        <%= raw(Recaptcha.Template.display([
+                public_key: public_key
+            ])) %>
 
       <%= submit "ИЗПРАТИ", class: "btn btn-primary" %>
+
+        
+            
       <% end %>
     </div>
   </div>
 </div>
+
