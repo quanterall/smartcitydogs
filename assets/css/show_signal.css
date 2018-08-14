@@ -37,8 +37,20 @@ show-signal-label-title{
     font-size: 40px;
 }
 .fa-map-marker-alt{
-    color: #00c790;
+    margin-bottom: 3%;
+    cursor: pointer;
+    opacity: 1;
+    color: white;
     margin-right: 2%;
+}
+.fa-map-marker-alt:hover{
+    color: white;
+    /* color: #00c790; */
+    cursor: pointer;
+    transition: 0.5s;
+    opacity: 1;
+    text-decoration: none;
+    
 }
 #show-map{
     cursor: pointer;

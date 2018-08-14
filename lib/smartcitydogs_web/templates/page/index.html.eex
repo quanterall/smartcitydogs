@@ -1,3 +1,9 @@
+<style>
+    .button-show-hide .btn-secondary{
+        margin-top: 0px;
+    }
+</style>
+
 <div class="home-bg">
 </div>
 
@@ -106,9 +112,15 @@
             <center>
 
             <div class="button-show-hide">
+                <div class="map-show-buttons">
             
-              <p class="p-button-view"><%= link "", to: signal_path(@conn, :show, signal), class: "fa fa-map-marker-alt" %><a class="btn btn-secondary" href="signals/<%=signal.id%>" role="button">Виж още</a>
+              <p class="p-button-view">
+                <%= link "", to: signal_path(@conn, :show, signal), class: "fa fa-map-marker-alt" %>
+                <a class="btn btn-secondary" href="signals/<%=signal.id%>" role="button">Виж още</a>
+              </p>
+              </div>
             </div></center>
+            
           </div>
 
          </div>
