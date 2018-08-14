@@ -48,6 +48,7 @@ defmodule SmartcitydogsWeb.ContactController do
         
       {:error, errors} -> 
         IO.inspect errors
+        # put_flash(:info, "You are a robot!")
         redirect(conn, to: contact_path(conn, :index))
       end
   end

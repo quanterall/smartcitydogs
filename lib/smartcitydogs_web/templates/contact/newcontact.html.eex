@@ -10,12 +10,16 @@ body {
     <div class="contacts-left">
 
       <p class="top-contacts-left">За контакти с нас:</p>
-      <i class="fab fa-facebook-f"></i><p class="contact-text-info"><a href="https://www.facebook.com/smartcitydogs">www.facebook.com/smartcitydogs</a></p>  
       
-      <i class="fa fa-phone"></i><p class="contact-text-info"><a href="tel:+359878892610">+359 / 878892610</a></p>
-      
-      <i class="fa fa-envelope"></i><p class="contact-text-info"><a href="mailto:smartcitydogs@gmail.com">smartcitydogs@gmail.com</a></p>
-
+      <div class="contact-icons">
+        <i class="fab fa-facebook-f"></i><p class="contact-text-info"><a href="https://www.facebook.com/smartcitydogs">www.facebook.com/smartcitydogs</a></p>  
+      </div>
+      <div class="contact-icons">
+        <i class="fa fa-phone"></i><p class="contact-text-info"><a href="tel:+359878892610">+359 / 878892610</a></p>
+      </div>
+      <div class="contact-icons">
+        <i class="fa fa-envelope"></i><p class="contact-text-info"><a href="mailto:smartcitydogs@gmail.com">smartcitydogs@gmail.com</a></p>
+      </div>
       
     </div>
     <div class="contacts-right">
