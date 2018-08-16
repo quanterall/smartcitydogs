@@ -38,8 +38,6 @@
      
       </ul>   
                 <div class="input-group-append">
-                    <button class="btn btn-outline-secondary" type="submit">
-                        <i class="fa fa-search"></i>
                          <%= submit "Търси", class: "btn btn-submit" %> <br>
                            <% end %>
                     </button>
