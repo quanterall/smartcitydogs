@@ -1,4 +1,8 @@
 
+.fixed-top-costom .container{
+    margin-left: 8% !important;
+}
+
 .user-menu i {
     margin-left: 10px;
     margin-right: 10px;

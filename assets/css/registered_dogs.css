@@ -5,6 +5,7 @@
     /* margin: 7%; */
 }
 .col-12 .input-group{
+    margin-top: 2%;
     width: 40%;
     position: fixed;
     z-index: 1;
@@ -23,7 +24,7 @@
     color: white;
 }
 .container{
-    margin-left: 11%;
+    /* margin-left: 11%; */
     /* padding-left: 3%; */
     max-width: 80%;
 }
@@ -43,7 +44,7 @@
 .last-signals-dogs-div{
     position: absolute;
     margin-right: 12%;
-    margin-left: 9%;
+    /* margin-left: 9%; */
 }
 .col-container .col-container-shadow{
     opacity: 0;

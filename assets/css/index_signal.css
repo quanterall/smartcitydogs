@@ -162,8 +162,8 @@ input#signals_url1{
   padding: 3%;
   border-radius: 10px;
   padding-left: 2%;
-  margin-left: 10%;
-  width: 70%;
+  margin-left: 14%;
+  width: 60%;
   border: 1px solid transparent;
   background-color: #00c790;
 }
@@ -286,7 +286,8 @@ margin-left: -10px;
 }
 
 .col-lg-3{
-    margin-top: 3%;
+    margin-top: 4%;
+    /* margin-bottom: 3% */
 }
 .container-filter{
   padding: 2%;
