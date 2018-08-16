@@ -228,8 +228,10 @@
 
                     <center>
                       <div class="button-show-hide">
-                        <div class="adopted_button">
-                          <%= link "Виж още »", to: animal_path(@conn, :show, animal), class: "btn btn-secondary" %>
+                        <div class="map-show-buttons">
+                            <p class="p-button-view">
+                                <a class="btn btn-secondary" href="animals/<%=animal.id%>" role="button">Виж още</a>
+                            </p>
                         </div>
                       </div>
                     </center>
@@ -308,8 +310,10 @@
 
                     <center>
                       <div class="button-show-hide">
-                        <div class="adopted_button">
-                          <%= link "Виж още »", to: animal_path(@conn, :show, animal), class: "btn btn-secondary" %>
+                        <div class="map-show-buttons">
+                            <p class="p-button-view">
+                                <a class="btn btn-secondary" href="animals/<%=animal.id%>" role="button">Виж още</a>
+                            </p>
                         </div>
                       </div>
                     </center>
