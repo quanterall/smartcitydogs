@@ -1,17 +1,17 @@
 
 <li class="nav-item active">
-    <a class="nav-link" href="/">Начало</a>
+    <a class="nav-link" href="/municipality/signals">Начало</a>
 </li>
 <li class="nav-item">
-    <a class="nav-link" href="/minicipality_signals">Подадени сигнали</a>
+    <a class="nav-link" href="/municipality/signals">Подадени сигнали</a>
 </li>
 <li class="nav-item">
-    <a class="nav-link" href="/minicipality_registered">Регистрирани кучета</a>
+    <a class="nav-link" href="/municipality/animals">Регистрирани кучета</a>
 </li>
 <li class="nav-item">
-    <a class="nav-link" href="/minicipality_adopted">Осиновени кучета</a>
+    <a class="nav-link" href="/municipality/animals/adopted">Осиновени кучета</a>
 </li>
 <li class="nav-item">
-    <a class="nav-link" href="/minicipality_shelter">Кучета в приюта</a>
+    <a class="nav-link" href="/municipality/animals/shelter">Кучета в приюта</a>
 </li>
            

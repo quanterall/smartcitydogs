@@ -91,16 +91,16 @@ defmodule SmartcitydogsWeb.Router do
     # post("/signals/add_comment_dislike", SignalController, :add_comment_dislike)
   end
 
+  ###### DEFAULT BROWSER STACK #####
+
   scope "/", SmartcitydogsWeb do
-    # Use the default browser stack
+
     pipe_through([:browser, :with_session])
 
     get("/", PageController, :index)
     get("/signals", SignalController, :index)
     get("/signals/:id", SignalController, :show)
-    get("/signals/filter_index", SignalController, :filter_index)
-
-    get("/animals/filter_index", AnimalController, :filter_index)
+    
     get("/animals", AnimalController, :index)
     get("/animals/:id", AnimalController, :show)
 
@@ -117,44 +117,31 @@ defmodule SmartcitydogsWeb.Router do
     )
     resources("/contact", ContactController, only: [:index, :new, :create])
 
-    ###### registered user zone
+    ###### REGISTERED USER ZONE #########
     scope "/" do
       pipe_through([:login_required])
+
       resources("/users", UserController)
+
       get("/users", UserController, :index)
       get("/users/:id", UserController, :show)
-
       resources("/animals", AnimalController)
-      resources("/news", NewsController)
-      get("/show", PageController, :show)
 
+      resources("/news", NewsController)
+
+      get("/show", PageController, :show)
       resources("/my_signals", MySignalsController)
 
-      # get("/signals/my_signals", SignalController, :my_signals)
-
-      #########################  Minicipality Home Page ########################
-      get("/minicipality_registered", AnimalController, :minicipality_registered)
-      get("/filter_registered", AnimalController, :filter_registered)
-      get("/minicipality_shelter", AnimalController, :minicipality_shelter)
-      get("/minicipality_adopted", AnimalController, :minicipality_adopted)
-      get("/minicipality_signals", SignalController, :minicipality_signals)
-      get("/filter_signals", SignalController, :filter_signals)
-      #########################  /Minicipality Home Page ########################
-
-      
-
       get("/signals/get_signals_support_count", SignalController, :get_signals_support_count)
-      
-      
-
       get("/signals/followed_signals", SignalController, :followed_signals)
       get("/signals/update_type", SignalController, :update_type)
       resources("/signals", SignalController)
 
       resources("/help", HelpController, only: [:index])
+
       resources("/contact", ContactController, only: [:new, :create, :edit, :update])
 
-      ############ admin(zone)
+      ####### ADMIN ZONE #########
 
       scope "/admin", Admin, as: :admin do
         pipe_through([:admin_required])
@@ -162,12 +149,23 @@ defmodule SmartcitydogsWeb.Router do
         resources("/users", UserController)
         get("/show", PageController, :show)
 
-        # get("/signals/comment", SignalController, :comment)
         get("/signals/get_signals_support_count", SignalController, :get_signals_support_count)
 
         resources("/contact", ContactController, only: [:new, :create, :edit, :update])
 
         resources("/signals", SignalController)
+      end
+
+      ######## MUNICIPALITY ZONE #######
+
+      scope "/municipality" do
+
+        get("/animals", AnimalController, :minicipality_registered)
+        get("/filter_registered", AnimalController, :filter_registered)
+        get("/animals/shelter", AnimalController, :minicipality_shelter)
+        get("/animals/adopted", AnimalController, :minicipality_adopted)
+        get("/signals", SignalController, :minicipality_signals)
+        get("/filter_signals", SignalController, :filter_signals)
       end
     end
   end
