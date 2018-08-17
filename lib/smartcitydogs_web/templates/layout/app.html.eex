@@ -101,7 +101,6 @@
 
 
 <script src='<%= static_path(@conn, "/js/app.js") %>'></script>
-<% IO.inspect Plug.CSRFProtection.get_csrf_token() %>
 <p id="get_token">
 
 </p>

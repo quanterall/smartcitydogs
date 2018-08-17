@@ -30,9 +30,6 @@ defmodule SmartcitydogsWeb.ContactController do
 
   ##When a not logged in user sneds email
   def create(conn, params) do
-    # IO.puts "_______________________TEST___________________"
-    # IO.inspect params
-    # IO.puts "_______________________TEST___________________"
     {:system, secret} = Application.get_env(:recaptcha, :secret)
     case Recaptcha.verify(params["g-recaptcha-response"],[secret: secret]) do
       {:ok, response} -> 
@@ -42,13 +39,10 @@ defmodule SmartcitydogsWeb.ContactController do
         Email.send_unauth_contact_email(topic, text, user_params)
         |> Smartcitydogs.Mailer.deliver_now()
 
-        IO.inspect response
 
         redirect(conn, to: page_path(conn, :index))
         
       {:error, errors} -> 
-        IO.inspect errors
-        # put_flash(:info, "You are a robot!")
         redirect(conn, to: contact_path(conn, :index))
       end
   end

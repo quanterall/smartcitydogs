@@ -28,7 +28,6 @@ body {
 
       <%= form_for @changeset, @action, fn f -> %>
 
-      <% IO.inspect @current_user %>
       <%= if @current_user != nil do %>
           <div class="contacts-right-form">
             <label>Име:</label>
