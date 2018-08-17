@@ -8,6 +8,7 @@ defmodule SmartcitydogsWeb.SignalController do
   alias Smartcitydogs.Repo
   alias Smartcitydogs.Animals
   alias SmartcitydogsWeb.SignalController
+  alias SmartcitydogsWeb.SignalControllerAPI
   import Ecto.Query
 
   # plug(:put_layout, false when action in [:filter_index])
@@ -239,11 +240,11 @@ defmodule SmartcitydogsWeb.SignalController do
     id = map["id"]
     cond do 
       id == "remove_like" ->
-        remove_like(conn,map)
+        SignalControllerAPI.remove_like(conn,map)
       id == "update_like_count" ->
-        update_like_count(conn,map)
+        SignalControllerAPI.update_like_count(conn,map)
       id == "comment" ->
-        comment(conn,map)
+        SignalControllerAPI.comment(conn,map)
       true ->
         id = String.to_integer(map["id"])
         comments = DataSignals.get_comment_signal_id(id)
@@ -328,29 +329,9 @@ defmodule SmartcitydogsWeb.SignalController do
     head.support_count - 1
   end
 
-  def remove_like(conn, map) do
-    show_id = String.to_integer(map["show-id"])
-    signal = DataSignals.get_signal(show_id)
-    
-    user_id = conn.assigns.current_user.id
-    DataUsers.remove_liked_signal(user_id, show_id)
-    count = get_signals_support_count_minus(show_id)
+  
 
-    conn
-    |> json(%{new_count: count})
-  end
-
-  def update_like_count(conn, map) do
-    show_count = String.to_integer(map["show-count"])
-    show_id = String.to_integer(map["show-id"])
-    signal = DataSignals.get_signal(show_id)
-    user_id = conn.assigns.current_user.id
-    DataUsers.add_liked_signal(user_id, show_id)
-    count = get_signals_support_count(show_id)
-
-    conn
-    |> json(%{new_count: count})
-  end
+ 
 
   def update_type(conn, %{"id" => id, "signals_types_id" => signals_types_id}) do
     signal = DataSignals.get_signal(id)
@@ -360,30 +341,7 @@ defmodule SmartcitydogsWeb.SignalController do
     render(conn, "index_signals.html", signals: signals)
   end
 
-  def comment(conn,map) do
-    
-    show_comment = map["show-comment"]
-    show_id = String.to_integer(map["show-id"])
-    user_id = conn.assigns.current_user.id
-
-    Smartcitydogs.DataSignals.create_signal_comment(%{
-      comment: show_comment,
-      signals_id: show_id,
-      users_id: user_id
-    })
-
-      comments = DataSignals.get_comment_signal_id(show_id)
-      signal = DataSignals.get_signal(show_id)
-      sorted_comments = DataSignals.sort_signal_comment_by_id()
-        render(
-          conn,
-          "show_signal.html",
-          signal: signal,
-          comments: sorted_comments,
-          comments_count: comments
-        )
-
-  end
+  
 
   def delete(conn, %{"id" => id}) do
     signal = DataSignals.get_signal(id)
