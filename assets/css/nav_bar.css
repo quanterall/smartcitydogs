@@ -1,6 +1,6 @@
 
 .fixed-top-costom .container{
-    margin-left: 6.5% !important;
+    max-width: 90%;
 }
 
 .user-menu i {

@@ -11,9 +11,6 @@ defmodule SmartcitydogsWeb.SignalController do
   alias SmartcitydogsWeb.SignalControllerAPI
   import Ecto.Query
 
-  # plug(:put_layout, false when action in [:filter_index])
-  # plug(:put_layout, false when action in [:filter_animals])
-  # plug(:put_layout, false when action in [:new])
 
   action_fallback(SmartCityDogsWeb.FallbackController)
 
