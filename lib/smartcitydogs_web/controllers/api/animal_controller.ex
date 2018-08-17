@@ -74,14 +74,14 @@ defmodule SmartcitydogsWeb.AnimalControllerAPI do
     
       case DataAnimals.create_animal(animal_params) do
         {:ok, animal} ->
-          SmartcitydogsWeb.AnimalController.upload_file(animal.id, conn)
+          # SmartcitydogsWeb.AnimalController.upload_file(animal.id, conn)
 
           DataAnimals.insert_performed_procedure(list_procedures, animal.id)
 
-          render(conn, "new.json", animal: animal)
+          render(conn, "show.json", animal: animal)
 
         {:error, changeset} ->
-          render(conn, "new.json", changeset: changeset)
+          render(conn, "show.json", changeset: changeset)
     end
   end
   

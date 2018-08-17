@@ -17,8 +17,6 @@ defmodule SmartcitydogsWeb.AnimalControllerAPIView do
       chip_number: animal.chip_number,
       address: animal.address,
       deleted_at: animal.deleted_at,
-   ##   registered_at: animal.registered_at,
-   ##   adopted_at: animal.adopted_at
     }
   end
 end
