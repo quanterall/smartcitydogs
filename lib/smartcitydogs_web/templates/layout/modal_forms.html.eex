@@ -15,8 +15,11 @@
             <% end %>" id="signal-form">
         <%= render SmartcitydogsWeb.SignalView, "form_signal.html", assigns %>
     </div>
-    <div class="modal-form form4">
-
+     <div class="modal-form <%= if length(@conn.path_info) == 0 do %>
+                shadow-off
+            <% end %>" id="forgotten-pass-form">
+            <% IO.inspect assigns %>
+            <%# <%= render SmartcitydogsWeb.ForgotenPasswordView, "new.html", aconn %> %>
     </div>
 
 
