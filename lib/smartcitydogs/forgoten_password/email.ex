@@ -19,9 +19,10 @@ defmodule Smartcitydogs.Email do
     |> from(user.email)
     |> subject(contact_params.topic)
     |> text_body(
-      "Text is #{text} \n\n\n\n Sent from #{user.first_name} #{user.last_name}, phone: #{
-        user.phone
-      }"
+      "Запитване:
+       #{text} \n\n\n\n 
+       Изпратено от: #{user.first_name} #{user.last_name}, 
+       телефонен номер: #{user.phone}"
     )
   end
 
@@ -52,7 +53,10 @@ defmodule Smartcitydogs.Email do
     |> from(System.get_env("SMTP_USERNAME"))
     |> subject(topic)
     |> text_body(
-      "Text is #{text}  \n\n\n\n Sent from #{user_data["first_name"]} #{user_data["last_name"]}, phone: #{
+      "Запитване:
+       #{text}  \n\n\n\n 
+       Изпратено от: #{user_data["first_name"]} #{user_data["last_name"]},
+       телефонен номер: #{
         user_data["phone"]
       }"
     )

@@ -45,7 +45,6 @@ defmodule SmartcitydogsWeb.NewsController do
      |> Markdown.to_html()
      |> Phoenix.HTML.raw() # Convert to {:safe, iodata} tuple
 
-     IO.inspect xxx
      news_params |> Map.delete("content") |> Map.put("content", xxx)
     case DataPages.create_news(news_params) do
       {:ok, news} ->
@@ -60,7 +59,6 @@ defmodule SmartcitydogsWeb.NewsController do
 
   def show(conn, %{"id" => id}) do
     news = DataPages.get_news(id)
-    IO.inspect news
     render(conn, "show.html", news: news)
   end
 

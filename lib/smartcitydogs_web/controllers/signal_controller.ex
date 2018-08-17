@@ -36,7 +36,6 @@ defmodule SmartcitydogsWeb.SignalController do
 
   #All signals page with the checkbox filters, function for the first rendering
   def minicipality_signals(conn, params) do
-    IO.inspect params
      data_status = 
      case Map.fetch(params, "page") do
         {:ok, num} -> {params["data_status"], params["data_category"], num}
@@ -90,7 +89,6 @@ defmodule SmartcitydogsWeb.SignalController do
 
   ##When the search button is clicked, for rendering the first page of the query.
   def filter_signals(conn, params) do
-    IO.inspect params
     data_status =  
       for  {k , v}  <- params do
         cond do 
@@ -140,7 +138,6 @@ defmodule SmartcitydogsWeb.SignalController do
 
   ##Get all of the ticked checkboxes from the filters, handle redirection to pagination pages.
   def get_ticked_checkboxes(conn, params) do
-    IO.inspect params
     {data_status, data_category, num} = params
     case data_status do
       nil -> []
@@ -239,7 +236,6 @@ defmodule SmartcitydogsWeb.SignalController do
   end
 
   def show(conn, map) do
-    IO.inspect map
     id = map["id"]
     cond do 
       id == "remove_like" ->
@@ -345,7 +341,6 @@ defmodule SmartcitydogsWeb.SignalController do
   end
 
   def update_like_count(conn, map) do
-    IO.inspect map
     show_count = String.to_integer(map["show-count"])
     show_id = String.to_integer(map["show-id"])
     signal = DataSignals.get_signal(show_id)
@@ -366,8 +361,7 @@ defmodule SmartcitydogsWeb.SignalController do
   end
 
   def comment(conn,map) do
-    IO.puts "MAP______________________________________"
-    IO.inspect map 
+    
     show_comment = map["show-comment"]
     show_id = String.to_integer(map["show-id"])
     user_id = conn.assigns.current_user.id
