@@ -290,10 +290,13 @@ defmodule SmartcitydogsWeb.AnimalController do
       render(conn, SmartcitydogsWeb.ErrorView, "401.html")
     end
   end
+ 
+  def delete(conn, %{"id" => id}) do
+    animal = DataAnimals.get_animal(id)
 
-
-
-
-
+    with {:ok, %Animals{}} <- DataAnimals.delete_animal(animal) do
+      send_resp(conn, :no_content, "")
+    end
+  end
 
 end

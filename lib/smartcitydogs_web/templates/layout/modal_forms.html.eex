@@ -18,7 +18,8 @@
      <div class="modal-form <%= if length(@conn.path_info) == 0 do %>
                 shadow-off
             <% end %>" id="forgotten-pass-form">
-            <%# <%= render SmartcitydogsWeb.ForgotenPasswordView, "new.html", assigns %> 
+            <% IO.inspect assigns %>
+            <%# <%= render SmartcitydogsWeb.ForgotenPasswordView, "new.html", aconn %> %>
     </div>
 
 

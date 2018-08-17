@@ -51,9 +51,11 @@ defmodule SmartcitydogsWeb.Router do
 
   scope "/api", SmartcitydogsWeb do
     pipe_through([:api, :api_auth])
-   # post("/animals/send_email", AnimalControllerAPI, :send_email)
+
     resources("/users", UserControllerAPI, except: [:new, :edit])
     post("/users/logout", UserControllerAPI, :logout)
+
+
     resources("/signals", SignalControllerAPI, except: [:new, :edit])
     put("/signals/follow", SignalControllerAPI, :follow)
     put("/signals/unfollow", SignalControllerAPI, :unfollow)
@@ -64,6 +66,11 @@ defmodule SmartcitydogsWeb.Router do
     resources("/signals_types", SignalsTypeControllerAPI, except: [:new, :edit])
     resources("/signals_categories", SignalCategoryControllerAPI, except: [:new, :edit])
     resources("/signals_likes", SignalsLikeControllerAPI, except: [:new, :edit])
+
+    resources("/animals", AnimalControllerAPI, except: [:new, :edit])
+    post("/animals/:id/send_email", AnimalControllerAPI, :send_email)
+    
+
     resources("/contacts", ContactControllerAPI, except: [:new, :edit, :delete])
     resources("/users_types", UsersTypeControllerAPI, except: [:new, :edit])
     resources("/performed_procedure", PerformedProcedureControllerAPI, except: [:new, :edit])
@@ -71,10 +78,12 @@ defmodule SmartcitydogsWeb.Router do
     resources("/animal_images", AnimalImageControllerAPI, except: [:new, :edit])
     resources("/rescues", RescueControllerAPI, except: [:new, :edit])
     resources("/procedure_types", ProcedureTypeControllerAPI, except: [:new, :edit])
-    resources("/animals", AnimalControllerAPI, except: [:new, :edit])
+
+    
     resources("/header_slides", HeaderSlideControllerAPI, except: [:new, :edit])
     resources("/news", NewsSchemaControllerAPI, except: [:new, :edit])
     resources("/static_pages", StaticPageControllerAPI, except: [:new, :edit])
+    
 
     # post("/signals/add_comment_like", SignalController, :add_comment_like)
     # post("/signals/add_comment_dislike", SignalController, :add_comment_dislike)
@@ -87,7 +96,6 @@ defmodule SmartcitydogsWeb.Router do
     get("/", PageController, :index)
     get("/signals", SignalController, :index)
     get("/signals/:id", SignalController, :show)
-    #  resources("/animals", SignalController, only: [:show, :index])
     get("/signals/filter_index", SignalController, :filter_index)
 
     get("/animals/filter_index", AnimalController, :filter_index)
@@ -114,8 +122,6 @@ defmodule SmartcitydogsWeb.Router do
       get("/users", UserController, :index)
       get("/users/:id", UserController, :show)
 
-      post "/animals/:id/send_email", AnimalController, :send_email
-      # get("/animals/send_email", AnimalController, :send_email)
       resources("/animals", AnimalController)
       resources("/news", NewsController)
       get("/show", PageController, :show)
