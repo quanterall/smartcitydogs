@@ -55,7 +55,9 @@ defmodule SmartcitydogsWeb.Router do
     resources("/users", UserControllerAPI, except: [:new, :edit])
     post("/users/logout", UserControllerAPI, :logout)
 
-
+    get("/signals/comment", SignalControllerAPI, :comment)
+    get("/signals/remove_like", SignalControllerAPI, :remove_like)
+    get("/signals/update_like_count", SignalControllerAPI, :update_like_count)
     resources("/signals", SignalControllerAPI, except: [:new, :edit])
     put("/signals/follow", SignalControllerAPI, :follow)
     put("/signals/unfollow", SignalControllerAPI, :unfollow)
@@ -139,11 +141,11 @@ defmodule SmartcitydogsWeb.Router do
       get("/filter_signals", SignalController, :filter_signals)
       #########################  /Minicipality Home Page ########################
 
-      get("/signals/comment", SignalController, :comment)
+      
 
       get("/signals/get_signals_support_count", SignalController, :get_signals_support_count)
-      get("/signals/update_like_count", SignalController, :update_like_count)
-      get("/signals/remove_like", SignalController, :remove_like)
+      
+      
 
       get("/signals/followed_signals", SignalController, :followed_signals)
       get("/signals/update_type", SignalController, :update_type)
@@ -162,8 +164,6 @@ defmodule SmartcitydogsWeb.Router do
 
         # get("/signals/comment", SignalController, :comment)
         get("/signals/get_signals_support_count", SignalController, :get_signals_support_count)
-        get("/signals/update_like_count", SignalController, :update_like_count)
-        get("/signals/remove_like", SignalController, :remove_like)
 
         resources("/contact", ContactController, only: [:new, :create, :edit, :update])
 
