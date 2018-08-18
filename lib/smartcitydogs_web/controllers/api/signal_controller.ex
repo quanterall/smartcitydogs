@@ -84,31 +84,25 @@ defmodule SmartcitydogsWeb.SignalControllerAPI do
     end 
   end
 
+  def like(conn, params) do
 
-  def update_like_count(conn, map) do
-    IO.inspect map
     user_id = conn.private.plug_session["current_user_id"]
-    show_count = String.to_integer(map["show-count"])
-    show_id = String.to_integer(map["show-id"])
-    signal = DataSignals.get_signal(show_id)
-    # user_id = conn.assigns.current_user.id
-    DataUsers.add_liked_signal(user_id, show_id)
-    count = SmartcitydogsWeb.SignalController.get_signals_support_count(show_id)
+    signal = DataSignals.get_signal(params["id"])
+    DataUsers.add_like(user_id, signal.id)
 
     conn
-    |> json(%{new_count: count})
+    |> json(%{new_count: DataUsers.get_likes(signal.id)})
+
   end
 
-  def remove_like(conn, map) do
-    show_id = String.to_integer(map["show-id"])
+  def unlike(conn, map) do
+    show_id = String.to_integer(map["id"])
     signal = DataSignals.get_signal(show_id)
     
     user_id = conn.private.plug_session["current_user_id"]
-    DataUsers.remove_liked_signal(user_id, show_id)
-    count = SmartcitydogsWeb.SignalController.get_signals_support_count_minus(show_id)
-
+    DataUsers.remove_like(user_id, signal.id)
     conn
-    |> json(%{new_count: count})
+    |> json(%{new_count: DataUsers.get_likes(signal.id)})
   end
 
   def comment(conn,map) do

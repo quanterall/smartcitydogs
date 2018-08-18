@@ -1,5 +1,4 @@
 <h1>Hello</h1>
-
 <div class="container">
           <!-- Three columns of text below the carousel -->
 
@@ -36,7 +35,7 @@
             Chip number: <%=signal.chip_number%>
           </li>
           <li>
-            Support count: <span id="signal-count"><%= signal.support_count %></span>
+            Support count: <span id="signal-count"><%= Smartcitydogs.DataUsers.get_likes(signal.id)%></span>
           </li>
           <li>
             Last location: <%=signal.address%>

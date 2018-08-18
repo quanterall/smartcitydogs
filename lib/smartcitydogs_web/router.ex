@@ -55,24 +55,26 @@ defmodule SmartcitydogsWeb.Router do
     resources("/users", UserControllerAPI, except: [:new, :edit])
     post("/users/logout", UserControllerAPI, :logout)
 
-    get("/signals/comment", SignalControllerAPI, :comment)
-    get("/signals/remove_like", SignalControllerAPI, :remove_like)
-    get("/signals/update_like_count", SignalControllerAPI, :update_like_count)
     resources("/signals", SignalControllerAPI, except: [:new, :edit])
-    put("/signals/follow", SignalControllerAPI, :follow)
-    put("/signals/unfollow", SignalControllerAPI, :unfollow)
+    scope "/signals" do
+      get("/comment", SignalControllerAPI, :comment)
+      get("/:id/unlike", SignalControllerAPI, :unlike)
+      get("/:id/like", SignalControllerAPI, :like)
+      put("/signals/follow", SignalControllerAPI, :follow)
+      put("/signals/unfollow", SignalControllerAPI, :unfollow)
+    end
+
     resources("/signal_images", SignalImageControllerAPI, except: [:new, :edit])
     resources("/signals_comments", SignalsCommentControllerAPI, except: [:new, :edit])
-    put("/signals_comments/follow", SignalsCommentControllerAPI,:follow)
-    put("/signals_comments/unfollow", SignalsCommentControllerAPI, :unfollow)
+    scope "/signals_comments", SmartcitydogsWeb do
+      put("/follow", SignalsCommentControllerAPI,:follow)
+      put("/unfollow", SignalsCommentControllerAPI, :unfollow)
+    end
     resources("/signals_types", SignalsTypeControllerAPI, except: [:new, :edit])
     resources("/signals_categories", SignalCategoryControllerAPI, except: [:new, :edit])
     resources("/signals_likes", SignalsLikeControllerAPI, except: [:new, :edit])
-
     resources("/animals", AnimalControllerAPI, except: [:new, :edit])
     post("/animals/:id/send_email", AnimalControllerAPI, :send_email)
-    
-
     resources("/contacts", ContactControllerAPI, except: [:new, :edit, :delete])
     resources("/users_types", UsersTypeControllerAPI, except: [:new, :edit])
     resources("/performed_procedure", PerformedProcedureControllerAPI, except: [:new, :edit])
@@ -80,8 +82,6 @@ defmodule SmartcitydogsWeb.Router do
     resources("/animal_images", AnimalImageControllerAPI, except: [:new, :edit])
     resources("/rescues", RescueControllerAPI, except: [:new, :edit])
     resources("/procedure_types", ProcedureTypeControllerAPI, except: [:new, :edit])
-
-    
     resources("/header_slides", HeaderSlideControllerAPI, except: [:new, :edit])
     resources("/news", NewsSchemaControllerAPI, except: [:new, :edit])
     resources("/static_pages", StaticPageControllerAPI, except: [:new, :edit])
@@ -98,39 +98,25 @@ defmodule SmartcitydogsWeb.Router do
     pipe_through([:browser, :with_session])
 
     get("/", PageController, :index)
-    get("/signals", SignalController, :index)
-    get("/signals/:id", SignalController, :show)
-    
-    get("/animals", AnimalController, :index)
-    get("/animals/:id", AnimalController, :show)
-
+    resources("/signals", SignalController)
+    resources("/animals", AnimalController)
     resources("/sessions", SessionController, only: [:new, :create, :delete])
-
     resources("/users", UserController, only: [:new, :create])
     resources("/help", HelpController, only: [:index])
     resources("/fortheproject", ForTheProjectController, only: [:index])
     resources("/news", NewsController)
-    resources(
-      "/forgoten_password",
-      ForgotenPasswordController,
-      only: [:new, :create, :edit, :update]
-    )
+    resources("/forgoten_password",ForgotenPasswordController)
     resources("/contact", ContactController, only: [:index, :new, :create])
-
     ###### REGISTERED USER ZONE #########
     scope "/" do
       pipe_through([:login_required])
-
       resources("/users", UserController)
-
-      get("/users", UserController, :index)
-      get("/users/:id", UserController, :show)
       resources("/animals", AnimalController)
-
       resources("/news", NewsController)
+      resources("/my_signals", MySignalsController)
 
       get("/show", PageController, :show)
-      resources("/my_signals", MySignalsController)
+
 
       get("/signals/get_signals_support_count", SignalController, :get_signals_support_count)
       get("/signals/followed_signals", SignalController, :followed_signals)
