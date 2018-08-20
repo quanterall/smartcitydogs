@@ -155,7 +155,7 @@ window.login = function () {
             }
         })
         .fail(function (text) {
-            $("#login-form-errors").text("Невалиден Имейл или Парола!!!!");
+            $("#login-form-errors").text("Невалиден Имейл или Парола!");
         });
 
 };
