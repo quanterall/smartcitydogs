@@ -43,7 +43,7 @@ defmodule SmartcitydogsWeb.ContactController do
         redirect(conn, to: page_path(conn, :index))
         
       {:error, errors} -> 
-        redirect(conn, to: contact_path(conn, :index))
+          redirect(conn, to: contact_path(conn, :index))
       end
   end
 

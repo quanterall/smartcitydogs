@@ -58,7 +58,12 @@
     color: #ffffff;
     margin-left: 10px;
 }
-
+#new-signal-btn:hover{
+    text-decoration: none;
+}
+.form-group.register-form-class .under-form{
+    margin-top: 10%;
+}
 .navbar-collapse.collapse.show, .navbar-collapse.collapsing {
     background-color: white;
 }
