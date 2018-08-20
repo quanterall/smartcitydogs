@@ -2,7 +2,7 @@ defmodule SmartcitydogsWeb.ErrorView do
   use SmartcitydogsWeb, :view
 
   def render("401.html", _assigns) do
-    "Нямате достъп!"
+    render(SmartcitydogsWeb.ErrorView, "unauth.html")
   end
 
   # If you want to customize a particular status code
