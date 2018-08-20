@@ -3,8 +3,8 @@
         margin-top: 0px;
     }
     .col-container {
-        width: 18vw;
-        height: 27vw;  
+        width: 250px;
+        height: 400px;  
     }
 </style>
 
