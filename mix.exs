@@ -68,7 +68,8 @@ defmodule Smartcitydogs.Mixfile do
       {:httpoison, "~> 1.0", override: true},
       {:html_entities, "~> 0.4"},
       {:cmark, "~> 0.7"},
-      {:recaptcha, "~> 2.3"}
+      {:recaptcha, "~> 2.3"},
+      {:bodyguard, "~> 2.1"}
     ]
   end
 

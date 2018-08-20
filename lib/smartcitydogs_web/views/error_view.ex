@@ -1,6 +1,13 @@
 defmodule SmartcitydogsWeb.ErrorView do
   use SmartcitydogsWeb, :view
 
+  def render("401.html", _assigns) do
+    "Нямате достъп до тази страница!"
+  end
+
+  def render("403.html", _assigns) do 
+    "Forbidden"
+  end
   # If you want to customize a particular status code
   # for a certain format, you may uncomment below.
   def render("500.html", _assigns) do
