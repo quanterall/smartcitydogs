@@ -28,6 +28,16 @@
     color: black;
 
 }
+@media (max-width: 992px) {
+    .col-lg-6{
+        max-width: 50% !important;
+    } 
+}
+@media (max-width: 650px) {
+    .col-lg-6{
+        max-width: 100% !important;
+    } 
+}
 
 @media (min-width: 992px) {
 
@@ -35,6 +45,39 @@
         background: transparent;
         box-shadow: none;
 
+    }
+}
+@media (min-height: 1080px) {
+    .modal-form{
+        padding-top: 5%;
+    }
+    .form-group{
+        margin-top: 7vh !important;
+    }
+    form.form-elixir.register-form-class{
+        margin-top: 2vh;
+    }
+}
+@media (max-height: 768px) {
+    .form-group{
+        margin-top: 3vh !important;
+    }
+    form.form-elixir.register-form-class{
+        margin-top: 2vh;
+    }
+}
+@media (max-height: 640px) {
+    .form-group{
+        margin-top: 1vh !important;
+    }
+    form.form-elixir.register-form-class{
+        margin-top: 0;
+    }
+}
+
+@media (max-width: 992px) {
+    .modal-form {
+        max-width: 100% !important;
     }
 }
 

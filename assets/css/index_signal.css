@@ -562,11 +562,11 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#2fd632', end
 }
 .container-new-signal .form-group{
   padding-top: 0px;
-  padding-bottom: 3%;
+  padding-bottom: 3vh;
   padding-left: 5px;
   margin-bottom: 0;
   margin: 1%;
-  margin-top: 2vh;
+  margin-top: 5vh;
 }
 input#autocomplete{
   margin-left: 0px;
@@ -589,25 +589,13 @@ input#autocomplete{
   background-color: transparent;
   color: black;
 }
-/* .container-new-signal .form-group input[type=file]{
-  border-color: white;
-  background-color: transparent;
-  color: white;
-} */
-/* input#signals_url{
-  border-color: white;
-  background-color: transparent;
-} */
+
 .container-new-signal input#signals_address, input#signals_title{
   margin-left: 0px;
 }
 .container-new-signal .under-form{
   width: 100%;
-  /* padding-top: 1%;
-  padding-left: 1%;
-  padding-right: 4%; */
   display: inline-block;
-  /* padding: 1%; */
   margin: 0%;
   padding: 0%
   
@@ -620,7 +608,6 @@ input#autocomplete{
   padding: 10%;
 }
 .container-new-signal{
-  /* -webkit-box-shadow: inset 0px 45px 7px -45px rgba(0,0,0,0.75); */
   background-color: rgb(0,201,148);
   padding: 2.5%;
   margin: 0px;

@@ -38,7 +38,7 @@
                 <br><br><br>
                 <a class="btn btn-primary pull-right" href='<%=session_url(@conn, :request,"facebook")%>'
                    rel="no-follow">
-                    <i class="fab fa-facebook-f"></i> FACEBOOK ВХОД</a>
+                    <i class="fab fa-facebook-f"></i> ВХОД</a>
                 <br>
                 <a class="close-modal" href="#">ОТКАЗ</a>
             </div>
