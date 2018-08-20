@@ -209,7 +209,7 @@ margin-left: -10px;
   }
 }
 
-@media (max-width:1366px){
+@media (max-width:4000px){
   .col-container{
     width: 200px;
     height: 300px;
@@ -788,4 +788,8 @@ label-signals-categories{
 }
 .Signals1 input[type="checkbox"]{
   margin-left: 5%;
+}
+.col-lg-12 .col-container:hover{
+  box-shadow: none;
+  -webkit-box-shadow: none;
 }

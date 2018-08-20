@@ -86,7 +86,6 @@ defmodule SmartcitydogsWeb.SignalControllerAPI do
 
 
   def update_like_count(conn, map) do
-    IO.inspect map
     user_id = conn.private.plug_session["current_user_id"]
     show_count = String.to_integer(map["show-count"])
     show_id = String.to_integer(map["show-id"])
@@ -112,7 +111,6 @@ defmodule SmartcitydogsWeb.SignalControllerAPI do
   end
 
   def comment(conn,map) do
-    IO.inspect map
     show_comment = map["show-comment"]
     show_id = String.to_integer(map["show-id"])
     user_id = conn.private.plug_session["current_user_id"]

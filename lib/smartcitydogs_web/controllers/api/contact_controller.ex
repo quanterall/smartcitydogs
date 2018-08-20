@@ -12,7 +12,6 @@ defmodule SmartcitydogsWeb.ContactControllerAPI do
   end
 
   def create(conn, params) do
-    IO.inspect params
     user_params = Map.get(params, "contact")
     topic = Map.get(user_params, "topic")
     text = Map.get(user_params, "text")

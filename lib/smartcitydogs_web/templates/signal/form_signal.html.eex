@@ -1,4 +1,3 @@
-    <% IO.inspect @conn %>
     <div class="container-new-signal
     <%= if length(@conn.path_info) == 0 do %><% else %>shadow-on<% end %>
     ">
