@@ -1,15 +1,9 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <%# <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>"> %>
-  </head>
-  <body>
-    <div class="register-photo">
-      <div class="container">
-        <div class="form-group">
-            <%= form_for @changeset, @action, fn f -> %>
 
+    <div id="login-form-container" class="register-photo">
+      <div class="container">
+        <div class="form-group register-form-class form-class-margin-top">
+            <%= form_for @conn, forgoten_password_path(@conn, :create), fn f -> %>
+              
               <%= text_input f, :username, placeholder: "Потребителско име...",id: "username-f-pass", class: "form-control1" %>
               <%= error_tag f, :username %>
 
@@ -18,19 +12,18 @@
 
               <%= text_input f, :phone, placeholder: "Телефонен номер...",id: "phone-f-pass", class: "form-control1" %>
               <%= error_tag f, :phone %>
+              
 
             <div class="under-form">
               
 
                 <%= submit "ИЗПРАТИ", class: "btn btn-submit" %><br>
-                <a class="link-cancel" href="/">ОТКАЗ</a>  
+                <a class="close-modal" href="#">ОТКАЗ</a>  
               </div>
             </div>
           <% end %>
         </div>
+        </div>
     </div>
   </div>
-  </body>
 
-
-  </html>
