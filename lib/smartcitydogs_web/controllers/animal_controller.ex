@@ -172,13 +172,15 @@ defmodule SmartcitydogsWeb.AnimalController do
 
   def new(conn, _params) do
     changeset = Animals.changeset(%Animals{})
-
-    logged_user_type_id = conn.assigns.current_user.users_types.id
-
-    if logged_user_type_id != 5 do
-      render(conn, SmartcitydogsWeb.ErrorView, "401.html")
+   
+    if conn.assigns.current_user != nil do
+      if conn.assigns.current_user.users_types_id != 5 do
+        render(conn, SmartcitydogsWeb.ErrorView, "401.html")
+      else
+        render(conn, "new.html", changeset: changeset)
+      end
     else
-      render(conn, "new.html", changeset: changeset)
+      render(conn, SmartcitydogsWeb.ErrorView, "401.html")
     end
   end
 
