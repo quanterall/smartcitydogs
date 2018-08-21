@@ -20,11 +20,12 @@ defmodule SmartcitydogsWeb.AnimalController do
 
   ## Start-up function of filter page for animals
   def minicipality_registered(conn, params) do
-    logged_user_type_id = conn.assigns.current_user.users_types.id
-
-    if logged_user_type_id == 3 do
-      render(conn, SmartcitydogsWeb.ErrorView, "401.html")
-    else
+    with :ok <-
+           Bodyguard.permit(
+             Smartcitydogs.Animals.Policy,
+             :minicipality_registered,
+             conn.assigns.current_user
+           ) do
       data_status =
         case Map.fetch(params, "page") do
           {:ok, num} -> {params["animal_status"], num}
@@ -32,24 +33,46 @@ defmodule SmartcitydogsWeb.AnimalController do
         end
 
       AnimalController.get_ticked_checkboxes(conn, data_status)
+    else
+      {:error, raison} -> render(conn, SmartcitydogsWeb.ErrorView, "401.html")
     end
   end
 
   ## Get all of the dogs in the shelter
   def minicipality_shelter(conn, _params) do
-    struct = from(p in Animals, where: p.animals_status_id == 3)
-    all_adopted = Repo.all(struct) |> Repo.preload(:animals_status)
-    page = Smartcitydogs.Repo.paginate(all_adopted, page: 1, page_size: 8)
-    render(conn, "minicipality_shelter.html", animals: page.entries, page: page)
+    with :ok <-
+           Bodyguard.permit(
+             Smartcitydogs.Animals.Policy,
+             :minicipality_shelter,
+             conn.assigns.current_user
+           ) do
+      struct = from(p in Animals, where: p.animals_status_id == 3)
+      all_adopted = Repo.all(struct) |> Repo.preload(:animals_status)
+      page = Smartcitydogs.Repo.paginate(all_adopted, page: 1, page_size: 8)
+      render(conn, "minicipality_shelter.html", animals: page.entries, page: page)
+    else
+      {:error, raison} -> render(conn, SmartcitydogsWeb.ErrorView, "401.html")
+    end
   end
 
   ## Get all of the adopted dogs
   def minicipality_adopted(conn, _params) do
-    struct = from(p in Animals, where: p.animals_status_id == 2)
-    all_adopted = Repo.all(struct) |> Repo.preload(:animals_status)
-    page = Smartcitydogs.Repo.paginate(all_adopted, page: 1, page_size: 8)
-    render(conn, "minicipality_adopted.html", animals: page.entries, page: page)
+    with :ok <-
+           Bodyguard.permit(
+             Smartcitydogs.Animals.Policy,
+             :minicipality_adopted,
+             conn.assigns.current_user
+           ) do
+      struct = from(p in Animals, where: p.animals_status_id == 2)
+      all_adopted = Repo.all(struct) |> Repo.preload(:animals_status)
+      page = Smartcitydogs.Repo.paginate(all_adopted, page: 1, page_size: 8)
+      render(conn, "minicipality_adopted.html", animals: page.entries, page: page)
+    else
+      {:error, raison} -> render(conn, SmartcitydogsWeb.ErrorView, "401.html")
+    end
   end
+
+  ###########################################################################################
 
   ## Get all of the ticked checkboxes from the filters, handle redirection to pagination pages.
   def get_ticked_checkboxes(conn, params) do
@@ -149,12 +172,14 @@ defmodule SmartcitydogsWeb.AnimalController do
     sorted_animals = DataAnimals.sort_animals_by_id()
 
     if conn.assigns.current_user != nil do
-      logged_user_type_id = conn.assigns.current_user.users_types.id
+      # logged_user_type_id = conn.assigns.current_user.users_types.id
 
-      if logged_user_type_id == 3 do
-        render(conn, SmartcitydogsWeb.ErrorView, "401.html")
+      # if logged_user_type_id == 3 do
+      with :ok <-
+             Bodyguard.permit(Smartcitydogs.Animals.Policy, :index, conn.assigns.current_user) do
+        index_rendering(conn, params, sorted_animals) 
       else
-        index_rendering(conn, params, sorted_animals)
+        {:error, raison} -> render(conn, SmartcitydogsWeb.ErrorView, "401.html")
       end
     else
       index_rendering(conn, params, sorted_animals)
@@ -216,7 +241,7 @@ defmodule SmartcitydogsWeb.AnimalController do
   def new(conn, _params) do
     changeset = Animals.changeset(%Animals{})
 
-    with :ok <- Bodyguard.permit(Smartcitydogs.Policy, :new, conn.assigns.current_user) do
+    with :ok <- Bodyguard.permit(Smartcitydogs.Animals.Policy, :new, conn.assigns.current_user) do
       render(conn, "new.html", changeset: changeset)
     else
       {:error, raison} -> render(conn, SmartcitydogsWeb.ErrorView, "401.html")
@@ -239,15 +264,10 @@ defmodule SmartcitydogsWeb.AnimalController do
         end
       end)
 
-    logged_user_type_id = conn.assigns.current_user.users_types.id
-
-    if logged_user_type_id != 5 do
-      render(conn, SmartcitydogsWeb.ErrorView, "401.html")
-    else
+    with :ok <- Bodyguard.permit(Smartcitydogs.Animals.Policy, :create, conn.assigns.current_user) do
       case DataAnimals.create_animal(animal_params) do
         {:ok, animal} ->
           upload_file(animal.id, conn)
-
           DataAnimals.insert_performed_procedure(list_procedures, animal.id)
 
           conn
@@ -256,6 +276,8 @@ defmodule SmartcitydogsWeb.AnimalController do
         {:error, changeset} ->
           render(conn, "new.html", changeset: changeset)
       end
+    else
+      {:error, raison} -> render(conn, SmartcitydogsWeb.ErrorView, "401.html")
     end
   end
 
@@ -305,10 +327,11 @@ defmodule SmartcitydogsWeb.AnimalController do
     changeset = DataAnimals.change_animal(animal)
     logged_user_type_id = conn.assigns.current_user.users_types.id
 
-    if logged_user_type_id == 1 || logged_user_type_id == 5 do
+    # if logged_user_type_id == 1 || logged_user_type_id == 5 do
+    with :ok <- Bodyguard.permit(Smartcitydogs.Animals.Policy, :edit, conn.assigns.current_user) do
       render(conn, "edit.html", animals: animal, changeset: changeset)
     else
-      render(conn, SmartcitydogsWeb.ErrorView, "401.html")
+      {:error, raison} -> render(conn, SmartcitydogsWeb.ErrorView, "401.html")
     end
   end
 
@@ -317,7 +340,8 @@ defmodule SmartcitydogsWeb.AnimalController do
 
     logged_user_type_id = conn.assigns.current_user.users_types.id
 
-    if logged_user_type_id == 1 || logged_user_type_id == 5 do
+    # if logged_user_type_id == 1 || logged_user_type_id == 5 do
+    with :ok <- Bodyguard.permit(Smartcitydogs.Animals.Policy, :update, conn.assigns.current_user) do
       case DataAnimals.update_animal(animal, animal_params) do
         {:ok, animal} ->
           conn
@@ -328,15 +352,17 @@ defmodule SmartcitydogsWeb.AnimalController do
           render(conn, "edit.html", animal: animal, changeset: changeset)
       end
     else
-      render(conn, SmartcitydogsWeb.ErrorView, "401.html")
+      {:error, raison} -> render(conn, SmartcitydogsWeb.ErrorView, "401.html")
     end
   end
 
   def delete(conn, %{"id" => id}) do
     animal = DataAnimals.get_animal(id)
 
-    with {:ok, %Animals{}} <- DataAnimals.delete_animal(animal) do
-      send_resp(conn, :no_content, "")
+    with :ok <- Bodyguard.permit(Smartcitydogs.Animals.Policy, :delete, conn.assigns.current_user) do
+      with {:ok, %Animals{}} <- DataAnimals.delete_animal(animal) do
+        send_resp(conn, :no_content, "")
+      end
     end
   end
 end
