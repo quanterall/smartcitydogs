@@ -378,3 +378,16 @@ linked-signals{
 .form-class-margin-top{
     margin-top: 0 !important;
 }
+label-forgotten-password{
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+    font-size: 30px;
+    color: white;
+    margin-bottom: 5%;
+}
+.radio-button-inline{
+    display: inline-block;
+    width: 100%;
+    margin-left: 2%;
+}
