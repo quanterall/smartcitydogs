@@ -15,7 +15,7 @@
           </a>
           <br>
           <br>
-          <a class="followed-signals-my-profile" href="/users/<%= @current_user.id %>/signals">
+          <a class="followed-signals-my-profile" href="/my_signals">
             Моите сигнали
           </a>
 

@@ -68,7 +68,7 @@
             <center>
 
             <div class="button-show-hide">
-              <p class="p-button-view"><a class="btn btn-secondary" href="signals/<%=signal.id%>" role="button">Виж още</a>
+              <p class="p-button-view"><%= link "Виж още", to: signal_path(@conn, :show, signal.id), class: "btn btn-secondary" %></p>
             </div></center>
           </div>
 
