@@ -69,8 +69,9 @@ defmodule SmartcitydogsWeb.Router do
     resources("/signals_categories", SignalCategoryControllerAPI, except: [:new, :edit])
     resources("/signals_likes", SignalsLikeControllerAPI, except: [:new, :edit])
 
-    resources("/animals", AnimalControllerAPI, except: [:new, :edit])
-    post("/animals/:id/send_email", AnimalControllerAPI, :send_email)
+      
+    resources("/registered", AnimalControllerAPI, except: [:new, :edit])
+    post("/registered/:id/send_email", AnimalControllerAPI, :send_email)
     
 
     resources("/contacts", ContactControllerAPI, except: [:new, :edit, :delete])
@@ -101,8 +102,8 @@ defmodule SmartcitydogsWeb.Router do
     get("/signals", SignalController, :index)
     get("/signals/:id", SignalController, :show)
     
-    get("/animals", AnimalController, :index)
-    get("/animals/:id", AnimalController, :show)
+    get("/registered", AnimalController, :index)
+    get("/registered/:id", AnimalController, :show)
 
     resources("/sessions", SessionController, only: [:new, :create, :delete])
 
@@ -125,7 +126,7 @@ defmodule SmartcitydogsWeb.Router do
 
       get("/users", UserController, :index)
       get("/users/:id", UserController, :show)
-      resources("/animals", AnimalController)
+      resources("/registered", AnimalController)
 
       resources("/news", NewsController)
 

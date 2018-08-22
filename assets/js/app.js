@@ -32,7 +32,7 @@ $('#submit-adoption').click(function(){
     
     $.ajax({
         method: "POST",
-        url: "/api/animals/:id/send_email",
+        url: "/api/registered/:id/send_email",
         credentials: 'same-origin',
         data: {
             "chip_number": $("#chip_number").text(),

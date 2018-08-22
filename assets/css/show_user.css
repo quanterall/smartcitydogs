@@ -1,15 +1,18 @@
 .show-user-edit{
   font-size: 20px;
-  color: white;
+  color: black;
   float: right;
   width: auto;
+  font-weight: bold;
 
 }
 .show-user-edit:hover{
-  color: white !important;
-  text-decoration: underline;
+
+  color: black !important;
+  text-decoration: none;
 }
 .container-show-user{
+  display: inline-flex;
   color: white;
   font-family: monospace;
   width: 100%;
@@ -23,11 +26,9 @@ label-li-text{
   color: white;
 }
 .strong-show-user{
-  margin-left: 1.5%;
-  font-size: 10px;
+  font-size: 12px;
 }
 .unauth_class{
-  /* color: white; */
   background-color: #36c995;
   width: 100%;
   height: 100vh;
@@ -151,4 +152,7 @@ label-li-text{
     margin-top: 5vh;
     font-size: 15px;
   }
+}
+.user-li label-li-text{
+  color: black;
 }

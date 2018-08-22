@@ -1,5 +1,5 @@
 .buttons-show-signals-user{
-  position: inherit;
+  width: 49%;
 }
 .buttons-show-followed-signal{
   margin-right: 5%;
@@ -29,4 +29,19 @@
   opacity: 1;
   text-decoration: underline;
   color: white;
+}
+.form-show-signals-user{
+  width: 49%;
+}
+.border-style-links-profile{
+  padding: 1%;
+  border: 1px solid rgb(0,201,148);
+  width: 60%;
+  text-align: center;
+  background-color: rgb(0,201,148);
+  float: right;
+}
+.profile-button-styles{
+  color: white;
+  /* padding: 5%; */
 }
