@@ -1,43 +1,27 @@
-<html>
-  <head>
-    <meta charset="utf-8">
-    <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
-  </head>
-
-  <body>
+  <div class="fill-container-my-profile">
     <div class="register-photo">
       <div class="container">
         <div class="container-show-user">
           <%= form_for @changeset, @action, fn f -> %>
-            <%= if @changeset.action do %>
-              <div class="alert alert-danger">
-                <p>Oops, something went wrong! Please check the errors below.</p>
-              </div>
-          <% end %>
-
-            <h2 align="center" style="color:white;font-family:monospace;">Hello <%= @user.first_name %> <%= @user.last_name %> </h2>
-          
-
-              <div class="form-group">
-
-
+      
+              <div class="form-group register-form-class form-class-margin-top">
               <br />
               <br />
-              <strong class="strong-show-user">New password:</strong>
-              <%= text_input f, :password, class: "form-control1" %>
+              <strong class="strong-show-user">Нова парола:</strong>
+              <%= text_input f, :password, class: "form-control1 padding-form-control1" %>
               <%= error_tag f, :password %>
               <br />
               <br />
 
-              <strong class="strong-show-user">New email:</strong>
-              <%= text_input f, :email, class: "form-control1" %>
+              <strong class="strong-show-user">Нов имейл:</strong>
+              <%= text_input f, :email, class: "form-control1 padding-form-control1" %>
               <%= error_tag f, :email %>
               <br />
               <br />
 
 
-              <strong class="strong-show-user">New phone:</strong>
-              <%= text_input f, :phone, class: "form-control1" %>
+              <strong class="strong-show-user">Нов телефонен номер:</strong>
+              <%= text_input f, :phone, class: "form-control1 padding-form-control1" %>
               <%= error_tag f, :phone %>
 
 
@@ -51,5 +35,4 @@
         </div>
       </div>
     </div>
-  </body>
-</html>
+</div>

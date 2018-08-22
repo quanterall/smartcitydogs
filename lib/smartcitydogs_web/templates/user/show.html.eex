@@ -1,27 +1,22 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
-  </head>
-  <body>
+<style>
+    body{
+        overflow: hidden;
+    }
+</style>
+<div class="fill-container-my-profile">
   <div class="register-photo">
     <div class="container">
       <div class="container-show-user">
 
-
-      <label-li-text><center>Your information: </center></label-li-text>
-
-      <br />
-      <br>
         <div class="buttons-show-signals-user"> <center>
           <a class="buttons-show-followed-signal" href="#">
           
-            <%= link "Followed signals", to: signal_path(@conn, :followed_signals), class: "show-user-edit" %>
+            <%= link "Следени сигнали", to: signal_path(@conn, :followed_signals), class: "followed-signals-my-profile" %>
           </a>
-          
-          <a class="buttons-show-my-signals" href="/my_signals">
-            My signals
+          <br>
+          <br>
+          <a class="followed-signals-my-profile" href="/my_signals">
+            Моите сигнали
           </a>
 
         </center>
@@ -36,7 +31,7 @@
 
           <li class="user-li">
             <label-li-text>
-              <strong class="strong-show-user">Name:</strong><br />
+              <strong class="strong-show-user">Име:</strong><br />
               <%= @user.first_name %> <%= @user.last_name %>
             </label-li-text>
           </li>
@@ -46,7 +41,7 @@
 
           <li class="user-li">
             <label-li-text>
-              <strong class="strong-show-user">Username:</strong><br />
+              <strong class="strong-show-user">Потребителско име:</strong><br />
               <%= @user.username %>
             </label-li-text>
           </li>
@@ -55,33 +50,32 @@
         <br>
         <li class="user-li">
           <label-li-text>
-            <strong class="strong-show-user">Phone:</strong><br />
-            <%= @user.phone %> <%= link "Edit", to: user_path(@conn, :edit, @user), class: "show-user-edit" %>
+            <strong class="strong-show-user">Телефонен номер:</strong><br />
+            <%= @user.phone %> 
           </label-li-text>
         </li>
         <br />
       <br>
       <li class="user-li">
         <label-li-text>
-          <strong class="strong-show-user">Password:</strong><br />
-          *************<%= link "Edit", to: user_path(@conn, :edit, @user), class: "show-user-edit" %>
+          <strong class="strong-show-user">Парола:</strong><br />
+          *************
         </label-li-text>
       </li>
       <br />
     <br>
           <li class="user-li">
             <label-li-text>
-              <strong class="strong-show-user">Email:</strong><br />
-              <%= @user.email %> <%= link "Edit", to: user_path(@conn, :edit, @user), class: "show-user-edit" %>
+              <strong class="strong-show-user">Имейл:</strong><br />
+              <%= @user.email %> 
             </label-li-text>
           </li>
         <br>
+          <li>
+            <%= link "Промяна на данни", to: user_path(@conn, :edit, @user), class: "show-user-edit" %>
+          </li>
 
-
-        <!-- <span><%=# link "Edit", to: user_path(@conn, :edit, @user) %></span>
-         <a href="\">Back</a></span> -->
          </div>
       </div>
     </div>
-  </body>
-</html>
+ </div>

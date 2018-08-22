@@ -1,4 +1,5 @@
 .show-user-edit{
+  font-size: 20px;
   color: white;
   float: right;
   width: auto;
@@ -22,6 +23,7 @@ label-li-text{
   color: white;
 }
 .strong-show-user{
+  margin-left: 1.5%;
   font-size: 10px;
 }
 .unauth_class{

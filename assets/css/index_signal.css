@@ -31,8 +31,8 @@ ul.navbar-nav.text-nowrap{
   background-repeat: no-repeat;
   background-position: center;
   border: none;
-  width: 18rem;
-  height: 25rem;
+  width: 14rem;
+  height: 20rem;
   color: white;
 
 }
@@ -210,7 +210,7 @@ margin-left: -10px;
 }
 
 @media (max-width:2000px){
-  .col-container{
+  .col-lg-12 .col-container{
     width: 325px !important;
     height: 500px !important;
   }
@@ -220,14 +220,14 @@ margin-left: -10px;
 }
 
 @media (max-width:1650px){
-  .col-container{
+  .col-lg-12 .col-container{
     width: 300px !important;
     height: 450px !important;
   }
 }
 
 @media (max-width:1600px){
-  .col-container{
+  .col-lg-12 .col-container{
     width: 250px !important;
     height: 400px !important;
   }
@@ -299,7 +299,7 @@ margin-left: -10px;
     margin-bottom: 20%;
     text-align:center;
 }
-.col-container{
+.col-lg-12 .col-container{
 
   width: 100%;
   height: 350px;
@@ -655,7 +655,7 @@ label-text-white{
   font-weight: bold;
 }
 .adopted_button .btn-secondary{
-  margin: 0px;
+  margin-top: 50%;
 }
 #all-adopted-dogs{
   color: black;
@@ -812,8 +812,30 @@ label-signals-categories{
   -webkit-box-shadow: none;
 }
 @media (max-width: 1920px){
-  .col-container{
+  .col-lg-12 .col-container{
     width: 350px;
     height: 500px;
   }
+}
+.fill-container-my-profile{
+  width: 100%;
+  height: 100vh;
+  background-color: #00c790;
+}
+.followed-signals-my-profile{
+  /* display: inline-block; */
+  font-weight: bold;
+  float: left;
+  color: white;
+  font-size: 20px;
+  margin-top: 8px;
+  /* width: 100%; */
+}
+.followed-signals-my-profile:hover{
+  color: white;
+  text-decoration: none;
+  transition: 0.5s;
+}
+.padding-form-control1 input[type=text]{
+  padding-left: 0px;
 }

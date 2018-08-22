@@ -242,6 +242,9 @@ defmodule SmartcitydogsWeb.SignalController do
         SignalControllerAPI.update_like_count(conn,map)
       id == "comment" ->
         SignalControllerAPI.comment(conn,map)
+      id == "followed_signals" ->
+        followed_signals(conn, map)
+
       true ->
         id = String.to_integer(map["id"])
         comments = DataSignals.get_comment_signal_id(id)
@@ -295,7 +298,8 @@ defmodule SmartcitydogsWeb.SignalController do
 
     all_followed_signals =
       Enum.map(user_like, fn elem ->
-        String.to_integer(elem) |> DataSignals.get_signal()
+        # String.to_integer(elem) |> DataSignals.get_signal()
+        DataSignals.get_signal(elem)
       end)
 
     page = Signals |> Smartcitydogs.Repo.paginate(params)
