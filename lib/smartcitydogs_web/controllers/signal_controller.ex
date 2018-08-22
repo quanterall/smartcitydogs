@@ -31,68 +31,79 @@ defmodule SmartcitydogsWeb.SignalController do
 
   # All signals page with the checkbox filters, function for the first rendering
   def minicipality_signals(conn, params) do
-    data_status =
-      case Map.fetch(params, "page") do
-        {:ok, num} -> {params["data_status"], params["data_category"], num}
-        _ -> {[], [], "1"}
-      end
-
-    SignalController.get_ticked_checkboxes(conn, data_status)
-
-    data_category =
-      for {k, v} <- params do
-        cond do
-          k |> String.match?(~r/sig_category./) && v != "false" ->
-            v
-
-          true ->
-            nil
+     with :ok <-
+           Bodyguard.permit(
+             Smartcitydogs.Signals.Policy,
+             :minicipality_signals,
+             conn.assigns.current_user
+           ) do
+      
+      data_status =
+        case Map.fetch(params, "page") do
+          {:ok, num} -> {params["data_status"], params["data_category"], num}
+          _ -> {[], [], "1"}
         end
-      end
 
-    data_status =
-      for {k, v} <- params do
-        cond do
-          k |> String.match?(~r/sig_status./) && v != "false" ->
-            v
+      SignalController.get_ticked_checkboxes(conn, data_status)
 
-          true ->
-            nil
+      data_category =
+        for {k, v} <- params do
+          cond do
+            k |> String.match?(~r/sig_category./) && v != "false" ->
+              v
+
+            true ->
+              nil
+          end
         end
+
+      data_status =
+        for {k, v} <- params do
+          cond do
+            k |> String.match?(~r/sig_status./) && v != "false" ->
+              v
+
+            true ->
+              nil
+          end
+        end
+
+      data_category = Enum.filter(data_category, &(!is_nil(&1)))
+      data_status = Enum.filter(data_status, &(!is_nil(&1)))
+
+      cond do
+        data_category != [] ->
+          all_query = []
+
+          x =
+            Enum.map(data_category, fn x ->
+              struct = from(p in Signals, where: p.signals_categories_id == ^String.to_integer(x))
+              all_query = all_query ++ Repo.all(struct)
+            end)
+
+          x = List.flatten(x)
+          page = Smartcitydogs.Repo.paginate(x, page: 1, page_size: 8)
+          render(conn, "minicipality_signals.html", signal: page.entries, page: page, data: nil)
+
+        data_status != [] ->
+          all_query = []
+
+          x =
+            Enum.map(data_status, fn x ->
+              struct = from(p in Signals, where: p.signals_types_id == ^String.to_integer(x))
+              all_query = all_query ++ Repo.all(struct)
+            end)
+
+          x = List.flatten(x)
+          page = Smartcitydogs.Repo.paginate(x, page: 1, page_size: 8)
+          render(conn, "minicipality_signals.html", signal: page.entries, page: page, data: nil)
+
+        true ->
+          nil
       end
-
-    data_category = Enum.filter(data_category, &(!is_nil(&1)))
-    data_status = Enum.filter(data_status, &(!is_nil(&1)))
-
-    cond do
-      data_category != [] ->
-        all_query = []
-
-        x =
-          Enum.map(data_category, fn x ->
-            struct = from(p in Signals, where: p.signals_categories_id == ^String.to_integer(x))
-            all_query = all_query ++ Repo.all(struct)
-          end)
-
-        x = List.flatten(x)
-        page = Smartcitydogs.Repo.paginate(x, page: 1, page_size: 8)
-        render(conn, "minicipality_signals.html", signal: page.entries, page: page, data: nil)
-
-      data_status != [] ->
-        all_query = []
-
-        x =
-          Enum.map(data_status, fn x ->
-            struct = from(p in Signals, where: p.signals_types_id == ^String.to_integer(x))
-            all_query = all_query ++ Repo.all(struct)
-          end)
-
-        x = List.flatten(x)
-        page = Smartcitydogs.Repo.paginate(x, page: 1, page_size: 8)
-        render(conn, "minicipality_signals.html", signal: page.entries, page: page, data: nil)
-
-        true -> nil
-    end
+    else
+      {:error, raison} -> render(conn, SmartcitydogsWeb.ErrorView, "401.html")
+    end  
   end
 
   ## When the search button is clicked, for rendering the first page of the query.
@@ -247,7 +258,7 @@ defmodule SmartcitydogsWeb.SignalController do
 
     # logged_user_type_id = conn.assigns.current_user.users_types.id
     # if logged_user_type_id == 4 || logged_user_type_id == 2 do
-   with :ok <-
+    with :ok <-
            Bodyguard.permit(
              Smartcitydogs.Signals.Policy,
              :new,
@@ -265,7 +276,7 @@ defmodule SmartcitydogsWeb.SignalController do
     # logged_user_type_id = conn.assigns.current_user.users_types.id
 
     # if logged_user_type_id == 4 || logged_user_type_id == 2 do
-   with :ok <-
+    with :ok <-
            Bodyguard.permit(
              Smartcitydogs.Signals.Policy,
              :create,
@@ -306,7 +317,7 @@ defmodule SmartcitydogsWeb.SignalController do
           render(conn, "new_signal.html", changeset: changeset)
       end
     else
-      {:error, raison} ->  render(conn, SmartcitydogsWeb.ErrorView, "401.html")
+      {:error, raison} -> render(conn, SmartcitydogsWeb.ErrorView, "401.html")
     end
   end
 
@@ -346,25 +357,29 @@ defmodule SmartcitydogsWeb.SignalController do
 
     # if logged_user_type_id == 2 do
     with :ok <-
-      Bodyguard.permit(
-      Smartcitydogs.Signals.Policy,
-      :edit,
-      conn.assigns.current_user
-      ) do
-     changeset = DataSignals.change_signal(signal)
-     render(conn, "edit_signal.html", signal: signal, changeset: changeset)
+           Bodyguard.permit(
+             Smartcitydogs.Signals.Policy,
+             :edit,
+             conn.assigns.current_user
+           ) do
+      changeset = DataSignals.change_signal(signal)
+      render(conn, "edit_signal.html", signal: signal, changeset: changeset)
     else
-      render(conn, SmartcitydogsWeb.ErrorView, "401.html")
+     {:error, raison} -> render(conn, SmartcitydogsWeb.ErrorView, "401.html")
     end
   end
 
   def update(conn, %{"id" => id, "signals" => signal_params}) do
     signal = DataSignals.get_signal(id)
-    logged_user_type_id = conn.assigns.current_user.users_types.id
+    # logged_user_type_id = conn.assigns.current_user.users_types.id
 
-    if logged_user_type_id == 2 do
-      render(conn, SmartcitydogsWeb.ErrorView, "401.html")
-    else
+    # if logged_user_type_id == 2 do
+    with :ok <-
+           Bodyguard.permit(
+             Smartcitydogs.Signals.Policy,
+             :update,
+             conn.assigns.current_user
+           ) do
       case DataSignals.update_signal(signal, signal_params) do
         {:ok, signal} ->
           conn
@@ -373,7 +388,10 @@ defmodule SmartcitydogsWeb.SignalController do
 
         {:error, %Ecto.Changeset{} = changeset} ->
           render(conn, "edit_signal.html", signal: signal, changeset: changeset)
-      end
+          end
+      else
+       {:error, raison} -> render(conn, SmartcitydogsWeb.ErrorView, "401.html")
+      
     end
   end
 
@@ -471,16 +489,22 @@ defmodule SmartcitydogsWeb.SignalController do
 
   def delete(conn, %{"id" => id}) do
     signal = DataSignals.get_signal(id)
-    logged_user_id = conn.assigns.current_user.id
+    # logged_user_id = conn.assigns.current_user.id
 
-    if logged_user_id != signal.users_id do
-      render(conn, SmartcitydogsWeb.ErrorView, "401.html")
-    else
+    # if logged_user_id != signal.users_id do
+    with :ok <-
+           Bodyguard.permit(
+             Smartcitydogs.Signals.Policy,
+             :update,
+             conn.assigns.current_user
+           ) do
       {:ok, _signal} = DataSignals.delete_signal(id)
 
       conn
       |> put_flash(:info, "Signal deleted successfully.")
       |> redirect(to: signal_path(conn, :index))
+    else
+      {:error, raison} -> render(conn, SmartcitydogsWeb.ErrorView, "401.html")
     end
   end
 end

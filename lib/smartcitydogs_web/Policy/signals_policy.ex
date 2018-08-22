@@ -6,20 +6,40 @@ defmodule Smartcitydogs.Signals.Policy do
   def authorize(_, %User{users_types_id: 1}, _), do: true
 
   # Zoo users can do anything
-  def authorize(_, %User{users_types_id: 3}, _), do: false
+  def authorize(action, %User{users_types_id: 3}, _)
+      when action in [:index, :show, :edit, :update],
+      do: true
 
   # Municipality users can do anything
   def authorize(action, %User{users_types_id: 4}, _)
-      when action in [:index, :show],
+      when action in [
+             :index,
+             :show,
+             :edit,
+             :update,
+             :new,
+             :create,
+             :minicipality_signals
+           ],
       do: true
 
   # Shelter users can do anything
-  def authorize(_, %User{users_types_id: 5}, _), do: true
+  def authorize(action, %User{users_types_id: 5}, _)
+      when action in [
+             :index,
+             :show,
+             :edit,
+             :update,
+             :minicipality_signals
+           ],
+      do: true
 
   # when action in [:new, :index, ]
 
   # Regular users can create posts
-  def authorize(:index, _, _), do: true
+  def authorize(action, _, _)
+      when action in [:index, :show],
+      do: true
 
   # Regular users can modify their own posts
   #   def authorize(action, %User{id: user_id}, %Blog.Post{user_id: user_id}})
