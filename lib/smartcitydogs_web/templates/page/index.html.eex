@@ -2,6 +2,10 @@
     .button-show-hide .btn-secondary{
         margin-top: 0px;
     }
+    .col-container {
+        width: 250px;
+        height: 400px;  
+    }
 </style>
 
 <div class="home-bg">

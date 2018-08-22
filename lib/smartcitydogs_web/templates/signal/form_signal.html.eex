@@ -1,4 +1,6 @@
-    <div class="container-new-signal">
+    <div class="container-new-signal
+    <%= if length(@conn.path_info) == 0 do %><% else %>shadow-on<% end %>
+    ">
     <center><label-signal>Подаване на сигнал към зоо полиция</label-signal></center>
 
     <%= form_for @conn, signal_path(@conn, :create),[multipart: true, class: "form-elixir register-form-class"], fn f -> %>

@@ -69,3 +69,9 @@ label1{
   font-family: monospace;
   color: white !important;
 }
+#login-form-errors{
+  padding-top: 10%;
+  color: white;
+  text-align: center;
+  font-weight: bold;
+}

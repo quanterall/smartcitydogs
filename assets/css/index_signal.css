@@ -31,8 +31,8 @@ ul.navbar-nav.text-nowrap{
   background-repeat: no-repeat;
   background-position: center;
   border: none;
-  width: 18rem;
-  height: 25rem;
+  width: 14rem;
+  height: 20rem;
   color: white;
 
 }
@@ -64,7 +64,8 @@ a.close-modal{
   float: right;
 }
 .shadow-on{
-  -webkit-box-shadow: inset 0px 45px 7px -45px rgba(0,0,0,0.75);
+  -webkit-box-shadow: inset 0px 44px 10px -46px rgba(0,0,0,0.75);
+  
 }
 .shadow-off{
   -webkit-box-shadow: inset 0px 0px 0px 0px rgba(0,0,0,0.75);
@@ -208,15 +209,30 @@ margin-left: -10px;
   }
 }
 
-@media (max-width:1366px){
-  .col-container{
-    width: 200px;
-    height: 300px;
+@media (max-width:2000px){
+  .col-lg-12 .col-container{
+    width: 325px !important;
+    height: 500px !important;
   }
   .col-lg-3{
       margin-top: 20%;
   }
 }
+
+@media (max-width:1650px){
+  .col-lg-12 .col-container{
+    width: 300px !important;
+    height: 450px !important;
+  }
+}
+
+@media (max-width:1600px){
+  .col-lg-12 .col-container{
+    width: 250px !important;
+    height: 400px !important;
+  }
+}
+
 
 @media (max-width: 700px){
   .send-signal-container{
@@ -283,7 +299,7 @@ margin-left: -10px;
     margin-bottom: 20%;
     text-align:center;
 }
-.col-container{
+.col-lg-12 .col-container{
 
   width: 100%;
   height: 350px;
@@ -562,11 +578,11 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#2fd632', end
 }
 .container-new-signal .form-group{
   padding-top: 0px;
-  padding-bottom: 3%;
+  padding-bottom: 3vh;
   padding-left: 5px;
   margin-bottom: 0;
   margin: 1%;
-  margin-top: 2vh;
+  margin-top: 5vh;
 }
 input#autocomplete{
   margin-left: 0px;
@@ -589,25 +605,13 @@ input#autocomplete{
   background-color: transparent;
   color: black;
 }
-/* .container-new-signal .form-group input[type=file]{
-  border-color: white;
-  background-color: transparent;
-  color: white;
-} */
-/* input#signals_url{
-  border-color: white;
-  background-color: transparent;
-} */
+
 .container-new-signal input#signals_address, input#signals_title{
   margin-left: 0px;
 }
 .container-new-signal .under-form{
   width: 100%;
-  /* padding-top: 1%;
-  padding-left: 1%;
-  padding-right: 4%; */
   display: inline-block;
-  /* padding: 1%; */
   margin: 0%;
   padding: 0%
   
@@ -615,15 +619,14 @@ input#autocomplete{
 .btn-submit:hover{
   background-color: white;
   color: rgb(0,201,148);
-  -webkit-box-shadow: 0px 0px 45px -4px rgba(0,0,0,0.75);
--moz-box-shadow: 0px 0px 45px -4px rgba(0,0,0,0.75);
-box-shadow: 0px 0px 45px -4px rgba(0,0,0,0.75);
 }
 .form-register{
-  padding: 10%;
+  /* padding: 10%; */
+  padding-top: 2%;
+  padding-left: 10%;
+  padding-right: 10%;
 }
 .container-new-signal{
-  /* -webkit-box-shadow: inset 0px 45px 7px -45px rgba(0,0,0,0.75); */
   background-color: rgb(0,201,148);
   padding: 2.5%;
   margin: 0px;
@@ -652,7 +655,7 @@ label-text-white{
   font-weight: bold;
 }
 .adopted_button .btn-secondary{
-  margin: 0px;
+  margin-top: 50%;
 }
 #all-adopted-dogs{
   color: black;
@@ -803,4 +806,36 @@ label-signals-categories{
 }
 .Signals1 input[type="checkbox"]{
   margin-left: 5%;
+}
+.col-lg-12 .col-container:hover{
+  box-shadow: none;
+  -webkit-box-shadow: none;
+}
+@media (max-width: 1920px){
+  .col-lg-12 .col-container{
+    width: 350px;
+    height: 500px;
+  }
+}
+.fill-container-my-profile{
+  width: 100%;
+  height: 100vh;
+  background-color: #00c790;
+}
+.followed-signals-my-profile{
+  /* display: inline-block; */
+  font-weight: bold;
+  float: left;
+  color: white;
+  font-size: 20px;
+  margin-top: 8px;
+  /* width: 100%; */
+}
+.followed-signals-my-profile:hover{
+  color: white;
+  text-decoration: none;
+  transition: 0.5s;
+}
+.padding-form-control1 input[type=text]{
+  padding-left: 0px;
 }

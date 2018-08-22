@@ -8,11 +8,8 @@ defmodule SmartcitydogsWeb.SignalController do
   alias Smartcitydogs.Repo
   alias Smartcitydogs.Animals
   alias SmartcitydogsWeb.SignalController
+  alias SmartcitydogsWeb.SignalControllerAPI
   import Ecto.Query
-
-  # plug(:put_layout, false when action in [:filter_index])
-  # plug(:put_layout, false when action in [:filter_animals])
-  # plug(:put_layout, false when action in [:new])
 
   action_fallback(SmartCityDogsWeb.FallbackController)
 
@@ -31,13 +28,12 @@ defmodule SmartcitydogsWeb.SignalController do
 
   # All signals page with the checkbox filters, function for the first rendering
   def minicipality_signals(conn, params) do
-     with :ok <-
+    with :ok <-
            Bodyguard.permit(
              Smartcitydogs.Signals.Policy,
              :minicipality_signals,
              conn.assigns.current_user
            ) do
-      
       data_status =
         case Map.fetch(params, "page") do
           {:ok, num} -> {params["data_status"], params["data_category"], num}
@@ -103,7 +99,7 @@ defmodule SmartcitydogsWeb.SignalController do
       end
     else
       {:error, raison} -> render(conn, SmartcitydogsWeb.ErrorView, "401.html")
-    end  
+    end
   end
 
   ## When the search button is clicked, for rendering the first page of the query.
@@ -326,13 +322,16 @@ defmodule SmartcitydogsWeb.SignalController do
 
     cond do
       id == "remove_like" ->
-        remove_like(conn, map)
+        SignalControllerAPI.remove_like(conn, map)
 
       id == "update_like_count" ->
-        update_like_count(conn, map)
+        SignalControllerAPI.update_like_count(conn, map)
 
       id == "comment" ->
-        comment(conn, map)
+        SignalControllerAPI.comment(conn, map)
+
+      id == "followed_signals" ->
+        followed_signals(conn, map)
 
       true ->
         id = String.to_integer(map["id"])
@@ -365,7 +364,7 @@ defmodule SmartcitydogsWeb.SignalController do
       changeset = DataSignals.change_signal(signal)
       render(conn, "edit_signal.html", signal: signal, changeset: changeset)
     else
-     {:error, raison} -> render(conn, SmartcitydogsWeb.ErrorView, "401.html")
+      {:error, raison} -> render(conn, SmartcitydogsWeb.ErrorView, "401.html")
     end
   end
 
@@ -388,10 +387,9 @@ defmodule SmartcitydogsWeb.SignalController do
 
         {:error, %Ecto.Changeset{} = changeset} ->
           render(conn, "edit_signal.html", signal: signal, changeset: changeset)
-          end
-      else
-       {:error, raison} -> render(conn, SmartcitydogsWeb.ErrorView, "401.html")
-      
+      end
+    else
+      {:error, raison} -> render(conn, SmartcitydogsWeb.ErrorView, "401.html")
     end
   end
 
@@ -400,7 +398,8 @@ defmodule SmartcitydogsWeb.SignalController do
 
     all_followed_signals =
       Enum.map(user_like, fn elem ->
-        String.to_integer(elem) |> DataSignals.get_signal()
+        # String.to_integer(elem) |> DataSignals.get_signal()
+        DataSignals.get_signal(elem)
       end)
 
     page = Signals |> Smartcitydogs.Repo.paginate(params)
@@ -431,60 +430,12 @@ defmodule SmartcitydogsWeb.SignalController do
     head.support_count - 1
   end
 
-  def remove_like(conn, map) do
-    show_id = String.to_integer(map["show-id"])
-    signal = DataSignals.get_signal(show_id)
-
-    user_id = conn.assigns.current_user.id
-    DataUsers.remove_liked_signal(user_id, show_id)
-    count = get_signals_support_count_minus(show_id)
-
-    conn
-    |> json(%{new_count: count})
-  end
-
-  def update_like_count(conn, map) do
-    show_count = String.to_integer(map["show-count"])
-    show_id = String.to_integer(map["show-id"])
-    signal = DataSignals.get_signal(show_id)
-    user_id = conn.assigns.current_user.id
-    DataUsers.add_liked_signal(user_id, show_id)
-    count = get_signals_support_count(show_id)
-
-    conn
-    |> json(%{new_count: count})
-  end
-
   def update_type(conn, %{"id" => id, "signals_types_id" => signals_types_id}) do
     signal = DataSignals.get_signal(id)
     DataSignals.update_signal(signal, %{"signals_types_id" => signals_types_id})
 
     signals = DataSignals.list_signals()
     render(conn, "index_signals.html", signals: signals)
-  end
-
-  def comment(conn, map) do
-    show_comment = map["show-comment"]
-    show_id = String.to_integer(map["show-id"])
-    user_id = conn.assigns.current_user.id
-
-    Smartcitydogs.DataSignals.create_signal_comment(%{
-      comment: show_comment,
-      signals_id: show_id,
-      users_id: user_id
-    })
-
-    comments = DataSignals.get_comment_signal_id(show_id)
-    signal = DataSignals.get_signal(show_id)
-    sorted_comments = DataSignals.sort_signal_comment_by_id()
-
-    render(
-      conn,
-      "show_signal.html",
-      signal: signal,
-      comments: sorted_comments,
-      comments_count: comments
-    )
   end
 
   def delete(conn, %{"id" => id}) do

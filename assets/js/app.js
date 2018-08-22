@@ -59,7 +59,7 @@ $("#like").click(function () {
 
     $.ajax({
         method: "GET",
-        url: "/signals/update_like_count",
+        url: "/api/signals/update_like_count",
         data: {
             "show-count": $("#signal-count").text(),
             "show-id": $("#signal-id").text()
@@ -89,7 +89,7 @@ $('#submit-like1').on('click',function(){
   if(a == "ПОСЛЕДВАЙ"){
     $.ajax({
         method: "GET",
-        url: "/signals/update_like_count",
+        url: "/api/signals/update_like_count",
         data: {
             "show-count": $("#signal-count").text(),
             "show-id": $("#signal-id").text()
@@ -103,7 +103,7 @@ $('#submit-like1').on('click',function(){
  else{
     $.ajax({
         method: "GET",
-        url: "/signals/remove_like",
+        url: "/api/signals/remove_like",
         data: {
             "show-count": $("#signal-count").text(),
             "show-id": $("#signal-id").text()
@@ -132,7 +132,7 @@ $('.close_comment').click(function() {
 $(".submit_comment").click(function() {
     $.ajax({
         method: "GET",
-        url: "/signals/comment",
+        url: "/api/signals/comment",
         data: {
             "show-comment": $("#comment-id").val(),
             "show-id": $("#signal-id").text()
@@ -148,14 +148,14 @@ window.login = function () {
     $.post("/api/users/sign_in", params)
         .done(function (data) {
             if ((data.users_types_id == 4) || (data.users_types_id == 5)) {
-                window.location.href = "minicipality_signals";
+                window.location.href = "municipality/signals";
             }
             else {
                 location.reload();
             }
         })
         .fail(function (text) {
-            $("#login-form-errors").text("Невалиден Имейл или Парола!!!!");
+            $("#login-form-errors").text("Невалиден Имейл или Парола!");
         });
 
 };
