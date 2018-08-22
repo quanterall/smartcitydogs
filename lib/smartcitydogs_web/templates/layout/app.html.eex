@@ -61,7 +61,7 @@
             <ul class="navbar-nav text-nowrap">
                 <%= if @current_user do %>
                 <li class="nav-item ">
-                    <a class="nav-link user-menu" href="#">
+                    <a class="nav-link user-menu" href="/users/<%= @current_user.id %>">
                         Здравей, <b><%= @current_user.first_name%></b>
                         <i class="fa fa-user"></i>
                     </a>

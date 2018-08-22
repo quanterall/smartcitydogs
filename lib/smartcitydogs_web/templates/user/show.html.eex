@@ -11,12 +11,12 @@
         <div class="buttons-show-signals-user"> <center>
           <a class="buttons-show-followed-signal" href="#">
           
-            <%= link "Followed signals", to: signal_path(@conn, :followed_signals), class: "followed-signals-my-profile" %>
+            <%= link "Следени сигнали", to: signal_path(@conn, :followed_signals), class: "followed-signals-my-profile" %>
           </a>
           <br>
           <br>
-          <a class="followed-signals-my-profile" href="/my_signals">
-            My signals
+          <a class="followed-signals-my-profile" href="/users/<%= @current_user.id %>/signals">
+            Моите сигнали
           </a>
 
         </center>
