@@ -252,8 +252,6 @@ defmodule SmartcitydogsWeb.SignalController do
   def new(conn, _params) do
     changeset = Smartcitydogs.DataSignals.change_signal(%Signals{})
 
-    # logged_user_type_id = conn.assigns.current_user.users_types.id
-    # if logged_user_type_id == 4 || logged_user_type_id == 2 do
     with :ok <-
            Bodyguard.permit(
              Smartcitydogs.Signals.Policy,
@@ -269,9 +267,7 @@ defmodule SmartcitydogsWeb.SignalController do
   def create(conn, signal_params) do
     signals_categories_id = String.to_integer(signal_params["signals_categories_id"])
     a = conn.assigns.current_user.id
-    # logged_user_type_id = conn.assigns.current_user.users_types.id
 
-    # if logged_user_type_id == 4 || logged_user_type_id == 2 do
     with :ok <-
            Bodyguard.permit(
              Smartcitydogs.Signals.Policy,
@@ -319,7 +315,7 @@ defmodule SmartcitydogsWeb.SignalController do
 
   def show(conn, map) do
     id = map["id"]
-
+    IO.inspect map
     cond do
       id == "remove_like" ->
         SignalControllerAPI.remove_like(conn, map)
@@ -352,9 +348,7 @@ defmodule SmartcitydogsWeb.SignalController do
 
   def edit(conn, %{"id" => id}) do
     signal = DataSignals.get_signal(id)
-    # logged_user_type_id = conn.assigns.current_user.users_types.id
 
-    # if logged_user_type_id == 2 do
     with :ok <-
            Bodyguard.permit(
              Smartcitydogs.Signals.Policy,
@@ -370,9 +364,7 @@ defmodule SmartcitydogsWeb.SignalController do
 
   def update(conn, %{"id" => id, "signals" => signal_params}) do
     signal = DataSignals.get_signal(id)
-    # logged_user_type_id = conn.assigns.current_user.users_types.id
 
-    # if logged_user_type_id == 2 do
     with :ok <-
            Bodyguard.permit(
              Smartcitydogs.Signals.Policy,
@@ -406,30 +398,6 @@ defmodule SmartcitydogsWeb.SignalController do
     render(conn, "followed_signals.html", signal: all_followed_signals, page: page)
   end
 
-  # def get_signals_support_count(signal_id) do
-  #   list = Smartcitydogs.DataSignals.get_signal_support_count(signal_id)
-
-  #   if list != [] do
-  #     [head | tail] = list
-  #     count = head.support_count
-  #     Smartcitydogs.DataSignals.update_signal(head, %{support_count: count + 1})
-  #   end
-
-  #   head.support_count + 1
-  # end
-
-  # def get_signals_support_count_minus(signal_id) do
-  #   list = Smartcitydogs.DataSignals.get_signal_support_count(signal_id)
-
-  #   if list != [] do
-  #     [head | tail] = list
-  #     count = head.support_count
-  #     Smartcitydogs.DataSignals.update_signal(head, %{support_count: count - 1})
-  #   end
-
-  #   head.support_count - 1
-  # end
-
   def update_type(conn, %{"id" => id, "signals_types_id" => signals_types_id}) do
     signal = DataSignals.get_signal(id)
     DataSignals.update_signal(signal, %{"signals_types_id" => signals_types_id})
@@ -440,9 +408,7 @@ defmodule SmartcitydogsWeb.SignalController do
 
   def delete(conn, %{"id" => id}) do
     signal = DataSignals.get_signal(id)
-    # logged_user_id = conn.assigns.current_user.id
 
-    # if logged_user_id != signal.users_id do
     with :ok <-
            Bodyguard.permit(
              Smartcitydogs.Signals.Policy,
