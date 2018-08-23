@@ -7,7 +7,6 @@ defmodule Smartcitydogs.Repo.Migrations.CreateSignalsLikes do
       add(:deleted_at, :naive_datetime)
       add(:signals_id, references("signals"))
       add(:users_id, references("users"))
-
       timestamps()
     end
   end

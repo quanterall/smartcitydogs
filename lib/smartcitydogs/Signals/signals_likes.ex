@@ -6,17 +6,16 @@ defmodule Smartcitydogs.SignalsLikes do
 
   schema "signals_likes" do
     field(:deleted_at, :naive_datetime)
-    field(:like, :integer)
     belongs_to(:signals, Smartcitydogs.Signals)
     belongs_to(:users, Smartcitydogs.User)
-
     timestamps()
   end
 
   @doc false
   def changeset(signals_like, attrs) do
     signals_like
-    |> cast(attrs, [:like, :deleted_at, :signals_id, :users_id])
-    |> validate_required([:like, :signals_id, :users_id])
+    |> cast(attrs, [ :deleted_at, :signals_id, :users_id])
+    |> validate_required([:signals_id, :users_id])
+    |> unique_constraint(:users_signals_unique_like,name: :users_signals_unique_like)
   end
 end

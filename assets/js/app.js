@@ -59,11 +59,7 @@ $("#like").click(function () {
 
     $.ajax({
         method: "GET",
-        url: "/api/signals/update_like_count",
-        data: {
-            "show-count": $("#signal-count").text(),
-            "show-id": $("#signal-id").text()
-        }
+        url: "/api/signals/"+$("#signal-id").text()+"/like"
     }).then(function (data) {
         $("#signal-count").text(data.new_count);
 
@@ -89,12 +85,9 @@ $('#submit-like1').on('click',function(){
   if(a == "ПОСЛЕДВАЙ"){
     $.ajax({
         method: "GET",
-        url: "/api/signals/update_like_count",
-        data: {
-            "show-count": $("#signal-count").text(),
-            "show-id": $("#signal-id").text()
-        }
+        url: "/api/signals/"+$("#signal-id").text()+"/like",
     }).then(function(data) {
+        console.log(data);
         $("#signal-count").text(data.new_count);
     })
 
@@ -103,12 +96,9 @@ $('#submit-like1').on('click',function(){
  else{
     $.ajax({
         method: "GET",
-        url: "/api/signals/remove_like",
-        data: {
-            "show-count": $("#signal-count").text(),
-            "show-id": $("#signal-id").text()
-        }
+        url: "/api/signals/"+$("#signal-id").text()+"/unlike",
     }).then(function(data) {
+        console.log(data);
         $("#signal-count").text(data.new_count);
 
     })

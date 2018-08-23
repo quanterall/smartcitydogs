@@ -406,29 +406,29 @@ defmodule SmartcitydogsWeb.SignalController do
     render(conn, "followed_signals.html", signal: all_followed_signals, page: page)
   end
 
-  def get_signals_support_count(signal_id) do
-    list = Smartcitydogs.DataSignals.get_signal_support_count(signal_id)
+  # def get_signals_support_count(signal_id) do
+  #   list = Smartcitydogs.DataSignals.get_signal_support_count(signal_id)
 
-    if list != [] do
-      [head | tail] = list
-      count = head.support_count
-      Smartcitydogs.DataSignals.update_signal(head, %{support_count: count + 1})
-    end
+  #   if list != [] do
+  #     [head | tail] = list
+  #     count = head.support_count
+  #     Smartcitydogs.DataSignals.update_signal(head, %{support_count: count + 1})
+  #   end
 
-    head.support_count + 1
-  end
+  #   head.support_count + 1
+  # end
 
-  def get_signals_support_count_minus(signal_id) do
-    list = Smartcitydogs.DataSignals.get_signal_support_count(signal_id)
+  # def get_signals_support_count_minus(signal_id) do
+  #   list = Smartcitydogs.DataSignals.get_signal_support_count(signal_id)
 
-    if list != [] do
-      [head | tail] = list
-      count = head.support_count
-      Smartcitydogs.DataSignals.update_signal(head, %{support_count: count - 1})
-    end
+  #   if list != [] do
+  #     [head | tail] = list
+  #     count = head.support_count
+  #     Smartcitydogs.DataSignals.update_signal(head, %{support_count: count - 1})
+  #   end
 
-    head.support_count - 1
-  end
+  #   head.support_count - 1
+  # end
 
   def update_type(conn, %{"id" => id, "signals_types_id" => signals_types_id}) do
     signal = DataSignals.get_signal(id)
