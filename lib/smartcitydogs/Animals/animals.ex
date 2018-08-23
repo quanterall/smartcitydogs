@@ -36,4 +36,7 @@ defmodule Smartcitydogs.Animals do
     ])
     |> validate_required([:sex, :chip_number, :address])
   end
+
+  
+
 end
