@@ -108,7 +108,7 @@
                   </td>
                   <td class="green-td">  
                     <label-description-support-count>
-                      <a id="signal-count"><%=@signal.support_count%></a>
+                      <a id="signal-count"><%=Smartcitydogs.DataUsers.get_likes(@signal.id)%></a>
                     </label-description-support-count>
                   </td>
                   <td class="green-td">
@@ -129,6 +129,7 @@
                     <div id="register-comment-button" onclick="showModalForm(event, 'register-form')">КОМЕНТИРАЙ</div>
                   <%= @current_user.users_types_id == 2 -> %>
                     <% list_of_liked_signals = @conn.assigns.current_user.liked_signals %>
+                    <% IO.inspect list_of_liked_signals%>
                     <%= if Enum.member?(list_of_liked_signals,@signal.id) do %>
                       <a id="submit-like1">ОТСЛЕДВАЙ</a>
                     <% else %>

@@ -7,44 +7,79 @@ defmodule SmartcitydogsWeb.ContactController do
 
   def index(conn, _params) do
     changeset = User.changeset(%User{})
-    if conn.assigns.current_user != nil do
-      changeset = User.changeset(conn.assigns.current_user)
-      id = conn.assigns.current_user.id
-      render(conn, "newcontact.html", changeset: changeset, action: contact_path(conn, :update, id))
-    else
-    render(conn, "newcontact.html", changeset: changeset, action: contact_path(conn, :create))
+
+    with :ok <-
+           Bodyguard.permit(
+             Smartcitydogs.Contact.Policy,
+             :index,
+             conn.assigns.current_user
+           ) do
+      if conn.assigns.current_user != nil do
+        changeset = User.changeset(conn.assigns.current_user)
+        id = conn.assigns.current_user.id
+
+        render(conn, "newcontact.html",
+          changeset: changeset,
+          action: contact_path(conn, :update, id)
+        )
+      else
+        render(conn, "newcontact.html",
+          changeset: changeset,
+          action: contact_path(conn, :create)
+        )
+      end
     end
   end
 
-  ##Render the two different forms based on logged or not user.
+  ## Render the two different forms based on logged or not user.
   def new(conn, _params) do
     changeset = User.changeset(%User{})
-    if conn.assigns.current_user != nil do
-      changeset = User.changeset(conn.assigns.current_user)
-      id = conn.assigns.current_user.id
-      render(conn, "newcontact.html", changeset: changeset, action: contact_path(conn, :update, id))
-    else
-    render(conn, "newcontact.html", changeset: changeset, action: contact_path(conn, :create))
+
+    with :ok <-
+           Bodyguard.permit(
+             Smartcitydogs.Contact.Policy,
+             :new,
+             conn.assigns.current_user
+           ) do
+      if conn.assigns.current_user != nil do
+        changeset = User.changeset(conn.assigns.current_user)
+        id = conn.assigns.current_user.id
+
+        render(conn, "newcontact.html",
+          changeset: changeset,
+          action: contact_path(conn, :update, id)
+        )
+      else
+        render(conn, "newcontact.html", changeset: changeset, action: contact_path(conn, :create))
+      end
     end
   end
 
-  ##When a not logged in user sneds email
+  ## When a not logged in user sneds email
   def create(conn, params) do
     {:system, secret} = Application.get_env(:recaptcha, :secret)
-    case Recaptcha.verify(params["g-recaptcha-response"],[secret: secret]) do
-      {:ok, response} -> 
-        user_params = Map.get(params, "user")
-        topic = Map.get(user_params, "topic")
-        text = Map.get(user_params, "text")
-        Email.send_unauth_contact_email(topic, text, user_params)
-        |> Smartcitydogs.Mailer.deliver_now()
 
+    with :ok <-
+           Bodyguard.permit(
+             Smartcitydogs.Contact.Policy,
+             :create,
+             conn.assigns.current_user
+           ) do
+      case Recaptcha.verify(params["g-recaptcha-response"], secret: secret) do
+        {:ok, response} ->
+          user_params = Map.get(params, "user")
+          topic = Map.get(user_params, "topic")
+          text = Map.get(user_params, "text")
 
-        redirect(conn, to: page_path(conn, :index))
-        
-      {:error, errors} -> 
+          Email.send_unauth_contact_email(topic, text, user_params)
+          |> Smartcitydogs.Mailer.deliver_now()
+
+          redirect(conn, to: page_path(conn, :index))
+
+        {:error, errors} ->
           redirect(conn, to: contact_path(conn, :index))
       end
+    end
   end
 
   def edit(conn, %{"id" => id}) do
@@ -53,16 +88,25 @@ defmodule SmartcitydogsWeb.ContactController do
     render(conn, "edit.html", user: user, changeset: changeset)
   end
 
-  ##When a logged in user sneds email
+  ## When a logged in user sneds email
   def update(conn, %{"id" => id, "user" => user_params}) do
     topic = Map.get(user_params, "topic")
     text = Map.get(user_params, "text")
-    contact_map = %{topic: topic, text: text, users_id: id}
-    DataUsers.create_contact(contact_map)
-    user_sender = DataUsers.get_user!(id)
-    Email.send_contact_email(user_sender, contact_map)
-    |> Smartcitydogs.Mailer.deliver_now()
 
-    redirect(conn, to: page_path(conn, :index))
+    with :ok <-
+           Bodyguard.permit(
+             Smartcitydogs.Contact.Policy,
+             :update,
+             conn.assigns.current_user
+           ) do
+      contact_map = %{topic: topic, text: text, users_id: id}
+      DataUsers.create_contact(contact_map)
+      user_sender = DataUsers.get_user!(id)
+
+      Email.send_contact_email(user_sender, contact_map)
+      |> Smartcitydogs.Mailer.deliver_now()
+
+      redirect(conn, to: page_path(conn, :index))
+    end
   end
 end

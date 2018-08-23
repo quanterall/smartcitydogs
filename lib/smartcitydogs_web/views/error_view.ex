@@ -5,6 +5,10 @@ defmodule SmartcitydogsWeb.ErrorView do
     render(SmartcitydogsWeb.ErrorView, "unauth.html")
   end
 
+  def render("403.html", _assigns) do 
+    "Forbidden"
+  end
+
   # If you want to customize a particular status code
   # for a certain format, you may uncomment below.
   def render("500.html", _assigns) do

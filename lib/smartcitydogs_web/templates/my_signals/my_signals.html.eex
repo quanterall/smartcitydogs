@@ -24,9 +24,27 @@
             <% end %>"><%=signal.signals_types_id
             |> Smartcitydogs.DataSignals.get_signal_type()
             |> Map.get(:name)
-          %>
-          </label-type>
-          <br />
+            %>
+          </li>
+          <li>
+            Registered at: <%=signal.inserted_at%>
+          </li>
+          <li>
+            Description: <%=signal.description%>
+          </li>
+          <li>
+            Chip number: <%=signal.chip_number%>
+          </li>
+          <li>
+            Support count: <span id="signal-count"><%= Smartcitydogs.DataUsers.get_likes(signal.id)%></span>
+          </li>
+          <li>
+            Last location: <%=signal.address%>
+          </li>
+          <li>
+            Views: <%=signal.view_count%>
+          </li>
+        </ul>
 
           <label-date>
           <%=
