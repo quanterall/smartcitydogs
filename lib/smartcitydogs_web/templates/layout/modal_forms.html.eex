@@ -2,7 +2,7 @@
 
     <div class="modal-form <%= if length(@conn.path_info) == 0 do %>
                 shadow-off
-            <% end %>'>" id="login-form">
+            <% end %>" id="login-form">
         <%= render SmartcitydogsWeb.SessionView, "new.html", assigns %>
     </div>
     <div class="modal-form <%= if length(@conn.path_info) == 0 do %>
@@ -20,6 +20,10 @@
             <% end %>" id="forgotten-pass-form">
             <%= render SmartcitydogsWeb.ForgotenPasswordView, "new.html", assigns  %>
     </div>
-
+     <div class="modal-form <%= if length(@conn.path_info) == 0 do %>
+                shadow-off
+            <% end %>" id="change-info-form">
+            <%= render SmartcitydogsWeb.UserView, "myprofile.html", assigns  %>
+    </div>
 
 </div>

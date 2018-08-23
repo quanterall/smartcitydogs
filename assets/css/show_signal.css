@@ -376,6 +376,7 @@ linked-signals{
     }
 }
 .form-class-margin-top{
+    padding: 6.4%;
     margin-top: 0 !important;
 }
 label-forgotten-password{

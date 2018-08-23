@@ -26,6 +26,7 @@ label-li-text{
   color: white;
 }
 .strong-show-user{
+  margin-left: 1%;
   font-size: 12px;
 }
 .unauth_class{

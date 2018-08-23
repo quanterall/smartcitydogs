@@ -39,7 +39,6 @@ defmodule SmartcitydogsWeb.UserController do
     else
       user_params = user_params
         |> Map.put("users_types_id", 2)
-      IO.inspect user_params
       changeset = %User{} |> User.registration_changeset(user_params)
 
       case Repo.insert(changeset) do
@@ -71,7 +70,7 @@ defmodule SmartcitydogsWeb.UserController do
       if logged_user_id != request_user_id do
         render(conn, SmartcitydogsWeb.ErrorView, "401.html")
       else
-        render(conn, "show.html", user: user, changeset: changeset)
+        render(conn, "show.html", user: user, changeset: changeset, conn: conn)
       end
     else
       {:error, raison} -> render(conn, SmartcitydogsWeb.ErrorView, "401.html")

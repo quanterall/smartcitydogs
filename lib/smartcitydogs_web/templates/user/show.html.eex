@@ -47,6 +47,9 @@
             <li>
               
             </li>
+            <div class="border-style-links-profile">
+                <a class="profile-button-styles" onclick="showModalForm(event, 'change-info-form')" href="#">Промяна на данни</a>
+              </div>
           </ul>
           </div>
 
@@ -59,9 +62,18 @@
                   Моите сигнали
                 </a>
               </div>
-              <div class="border-style-links-profile">
-                <%= link "Промяна на данни", to: user_path(@conn, :edit, @user), class: "profile-button-styles" %>
+              <div class="signals-user-show">
+              <%
+
+                user = @conn.assigns.current_user.id
+                sorted_signals = Smartcitydogs.DataSignals.sort_signal_by_id()
+                signals = Smartcitydogs.DataSignals.get_user_signal(user)
+                page = Smartcitydogs.Repo.paginate(signals, page: 1, page_size: 8)
+                
+              %>
+                <%= render SmartcitydogsWeb.MySignalsView, "my_signals.html", assigns %>
               </div>
+              
             </div>
 
           </div>

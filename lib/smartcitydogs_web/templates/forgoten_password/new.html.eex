@@ -17,12 +17,6 @@
               <%= text_input f, :reset_parameter, placeholder: "Въведете избраният от вас критерий...",id: "username-f-pass", class: "form-control1" %>
               <%= error_tag f, :reset_parameter %>
 
-              <%=# email_input f, :email, placeholder: "E-mail",id: "email-f-pass", class: "form-control1" %>
-              <%=# error_tag f, :email %>
-
-              <%=# text_input f, :phone, placeholder: "Телефонен номер...",id: "phone-f-pass", class: "form-control1" %>
-              <%=# error_tag f, :phone %>
-              
 
             <div class="under-form">
               
@@ -30,10 +24,9 @@
                 <%= submit "ИЗПРАТИ", class: "btn btn-submit" %><br>
                 <a class="close-modal" href="#">ОТКАЗ</a>  
               </div>
-            </div>
+           
           <% end %>
         </div>
         </div>
     </div>
-  </div>
 
