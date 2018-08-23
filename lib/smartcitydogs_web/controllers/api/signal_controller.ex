@@ -90,7 +90,6 @@ defmodule SmartcitydogsWeb.SignalControllerAPI do
     show_count = String.to_integer(map["show-count"])
     show_id = String.to_integer(map["show-id"])
     signal = DataSignals.get_signal(show_id)
-    # user_id = conn.assigns.current_user.id
     DataUsers.add_liked_signal(user_id, show_id)
     count = SmartcitydogsWeb.SignalController.get_signals_support_count(show_id)
 

@@ -9,7 +9,7 @@
       <br>
       <br />
       <br />
-      <div class="form-show-signals-user">
+      <div class="container-filter">
         <ul class="list-unstyled">
           <li class="user-li">
             <label-li-text>
@@ -50,7 +50,7 @@
           </ul>
           </div>
 
-            <div class="buttons-show-signals-user"> 
+            <div class="container-signals"> 
               <div class="border-style-links-profile">
                 <%= link "Следени сигнали", to: signal_path(@conn, :followed_signals), class: "profile-button-styles" %>
               </div>
