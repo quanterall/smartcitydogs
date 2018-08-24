@@ -50,8 +50,6 @@ defmodule SmartcitydogsWeb.SignalControllerAPIView do
         comments_user_last_name: signal.comments.users.last_name,
         comments_users_id: signal.comments.users_id
     
-      # comments_count: signal.comments_count.id
-      # comments: signal.comments
     }
   end
 
