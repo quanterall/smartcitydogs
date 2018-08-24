@@ -23,7 +23,9 @@
      <div class="modal-form <%= if length(@conn.path_info) == 0 do %>
                 shadow-off
             <% end %>" id="change-info-form">
+            <%= if @conn.assigns.current_user != nil do %>
             <%= render SmartcitydogsWeb.UserView, "myprofile.html", assigns  %>
+            <% end %>
     </div>
 
 </div>

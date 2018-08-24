@@ -394,6 +394,7 @@ defmodule SmartcitydogsWeb.SignalController do
   end
 
   def followed_signals(conn, params) do
+    IO.inspect params
     user_like = conn.assigns.current_user.liked_signals
 
     all_followed_signals =

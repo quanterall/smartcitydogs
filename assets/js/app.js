@@ -55,6 +55,16 @@ $('#submit-adoption').click(function(){
 	})
 });
 
+$("#my-signals-link").click(function(){
+    $(".last-signals-dogs-div").css("display","inline-block");
+    $(".last-signals-dogs-div2").css("display","none");
+})
+$("#followed-signals-link").click(function(){
+    $(".last-signals-dogs-div").css("display","none");
+    $(".last-signals-dogs-div2").css("display","inline-block");
+
+})
+
 $("#like").click(function () {
 
     $.ajax({

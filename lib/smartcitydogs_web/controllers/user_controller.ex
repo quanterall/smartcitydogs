@@ -54,9 +54,11 @@ defmodule SmartcitydogsWeb.UserController do
     end
   end
 
-  def show(conn, %{"id" => id}) do
+  def show(conn, params) do
+    IO.inspect params
+    id = params["id"]
     user = Repo.get!(User, id) |> Repo.preload(:users_types)
-    changeset = DataUsers.change_user(user)
+    # changeset = DataUsers.change_user(user)
 
     with :ok <-
            Bodyguard.permit(
@@ -70,7 +72,16 @@ defmodule SmartcitydogsWeb.UserController do
       if logged_user_id != request_user_id do
         render(conn, SmartcitydogsWeb.ErrorView, "401.html")
       else
-        render(conn, "show.html", user: user, changeset: changeset, conn: conn)
+        if Enum.count(params) == 1 do
+
+          page = Smartcitydogs.Repo.paginate(page: 1, page_size: 8)
+          render(conn, "show.html", user: user, conn: conn, page: page)
+        else  
+          page_params = params["page"]
+          page = Smartcitydogs.Repo.paginate(page: page_params, page_size: 8)
+          render(conn, "show.html", user: user, conn: conn, page: page)
+        end
+
       end
     else
       {:error, raison} -> render(conn, SmartcitydogsWeb.ErrorView, "401.html")
