@@ -63,7 +63,7 @@ defmodule SmartcitydogsWeb.Router do
       put("/signals/follow", SignalControllerAPI, :follow)
       put("/signals/unfollow", SignalControllerAPI, :unfollow)
     end
-
+    get("/my_signals", MySignalsControllerAPI, :index)
     resources("/signal_images", SignalImageControllerAPI, except: [:new, :edit])
     resources("/signals_comments", SignalsCommentControllerAPI, except: [:new, :edit])
     scope "/signals_comments", SmartcitydogsWeb do
