@@ -1,5 +1,4 @@
 
-<div class="last-signals-dogs-div2">          
 <div class="row">
 <%= if @signals == nil do %>
 ala bala
@@ -91,6 +90,5 @@ ala bala
     <%= link "#{x * 8 - 7}-#{x * 8} ", to: user_path(@conn, :show, id, %{page: x}) %>
   <% end %>
   <% end %>
-</div>
 </div>
 

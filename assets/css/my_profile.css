@@ -119,3 +119,106 @@
 .signals-user-show .row{
   margin-bottom: 5%;
 }
+@media (max-width:835px){
+  .container-signals .border-style-links-profile{
+    width: 40%;
+    margin-right: 7%;
+  }
+}
+@media (max-width:820px){
+  .signals-user-show .col-container{
+    width: 49vw;
+  }
+}
+@media (max-width:820px){
+  .container-signals .border-style-links-profile{
+    width: 47%;
+    margin-right: 1%;
+  }
+}
+@media (max-width:640px){
+  .signals-user-show .col-container{
+    width: 48vw;
+  }
+}
+@media (max-width:600px){
+  .signals-user-show .col-container{
+    width: 47vw;
+  }
+}
+@media (max-width:580px){
+  .container-show-user{
+    display: block;
+  }
+  .container-show-user .container-filter, container-signals{
+    width: 100%;
+  }
+  .container-filter .border-style-links-profile{
+    margin-bottom: 5vh;
+  }
+  .container-show-user .container-signals{
+    padding: 0px;
+    width: 100%;
+  }
+  .container-signals .border-style-links-profile{
+    width: 49%;
+    margin-right: 0.5%;
+  }
+  .signals-user-show .col-container{
+    width: 66vw;
+  }
+  .signals-user-show .col-lg-3{
+    margin-left: 0px;
+  }
+}
+@media (max-width:540px){
+  .signals-user-show .col-container{
+    width: 65vw;
+  }
+}
+@media (max-width:510px){
+  .signals-user-show .col-container{
+    width: 64vw;
+  }
+}
+@media (max-width:480px){
+  .signals-user-show .col-container{
+    width: 63vw;
+  }
+}
+@media (max-width:450px){
+  .signals-user-show .col-container{
+    width: 62vw;
+  }
+  .container-signals .border-style-links-profile{
+    width: 100%;
+    margin-bottom: 10%;
+    margin-right: 0%;
+  }
+}
+@media (max-width:420px){
+  .signals-user-show .col-container{
+    width: 60vw;
+  }
+}
+@media (max-width:390px){
+  .signals-user-show .col-container{
+    width: 59vw;
+  }
+}
+@media (max-width:360px){
+  .signals-user-show .col-container{
+    width: 58vw;
+  }
+}
+@media (max-width:330px){
+  .signals-user-show .col-container{
+    width: 55vw;
+  }
+}
+@media (min-width:1920px){
+  .signals-user-show .col-container{
+    width: 16rem;
+    height: 22rem;
+  }
+}

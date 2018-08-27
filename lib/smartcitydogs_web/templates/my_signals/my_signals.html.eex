@@ -1,5 +1,4 @@
 
-<div class="last-signals-dogs-div">          
 <div class="row">
   <%= for signal <- @signals do %>
     <div class="col-lg-3">
@@ -86,6 +85,5 @@
     %>
     <%= link "#{x * 8 - 7}-#{x * 8} ", to: user_path(@conn, :show, id, %{page: x}) %>
   <% end %>
-</div>
 </div>
 

@@ -3,15 +3,16 @@
   <div class="register-photo">
     <div class="container">
       <div class="container-show-user">
-
-        <% #IO.inspect @signal %>
-        <% #IO.inspect @page %>
-
       <br>
       <br />
       <br />
       <div class="container-filter">
         <ul class="list-unstyled">
+          <li class="user-li">
+            <label-headline>
+              <center>МОЯТ ПРОФИЛ</center>
+            </label-headline>
+          </li>
           <li class="user-li">
             <label-li-text>
               <strong class="strong-show-user">Име:</strong><br />
@@ -78,8 +79,12 @@
                 
                 
               %>
-                <%= render SmartcitydogsWeb.MySignalsView, "my_signals.html", profile_params %>
-                <%= render SmartcitydogsWeb.SignalView, "followed_signals.html", profile_liked_params %>
+                <div class="last-signals-dogs-div">
+                  <%= render SmartcitydogsWeb.MySignalsView, "my_signals.html", profile_params %>
+                </div>
+                <div class="last-signals-dogs-div2">
+                  <%= render SmartcitydogsWeb.SignalView, "followed_signals.html", profile_liked_params %>
+                </div>
               </div>
               
               
