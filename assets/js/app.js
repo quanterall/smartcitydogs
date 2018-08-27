@@ -32,7 +32,7 @@ $('#submit-adoption').click(function(){
     
     $.ajax({
         method: "POST",
-        url: "/api/animals/:id/send_email",
+        url: "/api/registered/:id/send_email",
         credentials: 'same-origin',
         data: {
             "chip_number": $("#chip_number").text(),
@@ -54,6 +54,16 @@ $('#submit-adoption').click(function(){
 		location.reload();
 	})
 });
+
+$("#my-signals-link").click(function(){
+    $(".last-signals-dogs-div").css("display","inline-block");
+    $(".last-signals-dogs-div2").css("display","none");
+})
+$("#followed-signals-link").click(function(){
+    $(".last-signals-dogs-div").css("display","none");
+    $(".last-signals-dogs-div2").css("display","inline-block");
+
+})
 
 $("#like").click(function () {
 

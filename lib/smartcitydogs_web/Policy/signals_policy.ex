@@ -38,7 +38,7 @@ defmodule Smartcitydogs.Signals.Policy do
 
   # Regular users can create posts
   def authorize(action, _, _)
-      when action in [:index, :show],
+      when action in [:index, :show, :new, :create],
       do: true
 
   # Regular users can modify their own posts

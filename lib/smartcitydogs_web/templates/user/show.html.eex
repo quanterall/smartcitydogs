@@ -1,81 +1,96 @@
-<style>
-    body{
-        overflow: hidden;
-    }
-</style>
+
 <div class="fill-container-my-profile">
   <div class="register-photo">
     <div class="container">
       <div class="container-show-user">
-
-        <div class="buttons-show-signals-user"> <center>
-          <a class="buttons-show-followed-signal" href="#">
-          
-            <%= link "Следени сигнали", to: signal_path(@conn, :followed_signals), class: "followed-signals-my-profile" %>
-          </a>
-          <br>
-          <br>
-          <a class="followed-signals-my-profile" href="/my_signals">
-            Моите сигнали
-          </a>
-
-        </center>
-
-        </div>
       <br>
       <br />
-
       <br />
-
+      <div class="container-filter">
         <ul class="list-unstyled">
-
+          <li class="user-li">
+            <label-headline>
+              <center>МОЯТ ПРОФИЛ</center>
+            </label-headline>
+          </li>
           <li class="user-li">
             <label-li-text>
               <strong class="strong-show-user">Име:</strong><br />
               <%= @user.first_name %> <%= @user.last_name %>
             </label-li-text>
           </li>
-
           <br />
-        <br>
-
+          <br>
           <li class="user-li">
             <label-li-text>
               <strong class="strong-show-user">Потребителско име:</strong><br />
               <%= @user.username %>
             </label-li-text>
           </li>
-        <br>
-
-        <br>
-        <li class="user-li">
-          <label-li-text>
-            <strong class="strong-show-user">Телефонен номер:</strong><br />
-            <%= @user.phone %> 
-          </label-li-text>
-        </li>
-        <br />
-      <br>
-      <li class="user-li">
-        <label-li-text>
-          <strong class="strong-show-user">Парола:</strong><br />
-          *************
-        </label-li-text>
-      </li>
-      <br />
-    <br>
+          <br>
+          <br>
           <li class="user-li">
             <label-li-text>
-              <strong class="strong-show-user">Имейл:</strong><br />
-              <%= @user.email %> 
+              <strong class="strong-show-user">Телефонен номер:</strong><br />
+              <%= @user.phone %> 
             </label-li-text>
           </li>
-        <br>
-          <li>
-            <%= link "Промяна на данни", to: user_path(@conn, :edit, @user), class: "show-user-edit" %>
-          </li>
+          <br />
+          <br>
+         
+       
+            <li class="user-li">
+              <label-li-text>
+                <strong class="strong-show-user">Имейл:</strong><br />
+                <%= @user.email %> 
+              </label-li-text>
+            </li>
+          <br>
+            <li>
+              
+            </li>
+            <div class="border-style-links-profile">
+                <a class="profile-button-styles" onclick="showModalForm(event, 'change-info-form')" href="#">Промяна на данни</a>
+              </div>
+          </ul>
+          </div>
 
-         </div>
+            <div class="container-signals"> 
+              <div class="border-style-links-profile">
+                <a class="profile-button-styles" id="followed-signals-link" href="#">
+                  Следени сигнали
+                </a>
+              </div>
+              <div class="border-style-links-profile">    
+                <a class="profile-button-styles" id="my-signals-link" href="#">
+                  Моите сигнали
+                </a>
+              </div>
+              <div class="signals-user-show">
+              <%
+
+                user = @conn.assigns.current_user.id
+                sorted_signals = Smartcitydogs.DataSignals.sort_signal_by_id()
+                signals = Smartcitydogs.DataSignals.get_user_signal(user)
+                page = Smartcitydogs.Repo.paginate(signals, page: @page, page_size: 8)
+                profile_params = %{signals: signals, page: page, conn: @conn}
+                followed_signals = Smartcitydogs.DataSignals.get_signal_like(user)
+                profile_liked_params = %{signals: followed_signals, page: page, conn: @conn}
+                
+                
+              %>
+                <div class="last-signals-dogs-div">
+                  <%= render SmartcitydogsWeb.MySignalsView, "my_signals.html", profile_params %>
+                </div>
+                <div class="last-signals-dogs-div2">
+                  <%= render SmartcitydogsWeb.SignalView, "followed_signals.html", profile_liked_params %>
+                </div>
+              </div>
+              
+              
+            </div>
+
+          </div>
       </div>
     </div>
  </div>
