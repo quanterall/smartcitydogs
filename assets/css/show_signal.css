@@ -38,7 +38,8 @@ show-signal-label-title{
     font-size: 40px;
 }
 .show-signal-right-container .buttons-for-signal{
-    margin-bottom: 10%;
+    margin-top: 20%;
+    margin-bottom: 0%;
 }
 .show-signal-right-container .table-under-form-signal{
     margin-bottom: 10%;
