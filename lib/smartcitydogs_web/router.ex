@@ -152,6 +152,8 @@ defmodule SmartcitydogsWeb.Router do
         get("/animals/adopted", AnimalController, :minicipality_adopted)
         get("/signals", SignalController, :minicipality_signals)
         get("/filter_signals", SignalController, :filter_signals)
+        resources("/signals", SignalController)
+        resources("/registered", AnimalController)
       end
     end
   end
