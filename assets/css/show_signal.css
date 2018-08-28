@@ -44,6 +44,8 @@ show-signal-label-title{
     margin-bottom: 10%;
 }
 .show-signal-right-container show-signal-label-description{
+    display: grid;
+    width: 100%;
     margin-bottom: 10%;
 }
 .show-signal-right-container #show-map{
@@ -51,6 +53,7 @@ show-signal-label-title{
     margin-bottom: 5%;
 }
 .show-signal-right-container show-signal-label-adress{
+    display: block;
     margin-bottom: 10%;
 }
 .show-signal-right-container .fa-map-marker-alt{

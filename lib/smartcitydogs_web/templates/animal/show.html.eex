@@ -90,14 +90,14 @@
             </td>
           </tr>
         </table>  
-        <br>
+        
         <% 
           procedures = Smartcitydogs.DataAnimals.get_procedures(@animals.id)
           
         %>
         <div class="div-procedures">
         <%= if procedures != [] do %>
-          <b>Извършени процедури</b> <br> <br>
+          <b>Извършени процедури</b> 
           <% else %>
 
           <% end %>
@@ -107,13 +107,12 @@
             procedure.procedure_type_id  
             |> Smartcitydogs.DataProcedure.get_procedure_type!()
             |> Map.get(:name)
-            %> <br>
+            %> 
 
             </div>
             <% end %>
         </div> 
-          <br>
-          <br>
+          
           <div class="buttons-for-signal">
 
           <%=  cond do %>

@@ -421,21 +421,25 @@ input#search-placeholder:focus{
 }
 
 .label-type-red{
+  display: grid;
   margin-bottom: 5%;
   font-weight: bold;
   color: red !important;
 }
 .label-type-orange{
+  display: grid;
   margin-bottom: 5%;
   font-weight: bold;
   color: orange !important;
 }
 .label-type-yellow{
+  display: grid;
   margin-bottom: 5%;
   font-weight: bold;
   color: yellow !important;
 }
 .label-type-green{
+  display: grid;
   margin-bottom: 5%;
   font-weight: bold;
   color: green !important;
@@ -860,4 +864,11 @@ label-signals-categories{
 }
 .info-change-container .under-form{
   margin-top: 30vh;
+}
+.procedures-all{
+  margin-top: 5%;
+  margin-bottom: 15%;
+}
+.div-procedures{
+  margin-top: 10%;
 }
