@@ -29,7 +29,8 @@ defmodule Smartcitydogs.Mixfile do
         :ueberauth_facebook,
         :ueberauth_twitter,
         :scrivener_ecto,
-        :httpoison
+        :httpoison,
+        :recaptcha
       ]
     ]
   end
@@ -66,7 +67,9 @@ defmodule Smartcitydogs.Mixfile do
       {:scrivener_list, "~> 1.0"},
       {:httpoison, "~> 1.0", override: true},
       {:html_entities, "~> 0.4"},
-      {:cmark, "~> 0.7"}
+      {:cmark, "~> 0.7"},
+      {:recaptcha, "~> 2.3"},
+      {:bodyguard, "~> 2.1"}
     ]
   end
 

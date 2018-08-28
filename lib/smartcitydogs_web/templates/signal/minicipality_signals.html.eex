@@ -12,7 +12,7 @@
 
   <div class="container-filter-signals">
         <div class="container-filter">
-            <b><a href="/minicipality_signals" id="all-signals">Подадени сигнали</a></b>
+            <b><a href="/municipality/signals" id="all-signals">Подадени сигнали</a></b>
 
             <div class="Signals"> 
             <div class="Signals-filter"> 
@@ -38,8 +38,6 @@
      
       </ul>   
                 <div class="input-group-append">
-                    <button class="btn btn-outline-secondary" type="submit">
-                        <i class="fa fa-search"></i>
                          <%= submit "Търси", class: "btn btn-submit" %> <br>
                            <% end %>
                     </button>
@@ -48,18 +46,18 @@
         </div>
             </div>
             <br />
-            <a href="minicipality_registered" id="all-registered-dogs">Регистрирани кучета</a>
+            <a href="/municipality/animals" id="all-registered-dogs">Регистрирани кучета</a>
             <div class="Signals1"> 
             
             </div>
             <br />
-            <a href="/minicipality_adopted" id="all-adopted-dogs">Осиновени кучета</a>
+            <a href="/municipality/animals/adopted" id="all-adopted-dogs">Осиновени кучета</a>
             <div class="Signals2"> 
             
             </div>
             <br />
             <b>
-            <a href="/minicipality_shelter" id="all-dogs-shelter">Кучета в приюта</a>
+            <a href="/municipality/animals/shelter" id="all-dogs-shelter">Кучета в приюта</a>
             <div class="Signals3"> 
             
             </div>

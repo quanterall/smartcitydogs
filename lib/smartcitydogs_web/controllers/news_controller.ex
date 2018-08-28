@@ -10,7 +10,7 @@ defmodule SmartcitydogsWeb.NewsController do
   def index(conn, %{"page" => page_number}) do
     news = DataPages.list_news()
     news2 = Enum.slice(news, -3..-2) ##second and third to last created news
-    last_news = Repo.one(from x in News, order_by: [desc: x.id], limit: 1)
+    last_news = Repo.one(from n in News, order_by: [desc: n.id], limit: 1)
     news = Enum.drop(news, -3)
     page = Smartcitydogs.Repo.paginate(news, page: String.to_integer(page_number), page_size: 8)
     render(conn, "index.html", news: page.entries, last_news: last_news, news2: news2, page: page)
@@ -19,7 +19,7 @@ defmodule SmartcitydogsWeb.NewsController do
   def index(conn, %{}) do
     news = DataPages.list_news()
     news2 = Enum.slice(news, -3..-2) ##second and third to last created news
-    last_news = Repo.one(from x in News, order_by: [desc: x.id], limit: 1)
+    last_news = Repo.one(from n in News, order_by: [desc: n.id], limit: 1)
     news = Enum.drop(news, -3)
     page = Smartcitydogs.Repo.paginate(news, page: 1, page_size: 8)
     render(conn, "index.html", news: page.entries, last_news: last_news, news2: news2, page: page)
@@ -33,12 +33,9 @@ defmodule SmartcitydogsWeb.NewsController do
   end
 
   def create(conn, %{"news" => news_params}) do
-    IO.inspect news_params["image_url"]
-    image_name = String.split(news_params["image_url"], "\\") |> List.last 
-   
-    IO.inspect image_name
-    IO.puts "TTTTTTTTTTTT"
-    extension = Path.extname(image_name)
+
+     image_name = String.split(news_params["image_url"], "\\") |> List.last 
+     extension = Path.extname(image_name)
     upload = 
     %Plug.Upload{
       content_type: "image/jpeg",
@@ -46,20 +43,7 @@ defmodule SmartcitydogsWeb.NewsController do
       path: "./smartcitydogs/assets/static/images/#{image_name}-profile#{extension}"
     }
     
-    IO.inspect upload
-    # IO.inspect conn
-    # upload = Map.get(conn, :params)
-    # upload = Map.get(upload, "files")
-    # IO.inspect upload
- 
-
-    # File.cp(
-    #   upload.path,
-    #   "../smartcitydogs/assets/static/images/#{Map.get(upload, :filename)}-profile#{extension}"
-    # )
-
     news_params = Map.put(news_params, "date", DateTime.utc_now())
-
     news_params =
       Map.put(
         news_params,
@@ -72,10 +56,7 @@ defmodule SmartcitydogsWeb.NewsController do
      |> Markdown.to_html()
      |> Phoenix.HTML.raw() # Convert to {:safe, iodata} tuple
 
-     ##IO.inspect xxx
      news_params |> Map.delete("content") |> Map.put("content", xxx)
-     IO.puts "))))))))))))))))))))))))))"
-     IO.inspect news_params
     case DataPages.create_news(news_params) do
       {:ok, news} ->
         conn
@@ -89,7 +70,6 @@ defmodule SmartcitydogsWeb.NewsController do
 
   def show(conn, %{"id" => id}) do
     news = DataPages.get_news(id)
-  ##  IO.inspect news
     render(conn, "show.html", news: news)
   end
 
@@ -115,9 +95,6 @@ defmodule SmartcitydogsWeb.NewsController do
     end
   end
 
-  def images(conn, image_params) do
-    IO.inspect image_params
-    IO.puts "TTTTTTTTTTTTTTTTTTTTTTTTT"
-  end
+
 
 end

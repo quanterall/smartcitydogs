@@ -9,7 +9,8 @@
 
 
           <div class="nav-link-pass">
-              <%= link "Забравена парола?", to: forgoten_password_path(@conn, :new) %>
+              <a id ="new-signal-btn"  onclick="showModalForm(event, 'forgotten-pass-form')" href="#"> ЗАБРАВЕНА ПАРОЛА
+                    </a>
           </div>
         <div class="under-form">
 

@@ -5,6 +5,7 @@
     /* margin: 7%; */
 }
 .col-12 .input-group{
+    margin-top: 2%;
     width: 40%;
     position: fixed;
     z-index: 1;
@@ -13,9 +14,9 @@
 .input-group-append{
     background-color: white;
 }
-.input-group-append:hover{
+/* .input-group-append:hover{
     background-color: rgb(0,201,148) !important;
-}
+} */
 .input.form-control.border-secondary.py-2:focus{
     -webkit-text-fill-color: black !important;
 }
@@ -23,6 +24,8 @@
     color: white;
 }
 .container{
+    /* margin-left: 11%; */
+    /* padding-left: 3%; */
     max-width: 80%;
 }
 .input-group-append .btn-outline-secondary:hover{
@@ -39,7 +42,31 @@
     opacity: 1;
 }
 .last-signals-dogs-div{
+    display: none;
     position: absolute;
     margin-right: 12%;
-    margin-left: 9%;
+    /* margin-left: 9%; */
+}
+.last-signals-dogs-div2{
+    display: none;
+    position: absolute;
+    margin-right: 12%;
+    /* margin-left: 9%; */
+}
+
+.col-container .col-container-shadow{
+    opacity: 0;
+}
+.col-container .col-container-shadow:hover{
+    transition: 0.5s;
+    opacity: 1;
+}
+.row.slick{
+    margin-bottom: 50px;
+}
+label-headline{
+    font-family: monospace;
+    font-weight: 500;
+    font-size: 20px;
+    margin-bottom: 20%;
 }

@@ -3,10 +3,7 @@ defmodule SmartcitydogsWeb.SignalControllerAPIView do
   alias SmartcitydogsWeb.SignalControllerAPIView
   alias  Smartcitydogs.SignalView 
 
-  def render("filter_index.html", params) do
-   
-    Phoenix.View.render(SmartcitydogsWeb.SignalControllerView, "filter_index.html", params)
-  end
+ 
 
 
   def render("index.json", %{signals: signals}) do

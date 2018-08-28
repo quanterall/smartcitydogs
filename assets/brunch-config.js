@@ -36,7 +36,17 @@ watcher: {
           "css/index_signal.css",
           "css/nav_bar.css",
           "css/show_signal.css",
-          "css/registered_dogs.css"
+          "css/registered_dogs.css",
+          "css/contact.css",
+          "css/project.css",
+          "css/help-page/bootstrap.css",
+          "css/help-page/font-awesome.css",
+          "css/help-page/linearicons.css",
+          "css/help-page/magnific-popup.css",
+          "css/help-page/main.css",
+          "css/help-page/nice-select.css",
+          "css/help-page/owl.carousel.css",
+          "css/help-page/pgwslider.css"
         ]
       }
     },

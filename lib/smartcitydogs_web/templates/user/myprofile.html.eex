@@ -1,55 +1,34 @@
-<html>
-  <head>
-    <meta charset="utf-8">
-    <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
-  </head>
+<div class="container-new-signal
+    <%= if length(@conn.path_info) == 0 do %><% else %>shadow-on<% end %>
+    ">
+  <div class="info-change-container">
+    <%= form_for @conn, user_path(@conn, :update, @conn.assigns.current_user.id), [class: "form-elixir register-form-class"],fn f -> %>
 
-  <body>
-    <div class="register-photo">
-      <div class="container">
-        <div class="container-show-user">
-          <%= form_for @changeset, @action, fn f -> %>
-            <%= if @changeset.action do %>
-              <div class="alert alert-danger">
-                <p>Oops, something went wrong! Please check the errors below.</p>
-              </div>
-          <% end %>
+        
+        <label-1>Нова парола:</label-1>
+        <%= text_input f, :password, class: "form-control1 padding-form-control1" %>
+        <%= error_tag f, :password %>
+        <br><br>
 
-            <h2 align="center" style="color:white;font-family:monospace;">Hello <%= @user.first_name %> <%= @user.last_name %> </h2>
-          
-
-              <div class="form-group">
+        <label-1>Нов имейл:</label-1>
+        <%= text_input f, :email, class: "form-control1 padding-form-control1" %>
+        <%= error_tag f, :email %>
+        <br><br>
 
 
-              <br />
-              <br />
-              <strong class="strong-show-user">New password:</strong>
-              <%= text_input f, :password, class: "form-control1" %>
-              <%= error_tag f, :password %>
-              <br />
-              <br />
+        <label-1>Нов телефонен номер:</label-1>
+        <%= text_input f, :phone, class: "form-control1" %>
+        <%= error_tag f, :phone %>
+        <br><br>
 
-              <strong class="strong-show-user">New email:</strong>
-              <%= text_input f, :email, class: "form-control1" %>
-              <%= error_tag f, :email %>
-              <br />
-              <br />
+        
+      <div class="under-form">
 
-
-              <strong class="strong-show-user">New phone:</strong>
-              <%= text_input f, :phone, class: "form-control1" %>
-              <%= error_tag f, :phone %>
-
-
-              <br />
-              <br />
-              <div class="under-form">
-
-                <%= submit "Submit", class: "btn btn-submit" %>
-              </div>
-            <% end %>
-        </div>
+        <%= submit "Изпрати", class: "btn btn-submit" %> 
+        <br>
+        <div class="close-modal ">ОТКАЗ</div>
       </div>
+    <% end %>
     </div>
-  </body>
-</html>
+</div>
+       

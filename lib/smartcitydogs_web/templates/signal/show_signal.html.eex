@@ -108,7 +108,7 @@
                   </td>
                   <td class="green-td">  
                     <label-description-support-count>
-                      <a id="signal-count"><%=@signal.support_count%></a>
+                      <a id="signal-count"><%=Smartcitydogs.DataUsers.get_likes(@signal.id)%></a>
                     </label-description-support-count>
                   </td>
                   <td class="green-td">

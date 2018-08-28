@@ -84,5 +84,44 @@ defmodule SmartcitydogsWeb.SignalControllerAPI do
     end 
   end
 
+  def like(conn, params) do
+
+    user_id = conn.private.plug_session["current_user_id"]
+    signal = DataSignals.get_signal(params["id"])
+    DataUsers.add_like(user_id, signal.id)
+
+    conn
+    |> json(%{new_count: DataUsers.get_likes(signal.id)})
+
+  end
+
+  def unlike(conn, map) do
+    show_id = String.to_integer(map["id"])
+    signal = DataSignals.get_signal(show_id)
+    
+    user_id = conn.private.plug_session["current_user_id"]
+    DataUsers.remove_like(user_id, signal.id)
+    conn
+    |> json(%{new_count: DataUsers.get_likes(signal.id)})
+  end
+
+  def comment(conn,map) do
+    show_comment = map["show-comment"]
+    show_id = String.to_integer(map["show-id"])
+    user_id = conn.private.plug_session["current_user_id"]
+
+    Smartcitydogs.DataSignals.create_signal_comment(%{
+      comment: show_comment,
+      signals_id: show_id,
+      users_id: user_id
+    })
+
+      comments = Smartcitydogs.DataSignals.get_comment_signal_id(show_id)
+      signal = Smartcitydogs.DataSignals.get_signal(show_id)
+      sorted_comments = Smartcitydogs.DataSignals.sort_signal_comment_by_id()
+      
+      redirect(conn, to: signal_path(conn, :show, signal))
+
+  end
 
 end

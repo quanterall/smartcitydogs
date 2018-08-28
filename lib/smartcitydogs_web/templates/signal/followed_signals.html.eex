@@ -1,72 +1,94 @@
-<h1><center> Followed signals <center></h1>
 
-<div class="container">
-          <!-- Three columns of text below the carousel -->
+<div class="row">
+<%= if @signals == nil do %>
+ala bala
+<% else %>
+  <%= for signal <- @signals do %>
+    <div class="col-lg-3">
+      <div class="col-container" style="background-image: url('/<%= get_signals_images(signal.id) %>')">
+        <div class="col-container-shadow">
+          <% signal_type = Smartcitydogs.DataSignals.get_signal(signal.signals_id) %>
+          <label-type class="
+            <%= if signal_type.signals_types_id == 1 do %>
+            label-type-red
+            <% end %>
 
-          <div class="row">
-          <%= for signal <- @signal do %>
-            <div class="col-lg-4">
+            <%= if signal_type.signals_types_id == 2 do %>
+            label-type-orange
+            <% end %>
 
-              <img class="rounded-circle" src="/<%= get_signals_images(signal.id) %>" alt="Generic placeholder image" width="140" height="140">
-              <h2><%=signal.title%></h2>
-              <ul>
-                <li>
-                  Signal number:
-                  <a id="signal-id"><%= signal.id %></a>
-                </li>
-                <li>
-                  Category: <%=signal.signals_categories_id
-                  |> Smartcitydogs.DataSignals.get_signal_category()
-                  |> Map.get(:name)
-                  %>
-                </li>
-                <li>
-                  Type: <%=signal.signals_types_id
-                  |> Smartcitydogs.DataSignals.get_signal_type()
-                  |> Map.get(:name)
-                  %>
-                </li>
-                <li>
-                  Registered at: <%=
-                    signal_time = signal.inserted_at
-                    |> DateTime.truncate(:second)
-                    |> DateTime.to_string()
-                    count = String.length(signal_time)
-                    final_time = String.slice(signal_time,0..count-2)
-                    final_time
+            <%= if signal_type.signals_types_id == 3 do %>
+            label-type-yellow
+            <% end %>
 
-    
+            <%= if signal_type.signals_types_id == 4 do %>
+            label-type-green
+            <% end %>"><%= signal_type.signals_types_id
+            |> Smartcitydogs.DataSignals.get_signal_type()
+            |> Map.get(:name)
+          %>
+          </label-type>
+          <br />
+          <label-date>
+          <%=
+            signal_time = signal_type.inserted_at
+            |> DateTime.truncate(:second)
+            |> DateTime.to_string()
+            count = String.length(signal_time)
+            final_time = String.slice(signal_time,0..count-11)
+            final_time
+          %>
+          <br />
+          </label-date>
+
+          <label-title><b>
+          <%=
+            signal_type.title
+          %></b></label-title>
+          <br />
 
 
-                    %>
-                </li>
-                <li>
-                  Description: <%=signal.description%>
-                </li>
-                <li>
-                  Chip number: <%=signal.chip_number%>
-                </li>
-                <li>
-                  Support count: <span id="signal-count"><%= signal.support_count %></span>
-                </li>
-                <li>
-                  Last location: <%=signal.address%>
-                </li>
-                <li>
-                  Views: <%=signal.view_count%>
-                </li>
-              </ul>
+          <label-adress><%=
+            signal_type.address
+          %></label-adress>
+          <br />
 
-              <p><a class="btn btn-secondary" href="signals/<%=signal.id%>" role="button">View more »</a>
-              <a class="btn btn-secondary" href="#" role="button">View map »</a></p>
-
+            <div class="icon-scale">
+              <i class="fas fa-search"></i> : <%=signal_type.view_count%>
+              <br />
             </div>
-            <%end%>
-          </div><!-- /.row -->
+            <div class="icon-scale">
+              <i class="fas fa-arrow-up"></i> : <span id="signal-count"><%= signal_type.support_count %></span>
+            </div>
+            <div class="icon-scale">
+              <i class="far fa-comment fa-flip-horizontal"></i> : <%= Enum.count(Smartcitydogs.DataSignals.get_comment_signal_id(signal_type.id)) %>
+            <br />
+            </div>
+          
 
+            <center>
 
+            <div class="button-show-hide">
+            <p class="p-button-view"><%= link "Виж още", to: signal_path(@conn, :show, signal.id), class: "btn btn-secondary" %></p>
+             
+            </div></center>
+          </div>
 
+         </div>
+       </div>
+    <%end%>
 </div>
-<%= for x <- 1..@page.total_pages do %>
-  <%= link "#{x * 8 - 7} - #{x * 8}", to: signal_path(@conn, :index, page: x) %>
-<% end %>  
+
+
+<div class="padination">
+
+  <%= for x <- 1..@page.total_pages do %>
+    <% 
+    page = x 
+    id = @conn.assigns.current_user.id
+    %>
+    <%= link "#{x * 8 - 7}-#{x * 8} ", to: user_path(@conn, :show, id, %{page: x}) %>
+  <% end %>
+  <% end %>
+</div>
+

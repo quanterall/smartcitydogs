@@ -1,3 +1,13 @@
+<style>
+    .button-show-hide .btn-secondary{
+        margin-top: 0px;
+    }
+    .col-container {
+        width: 250px;
+        height: 400px;  
+    }
+</style>
+
 <div class="home-bg">
 </div>
 
@@ -41,41 +51,85 @@
 <div class="row slick ">
     <%= for signal <- @signal do %>
     <div class="col-lg-12">
-        <div class="card slick-card w-100"
-             style="background:  linear-gradient(rgba(0, 0, 0, 0.5),rgba(0, 0, 0, 0.5)),  no-repeat center center url('https://topdoghub.com/wp-content/uploads/2017/12/Best-Tough-Toys-For-Dogs-1140x624.jpg')">
-            <div class="card-body">
-                
-                <div class="slick-card-status">
-                    <%=signal.signals_types_id
-                    |> Smartcitydogs.DataSignals.get_signal_type()
-                    |> Map.get(:name)
-                    %>
-                </div>
-                <div class="slick-card-small text-gray">
-                    <%=DateTime.to_date(signal.inserted_at) %>
-                </div>
-                <div class="slick-card-title">
-                    <%=signal.title%>
-                </div>
-                <div class="slick-card-small text-gray mt-3">
-                    <%=signal.address%>
-                </div>
-                <div class="slick-card-small text-white mt-3">
-                    <i class="fas fa-search"></i> <%=signal.view_count%>
-                </div>
-                <div class="slick-card-small text-white">
-                    <i class="fas fa-arrow-up"></i> <%=signal.support_count%>
-                </div>
-                <div class="slick-card-small text-white">
-                    <i class="far fa-comment fa-flip-horizontal"></i> <%=signal.view_count%>
-                </div>
+        <div class="col-container" style="background-image: url('/<%= get_signals_images(signal.id) %>')">
+        <div class="col-container-shadow">
 
-                  <div class="adopted_button"> 
-                   <%= link "", to: signal_path(@conn, :show, signal), class: "fa fa-map-marker-alt" %>
-                          <%= link "Виж още »", to: signal_path(@conn, :show, signal), class: "btn btn-secondary" %>
-                  </div>
+          <label-type class="
+            <%= if signal.signals_types_id == 1 do %>
+            label-type-red
+            <% end %>
+
+            <%= if signal.signals_types_id == 2 do %>
+            label-type-orange
+            <% end %>
+
+            <%= if signal.signals_types_id == 3 do %>
+            label-type-yellow
+            <% end %>
+
+            <%= if signal.signals_types_id == 4 do %>
+            label-type-green
+            <% end %>"><%=signal.signals_types_id
+            |> Smartcitydogs.DataSignals.get_signal_type()
+            |> Map.get(:name)
+          %>
+          </label-type>
+          <br />
+
+          <label-date>
+          <%=
+            signal_time = signal.inserted_at
+            |> DateTime.truncate(:second)
+            |> DateTime.to_string()
+            count = String.length(signal_time)
+            final_time = String.slice(signal_time,0..count-11)
+            final_time
+          %>
+          <br />
+          </label-date>
+
+          <label-title><b>
+          <%=
+            signal.signals_categories_id
+                |> Smartcitydogs.DataSignals.get_signal_category()
+                |> Map.get(:name)
+          %></b></label-title>
+          <br />
+
+
+          <label-adress><%=
+            signal.address
+          %></label-adress>
+          <br />
+
+            <div class="icon-scale">
+              <i class="fas fa-search"></i> : <%=signal.view_count%>
+              <br />
             </div>
-        </div>
+            <div class="icon-scale">
+              <i class="fas fa-arrow-up"></i> : <span id="signal-count"><%= signal.support_count %></span>
+            </div>
+            <div class="icon-scale">
+              <i class="far fa-comment fa-flip-horizontal"></i> : <%= Enum.count(Smartcitydogs.DataSignals.get_comment_signal_id(signal.id)) %>
+            <br />
+            </div>
+          
+
+            <center>
+
+            <div class="button-show-hide">
+                <div class="map-show-buttons">
+            
+              <p class="p-button-view">
+                <%= link "", to: signal_path(@conn, :show, signal), class: "fa fa-map-marker-alt" %>
+                <a class="btn btn-secondary" href="signals/<%=signal.id%>" role="button">Виж още</a>
+              </p>
+              </div>
+            </div></center>
+            
+          </div>
+
+         </div>
     </div>
     <% end %>
 </div>
@@ -120,7 +174,8 @@
     <div class="col-lg-12">
         <div class="col-container" style="background-image: url('/<%= SmartcitydogsWeb.AnimalView.get_image_animals_id(animal.id) %>')">
                 <div class="col-container-shadow">
-                               <label-type class="
+
+                  <label-type class="
                     <%= if animal.animals_status_id == 1 do %>
                         label-type-red
                     <% end %>
@@ -131,32 +186,60 @@
 
                     <%= if animal.animals_status_id == 3 do %>
                         label-type-green
-                    <% end %>"><%= animal.animals_status.name %>
+                    <% end %>"><%= animal.animals_status_id 
+                    |> Smartcitydogs.DataAnimals.get_animal_status
+                    |> Map.get(:name)
+                    %>
                   </label-type>
-                <div class="slick-card-small text-gray">
-                    <%= animal.sex  %>
-                </div>
-                <div class="slick-card-title">
-                    <%=animal.chip_number %>
-                </div>
-                <div class="slick-card-small text-gray mt-3">
-                    <%=signal_time = animal.inserted_at
+                  <br />
+                  <label-text-grey>
+                    ПОЛ
+                  </label-text-grey>
+                  <br>
+                  <label-text-white>
+                    <%= animal.sex %>
+                  </label-text-white>
+                  <br><br>
+                  <label-text-grey>
+                    НОМЕР НА МАРКА/ЧИП
+                  </label-text-grey>
+                  <br>
+                  <label-text-white>
+                    <%= animal.chip_number %>
+                  </label-text-white>
+                  <br><br>
+                  <label-text-grey>
+                    ДАТА НА РЕГИСТРАЦИЯ
+                  </label-text-grey><br>
+                  <label-text-white>
+                  <%=
+                    signal_time = animal.inserted_at
                     |> DateTime.truncate(:second)
                     |> DateTime.to_string()
                     count = String.length(signal_time)
                     final_time = String.slice(signal_time,0..count-11)
-                    final_time%>
-                </div>
-                <div class="slick-card-small text-white mt-3">
-                    <i class="fas fa-search"></i> <%=animal.address %>
-                </div>
+                    final_time
+                  %>
+                  </label-text-white>
+                  <br><br>
+                  <label-text-grey>
+                    ПОСЛЕДНА ЛОКАЦИЯ
+                  </label-text-grey>
+                  <br>
+                  <label-text-white>
+                    <%= animal.address %>
+                  </label-text-white>
 
-             <div class="button-show-hide">
-                        <div class="adopted_button">
-                          <%= link "Виж още »", to: animal_path(@conn, :show, animal), class: "btn btn-secondary" %>
+                    <center>
+                      <div class="button-show-hide">
+                        <div class="map-show-buttons">
+                            <p class="p-button-view">
+                                <a class="btn btn-secondary" href="animals/<%=animal.id%>" role="button">Виж още</a>
+                            </p>
                         </div>
                       </div>
-            </div>
+                    </center>
+                </div>
         </div>
     </div>
     <% end %>
@@ -168,12 +251,13 @@
     </div>
 </div>
 
-<div class="row slick ">
+<div class="row slick">
     <%= for animal <- @adopted_animals do %>
     <div class="col-lg-12">
         <div class="col-container" style="background-image: url('/<%= SmartcitydogsWeb.AnimalView.get_image_animals_id(animal.id) %>')">
                 <div class="col-container-shadow">
-                               <label-type class="
+
+                  <label-type class="
                     <%= if animal.animals_status_id == 1 do %>
                         label-type-red
                     <% end %>
@@ -184,32 +268,60 @@
 
                     <%= if animal.animals_status_id == 3 do %>
                         label-type-green
-                    <% end %>"><%= animal.animals_status.name %>
+                    <% end %>"><%= animal.animals_status_id 
+                    |> Smartcitydogs.DataAnimals.get_animal_status
+                    |> Map.get(:name)
+                    %>
                   </label-type>
-                <div class="slick-card-small text-gray">
-                    <%= animal.sex  %>
-                </div>
-                <div class="slick-card-title">
-                    <%=animal.chip_number %>
-                </div>
-                <div class="slick-card-small text-gray mt-3">
-                    <%=signal_time = animal.inserted_at
+                  <br />
+                  <label-text-grey>
+                    ПОЛ
+                  </label-text-grey>
+                  <br>
+                  <label-text-white>
+                    <%= animal.sex %>
+                  </label-text-white>
+                  <br><br>
+                  <label-text-grey>
+                    НОМЕР НА МАРКА/ЧИП
+                  </label-text-grey>
+                  <br>
+                  <label-text-white>
+                    <%= animal.chip_number %>
+                  </label-text-white>
+                  <br><br>
+                  <label-text-grey>
+                    ДАТА НА РЕГИСТРАЦИЯ
+                  </label-text-grey><br>
+                  <label-text-white>
+                  <%=
+                    signal_time = animal.inserted_at
                     |> DateTime.truncate(:second)
                     |> DateTime.to_string()
                     count = String.length(signal_time)
                     final_time = String.slice(signal_time,0..count-11)
-                    final_time%>
-                </div>
-                <div class="slick-card-small text-white mt-3">
-                    <i class="fas fa-search"></i> <%=animal.address %>
-                </div>
+                    final_time
+                  %>
+                  </label-text-white>
+                  <br><br>
+                  <label-text-grey>
+                    ПОСЛЕДНА ЛОКАЦИЯ
+                  </label-text-grey>
+                  <br>
+                  <label-text-white>
+                    <%= animal.address %>
+                  </label-text-white>
 
-             <div class="button-show-hide">
-                        <div class="adopted_button">
-                          <%= link "Виж още »", to: animal_path(@conn, :show, animal), class: "btn btn-secondary" %>
+                    <center>
+                      <div class="button-show-hide">
+                        <div class="map-show-buttons">
+                            <p class="p-button-view">
+                                <a class="btn btn-secondary" href="animals/<%=animal.id%>" role="button">Виж още</a>
+                            </p>
                         </div>
                       </div>
-            </div>
+                    </center>
+                </div>
         </div>
     </div>
     <% end %>

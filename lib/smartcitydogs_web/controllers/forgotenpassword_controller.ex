@@ -13,24 +13,30 @@ defmodule SmartcitydogsWeb.ForgotenPasswordController do
     render(conn, "new.html", changeset: changeset, action: forgoten_password_path(conn, :create))
   end
 
-  def create(conn, %{"user" => pw_params}) do
-    email = pw_params["email"]
-    phone = pw_params["phone"]
-    username = pw_params["username"]
+  def create(conn, pw_params) do
+    reset_parameter = pw_params["reset_parameter"]
+    reset_password_radio = String.to_integer(pw_params["reset_password_radio"])
+      
 
     user =
       cond do
-        String.trim(email) != "" ->
-          User
-          |> Repo.get_by(email: email)
+        reset_password_radio == 2 ->
+         if String.trim(reset_parameter) != "" do
+            User
+            |> Repo.get_by(email: reset_parameter)
+         end
 
-        String.trim(phone) != "" ->
-          User
-          |> Repo.get_by(phone: phone)
+        reset_password_radio == 3 ->
+         if String.trim(reset_parameter) != "" do
+            User
+            |> Repo.get_by(phone: reset_parameter)
+         end
 
-        String.trim(username) != "" ->
-          User
-          |> Repo.get_by(username: username)
+        reset_password_radio == 1 ->
+          if String.trim(reset_parameter) != "" do
+            User
+            |> Repo.get_by(username: reset_parameter)
+          end
 
         true ->
           nil
@@ -40,7 +46,7 @@ defmodule SmartcitydogsWeb.ForgotenPasswordController do
       nil ->
         conn
         |> put_flash(:error, "Could not send reset email. Please try again later")
-        |> redirect(to: forgoten_password_path(conn, :new))
+        |> redirect(to: page_path(conn, :index))
 
       user ->
         user = reset_password_token(user)
@@ -49,7 +55,7 @@ defmodule SmartcitydogsWeb.ForgotenPasswordController do
         Smartcitydogs.Email.send_reset_email(email, user.reset_password_token)
         |> Smartcitydogs.Mailer.deliver_now()
 
-        redirect(conn, to: session_path(conn, :new))
+        redirect(conn, to: page_path(conn, :index))
 
         put_flash(
           conn,

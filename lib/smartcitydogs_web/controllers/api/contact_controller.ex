@@ -11,23 +11,13 @@ defmodule SmartcitydogsWeb.ContactControllerAPI do
     render(conn, "index.json", contacts: contacts)
   end
 
-  def create(conn, %{"contact" => contact_params}) do
-    id = contact_params["id"]
-    topic = contact_params["topic"]
-    text = contact_params["text"]
-
-    if id != "" do
-      user_sender = Smartcitydogs.DataUsers.get_user!(id)
-      user_email = Map.get(user_sender, :email)
-
-      Smartcitydogs.Email.send_contact_email(user_sender, contact_params)
-      |> Smartcitydogs.Mailer.deliver_now()
-    else
-      Smartcitydogs.Email.send_unauth_contact_email(topic, text, contact_params)
-      |> Smartcitydogs.Mailer.deliver_now()
-    end
-
-    contactt_params = for {key, val} <- contact_params, into: %{}, do: {String.to_atom(key), val}
+  def create(conn, params) do
+    user_params = Map.get(params, "contact")
+    topic = Map.get(user_params, "topic")
+    text = Map.get(user_params, "text")
+    Smartcitydogs.Email.send_unauth_contact_email(topic, text, user_params)
+    |> Smartcitydogs.Mailer.deliver_now()
+    contactt_params = for {key, val} <- user_params, into: %{}, do: {String.to_atom(key), val}
     render(conn, "show.json", contact: contactt_params)
   end
 

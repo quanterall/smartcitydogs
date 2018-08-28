@@ -37,8 +37,20 @@ show-signal-label-title{
     font-size: 40px;
 }
 .fa-map-marker-alt{
-    color: #00c790;
+    margin-bottom: 3%;
+    cursor: pointer;
+    opacity: 1;
+    color: white;
     margin-right: 2%;
+}
+.fa-map-marker-alt:hover{
+    color: white;
+    /* color: #00c790; */
+    cursor: pointer;
+    transition: 0.5s;
+    opacity: 1;
+    text-decoration: none;
+    
 }
 #show-map{
     cursor: pointer;
@@ -361,5 +373,183 @@ linked-signals{
     }
     #register-comment-button{
         width: 50%;
+    }
+}
+.form-class-margin-top{
+    padding: 6.4%;
+    margin-top: 0 !important;
+}
+label-forgotten-password{
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+    font-size: 30px;
+    color: white;
+    margin-bottom: 5%;
+}
+.radio-button-inline{
+    display: inline-block;
+    width: 100%;
+    margin-left: 2%;
+}
+@media (min-width: 1920px){
+    .show-signals-dogs .col-container{
+        width: 20rem;
+        height: 28rem;
+    }
+}
+@media (max-width: 1920px){
+    .show-signals-dogs .col-container{
+        width: 21rem;
+        height: 28rem;
+    }
+    .show-signals-dogs .col-lg-3{
+        flex: 0 0 25%;
+    }
+}
+@media (max-width: 1865px){
+    .show-signals-dogs .col-container{
+        width: 20rem;
+    }
+}
+@media (max-width: 1785px){
+    .show-signals-dogs .col-container{
+        width: 19rem;
+        /* height: 23rem; */
+    }
+}
+@media (max-width: 1705px){
+    .show-signals-dogs .col-container{
+        width: 19rem;
+    }
+}
+@media (max-width: 1645px){
+    .show-signals-dogs .col-container{
+        width: 18rem;
+    }
+}
+@media (max-width: 1585px){
+    .show-signals-dogs .col-container{
+        width: 17rem;
+    }
+}
+@media (max-width: 1525px){
+    .show-signals-dogs .col-container{
+        width: 16rem;
+    }
+}
+@media (max-width: 1465px){
+    .show-signals-dogs .col-container{
+        width: 21rem;
+    }
+}
+@media (max-width: 1405px){
+    .show-signals-dogs .col-container{
+        width: 20rem;
+    }
+}
+@media (max-width: 1345px){
+    .show-signals-dogs .col-container{
+        width: 19rem;
+    }
+}
+@media (max-width: 1285px){
+    .show-signals-dogs .col-container{
+        width: 18rem;
+    }
+}
+@media (max-width: 1225px){
+    .show-signals-dogs .col-container{
+        width: 17rem;
+    }
+}
+@media (max-width: 1165px){
+    .show-signals-dogs .col-container{
+        width: 23rem;
+    }
+}
+@media (max-width: 1103px){
+    .show-signals-dogs .col-container{
+        width: 22rem;
+    }
+}
+@media (max-width: 1053px){
+    .show-signals-dogs .col-container{
+        width: 21rem;
+    }
+}
+@media (max-width: 1003px){
+    .show-signals-dogs .col-container{
+        width: 20rem;
+    }
+}
+@media (max-width: 953px){
+    .show-signals-dogs .col-container{
+        width: 19rem;
+    }
+}
+@media (max-width: 903px){
+    .show-signals-dogs .col-container{
+        width: 18rem;
+    }
+}
+@media (max-width: 853px){
+    .show-signals-dogs .col-container{
+        width: 17rem;
+    }
+}
+@media (max-width: 823px){
+    .show-signals-dogs .col-container{
+        width: 36rem;
+    }
+}
+@media (max-width: 763px){
+    .show-signals-dogs .col-container{
+        width: 33rem;
+    }
+}
+@media (max-width: 733px){
+    .show-signals-dogs .col-container{
+        width: 31.5rem;
+    }
+}
+@media (max-width: 703px){
+    .show-signals-dogs .col-container{
+        width: 30rem;
+    }
+}
+@media (max-width: 673px){
+    .show-signals-dogs .col-container{
+        width: 28.5rem;
+    }
+}
+@media (max-width: 643px){
+    .show-signals-dogs .col-container{
+        width: 26rem;
+    }
+}
+@media (max-width: 613px){
+    .show-signals-dogs .col-container{
+        width: 24.5rem;
+    }
+}
+@media (max-width: 583px){
+    .show-signals-dogs .col-container{
+        width: 23rem;
+    }
+}
+@media (max-width: 523px){
+    .show-signals-dogs .col-container{
+        width: 20rem;
+    }
+}
+@media (max-width: 463px){
+    .show-signals-dogs .col-container{
+        width: 18.5rem;
+    }
+}
+@media (max-width: 433px){
+    .show-signals-dogs .col-container{
+        width: 16rem;
     }
 }
