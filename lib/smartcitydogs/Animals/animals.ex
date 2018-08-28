@@ -2,6 +2,8 @@ defmodule Smartcitydogs.Animals do
   use Ecto.Schema
   import Ecto.Changeset
 
+  alias Smartcitydogs.DataAnimals
+
   @timestamps_opts [type: :utc_datetime, usec: false]
 
   schema "animals" do
@@ -37,6 +39,12 @@ defmodule Smartcitydogs.Animals do
     |> validate_required([:sex, :chip_number, :address])
   end
 
-  
+   ###### Send E-mail ########
+
+  def send_email(conn, data) do
+    Smartcitydogs.Email.send_email(data)
+    DataAnimals.insert_adopt(data["user_id"], data["animal_id"])
+  end
+
 
 end

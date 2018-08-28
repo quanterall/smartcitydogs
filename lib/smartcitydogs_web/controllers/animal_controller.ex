@@ -11,8 +11,7 @@ defmodule SmartcitydogsWeb.AnimalController do
 
   def send_email(conn, data) do
     int = String.to_integer(data["animal_id"])
-    Smartcitydogs.Email.send_email(data)
-    DataAnimals.insert_adopt(data["user_id"], data["animal_id"])
+    Smartcitydogs.Animals.send_email(conn,data)
     redirect(conn, to: "/animals/#{int}")
   end
 
@@ -46,9 +45,7 @@ defmodule SmartcitydogsWeb.AnimalController do
              :minicipality_shelter,
              conn.assigns.current_user
            ) do
-      struct = from(p in Animals, where: p.animals_status_id == 3)
-      all_adopted = Repo.all(struct) |> Repo.preload(:animals_status)
-      page = Smartcitydogs.Repo.paginate(all_adopted, page: 1, page_size: 8)
+      page = Smartcitydogs.DataAnimals.get_animals_by_status(2)
       render(conn, "minicipality_shelter.html", animals: page.entries, page: page)
     else
       {:error, raison} -> render(conn, SmartcitydogsWeb.ErrorView, "401.html")
@@ -63,9 +60,7 @@ defmodule SmartcitydogsWeb.AnimalController do
              :minicipality_adopted,
              conn.assigns.current_user
            ) do
-      struct = from(p in Animals, where: p.animals_status_id == 2)
-      all_adopted = Repo.all(struct) |> Repo.preload(:animals_status)
-      page = Smartcitydogs.Repo.paginate(all_adopted, page: 1, page_size: 8)
+      page = Smartcitydogs.DataAnimals.get_animals_by_status(3)
       render(conn, "minicipality_adopted.html", animals: page.entries, page: page)
     else
       {:error, raison} -> render(conn, SmartcitydogsWeb.ErrorView, "401.html")
@@ -310,7 +305,7 @@ defmodule SmartcitydogsWeb.AnimalController do
 
     cond do
       id_map == "send_email" ->
-        send_email(conn, map)
+        Smartcitydogs.Animals.send_email(conn, map)
 
       id_map == "new" ->
         new(conn, map)
