@@ -105,7 +105,7 @@ defmodule SmartcitydogsWeb.Router do
       ForgotenPasswordController,
       only: [:new, :create, :edit, :update]
     )
-
+    get("/news/images/:image", NewsController, :images)
     resources("/contact", ContactController, only: [:new, :create])
 
     ###### registered user zone
@@ -119,6 +119,7 @@ defmodule SmartcitydogsWeb.Router do
       # get("/animals/send_email", AnimalController, :send_email)
       resources("/animals", AnimalController)
       resources("/news", NewsController)
+      
       get("/show", PageController, :show)
 
       resources("/my_signals", MySignalsController)
