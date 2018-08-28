@@ -5,8 +5,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/all.css" integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ" crossorigin="anonymous">
   
-  <% IO.inspect @signal.id %>
-  <% IO.inspect @current_user %>
+ 
   <div id="cor-a"><%= @signal.address_F %></div>
        <div id="cor-b"><%= @signal.address_B %></div>
   <div class="show-signal-container">
