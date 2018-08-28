@@ -421,18 +421,22 @@ input#search-placeholder:focus{
 }
 
 .label-type-red{
+  margin-bottom: 5%;
   font-weight: bold;
   color: red !important;
 }
 .label-type-orange{
+  margin-bottom: 5%;
   font-weight: bold;
   color: orange !important;
 }
 .label-type-yellow{
+  margin-bottom: 5%;
   font-weight: bold;
   color: yellow !important;
 }
 .label-type-green{
+  margin-bottom: 5%;
   font-weight: bold;
   color: green !important;
 }

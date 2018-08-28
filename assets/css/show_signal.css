@@ -11,10 +11,10 @@
 }
 div.show-signal-right-container{
     padding-left: 5%;
-    /* padding-right: 5%; */
     margin-top: 11vh;
     margin-left: 50%;
     width: 50%;
+    display: grid;
 }
 .show-signal-container{
     width: 100%;
@@ -33,8 +33,28 @@ textarea#comment-id{
     width: 100%;
 }
 show-signal-label-title{
+    margin-bottom: 10%;
     font-weight: bold;
     font-size: 40px;
+}
+.show-signal-right-container .buttons-for-signal{
+    margin-bottom: 10%;
+}
+.show-signal-right-container .table-under-form-signal{
+    margin-bottom: 10%;
+}
+.show-signal-right-container show-signal-label-description{
+    margin-bottom: 10%;
+}
+.show-signal-right-container #show-map{
+    text-align: right;
+    margin-bottom: 5%;
+}
+.show-signal-right-container show-signal-label-adress{
+    margin-bottom: 10%;
+}
+.show-signal-right-container .fa-map-marker-alt{
+    color: rgb(0,201,148);
 }
 .fa-map-marker-alt{
     margin-bottom: 3%;
@@ -78,6 +98,7 @@ show-signal-label-title{
 .show-signal-under-description-title{
     display: inline;
     font-size: 10px;
+    
 }
 .green-td{
     color: #00c790;
@@ -100,7 +121,7 @@ show-signal-label-description{
 }
 .buttons-for-signal{
     /* float: right; */
-    margin-left: 50%;
+    /* margin-left: 50%; */
     margin-top: 10%;
     width: 100%;
     height: 100px;;
