@@ -39,7 +39,14 @@
                                           class: "form-control1" %>
         </div>
 
-        <label-5>6.Статус на кучето:</label-5><br>
+        <label-3>6.Описание:</label-3><br>
+        <div class="form-group registered-group">
+          <%= text_input f, :description, placeholder: "Описание...",
+                                  class: "form-control1" %>
+          <%= error_tag f, :description %>
+        </div>
+
+        <label-5>7.Статус на кучето:</label-5><br>
         <div class="form-group registered-group">
           <%= select( f, :animals_status_id, [
             [key: "На свобода", value: "1"],

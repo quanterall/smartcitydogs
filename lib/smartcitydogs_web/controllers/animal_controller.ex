@@ -251,6 +251,8 @@ defmodule SmartcitydogsWeb.AnimalController do
       "Ваксинирано" => animal_params["Ваксинирано"]
     }
 
+    IO.inspect animal_params
+
     list_procedures =
       Enum.map(map_procedures, fn x ->
         case x do

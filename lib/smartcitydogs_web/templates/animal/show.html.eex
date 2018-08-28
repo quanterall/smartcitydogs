@@ -34,20 +34,16 @@
           |> Map.get(:name)
           %>
         </show-signal-label-status>
-        <br>
-        <br>
-        <br>
+       
         <show-signal-label-adress>
          <div class="fa fa-map-marker-alt" aria-hidden="false"></div><div class="address-style" id="test-address"><%=@animals.address%></div>
         </show-signal-label-adress>
         <a id="show-map" >ВИЖ НА КАРТА</a>
-        <br><br><br>
 
         <show-signal-label-description>
          <%=@animals.description%>
         </show-signal-label-description>
 
-         <br><br><br>
         <table class="table-under-form-signal">
 
           <tr>
