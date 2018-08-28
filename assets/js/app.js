@@ -132,7 +132,7 @@ $('.close_comment').click(function() {
 $(".submit_comment").click(function() {
     $.ajax({
         method: "GET",
-        url: "/api/signals/comment",
+        url: "/api/signals/:id/comment",
         data: {
             "show-comment": $("#comment-id").val(),
             "show-id": $("#signal-id").text()

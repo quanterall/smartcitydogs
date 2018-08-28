@@ -57,7 +57,7 @@ defmodule SmartcitydogsWeb.Router do
 
     resources("/signals", SignalControllerAPI, except: [:new, :edit])
     scope "/signals" do
-      get("/comment", SignalControllerAPI, :comment)
+      get("/:id/comment", SignalControllerAPI, :comment)
       get("/:id/unlike", SignalControllerAPI, :unlike)
       get("/:id/like", SignalControllerAPI, :like)
       put("/signals/follow", SignalControllerAPI, :follow)
