@@ -382,7 +382,6 @@ defmodule SmartcitydogsWeb.SignalController do
     render(conn, "followed_signals.html", signal: all_followed_signals, page: page)
   end
 
-
   def update_type(conn, %{"id" => id, "signals_types_id" => signals_types_id}) do
     signal = DataSignals.get_signal(id)
     DataSignals.update_signal(signal, %{"signals_types_id" => signals_types_id})

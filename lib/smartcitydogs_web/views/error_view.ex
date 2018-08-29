@@ -5,6 +5,10 @@ defmodule SmartcitydogsWeb.ErrorView do
     render(SmartcitydogsWeb.ErrorView, "unauth.html")
   end
 
+  def render("401.json", _assigns) do
+    "Not autorization!"
+  end
+
   def render("403.html", _assigns) do 
     "Forbidden"
   end

@@ -1,4 +1,3 @@
-
 <div class="fill-container-my-profile">
   <div class="register-photo">
     <div class="container">
@@ -16,7 +15,8 @@
           <li class="user-li">
             <label-li-text>
               <strong class="strong-show-user">Име:</strong><br />
-              <%= @user.first_name %> <%= @user.last_name %>
+              <%= @user.first_name %>
+                <%= @user.last_name %>
             </label-li-text>
           </li>
           <br />
@@ -93,4 +93,5 @@
           </div>
       </div>
     </div>
- </div>
+  </div>
+</div>
