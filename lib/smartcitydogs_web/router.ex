@@ -99,7 +99,7 @@ defmodule SmartcitydogsWeb.Router do
 
     get("/", PageController, :index)
     resources("/signals", SignalController)
-    resources("/animals", AnimalController)
+    resources("/registered", AnimalController)
     resources("/sessions", SessionController, only: [:new, :create, :delete])
     resources("/users", UserController, only: [:new, :create])
     resources("/help", HelpController, only: [:index])
@@ -111,8 +111,11 @@ defmodule SmartcitydogsWeb.Router do
     scope "/" do
       pipe_through([:login_required])
       resources("/users", UserController)
-      resources("/animals", AnimalController)
+      resources("/registered", AnimalController)
       resources("/news", NewsController)
+      
+      get("/show", PageController, :show) ##not in develop
+
       resources("/my_signals", MySignalsController)
 
       get("/show", PageController, :show)
@@ -152,6 +155,8 @@ defmodule SmartcitydogsWeb.Router do
         get("/animals/adopted", AnimalController, :minicipality_adopted)
         get("/signals", SignalController, :minicipality_signals)
         get("/filter_signals", SignalController, :filter_signals)
+        resources("/signals", SignalController)
+        resources("/registered", AnimalController)
       end
     end
   end

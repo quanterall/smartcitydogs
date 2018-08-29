@@ -32,7 +32,7 @@ $('#submit-adoption').click(function(){
     
     $.ajax({
         method: "POST",
-        url: "/api/animals/:id/send_email",
+        url: "/api/registered/:id/send_email",
         credentials: 'same-origin',
         data: {
             "chip_number": $("#chip_number").text(),
@@ -54,6 +54,44 @@ $('#submit-adoption').click(function(){
 		location.reload();
 	})
 });
+
+$('#submit-news').click(function(){
+    var editor_content = quill.container.firstChild.innerHTML
+    var image = document.getElementById('image').value
+    var title = document.getElementById('title').value
+    var short_content = document.getElementById('short_content').value
+    $.ajax({
+        method: "POST",
+        url: "/news",
+        credentials: 'same-origin',
+        data: {
+            "news": {
+                    "image_url": image,
+                    "title": title,
+                    "short_content": short_content,
+                    "content": editor_content,
+                    }
+        },
+        success: function (msg) {
+                alert("Новината ви беше успешно създадена!");
+        },
+        error: function (xhr, status) {
+           alert("Неуспешно създаване на новина!");
+          }
+    }).done(function(){
+		location.reload();
+	})
+});
+
+$("#my-signals-link").click(function(){
+    $(".last-signals-dogs-div").css("display","inline-block");
+    $(".last-signals-dogs-div2").css("display","none");
+})
+$("#followed-signals-link").click(function(){
+    $(".last-signals-dogs-div").css("display","none");
+    $(".last-signals-dogs-div2").css("display","inline-block");
+
+})
 
 $("#like").click(function () {
 
@@ -231,22 +269,4 @@ $('.navbar-collapse').on('show.bs.collapse', function() {
 
     
 
-ClassicEditor
-    .create( document.querySelector( '#editor' ) )
-   
-    .then( editor => {
-        config.extraPlugins = 'image';
-        config.extraPlugins = 'dialog';
-        image: {
-            toolbar: [ 'imageTextAlternative' ]
-        }
-    } )
-    .catch( error => {
-        console.error( error );
-    } );
 
-
-
-
-
-  

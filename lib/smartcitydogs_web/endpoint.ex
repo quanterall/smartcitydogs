@@ -12,7 +12,7 @@ defmodule SmartcitydogsWeb.Endpoint do
     at: "/",
     from: :smartcitydogs,
     gzip: false,
-    only: ~w(css fonts images js favicon.ico robots.txt ckeditor5-build-classic)
+    only: ~w(css fonts images js favicon.ico robots.txt)
   )
 
   # plug Plug.Static, at: "/animals/new", from: "/home/sonyft/smartcitydog/smartcitydogs/assets/static/images/"
@@ -30,7 +30,8 @@ defmodule SmartcitydogsWeb.Endpoint do
     Plug.Parsers,
     parsers: [:urlencoded, :multipart, :json],
     pass: ["*/*"],
-    json_decoder: Poison
+    json_decoder: Poison,
+    length: 100_000_000
   )
 
   plug(Plug.MethodOverride)

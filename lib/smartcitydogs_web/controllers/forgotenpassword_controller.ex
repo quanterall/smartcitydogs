@@ -14,7 +14,6 @@ defmodule SmartcitydogsWeb.ForgotenPasswordController do
   end
 
   def create(conn, pw_params) do
-    IO.inspect pw_params
     reset_parameter = pw_params["reset_parameter"]
     reset_password_radio = String.to_integer(pw_params["reset_password_radio"])
       

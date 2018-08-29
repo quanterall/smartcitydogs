@@ -75,3 +75,6 @@ label1{
   text-align: center;
   font-weight: bold;
 }
+.fill-container-my-profile .register-photo .container{
+  max-width: 100%;
+}
