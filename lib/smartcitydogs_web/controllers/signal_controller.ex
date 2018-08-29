@@ -39,9 +39,7 @@ defmodule SmartcitydogsWeb.SignalController do
           {:ok, num} -> {params["data_status"], params["data_category"], num}
           _ -> {[], [], "1"}
         end
-
       SignalController.get_ticked_checkboxes(conn, data_status)
-
       data_category =
         for {k, v} <- params do
           cond do
@@ -103,33 +101,9 @@ defmodule SmartcitydogsWeb.SignalController do
   end
 
   ## When the search button is clicked, for rendering the first page of the query.
-  def filter_signals(conn, params) do
-    data_status =
-      for {k, v} <- params do
-        cond do
-          k |> String.match?(~r/sig_status./) && v != "false" ->
-            v
-
-          true ->
-            nil
-        end
-      end
-
-    data_category =
-      for {k, v} <- params do
-        cond do
-          ## do
-          k |> String.match?(~r/sig_category./) && v != "false" ->
-            v
-
-          true ->
-            nil
-        end
-      end
-
-    data_category = Enum.filter(data_category, &(!is_nil(&1)))
-    data_status = Enum.filter(data_status, &(!is_nil(&1)))
-
+  def filter_signals(conn, %{"_utf8" => "✓", "sig_category" => data_category, "sig_status" => data_status}) do
+    data_status =  Enum.filter(data_status, fn x -> x != "false" end)
+    data_category =  Enum.filter(data_category, fn x -> x != "false" end)
     cond do
       data_status != [] ->
         all_query = []
@@ -184,7 +158,6 @@ defmodule SmartcitydogsWeb.SignalController do
   ## Get all of the ticked checkboxes from the filters, handle redirection to pagination pages.
   def get_ticked_checkboxes(conn, params) do
     {data_status, data_category, num} = params
-
     case data_status do
       nil -> []
       _ -> data_status
@@ -265,7 +238,6 @@ defmodule SmartcitydogsWeb.SignalController do
   end
 
   def create(conn, signal_params) do
-    signals_categories_id = String.to_integer(signal_params["signals_categories_id"])
     a = conn.assigns.current_user.id
     with :ok <-
            Bodyguard.permit(
@@ -308,7 +280,7 @@ defmodule SmartcitydogsWeb.SignalController do
           render(conn, "new_signal.html", changeset: changeset)
       end
     else
-      {:error, raison} -> render(conn, SmartcitydogsWeb.ErrorView, "401.html")
+      {:error, _} -> render(conn, SmartcitydogsWeb.ErrorView, "401.html")
     end
   end
 
@@ -364,12 +336,11 @@ defmodule SmartcitydogsWeb.SignalController do
           render(conn, "edit_signal.html", signal: signal, changeset: changeset)
       end
     else
-      {:error, raison} -> render(conn, SmartcitydogsWeb.ErrorView, "401.html")
+      {:error, _} -> render(conn, SmartcitydogsWeb.ErrorView, "401.html")
     end
   end
 
   def followed_signals(conn, params) do
-    # IO.inspect params
     user_like = conn.assigns.current_user.liked_signals
 
     all_followed_signals =
@@ -400,13 +371,13 @@ defmodule SmartcitydogsWeb.SignalController do
              :update,
              conn.assigns.current_user
            ) do
-      {:ok, _signal} = DataSignals.delete_signal(id)
+      {:ok, signal} = DataSignals.delete_signal(id)
 
       conn
       |> put_flash(:info, "Signal deleted successfully.")
       |> redirect(to: signal_path(conn, :index))
     else
-      {:error, raison} -> render(conn, SmartcitydogsWeb.ErrorView, "401.html")
+      {:error, _} -> render(conn, SmartcitydogsWeb.ErrorView, "401.html")
     end
   end
 end

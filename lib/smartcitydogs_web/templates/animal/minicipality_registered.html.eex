@@ -21,27 +21,26 @@
                     <ul style="list-style-type:none;">  
                     <li class="title_filter"> Филтрирай спрямо Статус </li> 
                 <%= form_for @conn, animal_path(@conn, :filter_registered),[multipart: true, class: "form-elixir register-form-class", method: :get], fn f -> %>
-              <%= checkbox(f, :animal_status1, checked_value: 1, value:    if Enum.find(@data, fn x -> x == "1" end)  != nil do Enum.find(@data, fn x -> x == "1" end) |> String.to_integer() 
-                                                                                        else  0 end )%>Бездомно куче</br>
-              <%= checkbox(f, :animal_status2, checked_value: 2, value: if Enum.find(@data, fn x -> x == "2" end)  != nil do Enum.find(@data, fn x -> x == "2" end) |> String.to_integer() 
-                                                                                        else  0 end )%>Избягал домашен любимец</br>
-              <%= checkbox(f, :animal_status3, checked_value: 3, value: if Enum.find(@data, fn x -> x == "3" end)  != nil do Enum.find(@data, fn x -> x == "3" end) |> String.to_integer() 
-                                                                                        else  0 end )%>Малтретиране на животно
+            <%= checkbox(f, :animal_status1, checked_value: 1, name: "animal_status[]", value: if Enum.find(@data, fn x -> x == "1" end) != nil do Enum.find(@data, fn x -> x == "1" end) |> String.to_integer() else 0 end )%>  Бездомно куче</br>
+              <%= checkbox(f, :animal_status2, checked_value: 2, name: "animal_status[]", value:  if Enum.find(@data, fn x -> x == "2" end) != nil do Enum.find(@data, fn x -> x == "2" end) |> String.to_integer() else 0 end)%>Избягал домашен любимец</br>
+              <%= checkbox(f, :animal_status3, checked_value: 3, name: "animal_status[]", value:  if Enum.find(@data, fn x -> x == "3" end) != nil do Enum.find(@data, fn x -> x == "3" end) |> String.to_integer() else 0 end)%>Малтретиране на животно
                     </div>
                           </ul>   
                 <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" type="submit">
+                        <i class="fa fa-search"></i>
                          <%= submit "Търси", class: "btn btn-submit" %> <br>
                           <% end %>
                     </button>
                 </div>
                     <br />
-                    <a href="/municipality/animals/adopted" id="all-adopted-dogs">Осиновени кучета</a>
+                    <a href="/minicipality_adopted" id="all-adopted-dogs">Осиновени кучета</a>
                     <div class="Signals2"> 
                     
                     </div>
                     <br />
                     <b>
-                    <a href="/municipality/animals/shelter" id="all-dogs-shelter">Кучета в приюта</a>
+                    <a href="/minicipality_shelter" id="all-dogs-shelter">Кучета в приюта</a>
                     <div class="Signals3"> 
                     
                     </div>
@@ -61,11 +60,9 @@
                     <%= if animal.animals_status_id == 1 do %>
                         label-type-red
                     <% end %>
-
                     <%= if animal.animals_status_id == 2 do %>
                         label-type-orange
                     <% end %>
-
                     <%= if animal.animals_status_id == 3 do %>
                         label-type-green
                     <% end %>"><%= animal.animals_status.name %>

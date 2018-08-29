@@ -121,24 +121,12 @@ defmodule SmartcitydogsWeb.AnimalController do
   end
 
   ## When the search button is clicked, for rendering the first page of the query.
-  def filter_registered(conn, params) do
-    data_status =
-      for {k, v} <- params do
-        cond do
-          k |> String.match?(~r/animal_status./) && v != "false" ->
-            v
-
-          true ->
-            nil
-        end
-      end
-
-    data_status = Enum.filter(data_status, &(!is_nil(&1)))
-
+  def filter_registered(conn, %{"_utf8" => "✓", "animal_status" => data_status  }) do
+    data_status =  Enum.filter(data_status, fn x -> x != "false" end)
     cond do
       data_status != [] ->
         all_query = []
-
+        IO.inspect data_status
         x =
           Enum.map(data_status, fn x ->
             struct = from(p in Animals, where: p.animals_status_id == ^String.to_integer(x))
