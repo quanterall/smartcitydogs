@@ -39,64 +39,11 @@ defmodule SmartcitydogsWeb.SignalController do
           {:ok, num} -> {params["data_status"], params["data_category"], num}
           _ -> {[], [], "1"}
         end
-      SignalController.get_ticked_checkboxes(conn, data_status)
-      data_category =
-        for {k, v} <- params do
-          cond do
-            k |> String.match?(~r/sig_category./) && v != "false" ->
-              v
+    [page, data_category, data_status] =  Signals.get_ticked_checkboxes(data_status)
 
-            true ->
-              nil
-          end
-        end
-
-      data_status =
-        for {k, v} <- params do
-          cond do
-            k |> String.match?(~r/sig_status./) && v != "false" ->
-              v
-
-            true ->
-              nil
-          end
-        end
-
-      data_category = Enum.filter(data_category, &(!is_nil(&1)))
-      data_status = Enum.filter(data_status, &(!is_nil(&1)))
-
-      cond do
-        data_category != [] ->
-          all_query = []
-
-          x =
-            Enum.map(data_category, fn x ->
-              struct = from(p in Signals, where: p.signals_categories_id == ^String.to_integer(x))
-              all_query = all_query ++ Repo.all(struct)
-            end)
-
-          x = List.flatten(x)
-          page = Smartcitydogs.Repo.paginate(x, page: 1, page_size: 8)
-          render(conn, "minicipality_signals.html", signal: page.entries, page: page, data: nil)
-
-        data_status != [] ->
-          all_query = []
-
-          x =
-            Enum.map(data_status, fn x ->
-              struct = from(p in Signals, where: p.signals_types_id == ^String.to_integer(x))
-              all_query = all_query ++ Repo.all(struct)
-            end)
-
-          x = List.flatten(x)
-          page = Smartcitydogs.Repo.paginate(x, page: 1, page_size: 8)
-          render(conn, "minicipality_signals.html", signal: page.entries, page: page, data: nil)
-
-        true ->
-          nil
-      end
+    render(conn, "minicipality_signals.html", signal: page.entries, page: page, data_category: data_category, data_status: data_status)
     else
-      {:error, raison} -> render(conn, SmartcitydogsWeb.ErrorView, "401.html")
+      {:error, _} -> render(conn, SmartcitydogsWeb.ErrorView, "401.html")
     end
   end
 
@@ -155,72 +102,7 @@ defmodule SmartcitydogsWeb.SignalController do
     end
   end
 
-  ## Get all of the ticked checkboxes from the filters, handle redirection to pagination pages.
-  def get_ticked_checkboxes(conn, params) do
-    {data_status, data_category, num} = params
-    case data_status do
-      nil -> []
-      _ -> data_status
-    end
-
-    case data_category do
-      nil -> []
-      _ -> data_category
-    end
-
-    num = String.to_integer(num)
-
-    cond do
-      data_status != [] ->
-        all_query = []
-
-        x =
-          Enum.map(data_status, fn x ->
-            struct = from(p in Signals, where: p.signals_types_id == ^String.to_integer(x))
-            all_query = all_query ++ Repo.all(struct)
-          end)
-
-        x = List.flatten(x)
-        list_signals = Smartcitydogs.Repo.paginate(x, page: num, page_size: 8)
-
-        render(conn, "minicipality_signals.html",
-          signal: list_signals.entries,
-          page: list_signals,
-          data_category: data_category,
-          data_status: data_status
-        )
-
-      data_category != [] ->
-        all_query = []
-
-        x =
-          Enum.map(data_category, fn x ->
-            struct = from(p in Signals, where: p.signals_categories_id == ^String.to_integer(x))
-            all_query = all_query ++ Repo.all(struct)
-          end)
-
-        x = List.flatten(x)
-        page = Smartcitydogs.Repo.paginate(x, page: 1, page_size: 8)
-
-        render(conn, "minicipality_signals.html",
-          signal: page.entries,
-          page: page,
-          data_category: data_category,
-          data_status: data_status
-        )
-
-      true ->
-        x = DataSignals.list_signals()
-        page = Smartcitydogs.Repo.paginate(x, page: 1, page_size: 8)
-
-        render(conn, "minicipality_signals.html",
-          signal: page.entries,
-          page: page,
-          data_category: data_category,
-          data_status: data_status
-        )
-    end
-  end
+  
 
   def new(conn, _params) do
     changeset = Smartcitydogs.DataSignals.change_signal(%Signals{})

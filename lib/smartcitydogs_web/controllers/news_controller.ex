@@ -50,13 +50,14 @@ defmodule SmartcitydogsWeb.NewsController do
         "image_url",
         "images/#{Map.get(upload, :filename)}-profile#{extension}"
       )
+      IO.inspect news_params, label: "NEWS PARAMS"
+    # {:safe, xxx} =
+    #  news_params["content"]
+    #  |> Markdown.to_html()
+    #  |> Phoenix.HTML.raw() # Convert to {:safe, iodata} tuple
 
-    {:safe, xxx} =
-     news_params["content"]
-     |> Markdown.to_html()
-     |> Phoenix.HTML.raw() # Convert to {:safe, iodata} tuple
-
-     news_params |> Map.delete("content") |> Map.put("content", xxx)
+    #  news_params |> Map.delete("content") |> Map.put("content", xxx)
+    
     case DataPages.create_news(news_params) do
       {:ok, news} ->
         conn
