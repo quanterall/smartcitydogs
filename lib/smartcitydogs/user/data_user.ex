@@ -25,17 +25,13 @@ defmodule Smartcitydogs.DataUsers do
     |> Repo.insert()
   end
 
-  def create_user_contact(id, args) do
-    
-    user = Repo.get!(User, id)
-    
-    changeset = Ecto.Changeset.change(user)
-    
-    changeset = Ecto.Changeset.put_embed(changeset, :contact, args)
-    
-    Repo.update!(changeset).contact
-    Repo.get!(User, id)
-  end
+  # def create_user_contact(id, args) do
+  #   Repo.get!(User, id) 
+  #   |> Ecto.Changeset.change()
+  #   |> Ecto.Changeset.put_embed( :contact, args)
+  #   |> Repo.update!().contact
+  #   Repo.get!(User, id)
+  # end
 
   # todo: some users don't have phone
   def create_user_from_auth(auth) do
@@ -72,8 +68,7 @@ defmodule Smartcitydogs.DataUsers do
 
   def remove_like(user_id, signal_id) do
     from(l in Smartcitydogs.SignalsLikes, where: l.users_id == ^user_id and l.signals_id == ^signal_id )
-|> Repo.delete_all
-
+    |> Repo.delete_all
   end
 
   def get_likes(signal_id) do
@@ -82,7 +77,6 @@ defmodule Smartcitydogs.DataUsers do
 
   def add_liked_signal_comment(user_id, comment_id) do
     user = Repo.get!(User, user_id)
-    
     User.changeset(user, %{liked_comments: user.liked_comments ++ [comment_id]})
     |> Repo.update()
   end

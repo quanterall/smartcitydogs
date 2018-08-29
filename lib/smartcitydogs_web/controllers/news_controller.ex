@@ -18,7 +18,11 @@ defmodule SmartcitydogsWeb.NewsController do
   
   def index(conn, %{}) do
     news = DataPages.list_news()
-    news2 = Enum.slice(news, -3..-2) ##second and third to last created news
+    cond do
+      length(news) == 2 -> news2 = Enum.slice(news, -2..-2) ++ []
+      length(news) == 1 -> [[],[]]
+      length(news) == 0 -> [[],[]]
+    end
     last_news = Repo.one(from n in News, order_by: [desc: n.id], limit: 1)
     news = Enum.drop(news, -3)
     page = Smartcitydogs.Repo.paginate(news, page: 1, page_size: 8)
@@ -53,12 +57,12 @@ defmodule SmartcitydogsWeb.NewsController do
         news_params = Map.put(news_params, "image_url", "")
       end
       case DataPages.create_news(news_params) do
-        {:ok, news} ->
+        {:ok, _} ->
           conn
           |> put_flash(:info, " News is created!")
           |> redirect(to: news_path(conn, :index))
 
-        {:error, changeset} ->
+        {:error, _} ->
           conn
             |> put_status(:not_acceptable)
             |> send_resp(:not_acceptable, "")

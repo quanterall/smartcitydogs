@@ -66,7 +66,7 @@ defmodule SmartcitydogsWeb.ContactController do
              conn.assigns.current_user
            ) do
       case Recaptcha.verify(params["g-recaptcha-response"], secret: secret) do
-        {:ok, response} ->
+        {:ok, _} ->
           user_params = Map.get(params, "user")
           topic = Map.get(user_params, "topic")
           text = Map.get(user_params, "text")
@@ -76,7 +76,7 @@ defmodule SmartcitydogsWeb.ContactController do
 
           redirect(conn, to: page_path(conn, :index))
 
-        {:error, errors} ->
+        {:error, _} ->
           redirect(conn, to: contact_path(conn, :index))
       end
     end

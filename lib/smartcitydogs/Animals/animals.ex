@@ -5,7 +5,7 @@ defmodule Smartcitydogs.Animals do
   alias Smartcitydogs.DataAnimals
   alias Smartcitydogs.Animals
   alias Smartcitydogs.Repo
-  alias SmartcitydogsWeb.AnimalController
+  ##alias SmartcitydogsWeb.AnimalController
 
 
   alias Smartcitydogs.DataAnimals
@@ -84,15 +84,4 @@ defmodule Smartcitydogs.Animals do
           [page, data_status]
       end
     end
-  
-
-
-
-
-
-
-
-
-
-
 end

@@ -45,7 +45,7 @@ defmodule SmartcitydogsWeb.SessionController do
             |> put_flash(:info, "You’re now signed in!")
             |> redirect(to: "/")
 
-          {:error, changeset} ->
+          {:error, _} ->
             conn
             |> put_flash(:error, "Fail to store to DB")
             |> redirect(to: "/")

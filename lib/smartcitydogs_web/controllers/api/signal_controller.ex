@@ -97,8 +97,6 @@ defmodule SmartcitydogsWeb.SignalControllerAPI do
         )
     end
 
-    # signal = DataSignals.get_signal(id)
-    # render(conn, "show.json", signal: signal)
   end
 
   def update(conn, %{"id" => id, "signal" => signal_params}) do

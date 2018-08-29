@@ -2,13 +2,13 @@ defmodule SmartcitydogsWeb.SignalController do
   use SmartcitydogsWeb, :controller
   alias Smartcitydogs.DataSignals
   alias Smartcitydogs.Signals
-  alias Smartcitydogs.DataUsers
+#alias Smartcitydogs.DataUsers
   alias Smartcitydogs.Repo
-  alias Smartcitydogs.DataAnimals
+ ## alias Smartcitydogs.DataAnimals
   alias Smartcitydogs.Repo
-  alias Smartcitydogs.Animals
-  alias SmartcitydogsWeb.SignalController
-  alias SmartcitydogsWeb.SignalControllerAPI
+##alias Smartcitydogs.Animals
+ ## alias SmartcitydogsWeb.SignalController
+##  alias SmartcitydogsWeb.SignalControllerAPI
   import Ecto.Query
 
   action_fallback(SmartCityDogsWeb.FallbackController)
@@ -115,7 +115,7 @@ defmodule SmartcitydogsWeb.SignalController do
            ) do
       render(conn, "new_signal.html", changeset: changeset)
     else
-      {:error, raison} -> render(conn, SmartcitydogsWeb.ErrorView, "401.html")
+      {:error, _} -> render(conn, SmartcitydogsWeb.ErrorView, "401.html")
     end
   end
 
@@ -195,7 +195,7 @@ defmodule SmartcitydogsWeb.SignalController do
       changeset = DataSignals.change_signal(signal)
       render(conn, "edit_signal.html", signal: signal, changeset: changeset)
     else
-      {:error, raison} -> render(conn, SmartcitydogsWeb.ErrorView, "401.html")
+      {:error, _} -> render(conn, SmartcitydogsWeb.ErrorView, "401.html")
     end
   end
 

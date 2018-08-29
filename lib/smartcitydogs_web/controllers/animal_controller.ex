@@ -75,13 +75,13 @@ defmodule SmartcitydogsWeb.AnimalController do
     cond do
       data_status != [] ->
         all_query = []
-        x =
+        query_animals =
           Enum.map(data_status, fn x ->
             struct = from(p in Animals, where: p.animals_status_id == ^String.to_integer(x))
             (all_query ++ Repo.all(struct)) |> Repo.preload(:animals_status)
           end)
 
-        page = Smartcitydogs.Repo.paginate(List.flatten(x), page: 1, page_size: 8)
+        page = Smartcitydogs.Repo.paginate(List.flatten(query_animals), page: 1, page_size: 8)
 
         render(conn, "minicipality_registered.html",
           animals: page.entries,
@@ -90,8 +90,8 @@ defmodule SmartcitydogsWeb.AnimalController do
         )
 
       true ->
-        x = DataAnimals.list_animals()
-        page = Smartcitydogs.Repo.paginate(x, page: 1, page_size: 8)
+        all_animals = DataAnimals.list_animals()
+        page = Smartcitydogs.Repo.paginate(all_animals, page: 1, page_size: 8)
 
         render(conn, "minicipality_registered.html",
           animals: page.entries,
@@ -108,9 +108,6 @@ defmodule SmartcitydogsWeb.AnimalController do
     sorted_animals = DataAnimals.sort_animals_by_id()
 
     if conn.assigns.current_user != nil do
-      # logged_user_type_id = conn.assigns.current_user.users_types.id
-
-      # if logged_user_type_id == 3 do
       with :ok <-
              Bodyguard.permit(Smartcitydogs.Animals.Policy, :index, conn.assigns.current_user) do
         index_rendering(conn, params, sorted_animals) 
@@ -262,9 +259,6 @@ defmodule SmartcitydogsWeb.AnimalController do
   def edit(conn, %{"id" => id}) do
     animal = DataAnimals.get_animal(id)
     changeset = DataAnimals.change_animal(animal)
-    logged_user_type_id = conn.assigns.current_user.users_types.id
-
-    # if logged_user_type_id == 1 || logged_user_type_id == 5 do
     with :ok <- Bodyguard.permit(Smartcitydogs.Animals.Policy, :edit, conn.assigns.current_user) do
       render(conn, "edit.html", animals: animal, changeset: changeset)
     else
@@ -274,10 +268,6 @@ defmodule SmartcitydogsWeb.AnimalController do
 
   def update(conn, %{"id" => id, "animals" => animal_params}) do
     animal = DataAnimals.get_animal(id)
-
-    logged_user_type_id = conn.assigns.current_user.users_types.id
-
-    # if logged_user_type_id == 1 || logged_user_type_id == 5 do
     with :ok <- Bodyguard.permit(Smartcitydogs.Animals.Policy, :update, conn.assigns.current_user) do
       case DataAnimals.update_animal(animal, animal_params) do
         {:ok, animal} ->

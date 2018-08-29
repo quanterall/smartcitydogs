@@ -1,10 +1,12 @@
 defmodule SmartcitydogsWeb.PageController do
   use SmartcitydogsWeb, :controller
+  
+  import Ecto.Query
   alias Smartcitydogs.DataSignals
   alias Smartcitydogs.DataPages
   alias Smartcitydogs.DataAnimals
   alias Smartcitydogs.Animals
-  import Ecto.Query
+  
 
   def index(conn, _params) do
     signal = DataSignals.list_signals()
