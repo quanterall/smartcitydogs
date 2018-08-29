@@ -17,6 +17,8 @@
 }
 
 .modal-form{
+  width: 50%;
+  margin-left: 50%;
   -webkit-box-shadow: inset 0px 45px 7px -45px rgba(0,0,0,0.75);
   display: none;
   height: 100vh;

@@ -7,7 +7,7 @@ defmodule SmartcitydogsWeb.UserControllerAPI do
   alias SmartcitydogsWeb.SignalView
   plug(Ueberauth)
 
- ## action_fallback(SmartcitydogsWeb.FallbackController)
+  ## action_fallback(SmartcitydogsWeb.FallbackController)
 
   def index(conn, _params) do
     users = DataUsers.list_users()
@@ -31,42 +31,44 @@ defmodule SmartcitydogsWeb.UserControllerAPI do
   end
 
   def show(conn, %{"id" => id}) do
-    user = DataUsers.get_user!(id)
-    render(conn, "show.json", user: user)
-  end
+    user_id = conn.private.plug_session["current_user_id"]
 
-  def update(conn, %{"id" => id, "user" => user_params}) do
-    user = DataUsers.get_user!(id)
-
-    with {:ok, %User{} = user} <- DataUsers.update_user(user, user_params) do
+    if(Integer.to_string(user_id) == id) do
+      user = DataUsers.get_user!(id)
       render(conn, "show.json", user: user)
+    else
+      render(conn, "401.json", user: "Not autorization!")
     end
   end
 
-  def delete(conn, %{"id" => id}) do
-    user = DataUsers.get_user!(id)
+  # def update(conn, %{"id" => id, "user" => user_params}) do
+  #   user = DataUsers.get_user!(id)
 
-    with {:ok, %User{}} <- DataUsers.delete_user(user) do
-      send_resp(conn, :no_content, "")
-    end
-  end
+  #   with {:ok, %User{} = user} <- DataUsers.update_user(user, user_params) do
+  #     render(conn, "show.json", user: user)
+  #   end
+  # end
 
   def sign_in(conn, %{"email" => email, "password" => password}) do
     case Smartcitydogs.Auth.login_by_email_and_pass(conn, email, password) do
       {:ok, conn} ->
-        user =  Guardian.Plug.current_resource(conn)
-       if user.users_types_id == 4 || user.users_types_id == 5 do
-       conn
-       |> put_session(:current_user_id, user.id)
-       |> put_status(:ok)
-       |> render(SmartcitydogsWeb.UserControllerAPIView, "municipality_sign_in.json", user: user)
-       else
-        conn
-        |> put_session(:current_user_id, user.id)
-        |> put_status(:ok)
-        |> render(SmartcitydogsWeb.UserControllerAPIView, "sign_in.json", user: user)
-       end
-      {:error, message,conn} ->
+        user = Guardian.Plug.current_resource(conn)
+
+        if user.users_types_id == 4 || user.users_types_id == 5 do
+          conn
+          |> put_session(:current_user_id, user.id)
+          |> put_status(:ok)
+          |> render(SmartcitydogsWeb.UserControllerAPIView, "municipality_sign_in.json",
+            user: user
+          )
+        else
+          conn
+          |> put_session(:current_user_id, user.id)
+          |> put_status(:ok)
+          |> render(SmartcitydogsWeb.UserControllerAPIView, "sign_in.json", user: user)
+        end
+
+      {:error, message, conn} ->
         conn
         |> delete_session(:current_user_id)
         |> put_status(:unauthorized)

@@ -63,7 +63,7 @@ defmodule SmartcitydogsWeb.Router do
       put("/signals/follow", SignalControllerAPI, :follow)
       put("/signals/unfollow", SignalControllerAPI, :unfollow)
     end
-
+    get("/my_signals", MySignalsControllerAPI, :index)
     resources("/signal_images", SignalImageControllerAPI, except: [:new, :edit])
     resources("/signals_comments", SignalsCommentControllerAPI, except: [:new, :edit])
     scope "/signals_comments", SmartcitydogsWeb do
@@ -113,6 +113,9 @@ defmodule SmartcitydogsWeb.Router do
       resources("/users", UserController)
       resources("/registered", AnimalController)
       resources("/news", NewsController)
+      
+      get("/show", PageController, :show) ##not in develop
+
       resources("/my_signals", MySignalsController)
 
       get("/show", PageController, :show)
@@ -168,7 +171,6 @@ defmodule SmartcitydogsWeb.Router do
   # Plug function
   defp ensure_authenticated(conn, _opts) do
     current_user_id = get_session(conn, :current_user_id)
-
     if current_user_id do
       conn
     else

@@ -522,16 +522,16 @@ label-forgotten-password{
     }
 }
 @media (max-width: 1053px){
-    .show-signals-dogs{
+    /* .show-signals-dogs{
         padding-left: 5%;
-    }
+    } */
     .show-signals-dogs .col-container{
-        width: 20rem;
+        width: 11rem;
     }
 }
 @media (max-width: 1003px){
     .show-signals-dogs .col-container{
-        width: 19rem;
+        width: 10rem;
     }
 }
 @media (max-width: 953px){
@@ -729,12 +729,12 @@ label-forgotten-password{
 }
 @media (max-width: 1053px){
     .registered-dogs-div .col-container{
-        width: 20rem;
+        width: 11rem;
     }
 }
 @media (max-width: 1003px){
     .registered-dogs-div .col-container{
-        width: 19rem;
+        width: 10rem;
     }
 }
 @media (max-width: 953px){

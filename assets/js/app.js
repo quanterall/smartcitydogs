@@ -55,6 +55,34 @@ $('#submit-adoption').click(function(){
 	})
 });
 
+$('#submit-news').click(function(){
+    var editor_content = quill.container.firstChild.innerHTML
+    var image = document.getElementById('image').value
+    var title = document.getElementById('title').value
+    var short_content = document.getElementById('short_content').value
+    $.ajax({
+        method: "POST",
+        url: "/news",
+        credentials: 'same-origin',
+        data: {
+            "news": {
+                    "image_url": image,
+                    "title": title,
+                    "short_content": short_content,
+                    "content": editor_content,
+                    }
+        },
+        success: function (msg) {
+                alert("Новината ви беше успешно създадена!");
+        },
+        error: function (xhr, status) {
+           alert("Неуспешно създаване на новина!");
+          }
+    }).done(function(){
+		location.reload();
+	})
+});
+
 $("#my-signals-link").click(function(){
     $(".last-signals-dogs-div").css("display","inline-block");
     $(".last-signals-dogs-div2").css("display","none");
@@ -241,22 +269,4 @@ $('.navbar-collapse').on('show.bs.collapse', function() {
 
     
 
-ClassicEditor
-    .create( document.querySelector( '#editor' ) )
-   
-    .then( editor => {
-        config.extraPlugins = 'image';
-        config.extraPlugins = 'dialog';
-        image: {
-            toolbar: [ 'imageTextAlternative' ]
-        }
-    } )
-    .catch( error => {
-        console.error( error );
-    } );
 
-
-
-
-
-  
