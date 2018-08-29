@@ -33,7 +33,6 @@ defmodule SmartcitydogsWeb.NewsController do
   end
 
   def create(conn, %{"news" => news_params}) do
-
      image_name = String.split(news_params["image_url"], "\\") |> List.last 
      extension = Path.extname(image_name)
     upload = 
@@ -50,22 +49,24 @@ defmodule SmartcitydogsWeb.NewsController do
         "image_url",
         "images/#{Map.get(upload, :filename)}-profile#{extension}"
       )
+      if news_params["image_url"] == "images/-profile" do
+        news_params = Map.put(news_params, "image_url", "")
+      end
+      #IO.inspect news_params
+      case DataPages.create_news(news_params) do
+        {:ok, news} ->
+          conn
+          |> put_flash(:info, " News is created!")
+          |> redirect(to: news_path(conn, :index))
 
-    {:safe, xxx} =
-     news_params["content"]
-     |> Markdown.to_html()
-     |> Phoenix.HTML.raw() # Convert to {:safe, iodata} tuple
+        {:error, changeset} ->
+          IO.puts "EEEEEEEERRRRRRRRRRRRRRROOOOOOOOOOORRRRRRRRRRRRRRRRRR!"
+          conn
+            |> put_status(:not_acceptable)
+            |> send_resp(:not_acceptable, "")
+            
+      end
 
-     news_params |> Map.delete("content") |> Map.put("content", xxx)
-    case DataPages.create_news(news_params) do
-      {:ok, news} ->
-        conn
-        |> put_flash(:info, " News is created!")
-        |> redirect(to: news_path(conn, :index))
-
-      {:error, changeset} ->
-        render(conn, "new.html", changeset: changeset)
-    end
   end
 
   def show(conn, %{"id" => id}) do

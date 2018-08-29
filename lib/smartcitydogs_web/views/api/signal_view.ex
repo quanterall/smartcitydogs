@@ -28,7 +28,6 @@ defmodule SmartcitydogsWeb.SignalControllerAPIView do
   end
 
   def render("signal_show.json", %{signal_controller_api: signal}) do
-    IO.inspect signal
     %{
        
         id: signal.signal.id,

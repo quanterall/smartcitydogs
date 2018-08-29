@@ -55,7 +55,6 @@ defmodule SmartcitydogsWeb.UserController do
   end
 
   def show(conn, params) do
-    IO.inspect params
     id = params["id"]
     user = Repo.get!(User, id) |> Repo.preload(:users_types)
     # changeset = DataUsers.change_user(user)

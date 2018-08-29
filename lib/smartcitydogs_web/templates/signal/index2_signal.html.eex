@@ -6,7 +6,6 @@
     <div class="col-lg-3">
       <div class="col-container" style="background-image: url('/<%= get_signals_images(signal.id) %>')">
         <div class="col-container-shadow">
-        <% #IO.inspect signal %>
           <label-type class="
             <%= if signal.signals_types_id == 1 do %>
             label-type-red

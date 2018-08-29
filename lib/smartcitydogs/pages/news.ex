@@ -7,7 +7,6 @@ defmodule Smartcitydogs.News do
   schema "news" do
     field(:content, :string)
     field(:date, :naive_datetime)
-    field(:deleted_at, :naive_datetime)
     field(:image_url, :string)
     field(:short_content, :string)
     field(:title, :string)
@@ -23,14 +22,17 @@ defmodule Smartcitydogs.News do
       :title,
       :content,
       :short_content,
-      :date,
-      :deleted_at
-    ])
-    |> validate_required([
-       :image_url,
-      :title,
-      :content,
       :date
     ])
+    |> validate_required([
+      :image_url,
+      :title,
+      :content,
+      :date,
+      :short_content
+    ])
+    |> validate_length(:title, min: 5, max: 50)
+    |> validate_length(:content, min: 15)
+    |> validate_length(:short_content, min: 5, max: 50)
   end
 end

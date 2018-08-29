@@ -177,7 +177,6 @@ defmodule SmartcitydogsWeb.SignalControllerAPI do
     show_comment = map["show-comment"]
     show_id = String.to_integer(map["show-id"])
     user_id = conn.private.plug_session["current_user_id"]
-    IO.inspect show_id, label: "SHOW_ID:"
     Smartcitydogs.DataSignals.create_signal_comment(%{
       comment: show_comment,
       signals_id: show_id,
