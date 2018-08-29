@@ -48,9 +48,9 @@
     }
 }
 @media (min-height: 1080px) {
-    .modal-form{
+    /* .modal-form{
         padding-top: 5%;
-    }
+    } */
     .form-group{
         margin-top: 7vh !important;
     }
