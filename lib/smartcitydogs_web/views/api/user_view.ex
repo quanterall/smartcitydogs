@@ -38,6 +38,10 @@ defmodule SmartcitydogsWeb.UserControllerAPIView do
     }
   end
 
+  def render("401.json", %{user: user}) do
+    "Not autorization!"
+  end
+
   def render("municipality_sign_in.json", %{user: user}) do
     %{
       users_types_id: user.users_types_id,

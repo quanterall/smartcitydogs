@@ -21,7 +21,6 @@
 
         <div class="under-form">
 
-<<<<<<< HEAD
           <%= submit "ИЗПРАТИ", class: "btn btn-submit" %><br>
           <a class="close-modal" href="#">ОТКАЗ</a>
         </div>
@@ -30,4 +29,3 @@
   </div>
 </div>
 
->>>>>>> develop
