@@ -7,13 +7,25 @@ defmodule SmartcitydogsWeb.NewsController do
   alias Smartcitydogs.Repo
   alias Smartcitydogs.Markdown
 
-  def index(conn, _params) do
+  def index(conn, %{"page" => page_number}) do
     news = DataPages.list_news()
-    news2 = Enum.slice(news, -3..-2)
-    last_news = Repo.one(from x in News, order_by: [desc: x.id], limit: 1)
+    news2 = Enum.slice(news, -3..-2) ##second and third to last created news
+    last_news = Repo.one(from n in News, order_by: [desc: n.id], limit: 1)
     news = Enum.drop(news, -3)
-    render(conn, "index.html", news: news, last_news: last_news, news2: news2)
+    page = Smartcitydogs.Repo.paginate(news, page: String.to_integer(page_number), page_size: 8)
+    render(conn, "index.html", news: page.entries, last_news: last_news, news2: news2, page: page)
   end
+  
+  def index(conn, %{}) do
+    news = DataPages.list_news()
+    news2 = Enum.slice(news, -3..-2) ##second and third to last created news
+    last_news = Repo.one(from n in News, order_by: [desc: n.id], limit: 1)
+    news = Enum.drop(news, -3)
+    page = Smartcitydogs.Repo.paginate(news, page: 1, page_size: 8)
+    render(conn, "index.html", news: page.entries, last_news: last_news, news2: news2, page: page)
+  end
+
+
 
   def new(conn, _params) do
     changeset = News.changeset(%News{})
@@ -21,18 +33,17 @@ defmodule SmartcitydogsWeb.NewsController do
   end
 
   def create(conn, %{"news" => news_params}) do
-    upload = Map.get(conn, :params)
-    upload = Map.get(upload, "files")
 
-    extension = Path.extname(upload.filename)
-
-    File.cp(
-      upload.path,
-      "../smartcitydogs/assets/static/images/#{Map.get(upload, :filename)}-profile#{extension}"
-    )
-
+     image_name = String.split(news_params["image_url"], "\\") |> List.last 
+     extension = Path.extname(image_name)
+    upload = 
+    %Plug.Upload{
+      content_type: "image/jpeg",
+      filename: image_name,
+      path: "./smartcitydogs/assets/static/images/#{image_name}-profile#{extension}"
+    }
+    
     news_params = Map.put(news_params, "date", DateTime.utc_now())
-
     news_params =
       Map.put(
         news_params,
@@ -83,4 +94,7 @@ defmodule SmartcitydogsWeb.NewsController do
         render(conn, "edit.html", news: news, changeset: changeset)
     end
   end
+
+
+
 end

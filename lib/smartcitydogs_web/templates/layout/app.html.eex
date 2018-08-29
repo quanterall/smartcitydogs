@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css"
           integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
     <link rel="stylesheet" href='<%= static_path(@conn, "/css/app.css") %>'>
-    
+
 </head>
 <body>
 <div class="container-fluid">
@@ -103,6 +103,7 @@
 <script src='<%= static_path(@conn, "/js/app.js") %>'></script>
 <p id="get_token">
 
+<p id="get_token">
 </p>
 <script>
 $.ajaxSetup({
@@ -111,8 +112,6 @@ $.ajaxSetup({
         }
    });
 </script>
-
-
 
 </body>
 </html>

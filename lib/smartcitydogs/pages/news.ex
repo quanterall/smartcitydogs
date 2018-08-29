@@ -9,8 +9,6 @@ defmodule Smartcitydogs.News do
     field(:date, :naive_datetime)
     field(:deleted_at, :naive_datetime)
     field(:image_url, :string)
-    field(:keywords, :string)
-    field(:meta, :string)
     field(:short_content, :string)
     field(:title, :string)
 
@@ -23,15 +21,13 @@ defmodule Smartcitydogs.News do
     |> cast(attrs, [
       :image_url,
       :title,
-      :meta,
-      :keywords,
       :content,
       :short_content,
       :date,
       :deleted_at
     ])
     |> validate_required([
-      # :image_url,
+       :image_url,
       :title,
       :content,
       :date

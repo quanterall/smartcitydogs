@@ -1,5 +1,5 @@
 .buttons-show-signals-user{
-  position: inherit;
+  width: 49%;
 }
 .buttons-show-followed-signal{
   margin-right: 5%;
@@ -29,4 +29,196 @@
   opacity: 1;
   text-decoration: underline;
   color: white;
+}
+.form-show-signals-user{
+  width: 49%;
+}
+.container-filter .border-style-links-profile{
+  padding: 1%;
+  border: 1px solid rgb(0,201,148);
+  /* width: 60%; */
+  text-align: center;
+  background-color: rgb(0,201,148);
+  float: right;
+}
+.container-signals .border-style-links-profile{
+  float: right;
+}
+.profile-button-styles{
+  width: 100%;
+  text-align: -webkit-center;
+  font-weight: bold;
+  font-size: 14px;
+  color: white;
+  display: -webkit-box;
+}
+.container-filter .border-style-links-profile{
+  transition: 0.5s;
+  padding: 3% 0% 3% 3%;
+  width: 100%;
+  margin-top: 10vh;
+  float: left;
+}
+.container-filter .border-style-links-profile:hover{
+  transition: 0.5s;
+  text-decoration: none;
+  background-color: white;
+}
+.container-filter .border-style-links-profile:hover .profile-button-styles{
+  font-weight: bold;
+  font-size: 14px;
+  transition: 0.5s;
+  color: rgb(0,201,148);
+  text-decoration: none;
+}
+.container-signals .border-style-links-profile{
+  width: 30%;
+  margin-right: 14%
+}
+.container-signals .border-style-links-profile .profile-button-styles{
+  transition: 0.5s;
+  padding: 2%;
+  width: 100%;
+  height: 100%;
+  border: 1px solid rgb(0,201,148);
+  background-color: rgb(0,201,148);
+  color: white;
+  text-align: -webkit-center;
+}
+.container-signals .border-style-links-profile .profile-button-styles:hover{
+  transition: 0.5s;
+  color: rgb(0,201,148);
+  background-color: white;
+  text-decoration: none; 
+}
+.container-show-user .container-filter{
+
+  border:none;
+}
+.container-background-user{
+  width: 100%;
+  height: 100vh;
+  background-color: rgb(0,201,148);
+}
+.user-li .strong-show-user{
+  margin-left: 0px;
+}
+.container-show-user .container-filter{
+  width: 20%;
+}
+.container-show-user .container-signals{
+  width: 80%;
+}
+.signals-user-show{
+  /* display: none; */
+  margin-top: 2%;
+  width: 100%;
+  height: 100%;
+  display: inline-block;
+}
+.signals-user-show .row{
+  margin-bottom: 5%;
+}
+@media (max-width:835px){
+  .container-signals .border-style-links-profile{
+    width: 40%;
+    margin-right: 7%;
+  }
+}
+@media (max-width:820px){
+  .signals-user-show .col-container{
+    width: 49vw;
+  }
+}
+@media (max-width:820px){
+  .container-signals .border-style-links-profile{
+    width: 47%;
+    margin-right: 1%;
+  }
+}
+@media (max-width:640px){
+  .signals-user-show .col-container{
+    width: 48vw;
+  }
+}
+@media (max-width:600px){
+  .signals-user-show .col-container{
+    width: 47vw;
+  }
+}
+@media (max-width:580px){
+  .container-show-user{
+    display: block;
+  }
+  .container-show-user .container-filter, container-signals{
+    width: 100%;
+  }
+  .container-filter .border-style-links-profile{
+    margin-bottom: 5vh;
+  }
+  .container-show-user .container-signals{
+    padding: 0px;
+    width: 100%;
+  }
+  .container-signals .border-style-links-profile{
+    width: 49%;
+    margin-right: 0.5%;
+  }
+  .signals-user-show .col-container{
+    width: 66vw;
+  }
+  .signals-user-show .col-lg-3{
+    margin-left: 0px;
+  }
+}
+@media (max-width:540px){
+  .signals-user-show .col-container{
+    width: 65vw;
+  }
+}
+@media (max-width:510px){
+  .signals-user-show .col-container{
+    width: 64vw;
+  }
+}
+@media (max-width:480px){
+  .signals-user-show .col-container{
+    width: 63vw;
+  }
+}
+@media (max-width:450px){
+  .signals-user-show .col-container{
+    width: 62vw;
+  }
+  .container-signals .border-style-links-profile{
+    width: 100%;
+    margin-bottom: 10%;
+    margin-right: 0%;
+  }
+}
+@media (max-width:420px){
+  .signals-user-show .col-container{
+    width: 60vw;
+  }
+}
+@media (max-width:390px){
+  .signals-user-show .col-container{
+    width: 59vw;
+  }
+}
+@media (max-width:360px){
+  .signals-user-show .col-container{
+    width: 58vw;
+  }
+}
+@media (max-width:330px){
+  .signals-user-show .col-container{
+    width: 55vw;
+  }
+}
+@media (min-width:1920px){
+  .signals-user-show .col-container{
+    width: 16rem;
+    height: 22rem;
+  }
 }

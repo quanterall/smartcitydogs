@@ -334,8 +334,6 @@ end
 news_params = %{
   image_url: "images/2.jpg",
   title: "Изгубено куче!",
-  meta: "kuce, miss",
-  keywords: "miss, lost",
   content: "Obatede se ako go namerite",
   short_content: "Help my",
   date: "2018-05-22 11:56:16"

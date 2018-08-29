@@ -216,7 +216,8 @@ defmodule Smartcitydogs.DataSignals do
   # Signals likes
 
   def get_signal_like(id) do
-    Repo.get!(SignalsLikes, id)
+    query = Ecto.Query.from(c in SignalsLikes, where: c.users_id == ^id)
+    Repo.all(query)
   end
 
   def list_signal_like() do

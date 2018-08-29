@@ -1,5 +1,4 @@
 
-<div class="last-signals-dogs-div">          
 <div class="row">
   <%= for signal <- @signals do %>
     <div class="col-lg-3">
@@ -24,27 +23,9 @@
             <% end %>"><%=signal.signals_types_id
             |> Smartcitydogs.DataSignals.get_signal_type()
             |> Map.get(:name)
-            %>
-          </li>
-          <li>
-            Registered at: <%=signal.inserted_at%>
-          </li>
-          <li>
-            Description: <%=signal.description%>
-          </li>
-          <li>
-            Chip number: <%=signal.chip_number%>
-          </li>
-          <li>
-            Support count: <span id="signal-count"><%= Smartcitydogs.DataUsers.get_likes(signal.id)%></span>
-          </li>
-          <li>
-            Last location: <%=signal.address%>
-          </li>
-          <li>
-            Views: <%=signal.view_count%>
-          </li>
-        </ul>
+          %>
+          </label-type>
+          <br />
 
           <label-date>
           <%=
@@ -86,10 +67,9 @@
             <center>
 
             <div class="button-show-hide">
-              <p class="p-button-view"><%= link "Виж още", to: signal_path(@conn, :show, signal.id), class: "btn btn-secondary" %></p>
+              <p class="p-button-view"><a class="btn btn-secondary" href="signals/<%=signal.id%>" role="button">Виж още</a>
             </div></center>
           </div>
-
          </div>
        </div>
     <%end%>
@@ -99,8 +79,11 @@
 <div class="padination">
 
   <%= for x <- 1..@page.total_pages do %>
-    <%= link "#{x * 8 - 7}-#{x * 8} ", to: my_signals_path(@conn, :index, page: x) %>
+    <% 
+    page = x 
+    id = @conn.assigns.current_user.id
+    %>
+    <%= link "#{x * 8 - 7}-#{x * 8} ", to: user_path(@conn, :show, id, %{page: x}) %>
   <% end %>
-</div>
 </div>
 

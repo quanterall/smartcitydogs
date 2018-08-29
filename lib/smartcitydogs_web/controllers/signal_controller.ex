@@ -267,7 +267,6 @@ defmodule SmartcitydogsWeb.SignalController do
   def create(conn, signal_params) do
     signals_categories_id = String.to_integer(signal_params["signals_categories_id"])
     a = conn.assigns.current_user.id
-
     with :ok <-
            Bodyguard.permit(
              Smartcitydogs.Signals.Policy,
@@ -314,25 +313,10 @@ defmodule SmartcitydogsWeb.SignalController do
   end
 
   def show(conn, map) do
-    id = map["id"]
-    IO.inspect map
-    cond do
-      id == "remove_like" ->
-        SignalControllerAPI.remove_like(conn, map)
-
-      id == "update_like_count" ->
-        SignalControllerAPI.update_like_count(conn, map)
-
-      id == "comment" ->
-        SignalControllerAPI.comment(conn, map)
-
-      id == "followed_signals" ->
-        followed_signals(conn, map)
-
-      true ->
         id = String.to_integer(map["id"])
         comments = DataSignals.get_comment_signal_id(id)
         signal = DataSignals.get_signal(id)
+    
         ## signal is liked by user
         sorted_comments = DataSignals.sort_signal_comment_by_id()
 
@@ -343,12 +327,11 @@ defmodule SmartcitydogsWeb.SignalController do
           comments: sorted_comments,
           comments_count: comments
         )
-    end
   end
 
   def edit(conn, %{"id" => id}) do
     signal = DataSignals.get_signal(id)
-
+   
     with :ok <-
            Bodyguard.permit(
              Smartcitydogs.Signals.Policy,
@@ -386,6 +369,7 @@ defmodule SmartcitydogsWeb.SignalController do
   end
 
   def followed_signals(conn, params) do
+    # IO.inspect params
     user_like = conn.assigns.current_user.liked_signals
 
     all_followed_signals =
@@ -408,7 +392,7 @@ defmodule SmartcitydogsWeb.SignalController do
 
   def delete(conn, %{"id" => id}) do
     signal = DataSignals.get_signal(id)
-
+   
     with :ok <-
            Bodyguard.permit(
              Smartcitydogs.Signals.Policy,

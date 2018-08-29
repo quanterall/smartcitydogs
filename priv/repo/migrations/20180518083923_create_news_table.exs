@@ -5,8 +5,6 @@ defmodule Smartcitydogs.Repo.Migrations.CreateNewsTable do
     create table("news") do
       add(:image_url, :text)
       add(:title, :text)
-      add(:meta, :text)
-      add(:keywords, :text)
       add(:content, :text)
       add(:short_content, :text)
       add(:date, :naive_datetime)

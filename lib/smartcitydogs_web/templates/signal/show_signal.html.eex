@@ -107,37 +107,36 @@
                               final_time = String.slice(signal_time,0..count-11)
                               final_time
                       %>
-              </label-description-registered>
-            </td>
-            <td class="green-td">
-              <label-description-view-count>
-                <%= get_signals_view_count(@signal.id)  %>
-              </label-description-view-count>
-            </td>
-            <td class="green-td">
-              <label-description-support-count>
-                <a id="signal-count"><%=Smartcitydogs.DataUsers.get_likes(@signal.id)%></a>
-              </label-description-support-count>
-            </td>
-            <td class="green-td">
-              <label-description-comments>
-                <%= Enum.count(@comments_count) %>
-              </label-description-comments>
-            </td>
-          </tr>
-        </table>
-
-      </div>
-      <br><br>
-      <div class="buttons-for-signal1">
-        <div class="buttons-for-signal">
-          <%= cond do%>
-            <%= @current_user == nil -> %>
-              <a id="register-submit-adoption" onclick="showModalForm(event, 'register-form')">ПОСЛЕДВАЙ</a>
-              <div id="register-comment-button" onclick="showModalForm(event, 'register-form')">КОМЕНТИРАЙ</div>
-              <%= @current_user.users_types_id == 2 -> %>
-                <% list_of_liked_signals = @conn.assigns.current_user.liked_signals %>
-                  <% IO.inspect list_of_liked_signals%>
+                    </label-description-registered>
+                  </td>
+                  <td class="green-td">
+                    <label-description-view-count>
+                      <%= get_signals_view_count(@signal.id)  %>
+                    </label-description-view-count>
+                  </td>
+                  <td class="green-td">  
+                    <label-description-support-count>
+                      <a id="signal-count"><%=Smartcitydogs.DataUsers.get_likes(@signal.id)%></a>
+                    </label-description-support-count>
+                  </td>
+                  <td class="green-td">
+                    <label-description-comments>
+                      <%= Enum.count(@comments_count) %>
+                    </label-description-comments>
+                  </td>
+                  </tr>
+                </table>  
+              
+            </div>
+            <br><br>
+            <div class="buttons-for-signal1">
+              <div class="buttons-for-signal">
+                <%= cond do%>
+                  <%= @current_user == nil -> %>
+                    <a id="register-submit-adoption" onclick="showModalForm(event, 'register-form')">ПОСЛЕДВАЙ</a>
+                    <div id="register-comment-button" onclick="showModalForm(event, 'register-form')">КОМЕНТИРАЙ</div>
+                  <%= @current_user.users_types_id == 2 -> %>
+                    <% list_of_liked_signals = @conn.assigns.current_user.liked_signals %>
                     <%= if Enum.member?(list_of_liked_signals,@signal.id) do %>
                       <a id="submit-like1">ОТСЛЕДВАЙ</a>
                       <% else %>
