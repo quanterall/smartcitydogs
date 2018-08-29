@@ -52,7 +52,6 @@ defmodule SmartcitydogsWeb.NewsController do
       if news_params["image_url"] == "images/-profile" do
         news_params = Map.put(news_params, "image_url", "")
       end
-      #IO.inspect news_params
       case DataPages.create_news(news_params) do
         {:ok, news} ->
           conn
@@ -60,7 +59,6 @@ defmodule SmartcitydogsWeb.NewsController do
           |> redirect(to: news_path(conn, :index))
 
         {:error, changeset} ->
-          IO.puts "EEEEEEEERRRRRRRRRRRRRRROOOOOOOOOOORRRRRRRRRRRRRRRRRR!"
           conn
             |> put_status(:not_acceptable)
             |> send_resp(:not_acceptable, "")

@@ -38,13 +38,12 @@
   font-weight: 300;
 }
 
-body {
+ body {
   color: #777777;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 14px;
   font-weight: 300;
   line-height: 1.5em;
-  position: relative;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -93,7 +92,7 @@ a, a:focus, a:hover {
 .card-panel {
   margin: 0;
   padding: 60px;
-}
+} 
 
 /**
  *  Typography

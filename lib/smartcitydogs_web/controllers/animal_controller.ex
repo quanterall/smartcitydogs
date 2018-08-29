@@ -4,7 +4,6 @@ defmodule SmartcitydogsWeb.AnimalController do
   alias Smartcitydogs.DataAnimals
   alias Smartcitydogs.Animals
   alias Smartcitydogs.Repo
-  alias SmartcitydogsWeb.AnimalController
   import Ecto.Query
 
   ###### Send E-mail ########
@@ -30,10 +29,10 @@ defmodule SmartcitydogsWeb.AnimalController do
           {:ok, num} -> {params["animal_status"], num}
           _ -> {[], "1"}
         end
-
-      AnimalController.get_ticked_checkboxes(conn, data_status)
+      [page,data_status] = Animals.get_ticked_checkboxes(data_status)
+      render(conn, "minicipality_registered.html", animals: page.entries, page: page, data: data_status)
     else
-      {:error, raison} -> render(conn, SmartcitydogsWeb.ErrorView, "401.html")
+      {:error, _} -> render(conn, SmartcitydogsWeb.ErrorView, "401.html")
     end
   end
 
@@ -48,7 +47,7 @@ defmodule SmartcitydogsWeb.AnimalController do
       page = Smartcitydogs.DataAnimals.get_animals_by_status(2)
       render(conn, "minicipality_shelter.html", animals: page.entries, page: page)
     else
-      {:error, raison} -> render(conn, SmartcitydogsWeb.ErrorView, "401.html")
+      {:error, _} -> render(conn, SmartcitydogsWeb.ErrorView, "401.html")
     end
   end
 
@@ -63,77 +62,19 @@ defmodule SmartcitydogsWeb.AnimalController do
       page = Smartcitydogs.DataAnimals.get_animals_by_status(3)
       render(conn, "minicipality_adopted.html", animals: page.entries, page: page)
     else
-      {:error, raison} -> render(conn, SmartcitydogsWeb.ErrorView, "401.html")
+      {:error, _} -> render(conn, SmartcitydogsWeb.ErrorView, "401.html")
     end
   end
 
   ###########################################################################################
 
-  ## Get all of the ticked checkboxes from the filters, handle redirection to pagination pages.
-  def get_ticked_checkboxes(conn, params) do
-    {data_status, num} = params
-
-    data_status =
-      case data_status do
-        nil -> []
-        _ -> data_status
-      end
-
-    num = String.to_integer(num)
-
-    cond do
-      data_status != [] ->
-        all_query = []
-
-        x =
-          Enum.map(data_status, fn x ->
-            struct = from(p in Animals, where: p.animals_status_id == ^String.to_integer(x))
-
-            (all_query ++ Repo.all(struct))
-            |> Repo.preload(:animals_status)
-            |> Repo.preload(:animals_image)
-          end)
-
-        x = List.flatten(x)
-        list_animals = Smartcitydogs.Repo.paginate(x, page: num, page_size: 8)
-
-        render(conn, "minicipality_registered.html",
-          animals: list_animals.entries,
-          page: list_animals,
-          data: data_status
-        )
-
-      true ->
-        x = DataAnimals.list_animals()
-        page = Smartcitydogs.Repo.paginate(x, page: num, page_size: 8)
-
-        render(conn, "minicipality_registered.html",
-          animals: page.entries,
-          page: page,
-          data: data_status
-        )
-    end
-  end
 
   ## When the search button is clicked, for rendering the first page of the query.
-  def filter_registered(conn, params) do
-    data_status =
-      for {k, v} <- params do
-        cond do
-          k |> String.match?(~r/animal_status./) && v != "false" ->
-            v
-
-          true ->
-            nil
-        end
-      end
-
-    data_status = Enum.filter(data_status, &(!is_nil(&1)))
-
+  def filter_registered(conn, %{"_utf8" => "✓", "animal_status" => data_status  }) do
+    data_status =  Enum.filter(data_status, fn x -> x != "false" end)
     cond do
       data_status != [] ->
         all_query = []
-
         x =
           Enum.map(data_status, fn x ->
             struct = from(p in Animals, where: p.animals_status_id == ^String.to_integer(x))
@@ -174,7 +115,7 @@ defmodule SmartcitydogsWeb.AnimalController do
              Bodyguard.permit(Smartcitydogs.Animals.Policy, :index, conn.assigns.current_user) do
         index_rendering(conn, params, sorted_animals) 
       else
-        {:error, raison} -> render(conn, SmartcitydogsWeb.ErrorView, "401.html")
+        {:error, _} -> render(conn, SmartcitydogsWeb.ErrorView, "401.html")
       end
     else
       index_rendering(conn, params, sorted_animals)
@@ -239,7 +180,7 @@ defmodule SmartcitydogsWeb.AnimalController do
     with :ok <- Bodyguard.permit(Smartcitydogs.Animals.Policy, :new, conn.assigns.current_user) do
       render(conn, "new.html", changeset: changeset)
     else
-      {:error, raison} -> render(conn, SmartcitydogsWeb.ErrorView, "401.html")
+      {:error, _} -> render(conn, SmartcitydogsWeb.ErrorView, "401.html")
     end
   end
 
@@ -273,7 +214,7 @@ defmodule SmartcitydogsWeb.AnimalController do
           render(conn, "new.html", changeset: changeset)
       end
     else
-      {:error, raison} -> render(conn, SmartcitydogsWeb.ErrorView, "401.html")
+      {:error, _} -> render(conn, SmartcitydogsWeb.ErrorView, "401.html")
     end
   end
 
@@ -327,7 +268,7 @@ defmodule SmartcitydogsWeb.AnimalController do
     with :ok <- Bodyguard.permit(Smartcitydogs.Animals.Policy, :edit, conn.assigns.current_user) do
       render(conn, "edit.html", animals: animal, changeset: changeset)
     else
-      {:error, raison} -> render(conn, SmartcitydogsWeb.ErrorView, "401.html")
+      {:error, _} -> render(conn, SmartcitydogsWeb.ErrorView, "401.html")
     end
   end
 
@@ -348,7 +289,7 @@ defmodule SmartcitydogsWeb.AnimalController do
           render(conn, "edit.html", animal: animal, changeset: changeset)
       end
     else
-      {:error, raison} -> render(conn, SmartcitydogsWeb.ErrorView, "401.html")
+      {:error, _} -> render(conn, SmartcitydogsWeb.ErrorView, "401.html")
     end
   end
 
