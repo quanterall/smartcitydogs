@@ -78,6 +78,7 @@ a.close-modal{
   box-shadow: 1px 5px 46px 1px rgba(0,0,0,0.5);
 }
 .col-container-shadow{
+  transition: 0.5s;
   width: 100%;
   height: 100%;
   padding: 10px;
@@ -209,32 +210,141 @@ margin-left: -10px;
   }
 }
 
-@media (max-width:2000px){
-  .col-lg-12 .col-container{
-    width: 325px !important;
-    height: 500px !important;
+@media (max-width: 2560px){
+  .slick-slide .col-container{
+    width: 450px;
+    height: 600px;
   }
   .col-lg-3{
       margin-top: 20%;
   }
 }
 
-@media (max-width:1650px){
-  .col-lg-12 .col-container{
-    width: 300px !important;
-    height: 450px !important;
+@media (max-width:2360px){
+  .slick-slide .col-container{
+    width: 425px;
+    height: 575px;
   }
 }
+@media (max-width:2240px){
+  .slick-slide .col-container{
+    width: 400px;
+    height: 550px;
+  }
+}
+@media (max-width:2120px){
+  .slick-slide .col-container{
+    width: 375px;
+    height: 525px;
+  }
+}
+@media (max-width:2000px){
+  .slick-slide .col-container{
+    width: 350px;
+    height: 500px;
+  }
+}
+
+@media (max-width:1860px){
+  .slick-slide .col-container{
+    width: 340px;
+    height: 490px;
+  }
+}
+
+@media (max-width:1810px){
+  .slick-slide .col-container{
+    width: 335px;
+    height: 480px;
+  }
+}
+@media (max-width:1780px){
+  .slick-slide .col-container{
+    width: 320px;
+    height: 470px;
+  }
+}
+
+@media (max-width:1710px){
+  .slick-slide .col-container{
+    width: 310px;
+    height: 460px;
+  }
+}
+
+@media (max-width:1650px){
+  .slick-slide .col-container{
+    width: 300px;
+    height: 450px;
+  }
+}
+
 
 @media (max-width:1600px){
-  .col-lg-12 .col-container{
-    width: 250px !important;
-    height: 400px !important;
+  .slick-slide .col-container{
+    width: 275px;
+    height: 425px;
   }
 }
-
-
+@media (max-width:1480px){
+  .slick-slide .col-container{
+    width: 250px;
+    height: 400px;
+  }
+}
+@media (max-width:1360px){
+  .slick-slide .col-container{
+    width: 225px;
+    height: 375px;
+  }
+}
+@media (max-width:1240px){
+  .slick-slide .col-container{
+    width: 200px;
+    height: 350px;
+  }
+}
+@media (max-width:1120px){
+  .slick-slide .col-container{
+    width: 180px;
+    height: 330px;
+  }
+}
+@media (max-width:1030px){
+  .slick-slide .col-container{
+    width: 240px;
+    height: 325px;
+  }
+}
+@media (max-width:990px){
+  .slick-slide .col-container{
+    width: 220px;
+    height: 325px;
+  }
+}
+@media (max-width:920px){
+  .slick-slide .col-container{
+    width: 200px;
+    height: 300px;
+  }
+}
+@media (max-width:840px){
+  .slick-slide .col-container{
+    width: 180px;
+    height: 280px;
+  }
+}
+@media (max-width:800px){
+  .slick-slide .col-container{
+    width: 250px;
+    height: 280px;
+  }
+}
 @media (max-width: 700px){
+  .slick-slide .col-container{
+    width: 180px;
+    height: 280px;
+  }
   .send-signal-container{
     min-width: 100%;
   }
@@ -260,7 +370,6 @@ margin-left: -10px;
   }
   .col-lg-3{
     max-width: 100%;
-    margin-left: 2vw;
   }
   .container-filter button{
     font-size: 15px;
@@ -421,18 +530,26 @@ input#search-placeholder:focus{
 }
 
 .label-type-red{
+  display: grid;
+  margin-bottom: 5%;
   font-weight: bold;
   color: red !important;
 }
 .label-type-orange{
+  display: grid;
+  margin-bottom: 5%;
   font-weight: bold;
   color: orange !important;
 }
 .label-type-yellow{
+  display: grid;
+  margin-bottom: 5%;
   font-weight: bold;
   color: yellow !important;
 }
 .label-type-green{
+  display: grid;
+  margin-bottom: 5%;
   font-weight: bold;
   color: green !important;
 }
@@ -812,12 +929,7 @@ label-signals-categories{
   box-shadow: none;
   -webkit-box-shadow: none;
 }
-@media (max-width: 1920px){
-  .col-lg-12 .col-container{
-    width: 350px;
-    height: 500px;
-  }
-}
+
 .fill-container-my-profile{
   width: 100%;
   height: 100%;
@@ -856,4 +968,20 @@ label-signals-categories{
 }
 .info-change-container .under-form{
   margin-top: 30vh;
+}
+.procedures-all{
+  margin-top: 5%;
+  margin-bottom: 1%;
+}
+.div-procedures{
+  margin-top: 10%;
+}
+.form-register input.form-control1{
+  margin-top: 2vh;
+  margin-left: 0px;
+  padding-left: 0px;
+}
+.form-register .under-form{
+  margin-top: 5vh;
+  margin-left: 0px;
 }

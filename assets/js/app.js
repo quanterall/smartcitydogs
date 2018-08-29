@@ -32,7 +32,7 @@ $('#submit-adoption').click(function(){
     
     $.ajax({
         method: "POST",
-        url: "/api/registered/:id/send_email",
+        url: "/api/animals/:id/send_email",
         credentials: 'same-origin',
         data: {
             "chip_number": $("#chip_number").text(),
@@ -160,7 +160,7 @@ $('.close_comment').click(function() {
 $(".submit_comment").click(function() {
     $.ajax({
         method: "GET",
-        url: "/api/signals/comment",
+        url: "/api/signals/:id/comment",
         data: {
             "show-comment": $("#comment-id").val(),
             "show-id": $("#signal-id").text()

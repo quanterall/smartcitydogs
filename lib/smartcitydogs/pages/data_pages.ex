@@ -32,7 +32,7 @@ defmodule Smartcitydogs.DataPages do
   end
 
   def create_news(args \\ %{}) do
-    %News{}
+   %News{} 
     |> News.changeset(args)
     |> Repo.insert()
   end

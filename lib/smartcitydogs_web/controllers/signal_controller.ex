@@ -227,14 +227,12 @@ defmodule SmartcitydogsWeb.SignalController do
 
     all_followed_signals =
       Enum.map(user_like, fn elem ->
-        # String.to_integer(elem) |> DataSignals.get_signal()
         DataSignals.get_signal(elem)
       end)
 
     page = Signals |> Smartcitydogs.Repo.paginate(params)
     render(conn, "followed_signals.html", signal: all_followed_signals, page: page)
   end
-
 
   def update_type(conn, %{"id" => id, "signals_types_id" => signals_types_id}) do
     signal = DataSignals.get_signal(id)

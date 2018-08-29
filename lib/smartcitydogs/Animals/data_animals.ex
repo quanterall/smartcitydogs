@@ -46,6 +46,11 @@ defmodule Smartcitydogs.DataAnimals do
     end
   end
 
+  def get_animals_by_status(id) do
+    struct = from(p in Animals, where: p.animals_status_id == ^id)
+      all_adopted = Repo.all(struct) |> Repo.preload(:animals_status)
+      Smartcitydogs.Repo.paginate(all_adopted, page: 1, page_size: 8)
+  end
   # def get_animal_by_chip(chip_number) do
   #   query = Ecto.Query.from(c in Animals, where: c.chip_number == ^chip_number)
   #   Repo.all(query)

@@ -11,10 +11,10 @@
 }
 div.show-signal-right-container{
     padding-left: 5%;
-    /* padding-right: 5%; */
     margin-top: 11vh;
     margin-left: 50%;
     width: 50%;
+    display: grid;
 }
 .show-signal-container{
     width: 100%;
@@ -33,8 +33,32 @@ textarea#comment-id{
     width: 100%;
 }
 show-signal-label-title{
+    margin-bottom: 10%;
     font-weight: bold;
     font-size: 40px;
+}
+.show-signal-right-container .buttons-for-signal{
+    margin-top: 20%;
+    margin-bottom: 0%;
+}
+.show-signal-right-container .table-under-form-signal{
+    margin-bottom: 10%;
+}
+.show-signal-right-container show-signal-label-description{
+    display: grid;
+    width: 100%;
+    margin-bottom: 10%;
+}
+.show-signal-right-container #show-map{
+    text-align: right;
+    margin-bottom: 5%;
+}
+.show-signal-right-container show-signal-label-adress{
+    display: block;
+    margin-bottom: 10%;
+}
+.show-signal-right-container .fa-map-marker-alt{
+    color: rgb(0,201,148);
 }
 .fa-map-marker-alt{
     margin-bottom: 3%;
@@ -78,6 +102,7 @@ show-signal-label-title{
 .show-signal-under-description-title{
     display: inline;
     font-size: 10px;
+    
 }
 .green-td{
     color: #00c790;
@@ -100,7 +125,7 @@ show-signal-label-description{
 }
 .buttons-for-signal{
     /* float: right; */
-    margin-left: 50%;
+    /* margin-left: 50%; */
     margin-top: 10%;
     width: 100%;
     height: 100px;;
@@ -392,10 +417,28 @@ label-forgotten-password{
     width: 100%;
     margin-left: 2%;
 }
-@media (min-width: 1920px){
+@media (max-width: 2560px){
     .show-signals-dogs .col-container{
-        width: 20rem;
-        height: 28rem;
+        width: 27rem;
+        height: 36rem;
+    }
+}
+@media (max-width: 2380px){
+    .show-signals-dogs .col-container{
+        width: 25rem;
+        height: 35rem;
+    }
+}
+@media (max-width: 2200px){
+    .show-signals-dogs .col-container{
+        width: 23rem;
+        height: 33rem;
+    }
+}
+@media (max-width: 2020px){
+    .show-signals-dogs .col-container{
+        width: 21rem;
+        height: 31rem;
     }
 }
 @media (max-width: 1920px){
@@ -420,12 +463,13 @@ label-forgotten-password{
 }
 @media (max-width: 1705px){
     .show-signals-dogs .col-container{
-        width: 19rem;
+        width: 18rem;
     }
 }
 @media (max-width: 1645px){
     .show-signals-dogs .col-container{
-        width: 18rem;
+        width: 17rem;
+        height: 26rem;;
     }
 }
 @media (max-width: 1585px){
@@ -440,70 +484,80 @@ label-forgotten-password{
 }
 @media (max-width: 1465px){
     .show-signals-dogs .col-container{
-        width: 21rem;
+        width: 15rem;
+        height: 21rem;
     }
 }
 @media (max-width: 1405px){
     .show-signals-dogs .col-container{
-        width: 20rem;
+        width: 15rem;
     }
 }
 @media (max-width: 1345px){
     .show-signals-dogs .col-container{
-        width: 19rem;
+        width: 14rem;
+        height: 20rem;
     }
 }
 @media (max-width: 1285px){
     .show-signals-dogs .col-container{
-        width: 18rem;
+        width: 13rem;
     }
 }
 @media (max-width: 1225px){
     .show-signals-dogs .col-container{
-        width: 17rem;
+        width: 13rem;
+        height: 18rem;
     }
 }
 @media (max-width: 1165px){
     .show-signals-dogs .col-container{
-        width: 23rem;
+        width: 12rem;
     }
 }
 @media (max-width: 1103px){
     .show-signals-dogs .col-container{
-        width: 22rem;
+        width: 11rem;
+        height: 16rem;
     }
 }
 @media (max-width: 1053px){
+    /* .show-signals-dogs{
+        padding-left: 5%;
+    } */
     .show-signals-dogs .col-container{
-        width: 21rem;
+        width: 11rem;
     }
 }
 @media (max-width: 1003px){
     .show-signals-dogs .col-container{
-        width: 20rem;
+        width: 10rem;
     }
 }
 @media (max-width: 953px){
     .show-signals-dogs .col-container{
-        width: 19rem;
+        width: 18rem;
     }
 }
 @media (max-width: 903px){
     .show-signals-dogs .col-container{
-        width: 18rem;
+        width: 17rem;
     }
 }
 @media (max-width: 853px){
     .show-signals-dogs .col-container{
-        width: 17rem;
+        width: 16rem;
     }
 }
 @media (max-width: 823px){
     .show-signals-dogs .col-container{
-        width: 36rem;
+        width: 15rem;
     }
 }
-@media (max-width: 763px){
+@media (max-width: 780px){
+    .show-signals-dogs{
+        padding: 0px;
+    }
     .show-signals-dogs .col-container{
         width: 33rem;
     }
@@ -550,6 +604,209 @@ label-forgotten-password{
 }
 @media (max-width: 433px){
     .show-signals-dogs .col-container{
+        width: 16rem;
+    }
+}
+
+
+
+
+
+
+
+/* REGISTERED DOGS */
+
+@media (max-width: 2560px){
+    .registered-dogs-div .col-container{
+        width: 27rem;
+        height: 36rem;
+    }
+}
+@media (max-width: 2380px){
+    .registered-dogs-div .col-container{
+        width: 25rem;
+        height: 35rem;
+    }
+}
+@media (max-width: 2200px){
+    .registered-dogs-div .col-container{
+        width: 23rem;
+        height: 33rem;
+    }
+}
+@media (max-width: 2090px){
+    .registered-dogs-div .col-container{
+        width: 22rem;
+        height: 32rem;
+    }
+}
+@media (max-width: 2020px){
+    .registered-dogs-div .col-container{
+        width: 21rem;
+        height: 31rem;
+    }
+}
+@media (max-width: 1920px){
+    .registered-dogs-div .col-container{
+        width: 20rem;
+        height: 27rem;
+    }
+    .registered-dogs-div .col-lg-3{
+        flex: 0 0 25%;
+    }
+}
+@media (max-width: 1865px){
+    .registered-dogs-div .col-container{
+        width: 19rem;
+    }
+}
+@media (max-width: 1785px){
+    .registered-dogs-div .col-container{
+        width: 19rem;
+        /* height: 23rem; */
+    }
+}
+@media (max-width: 1755px){
+    .registered-dogs-div .col-container{
+        width: 18rem;
+    }
+}
+@media (max-width: 1645px){
+    .registered-dogs-div .col-container{
+        width: 17rem;
+        height: 26rem;;
+    }
+}
+@media (max-width: 1585px){
+    .registered-dogs-div .col-container{
+        width: 16rem;
+    }
+}
+@media (max-width: 1525px){
+    .registered-dogs-div .col-container{
+        width: 15rem;
+        height: 23rem;
+    }
+}
+@media (max-width: 1465px){
+    .registered-dogs-div .col-container{
+        width: 15rem;
+        height: 21rem;
+    }
+}
+@media (max-width: 1415px){
+    .registered-dogs-div .col-container{
+        width: 14rem;
+    }
+}
+@media (max-width: 1345px){
+    .registered-dogs-div .col-container{
+        width: 13rem;
+        height: 20rem;
+    }
+}
+@media (max-width: 1290px){
+    .registered-dogs-div .col-container{
+        width: 13rem;
+    }
+}
+@media (max-width: 1225px){
+    .registered-dogs-div .col-container{
+        width: 13rem;
+        height: 18rem;
+    }
+}
+@media (max-width: 1165px){
+    .registered-dogs-div .col-container{
+        width: 12rem;
+    }
+}
+@media (max-width: 1103px){
+    .registered-dogs-div .col-container{
+        width: 11rem;
+        height: 16rem;
+    }
+}
+@media (max-width: 1053px){
+    .registered-dogs-div .col-container{
+        width: 11rem;
+    }
+}
+@media (max-width: 1003px){
+    .registered-dogs-div .col-container{
+        width: 10rem;
+    }
+}
+@media (max-width: 953px){
+    .registered-dogs-div .col-container{
+        width: 18rem;
+    }
+}
+@media (max-width: 903px){
+    .registered-dogs-div .col-container{
+        width: 17rem;
+    }
+}
+@media (max-width: 853px){
+    .registered-dogs-div .col-container{
+        width: 16rem;
+    }
+}
+@media (max-width: 823px){
+    .registered-dogs-div .col-container{
+        width: 15rem;
+    }
+}
+@media (max-width: 780px){
+    .registered-dogs-div{
+        padding: 0px;
+    }
+    .registered-dogs-div .col-container{
+        width: 33rem;
+    }
+}
+@media (max-width: 733px){
+    .registered-dogs-div .col-container{
+        width: 31.5rem;
+    }
+}
+@media (max-width: 703px){
+    .registered-dogs-div .col-container{
+        width: 30rem;
+    }
+}
+@media (max-width: 673px){
+    .registered-dogs-div .col-container{
+        width: 28.5rem;
+    }
+}
+@media (max-width: 643px){
+    .registered-dogs-div .col-container{
+        width: 26rem;
+    }
+}
+@media (max-width: 613px){
+    .registered-dogs-div .col-container{
+        width: 24.5rem;
+    }
+}
+@media (max-width: 583px){
+    .registered-dogs-div .col-container{
+        width: 23rem;
+    }
+}
+@media (max-width: 523px){
+    .registered-dogs-div .col-container{
+        width: 20rem;
+    }
+}
+@media (max-width: 463px){
+    .registered-dogs-div .col-container{
+        width: 18.5rem;
+    }
+}
+@media (max-width: 433px){
+    .registered-dogs-div .col-container{
         width: 16rem;
     }
 }

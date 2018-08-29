@@ -1,32 +1,31 @@
-
-    <div id="login-form-container" class="register-photo">
-      <div class="container">
-        <div class="form-group register-form-class form-class-margin-top">
-            <%= form_for @conn, forgoten_password_path(@conn, :create), fn f -> %>
-              <label-forgotten-password>Изберете начин:</label-forgotten-password>
-              <div class="radio-button-inline">
-                <input type="radio" name="reset_password_radio" value="1" checked="true"> <label-signals-categories>Потребителско име</label-signals-categories>
-              </div>
-              <div class="radio-button-inline">
-                <input type="radio" name="reset_password_radio" value="2"> <label-signals-categories>Имейл</label-signals-categories>
-              </div>
-              <div class="radio-button-inline">
-                <input type="radio" name="reset_password_radio" value="3"> <label-signals-categories>Телефонен номер</label-signals-categories>
-              </div>
-
-              <%= text_input f, :reset_parameter, placeholder: "Въведете избраният от вас критерий...",id: "username-f-pass", class: "form-control1" %>
-              <%= error_tag f, :reset_parameter %>
-
-
-            <div class="under-form">
-              
-
-                <%= submit "ИЗПРАТИ", class: "btn btn-submit" %><br>
-                <a class="close-modal" href="#">ОТКАЗ</a>  
-              </div>
-           
-          <% end %>
+<div id="login-form-container" class="register-photo">
+  <div class="container">
+    <div class="form-group register-form-class form-class-margin-top">
+      <%= form_for @conn, forgoten_password_path(@conn, :create), fn f -> %>
+        <label-forgotten-password>Изберете начин:</label-forgotten-password>
+        <div class="radio-button-inline">
+          <input type="radio" name="reset_password_radio" value="1" checked="true"> <label-signals-categories>Потребителско
+            име
+          </label-signals-categories>
         </div>
+        <div class="radio-button-inline">
+          <input type="radio" name="reset_password_radio" value="2"> <label-signals-categories>Имейл</label-signals-categories>
         </div>
-    </div>
+        <div class="radio-button-inline">
+          <input type="radio" name="reset_password_radio" value="3"> <label-signals-categories>Телефонен номер</label-signals-categories>
+        </div>
+
+        <%= text_input f, :reset_parameter, placeholder: "Въведете избраният от вас критерий...",id: "username-f-pass", class: "form-control1" %>
+        <%= error_tag f, :reset_parameter %>
+
+
+        <div class="under-form">
+
+          <%= submit "ИЗПРАТИ", class: "btn btn-submit" %><br>
+          <a class="close-modal" href="#">ОТКАЗ</a>
+        </div>
+      </div>
+        <% end %>
+  </div>
+</div>
 

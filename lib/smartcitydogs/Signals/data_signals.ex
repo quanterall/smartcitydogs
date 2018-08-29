@@ -47,6 +47,8 @@ defmodule Smartcitydogs.DataSignals do
     |> Repo.update()
   end
 
+
+
   def get_user_signal(users_id) do
     query = Ecto.Query.from(c in Signals, where: c.users_id == ^users_id)
     Repo.all(query)
@@ -214,6 +216,10 @@ defmodule Smartcitydogs.DataSignals do
   end
 
   # Signals likes
+  def get_signals_user_like(user_id, signal_id) do
+    Ecto.Query.from(c in SignalsLikes, where: c.users_id == ^user_id and c.signals_id == ^signal_id)
+    |> Repo.all()
+  end
 
   def get_signal_like(id) do
     query = Ecto.Query.from(c in SignalsLikes, where: c.users_id == ^id)

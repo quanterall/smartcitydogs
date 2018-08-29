@@ -8,6 +8,8 @@ defmodule Smartcitydogs.Animals do
   alias SmartcitydogsWeb.AnimalController
 
 
+  alias Smartcitydogs.DataAnimals
+
   @timestamps_opts [type: :utc_datetime, usec: false]
 
   schema "animals" do
@@ -43,7 +45,13 @@ defmodule Smartcitydogs.Animals do
     |> validate_required([:sex, :chip_number, :address])
   end
 
-  
+   ###### Send E-mail ########
+
+  def send_email(conn, data) do
+    Smartcitydogs.Email.send_email(data)
+    DataAnimals.insert_adopt(data["user_id"], data["animal_id"])
+  end
+
 
     ## Get all of the ticked checkboxes from the filters, handle redirection to pagination pages.
     def get_ticked_checkboxes(params) do

@@ -77,7 +77,7 @@ defmodule Smartcitydogs.DataUsers do
   end
 
   def get_likes(signal_id) do
-    IO.inspect Repo.one(from l in Smartcitydogs.SignalsLikes,select: count(l.id), where: l.signals_id == ^signal_id )
+    Repo.one(from l in Smartcitydogs.SignalsLikes,select: count(l.id), where: l.signals_id == ^signal_id )
   end
 
   def add_liked_signal_comment(user_id, comment_id) do
