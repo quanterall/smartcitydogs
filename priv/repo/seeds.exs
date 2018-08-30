@@ -150,6 +150,24 @@ end
 
 ############## Users #############
 users_params = %{
+  username: "tod",
+  first_name: "zoo",
+  last_name: "police",
+  email: "zoo_police@abv.bg",
+  password: "123456",
+  phone: "0896230250",
+  users_types_id: 3
+}
+
+unless Repo.get_by(User, username: users_params[:username]) do
+  %User{}
+  |> User.registration_changeset(users_params)
+  |> Repo.insert!()
+end
+
+
+############## Users #############
+users_params = %{
   username: "todor_municipaty",
   first_name: "Todor",
   last_name: "Todorov",
