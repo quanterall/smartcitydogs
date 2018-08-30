@@ -72,13 +72,13 @@ config :smartcitydogs, Smartcitydogs.Repo,
 config :ueberauth, Ueberauth,
   providers: [
     facebook: {Ueberauth.Strategy.Facebook, [profile_fields: "name,email,first_name,last_name"]},
-    twitter: {Ueberauth.Strategy.Twitter, [profile_fields: "name,email,first_name,last_name"]}
+    ##twitter: {Ueberauth.Strategy.Twitter, [profile_fields: "name,email,first_name,last_name"]}
   ]
 
 config :ueberauth, Ueberauth.Strategy.Facebook.OAuth,
   client_id: System.get_env("FACEBOOK_ID"),
   client_secret: System.get_env("FACEBOOK_SECRET")
 
-config :ueberauth, Ueberauth.Strategy.Twitter.OAuth,
-  consumer_key: System.get_env("TWITTER_ID"),
-  consumer_secret: System.get_env("TWITTER_SECRET")
+# config :ueberauth, Ueberauth.Strategy.Twitter.OAuth,
+#   consumer_key: System.get_env("TWITTER_ID"),
+#   consumer_secret: System.get_env("TWITTER_SECRET")

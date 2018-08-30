@@ -5,7 +5,7 @@ defmodule SmartcitydogsWeb.SessionController do
   plug(Ueberauth)
   plug(:scrub_params, "session" when action in ~w(create)a)
   # import Comeonin.Bcrypt, only: [checkpw: 2, dummy_checkpw: 0]
-  import Logger
+  #import Logger
 
 
   def new(conn, _) do
@@ -29,7 +29,7 @@ defmodule SmartcitydogsWeb.SessionController do
   end
 
   def callback(conn = %{assigns: %{ueberauth_failure: _fails}}, _params) do
-    Logger.warn("Authentication failed", conn: conn)
+    #Logger.warn("Authentication failed", conn: conn)
 
     conn
       |> redirect(to: "/session/new")
@@ -45,7 +45,7 @@ defmodule SmartcitydogsWeb.SessionController do
             |> put_flash(:info, "You’re now signed in!")
             |> redirect(to: "/")
 
-          {:error, changeset} ->
+          {:error, _} ->
             conn
             |> put_flash(:error, "Fail to store to DB")
             |> redirect(to: "/")
@@ -71,7 +71,4 @@ defmodule SmartcitydogsWeb.SessionController do
     |> redirect(to: page_path(conn, :index))
   end
 
-  defp logout(conn) do
-    Guardian.Plug.sign_out(conn)
-  end
 end

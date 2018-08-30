@@ -24,8 +24,6 @@ defmodule Smartcitydogs.DataAnimals do
     procedure |> Map.get(:id)
   end
 
-  
-
   def get_procedures(id) do
     query = Ecto.Query.from(c in PerformedProcedures, where: c.animals_id == ^id)
     Repo.all(query)
@@ -51,10 +49,7 @@ defmodule Smartcitydogs.DataAnimals do
       all_adopted = Repo.all(struct) |> Repo.preload(:animals_status)
       Smartcitydogs.Repo.paginate(all_adopted, page: 1, page_size: 8)
   end
-  # def get_animal_by_chip(chip_number) do
-  #   query = Ecto.Query.from(c in Animals, where: c.chip_number == ^chip_number)
-  #   Repo.all(query)
-  # end
+
 
   def get_animal_status(id) do
     Repo.get!(AnimalStatus, id)
@@ -103,7 +98,6 @@ defmodule Smartcitydogs.DataAnimals do
   end
 
   def list_animals do
-    # > Repo.preload(:animals_image)
     Repo.all(Animals) |> Repo.preload(:animals_status)
   end
 
@@ -136,8 +130,6 @@ defmodule Smartcitydogs.DataAnimals do
   end
 
   def create_animal(args \\ %{}) do
-    # args = Map.put_new(args, :registered_at, get_current_time())
-
     %Animals{}
     |> Animals.changeset(args)
     |> Repo.insert()
@@ -221,12 +213,9 @@ defmodule Smartcitydogs.DataAnimals do
     query_user = Ecto.Query.from(c in Adopt, where: c.users_id == ^users_id)
     list = Repo.all(query_user)
     check_list(list, animals_id)
-    
-    
-    
   end
   
-  def check_list([],animals_id) do
+  def check_list([], _ ) do
     false
   end
 

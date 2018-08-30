@@ -162,13 +162,14 @@ defmodule Smartcitydogs.DataSignals do
   end
 
   def get_comment_signal_id(signals_id) do
-    query = Ecto.Query.from(c in SignalsComments, where: c.signals_id == ^signals_id)
-    comment = Repo.all(query)
+    Ecto.Query.from(c in SignalsComments, where: c.signals_id == ^signals_id)
+    |> Repo.all()
   end
 
   def get_one_signal_comment(signals_id, comment_id) do
-    query = Ecto.Query.from(c in SignalsComments, where: c.signals_id == ^signals_id)
-    comment = Repo.all(query) |> Enum.at(comment_id - 1)
+   Ecto.Query.from(c in SignalsComments, where: c.signals_id == ^signals_id)
+   |> Repo.all() 
+   |> Enum.at(comment_id - 1)
   end
 
   def create_signal_comment(args \\ %{}) do

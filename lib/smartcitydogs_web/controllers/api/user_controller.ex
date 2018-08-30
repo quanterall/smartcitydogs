@@ -2,9 +2,6 @@ defmodule SmartcitydogsWeb.UserControllerAPI do
   use SmartcitydogsWeb, :controller
   alias Smartcitydogs.User
   alias Smartcitydogs.DataUsers
-  alias Smartcitydogs.Signals
-  alias Smartcitydogs.SignalController
-  alias SmartcitydogsWeb.SignalView
   plug(Ueberauth)
 
   ## action_fallback(SmartcitydogsWeb.FallbackController)
@@ -40,14 +37,6 @@ defmodule SmartcitydogsWeb.UserControllerAPI do
       render(conn, "401.json", user: "Not autorization!")
     end
   end
-
-  # def update(conn, %{"id" => id, "user" => user_params}) do
-  #   user = DataUsers.get_user!(id)
-
-  #   with {:ok, %User{} = user} <- DataUsers.update_user(user, user_params) do
-  #     render(conn, "show.json", user: user)
-  #   end
-  # end
 
   def sign_in(conn, %{"email" => email, "password" => password}) do
     case Smartcitydogs.Auth.login_by_email_and_pass(conn, email, password) do

@@ -4,13 +4,7 @@ defmodule Smartcitydogs.Signals do
   import Ecto.Query
   alias Smartcitydogs.DataSignals
   alias Smartcitydogs.Signals
-  alias Smartcitydogs.DataUsers
   alias Smartcitydogs.Repo
-  alias Smartcitydogs.DataAnimals
-  alias Smartcitydogs.Repo
-  alias Smartcitydogs.Animals
-  alias SmartcitydogsWeb.SignalController
-  alias SmartcitydogsWeb.SignalControllerAPI
 
   @timestamps_opts [type: :utc_datetime, usec: false]
 
@@ -52,14 +46,11 @@ defmodule Smartcitydogs.Signals do
       :address_F
     ])
     |> validate_required([
-      # :title,
-      # :view_count,
-      :address
-      # :support_count,
-      # :chip_number,
-      # :description
-      # :signals_categories_id,
-      # :signals_types_id
+       :title,
+       :address,
+       :description,
+       :signals_categories_id,
+       :signals_types_id
     ])
   end
 
@@ -87,31 +78,31 @@ defmodule Smartcitydogs.Signals do
       data_status != [] ->
         all_query = []
 
-        x =
+        all_query =
           Enum.map(data_status, fn x ->
             struct = from(p in Signals, where: p.signals_types_id == ^String.to_integer(x))
-            all_query = all_query ++ Repo.all(struct)
+            all_query ++ Repo.all(struct)
           end)
 
-        x = List.flatten(x)
-        list_signals = Smartcitydogs.Repo.paginate(x, page: num, page_size: 8)
+          all_query = List.flatten(all_query)
+        list_signals = Smartcitydogs.Repo.paginate(all_query, page: num, page_size: 8)
 
           [list_signals, data_category, data_status]
       data_category != [] ->
         all_query = []
 
-        x =
+        all_query =
           Enum.map(data_category, fn x ->
             struct = from(p in Signals, where: p.signals_categories_id == ^String.to_integer(x))
-            all_query = all_query ++ Repo.all(struct)
+            all_query ++ Repo.all(struct)
           end)
 
-        x = List.flatten(x)
-        page = Smartcitydogs.Repo.paginate(x, page: 1, page_size: 8)
+          all_query = List.flatten(all_query)
+        page = Smartcitydogs.Repo.paginate(all_query, page: 1, page_size: 8)
         [page, data_category, data_status]
       true ->
-        x = DataSignals.list_signals()
-        page = Smartcitydogs.Repo.paginate(x, page: 1, page_size: 8)
+        all_query = DataSignals.list_signals()
+        page = Smartcitydogs.Repo.paginate(all_query, page: 1, page_size: 8)
         [page, data_category, data_status]
     end
   end

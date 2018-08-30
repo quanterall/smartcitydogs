@@ -5,7 +5,7 @@ defmodule Smartcitydogs.Animals do
   alias Smartcitydogs.DataAnimals
   alias Smartcitydogs.Animals
   alias Smartcitydogs.Repo
-  alias SmartcitydogsWeb.AnimalController
+  ##alias SmartcitydogsWeb.AnimalController
 
 
   alias Smartcitydogs.DataAnimals
@@ -47,7 +47,7 @@ defmodule Smartcitydogs.Animals do
 
    ###### Send E-mail ########
 
-  def send_email(conn, data) do
+  def send_email(data) do
     Smartcitydogs.Email.send_email(data)
     DataAnimals.insert_adopt(data["user_id"], data["animal_id"])
   end
@@ -84,15 +84,4 @@ defmodule Smartcitydogs.Animals do
           [page, data_status]
       end
     end
-  
-
-
-
-
-
-
-
-
-
-
 end

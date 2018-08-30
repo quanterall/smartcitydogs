@@ -61,7 +61,7 @@ defmodule SmartcitydogsWeb.ForgotenPasswordControllerAPI do
       user ->
         if expired?(user.reset_token_sent_at) do
           # could set reset fields to nil here
-          User.password_token_changeset(user, %{
+          User.changeset(user, %{
             reset_password_token: nil,
             reset_token_sent_at: nil
           })
@@ -82,7 +82,7 @@ defmodule SmartcitydogsWeb.ForgotenPasswordControllerAPI do
 
       user ->
         if expired?(user.reset_token_sent_at) do
-          User.password_token_changeset(user, %{
+          User.changeset(user, %{
             reset_password_token: nil,
             reset_token_sent_at: nil
           })
@@ -91,11 +91,11 @@ defmodule SmartcitydogsWeb.ForgotenPasswordControllerAPI do
           IO.puts("Password reset token expired")
           render(conn, "token_exp.json", forgoten_password: user)
         else
-          changeset = User.register_changeset(user, pw_params)
+          changeset = User.registration_changeset(user, pw_params)
 
           case Repo.update(changeset) do
             {:ok, _user} ->
-              User.password_token_changeset(user, %{
+              User.changeset(user, %{
                 reset_password_token: nil,
                 reset_token_sent_at: nil
               })

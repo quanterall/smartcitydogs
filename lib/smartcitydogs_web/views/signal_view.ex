@@ -4,10 +4,10 @@ defmodule SmartcitydogsWeb.SignalView do
   def get_signals_images(signals_id) do
     list = Smartcitydogs.DataSignals.get_signal_image_id(signals_id)
 
-    if list != [] do
-      [head | tail] = list
-      
-      head.url
+    if List.first(list) == nil do
+      "images/2.jpg"
+    else
+      List.first(list).url
     end
   end
 
@@ -29,14 +29,15 @@ defmodule SmartcitydogsWeb.SignalView do
 
   def get_signals_view_count(signal_id) do
     list = Smartcitydogs.DataSignals.get_signal_support_count(signal_id)
-
+  
+  views =
     if list != [] do
-      [head | tail] = list
+      [head | _] = list
       count = head.view_count
       Smartcitydogs.DataSignals.update_signal(head, %{view_count: count + 1})
-      views = head.view_count + 1
+      head.view_count + 1
     end
 
-    views
+    
   end
 end

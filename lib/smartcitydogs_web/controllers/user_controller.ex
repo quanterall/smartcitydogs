@@ -18,7 +18,7 @@ defmodule SmartcitydogsWeb.UserController do
            ) do
       render(conn, "index.html", users: users)
     else
-      {:error, raison} -> render(conn, SmartcitydogsWeb.ErrorView, "401.html")
+      {:error, _} -> render(conn, SmartcitydogsWeb.ErrorView, "401.html")
     end
   end
 
@@ -83,7 +83,7 @@ defmodule SmartcitydogsWeb.UserController do
 
       end
     else
-      {:error, raison} -> render(conn, SmartcitydogsWeb.ErrorView, "401.html")
+      {:error, _} -> render(conn, SmartcitydogsWeb.ErrorView, "401.html")
     end
   end
 
@@ -106,7 +106,7 @@ defmodule SmartcitydogsWeb.UserController do
         render(conn, "edit.html", user: user, changeset: changeset)
       end
     else
-      {:error, raison} -> render(conn, SmartcitydogsWeb.ErrorView, "401.html")
+      {:error, _} -> render(conn, SmartcitydogsWeb.ErrorView, "401.html")
     end
   end
 
@@ -136,7 +136,7 @@ defmodule SmartcitydogsWeb.UserController do
         end
       end
     else
-      {:error, raison} -> render(conn, SmartcitydogsWeb.ErrorView, "401.html")
+      {:error, _} -> render(conn, SmartcitydogsWeb.ErrorView, "401.html")
     end
   end
 
@@ -162,7 +162,7 @@ defmodule SmartcitydogsWeb.UserController do
         |> redirect(to: user_path(conn, :index))
       end
     else
-      {:error, raison} -> render(conn, SmartcitydogsWeb.ErrorView, "401.html")
+      {:error, _} -> render(conn, SmartcitydogsWeb.ErrorView, "401.html")
     end
   end
 end

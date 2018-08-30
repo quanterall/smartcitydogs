@@ -120,11 +120,11 @@
           <%= @current_user == nil -> %>
             <%= if @animals.animals_status_id == 3 do %>
               <a input type="button" id="adoption-done"></a>
-              <% else %>
+            <% else %>
               <a input type="button" id="register-submit-adoption" onclick="showModalForm(event, 'register-form')"><i class="fa fa-home"></i> ОСИНОВИ </a>
             <% end %>
 
-          <%= @current_user.users_types_id == 2 -> %>
+          <% @current_user.users_types_id == 2 -> %>
               <div class="hide_for_ajax">
 
               <p id="chip_number"><%= @animals.chip_number %></p>
@@ -148,7 +148,7 @@
                   <% end %>
 
               <% end %>
-          <%= @current_user.users_types_id == 3 || @current_user.users_types_id == 4 || @current_user.users_types_id == 5 ->%>
+          <% @current_user.users_types_id == 3 || @current_user.users_types_id == 4 || @current_user.users_types_id == 5 -> %>
           <% end %>
             
             

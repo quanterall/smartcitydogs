@@ -38,7 +38,7 @@ defmodule SmartcitydogsWeb.UserControllerAPIView do
     }
   end
 
-  def render("401.json", %{user: user}) do
+  def render("401.json", %{user: _}) do
     "Not autorization!"
   end
 

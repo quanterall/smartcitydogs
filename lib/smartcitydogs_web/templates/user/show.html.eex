@@ -70,7 +70,6 @@
               <%
 
                 user = @conn.assigns.current_user.id
-                sorted_signals = Smartcitydogs.DataSignals.sort_signal_by_id()
                 signals = Smartcitydogs.DataSignals.get_user_signal(user)
                 page = Smartcitydogs.Repo.paginate(signals, page: @page, page_size: 8)
                 profile_params = %{signals: signals, page: page, conn: @conn}
