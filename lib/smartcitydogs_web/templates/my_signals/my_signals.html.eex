@@ -80,7 +80,7 @@
 
   <%= for x <- 1..@page.total_pages do %>
     <% 
-    page = x 
+   
     id = @conn.assigns.current_user.id
     %>
     <%= link "#{x * 8 - 7}-#{x * 8} ", to: user_path(@conn, :show, id, %{page: x}) %>

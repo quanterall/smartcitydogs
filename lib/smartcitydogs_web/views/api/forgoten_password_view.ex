@@ -26,15 +26,15 @@ defmodule SmartcitydogsWeb.ForgotenPasswordControllerAPIView do
     }
   end
 
-  def render("couldnt_send_token.json", %{forgoten_password: user}) do
+  def render("couldnt_send_token.json", %{forgoten_password: _}) do
     %{error: "Could not send reset email. Please try again later"}
   end
 
-  def render("inv_token.json", %{forgoten_password: user}) do
+  def render("inv_token.json", %{forgoten_password: _}) do
     %{error: "Invalid reset token."}
   end
 
-  def render("token_exp.json", %{forgoten_password: user}) do
+  def render("token_exp.json", %{forgoten_password: _}) do
     %{error: "Password token expired."}
   end
 end

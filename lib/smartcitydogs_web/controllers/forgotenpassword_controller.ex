@@ -79,15 +79,14 @@ defmodule SmartcitydogsWeb.ForgotenPasswordController do
       user ->
         if expired?(user.reset_token_sent_at) do
           # could set reset fields to nil here
-          User.password_token_changeset(user, %{
+          User.changeset(user, %{
             reset_password_token: nil,
             reset_token_sent_at: nil
           })
           |> Repo.update!()
 
           conn
-          |> put_flash(:error, "Password reset token expired")
-          |> redirect(to: forgoten_password_path(conn, :new))
+              |> redirect(to: page_path(conn, :index))
         else
           changeset = User.changeset(%User{})
 
@@ -110,7 +109,7 @@ defmodule SmartcitydogsWeb.ForgotenPasswordController do
 
       user ->
         if expired?(user.reset_token_sent_at) do
-          User.password_token_changeset(user, %{
+          User.changeset(user, %{
             reset_password_token: nil,
             reset_token_sent_at: nil
           })
@@ -124,7 +123,7 @@ defmodule SmartcitydogsWeb.ForgotenPasswordController do
 
           case Repo.update(changeset) do
             {:ok, _user} ->
-              User.password_token_changeset(user, %{
+              User.changeset(user, %{
                 reset_password_token: nil,
                 reset_token_sent_at: nil
               })
@@ -133,8 +132,7 @@ defmodule SmartcitydogsWeb.ForgotenPasswordController do
               |> Repo.update!()
 
               conn
-              |> put_flash(:info, "Password reset successfully!")
-              |> redirect(to: forgoten_password_path(conn, :new))
+              |> redirect(to: page_path(conn, :index))
 
             {:error, changeset} ->
               conn

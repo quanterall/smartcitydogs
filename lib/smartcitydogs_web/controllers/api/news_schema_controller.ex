@@ -36,7 +36,7 @@ defmodule SmartcitydogsWeb.NewsSchemaControllerAPI do
   def delete(conn, %{"id" => id}) do
     news_schema = DataPages.get_news(id)
 
-    with {:ok, %News{}} <- DataPages.delete_news_schema(news_schema) do
+    with {:ok, %News{}} <- DataPages.delete_news(news_schema) do
       send_resp(conn, :no_content, "")
     end
   end

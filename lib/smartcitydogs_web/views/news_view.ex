@@ -9,6 +9,8 @@ defmodule SmartcitydogsWeb.NewsView do
 
 end
 
+## To render the news content the way it is created in the text editor.
+
 defmodule Smartcitydogs.Markdown do
   defstruct text: "", html: nil
   def to_html(%__MODULE__{html: html}) when is_binary(html) do

@@ -10,7 +10,8 @@ defmodule Smartcitydogs.Mixfile do
       compilers: [:phoenix, :gettext] ++ Mix.compilers(),
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
-      deps: deps()
+      deps: deps(),
+      xref: xref()
     ]
   end
 
@@ -27,9 +28,9 @@ defmodule Smartcitydogs.Mixfile do
         :timex,
         :bamboo_smtp,
         :ueberauth_facebook,
-        :ueberauth_twitter,
+       ## :ueberauth_twitter,
         :scrivener_ecto,
-        :httpoison,
+      ##  :httpoison,
         :recaptcha
       ]
     ]
@@ -38,6 +39,13 @@ defmodule Smartcitydogs.Mixfile do
   # Specifies which paths to compile per environment.
   defp elixirc_paths(:test), do: ["lib", "test/support"]
   defp elixirc_paths(_), do: ["lib"]
+  defp xref do
+    [
+      exclude: [
+        {Plug.Conn.WrapperError, :reraise, 3}
+      ]
+    ]
+  end
 
   # Specifies your project dependencies.
   #
@@ -57,7 +65,7 @@ defmodule Smartcitydogs.Mixfile do
       {:comeonin, "~> 2.5"},
       {:guardian, "~> 0.12.0"},
       {:ueberauth_facebook, "~> 0.3"},
-      {:ueberauth_twitter, "~> 0.2"},
+     ## {:ueberauth_twitter, "~> 0.2"},
       {:oauth, github: "tim/erlang-oauth"},
       {:bamboo, "~> 0.7"},
       {:bamboo_smtp, "~> 1.4.0"},
@@ -65,8 +73,8 @@ defmodule Smartcitydogs.Mixfile do
       {:timex, "~> 3.1"},
       {:scrivener_ecto, "~> 1.0"},
       {:scrivener_list, "~> 1.0"},
-      {:httpoison, "~> 1.0", override: true},
-      {:html_entities, "~> 0.4"},
+     ## {:httpoison, "~> 1.0", override: true},
+     ## {:html_entities, "~> 0.4"},
       {:cmark, "~> 0.7"},
       {:recaptcha, "~> 2.3"},
       {:bodyguard, "~> 2.1"}

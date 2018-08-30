@@ -32,7 +32,7 @@ defmodule SmartcitydogsWeb.SignalsCommentControllerAPIView do
     }
   end
 
-  def render("already_followed.json", %{signal_comment: signals_comment}) do
+  def render("already_followed.json", %{signal_comment: _}) do
     %{error: "Signal comment has already been liked."}
   end
 
@@ -48,11 +48,11 @@ defmodule SmartcitydogsWeb.SignalsCommentControllerAPIView do
     }
   end
 
-  def render("already_unfollowed.json", %{signal_comment: signals_comment}) do
+  def render("already_unfollowed.json", %{signal_comment: _}) do
     %{error: "Signal comment has already been disliked."}
   end
 
-  def render("not_found.json", %{signal_comment: signals_comment}) do
+  def render("not_found.json", %{signal_comment: _}) do
     %{error: "Signal comment not found."}
   end
 end

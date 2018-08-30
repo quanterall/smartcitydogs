@@ -118,7 +118,7 @@ defmodule SmartcitydogsWeb.Router do
 
       resources("/my_signals", MySignalsController)
 
-      get("/show", PageController, :show)
+
 
 
       get("/signals/get_signals_support_count", SignalController, :get_signals_support_count)
