@@ -5,7 +5,7 @@ defmodule SmartcitydogsWeb.NewsController do
   alias Smartcitydogs.News
   alias Smartcitydogs.DataPages
   alias Smartcitydogs.Repo
-  alias Smartcitydogs.Markdown
+  #alias Smartcitydogs.Markdown
 
   def index(conn, %{"page" => page_number}) do
     news = DataPages.list_news()
@@ -18,11 +18,12 @@ defmodule SmartcitydogsWeb.NewsController do
   
   def index(conn, %{}) do
     news = DataPages.list_news()
-    cond do
-      length(news) == 2 -> news2 = Enum.slice(news, -2..-2) ++ []
-      length(news) == 1 -> [[],[]]
-      length(news) == 0 -> [[],[]]
-    end
+    news2 = 
+      cond do
+        length(news) == 2 -> Enum.slice(news, -2..-2) ++ []
+        length(news) == 1 -> [[],[]]
+        length(news) == 0 -> [[],[]]
+      end
     last_news = Repo.one(from n in News, order_by: [desc: n.id], limit: 1)
     news = Enum.drop(news, -3)
     page = Smartcitydogs.Repo.paginate(news, page: 1, page_size: 8)
@@ -53,9 +54,10 @@ defmodule SmartcitydogsWeb.NewsController do
         "image_url",
         "images/#{Map.get(upload, :filename)}-profile#{extension}"
       )
-      if news_params["image_url"] == "images/-profile" do
-        news_params = Map.put(news_params, "image_url", "")
-      end
+      news_params =
+        if news_params["image_url"] == "images/-profile" do
+          Map.put(news_params, "image_url", "")
+        end
       case DataPages.create_news(news_params) do
         {:ok, _} ->
           conn

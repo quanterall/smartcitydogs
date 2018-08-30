@@ -45,7 +45,7 @@ ul.navbar-nav.text-nowrap{
 }
 .button-show-hide{
 
-  display: contents;
+  /* display: contents; */
   margin-left: -10px;
   width: 100%;
   position: absolute;
@@ -91,7 +91,7 @@ a.close-modal{
 }
 .col-container-shadow .button-show-hide{
   background-color: transparent;
-  box-shadow: inset 0px 0px 400px 110px rgba(0, 0, 0, .5)
+  /* box-shadow: inset 0px 0px 400px 110px rgba(0, 0, 0, .5) */
 }
 .col-container-shadow .btn-secondary:hover{
   color: #00c790 !important;

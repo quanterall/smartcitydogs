@@ -47,7 +47,7 @@ defmodule Smartcitydogs.Animals do
 
    ###### Send E-mail ########
 
-  def send_email(conn, data) do
+  def send_email(data) do
     Smartcitydogs.Email.send_email(data)
     DataAnimals.insert_adopt(data["user_id"], data["animal_id"])
   end

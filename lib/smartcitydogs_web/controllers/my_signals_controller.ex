@@ -4,10 +4,11 @@ defmodule SmartcitydogsWeb.MySignalsController do
 
   def index(conn, params) do
 
+  page_num =
     if params == %{} do
-      page_num = 1
+      1
     else
-      page_num = String.to_integer(params["page"])
+      String.to_integer(params["page"])
     end
 
     user = conn.assigns.current_user.id

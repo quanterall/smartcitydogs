@@ -162,7 +162,7 @@ defmodule Smartcitydogs.DataSignals do
   end
 
   def get_comment_signal_id(signals_id) do
-    query = Ecto.Query.from(c in SignalsComments, where: c.signals_id == ^signals_id)
+    Ecto.Query.from(c in SignalsComments, where: c.signals_id == ^signals_id)
     |> Repo.all()
   end
 

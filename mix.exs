@@ -10,7 +10,8 @@ defmodule Smartcitydogs.Mixfile do
       compilers: [:phoenix, :gettext] ++ Mix.compilers(),
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
-      deps: deps()
+      deps: deps(),
+      xref: xref()
     ]
   end
 
@@ -38,6 +39,13 @@ defmodule Smartcitydogs.Mixfile do
   # Specifies which paths to compile per environment.
   defp elixirc_paths(:test), do: ["lib", "test/support"]
   defp elixirc_paths(_), do: ["lib"]
+  defp xref do
+    [
+      exclude: [
+        {Plug.Conn.WrapperError, :reraise, 3}
+      ]
+    ]
+  end
 
   # Specifies your project dependencies.
   #

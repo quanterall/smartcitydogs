@@ -1,6 +1,7 @@
 defmodule SmartcitydogsWeb.AnimalControllerAPI do
   use SmartcitydogsWeb, :controller
 
+  alias Smartcitydogs.Repo
   alias Smartcitydogs.Animals
   alias Smartcitydogs.DataAnimals
 
@@ -8,7 +9,7 @@ defmodule SmartcitydogsWeb.AnimalControllerAPI do
 
   def send_email(conn,data) do
     int = String.to_integer(data["animal_id"])
-    Smartcitydogs.Animals.send_email(conn,data)
+    Smartcitydogs.Animals.send_email(data)
     redirect conn, to: "/registered/#{int}"
   end
 

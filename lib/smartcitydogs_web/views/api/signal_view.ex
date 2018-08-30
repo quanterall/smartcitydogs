@@ -1,13 +1,12 @@
 defmodule SmartcitydogsWeb.SignalControllerAPIView do
   use SmartcitydogsWeb, :view
   alias SmartcitydogsWeb.SignalControllerAPIView
-  alias Smartcitydogs.SignalView
 
   def render("index.json", %{signals: signals}) do
     %{data: render_many(signals, SignalControllerAPIView, "signals.json")}
   end
 
-  def render("show.json", %{signal: signal, comments: [sorted_comments], comments_count: comments}) do
+  def render("show.json", %{signal: signal, comments: [sorted_comments], comments_count: _}) do
     %{data: render_one(%{signal: signal, comments: sorted_comments,}, SignalControllerAPIView, "signal_show.json")}
   end
 
@@ -68,7 +67,7 @@ defmodule SmartcitydogsWeb.SignalControllerAPIView do
       }
   end
 
-  def render("already_followed.json", %{signal: signal}) do
+  def render("already_followed.json", %{signal: _}) do
     %{error: "Signal has already been followed."}
   end
 
@@ -88,7 +87,7 @@ defmodule SmartcitydogsWeb.SignalControllerAPIView do
     }
   end
 
-  def render("already_unfollowed.json", %{signal: signal}) do
+  def render("already_unfollowed.json", %{signal: _}) do
     %{error: "Signal has already been unfollowed."}
   end
 end

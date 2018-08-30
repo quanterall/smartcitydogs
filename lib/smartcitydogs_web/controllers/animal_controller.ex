@@ -6,13 +6,7 @@ defmodule SmartcitydogsWeb.AnimalController do
   alias Smartcitydogs.Repo
   import Ecto.Query
 
-  ###### Send E-mail ########
-
-  def send_email(conn, data) do
-    int = String.to_integer(data["animal_id"])
-    Smartcitydogs.Animals.send_email(conn,data)
-    redirect(conn, to: "/animals/#{int}")
-  end
+  
 
   ############################# Minicipality Home Page Animals ################################
 
@@ -220,22 +214,33 @@ defmodule SmartcitydogsWeb.AnimalController do
     upload = Map.get(conn, :params)
     upload = Map.get(upload, "files")
 
-    for n <- upload do
-      [head] = n
+    IO.inspect upload
 
-      extension = Path.extname(head.filename)
+    if upload == nil do
+      # args = %{
+      #   "url" => "images/2.jpg"
+      #   "animals_id" => "#{id}"
+      # }
 
-      File.cp(
-        head.path,
-        "../smartcitydogs/assets/static/images/#{Map.get(head, :filename)}-profile#{extension}"
-      )
+      # DataAnimals.create_animal_image(args)
+    else
+      for n <- upload do
+        [head] = n
 
-      args = %{
-        "url" => "images/#{Map.get(head, :filename)}-profile#{extension}",
-        "animals_id" => "#{id}"
-      }
+        extension = Path.extname(head.filename)
 
-      DataAnimals.create_animal_image(args)
+        File.cp(
+          head.path,
+          "../smartcitydogs/assets/static/images/#{Map.get(head, :filename)}-profile#{extension}"
+        )
+
+        args = %{
+          "url" => "images/#{Map.get(head, :filename)}-profile#{extension}",
+          "animals_id" => "#{id}"
+        }
+
+        DataAnimals.create_animal_image(args)
+      end
     end
   end
 
@@ -244,7 +249,7 @@ defmodule SmartcitydogsWeb.AnimalController do
 
     cond do
       id_map == "send_email" ->
-        Smartcitydogs.Animals.send_email(conn, map)
+        Smartcitydogs.Animals.send_email(map)
 
       id_map == "new" ->
         new(conn, map)

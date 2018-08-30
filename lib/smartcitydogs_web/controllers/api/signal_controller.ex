@@ -67,45 +67,27 @@ defmodule SmartcitydogsWeb.SignalControllerAPI do
   end
 
   def show(conn, map) do
-   id = map["id"]
-
-    cond do
-      id == "remove_like" ->
-        SignalControllerAPI.remove_like(conn, map)
-
-      id == "update_like_count" ->
-        SignalControllerAPI.update_like_count(conn, map)
-
-      id == "comment" ->
-        SignalControllerAPI.comment(conn, map)
-
-      id == "followed_signals" ->
-     :ok   # followed_signals(conn, map)
-
-      true ->
-        id = String.to_integer(map["id"])
-        comments = DataSignals.get_comment_signal_id(id)
-        signal = DataSignals.get_signal(id)
-        ## signal is liked by user
-        sorted_comments = DataSignals.sort_signal_comment_by_id()
-        render(
-          conn,
-          "show.json",
-          signal: signal,
-          comments: sorted_comments,
-          comments_count: comments
-        )
-    end
-
+    id = String.to_integer(map["id"])
+    comments = DataSignals.get_comment_signal_id(id)
+    signal = DataSignals.get_signal(id)
+    ## signal is liked by user
+    sorted_comments = DataSignals.sort_signal_comment_by_id()
+    render(
+      conn,
+      "show.json",
+      signal: signal,
+      comments: sorted_comments,
+      comments_count: comments
+    )
   end
 
   def update(conn, %{"id" => id, "signal" => signal_params}) do
-    if id == "follow" do
-      SmartcitydogsWeb.SignalControllerAPI.follow(conn, %{"id" => signal_params})
-    end
-    if id == "unfollow" do
-      SmartcitydogsWeb.SignalControllerAPI.unfollow(conn, %{"id" => signal_params})
-    end
+    # if id == "follow" do
+    #   SmartcitydogsWeb.SignalControllerAPI.follow(conn, %{"id" => signal_params})
+    # end
+    # if id == "unfollow" do
+    #   SmartcitydogsWeb.SignalControllerAPI.unfollow(conn, %{"id" => signal_params})
+    # end
     signal = DataSignals.get_signal(id)
 
     with {:ok, %Signals{} = signal} <- DataSignals.update_signal(signal, signal_params) do
@@ -120,36 +102,36 @@ defmodule SmartcitydogsWeb.SignalControllerAPI do
   end
 
 
-  def follow(conn, %{"id" => id}) do
-    id = String.to_integer(id)
-    user_id = conn.private.plug_session["current_user_id"]
-    user_liked_signals = DataUsers.get_user!(user_id) |> Map.get(:liked_signals)
-    cond do
-      Enum.member?(user_liked_signals, id) -> 
-        signal = DataSignals.get_signal(id)
-        render(conn, "already_followed.json", signal: signal)
-      Enum.member?(user_liked_signals, id) == false ->
-          DataUsers.add_liked_signal(user_id, id)
-         {:ok, signal} = DataSignals.follow_signal(id)
-          render(conn, "followed.json", signal: signal)
-    end 
-  end
+  # def follow(conn, %{"id" => id}) do
+  #   id = String.to_integer(id)
+  #   user_id = conn.private.plug_session["current_user_id"]
+  #   user_liked_signals = DataUsers.get_user!(user_id) |> Map.get(:liked_signals)
+  #   cond do
+  #     Enum.member?(user_liked_signals, id) -> 
+  #       signal = DataSignals.get_signal(id)
+  #       render(conn, "already_followed.json", signal: signal)
+  #     Enum.member?(user_liked_signals, id) == false ->
+  #         DataUsers.add_like(user_id, id)
+  #        {:ok, signal} = DataSignals.follow_signal(id)
+  #         render(conn, "followed.json", signal: signal)
+  #   end 
+  # end
 
-  def unfollow(conn, %{"id" => id}) do
-    id = String.to_integer(id)
-    user_id = conn.private.plug_session["current_user_id"]
-    user_liked_signals = DataUsers.get_user!(user_id) |> Map.get(:liked_signals)
-    cond do
-      Enum.member?(user_liked_signals, id) -> 
-        DataUsers.remove_liked_signal(user_id, id)
-        {:ok, signal} = DataSignals.unfollow_signal(id)
-        render(conn, "unfollowed.json", signal: signal)
+  # def unfollow(conn, %{"id" => id}) do
+  #   id = String.to_integer(id)
+  #   user_id = conn.private.plug_session["current_user_id"]
+  #   user_liked_signals = DataUsers.get_user!(user_id) |> Map.get(:liked_signals)
+  #   cond do
+  #     Enum.member?(user_liked_signals, id) -> 
+  #       DataUsers.remove_liked_signal(user_id, id)
+  #       {:ok, signal} = DataSignals.unfollow_signal(id)
+  #       render(conn, "unfollowed.json", signal: signal)
 
-      Enum.member?(user_liked_signals, id) == false ->
-        signal = DataSignals.get_signal(id)
-        render(conn, "already_unfollowed.json", signal: signal)
-    end 
-  end
+  #     Enum.member?(user_liked_signals, id) == false ->
+  #       signal = DataSignals.get_signal(id)
+  #       render(conn, "already_unfollowed.json", signal: signal)
+  #   end 
+  # end
 
   def like(conn, params) do
     user_id = conn.private.plug_session["current_user_id"]
@@ -185,7 +167,8 @@ defmodule SmartcitydogsWeb.SignalControllerAPI do
       signal = Smartcitydogs.DataSignals.get_signal(show_id)
       sorted_comments = Smartcitydogs.DataSignals.sort_signal_comment_by_id()
       
-      redirect(conn, to: signal_path(conn, :show, signal))
+      
+      redirect(conn, to: signal_path(conn, :show, signal, %{"comments" => comments, "sorted_comments" => sorted_comments}))
 
   end
 

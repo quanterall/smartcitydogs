@@ -4,13 +4,7 @@ defmodule Smartcitydogs.Signals do
   import Ecto.Query
   alias Smartcitydogs.DataSignals
   alias Smartcitydogs.Signals
-  alias Smartcitydogs.DataUsers
   alias Smartcitydogs.Repo
-  alias Smartcitydogs.DataAnimals
-  alias Smartcitydogs.Repo
-  alias Smartcitydogs.Animals
-  alias SmartcitydogsWeb.SignalController
-  alias SmartcitydogsWeb.SignalControllerAPI
 
   @timestamps_opts [type: :utc_datetime, usec: false]
 

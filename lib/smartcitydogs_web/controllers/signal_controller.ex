@@ -15,14 +15,15 @@ defmodule SmartcitydogsWeb.SignalController do
 
   ## Hanlde regular user page
   def index(conn, params) do
+    page_num =
     if params == %{} do
-      x = 1
+      1
     else
-      x = String.to_integer(params["page"])
+      String.to_integer(params["page"])
     end
 
     sorted_signals = DataSignals.sort_signal_by_id()
-    page = Smartcitydogs.Repo.paginate(sorted_signals, page: x, page_size: 8)
+    page = Smartcitydogs.Repo.paginate(sorted_signals, page: page_num, page_size: 8)
     render(conn, "index2_signal.html", signal: page.entries, page: page)
   end
 
@@ -55,13 +56,13 @@ defmodule SmartcitydogsWeb.SignalController do
       data_status != [] ->
         all_query = []
 
-        x =
+        all_query =
           Enum.map(data_status, fn x ->
             struct = from(p in Signals, where: p.signals_types_id == ^String.to_integer(x))
-            all_query = all_query ++ Repo.all(struct)
+            all_query ++ Repo.all(struct)
           end)
 
-        page = Smartcitydogs.Repo.paginate(List.flatten(x), page: 1, page_size: 8)
+        page = Smartcitydogs.Repo.paginate(List.flatten(all_query), page: 1, page_size: 8)
 
         render(conn, "minicipality_signals.html",
           signal: page.entries,
@@ -73,14 +74,14 @@ defmodule SmartcitydogsWeb.SignalController do
       data_category != [] ->
         all_query = []
 
-        x =
+        all_query =
           Enum.map(data_category, fn x ->
             struct = from(p in Signals, where: p.signals_categories_id == ^String.to_integer(x))
-            all_query = all_query ++ Repo.all(struct)
+            all_query ++ Repo.all(struct)
           end)
 
-        x = List.flatten(x)
-        page = Smartcitydogs.Repo.paginate(x, page: 1, page_size: 8)
+          all_query = List.flatten(all_query)
+        page = Smartcitydogs.Repo.paginate(all_query, page: 1, page_size: 8)
 
         render(conn, "minicipality_signals.html",
           signal: page.entries,
@@ -90,8 +91,8 @@ defmodule SmartcitydogsWeb.SignalController do
         )
 
       true ->
-        x = DataSignals.list_signals()
-        page = Smartcitydogs.Repo.paginate(x, page: 1, page_size: 8)
+        all_query = DataSignals.list_signals()
+        page = Smartcitydogs.Repo.paginate(all_query, page: 1, page_size: 8)
 
         render(conn, "minicipality_signals.html",
           signal: page.entries,
@@ -243,7 +244,6 @@ defmodule SmartcitydogsWeb.SignalController do
   end
 
   def delete(conn, %{"id" => id}) do
-    signal = DataSignals.get_signal(id)
    
     with :ok <-
            Bodyguard.permit(
@@ -251,7 +251,7 @@ defmodule SmartcitydogsWeb.SignalController do
              :update,
              conn.assigns.current_user
            ) do
-      {:ok, signal} = DataSignals.delete_signal(id)
+      {:ok, _} = DataSignals.delete_signal(id)
 
       conn
       |> put_flash(:info, "Signal deleted successfully.")

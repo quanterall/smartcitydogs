@@ -1,7 +1,6 @@
 defmodule SmartcitydogsWeb.Admin.UserController do
   use SmartcitydogsWeb, :controller
 
-  alias Smartcitydogs.User
 
   def index(conn, _params) do
     users = Smartcitydogs.DataUsers.list_users()

@@ -2,7 +2,6 @@ defmodule SmartcitydogsWeb.ContactControllerAPI do
   use SmartcitydogsWeb, :controller
 
   alias Smartcitydogs.DataUsers
-  alias Smartcitydogs.Contact
 
   action_fallback(SmartcitydogsWeb.FallbackController)
 

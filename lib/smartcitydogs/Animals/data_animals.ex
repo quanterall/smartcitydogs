@@ -215,7 +215,7 @@ defmodule Smartcitydogs.DataAnimals do
     check_list(list, animals_id)
   end
   
-  def check_list([],animals_id) do
+  def check_list([], _ ) do
     false
   end
 
