@@ -35,14 +35,20 @@
 <style>
 .latest-bg {
   top: 0px;
-  width: 100%;
+  width: 98.5%;
   background-size: cover;
   background-position-x: center;
   height: 620px;
 }
+.card{
+  height: 100% !important;
+}
+.col-lg-3 img.card-img-top{
+  height: 40%;
+}
 
 .second-bg {
-  width: 45%;
+  width: 100%;
   background-size: cover;
   height: 500px;
   
@@ -55,9 +61,7 @@
   height: 500px;
 }
 
-.empty-to-center{
-    height:290px;
-}
+
 
 .empty-to-center2{
     height:190px;
@@ -91,80 +95,60 @@ h5, .h5 {
    font-weight: bold;
 }
 
-.nnn{
-   padding-left: 10%;
+.col-lg-6{
+  padding-left: 0px;
 }
+.col-lg-3{
+  padding-left: 0px;
+}
+
 
 </style>
  <br>
  <br>
+ <%= if @news2 == [] do %>
+ <% else %>
 
  <div class="row">
+   <%= for news <- @news2 do %>
+   <div class="col-lg-6">
+      <div class="second-bg" style="background-image: url('/<%= news.image_url %>')">
 
-<div class="second-bg" style="background-image: url('/<%= Enum.at(@news2,0).image_url %>')">
- <div class="empty-to-center2" >
- </div>
+        <div class="empty-to-center" >
+        </div>
 
-  <div class=nonlatest-news-data>
+  <div class=latest-news-data>
 
     <div class="latest-date" style="color: grey;" >
-     <%=NaiveDateTime.to_date( Enum.at(@news2,0).date) %>
+     <%=NaiveDateTime.to_date(news.date) %>
     </div>
 
   <br>
   <br>
 
     <div class="latest-text" style="color: white; font-size: 35px;">
-     <b><%=Enum.at(@news2,0).title %></b>
+     <b><%=news.title %></b>
     </div>
 
     <div class="latest-text" style="color: white; font-size: 18px;">
-     <%=Enum.at(@news2,0).short_content %>
+     <%=news.short_content %>
     </div>
   
   <br>
   
-    <b> <%= link "Виж още", to: news_path(@conn, :show, Enum.at(@news2,0)), style: "color: rgb(0,201,148); font-size: 18px;"%>
+    <b> <%= link "Виж още", to: news_path(@conn, :show, news.id), style: "color: rgb(0,201,148); font-size: 18px;"%>
     </b>
 
-  </div>
-</div>
-
-
-<div class="third-bg" style="background-image: url('/<%= Enum.at(@news2,1).image_url %>')">
- <div class="empty-to-center2" >
  </div>
 
-  <div class=nonlatest-news-data>
-
-    <div class="latest-date" style="color: grey;" >
-    <%=NaiveDateTime.to_date( Enum.at(@news2,1).date) %>
-    </div>
-
-  <br>
-  <br>
-
-    <div class="latest-text" style="color: white; font-size: 35px;">
-    <b><%=Enum.at(@news2,1).title %></b>
-    </div>
-
-    <div class="latest-text" style="color: white; font-size: 18px;">
-    <%=Enum.at(@news2,1).short_content %>
-    </div>
-  
-  <br>
-  
-    <b> <%= link "Виж още", to: news_path(@conn, :show, Enum.at(@news2,1)), style: "color: rgb(0,201,148); font-size: 18px;"%>
-    </b>
-
-  </div>
 </div>
-
+   </div>
+   <% end %>
  </div>
-</div>
 
 <div class= "nnn">
 <div class="row">
+<% IO.inspect @news %>
     <%= for news <- @news do %>
     <div class="col-lg-3">
         <div class="card">
@@ -193,7 +177,11 @@ h5, .h5 {
       <% end %>  
       <% end %>
     </div>
-     <%= link "Създай новина", to: news_path(@conn, :new) %>
+     
 </div>
 
 
+<% end %>
+<div class ="news-button-create">
+  <%= link "Създай новина", to: news_path(@conn, :new), class: "btn btn-primary" %>
+</div>

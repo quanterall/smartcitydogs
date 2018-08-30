@@ -20,11 +20,21 @@ defmodule SmartcitydogsWeb.NewsController do
     news = DataPages.list_news()
     news2 = 
       cond do
-        length(news) == 2 -> Enum.slice(news, -2..-2) ++ []
-        length(news) == 1 -> [[],[]]
-        length(news) == 0 -> [[],[]]
+        length(news) == 2 -> 
+          Enum.slice(news, -2..-2) ++ []
+        
+        length(news) == 1 -> 
+          []
+
+        length(news) == 0 ->
+          []
+
+        true -> 
+          Enum.slice(news, -3..-2)
+
       end
     last_news = Repo.one(from n in News, order_by: [desc: n.id], limit: 1)
+    IO.inspect news 
     news = Enum.drop(news, -3)
     page = Smartcitydogs.Repo.paginate(news, page: 1, page_size: 8)
     render(conn, "index.html", news: page.entries, last_news: last_news, news2: news2, page: page)
@@ -46,7 +56,7 @@ defmodule SmartcitydogsWeb.NewsController do
       filename: image_name,
       path: "./smartcitydogs/assets/static/images/#{image_name}-profile#{extension}"
     }
-    
+    IO.inspect news_params
     news_params = Map.put(news_params, "date", DateTime.utc_now())
     news_params =
       Map.put(
@@ -54,10 +64,10 @@ defmodule SmartcitydogsWeb.NewsController do
         "image_url",
         "images/#{Map.get(upload, :filename)}-profile#{extension}"
       )
-      news_params =
         if news_params["image_url"] == "images/-profile" do
           Map.put(news_params, "image_url", "")
         end
+        IO.inspect news_params
       case DataPages.create_news(news_params) do
         {:ok, _} ->
           conn
