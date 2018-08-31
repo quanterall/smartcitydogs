@@ -77,8 +77,10 @@ defmodule SmartcitydogsWeb.UserController do
           render(conn, "show.html", user: user, conn: conn, page: page)
         else  
           page_params = params["page"]
-          page = Smartcitydogs.Repo.paginate(page: page_params, page_size: 8)
-          render(conn, "show.html", user: user, conn: conn, page: page)
+          IO.puts "PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP"
+         ## IO.inspect page_params
+         ## page = Smartcitydogs.Repo.paginate(page: page_params, page_size: 8)
+          render(conn, "show_my_signals.html", user: user, conn: conn, page: String.to_integer(page_params) )
         end
 
       end

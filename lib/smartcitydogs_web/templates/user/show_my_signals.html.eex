@@ -68,11 +68,11 @@
               </div>
               <div class="signals-user-show">
               <%
-                IO.inspect @page
+                ##IO.inspect @page
                 user = @conn.assigns.current_user.id
                 signals = Smartcitydogs.DataSignals.get_user_signal(user)
                 page = Smartcitydogs.Repo.paginate(signals, page: @page, page_size: 8)
-                IO.inspect page
+               ## IO.inspect page
                 profile_params = %{signals: signals, page: page, conn: @conn}
                 followed_signals = Smartcitydogs.DataSignals.get_signal_like(user)
                 profile_liked_params = %{signals: followed_signals, page: page, conn: @conn}
@@ -80,7 +80,103 @@
                 
               %>
                 <div class="last-signals-dogs-div">
-                  <%= render SmartcitydogsWeb.MySignalsView, "my_signals.html", profile_params %>
+           
+<div class="row">
+  
+  <%= for my_signal <- page.entries do %>
+  
+    <div class="col-lg-3">
+      <div class="col-container" style="background-image: url('/<%= get_signals_images(my_signal.id) %>')">
+        <div class="col-container-shadow">
+
+          <label-type class="
+            <%= if my_signal.signals_types_id == 1 do %>
+            label-type-red
+            <% end %>
+
+            <%= if my_signal.signals_types_id == 2 do %>
+            label-type-orange
+            <% end %>
+
+            <%= if my_signal.signals_types_id == 3 do %>
+            label-type-yellow
+            <% end %>
+
+            <%= if my_signal.signals_types_id == 4 do %>
+            label-type-green
+            <% end %>"><%=my_signal.signals_types_id
+            |> Smartcitydogs.DataSignals.get_signal_type()
+            |> Map.get(:name)
+          %>
+          </label-type>
+          <br />
+
+          <label-date>
+          <%=
+            signal_time = my_signal.inserted_at
+            |> DateTime.truncate(:second)
+            |> DateTime.to_string()
+            count = String.length(signal_time)
+            final_time = String.slice(signal_time,0..count-11)
+            final_time
+          %>
+          <br />
+          </label-date>
+
+          <label-title><b>
+          <%=
+            my_signal.title
+          %></b></label-title>
+          <br />
+
+
+          <label-adress><%=
+            my_signal.address
+          %></label-adress>
+          <br />
+
+            <div class="icon-scale">
+              <i class="fas fa-search"></i> : <%=my_signal.view_count%>
+              <br />
+            </div>
+            <div class="icon-scale">
+              <i class="fas fa-arrow-up"></i> : <span id="signal-count"><%= my_signal.support_count %></span>
+            </div>
+            <div class="icon-scale">
+              <i class="far fa-comment fa-flip-horizontal"></i> : <%= Enum.count(Smartcitydogs.DataSignals.get_comment_signal_id(my_signal.id)) %>
+            <br />
+            </div>
+          
+
+            <center>
+
+            <div class="button-show-hide">
+            <p class="p-button-view"><a class="btn btn-secondary" href="/signals/<%=my_signal.id%>" role="button">Виж още</a>
+            </div></center>
+          </div>
+         </div>
+       </div>
+    <%end%>
+</div>
+
+<style>
+.last-signals-dogs-div{
+  display: inline-block;
+}
+</style>
+
+<div class="padination">
+
+  <%= for x <- 1..page.total_pages do %>
+    <% 
+   
+    id = @conn.assigns.current_user.id
+    %>
+    <%= link "#{x * 8 - 7}-#{x * 8} ", to: user_path(@conn, :show, id, %{page: x}) %>
+  <% end %>
+</div>
+
+
                 </div>
                 <div class="last-signals-dogs-div2">
                   <%= render SmartcitydogsWeb.SignalView, "followed_signals.html", profile_liked_params %>

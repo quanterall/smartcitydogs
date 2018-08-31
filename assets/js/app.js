@@ -84,8 +84,15 @@ $('#submit-news').click(function(){
 });
 
 $("#my-signals-link").click(function(){
-    $(".last-signals-dogs-div").css("display","inline-block");
-    $(".last-signals-dogs-div2").css("display","none");
+    $.ajax({
+        method: "GET",
+        url: "/my_signals"
+    }).then(function (data) {
+       
+        $(".last-signals-dogs-div").css("display","inline-block");
+    
+    })
+    
 })
 $("#followed-signals-link").click(function(){
     $(".last-signals-dogs-div").css("display","none");

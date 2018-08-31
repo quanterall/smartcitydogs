@@ -27,15 +27,12 @@
                           <%= if @signal.signals_types_id == 1 do %>
                             label-type-red
                           <% end %>
-
                           <%= if @signal.signals_types_id == 2 do %>
                             label-type-orange
                           <% end %>
-
                           <%= if @signal.signals_types_id == 3 do %>
                             label-type-yellow
                           <% end %>
-
                           <%= if @signal.signals_types_id == 4 do %>
                             label-type-green
                           <% end %>">
@@ -208,7 +205,6 @@
       zoom: 18,
       mapTypeId: google.maps.MapTypeId.ROADMAP
     };
-
     var map = new google.maps.Map(mapCanvas, mapOptions);
     var marker = new google.maps.Marker({
       position: myCenter,

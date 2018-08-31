@@ -3,7 +3,7 @@ defmodule SmartcitydogsWeb.MySignalsController do
   alias Smartcitydogs.DataSignals
 
   def index(conn, params) do
-
+   ## IO.inspect params
   page_num =
     if params == %{} do
       1
@@ -12,10 +12,11 @@ defmodule SmartcitydogsWeb.MySignalsController do
     end
 
     user = conn.assigns.current_user.id
-    sorted_signals = DataSignals.sort_signal_by_id()
+    ##sorted_signals = DataSignals.sort_signal_by_id()
     signals = DataSignals.get_user_signal(user)
     
-    page = Smartcitydogs.Repo.paginate(sorted_signals, page: page_num, page_size: 8)
+    page = Smartcitydogs.Repo.paginate(signals, page: page_num, page_size: 8)
+    ##IO.inspect page
     render(conn, "my_signals.html", signals: signals, page: page)
   end
 end

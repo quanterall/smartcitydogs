@@ -1,26 +1,27 @@
 
 <div class="row">
-  <%= for signal <- @signals do %>
+
+  <%= for page <- @page.entries do %>
     <div class="col-lg-3">
-      <div class="col-container" style="background-image: url('/<%= get_signals_images(signal.id) %>')">
+      <div class="col-container" style="background-image: url('/<%= get_signals_images(page.id) %>')">
         <div class="col-container-shadow">
 
           <label-type class="
-            <%= if signal.signals_types_id == 1 do %>
+            <%= if page.signals_types_id == 1 do %>
             label-type-red
             <% end %>
 
-            <%= if signal.signals_types_id == 2 do %>
+            <%= if page.signals_types_id == 2 do %>
             label-type-orange
             <% end %>
 
-            <%= if signal.signals_types_id == 3 do %>
+            <%= if page.signals_types_id == 3 do %>
             label-type-yellow
             <% end %>
 
-            <%= if signal.signals_types_id == 4 do %>
+            <%= if page.signals_types_id == 4 do %>
             label-type-green
-            <% end %>"><%=signal.signals_types_id
+            <% end %>"><%=page.signals_types_id
             |> Smartcitydogs.DataSignals.get_signal_type()
             |> Map.get(:name)
           %>
@@ -29,7 +30,7 @@
 
           <label-date>
           <%=
-            signal_time = signal.inserted_at
+            signal_time = page.inserted_at
             |> DateTime.truncate(:second)
             |> DateTime.to_string()
             count = String.length(signal_time)
@@ -41,25 +42,25 @@
 
           <label-title><b>
           <%=
-            signal.title
+            page.title
           %></b></label-title>
           <br />
 
 
           <label-adress><%=
-            signal.address
+            page.address
           %></label-adress>
           <br />
 
             <div class="icon-scale">
-              <i class="fas fa-search"></i> : <%=signal.view_count%>
+              <i class="fas fa-search"></i> : <%=page.view_count%>
               <br />
             </div>
             <div class="icon-scale">
-              <i class="fas fa-arrow-up"></i> : <span id="signal-count"><%= signal.support_count %></span>
+              <i class="fas fa-arrow-up"></i> : <span id="signal-count"><%= page.support_count %></span>
             </div>
             <div class="icon-scale">
-              <i class="far fa-comment fa-flip-horizontal"></i> : <%= Enum.count(Smartcitydogs.DataSignals.get_comment_signal_id(signal.id)) %>
+              <i class="far fa-comment fa-flip-horizontal"></i> : <%= Enum.count(Smartcitydogs.DataSignals.get_comment_signal_id(page.id)) %>
             <br />
             </div>
           
@@ -67,7 +68,7 @@
             <center>
 
             <div class="button-show-hide">
-              <p class="p-button-view"><a class="btn btn-secondary" href="signals/<%=signal.id%>" role="button">Виж още</a>
+              <p class="p-button-view"><a class="btn btn-secondary" href="signals/<%=page.id%>" role="button">Виж още</a>
             </div></center>
           </div>
          </div>
