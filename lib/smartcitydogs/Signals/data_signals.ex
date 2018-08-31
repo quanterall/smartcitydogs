@@ -124,6 +124,11 @@ defmodule Smartcitydogs.DataSignals do
     |> Repo.delete()
   end
 
+  def get_all_cruelty_signals() do
+    Ecto.Query.from(c in Signals, where: c.signals_categories_id == ^3)
+    |> Repo.all()
+  end
+
   # Signals types
 
   def get_signal_type(id) do

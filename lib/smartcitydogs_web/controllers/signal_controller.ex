@@ -21,8 +21,12 @@ defmodule SmartcitydogsWeb.SignalController do
     else
       String.to_integer(params["page"])
     end
-
-    sorted_signals = DataSignals.sort_signal_by_id()
+   ## IO.inspect conn.assigns.current_user
+    sorted_signals = if conn.assigns.current_user.users_types_id == 3 do
+       DataSignals.get_all_cruelty_signals
+    else
+      DataSignals.sort_signal_by_id()
+    end
     page = Smartcitydogs.Repo.paginate(sorted_signals, page: page_num, page_size: 8)
     render(conn, "index2_signal.html", signal: page.entries, page: page)
   end
