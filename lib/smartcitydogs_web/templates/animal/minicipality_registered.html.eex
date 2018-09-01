@@ -34,13 +34,13 @@
                     </button>
                 </div>
                     <br />
-                    <a href="/minicipality_adopted" id="all-adopted-dogs">Осиновени кучета</a>
+                    <a href="/municipality/animals/adopted" id="all-adopted-dogs">Осиновени кучета</a>
                     <div class="Signals2"> 
                     
                     </div>
                     <br />
                     <b>
-                    <a href="/minicipality_shelter" id="all-dogs-shelter">Кучета в приюта</a>
+                    <a href="/municipality/animals/shelter" id="all-dogs-shelter">Кучета в приюта</a>
                     <div class="Signals3"> 
                     
                     </div>
