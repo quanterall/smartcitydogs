@@ -117,7 +117,7 @@ defmodule SmartcitydogsWeb.Router do
       get("/show", PageController, :show) ##not in develop
 
       resources("/my_signals", MySignalsController)
-
+      get("/followed_signals", SignalController, :followed_signals)
 
 
 

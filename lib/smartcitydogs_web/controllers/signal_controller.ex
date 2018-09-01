@@ -15,13 +15,18 @@ defmodule SmartcitydogsWeb.SignalController do
 
   ## Hanlde regular user page
   def index(conn, params) do
+    
     page_num =
     if params == %{} do
       1
     else
       String.to_integer(params["page"])
     end
-   ## IO.inspect conn.assigns.current_user
+    if conn.assigns.current_user == nil do
+      sorted_signals = DataSignals.sort_signal_by_id()
+      page = Smartcitydogs.Repo.paginate(sorted_signals, page: page_num, page_size: 8)
+      render(conn, "index2_signal.html", signal: page.entries, page: page)
+    end
     sorted_signals = if conn.assigns.current_user.users_types_id == 3 do
        DataSignals.get_all_cruelty_signals
     else
@@ -228,15 +233,24 @@ defmodule SmartcitydogsWeb.SignalController do
   end
 
   def followed_signals(conn, params) do
-    user_like = conn.assigns.current_user.liked_signals
+    ##user_like = conn.assigns.current_user.liked_signals
 
-    all_followed_signals =
-      Enum.map(user_like, fn elem ->
-        DataSignals.get_signal(elem)
-      end)
+    # all_followed_signals =
+    #   Enum.map(user_like, fn elem ->
+    #     DataSignals.get_signal(elem)
+    #   end)
 
-    page = Signals |> Smartcitydogs.Repo.paginate(params)
-    render(conn, "followed_signals.html", signal: all_followed_signals, page: page)
+      followed_signals = Smartcitydogs.DataSignals.get_signal_like(conn.assigns.current_user.id)
+      liked_signals = Enum.map(followed_signals, fn x -> x |> Map.get(:signals_id) end)
+      IO.inspect liked_signals
+      followed_signals = []
+      followed_signals = for sig <- liked_signals, do: followed_signals ++ sig |> DataSignals.get_signal()
+      IO.inspect followed_signals
+      page = Smartcitydogs.Repo.paginate(followed_signals, page: 1, page_size: 8)
+     IO.inspect page
+      IO.puts "QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ"
+    # page = Signals |> Smartcitydogs.Repo.paginate(params)
+    render(conn, "followed_signals.html", signals: page.entries, page: page)
   end
 
   def update_type(conn, %{"id" => id, "signals_types_id" => signals_types_id}) do

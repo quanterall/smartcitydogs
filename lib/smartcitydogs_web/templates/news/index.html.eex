@@ -1,5 +1,6 @@
 
 
+<div class="news-page-index">
 
 <div class="latest-bg" style="background-image: url('/<%= @last_news.image_url %>')">
 
@@ -8,24 +9,24 @@
 
   <div class=latest-news-data>
 
-    <div class="latest-date" style="color: grey;" >
+    <p class="card-title" >
      <%=NaiveDateTime.to_date( @last_news.date) %>
-    </div>
+    </p>
 
   <br>
   <br>
 
-    <div class="latest-text" style="color: white; font-size: 35px;">
+    <div class="latest-text" style="height: 15vh;width: 100%;color: white;font-size: 35px;">
      <b><%=@last_news.title %></b>
     </div>
 
-    <div class="latest-text" style="color: white; font-size: 18px;">
+    <div class="latest-text" style=";margin-bottom: 50vh;font-size: 18px;color: white;">
      <%=@last_news.short_content %>
     </div>
   
   <br>
   
-    <b> <%= link "Виж още", to: news_path(@conn, :show, @last_news), style: "color: rgb(0,201,148); font-size: 18px;"%>
+    <b> <%= link "Виж още", to: news_path(@conn, :show, @last_news), class: "button-news" %> 
     </b>
 
  </div>
@@ -34,6 +35,7 @@
 
 <style>
 .latest-bg {
+  margin-top: 5%;
   top: 0px;
   width: 98.5%;
   background-size: cover;
@@ -108,7 +110,7 @@ h5, .h5 {
  <br>
  <%= if @news2 == [] do %>
  <% else %>
-
+<div class="second-news-div">
  <div class="row">
    <%= for news <- @news2 do %>
    <div class="col-lg-6">
@@ -119,7 +121,7 @@ h5, .h5 {
 
   <div class=latest-news-data>
 
-    <div class="latest-date" style="color: grey;" >
+    <div class="latest-date">
      <%=NaiveDateTime.to_date(news.date) %>
     </div>
 
@@ -131,19 +133,39 @@ h5, .h5 {
     </div>
 
     <div class="latest-text" style="color: white; font-size: 18px;">
-     <%=news.short_content %>
+     <%=
+     
+     
+      text = news.short_content
+      len = String.length(news.short_content)
+      if len > 20 do
+          text_sliced = String.slice(text,0..20)
+          if String.last(text_sliced) == " " do 
+            String.trim_trailing(text_sliced," ")
+            |> Kernel.<> "..."
+          else
+            text_sliced <> "..."
+          end
+          
+      else
+          text
+      end
+     
+      %>
     </div>
   
   <br>
-  
-    <b> <%= link "Виж още", to: news_path(@conn, :show, news.id), style: "color: rgb(0,201,148); font-size: 18px;"%>
+      <div class="div-for-button-news">
+    <b> <%= link "Виж още", to: news_path(@conn, :show, news.id), class: "button-news" %>
     </b>
+    </div>
 
  </div>
 
 </div>
    </div>
    <% end %>
+ </div>
  </div>
 
 <div class= "nnn">
@@ -162,7 +184,25 @@ h5, .h5 {
                     </small>
                 </p>
                 <h5 class="card-title"><%=  news.title %></h5>
-                <p class="card-text"><%= news.short_content%></p>
+                <p class="card-text"><%= 
+                
+                text = news.short_content
+                len = String.length(news.short_content)
+                if len > 20 do
+                    text_sliced = String.slice(text,0..20)
+                    if String.last(text_sliced) == " " do 
+                      String.trim_trailing(text_sliced," ")
+                      |> Kernel.<> "..."
+                    else
+                      text_sliced <> "..."
+                    end
+                    
+                else
+                    text
+                end
+                
+                
+                %></p>
                 <%= link "Виж повече »", to: news_path(@conn, :show, news), class: "btn btn-default float-right
                 text-green" %>
             </div>
@@ -184,4 +224,6 @@ h5, .h5 {
 <% end %>
 <div class ="news-button-create">
   <%= link "Създай новина", to: news_path(@conn, :new), class: "btn btn-primary" %>
+</div>
+
 </div>

@@ -148,7 +148,7 @@
                   <% end %>
 
               <% end %>
-          <% @current_user.users_types_id == 3 || @current_user.users_types_id == 4 || @current_user.users_types_id == 5 -> %>
+          <% true -> %>
           <% end %>
             
             

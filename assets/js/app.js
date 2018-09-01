@@ -88,16 +88,22 @@ $("#my-signals-link").click(function(){
         method: "GET",
         url: "/my_signals"
     }).then(function (data) {
-       
         $(".last-signals-dogs-div").css("display","inline-block");
-    
+        $(".last-signals-dogs-div2").css("display","none");
     })
     
 })
 $("#followed-signals-link").click(function(){
+    $.ajax({
+        method: "GET",
+        url: "/followed_signals",
+        data: {
+            "followed_signals": 0,
+        }
+    }).then(function (data) {
     $(".last-signals-dogs-div").css("display","none");
     $(".last-signals-dogs-div2").css("display","inline-block");
-
+    })
 })
 
 $("#like").click(function () {
