@@ -153,7 +153,24 @@
                     </small>
                 </p>
                 <h5 class="card-title"><%=  news.title %></h5>
-                <p class="card-text"><%= news.short_content%></p>
+                <p class="card-text"><%=
+                
+                text = news.short_content
+                len = String.length(news.short_content)
+                if len > 20 do
+                    text_sliced = String.slice(text,0..20)
+                    if String.last(text_sliced) == " " do 
+                      String.trim_trailing(text_sliced," ")
+                      |> Kernel.<> "..."
+                    else
+                      text_sliced <> "..."
+                    end
+                    
+                else
+                    text
+                end
+                
+                %></p>
                 <%= link "Виж повече »", to: news_path(@conn, :show, news), class: "btn btn-default float-right
                 text-green" %>
             </div>
