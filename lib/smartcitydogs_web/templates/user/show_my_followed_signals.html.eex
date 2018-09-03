@@ -84,7 +84,6 @@
                 followed_signals = []
                 followed_signals = for sig <- liked_signals, do: followed_signals ++ sig |> DataSignals.get_signal()
                 page = Smartcitydogs.Repo.paginate(followed_signals, page: @page, page_size: 8)
-                IO.inspect page
                 profile_params = %{signals: signals, page: page, conn: @conn}
                 
                 ##profile_liked_params = %{signals: followed_signals, page: page, conn: @conn}

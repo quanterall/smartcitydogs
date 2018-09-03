@@ -68,16 +68,13 @@
               </div>
               <div class="signals-user-show">
               <%
-                IO.inspect @page
                 alias Smartcitydogs.DataSignals
                 user = @conn.assigns.current_user.id
                 signals = Smartcitydogs.DataSignals.get_user_signal(user)
                 page = Smartcitydogs.Repo.paginate(signals, page: @page, page_size: 8)
-                IO.inspect page
                 profile_params = %{signals: signals, page: page, conn: @conn}
                 followed_signals = Smartcitydogs.DataSignals.get_signal_like(user)
                 liked_signals = Enum.map(followed_signals, fn x -> x |> Map.get(:signals_id) end)
-                IO.inspect liked_signals
                 followed_signals = []
                 followed_signals = for sig <- liked_signals, do: followed_signals ++ sig |> DataSignals.get_signal()
                  page = Smartcitydogs.Repo.paginate(followed_signals, page: @page, page_size: 8)

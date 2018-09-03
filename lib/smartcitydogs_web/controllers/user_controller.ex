@@ -93,7 +93,6 @@ defmodule SmartcitydogsWeb.UserController do
   ##  sig = DataSignals.list_signals()
    ## user = user |> Map.put(:liked_signals, sig) |> Repo.update!()
 
-    IO.inspect user
     IO.puts "TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT"
     with :ok <-
            Bodyguard.permit(
@@ -111,11 +110,9 @@ defmodule SmartcitydogsWeb.UserController do
          
           followed_signals = Smartcitydogs.DataSignals.get_signal_like(conn.assigns.current_user.id)
           liked_signals = Enum.map(followed_signals, fn x -> x |> Map.get(:signals_id) end)
-          IO.inspect liked_signals
           followed_signals = []
           followed_signals = for sig <- liked_signals, do: followed_signals ++ sig |> DataSignals.get_signal()
           page = Smartcitydogs.Repo.paginate(followed_signals, page: 1, page_size: 8)
-          IO.inspect page
           
           render(conn, "show.html", user: user, conn: conn, page: 1)
         # else  
@@ -155,7 +152,6 @@ defmodule SmartcitydogsWeb.UserController do
         else  
           page_params = params["page"]
           IO.puts "PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP"
-         ## IO.inspect page_params
          ## page = Smartcitydogs.Repo.paginate(page: page_params, page_size: 8)
           render(conn, "show_my_signals.html", user: user, conn: conn, page: String.to_integer(page_params) )
         end

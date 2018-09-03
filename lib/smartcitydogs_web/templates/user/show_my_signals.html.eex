@@ -68,7 +68,6 @@
               </div>
               <div class="signals-user-show">
               <%
-                IO.inspect @page
                 user = @conn.assigns.current_user.id
                 signals = Smartcitydogs.DataSignals.get_user_signal(user)
                 page = Smartcitydogs.Repo.paginate(signals, page: @page, page_size: 8)

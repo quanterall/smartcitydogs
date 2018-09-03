@@ -30,7 +30,7 @@ defmodule SmartcitydogsWeb.SignalView do
   def get_signals_view_count(signal_id) do
     list = Smartcitydogs.DataSignals.get_signal_support_count(signal_id)
   
-  views =
+ 
     if list != [] do
       [head | _] = list
       count = head.view_count

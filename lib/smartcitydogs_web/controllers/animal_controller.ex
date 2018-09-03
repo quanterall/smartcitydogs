@@ -214,7 +214,6 @@ defmodule SmartcitydogsWeb.AnimalController do
     upload = Map.get(conn, :params)
     upload = Map.get(upload, "files")
 
-    IO.inspect upload
 
     if upload == nil do
       # args = %{

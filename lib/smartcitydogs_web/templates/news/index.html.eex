@@ -170,7 +170,6 @@ h5, .h5 {
 
 <div class= "nnn">
 <div class="row">
-<% IO.inspect @news %>
     <%= for news <- @news do %>
     <div class="col-lg-3">
         <div class="card">

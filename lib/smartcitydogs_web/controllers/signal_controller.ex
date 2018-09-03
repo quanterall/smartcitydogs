@@ -233,23 +233,12 @@ defmodule SmartcitydogsWeb.SignalController do
   end
 
   def followed_signals(conn, params) do
-    ##user_like = conn.assigns.current_user.liked_signals
-
-    # all_followed_signals =
-    #   Enum.map(user_like, fn elem ->
-    #     DataSignals.get_signal(elem)
-    #   end)
-
+   
       followed_signals = Smartcitydogs.DataSignals.get_signal_like(conn.assigns.current_user.id)
       liked_signals = Enum.map(followed_signals, fn x -> x |> Map.get(:signals_id) end)
-      IO.inspect liked_signals
       followed_signals = []
       followed_signals = for sig <- liked_signals, do: followed_signals ++ sig |> DataSignals.get_signal()
-      IO.inspect followed_signals
       page = Smartcitydogs.Repo.paginate(followed_signals, page: 1, page_size: 8)
-     IO.inspect page
-      IO.puts "QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ"
-    # page = Signals |> Smartcitydogs.Repo.paginate(params)
     render(conn, "followed_signals.html", signals: page.entries, page: page)
   end
 

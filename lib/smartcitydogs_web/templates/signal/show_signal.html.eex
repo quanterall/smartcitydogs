@@ -139,8 +139,8 @@
                   <% @current_user.users_types_id == 2 -> %>
 
                     <% check_follow = Smartcitydogs.DataSignals.get_signals_user_like(@current_user.id, @signal.id)%>
-
-                    <%= if check_follow != nil do %>                  
+                    <% IO.inspect check_follow %>
+                    <%= if check_follow != [] do %>                  
                       <a id="submit-like1">ОТСЛЕДВАЙ</a>
                     <% else %>
                       <a id="submit-like1">ПОСЛЕДВАЙ</a>
