@@ -1,7 +1,7 @@
 
 
 <div class="news-page-index">
-
+<div class="first-new-page">
 <div class="latest-bg" style="background-image: url('/<%= @last_news.image_url %>')">
 
   <div class="empty-to-center" >
@@ -16,11 +16,11 @@
   <br>
   <br>
 
-    <div class="latest-text" style="height: 15vh;width: 100%;color: white;font-size: 35px;">
+    <div class="latest-text">
      <b><%=@last_news.title %></b>
     </div>
 
-    <div class="latest-text" style=";margin-bottom: 50vh;font-size: 18px;color: white;">
+    <div class="latest-text2">
      <%=@last_news.short_content %>
     </div>
   
@@ -30,7 +30,7 @@
     </b>
 
  </div>
-
+</div>
 </div>
 
 <style>
@@ -128,11 +128,11 @@ h5, .h5 {
   <br>
   <br>
 
-    <div class="latest-text" style="color: white; font-size: 35px;">
+    <div class="latest-text">
      <b><%=news.title %></b>
     </div>
 
-    <div class="latest-text" style="color: white; font-size: 18px;">
+    <div class="latest-text2">
      <%=
      
      

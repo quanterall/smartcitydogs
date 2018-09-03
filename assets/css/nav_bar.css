@@ -150,10 +150,10 @@ div#modal-forms-container{
     box-shadow: none !important;
     border-color: rgb(0,201,148) !important;
 }
-.latest-news-data .latest-date{
+/* .latest-news-data .latest-date{
     margin-top: 5vh;
     padding-top: 5vh;
-}
+} */
 .card{
     height: 100%;
 }
@@ -163,10 +163,6 @@ div#modal-forms-container{
 .card-body{
     padding: 1rem;
 }
-/* .card-title{
-    height: 10vh;
-    margin-bottom: 2rem;
-} */
 .second-news-div{
     width: 100%;
     height: 100%;
@@ -183,13 +179,14 @@ div#modal-forms-container{
     padding: 5%;
 }
 .button-news{
+    text-decoration: none;
     color: rgb(0,201,148) !important;
     font-size: 30px;
     transition: 1s;
 }
 .button-news:hover{
     color: rgb(0,201,148) !important;
-    font-size: 35px;
+    font-size: 33px;
     transition: 1s;
 }
 .second-news-div .button-news{
@@ -331,4 +328,571 @@ div#modal-forms-container{
 }
 .ql-toolbar.ql-snow{
     border-color: white;
+}
+.first-new-page{
+    width: 100%;
+    height: 100%;
+}
+@media (max-width:2560px){
+    .second-news-div .row{
+        /* margin-right: 0.7%; */
+    }
+    .first-new-page .latest-bg{
+        width: 99.3%;
+    }
+    .first-new-page .latest-text{
+        height: 100px;
+        width: 100%;
+        color: white;
+        font-size: 45px;
+    }
+    .first-new-page .latest-text2{
+        padding-left: 2%;
+        font-size: 30px;
+        color: white;
+        height: 500px;
+    }
+    .first-new-page .card-title{
+        font-size: 35px;
+    }
+    .first-new-page .button-news{
+        text-decoration: none;
+    }
+    .first-new-page .button-news{
+        font-size: 50px;
+    }
+    .first-new-page .button-news:hover{
+        font-size: 53px;
+    }
+    .first-new-page .latest-bg{
+        height: 1000px;
+    }
+    .second-news-div .second-bg{
+        height: 700px;
+    }
+    .second-news-div .latest-date{
+        font-size: 30px;
+    }
+    .second-news-div .latest-text{
+        margin: 0px;
+        height: 100px;
+        color: white;
+        font-size: 40px;
+    }
+    .second-news-div .latest-text2{
+        height: 340px;;
+        color: white;
+        font-size: 30px;
+    }
+    .second-news-div .div-for-button-news{
+        margin: 0px;
+    }
+    .second-news-div .button-news{
+        font-size: 40px;
+        text-decoration: none;
+    }
+    .second-news-div .button-news:hover{
+        font-size: 43px;
+    }
+    .nnn p{
+        margin: 0px;
+    }
+    .nnn .card{
+        height: 800px;
+    }
+    .nnn .text-dark{
+        font-size: 35px;
+    }
+    .nnn .card-text{
+        font-size: 35px;
+        height: 150px;
+    }
+    .nnn .card-title{
+        font-size: 30px;
+    }
+    .nnn .text-green{
+        transition: 1s;
+        font-size: 30px;
+    }
+    .nnn .text-green:hover{
+        transition: 1s;
+        font-size: 33px;
+    }
+    .news-page-index .padination{
+        font-size: 25px;
+    }
+    .news-button-create .btn-primary{
+        font-size: 40px;
+    }
+}
+@media (max-width:1920px){
+    .second-news-div .row{
+        /* margin-right: 0.7%; */
+    }
+    .first-new-page .latest-bg{
+        width: 99%;
+    }
+    .first-new-page .latest-text{
+        height: 100px;
+        width: 100%;
+        color: white;
+        font-size: 40px;
+    }
+    .first-new-page .latest-text2{
+        padding-left: 2%;
+        font-size: 35px;
+        color: white;
+        height: 400px;
+    }
+    .first-new-page .card-title{
+        font-size: 30px;
+    }
+    .first-new-page .button-news{
+        text-decoration: none;
+    }
+    .first-new-page .button-news{
+        font-size: 45px;
+    }
+    .first-new-page .button-news:hover{
+        font-size: 48px;
+    }
+    .first-new-page .latest-bg{
+        height: 800px;
+    }
+    .second-news-div .second-bg{
+        height: 500px;
+    }
+    .second-news-div .latest-date{
+        font-size: 25px;
+    }
+    .second-news-div .latest-text{
+        margin: 0px;
+        height: 100px;
+        color: white;
+        font-size: 35px;
+    }
+    .second-news-div .latest-text2{
+        height: 180px;
+        color: white;
+        font-size: 25px;
+    }
+    .second-news-div .div-for-button-news{
+        margin: 0px;
+    }
+    .second-news-div .button-news{
+        font-size: 35px;
+        text-decoration: none;
+    }
+    .second-news-div .button-news:hover{
+        font-size: 38px;
+    }
+    .nnn p{
+        margin: 0px;
+    }
+    .nnn .card{
+        height: 600px;
+    }
+    .nnn .text-dark{
+        font-size: 25px;
+    }
+    .nnn .card-text{
+        font-size: 25px;
+        height: 150px;
+    }
+    .nnn .card-title{
+        font-size: 20px;
+    }
+    .nnn .text-green{
+        transition: 1s;
+        font-size: 20px;
+    }
+    .nnn .text-green:hover{
+        transition: 1s;
+        font-size: 23px;
+    }
+    .news-page-index .padination{
+        font-size: 20px;
+    }
+    .news-button-create .btn-primary{
+        font-size: 30px;
+    }
+}
+@media (max-width:1440px){
+    .first-new-page .latest-bg{
+        width: 98.5%;
+    }
+    .first-new-page .latest-text{
+        height: 100px;
+        width: 100%;
+        color: white;
+        font-size: 30px;
+    }
+    .first-new-page .latest-text2{
+        padding-left: 2%;
+        font-size: 25px;
+        color: white;
+        height: 250px;
+    }
+    .first-new-page .card-title{
+        font-size: 25px;
+    }
+    .first-new-page .button-news{
+        text-decoration: none;
+    }
+    .first-new-page .button-news{
+        font-size: 35px;
+    }
+    .first-new-page .button-news:hover{
+        font-size: 38px;
+    }
+    .first-new-page .latest-bg{
+        height: 600px;
+    }
+    .second-news-div .second-bg{
+        height: 400px;
+    }
+    .second-news-div .latest-date{
+        font-size: 20px;
+    }
+    .second-news-div .latest-text{
+        margin: 0px;
+        height: 80px;
+        color: white;
+        font-size: 25px;
+    }
+    .second-news-div .latest-text2{
+        height: 120px;
+        color: white;
+        font-size: 20px;
+    }
+    .second-news-div .div-for-button-news{
+        margin: 0px;
+    }
+    .second-news-div .button-news{
+        font-size: 25px;
+        text-decoration: none;
+    }
+    .second-news-div .button-news:hover{
+        font-size: 28px;
+    }
+    .nnn p{
+        margin: 0px;
+    }
+    .nnn .card{
+        height: 400px;
+    }
+    .nnn .text-dark{
+        font-size: 15px;
+    }
+    .nnn .card-text{
+        font-size: 15px;
+        height: 50px;
+    }
+    .nnn .card-title{
+        font-size: 15px;
+    }
+    .nnn .text-green{
+        transition: 1s;
+        font-size: 15px;
+    }
+    .nnn .text-green:hover{
+        transition: 1s;
+        font-size: 18px;
+    }
+    .news-page-index .padination{
+        font-size: 15px;
+    }
+    .news-button-create .btn-primary{
+        font-size: 20px;
+    }
+}
+@media (max-width:1024px){
+    .first-new-page .latest-bg{
+        width: 98%;
+    }
+    .first-new-page .latest-text{
+        height: 60px;
+        width: 100%;
+        color: white;
+        font-size: 25px;
+    }
+    .first-new-page .latest-text2{
+        padding-left: 2%;
+        font-size: 20px;
+        color: white;
+        height: 150px;
+    }
+    .first-new-page .card-title{
+        font-size: 20px;
+    }
+    .first-new-page .button-news{
+        text-decoration: none;
+    }
+    .first-new-page .button-news{
+        font-size: 25px;
+    }
+    .first-new-page .button-news:hover{
+        font-size: 28px;
+    }
+    .first-new-page .latest-bg{
+        height: 400px;
+    }
+    .second-news-div .second-bg{
+        height: 250px;
+    }
+    .second-news-div .latest-date{
+        font-size: 15px;
+    }
+    .second-news-div .latest-text{
+        margin: 0px;
+        height: 50px;
+        color: white;
+        font-size: 20px;
+    }
+    .second-news-div .latest-text2{
+        height: 50px;
+        color: white;
+        font-size: 15px;
+    }
+    .second-news-div .div-for-button-news{
+        margin: 0px;
+    }
+    .second-news-div .button-news{
+        font-size: 25px;
+        text-decoration: none;
+    }
+    .second-news-div .button-news:hover{
+        font-size: 28px;
+    }
+    .nnn p{
+        margin: 0px;
+    }
+    .nnn .card{
+        height: 500px !important;
+    }
+    .nnn .text-dark{
+        font-size: 20px;
+    }
+    .nnn .col-lg-3{
+        flex: 0 0 50%;
+        max-width: 50%;
+    }
+    .nnn .card-text{
+        font-size: 20px;
+        height: 100px;
+    }
+    .nnn .card-title{
+        font-size: 20px;
+    }
+    .nnn .text-green{
+        transition: 1s;
+        font-size: 20px;
+    }
+    .nnn .text-green:hover{
+        transition: 1s;
+        font-size: 18px;
+    }
+    .news-page-index .padination{
+        font-size: 15px;
+    }
+    .news-button-create .btn-primary{
+        font-size: 20px;
+    }
+}
+@media (max-width:768px){
+    .first-new-page .latest-bg{
+        width: 97.3%;
+    }
+    .first-new-page .latest-text{
+        height: 50px;
+        width: 100%;
+        color: white;
+        font-size: 20px;
+    }
+    .first-new-page .latest-text2{
+        padding-left: 2%;
+        font-size: 15px;
+        color: white;
+        height: 80px;
+    }
+    .first-new-page .card-title{
+        font-size: 15px;
+    }
+    .first-new-page .button-news{
+        text-decoration: none;
+    }
+    .first-new-page .button-news{
+        font-size: 20px;
+    }
+    .first-new-page .button-news:hover{
+        font-size: 23px;
+    }
+    .first-new-page .latest-bg{
+        height: 300px;
+    }
+    .second-news-div .second-bg{
+        margin-bottom: 5%;
+        height: 300px;
+    }
+    .second-news-div .latest-date{
+        font-size: 15px;
+    }
+    .second-news-div .latest-text{
+        margin: 0px;
+        height: 50px;
+        color: white;
+        font-size: 20px;
+    }
+    .second-news-div .latest-text2{
+        height: 80px;
+        color: white;
+        font-size: 15px;
+    }
+    .second-news-div .div-for-button-news{
+        margin: 0px;
+    }
+    .second-news-div .button-news{
+        font-size: 20px;
+        text-decoration: none;
+    }
+    .second-news-div .button-news:hover{
+        font-size: 23px;
+    }
+    .nnn p{
+        margin: 0px;
+    }
+    .nnn .card{
+        height: 400px !important;
+    }
+    .nnn .text-dark{
+        font-size: 15px;
+    }
+    .nnn .col-lg-3{
+        flex: 0 0 50%;
+        max-width: 50%;
+    }
+    .nnn .card-text{
+        font-size: 15px;
+        height: 60px;
+    }
+    .nnn .card-title{
+        font-size: 15px;
+    }
+    .nnn .text-green{
+        transition: 1s;
+        font-size: 15px;
+    }
+    .nnn .text-green:hover{
+        transition: 1s;
+        font-size: 18px;
+    }
+    .news-page-index .padination{
+        font-size: 10px;
+    }
+    .news-button-create .btn-primary{
+        font-size: 15px;
+    }
+}
+@media (max-width:375px){
+    .news-page-index{
+        margin-top: 20%;
+    }
+    .first-new-page .latest-bg{
+        width: 100%;
+    }
+    .first-new-page .latest-text{
+        height: 50px;
+        width: 100%;
+        color: white;
+        font-size: 15px;
+    }
+    .first-new-page .latest-text2{
+        padding-left: 2%;
+        font-size: 15px;
+        color: white;
+        height: 100px;
+    }
+    .first-new-page .card-title{
+        font-size: 15px;
+    }
+    .first-new-page .button-news{
+        text-decoration: none;
+    }
+    .first-new-page .button-news{
+        font-size: 15px;
+    }
+    .first-new-page .button-news:hover{
+        font-size: 18px;
+    }
+    .first-new-page .latest-bg{
+        height: 300px;
+    }
+    .second-news-div .col-lg-6{
+        padding-right: 0px !important;
+        width: 100%;
+    }
+    .second-news-div .second-bg{
+        margin-bottom: 5%;
+        height: 300px;
+    }
+    .second-news-div .latest-date{
+        font-size: 15px;
+    }
+    .second-news-div .latest-text{
+        margin: 0px;
+        height: 50px;
+        color: white;
+        font-size: 15px;
+    }
+    .second-news-div .latest-text2{
+        height: 110px;
+        color: white;
+        font-size: 15px;
+    }
+    .second-news-div .div-for-button-news{
+        margin: 0px;
+    }
+    .second-news-div .button-news{
+        font-size: 15px;
+        text-decoration: none;
+    }
+    .second-news-div .button-news:hover{
+        font-size: 18px;
+    }
+    .nnn p{
+        margin: 0px;
+    }
+    .nnn .card{
+        height: 400px !important;
+    }
+    .nnn .text-dark{
+        font-size: 15px;
+    }
+    .nnn .col-lg-3{
+        flex: 0 0 100%;
+        max-width: 100%;
+        padding: 0px;
+    }
+    .nnn .card-text{
+        font-size: 15px;
+        height: 60px;
+    }
+    .nnn .card-title{
+        font-size: 15px;
+    }
+    .nnn .text-green{
+        transition: 1s;
+        font-size: 15px;
+    }
+    .nnn .text-green:hover{
+        transition: 1s;
+        font-size: 18px;
+    }
+    .news-page-index .padination{
+        font-size: 10px;
+    }
+    .news-button-create .btn-primary{
+        font-size: 15px;
+        width: 100%;
+    }
 }
