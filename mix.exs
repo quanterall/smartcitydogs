@@ -28,10 +28,9 @@ defmodule Smartcitydogs.Mixfile do
         :timex,
         :bamboo_smtp,
         :ueberauth_facebook,
-       ## :ueberauth_twitter,
         :scrivener_ecto,
-      ##  :httpoison,
-        :recaptcha
+        :recaptcha,
+        :faker
       ]
     ]
   end
@@ -65,7 +64,6 @@ defmodule Smartcitydogs.Mixfile do
       {:comeonin, "~> 2.5"},
       {:guardian, "~> 0.12.0"},
       {:ueberauth_facebook, "~> 0.3"},
-     ## {:ueberauth_twitter, "~> 0.2"},
       {:oauth, github: "tim/erlang-oauth"},
       {:bamboo, "~> 0.7"},
       {:bamboo_smtp, "~> 1.4.0"},
@@ -73,11 +71,10 @@ defmodule Smartcitydogs.Mixfile do
       {:timex, "~> 3.1"},
       {:scrivener_ecto, "~> 1.0"},
       {:scrivener_list, "~> 1.0"},
-     ## {:httpoison, "~> 1.0", override: true},
-     ## {:html_entities, "~> 0.4"},
       {:cmark, "~> 0.7"},
       {:recaptcha, "~> 2.3"},
-      {:bodyguard, "~> 2.1"}
+      {:bodyguard, "~> 2.1"},
+      {:faker, "~> 0.10"}
     ]
   end
 

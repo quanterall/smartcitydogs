@@ -1,15 +1,4 @@
-<style>
-    .button-show-hide .btn-secondary{
-        margin-top: 0px;
-    }
-    .col-container {
-        width: 250px;
-        height: 400px;  
-    }
-</style>
-
-<div class="home-bg">
-</div>
+<div class="home-bg"></div>
 
 <div class="row">
     <div class="col-lg-12 mt-5">
@@ -52,9 +41,9 @@
     <%= for signal <- @signal do %>
     <div class="col-lg-12">
         <div class="col-container" style="background-image: url('/<%= get_signals_images(signal.id) %>')">
-        <div class="col-container-shadow">
+            <div class="col-container-shadow">
 
-          <label-type class="
+                <span class="
             <%= if signal.signals_types_id == 1 do %>
             label-type-red
             <% end %>
@@ -70,66 +59,69 @@
             <%= if signal.signals_types_id == 4 do %>
             label-type-green
             <% end %>"><%=signal.signals_types_id
-            |> Smartcitydogs.DataSignals.get_signal_type()
-            |> Map.get(:name)
-          %>
-          </label-type>
-          <br />
+                    |> Smartcitydogs.DataSignals.get_signal_type()
+                    |> Map.get(:name)
+                    %>
+                </span>
+                <br/>
 
-          <label-date>
-          <%=
-            signal_time = signal.inserted_at
-            |> DateTime.truncate(:second)
-            |> DateTime.to_string()
-            count = String.length(signal_time)
-            final_time = String.slice(signal_time,0..count-11)
-            final_time
-          %>
-          <br />
-          </label-date>
+                <label-date>
+                    <%=
+                    signal_time = signal.inserted_at
+                    |> DateTime.truncate(:second)
+                    |> DateTime.to_string()
+                    count = String.length(signal_time)
+                    final_time = String.slice(signal_time,0..count-11)
+                    final_time
+                    %>
+                    <br/>
+                </label-date>
 
-          <label-title><b>
-          <%=
-            signal.signals_categories_id
-                |> Smartcitydogs.DataSignals.get_signal_category()
-                |> Map.get(:name)
-          %></b></label-title>
-          <br />
+                <label-title><b>
+                    <%=
+                    signal.signals_categories_id
+                    |> Smartcitydogs.DataSignals.get_signal_category()
+                    |> Map.get(:name)
+                    %></b></label-title>
+                <br/>
 
 
-          <label-adress><%=
-            signal.address
-          %></label-adress>
-          <br />
+                <label-adress><%=
+                    signal.address
+                    %>
+                </label-adress>
+                <br/>
 
-            <div class="icon-scale">
-              <i class="fas fa-search"></i> : <%=signal.view_count%>
-              <br />
+                <div class="icon-scale">
+                    <i class="fas fa-search"></i> : <%=signal.view_count%>
+                    <br/>
+                </div>
+                <div class="icon-scale">
+                    <i class="fas fa-arrow-up"></i> : <span id="signal-count"><%= signal.support_count %></span>
+                </div>
+                <div class="icon-scale">
+                    <i class="far fa-comment fa-flip-horizontal"></i> : <%=
+                    Enum.count(Smartcitydogs.DataSignals.get_comment_signal_id(signal.id)) %>
+                    <br/>
+                </div>
+
+
+                <center>
+
+                    <div class="button-show-hide">
+                        <div class="map-show-buttons">
+
+                            <p class="p-button-view">
+                                <%= link "", to: signal_path(@conn, :show, signal), class: "fa fa-map-marker-alt" %>
+                                <a class="btn btn-secondary" href="signals/<%=signal.id%>" role="button">Виж още</a>
+                            </p>
+                        </div>
+                    </div>
+                </center>
+
             </div>
-            <div class="icon-scale">
-              <i class="fas fa-arrow-up"></i> : <span id="signal-count"><%= signal.support_count %></span>
-            </div>
-            <div class="icon-scale">
-              <i class="far fa-comment fa-flip-horizontal"></i> : <%= Enum.count(Smartcitydogs.DataSignals.get_comment_signal_id(signal.id)) %>
-            <br />
-            </div>
-          
 
-            <center>
-
-            <div class="button-show-hide">
-                <div class="map-show-buttons">
-            
-              <p class="p-button-view">
-                <%= link "", to: signal_path(@conn, :show, signal), class: "fa fa-map-marker-alt" %>
-                <a class="btn btn-secondary" href="signals/<%=signal.id%>" role="button">Виж още</a>
-              </p>
-              </div>
-            </div></center>
-            
-          </div>
-
-         </div>
+        </div>
     </div>
     <% end %>
 </div>
@@ -152,25 +144,25 @@
                         <%=NaiveDateTime.to_date( news.date) %>
                     </small>
                 </p>
-                <h5 class="card-title"><%=  news.title %></h5>
+                <h5 class="card-title"><%= news.title %></h5>
                 <p class="card-text"><%=
-                
-                text = news.short_content
-                len = String.length(news.short_content)
-                if len > 20 do
+
+                    text = news.short_content
+                    len = String.length(news.short_content)
+                    if len > 20 do
                     text_sliced = String.slice(text,0..20)
-                    if String.last(text_sliced) == " " do 
-                      String.trim_trailing(text_sliced," ")
-                      |> Kernel.<> "..."
+                    if String.last(text_sliced) == " " do
+                    String.trim_trailing(text_sliced," ")
+                    |> Kernel.<> "..."
                     else
-                      text_sliced <> "..."
+                    text_sliced <> "..."
                     end
-                    
-                else
+
+                    else
                     text
-                end
-                
-                %></p>
+                    end
+
+                    %></p>
                 <%= link "Виж повече »", to: news_path(@conn, :show, news), class: "btn btn-default float-right
                 text-green" %>
             </div>
@@ -189,10 +181,11 @@
 <div class="row slick ">
     <%= for animal <- @animals do %>
     <div class="col-lg-12">
-        <div class="col-container" style="background-image: url('/<%= SmartcitydogsWeb.AnimalView.get_image_animals_id(animal.id) %>')">
-                <div class="col-container-shadow">
+        <div class="col-container"
+             style="background-image: url('/<%= SmartcitydogsWeb.AnimalView.get_image_animals_id(animal.id) %>')">
+            <div class="col-container-shadow">
 
-                  <label-type class="
+                <label-type class="
                     <%= if animal.animals_status_id == 1 do %>
                         label-type-red
                     <% end %>
@@ -203,60 +196,61 @@
 
                     <%= if animal.animals_status_id == 3 do %>
                         label-type-green
-                    <% end %>"><%= animal.animals_status_id 
+                    <% end %>"><%= animal.animals_status_id
                     |> Smartcitydogs.DataAnimals.get_animal_status
                     |> Map.get(:name)
                     %>
-                  </label-type>
-                  <br />
-                  <label-text-grey>
+                </label-type>
+                <br/>
+                <label-text-grey>
                     ПОЛ
-                  </label-text-grey>
-                  <br>
-                  <label-text-white>
+                </label-text-grey>
+                <br>
+                <label-text-white>
                     <%= animal.sex %>
-                  </label-text-white>
-                  <br><br>
-                  <label-text-grey>
+                </label-text-white>
+                <br><br>
+                <label-text-grey>
                     НОМЕР НА МАРКА/ЧИП
-                  </label-text-grey>
-                  <br>
-                  <label-text-white>
+                </label-text-grey>
+                <br>
+                <label-text-white>
                     <%= animal.chip_number %>
-                  </label-text-white>
-                  <br><br>
-                  <label-text-grey>
+                </label-text-white>
+                <br><br>
+                <label-text-grey>
                     ДАТА НА РЕГИСТРАЦИЯ
-                  </label-text-grey><br>
-                  <label-text-white>
-                  <%=
+                </label-text-grey>
+                <br>
+                <label-text-white>
+                    <%=
                     signal_time = animal.inserted_at
                     |> DateTime.truncate(:second)
                     |> DateTime.to_string()
                     count = String.length(signal_time)
                     final_time = String.slice(signal_time,0..count-11)
                     final_time
-                  %>
-                  </label-text-white>
-                  <br><br>
-                  <label-text-grey>
+                    %>
+                </label-text-white>
+                <br><br>
+                <label-text-grey>
                     ПОСЛЕДНА ЛОКАЦИЯ
-                  </label-text-grey>
-                  <br>
-                  <label-text-white>
+                </label-text-grey>
+                <br>
+                <label-text-white>
                     <%= animal.address %>
-                  </label-text-white>
+                </label-text-white>
 
-                    <center>
-                      <div class="button-show-hide">
+                <center>
+                    <div class="button-show-hide">
                         <div class="map-show-buttons">
                             <p class="p-button-view">
                                 <a class="btn btn-secondary" href="animals/<%=animal.id%>" role="button">Виж още</a>
                             </p>
                         </div>
-                      </div>
-                    </center>
-                </div>
+                    </div>
+                </center>
+            </div>
         </div>
     </div>
     <% end %>
@@ -271,10 +265,11 @@
 <div class="row slick">
     <%= for animal <- @adopted_animals do %>
     <div class="col-lg-12">
-        <div class="col-container" style="background-image: url('/<%= SmartcitydogsWeb.AnimalView.get_image_animals_id(animal.id) %>')">
-                <div class="col-container-shadow">
+        <div class="col-container"
+             style="background-image: url('/<%= SmartcitydogsWeb.AnimalView.get_image_animals_id(animal.id) %>')">
+            <div class="col-container-shadow">
 
-                  <label-type class="
+                <label-type class="
                     <%= if animal.animals_status_id == 1 do %>
                         label-type-red
                     <% end %>
@@ -285,60 +280,61 @@
 
                     <%= if animal.animals_status_id == 3 do %>
                         label-type-green
-                    <% end %>"><%= animal.animals_status_id 
+                    <% end %>"><%= animal.animals_status_id
                     |> Smartcitydogs.DataAnimals.get_animal_status
                     |> Map.get(:name)
                     %>
-                  </label-type>
-                  <br />
-                  <label-text-grey>
+                </label-type>
+                <br/>
+                <label-text-grey>
                     ПОЛ
-                  </label-text-grey>
-                  <br>
-                  <label-text-white>
+                </label-text-grey>
+                <br>
+                <label-text-white>
                     <%= animal.sex %>
-                  </label-text-white>
-                  <br><br>
-                  <label-text-grey>
+                </label-text-white>
+                <br><br>
+                <label-text-grey>
                     НОМЕР НА МАРКА/ЧИП
-                  </label-text-grey>
-                  <br>
-                  <label-text-white>
+                </label-text-grey>
+                <br>
+                <label-text-white>
                     <%= animal.chip_number %>
-                  </label-text-white>
-                  <br><br>
-                  <label-text-grey>
+                </label-text-white>
+                <br><br>
+                <label-text-grey>
                     ДАТА НА РЕГИСТРАЦИЯ
-                  </label-text-grey><br>
-                  <label-text-white>
-                  <%=
+                </label-text-grey>
+                <br>
+                <label-text-white>
+                    <%=
                     signal_time = animal.inserted_at
                     |> DateTime.truncate(:second)
                     |> DateTime.to_string()
                     count = String.length(signal_time)
                     final_time = String.slice(signal_time,0..count-11)
                     final_time
-                  %>
-                  </label-text-white>
-                  <br><br>
-                  <label-text-grey>
+                    %>
+                </label-text-white>
+                <br><br>
+                <label-text-grey>
                     ПОСЛЕДНА ЛОКАЦИЯ
-                  </label-text-grey>
-                  <br>
-                  <label-text-white>
+                </label-text-grey>
+                <br>
+                <label-text-white>
                     <%= animal.address %>
-                  </label-text-white>
+                </label-text-white>
 
-                    <center>
-                      <div class="button-show-hide">
+                <center>
+                    <div class="button-show-hide">
                         <div class="map-show-buttons">
                             <p class="p-button-view">
                                 <a class="btn btn-secondary" href="animals/<%=animal.id%>" role="button">Виж още</a>
                             </p>
                         </div>
-                      </div>
-                    </center>
-                </div>
+                    </div>
+                </center>
+            </div>
         </div>
     </div>
     <% end %>
