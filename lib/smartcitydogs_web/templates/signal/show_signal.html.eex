@@ -1,29 +1,13 @@
-<meta charset="utf-8">
-<link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/all.css" integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ"
-  crossorigin="anonymous">
-
-
-<div id="cor-a">
-  <%= @signal.address_F %>
-</div>
-<div id="cor-b">
-  <%= @signal.address_B %>
-</div>
 <div class="show-signal-container">
   <div class="show-signal-left-container">
-    <div class="signal-photo-container">
-      <img class="photo-single-signal" src="/<%= get_signals_images(@signal.id) %>" alt="Generic placeholder image" width="300"
-        height="200">
+    <div class="signal-photo-container" style="background-image: url('/<%= get_signals_images(@signal.id) %>') ">
     </div>
   </div>
   <div class="show-signal-right-container">
     <div id="show_map" style="position: relative; display: none;">
     </div>
     <i class="far fa-window-close close2"></i>
-    <show-signal-label-status class="
+    <span class="
                           <%= if @signal.signals_types_id == 1 do %>
                             label-type-red
                           <% end %>
@@ -43,7 +27,7 @@
               |> Smartcitydogs.DataSignals.get_signal_type()
               |> Map.get(:name)
               %>
-    </show-signal-label-status>
+    </span>
     <br> <br>
     <show-signal-label-title>
               <%=
@@ -134,22 +118,23 @@
             </div>
             
             <div class="buttons-for-signal1">
+              <% IO.inspect @current_user.users_types_id %>
               <div class="buttons-for-signal">
-                <%= cond do%>
-                  <%= @current_user == nil -> %>
+                <%= case @current_user.users_types_id do%>
+                  <%= nil -> %>
                     <a id="register-submit-adoption" onclick="showModalForm(event, 'register-form')">ПОСЛЕДВАЙ</a>
                     <div id="register-comment-button" onclick="showModalForm(event, 'register-form')">КОМЕНТИРАЙ</div>
-                  <% @current_user.users_types_id == 2 -> %>
+                  <%  2 -> %>
 
                     <% check_follow = Smartcitydogs.DataSignals.get_signals_user_like(@current_user.id, @signal.id)%>
 
-                    <%= if check_follow != nil do %>                  
+                    <%= if check_follow != nil do %>
                       <a id="submit-like1">ОТСЛЕДВАЙ</a>
                     <% else %>
                       <a id="submit-like1">ПОСЛЕДВАЙ</a>
                     <% end %>
                     <div id="comment" >КОМЕНТИРАЙ</div>
-                  <% @current_user.users_types_id == 3 || @current_user.users_types_id == 4 || @current_user.users_types_id == 5 -> %>
+                <%  _ -> %>
                 <% end %>
                   
                   
