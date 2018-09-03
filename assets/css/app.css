@@ -120,3 +120,7 @@
   font-size: 23px;
   font-weight: bold;
 }
+.signal-photo-container{
+  background-repeat:no-repeat;
+  background-position: center;
+}
