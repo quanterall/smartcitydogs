@@ -1,4 +1,4 @@
-defmodule Smartcitydogs.Repo.Migrations.CreateUsersTable do
+defmodule Smartcitydogs.Repo.Migrations.Users do
   use Ecto.Migration
 
   def up do
@@ -15,7 +15,7 @@ defmodule Smartcitydogs.Repo.Migrations.CreateUsersTable do
       add(:liked_signals, {:array, :integer})
       add(:liked_comments, {:array, :integer})
       add(:disliked_comments, {:array, :integer})
-      ## add(:contact, :json)
+      add(:users_types_id, references("users_types"))
       timestamps()
     end
   end

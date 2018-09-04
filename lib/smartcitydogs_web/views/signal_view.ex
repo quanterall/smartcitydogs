@@ -2,13 +2,26 @@ defmodule SmartcitydogsWeb.SignalView do
   use SmartcitydogsWeb, :view
 
   def get_signals_images(signals_id) do
-    list = Smartcitydogs.DataSignals.get_signal_image_id(signals_id)
+    signal = Smartcitydogs.DataSignals.get_signal(signals_id) |> Smartcitydogs.Repo.preload(:signal_images)
+    cond do
+      signal.signal_images == [] -> 
+        cond do
+          signal.signals_categories_id == 1 -> "images/stray.jpg"
+          signal.signals_categories_id == 2 -> "images/escaped.jpg"
+          signal.signals_categories_id == 3 -> "images/mistreated.jpg"
+        end
+      List.first(signal.signal_images).url == nil ->
+        cond do
+          signal.signals_categories_id == 1 -> "images/stray.jpg"
+          signal.signals_categories_id == 2 -> "images/escaped.jpg"
+          signal.signals_categories_id == 3 -> "images/mistreated.jpg"
+        end
+      true ->
+        List.first(signal.signal_images).url 
+      end
 
-    if List.first(list) == nil do
-      "images/2.jpg"
-    else
-      List.first(list).url
-    end
+    
+
   end
 
  

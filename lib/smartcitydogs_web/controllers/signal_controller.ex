@@ -2,13 +2,8 @@ defmodule SmartcitydogsWeb.SignalController do
   use SmartcitydogsWeb, :controller
   alias Smartcitydogs.DataSignals
   alias Smartcitydogs.Signals
-#alias Smartcitydogs.DataUsers
   alias Smartcitydogs.Repo
- ## alias Smartcitydogs.DataAnimals
   alias Smartcitydogs.Repo
-##alias Smartcitydogs.Animals
- ## alias SmartcitydogsWeb.SignalController
-##  alias SmartcitydogsWeb.SignalControllerAPI
   import Ecto.Query
 
   action_fallback(SmartCityDogsWeb.FallbackController)
@@ -149,21 +144,24 @@ defmodule SmartcitydogsWeb.SignalController do
           upload = Map.get(conn, :params)
 
           upload = Map.get(upload, "url")
+          if upload == nil do
 
-          for n <- upload do
-            extension = Path.extname(n.filename)
+          else
+            for n <- upload do
+              extension = Path.extname(n.filename)
 
-            File.cp(
-              n.path,
-              "../smartcitydogs/assets/static/images/#{Map.get(n, :filename)}-profile#{extension}"
-            )
+              File.cp(
+                n.path,
+                "../smartcitydogs/assets/static/images/#{Map.get(n, :filename)}-profile#{extension}"
+              )
 
-            args = %{
-              "url" => "images/#{Map.get(n, :filename)}-profile#{extension}",
-              "signals_id" => "#{signal.id}"
-            }
+              args = %{
+                "url" => "images/#{Map.get(n, :filename)}-profile#{extension}",
+                "signals_id" => "#{signal.id}"
+              }
 
-            DataSignals.create_signal_images(args)
+              DataSignals.create_signal_images(args)
+            end
           end
 
           redirect(conn, to: signal_path(conn, :show, signal))
@@ -177,7 +175,7 @@ defmodule SmartcitydogsWeb.SignalController do
   end
 
   def show(conn, map) do
-    IO.inspect(map)
+
         id = String.to_integer(map["id"])
         comments = DataSignals.get_comment_signal_id(id)
         signal = DataSignals.get_signal(id)
@@ -233,20 +231,18 @@ defmodule SmartcitydogsWeb.SignalController do
     end
   end
 
-  def followed_signals(conn, params) do
-   
-      followed_signals = Smartcitydogs.DataSignals.get_signal_like(conn.assigns.current_user.id)
+  def followed_signals(conn, _) do
+      followed_signals = DataSignals.get_signal_like(conn.assigns.current_user.id)
       liked_signals = Enum.map(followed_signals, fn x -> x |> Map.get(:signals_id) end)
       followed_signals = []
       followed_signals = for sig <- liked_signals, do: followed_signals ++ sig |> DataSignals.get_signal()
-      page = Smartcitydogs.Repo.paginate(followed_signals, page: 1, page_size: 8)
-    render(conn, "followed_signals.html", signals: page.entries, page: page)
+      page = Repo.paginate(followed_signals, page: 1, page_size: 8)
+      render(conn, "followed_signals.html", signals: page.entries, page: page)
   end
 
   def update_type(conn, %{"id" => id, "signals_types_id" => signals_types_id}) do
     signal = DataSignals.get_signal(id)
     DataSignals.update_signal(signal, %{"signals_types_id" => signals_types_id})
-
     signals = DataSignals.list_signals()
     render(conn, "index_signals.html", signals: signals)
   end

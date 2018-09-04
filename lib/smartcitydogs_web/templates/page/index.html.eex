@@ -245,7 +245,7 @@
                     <div class="button-show-hide">
                         <div class="map-show-buttons">
                             <p class="p-button-view">
-                                <a class="btn btn-secondary" href="animals/<%=animal.id%>" role="button">Виж още</a>
+                                <a class="btn btn-secondary" href="registered/<%=animal.id%>" role="button">Виж още</a>
                             </p>
                         </div>
                     </div>
@@ -329,7 +329,7 @@
                     <div class="button-show-hide">
                         <div class="map-show-buttons">
                             <p class="p-button-view">
-                                <a class="btn btn-secondary" href="animals/<%=animal.id%>" role="button">Виж още</a>
+                                <a class="btn btn-secondary" href="registered/<%=animal.id%>" role="button">Виж още</a>
                             </p>
                         </div>
                     </div>

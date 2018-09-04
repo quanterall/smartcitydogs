@@ -1,8 +1,8 @@
-defmodule Smartcitydogs.Repo.Migrations.CreateSignalsTypesTable do
+defmodule Smartcitydogs.Repo.Migrations.Procedure do
   use Ecto.Migration
 
   def change do
-    create table("signals_types") do
+    create table("procedure_type") do
       add(:name, :text)
       add(:deleted_at, :naive_datetime)
       timestamps()

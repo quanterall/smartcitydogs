@@ -51,7 +51,7 @@ defmodule Smartcitydogs.DataSignals do
 
   def get_user_signal(users_id) do
     query = Ecto.Query.from(c in Signals, where: c.users_id == ^users_id)
-    Repo.all(query)
+    Repo.all(query) |> Repo.preload(:signal_images)
   end
 
   ### takes the support_count

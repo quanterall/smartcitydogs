@@ -234,7 +234,7 @@ Enum.each(0..99, fn(x) ->
     animal = %Animals{}
     |> Animals.changeset(animals_params)
     |> Repo.insert!()
-    animals_images_params = %{url: "images/2.jpg", animals_id: animal.id}
+    animals_images_params = %{animals_id: animal.id}
     %AnimalImages{}
     |> AnimalImages.changeset(animals_images_params)
     |> Repo.insert!()
@@ -382,7 +382,7 @@ Enum.each(0..99, fn(x) ->
   signal = %Signals{} |> Signals.changeset(signals_params) |> Repo.insert!()
 
   ############## Signals Images #############
-  signal_image_params = %{url: "images/1.jpg", signals_id: signal.id}
+  signal_image_params = %{signals_id: signal.id}
 
 
     %SignalImages{}

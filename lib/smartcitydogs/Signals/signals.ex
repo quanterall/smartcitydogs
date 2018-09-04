@@ -46,7 +46,7 @@ defmodule Smartcitydogs.Signals do
       :address_F
     ])
     |> validate_required([
-       :title,
+ #      :title,
        :address,
        :description,
        :signals_categories_id,
