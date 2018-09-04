@@ -6,7 +6,6 @@ defmodule Smartcitydogs.DataUsers do
   alias Smartcitydogs.UsersType
   alias Smartcitydogs.Contact
 
-
   def list_users do
     Repo.all(User) |> Repo.preload(:users_types)
   end
@@ -62,39 +61,47 @@ defmodule Smartcitydogs.DataUsers do
 
   def add_like(user_id, signal_id) do
     %Smartcitydogs.SignalsLikes{}
-    |> Smartcitydogs.SignalsLikes.changeset(%{users_id: user_id,signals_id: signal_id})
+    |> Smartcitydogs.SignalsLikes.changeset(%{users_id: user_id, signals_id: signal_id})
     |> Repo.insert()
   end
 
   def remove_like(user_id, signal_id) do
-    from(l in Smartcitydogs.SignalsLikes, where: l.users_id == ^user_id and l.signals_id == ^signal_id )
-    |> Repo.delete_all
+    from(l in Smartcitydogs.SignalsLikes,
+      where: l.users_id == ^user_id and l.signals_id == ^signal_id
+    )
+    |> Repo.delete_all()
   end
 
   def get_likes(signal_id) do
-    Repo.one(from l in Smartcitydogs.SignalsLikes,select: count(l.id), where: l.signals_id == ^signal_id )
+    Repo.one(
+      from(l in Smartcitydogs.SignalsLikes, select: count(l.id), where: l.signals_id == ^signal_id)
+    )
   end
 
   def add_liked_signal_comment(user_id, comment_id) do
     user = Repo.get!(User, user_id)
+
     User.changeset(user, %{liked_comments: user.liked_comments ++ [comment_id]})
     |> Repo.update()
   end
 
   def add_disliked_signal_comment(user_id, comment_id) do
     user = Repo.get!(User, user_id)
+
     User.changeset(user, %{disliked_comments: user.disliked_comments ++ [comment_id]})
     |> Repo.update()
   end
 
   def remove_liked_signal_comment(user_id, comment_id) do
     user = Repo.get!(User, user_id)
+
     User.changeset(user, %{liked_comments: user.liked_comments -- [comment_id]})
     |> Repo.update()
   end
 
   def remove_disliked_signal_comment(user_id, comment_id) do
     user = Repo.get!(User, user_id)
+
     User.changeset(user, %{disliked_comments: user.disliked_comments -- [comment_id]})
     |> Repo.update()
   end

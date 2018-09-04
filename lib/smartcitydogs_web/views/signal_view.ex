@@ -11,8 +11,6 @@ defmodule SmartcitydogsWeb.SignalView do
     end
   end
 
- 
-
   def get_all_signals(user_id) do
     list = Smartcitydogs.DataSignals.get_user_signal(user_id)
     list
@@ -29,15 +27,12 @@ defmodule SmartcitydogsWeb.SignalView do
 
   def get_signals_view_count(signal_id) do
     list = Smartcitydogs.DataSignals.get_signal_support_count(signal_id)
-  
- 
+
     if list != [] do
       [head | _] = list
       count = head.view_count
       Smartcitydogs.DataSignals.update_signal(head, %{view_count: count + 1})
       head.view_count + 1
     end
-
-    
   end
 end

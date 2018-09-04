@@ -14,8 +14,8 @@ defmodule Smartcitydogs.SignalsLikes do
   @doc false
   def changeset(signals_like, attrs) do
     signals_like
-    |> cast(attrs, [ :deleted_at, :signals_id, :users_id])
+    |> cast(attrs, [:deleted_at, :signals_id, :users_id])
     |> validate_required([:signals_id, :users_id])
-    |> unique_constraint(:users_signals_unique_like,name: :users_signals_unique_like)
+    |> unique_constraint(:users_signals_unique_like, name: :users_signals_unique_like)
   end
 end

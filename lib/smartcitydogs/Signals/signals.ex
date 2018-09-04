@@ -46,32 +46,30 @@ defmodule Smartcitydogs.Signals do
       :address_F
     ])
     |> validate_required([
-       :title,
-       :address,
-       :description,
-       :signals_categories_id,
-       :signals_types_id
+      :title,
+      :address,
+      :description,
+      :signals_categories_id,
+      :signals_types_id
     ])
   end
 
-
-
-
-
-
-
-
   ## Get all of the ticked checkboxes from the filters, handle redirection to pagination pages.
-  def get_ticked_checkboxes(params) do 
+  def get_ticked_checkboxes(params) do
     {data_status, data_category, num} = params
-  data_status =  case data_status do
-      nil -> []
-      _ -> data_status
-    end
-  data_category =  case data_category do
-      nil -> []
-      _ -> data_category
-    end
+
+    data_status =
+      case data_status do
+        nil -> []
+        _ -> data_status
+      end
+
+    data_category =
+      case data_category do
+        nil -> []
+        _ -> data_category
+      end
+
     num = String.to_integer(num)
 
     cond do
@@ -84,10 +82,11 @@ defmodule Smartcitydogs.Signals do
             all_query ++ Repo.all(struct)
           end)
 
-          all_query = List.flatten(all_query)
+        all_query = List.flatten(all_query)
         list_signals = Smartcitydogs.Repo.paginate(all_query, page: num, page_size: 8)
 
-          [list_signals, data_category, data_status]
+        [list_signals, data_category, data_status]
+
       data_category != [] ->
         all_query = []
 
@@ -97,19 +96,14 @@ defmodule Smartcitydogs.Signals do
             all_query ++ Repo.all(struct)
           end)
 
-          all_query = List.flatten(all_query)
+        all_query = List.flatten(all_query)
         page = Smartcitydogs.Repo.paginate(all_query, page: 1, page_size: 8)
         [page, data_category, data_status]
+
       true ->
         all_query = DataSignals.list_signals()
         page = Smartcitydogs.Repo.paginate(all_query, page: 1, page_size: 8)
         [page, data_category, data_status]
     end
   end
-
-
-
-
-
-
 end

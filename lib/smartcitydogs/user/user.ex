@@ -58,8 +58,6 @@ defmodule Smartcitydogs.User do
     ])
   end
 
-  
-
   def registration_changeset(struct, params) do
     struct
     |> changeset(params)
@@ -81,5 +79,4 @@ defmodule Smartcitydogs.User do
         changeset
     end
   end
-
 end

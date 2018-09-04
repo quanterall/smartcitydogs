@@ -56,6 +56,7 @@ defmodule SmartcitydogsWeb.Router do
     post("/users/logout", UserControllerAPI, :logout)
 
     resources("/signals", SignalControllerAPI, except: [:new, :edit])
+
     scope "/signals" do
       get("/:id/comment", SignalControllerAPI, :comment)
       get("/:id/unlike", SignalControllerAPI, :unlike)
@@ -63,13 +64,16 @@ defmodule SmartcitydogsWeb.Router do
       put("/signals/follow", SignalControllerAPI, :follow)
       put("/signals/unfollow", SignalControllerAPI, :unfollow)
     end
+
     get("/my_signals", MySignalsControllerAPI, :index)
     resources("/signal_images", SignalImageControllerAPI, except: [:new, :edit])
     resources("/signals_comments", SignalsCommentControllerAPI, except: [:new, :edit])
+
     scope "/signals_comments", SmartcitydogsWeb do
-      put("/follow", SignalsCommentControllerAPI,:follow)
+      put("/follow", SignalsCommentControllerAPI, :follow)
       put("/unfollow", SignalsCommentControllerAPI, :unfollow)
     end
+
     resources("/signals_types", SignalsTypeControllerAPI, except: [:new, :edit])
     resources("/signals_categories", SignalCategoryControllerAPI, except: [:new, :edit])
     resources("/signals_likes", SignalsLikeControllerAPI, except: [:new, :edit])
@@ -85,7 +89,6 @@ defmodule SmartcitydogsWeb.Router do
     resources("/header_slides", HeaderSlideControllerAPI, except: [:new, :edit])
     resources("/news", NewsSchemaControllerAPI, except: [:new, :edit])
     resources("/static_pages", StaticPageControllerAPI, except: [:new, :edit])
-    
 
     # post("/signals/add_comment_like", SignalController, :add_comment_like)
     # post("/signals/add_comment_dislike", SignalController, :add_comment_dislike)
@@ -94,18 +97,17 @@ defmodule SmartcitydogsWeb.Router do
   ###### DEFAULT BROWSER STACK #####
 
   scope "/", SmartcitydogsWeb do
-
     pipe_through([:browser, :with_session])
 
     get("/", PageController, :index)
     resources("/signals", SignalController)
-    resources("/registered", AnimalController)
+    resources("/animals", AnimalController)
     resources("/sessions", SessionController, only: [:new, :create, :delete])
     resources("/users", UserController, only: [:new, :create])
     resources("/help", HelpController, only: [:index])
     resources("/fortheproject", ForTheProjectController, only: [:index])
     resources("/news", NewsController)
-    resources("/forgoten_password",ForgotenPasswordController)
+    resources("/forgoten_password", ForgotenPasswordController)
     resources("/contact", ContactController, only: [:index, :new, :create])
     ###### REGISTERED USER ZONE #########
     scope "/" do
@@ -113,13 +115,12 @@ defmodule SmartcitydogsWeb.Router do
       resources("/users", UserController)
       resources("/registered", AnimalController)
       resources("/news", NewsController)
-      
-      get("/show", PageController, :show) ##not in develop
+
+      ## not in develop
+      get("/show", PageController, :show)
 
       resources("/my_signals", MySignalsController)
       get("/followed_signals", SignalController, :followed_signals)
-
-
 
       get("/signals/get_signals_support_count", SignalController, :get_signals_support_count)
       get("/signals/followed_signals", SignalController, :followed_signals)
@@ -148,7 +149,6 @@ defmodule SmartcitydogsWeb.Router do
       ######## MUNICIPALITY ZONE #######
 
       scope "/municipality" do
-
         get("/animals", AnimalController, :minicipality_registered)
         get("/filter_registered", AnimalController, :filter_registered)
         get("/animals/shelter", AnimalController, :minicipality_shelter)
@@ -171,6 +171,7 @@ defmodule SmartcitydogsWeb.Router do
   # Plug function
   defp ensure_authenticated(conn, _opts) do
     current_user_id = get_session(conn, :current_user_id)
+
     if current_user_id do
       conn
     else

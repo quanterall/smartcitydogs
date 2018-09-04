@@ -1,7 +1,6 @@
 defmodule Smartcitydogs.Auth do
   import Comeonin.Bcrypt, only: [checkpw: 2, dummy_checkpw: 0]
 
-
   def login(conn, user) do
     conn
     |> Guardian.Plug.sign_in(user)
@@ -26,6 +25,4 @@ defmodule Smartcitydogs.Auth do
   def logout(conn) do
     Guardian.Plug.sign_out(conn)
   end
-
- 
 end

@@ -1,48 +1,43 @@
 defmodule SmartcitydogsWeb.PageController do
   use SmartcitydogsWeb, :controller
-  
+
   import Ecto.Query
   alias Smartcitydogs.DataSignals
   alias Smartcitydogs.DataPages
   alias Smartcitydogs.DataAnimals
   alias Smartcitydogs.Animals
-  
+  alias Smartcitydogs.Signals
+  alias Smartcitydogs.News
+  alias Smartcitydogs.Repo
 
   def index(conn, _params) do
-    signal = DataSignals.list_signals()
-    news = DataPages.list_news()
-    animal = DataAnimals.list_animals()
-    struct = from(p in Animals, where: p.animals_status_id == 3)
-    adopted_animals = Smartcitydogs.Repo.all(struct) |> Smartcitydogs.Repo.preload(:animals_status)
+    signal =
+      Signals
+      |> limit(6)
+      |> Repo.all()
+      |> Repo.preload([:signals_types, :signals_categories, :signals_comments])
 
-    last_animals = 
-      if length(animal) <= 6 do
-        animal
-      else
-        Enum.slice(animal, -6..-1) |> Enum.reverse
-      end
+    news =
+      News
+      |> limit(4)
+      |> Repo.all()
 
-    last_signals = 
-      if length(signal) <= 6 do
-        signal
-      else
-        Enum.slice(signal, -6..-1)
-      end
+    animal =
+      Animals
+      |> limit(6)
+      |> Repo.all()
+      |> Repo.preload([:animals_image, :animals_status])
 
-    last_news =
-      if length(news) <= 3 do
-        news
-      else
-        Enum.slice(news, -3..-1)
-      end
-      
-    last_adopted_animals =
-      if length(adopted_animals) <= 6 do
-        adopted_animals
-      else
-        Enum.slice(adopted_animals, -6..-1) |> Enum.reverse
-      end
+    adopted_animals =
+      Repo.all(from(p in Animals, where: p.animals_status_id == 3))
+      |> Smartcitydogs.Repo.preload(:animals_status)
+      |> Repo.preload([:animals_image, :animals_status])
 
-    render(conn, "index.html", signal: last_signals, news: last_news, animals: last_animals, adopted_animals: last_adopted_animals)
+    render(conn, "index.html",
+      signal: signal,
+      news: news,
+      animals: animal,
+      adopted_animals: adopted_animals
+    )
   end
 end

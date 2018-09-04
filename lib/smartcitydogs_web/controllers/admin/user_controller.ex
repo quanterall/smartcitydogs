@@ -1,7 +1,6 @@
 defmodule SmartcitydogsWeb.Admin.UserController do
   use SmartcitydogsWeb, :controller
 
-
   def index(conn, _params) do
     users = Smartcitydogs.DataUsers.list_users()
     render(conn, "index.html", users: users)
