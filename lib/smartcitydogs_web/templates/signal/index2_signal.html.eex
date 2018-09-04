@@ -42,7 +42,24 @@
 
           <label-title><b>
           <%=
-            signal.title
+
+
+              text = signal.title
+              len = String.length(text)
+              if len > 20 do
+                  text_sliced = String.slice(text,0..20)
+                  if String.last(text_sliced) == " " do 
+                    String.trim_trailing(text_sliced," ")
+                    |> Kernel.<> "..."
+                  else
+                    text_sliced <> "..."
+                  end
+                  
+              else
+                  text
+              end
+
+
           %></b></label-title>
           <br />
 
