@@ -115,7 +115,6 @@
             </div>
             
             <div class="buttons-for-signal1">
-              <% IO.inspect @current_user.users_types_id %>
               <div class="buttons-for-signal">
                 <%= case @current_user.users_types_id do%>
                   <%= nil -> %>

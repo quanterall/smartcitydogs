@@ -177,7 +177,6 @@ defmodule SmartcitydogsWeb.SignalController do
   end
 
   def show(conn, map) do
-    IO.inspect(map)
         id = String.to_integer(map["id"])
         comments = DataSignals.get_comment_signal_id(id)
         signal = DataSignals.get_signal(id)

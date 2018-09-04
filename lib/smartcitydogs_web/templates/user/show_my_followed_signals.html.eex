@@ -68,7 +68,6 @@
               </div>
               <div class="signals-user-show">
               <%
-                IO.inspect @page
               alias Smartcitydogs.DataSignals
                 user = @conn.assigns.current_user.id
                 signals = Smartcitydogs.DataSignals.get_all_followed_signals(user)
