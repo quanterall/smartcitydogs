@@ -123,7 +123,7 @@ defmodule SmartcitydogsWeb.Router do
 
       get("/signals/get_signals_support_count", SignalController, :get_signals_support_count)
       get("/signals/followed_signals", SignalController, :followed_signals)
-      get("/signals/update_type", SignalController, :update_type)
+      get("/signals/:id/update_type", SignalController, :update_type)
       resources("/signals", SignalController)
 
       resources("/help", HelpController, only: [:index])

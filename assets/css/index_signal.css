@@ -528,7 +528,7 @@ input#search-placeholder:focus{
 
 
 .modal-content {
-    background-color: #fefefe;
+    background-color: rgb(0,201,148);
     margin: auto;
     padding: 20px;
     border: 1px solid #888;
@@ -536,18 +536,34 @@ input#search-placeholder:focus{
     align-self: center;
 }
 .modal-type{
+  color: white;
+  font-size: 20px;
+  font-weight: bold;
   font-style: monospace;
   width: 50%;
   align-self: center;
 }
 .select-type{
+  background: transparent;
+  border: 1px solid white;
   width: 50%;
   align-self: center;
 }
-
+#type-chosen{
+  width: 50%;
+  margin-left: 25%;
+  color: rgb(0,201,148);
+  opacity: 1;
+  background-color: white;
+  border: 1px solid white;
+}
+#type-chosen:focus{
+  border: 1px solid white;
+  background-color: white;
+}
 .close {
     width: 2%;
-    color: #aaaaaa;
+    color: white;
     float: right;
     font-size: 28px;
     font-weight: bold;
@@ -555,7 +571,7 @@ input#search-placeholder:focus{
 
 .close:hover,
 .close:focus {
-    color: #000;
+    color: white;
     text-decoration: none;
     cursor: pointer;
 }
@@ -971,6 +987,9 @@ label-signals-categories{
   color: black;
   font-size: 20px;
   margin-top: 8px;
+}
+.get_id_for_modal{
+  display: none;
 }
 .followed-signals-my-profile:hover{
   color: black;

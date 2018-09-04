@@ -243,11 +243,13 @@ defmodule SmartcitydogsWeb.SignalController do
   end
 
   def update_type(conn, %{"id" => id, "signals_types_id" => signals_types_id}) do
+    IO.inspect id
+    IO.inspect signals_types_id
     signal = DataSignals.get_signal(id)
     DataSignals.update_signal(signal, %{"signals_types_id" => signals_types_id})
 
     signals = DataSignals.list_signals()
-    render(conn, "index_signals.html", signals: signals)
+    redirect(conn, to: signal_path(conn, :minicipality_signals))
   end
 
   def delete(conn, %{"id" => id}) do
