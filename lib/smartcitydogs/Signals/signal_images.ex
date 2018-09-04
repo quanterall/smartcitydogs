@@ -19,7 +19,7 @@ defmodule Smartcitydogs.SignalImages do
       :signals_id
     ])
     |> validate_required([
-      :url
+   ##   :url
     ])
   end
 end

@@ -1,4 +1,4 @@
-defmodule Smartcitydogs.Repo.Migrations.CreateNewsTable do
+defmodule Smartcitydogs.Repo.Migrations.News do
   use Ecto.Migration
 
   def change do

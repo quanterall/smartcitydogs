@@ -1,4 +1,4 @@
-defmodule Smartcitydogs.Repo.Migrations.CreateSignalsCommentsTable do
+defmodule Smartcitydogs.Repo.Migrations.SignalsComments do
   use Ecto.Migration
   # add
   def change do
@@ -6,6 +6,8 @@ defmodule Smartcitydogs.Repo.Migrations.CreateSignalsCommentsTable do
       add(:comment, :text)
       add(:likes_number, :integer)
       add(:deleted_at, :naive_datetime)
+      add(:signals_id, references("signals"))
+      add(:users_id, references("users"))
       timestamps()
     end
   end

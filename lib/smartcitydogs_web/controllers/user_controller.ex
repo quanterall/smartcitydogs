@@ -71,16 +71,16 @@ defmodule SmartcitydogsWeb.UserController do
       if logged_user_id != request_user_id do
         render(conn, SmartcitydogsWeb.ErrorView, "401.html")
       else
-        followed_signals = Smartcitydogs.DataSignals.get_signal_like(conn.assigns.current_user.id)
+    
+        signals = DataSignals.get_all_followed_signals(user.id)
+        followed_signals = DataSignals.get_signal_like(user.id)
         liked_signals = Enum.map(followed_signals, fn x -> x |> Map.get(:signals_id) end)
         followed_signals = []
+        followed_signals = for sig <- liked_signals, do: followed_signals ++ sig |> DataSignals.get_signal()
+        page = Repo.paginate(followed_signals, page: page_num, page_size: 8)
+        profile_params = %{signals: signals, page: page, conn: conn}   
 
-        followed_signals =
-          for sig <- liked_signals, do: (followed_signals ++ sig) |> DataSignals.get_signal()
-
-        page = Smartcitydogs.Repo.paginate(followed_signals, page: page_num, page_size: 8)
-
-        render(conn, "show_my_followed_signals.html", user: user, conn: conn, page: page_num)
+        render(conn, "show_my_followed_signals.html", user: user, conn: conn, page: page, profile_params: profile_params)
       end
     else
       {:error, _} -> render(conn, SmartcitydogsWeb.ErrorView, "401.html")
@@ -88,14 +88,8 @@ defmodule SmartcitydogsWeb.UserController do
   end
 
   def show(conn, %{"followed_signals" => _, "id" => _}) do
-    ## |> Map.put(:liked_signals, DataSignals.list_signals())
-    user = Repo.get!(User, conn.assigns.current_user.id) |> Repo.preload(:users_types)
-    # changeset = DataUsers.change_user(user)
-    ##  sig = DataSignals.list_signals()
-    ## user = user |> Map.put(:liked_signals, sig) |> Repo.update!()
-
-    IO.puts("TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT")
-
+    
+    user = Repo.get!(User, conn.assigns.current_user.id) |> Repo.preload(:users_types) 
     with :ok <-
            Bodyguard.permit(
              Smartcitydogs.Users.Policy,
@@ -108,23 +102,7 @@ defmodule SmartcitydogsWeb.UserController do
       if logged_user_id != request_user_id do
         render(conn, SmartcitydogsWeb.ErrorView, "401.html")
       else
-        ##   if Enum.count(params) == 2 do
-
-        followed_signals = Smartcitydogs.DataSignals.get_signal_like(conn.assigns.current_user.id)
-        liked_signals = Enum.map(followed_signals, fn x -> x |> Map.get(:signals_id) end)
-        followed_signals = []
-
-        followed_signals =
-          for sig <- liked_signals, do: (followed_signals ++ sig) |> DataSignals.get_signal()
-
-        page = Smartcitydogs.Repo.paginate(followed_signals, page: 1, page_size: 8)
-
-        render(conn, "show.html", user: user, conn: conn, page: 1)
-        # else  
-        #   IO.puts "R"
-        #   page_params = params["page"]
-        #   render(conn, "show_my_followed_signals.html.html", user: user, conn: conn, page: String.to_integer(page_params) )
-        # end
+          render(conn, "show.html", user: user, conn: conn, page: 1)
       end
     else
       {:error, _} -> render(conn, SmartcitydogsWeb.ErrorView, "401.html")
@@ -134,7 +112,7 @@ defmodule SmartcitydogsWeb.UserController do
   def show(conn, params) do
     id = params["id"]
     user = Repo.get!(User, id) |> Repo.preload(:users_types)
-    # changeset = DataUsers.change_user(user)
+ 
 
     with :ok <-
            Bodyguard.permit(
@@ -148,18 +126,22 @@ defmodule SmartcitydogsWeb.UserController do
       if logged_user_id != request_user_id do
         render(conn, SmartcitydogsWeb.ErrorView, "401.html")
       else
+        
+        signals = DataSignals.get_user_signal(user.id)
+        page = Repo.paginate(signals, page: 1, page_size: 8)
+        profile_params = %{signals: signals, page: page, conn: conn}
+        followed_signals = DataSignals.get_signal_like(user.id)
+        liked_signals = Enum.map(followed_signals, fn x -> x |> Map.get(:signals_id) end)
+        followed_signals = []
+        followed_signals = for sig <- liked_signals, do: followed_signals ++ sig |> DataSignals.get_signal()
+        page = Repo.paginate(followed_signals, page: 1, page_size: 8)
+        profile_liked_params = %{signals: page, page: page, conn: conn}
+
         if Enum.count(params) == 1 do
-          page = Smartcitydogs.Repo.paginate(page: 1, page_size: 8)
-          render(conn, "show.html", user: user, conn: conn, page: page)
-        else
-          page_params = params["page"]
-          IO.puts("PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP")
-          ## page = Smartcitydogs.Repo.paginate(page: page_params, page_size: 8)
-          render(conn, "show_my_signals.html",
-            user: user,
-            conn: conn,
-            page: String.to_integer(page_params)
-          )
+          render(conn, "show.html", user: user, conn: conn, profile_params: profile_params, profile_liked_params: profile_liked_params)
+        else  
+          page_my_signals = Repo.paginate(signals, page: params["page"], page_size: 8)
+          render(conn, "show_my_signals.html", user: user, conn: conn, page: page_my_signals, profile_liked_params: profile_liked_params )
         end
       end
     else

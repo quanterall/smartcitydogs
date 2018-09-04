@@ -1,10 +1,12 @@
-defmodule Smartcitydogs.Repo.Migrations.CreatePerformedProcedures do
+defmodule Smartcitydogs.Repo.Migrations.PerformedProcedures do
   use Ecto.Migration
 
   def change do
     create table("performed_procedures") do
       add(:date, :naive_datetime)
       add(:deleted_at, :naive_datetime)
+      add(:procedure_type_id, references("procedure_type"))
+      add(:animals_id, references("animals"))
       timestamps()
     end
   end

@@ -67,38 +67,16 @@
                 </a>
               </div>
               <div class="signals-user-show">
-              <%
-              alias Smartcitydogs.DataSignals
-                user = @conn.assigns.current_user.id
-                signals = Smartcitydogs.DataSignals.get_all_followed_signals(user)
-                ##IO.inspect signals
-              ##  followed_signals = []
-              ##  followed_signals = for sig <- signals, do: followed_signals ++ sig |> DataSignals.get_signal()
-              ##  IO.inspect followed_signals
-               ## page = Smartcitydogs.Repo.paginate(followed_signals, page: @page, page_size: 8)
-              ##  IO.inspect page
-              followed_signals = Smartcitydogs.DataSignals.get_signal_like(user)
-                liked_signals = Enum.map(followed_signals, fn x -> x |> Map.get(:signals_id) end)
-                #IO.inspect liked_signals
-                followed_signals = []
-                followed_signals = for sig <- liked_signals, do: followed_signals ++ sig |> DataSignals.get_signal()
-                page = Smartcitydogs.Repo.paginate(followed_signals, page: @page, page_size: 8)
-                profile_params = %{signals: signals, page: page, conn: @conn}
-                
-                ##profile_liked_params = %{signals: followed_signals, page: page, conn: @conn}
-               ## IO.inspect profile_params
-                
-              %>
                 <div class="last-signals-dogs-div">
-                  <%= render SmartcitydogsWeb.MySignalsView, "my_signals.html", profile_params %>
+                  <%= render SmartcitydogsWeb.MySignalsView, "my_signals.html", @profile_params %>
                 </div>
                 <div class="last-signals-dogs-div2">
                  
 <div class="row">
   
-  <%= for followed_signal <- page.entries do %>
+  <%= for followed_signal <- @page.entries do %>
     <div class="col-lg-3">
-      <div class="col-container" style="background-image: url('/<%= get_signals_images(followed_signal.id) %>')">
+      <div class="col-container" style="background-image: url('/<%= get_followed_signals_images(followed_signal.id) %>')">
         <div class="col-container-shadow">
 
           <label-type class="
@@ -181,7 +159,7 @@
 
 <div class="padination">
 
-  <%= for x <- 1..page.total_pages do %>
+  <%= for x <- 1..@page.total_pages do %>
     <% 
    
     id = @conn.assigns.current_user.id

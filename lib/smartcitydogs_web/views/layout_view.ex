@@ -5,7 +5,9 @@ defmodule SmartcitydogsWeb.LayoutView do
     Plug.Conn.get_session(conn, :csrf_token)
   end
 
-  def printNavbar(conn, current_user) do
+  def printNavbar(conn,current_user) do
+   ## IO.inspect current_user.users_types_id
+
     case current_user do
       nil ->
         render("navbar_no_user.html", %{conn: conn, current_user: current_user})

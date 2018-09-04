@@ -1,4 +1,4 @@
-defmodule Smartcitydogs.Repo.Migrations.CreateHeaderSlidesTable do
+defmodule Smartcitydogs.Repo.Migrations.HeaderSlides do
   use Ecto.Migration
 
   def change do

@@ -1,8 +1,8 @@
-defmodule Smartcitydogs.Repo.Migrations.CreateSignalsCategoriesTable do
+defmodule Smartcitydogs.Repo.Migrations.AnimalStatus do
   use Ecto.Migration
 
   def change do
-    create table("signals_categories") do
+    create table("animal_status") do
       add(:name, :text)
       add(:deleted_at, :naive_datetime)
       timestamps()

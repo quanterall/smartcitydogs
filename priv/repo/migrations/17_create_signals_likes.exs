@@ -1,4 +1,4 @@
-defmodule Smartcitydogs.Repo.Migrations.CreateSignalsLikes do
+defmodule Smartcitydogs.Repo.Migrations.SignalsLikes do
   use Ecto.Migration
 
   def change do
