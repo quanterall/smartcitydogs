@@ -164,18 +164,20 @@ input#signals_url1{
     cursor: pointer;
 }
 .map-show-buttons .p-button-view{
+  height: 5vh;
   display: flex;
   align-items: center;
   justify-content: space-evenly;
   padding: 3%;
   border-radius: 10px;
   padding-left: 2%;
-  margin-left: 14%;
-  width: 60%;
+  margin-left: 25%;
+  width: 50%;
   border: 1px solid transparent;
   background-color: #00c790;
 }
 .map-show-buttons .p-button-view .btn-secondary{
+  margin: 0px;
   padding: 0px;
   opacity: 1;
   box-shadow: none !important;

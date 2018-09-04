@@ -10,20 +10,9 @@
               <img class="rounded-circle" src="/<%= get_signals_images(signal.id) %>" alt="Generic placeholder image" width="140" height="140">
               <h2><%=
               
-              text = signal.title
-              len = String.length(text)
-              if len > 20 do
-                  text_sliced = String.slice(text,0..20)
-                  if String.last(text_sliced) == " " do 
-                    String.trim_trailing(text_sliced," ")
-                    |> Kernel.<> "..."
-                  else
-                    text_sliced <> "..."
-                  end
-                  
-              else
-                  text
-              end
+              signal.signals_categories_id
+              |> Smartcitydogs.DataSignals.get_signal_category()
+              |> Map.get(:name)
               
               %></h2>
               <ul>

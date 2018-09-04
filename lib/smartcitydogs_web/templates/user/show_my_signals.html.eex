@@ -124,7 +124,9 @@
 
           <label-title><b>
           <%=
-            my_signal.title
+            my_signal.signals_categories_id
+            |> Smartcitydogs.DataSignals.get_signal_category()
+            |> Map.get(:name)
           %></b></label-title>
           <br />
 
