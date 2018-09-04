@@ -53,14 +53,6 @@
     margin-right: 12%;
     /* margin-left: 9%; */
 }
-
-.col-container .col-container-shadow{
-    opacity: 0;
-}
-.col-container .col-container-shadow:hover{
-    transition: 0.5s;
-    opacity: 1;
-}
 .row.slick{
     margin-bottom: 50px;
 }
