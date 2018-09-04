@@ -10,17 +10,16 @@ defmodule Smartcitydogs.DataAnimals do
   alias Smartcitydogs.Adopt
   alias Smartcitydogs.ProcedureType
 
-
   ## gets the current time in Sofia
   def get_current_time() do
     Calendar.DateTime.now!("Europe/Sofia") |> DateTime.to_naive()
   end
 
   def get_procedure_id_by_name(name) do
-    {name_query,_} = name
+    {name_query, _} = name
     name_query = "%#{name_query}%"
     query = Ecto.Query.from(c in ProcedureType, where: ilike(c.name, ^name_query))
-    [procedure] = Repo.all(query) 
+    [procedure] = Repo.all(query)
     procedure |> Map.get(:id)
   end
 
@@ -30,26 +29,23 @@ defmodule Smartcitydogs.DataAnimals do
   end
 
   def insert_performed_procedure(procedure_list, animal_id) do
-    for procedure <- procedure_list do 
+    for procedure <- procedure_list do
       if procedure != nil do
         %PerformedProcedures{}
-        |> PerformedProcedures.changeset(
-          %{
-            animals_id: animal_id,
-            procedure_type_id: procedure
-           })
+        |> PerformedProcedures.changeset(%{
+          animals_id: animal_id,
+          procedure_type_id: procedure
+        })
         |> Repo.insert()
       end
-      
     end
   end
 
   def get_animals_by_status(id) do
     struct = from(p in Animals, where: p.animals_status_id == ^id)
-      all_adopted = Repo.all(struct) |> Repo.preload(:animals_status)
-      Smartcitydogs.Repo.paginate(all_adopted, page: 1, page_size: 8)
+    all_adopted = Repo.all(struct) |> Repo.preload(:animals_status)
+    Smartcitydogs.Repo.paginate(all_adopted, page: 1, page_size: 8)
   end
-
 
   def get_animal_status(id) do
     Repo.get!(AnimalStatus, id)
@@ -73,6 +69,14 @@ defmodule Smartcitydogs.DataAnimals do
     Repo.get!(AnimalImages, id)
   end
 
+  def get_first_image(animal) do
+    if List.first(animal.animals_image) == nil do
+      "images/2.jpg"
+    else
+      List.first(animal.animals_image).url
+    end
+  end
+
   def get_animal_image_animals_id(animals_id) do
     query = Ecto.Query.from(c in AnimalImages, where: c.animals_id == ^animals_id)
     Repo.all(query)
@@ -85,7 +89,7 @@ defmodule Smartcitydogs.DataAnimals do
 
   def get_animal_by_chip(chip_number) do
     chip_number = "%#{chip_number}%"
-    query = Ecto.Query.from(c in Animals, where: ilike(c.chip_number, ^chip_number ))                                                
+    query = Ecto.Query.from(c in Animals, where: ilike(c.chip_number, ^chip_number))
     Repo.all(query) |> Repo.preload(:animals_status)
   end
 
@@ -214,25 +218,20 @@ defmodule Smartcitydogs.DataAnimals do
     list = Repo.all(query_user)
     check_list(list, animals_id)
   end
-  
-  def check_list([], _ ) do
+
+  def check_list([], _) do
     false
   end
 
   def check_list([head | tail], animals_id) do
-    
     if head == [] do
       false
-      
     else
       if head.animals_id == animals_id do
         true
-      
       else
         check_list(tail, animals_id)
       end
     end
-  
   end
-
 end

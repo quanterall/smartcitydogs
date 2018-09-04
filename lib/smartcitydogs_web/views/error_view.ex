@@ -9,7 +9,7 @@ defmodule SmartcitydogsWeb.ErrorView do
     "Not autorization!"
   end
 
-  def render("403.html", _assigns) do 
+  def render("403.html", _assigns) do
     "Forbidden"
   end
 

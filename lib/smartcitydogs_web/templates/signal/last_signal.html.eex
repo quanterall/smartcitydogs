@@ -8,7 +8,13 @@
             <div class="col-lg-4">
 
               <img class="rounded-circle" src="/<%= get_signals_images(signal.id) %>" alt="Generic placeholder image" width="140" height="140">
-              <h2><%=signal.title%></h2>
+              <h2><%=
+              
+              signal.signals_categories_id
+              |> Smartcitydogs.DataSignals.get_signal_category()
+              |> Map.get(:name)
+              
+              %></h2>
               <ul>
                 <li>
                   Signal number:

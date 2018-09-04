@@ -27,6 +27,51 @@ function myOnLoadCallback() {
     alert("Captcha is OK");
   }
 
+$('.change-status').click(function(){
+    $(".modal").css("display","block");
+})
+$('.close').click(function(){
+    $(".modal").css("display","none");
+})
+
+$(function(){
+
+    var modal = document.getElementById('myModal');
+  //   var span = document.getElementsByClassName("close")[0];
+    var id;
+    var SelectedType;
+  
+    $('.change-status').on('click',function() {
+      id = $(this).attr('id');
+      console.log("Buttton: "+id);
+      
+  
+    });
+    
+    $('.asdf-test').on('click',function(){
+  
+      SelectedType = $(".select-type option:selected").val()
+      console.log(SelectedType);
+      console.log("Buttton1: "+id);
+  
+      $.ajax({
+          method: "GET",
+          url: "/signals/"+id+"/update_type",
+          data: {
+              "id": id,
+              "signals_types_id": SelectedType
+          }
+       })
+  
+       setTimeout(function() {
+           location.reload();
+       }, 1000);
+  
+  
+    });
+  });
+
+
 
 $('#submit-adoption').click(function(){
     

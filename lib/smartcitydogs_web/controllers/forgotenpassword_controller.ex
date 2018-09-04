@@ -16,21 +16,20 @@ defmodule SmartcitydogsWeb.ForgotenPasswordController do
   def create(conn, pw_params) do
     reset_parameter = pw_params["reset_parameter"]
     reset_password_radio = String.to_integer(pw_params["reset_password_radio"])
-      
 
     user =
       cond do
         reset_password_radio == 2 ->
-         if String.trim(reset_parameter) != "" do
+          if String.trim(reset_parameter) != "" do
             User
             |> Repo.get_by(email: reset_parameter)
-         end
+          end
 
         reset_password_radio == 3 ->
-         if String.trim(reset_parameter) != "" do
+          if String.trim(reset_parameter) != "" do
             User
             |> Repo.get_by(phone: reset_parameter)
-         end
+          end
 
         reset_password_radio == 1 ->
           if String.trim(reset_parameter) != "" do
@@ -86,7 +85,7 @@ defmodule SmartcitydogsWeb.ForgotenPasswordController do
           |> Repo.update!()
 
           conn
-              |> redirect(to: page_path(conn, :index))
+          |> redirect(to: page_path(conn, :index))
         else
           changeset = User.changeset(%User{})
 

@@ -10,8 +10,6 @@ defmodule Smartcitydogs.DataSignals do
   alias Smartcitydogs.SignalsLikes
   alias Smartcitydogs.DataUsers
 
-
-
   def get_animal_by_chip(chip_number) do
     query = Ecto.Query.from(c in Signals, where: c.chip_number == ^chip_number)
     Repo.all(query)
@@ -34,6 +32,7 @@ defmodule Smartcitydogs.DataSignals do
   def follow_signal(id) do
     signal = get_signal(id)
     follow_number = Map.get(signal, :support_count)
+
     signal
     |> Signals.changeset(%{support_count: follow_number + 1})
     |> Repo.update()
@@ -42,12 +41,11 @@ defmodule Smartcitydogs.DataSignals do
   def unfollow_signal(id) do
     signal = get_signal(id)
     follow_number = Map.get(signal, :support_count)
+
     signal
     |> Signals.changeset(%{support_count: follow_number - 1})
     |> Repo.update()
   end
-
-
 
   def get_user_signal(users_id) do
     query = Ecto.Query.from(c in Signals, where: c.users_id == ^users_id)
@@ -172,9 +170,9 @@ defmodule Smartcitydogs.DataSignals do
   end
 
   def get_one_signal_comment(signals_id, comment_id) do
-   Ecto.Query.from(c in SignalsComments, where: c.signals_id == ^signals_id)
-   |> Repo.all() 
-   |> Enum.at(comment_id - 1)
+    Ecto.Query.from(c in SignalsComments, where: c.signals_id == ^signals_id)
+    |> Repo.all()
+    |> Enum.at(comment_id - 1)
   end
 
   def create_signal_comment(args \\ %{}) do
@@ -223,7 +221,9 @@ defmodule Smartcitydogs.DataSignals do
 
   # Signals likes
   def get_signals_user_like(user_id, signal_id) do
-    Ecto.Query.from(c in SignalsLikes, where: c.users_id == ^user_id and c.signals_id == ^signal_id)
+    Ecto.Query.from(c in SignalsLikes,
+      where: c.users_id == ^user_id and c.signals_id == ^signal_id
+    )
     |> Repo.all()
   end
 

@@ -6,7 +6,6 @@ defmodule Smartcitydogs.DataProcedure do
   alias Smartcitydogs.ProcedureType
   alias Smartcitydogs.Rescues
 
-
   ### Performed Procedures function
   def list_performed_procedure do
     Repo.all(PerformedProcedures)

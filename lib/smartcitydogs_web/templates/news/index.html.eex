@@ -221,8 +221,19 @@ h5, .h5 {
 
 
 <% end %>
-<div class ="news-button-create">
-  <%= link "Създай новина", to: news_path(@conn, :new), class: "btn btn-primary" %>
-</div>
+<% current_user = @conn.assigns.current_user %>
+<%= if current_user == nil do %>
+
+<% else %>
+  <% current_user.users_types.id  %>
+  <%= if current_user.users_types.id == 4 do %>
+    <div class ="news-button-create">
+      <%= link "Създай новина", to: news_path(@conn, :new), class: "btn btn-primary" %>
+    </div>
+    <% else %>
+
+    <% end %>
+
+<% end %>
 
 </div>

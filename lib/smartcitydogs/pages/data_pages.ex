@@ -6,7 +6,6 @@ defmodule Smartcitydogs.DataPages do
   alias Smartcitydogs.StaticPages
   alias Smartcitydogs.HeaderSlides
 
-
   def get_news(id) do
     Repo.get!(News, id)
   end
@@ -32,7 +31,7 @@ defmodule Smartcitydogs.DataPages do
   end
 
   def create_news(args \\ %{}) do
-   %News{} 
+    %News{}
     |> News.changeset(args)
     |> Repo.insert()
   end

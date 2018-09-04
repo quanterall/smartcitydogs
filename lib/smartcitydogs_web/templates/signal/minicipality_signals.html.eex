@@ -1,14 +1,11 @@
-<!DOCTYPE html>
-<html>
-  <head>
+
     <meta charset="utf-8">
     <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     
   
-  </head>
-  <body>
+
 
   <div class="container-filter-signals">
         <div class="container-filter">
@@ -94,7 +91,7 @@
                         %>
                       </label-type>
                         <br />
-
+                      <p class="get_id_for_modal"><%= signal.id %></p>
                         <label-date>
                         <%=
                           signal_time = signal.inserted_at
@@ -108,7 +105,11 @@
                         <br />
                         </label-date>
 
-                        <label-title><b><%=signal.title%></b></label-title>
+                        <label-title><b><%=
+                        signal.signals_categories_id
+                        |> Smartcitydogs.DataSignals.get_signal_category()
+                        |> Map.get(:name)
+                        %></b></label-title>
                         <br />
 
 
@@ -130,13 +131,13 @@
                         <center>
 
                         <div class="button-show-hide">
-                          <p class="p-button-change"><a class="btn btn-secondary change-status" id="<%= signal.id %>" role="button">Промени статус</a></p>
+                          <a class="btn btn-secondary change-status" href="#" id="<%= signal.id %>" role="button">Промени статус</a>
                         </div></center>
 
 
                       <!-- The Modal -->
                         <div id="myModal" class="modal">
-
+                        
                           <!-- Modal content -->
                           <div class="modal-content">
                             <span class="close">&times;</span>
@@ -149,7 +150,7 @@
                               <option value="4">Осиновено</option>
                             </select>
                             <br />
-                            <a class="btn btn-secondary" id="type-chosen" role="button">Промени</a>
+                            <a class="btn btn-secondary asdf-test" id="type-chosen" role="button">Промени</a>
 
                           </div>
 
@@ -161,7 +162,7 @@
 
 
                         <div class="button-show-hide">
-                          <p class="p-button-view"><a class="btn btn-secondary" href="signals/<%=signal.id%>" role="button">Към сигнала</a>
+                          <p class="p-button-view"><a class="btn btn-secondary" href="signals/<%=signal.id%>" role="button">Към сигнала</a></p>
                       </div></center>
 
                       </div>
@@ -184,8 +185,4 @@
       <div class="send-signal-container">
         
       </div>
-      <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
-      
-</body>
-</html>
-<script>     
+    

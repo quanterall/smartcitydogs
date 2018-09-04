@@ -72,10 +72,10 @@ a.close-modal{
 }
 .col-container:hover{
 
-  transition: 0.5s;
+  /* transition: 0.5s;
   -webkit-box-shadow: 1px 5px 46px 1px rgba(0,0,0,0.5);
   -moz-box-shadow: 1px 5px 46px 1px rgba(0,0,0,0.5);
-  box-shadow: 1px 5px 46px 1px rgba(0,0,0,0.5);
+  box-shadow: 1px 5px 46px 1px rgba(0,0,0,0.5); */
 }
 .col-container-shadow{
   transition: 0.5s;
@@ -163,19 +163,50 @@ input#signals_url1{
     padding: 6px 12px;
     cursor: pointer;
 }
+.container-signals .button-show-hide .change-status{
+  margin-bottom: 20%;
+  opacity: 1;
+  color: rgb(0,201,148);
+}
+.container-signals .button-show-hide .p-button-view .btn-secondary{
+  opacity: 1;
+  color: rgb(0,201,148);
+}
+.container-signals .button-show-hide .change-status:focus{
+  box-shadow: none !important;
+  background: transparent !important;
+  border: transparent !important;
+}
+.container-signals .button-show-hide .p-button-view{
+  margin: 0px;
+}
+.container-signals .button-show-hide .p-button-view .btn-secondary{
+  margin: 0px;
+}
+.container-signals .button-show-hide .p-button-view .btn-secondary{
+  box-shadow: none !important;
+  background: transparent !important;
+  border: transparent !important;
+}
+.container-signals .map-show-buttons .p-button-view{
+  margin: 0px;
+}
 .map-show-buttons .p-button-view{
+  /* margin: 0px; */
+  height: 5vh;
   display: flex;
   align-items: center;
   justify-content: space-evenly;
   padding: 3%;
   border-radius: 10px;
   padding-left: 2%;
-  margin-left: 14%;
-  width: 60%;
+  margin-left: 25%;
+  width: 50%;
   border: 1px solid transparent;
   background-color: #00c790;
 }
 .map-show-buttons .p-button-view .btn-secondary{
+  margin: 0px;
   padding: 0px;
   opacity: 1;
   box-shadow: none !important;
@@ -497,7 +528,7 @@ input#search-placeholder:focus{
 
 
 .modal-content {
-    background-color: #fefefe;
+    background-color: rgb(0,201,148);
     margin: auto;
     padding: 20px;
     border: 1px solid #888;
@@ -505,18 +536,34 @@ input#search-placeholder:focus{
     align-self: center;
 }
 .modal-type{
+  color: white;
+  font-size: 20px;
+  font-weight: bold;
   font-style: monospace;
   width: 50%;
   align-self: center;
 }
 .select-type{
+  background: transparent;
+  border: 1px solid white;
   width: 50%;
   align-self: center;
 }
-
+#type-chosen{
+  width: 50%;
+  margin-left: 25%;
+  color: rgb(0,201,148);
+  opacity: 1;
+  background-color: white;
+  border: 1px solid white;
+}
+#type-chosen:focus{
+  border: 1px solid white;
+  background-color: white;
+}
 .close {
     width: 2%;
-    color: #aaaaaa;
+    color: white;
     float: right;
     font-size: 28px;
     font-weight: bold;
@@ -524,35 +571,33 @@ input#search-placeholder:focus{
 
 .close:hover,
 .close:focus {
-    color: #000;
+    color: white;
     text-decoration: none;
     cursor: pointer;
 }
-
-.label-type-red{
-  display: grid;
-  margin-bottom: 5%;
+.signal-type-label{
   font-weight: bold;
+  display: inline-block;
+  padding: 2px 5px 2px 0px;
+  border-radius: 5px;
+  color: #000;
+  margin-bottom: 5px;
+  font-size: 16px;
+
+}
+.signal-type-label.new{
   color: red !important;
 }
-.label-type-orange{
-  display: grid;
-  margin-bottom: 5%;
-  font-weight: bold;
+.signal-type-label.accepted{
   color: orange !important;
 }
-.label-type-yellow{
-  display: grid;
-  margin-bottom: 5%;
-  font-weight: bold;
+.signal-type-label.sent{
   color: yellow !important;
 }
-.label-type-green{
-  display: grid;
-  margin-bottom: 5%;
-  font-weight: bold;
-  color: green !important;
+.signal-type-label.closed{
+  color: #00ba00 !important;
 }
+
 .padination a{
   color: black;
   font-family: monospace;
@@ -941,6 +986,9 @@ label-signals-categories{
   font-size: 20px;
   margin-top: 8px;
 }
+.get_id_for_modal{
+  display: none;
+}
 .followed-signals-my-profile:hover{
   color: black;
   text-decoration: none;
@@ -984,4 +1032,8 @@ label-signals-categories{
 .form-register .under-form{
   margin-top: 5vh;
   margin-left: 0px;
+}
+.change-status{
+  opacity: 1;
+  cursor: pointer;
 }

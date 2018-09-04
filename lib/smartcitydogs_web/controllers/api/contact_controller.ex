@@ -14,8 +14,10 @@ defmodule SmartcitydogsWeb.ContactControllerAPI do
     user_params = Map.get(params, "contact")
     topic = Map.get(user_params, "topic")
     text = Map.get(user_params, "text")
+
     Smartcitydogs.Email.send_unauth_contact_email(topic, text, user_params)
     |> Smartcitydogs.Mailer.deliver_now()
+
     contact_params = for {key, val} <- user_params, into: %{}, do: {String.to_atom(key), val}
     render(conn, "show.json", contact: contact_params)
   end

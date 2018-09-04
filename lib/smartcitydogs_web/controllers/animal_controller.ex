@@ -6,8 +6,6 @@ defmodule SmartcitydogsWeb.AnimalController do
   alias Smartcitydogs.Repo
   import Ecto.Query
 
-  
-
   ############################# Minicipality Home Page Animals ################################
 
   ## Start-up function of filter page for animals
@@ -23,8 +21,14 @@ defmodule SmartcitydogsWeb.AnimalController do
           {:ok, num} -> {params["animal_status"], num}
           _ -> {[], "1"}
         end
-      [page,data_status] = Animals.get_ticked_checkboxes(data_status)
-      render(conn, "minicipality_registered.html", animals: page.entries, page: page, data: data_status)
+
+      [page, data_status] = Animals.get_ticked_checkboxes(data_status)
+
+      render(conn, "minicipality_registered.html",
+        animals: page.entries,
+        page: page,
+        data: data_status
+      )
     else
       {:error, _} -> render(conn, SmartcitydogsWeb.ErrorView, "401.html")
     end
@@ -63,13 +67,14 @@ defmodule SmartcitydogsWeb.AnimalController do
 
   ###########################################################################################
 
-
   ## When the search button is clicked, for rendering the first page of the query.
-  def filter_registered(conn, %{"_utf8" => "✓", "animal_status" => data_status  }) do
-    data_status =  Enum.filter(data_status, fn x -> x != "false" end)
+  def filter_registered(conn, %{"_utf8" => "✓", "animal_status" => data_status}) do
+    data_status = Enum.filter(data_status, fn x -> x != "false" end)
+
     cond do
       data_status != [] ->
         all_query = []
+
         query_animals =
           Enum.map(data_status, fn x ->
             struct = from(p in Animals, where: p.animals_status_id == ^String.to_integer(x))
@@ -105,7 +110,7 @@ defmodule SmartcitydogsWeb.AnimalController do
     if conn.assigns.current_user != nil do
       with :ok <-
              Bodyguard.permit(Smartcitydogs.Animals.Policy, :index, conn.assigns.current_user) do
-        index_rendering(conn, params, sorted_animals) 
+        index_rendering(conn, params, sorted_animals)
       else
         {:error, _} -> render(conn, SmartcitydogsWeb.ErrorView, "401.html")
       end
@@ -184,7 +189,6 @@ defmodule SmartcitydogsWeb.AnimalController do
       "Ваксинирано" => animal_params["Ваксинирано"]
     }
 
-
     list_procedures =
       Enum.map(map_procedures, fn x ->
         case x do
@@ -260,6 +264,7 @@ defmodule SmartcitydogsWeb.AnimalController do
   def edit(conn, %{"id" => id}) do
     animal = DataAnimals.get_animal(id)
     changeset = DataAnimals.change_animal(animal)
+
     with :ok <- Bodyguard.permit(Smartcitydogs.Animals.Policy, :edit, conn.assigns.current_user) do
       render(conn, "edit.html", animals: animal, changeset: changeset)
     else
@@ -269,6 +274,7 @@ defmodule SmartcitydogsWeb.AnimalController do
 
   def update(conn, %{"id" => id, "animals" => animal_params}) do
     animal = DataAnimals.get_animal(id)
+
     with :ok <- Bodyguard.permit(Smartcitydogs.Animals.Policy, :update, conn.assigns.current_user) do
       case DataAnimals.update_animal(animal, animal_params) do
         {:ok, animal} ->

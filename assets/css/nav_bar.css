@@ -117,9 +117,9 @@
     margin-left: 0px;
     text-align: center;
 }
-div#modal-forms-container{
+/* div#modal-forms-container{
     margin-top: 0.4%;
-}
+} */
 @media (max-width: 1200px){
     .fixed-top-costom .container{
         max-width: 100%;
@@ -894,5 +894,53 @@ div#modal-forms-container{
     .news-button-create .btn-primary{
         font-size: 15px;
         width: 100%;
+    }
+}
+@media (max-width:992px){
+    .second-news-div .second-bg{
+        height: 300px;
+        margin-bottom: 5%;
+    }
+}
+@media (max-width:1380px){
+    .nnn .text-dark{
+        font-size: 12px !important;
+    }
+    .nnn .card-title{
+        font-size: 10px !important;
+    }
+    .nnn .card-text{
+        font-size: 12px !important;
+    }
+    .nnn .text-green{
+        font-size: 12px !important;
+    }
+}
+@media (max-width:1750px){
+    .nnn .text-dark{
+        font-size: 18px;
+    }
+    .nnn .card-title{
+        font-size: 18px;
+    }
+    .nnn .card-text{
+        font-size: 18px;
+    }
+    .nnn .text-green{
+        font-size: 18px;
+    }
+}
+@media (max-width:1580px){
+    .nnn .text-dark{
+        font-size: 15px;
+    }
+    .nnn .card-title{
+        font-size: 15px;
+    }
+    .nnn .card-text{
+        font-size: 15px;
+    }
+    .nnn .text-green{
+        font-size: 15px;
     }
 }

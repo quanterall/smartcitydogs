@@ -113,24 +113,24 @@
                 </table>  
               
             </div>
+            <% IO.inspect @current_user %>
             
             <div class="buttons-for-signal1">
-
               <div class="buttons-for-signal">
-                <%= case @current_user.users_types_id do%>
-                  <%= nil -> %>
+                <%= if @current_user == nil do %>
                     <a id="register-submit-adoption" onclick="showModalForm(event, 'register-form')">ПОСЛЕДВАЙ</a>
                     <div id="register-comment-button" onclick="showModalForm(event, 'register-form')">КОМЕНТИРАЙ</div>
-                  <%  2 -> %>
-
+                <% else %>
+                  <%= if @current_user.users_types_id == 2 do %>
                     <% check_follow = Smartcitydogs.DataSignals.get_signals_user_like(@current_user.id, @signal.id)%>
-                    <%= if check_follow != nil do %>
-                      <a id="submit-like1">ОТСЛЕДВАЙ</a>
-                    <% else %>
-                      <a id="submit-like1">ПОСЛЕДВАЙ</a>
-                    <% end %>
+                      <%= if check_follow != nil do %>
+                        <a id="submit-like1">ОТСЛЕДВАЙ</a>
+                      <% else %>
+                        <a id="submit-like1">ПОСЛЕДВАЙ</a>
+                      <% end %>
                     <div id="comment" >КОМЕНТИРАЙ</div>
-                <%  _ -> %>
+                    <% else %>
+                    <% end %>
                 <% end %>
                   
                   

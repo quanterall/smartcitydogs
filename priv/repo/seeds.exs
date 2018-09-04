@@ -32,9 +32,8 @@ alias Smartcitydogs.SignalsComments
 alias Smartcitydogs.SignalImages
 alias Smartcitydogs.Adopt
 
-
 ############## Users Type Admin #############
-users_type_params = %{name: "Admin" , prefix: "admin"}
+users_type_params = %{name: "Admin", prefix: "admin"}
 
 unless Repo.get_by(UsersType, name: users_type_params[:name]) do
   %UsersType{}
@@ -43,7 +42,7 @@ unless Repo.get_by(UsersType, name: users_type_params[:name]) do
 end
 
 ############## Users Type User #############
-users_type_params = %{name: "User" , prefix: "citizen"}
+users_type_params = %{name: "User", prefix: "citizen"}
 
 unless Repo.get_by(UsersType, name: users_type_params[:name]) do
   %UsersType{}
@@ -70,7 +69,7 @@ unless Repo.get_by(UsersType, name: users_type_params[:name]) do
 end
 
 ############## Users Type  representative of a municipal shelter#############
-users_type_params = %{name: "representative of a municipal shelter",prefix: "shelter"}
+users_type_params = %{name: "representative of a municipal shelter", prefix: "shelter"}
 
 unless Repo.get_by(UsersType, name: users_type_params[:name]) do
   %UsersType{}
@@ -164,7 +163,7 @@ unless Repo.get_by(User, username: users_params[:username]) do
 end
 
 ############ Animal Status ############
-animals_status_params = %{name: "На свобода" ,prefix: "free"}
+animals_status_params = %{name: "На свобода", prefix: "free"}
 
 unless Repo.get_by(AnimalStatus, name: animals_status_params[:name]) do
   %AnimalStatus{}
@@ -173,7 +172,7 @@ unless Repo.get_by(AnimalStatus, name: animals_status_params[:name]) do
 end
 
 ############ Animal Status ############
-animals_status_params = %{name: "В приюта" ,prefix: "shelter"}
+animals_status_params = %{name: "В приюта", prefix: "shelter"}
 
 unless Repo.get_by(AnimalStatus, name: animals_status_params[:name]) do
   %AnimalStatus{}
@@ -182,7 +181,7 @@ unless Repo.get_by(AnimalStatus, name: animals_status_params[:name]) do
 end
 
 ############ Animal Status ############
-animals_status_params = %{name: "Осиновено",prefix: "adopted"}
+animals_status_params = %{name: "Осиновено", prefix: "adopted"}
 
 unless Repo.get_by(AnimalStatus, name: animals_status_params[:name]) do
   %AnimalStatus{}
@@ -191,7 +190,7 @@ unless Repo.get_by(AnimalStatus, name: animals_status_params[:name]) do
 end
 
 ########     Procedure Type   ###############
-procedure_type_prams = %{name: "Кастрирано",prefix: "castrated"}
+procedure_type_prams = %{name: "Кастрирано", prefix: "castrated"}
 
 unless Repo.get_by(ProcedureType, name: procedure_type_prams[:name]) do
   %ProcedureType{}
@@ -200,7 +199,7 @@ unless Repo.get_by(ProcedureType, name: procedure_type_prams[:name]) do
 end
 
 ########     Procedure Type   ###############
-procedure_type_prams = %{name: "Обезпаразитено",prefix: "deworm"}
+procedure_type_prams = %{name: "Обезпаразитено", prefix: "deworm"}
 
 unless Repo.get_by(ProcedureType, name: procedure_type_prams[:name]) do
   %ProcedureType{}
@@ -209,7 +208,7 @@ unless Repo.get_by(ProcedureType, name: procedure_type_prams[:name]) do
 end
 
 ########     Procedure Type   ###############
-procedure_type_prams = %{name: "Ваксинирано",prefix: "vaccinated"}
+procedure_type_prams = %{name: "Ваксинирано", prefix: "vaccinated"}
 
 unless Repo.get_by(ProcedureType, name: procedure_type_prams[:name]) do
   %ProcedureType{}
@@ -217,19 +216,15 @@ unless Repo.get_by(ProcedureType, name: procedure_type_prams[:name]) do
   |> Repo.insert!()
 end
 
-
-
-
-
-
-Enum.each(0..99, fn(x) ->
+Enum.each(0..99, fn _ ->
   animals_params = %{
     sex: "M",
-    chip_number: Faker.Address.building_number,
-    address: Faker.Address.street_address,
-    description: Faker.Lorem.paragraph,
-    animals_status_id: Faker.random_between(1,3)
+    chip_number: Faker.Address.building_number(),
+    address: Faker.Address.street_address(),
+    description: Faker.Lorem.paragraph(),
+    animals_status_id: Faker.random_between(1, 3)
   }
+
   unless Repo.get_by(Animals, chip_number: animals_params[:chip_number]) do
     animal = %Animals{}
     |> Animals.changeset(animals_params)
@@ -241,29 +236,30 @@ Enum.each(0..99, fn(x) ->
   end
 end)
 
-
-
-
 ###############  Performed Procedures #################
 
+animals_count = length(Repo.all(Animals))
 
-animals_count = length( Repo.all(Animals))
-Enum.each(0..99, fn(x) ->
-  performed_paramas = %{date:  Ecto.DateTime.utc()|>Ecto.DateTime.to_string(), animals_id: Faker.random_between(1,animals_count), procedure_type_id: Faker.random_between(1,3)}
+Enum.each(0..99, fn _ ->
+  performed_paramas = %{
+    date: Ecto.DateTime.utc() |> Ecto.DateTime.to_string(),
+    animals_id: Faker.random_between(1, animals_count),
+    procedure_type_id: Faker.random_between(1, 3)
+  }
+
   %PerformedProcedures{}
-    |> PerformedProcedures.changeset(performed_paramas)
-    |> Repo.insert!()
-
+  |> PerformedProcedures.changeset(performed_paramas)
+  |> Repo.insert!()
 end)
 
 #########    Rescues    ##############
-Enum.each(0..99, fn(x) ->
-rescue_param = %{name: Faker.Name.name, animals_id: Faker.random_between(1,animals_count)}
+Enum.each(0..99, fn _ ->
+  rescue_param = %{name: Faker.Name.name(), animals_id: Faker.random_between(1, animals_count)}
+
   %Rescues{}
   |> Rescues.changeset(rescue_param)
   |> Repo.insert!()
 end)
-
 
 ###########   Header Slides ############
 header_params = %{image_url: "images/2.jpg", text: "Hello Phoenix"}
@@ -275,20 +271,18 @@ unless Repo.get_by(HeaderSlides, image_url: header_params[:image_url]) do
 end
 
 ############# News #####################
-Enum.each(0..99, fn(x) ->
-news_params = %{
-  image_url: "images/2.jpg",
-  title: Faker.Lorem.Shakespeare.king_richard_iii(),
-  content: Faker.Lorem.paragraph(),
-  short_content:  Faker.Lorem.sentence(),
-  date: "2018-05-22 11:56:16"
-}
+Enum.each(0..99, fn _ ->
+  news_params = %{
+    image_url: "images/2.jpg",
+    title: Faker.Lorem.Shakespeare.king_richard_iii(),
+    content: Faker.Lorem.paragraph(),
+    short_content: Faker.Lorem.sentence(),
+    date: "2018-05-22 11:56:16"
+  }
 
-unless Repo.get_by(News, image_url: news_params[:image_url]) do
   %News{}
   |> News.changeset(news_params)
   |> Repo.insert!()
-end
 end)
 
 ############## Static Pages #############
@@ -301,7 +295,7 @@ unless Repo.get_by(StaticPages, content: static_params[:content]) do
 end
 
 ############## Signals Categories #############
-signal_categori_params = %{name: "Бездомно куче",prefix: "homeless"}
+signal_categori_params = %{name: "Бездомно куче", prefix: "homeless"}
 
 unless Repo.get_by(SignalsCategories, name: signal_categori_params[:name]) do
   %SignalsCategories{}
@@ -310,7 +304,7 @@ unless Repo.get_by(SignalsCategories, name: signal_categori_params[:name]) do
 end
 
 ############## Signals Categories #############
-signal_categori_params = %{name: "Избягало куче",prefix: "escaped"}
+signal_categori_params = %{name: "Избягало куче", prefix: "escaped"}
 
 unless Repo.get_by(SignalsCategories, name: signal_categori_params[:name]) do
   %SignalsCategories{}
@@ -319,7 +313,7 @@ unless Repo.get_by(SignalsCategories, name: signal_categori_params[:name]) do
 end
 
 ############## Signals Categories #############
-signal_categori_params = %{name: "Малтретиране на куче",prefix: "mistreatment"}
+signal_categori_params = %{name: "Малтретиране на куче", prefix: "mistreatment"}
 
 unless Repo.get_by(SignalsCategories, name: signal_categori_params[:name]) do
   %SignalsCategories{}
@@ -328,7 +322,7 @@ unless Repo.get_by(SignalsCategories, name: signal_categori_params[:name]) do
 end
 
 ############## Signals Types #############
-signal_type_params = %{name: "Нов",prefix: "new"}
+signal_type_params = %{name: "Нов", prefix: "new"}
 
 unless Repo.get_by(SignalsTypes, name: signal_type_params[:name]) do
   %SignalsTypes{}
@@ -338,7 +332,7 @@ end
 
 ############## Signals Types #############
 
-signal_type_params = %{name: "Приет",prefix: "accepted"}
+signal_type_params = %{name: "Приет", prefix: "accepted"}
 
 unless Repo.get_by(SignalsTypes, name: signal_type_params[:name]) do
   %SignalsTypes{}
@@ -348,7 +342,7 @@ end
 
 ############## Signals Types #############
 
-signal_type_params = %{name: "Изпратен",prefix: "sent"}
+signal_type_params = %{name: "Изпратен", prefix: "sent"}
 
 unless Repo.get_by(SignalsTypes, name: signal_type_params[:name]) do
   %SignalsTypes{}
@@ -358,14 +352,15 @@ end
 
 ############## Signals Types #############
 
-signal_type_params = %{name: "Приключен",prefix: "closed"}
+signal_type_params = %{name: "Приключен", prefix: "closed"}
 
 unless Repo.get_by(SignalsTypes, name: signal_type_params[:name]) do
   %SignalsTypes{}
   |> SignalsTypes.changeset(signal_type_params)
   |> Repo.insert!()
 end
-Enum.each(0..99, fn(x) ->
+
+Enum.each(0..99, fn _ ->
   ############## Signals #############
   signals_params = %{
     address: Faker.Address.street_address(),
@@ -374,8 +369,8 @@ Enum.each(0..99, fn(x) ->
     support_count: 0,
     title: Faker.Lorem.sentence(),
     view_count: 0,
-    signals_categories_id: Faker.random_between(1,3),
-    signals_types_id: Faker.random_between(1,4),
+    signals_categories_id: Faker.random_between(1, 3),
+    signals_types_id: Faker.random_between(1, 4),
     users_id: 1
   }
 
@@ -384,42 +379,28 @@ Enum.each(0..99, fn(x) ->
   ############## Signals Images #############
   signal_image_params = %{signals_id: signal.id}
 
+  %SignalImages{}
+  |> SignalImages.changeset(signal_image_params)
+  |> Repo.insert!()
 
-    %SignalImages{}
-    |> SignalImages.changeset(signal_image_params)
-    |> Repo.insert!()
+  Enum.each(0..5, fn _ ->
+    ############## Signals Comments #############
+    signal_comment_params = %{
+      comment: Faker.Lorem.sentence(),
+      users_id: Faker.random_between(1, 4),
+      signals_id: signal.id
+    }
 
+    %SignalsComments{} |> SignalsComments.changeset(signal_comment_params) |> Repo.insert!()
+  end)
+end)
 
-        Enum.each(0..5, fn(x) ->
-          ############## Signals Comments #############
-          signal_comment_params = %{
-            comment: Faker.Lorem.sentence(),
-            users_id: Faker.random_between(1,4),
-            signals_id: signal.id
-          }
-
-          %SignalsComments{} |> SignalsComments.changeset(signal_comment_params) |> Repo.insert!()
-
-
-        end)
-                end)
-
-
-
-
-
-
-########### GET Data from databse ##########
-Repo.all(Animals)
-Repo.all(AnimalStatus)
-Repo.all(AnimalImages)
-Repo.all(PerformedProcedures)
-Repo.all(ProcedureType)
-
-Enum.each(0..15, fn(x) ->
-################## Adopt ####################
-adopt_params = %{users_id: Faker.random_between(1,4), animals_id:  Faker.random_between(1,animals_count)}
-
+Enum.each(0..15, fn _ ->
+  ################## Adopt ####################
+  adopt_params = %{
+    users_id: Faker.random_between(1, 4),
+    animals_id: Faker.random_between(1, animals_count)
+  }
 
   %Adopt{}
   |> Adopt.changeset(adopt_params)

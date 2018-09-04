@@ -19,45 +19,46 @@ defmodule SmartcitydogsWeb.SignalControllerAPI do
   end
 
   def create(conn, %{"signal" => signal_params}) do
-  #  a = conn.assigns.current_user.id
-  user_id = conn.private.plug_session["current_user_id"]
-   signal_params =
-        signal_params
-        |> Map.put("signals_types_id", 1)
-        |> Map.put("view_count", 0)
-        |> Map.put("support_count", 0)
-        |> Map.put("users_id", user_id)
+    #  a = conn.assigns.current_user.id
+    user_id = conn.private.plug_session["current_user_id"]
 
-      case DataSignals.create_signal(signal_params) do
-        {:ok, signal} ->
-          upload = Map.get(conn, :params)
+    signal_params =
+      signal_params
+      |> Map.put("signals_types_id", 1)
+      |> Map.put("view_count", 0)
+      |> Map.put("support_count", 0)
+      |> Map.put("users_id", user_id)
 
-          upload = Map.get(upload, "url")
+    case DataSignals.create_signal(signal_params) do
+      {:ok, signal} ->
+        upload = Map.get(conn, :params)
 
-          for n <- upload do
-            extension = Path.extname(n.filename)
+        upload = Map.get(upload, "url")
 
-            File.cp(
-              n.path,
-              "../smartcitydogs/assets/static/images/#{Map.get(n, :filename)}-profile#{extension}"
-            )
+        for n <- upload do
+          extension = Path.extname(n.filename)
 
-            args = %{
-              "url" => "images/#{Map.get(n, :filename)}-profile#{extension}",
-              "signals_id" => "#{signal.id}"
-            }
+          File.cp(
+            n.path,
+            "../smartcitydogs/assets/static/images/#{Map.get(n, :filename)}-profile#{extension}"
+          )
 
-            DataSignals.create_signal_images(args)
-          end
+          args = %{
+            "url" => "images/#{Map.get(n, :filename)}-profile#{extension}",
+            "signals_id" => "#{signal.id}"
+          }
 
-          render("show.json", signal: signal)
-          # redirect(conn, to: signal_path(conn, :show, signal))
+          DataSignals.create_signal_images(args)
+        end
 
-        {:error, %Ecto.Changeset{} = changeset} ->
-          render(conn, "new_signal.html", changeset: changeset)
-      end
-   
-   
+        render("show.json", signal: signal)
+
+      # redirect(conn, to: signal_path(conn, :show, signal))
+
+      {:error, %Ecto.Changeset{} = changeset} ->
+        render(conn, "new_signal.html", changeset: changeset)
+    end
+
     # with {:ok, %Signals{} = signal} <- DataSignals.create_signal(signal_params) do
     #   conn
     #   |> put_status(:created)
@@ -72,6 +73,7 @@ defmodule SmartcitydogsWeb.SignalControllerAPI do
     signal = DataSignals.get_signal(id)
     ## signal is liked by user
     sorted_comments = DataSignals.sort_signal_comment_by_id()
+
     render(
       conn,
       "show.json",
@@ -100,7 +102,6 @@ defmodule SmartcitydogsWeb.SignalControllerAPI do
       send_resp(conn, :no_content, "")
     end
   end
-
 
   # def follow(conn, %{"id" => id}) do
   #   id = String.to_integer(id)
@@ -140,36 +141,40 @@ defmodule SmartcitydogsWeb.SignalControllerAPI do
 
     conn
     |> json(%{new_count: DataUsers.get_likes(signal.id)})
-
   end
 
   def unlike(conn, map) do
     show_id = String.to_integer(map["id"])
     signal = DataSignals.get_signal(show_id)
-    
+
     user_id = conn.private.plug_session["current_user_id"]
     DataUsers.remove_like(user_id, signal.id)
+
     conn
     |> json(%{new_count: DataUsers.get_likes(signal.id)})
   end
 
-  def comment(conn,map) do
+  def comment(conn, map) do
     show_comment = map["show-comment"]
     show_id = String.to_integer(map["show-id"])
     user_id = conn.private.plug_session["current_user_id"]
+
     Smartcitydogs.DataSignals.create_signal_comment(%{
       comment: show_comment,
       signals_id: show_id,
       users_id: user_id
     })
 
-      comments = Smartcitydogs.DataSignals.get_comment_signal_id(show_id)
-      signal = Smartcitydogs.DataSignals.get_signal(show_id)
-      sorted_comments = Smartcitydogs.DataSignals.sort_signal_comment_by_id()
-      
-      
-      redirect(conn, to: signal_path(conn, :show, signal, %{"comments" => comments, "sorted_comments" => sorted_comments}))
+    comments = Smartcitydogs.DataSignals.get_comment_signal_id(show_id)
+    signal = Smartcitydogs.DataSignals.get_signal(show_id)
+    sorted_comments = Smartcitydogs.DataSignals.sort_signal_comment_by_id()
 
+    redirect(conn,
+      to:
+        signal_path(conn, :show, signal, %{
+          "comments" => comments,
+          "sorted_comments" => sorted_comments
+        })
+    )
   end
-
 end

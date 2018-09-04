@@ -7,6 +7,7 @@ defmodule Smartcitydogs.UsersType do
   schema "users_types" do
     field(:deleted_at, :naive_datetime)
     field(:name, :string)
+    field(:prefix, :string)
     has_many(:users, Smartcitydogs.User)
 
     timestamps()
@@ -15,7 +16,7 @@ defmodule Smartcitydogs.UsersType do
   @doc false
   def changeset(users_type, attrs) do
     users_type
-    |> cast(attrs, [:name, :deleted_at])
+    |> cast(attrs, [:name, :prefix, :deleted_at])
     |> validate_required([:name])
   end
 end

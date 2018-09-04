@@ -32,7 +32,7 @@ defmodule SmartcitydogsWeb.UserControllerAPIView do
           id: user.id,
           email: user.email,
           username: user.username,
-          first_name: user.first_name,
+          first_name: user.first_name
         }
       }
     }
@@ -44,8 +44,8 @@ defmodule SmartcitydogsWeb.UserControllerAPIView do
 
   def render("municipality_sign_in.json", %{user: user}) do
     %{
-      users_types_id: user.users_types_id,
-     }
+      users_types_id: user.users_types_id
+    }
   end
 
   def render("logout.json", _) do

@@ -14,8 +14,9 @@ defmodule SmartcitydogsWeb.PageView do
         List.first(signal.signal_images).url == nil &&  signal.signals_categories_id == 1 -> "images/stray.jpg"
         List.first(signal.signal_images).url == nil &&  signal.signals_categories_id == 2 -> "images/escaped.jpg"
         List.first(signal.signal_images).url == nil &&  signal.signals_categories_id == 3 ->  "images/mistreated.jpg"
+        true -> List.first(signal.signal_images).url 
       end
-      List.first(signal.signal_images).url 
+      
     end
   end
 
@@ -23,5 +24,11 @@ defmodule SmartcitydogsWeb.PageView do
     Plug.Conn.get_session(conn, :csrf_token)
   end
 
-
+  def get_first_image(animal) do
+    if List.first(animal.animals_image) == nil do
+      "images/2.jpg"
+    else
+      List.first(animal.animals_image).url
+    end
+  end
 end

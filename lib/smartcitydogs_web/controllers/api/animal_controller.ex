@@ -7,18 +7,16 @@ defmodule SmartcitydogsWeb.AnimalControllerAPI do
 
   action_fallback(SmartCityDogsWeb.FallbackController)
 
-  def send_email(conn,data) do
+  def send_email(conn, data) do
     int = String.to_integer(data["animal_id"])
     Smartcitydogs.Animals.send_email(data)
-    redirect conn, to: "/registered/#{int}"
+    redirect(conn, to: "/registered/#{int}")
   end
 
   def index(conn, params) do
     cond do
       params == %{} || params["chip_number"] == "" ->
-
-        list_animals =
-          DataAnimals.list_animals
+        list_animals = DataAnimals.list_animals()
 
         render(
           conn,
@@ -26,6 +24,7 @@ defmodule SmartcitydogsWeb.AnimalControllerAPI do
           animals: list_animals,
           chip_number: params["chip_number"]
         )
+
       params != %{} ->
         animals = DataAnimals.get_animal_by_chip(params["chip_number"])
 
@@ -35,12 +34,15 @@ defmodule SmartcitydogsWeb.AnimalControllerAPI do
           animals: animals,
           chip_number: params["chip_number"]
         )
+
       params["chip_number"] != nil ->
         chip = params["chip_number"]
-        animals = DataAnimals.get_animal_by_chip(chip) 
-          |> Repo.preload(:animals_status) 
+
+        animals =
+          DataAnimals.get_animal_by_chip(chip)
+          |> Repo.preload(:animals_status)
           |> Repo.preload(:animals_image)
-        
+
         render(
           conn,
           "index.json",
@@ -50,39 +52,33 @@ defmodule SmartcitydogsWeb.AnimalControllerAPI do
     end
   end
 
-
-
-
-
   def create(conn, %{"animal" => animal_params}) do
-   
     map_procedures = %{
       "Кастрирано" => animal_params["Кастрирано"],
       "Обезпаразитено" => animal_params["Обезпаразитено"],
       "Ваксинирано" => animal_params["Ваксинирано"]
     }
 
-    list_procedures = Enum.map(map_procedures, fn(x) -> 
-      case x do 
-        {_, "true"} -> DataAnimals.get_procedure_id_by_name(x)
-        _ -> nil
-      end 
-    
-    end)
-    
-      case DataAnimals.create_animal(animal_params) do
-        {:ok, animal} ->
-          # SmartcitydogsWeb.AnimalController.upload_file(animal.id, conn)
+    list_procedures =
+      Enum.map(map_procedures, fn x ->
+        case x do
+          {_, "true"} -> DataAnimals.get_procedure_id_by_name(x)
+          _ -> nil
+        end
+      end)
 
-          DataAnimals.insert_performed_procedure(list_procedures, animal.id)
+    case DataAnimals.create_animal(animal_params) do
+      {:ok, animal} ->
+        # SmartcitydogsWeb.AnimalController.upload_file(animal.id, conn)
 
-          render(conn, "show.json", animal: animal)
+        DataAnimals.insert_performed_procedure(list_procedures, animal.id)
 
-        {:error, changeset} ->
-          render(conn, "show.json", changeset: changeset)
+        render(conn, "show.json", animal: animal)
+
+      {:error, changeset} ->
+        render(conn, "show.json", changeset: changeset)
     end
   end
-  
 
   def show(conn, %{"id" => id}) do
     animal = DataAnimals.get_animal(id)

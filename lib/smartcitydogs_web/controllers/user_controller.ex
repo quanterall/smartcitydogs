@@ -30,7 +30,6 @@ defmodule SmartcitydogsWeb.UserController do
 
   def create(conn, user_params) do
     if user_params["checked"] != "true" do
-    
       changeset = %User{} |> User.registration_changeset(user_params)
 
       conn
@@ -38,8 +37,10 @@ defmodule SmartcitydogsWeb.UserController do
 
       render(conn, "new.html", changeset: changeset)
     else
-      user_params = user_params
+      user_params =
+        user_params
         |> Map.put("users_types_id", 2)
+
       changeset = %User{} |> User.registration_changeset(user_params)
 
       case Repo.insert(changeset) do
@@ -55,10 +56,9 @@ defmodule SmartcitydogsWeb.UserController do
     end
   end
 
+  def show(conn, %{"followed_signals" => _, "id" => _, "page" => page_num}) do
+    user = Repo.get!(User, conn.assigns.current_user.id) |> Repo.preload(:users_types)
 
-  def show(conn,  %{"followed_signals" => _, "id" => _, "page" => page_num}) do
-    
-    user = Repo.get!(User, conn.assigns.current_user.id) |> Repo.preload(:users_types)  
     with :ok <-
            Bodyguard.permit(
              Smartcitydogs.Users.Policy,
@@ -109,7 +109,6 @@ defmodule SmartcitydogsWeb.UserController do
     end
   end
 
-
   def show(conn, params) do
     id = params["id"]
     user = Repo.get!(User, id) |> Repo.preload(:users_types)
@@ -144,13 +143,11 @@ defmodule SmartcitydogsWeb.UserController do
           page_my_signals = Repo.paginate(signals, page: params["page"], page_size: 8)
           render(conn, "show_my_signals.html", user: user, conn: conn, page: page_my_signals, profile_liked_params: profile_liked_params )
         end
-
       end
     else
       {:error, _} -> render(conn, SmartcitydogsWeb.ErrorView, "401.html")
     end
   end
-
 
   def edit(conn, %{"id" => id}) do
     user = DataUsers.get_user!(id)

@@ -30,8 +30,6 @@ defmodule SmartcitydogsWeb.SignalsCommentControllerAPI do
   end
 
   def update(conn, %{"id" => id, "signals_comment" => signals_comment_params}) do
-   
-
     signals_comment = DataSignals.get_signal_comment(id)
 
     with {:ok, %SignalsComments{} = signals_comment} <-
@@ -45,6 +43,4 @@ defmodule SmartcitydogsWeb.SignalsCommentControllerAPI do
       send_resp(conn, :no_content, "")
     end
   end
-
- 
 end

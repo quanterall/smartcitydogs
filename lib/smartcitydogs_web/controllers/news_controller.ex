@@ -5,41 +5,41 @@ defmodule SmartcitydogsWeb.NewsController do
   alias Smartcitydogs.News
   alias Smartcitydogs.DataPages
   alias Smartcitydogs.Repo
-  #alias Smartcitydogs.Markdown
+  # alias Smartcitydogs.Markdown
 
   def index(conn, %{"page" => page_number}) do
     news = DataPages.list_news()
-    news2 = Enum.slice(news, -3..-2) ##second and third to last created news
-    last_news = Repo.one(from n in News, order_by: [desc: n.id], limit: 1)
+    ## second and third to last created news
+    news2 = Enum.slice(news, -3..-2)
+    last_news = Repo.one(from(n in News, order_by: [desc: n.id], limit: 1))
     news = Enum.drop(news, -3)
     page = Smartcitydogs.Repo.paginate(news, page: String.to_integer(page_number), page_size: 8)
     render(conn, "index.html", news: page.entries, last_news: last_news, news2: news2, page: page)
   end
-  
+
   def index(conn, %{}) do
     news = DataPages.list_news()
-    news2 = 
+
+    news2 =
       cond do
-        length(news) == 2 -> 
+        length(news) == 2 ->
           Enum.slice(news, -2..-2) ++ []
-        
-        length(news) == 1 -> 
+
+        length(news) == 1 ->
           []
 
         length(news) == 0 ->
           []
 
-        true -> 
+        true ->
           Enum.slice(news, -3..-2)
-
       end
-    last_news = Repo.one(from n in News, order_by: [desc: n.id], limit: 1)
+
+    last_news = Repo.one(from(n in News, order_by: [desc: n.id], limit: 1))
     news = Enum.drop(news, -3)
     page = Smartcitydogs.Repo.paginate(news, page: 1, page_size: 8)
     render(conn, "index.html", news: page.entries, last_news: last_news, news2: news2, page: page)
   end
-
-
 
   def new(conn, _params) do
     changeset = News.changeset(%News{})
@@ -47,37 +47,39 @@ defmodule SmartcitydogsWeb.NewsController do
   end
 
   def create(conn, %{"news" => news_params}) do
-     image_name = String.split(news_params["image_url"], "\\") |> List.last 
-     extension = Path.extname(image_name)
-    upload = 
-    %Plug.Upload{
+    image_name = String.split(news_params["image_url"], "\\") |> List.last()
+    extension = Path.extname(image_name)
+
+    upload = %Plug.Upload{
       content_type: "image/jpeg",
       filename: image_name,
       path: "./smartcitydogs/assets/static/images/#{image_name}-profile#{extension}"
     }
+
     news_params = Map.put(news_params, "date", DateTime.utc_now())
+
     news_params =
       Map.put(
         news_params,
         "image_url",
         "images/#{Map.get(upload, :filename)}-profile#{extension}"
       )
-        if news_params["image_url"] == "images/-profile" do
-          Map.put(news_params, "image_url", "")
-        end
-      case DataPages.create_news(news_params) do
-        {:ok, _} ->
-          conn
-          |> put_flash(:info, " News is created!")
-          |> redirect(to: news_path(conn, :index))
 
-        {:error, _} ->
-          conn
-            |> put_status(:not_acceptable)
-            |> send_resp(:not_acceptable, "")
-            
-      end
+    if news_params["image_url"] == "images/-profile" do
+      Map.put(news_params, "image_url", "")
+    end
 
+    case DataPages.create_news(news_params) do
+      {:ok, _} ->
+        conn
+        |> put_flash(:info, " News is created!")
+        |> redirect(to: news_path(conn, :index))
+
+      {:error, _} ->
+        conn
+        |> put_status(:not_acceptable)
+        |> send_resp(:not_acceptable, "")
+    end
   end
 
   def show(conn, %{"id" => id}) do
@@ -106,7 +108,4 @@ defmodule SmartcitydogsWeb.NewsController do
         render(conn, "edit.html", news: news, changeset: changeset)
     end
   end
-
-
-
 end

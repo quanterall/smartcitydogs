@@ -38,7 +38,7 @@
             <br/>
             <div class="under-form">
 
-                <%= checkbox f, :checked, class: "form-control1", required: true %> Съгласен съм с условията. </p>
+                <%= checkbox f, :checked, class: "form-control1", required: true %> Съгласен съм с условията. 
 
                 <br/>
 

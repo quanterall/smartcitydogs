@@ -18,12 +18,10 @@ defmodule Smartcitydogs.Email do
     |> to("smartcitydogs@gmail.com")
     |> from(user.email)
     |> subject(contact_params.topic)
-    |> text_body(
-      "Запитване:
+    |> text_body("Запитване:
        #{text} \n\n\n\n 
        Изпратено от: #{user.first_name} #{user.last_name}, 
-       телефонен номер: #{user.phone}"
-    )
+       телефонен номер: #{user.phone}")
   end
 
   def send_email(data) do
@@ -31,8 +29,7 @@ defmodule Smartcitydogs.Email do
     |> to("smartcitydogs@gmail.com")
     |> from(data["user_email"])
     |> subject("Заявка за осиновяване.")
-    |> text_body(
-      "
+    |> text_body("
       Желая да осиновя куче с номер на чипа: #{data["chip_number"]} .
 
       Данни:
@@ -41,10 +38,8 @@ defmodule Smartcitydogs.Email do
       Фамилия: #{data["user_last_name"]},
       Имейл: #{data["user_email"]},
       Телефонен номер: #{data["user_phone"]}
-      "
-    )
+      ")
     |> Smartcitydogs.Mailer.deliver_now()
-    
   end
 
   def send_unauth_contact_email(topic, text, user_data) do
@@ -52,13 +47,9 @@ defmodule Smartcitydogs.Email do
     |> to(System.get_env("SMTP_USERNAME"))
     |> from(System.get_env("SMTP_USERNAME"))
     |> subject(topic)
-    |> text_body(
-      "Запитване:
+    |> text_body("Запитване:
        #{text}  \n\n\n\n 
        Изпратено от: #{user_data["first_name"]} #{user_data["last_name"]},
-       телефонен номер: #{
-        user_data["phone"]
-      }"
-    )
+       телефонен номер: #{user_data["phone"]}")
   end
 end

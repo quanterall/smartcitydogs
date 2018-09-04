@@ -43,7 +43,13 @@
               <br />
               </label-date>
 
-              <label-title><b><%=signal.title%></b></label-title>
+              <label-title><b><%=
+
+              signal.signals_categories_id
+              |> Smartcitydogs.DataSignals.get_signal_category()
+              |> Map.get(:name)
+              
+              %></b></label-title>
               <br />
 
 
