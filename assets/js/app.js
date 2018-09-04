@@ -27,6 +27,12 @@ function myOnLoadCallback() {
     alert("Captcha is OK");
   }
 
+$('.change-status').click(function(){
+    $(".modal").css("display","block");
+})
+$('.close').click(function(){
+    $(".modal").css("display","none");
+})
 
 $('#submit-adoption').click(function(){
     

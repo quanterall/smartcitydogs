@@ -72,10 +72,10 @@ a.close-modal{
 }
 .col-container:hover{
 
-  transition: 0.5s;
+  /* transition: 0.5s;
   -webkit-box-shadow: 1px 5px 46px 1px rgba(0,0,0,0.5);
   -moz-box-shadow: 1px 5px 46px 1px rgba(0,0,0,0.5);
-  box-shadow: 1px 5px 46px 1px rgba(0,0,0,0.5);
+  box-shadow: 1px 5px 46px 1px rgba(0,0,0,0.5); */
 }
 .col-container-shadow{
   transition: 0.5s;
@@ -163,7 +163,36 @@ input#signals_url1{
     padding: 6px 12px;
     cursor: pointer;
 }
+.container-signals .button-show-hide .change-status{
+  margin-bottom: 20%;
+  opacity: 1;
+  color: rgb(0,201,148);
+}
+.container-signals .button-show-hide .p-button-view .btn-secondary{
+  opacity: 1;
+  color: rgb(0,201,148);
+}
+.container-signals .button-show-hide .change-status:focus{
+  box-shadow: none !important;
+  background: transparent !important;
+  border: transparent !important;
+}
+.container-signals .button-show-hide .p-button-view{
+  margin: 0px;
+}
+.container-signals .button-show-hide .p-button-view .btn-secondary{
+  margin: 0px;
+}
+.container-signals .button-show-hide .p-button-view .btn-secondary{
+  box-shadow: none !important;
+  background: transparent !important;
+  border: transparent !important;
+}
+.container-signals .map-show-buttons .p-button-view{
+  margin: 0px;
+}
 .map-show-buttons .p-button-view{
+  /* margin: 0px; */
   height: 5vh;
   display: flex;
   align-items: center;
@@ -986,4 +1015,8 @@ label-signals-categories{
 .form-register .under-form{
   margin-top: 5vh;
   margin-left: 0px;
+}
+.change-status{
+  opacity: 1;
+  cursor: pointer;
 }

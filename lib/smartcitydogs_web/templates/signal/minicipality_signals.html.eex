@@ -134,7 +134,7 @@
                         <center>
 
                         <div class="button-show-hide">
-                          <p class="p-button-change"><a class="btn btn-secondary change-status" id="<%= signal.id %>" role="button">Промени статус</a></p>
+                          <a class="btn btn-secondary change-status" href="#" id="<%= signal.id %>" role="button">Промени статус</a>
                         </div></center>
 
 
