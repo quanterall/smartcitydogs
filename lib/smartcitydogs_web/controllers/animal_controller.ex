@@ -24,7 +24,9 @@ defmodule SmartcitydogsWeb.AnimalController do
 
       [page, data_status] = Animals.get_ticked_checkboxes(data_status)
 
-      render(conn, "minicipality_registered.html",
+      render(
+        conn,
+        "minicipality_registered.html",
         animals: page.entries,
         page: page,
         data: data_status
@@ -75,14 +77,21 @@ defmodule SmartcitydogsWeb.AnimalController do
         all_query = []
 
         query_animals =
-          Enum.map(data_status, fn x ->
-            struct = from(p in Animals, where: p.animals_status_id == ^String.to_integer(x))
-            (all_query ++ Repo.all(struct)) |> Repo.preload(:animals_status)
-          end)
+          Enum.map(
+            data_status,
+            fn x ->
+              struct = from(p in Animals, where: p.animals_status_id == ^String.to_integer(x))
+
+              (all_query ++ Repo.all(struct))
+              |> Repo.preload(:animals_status)
+            end
+          )
 
         page = Smartcitydogs.Repo.paginate(List.flatten(query_animals), page: 1, page_size: 9)
 
-        render(conn, "minicipality_registered.html",
+        render(
+          conn,
+          "minicipality_registered.html",
           animals: page.entries,
           page: page,
           data: data_status
@@ -92,7 +101,9 @@ defmodule SmartcitydogsWeb.AnimalController do
         all_animals = DataAnimals.list_animals()
         page = Smartcitydogs.Repo.paginate(all_animals, page: 1, page_size: 9)
 
-        render(conn, "minicipality_registered.html",
+        render(
+          conn,
+          "minicipality_registered.html",
           animals: page.entries,
           page: page,
           data: data_status
@@ -104,70 +115,26 @@ defmodule SmartcitydogsWeb.AnimalController do
 
   ## Render for regular users
   def index(conn, params) do
-    sorted_animals = DataAnimals.sort_animals_by_id()
-
-    if conn.assigns.current_user != nil do
-      with :ok <-
-             Bodyguard.permit(Smartcitydogs.Animals.Policy, :index, conn.assigns.current_user) do
-        index_rendering(conn, params, sorted_animals)
+    chip =
+      if params["chip_number"] do
+        dynamic([p], ilike(p.chip_number, ^params["chip_number"]))
       else
-        {:error, _} -> render(conn, SmartcitydogsWeb.ErrorView, "401.html")
+        true
       end
-    else
-      index_rendering(conn, params, sorted_animals)
-    end
-  end
 
-  ## Handle search by chip number filter.
-  defp index_rendering(conn, params, sorted_animals) do
-    cond do
-      params == %{} || (params["page"] == nil && params["chip_number"] == "") ->
-        page = Smartcitydogs.Repo.paginate(sorted_animals, page: 1, page_size: 8)
+    page =
+      Animals
+      |> preload(:animals_status)
+      |> where(^chip)
+      |> order_by(desc: :inserted_at)
+      |> Repo.paginate(params)
 
-        list_animals =
-          Map.get(page, :entries)
-          |> Repo.preload(:animals_status)
-          |> Repo.preload(:animals_image)
-
-        render(
-          conn,
-          "index.html",
-          animals: list_animals,
-          page: page,
-          chip_number: params["chip_number"]
-        )
-
-      params != %{} && params["page"] != nil ->
-        num = String.to_integer(params["page"])
-        animals = DataAnimals.get_animal_by_chip(params["chip_number"])
-        page = Smartcitydogs.Repo.paginate(animals, page: num, page_size: 8)
-
-        render(
-          conn,
-          "index.html",
-          animals: page.entries,
-          page: page,
-          chip_number: params["chip_number"]
-        )
-
-      params["chip_number"] != nil ->
-        chip = params["chip_number"]
-
-        animals =
-          DataAnimals.get_animal_by_chip(chip)
-          |> Repo.preload(:animals_status)
-          |> Repo.preload(:animals_image)
-
-        page = Smartcitydogs.Repo.paginate(animals, page_size: 8)
-
-        render(
-          conn,
-          "index.html",
-          animals: page.entries,
-          page: page,
-          chip_number: params["chip_number"]
-        )
-    end
+    render(
+      conn,
+      "index.html",
+      animals: page.entries,
+      page: page
+    )
   end
 
   def new(conn, _params) do
@@ -189,12 +156,15 @@ defmodule SmartcitydogsWeb.AnimalController do
     }
 
     list_procedures =
-      Enum.map(map_procedures, fn x ->
-        case x do
-          {_, "true"} -> DataAnimals.get_procedure_id_by_name(x)
-          _ -> nil
+      Enum.map(
+        map_procedures,
+        fn x ->
+          case x do
+            {_, "true"} -> DataAnimals.get_procedure_id_by_name(x)
+            _ -> nil
+          end
         end
-      end)
+      )
 
     with :ok <- Bodyguard.permit(Smartcitydogs.Animals.Policy, :create, conn.assigns.current_user) do
       case DataAnimals.create_animal(animal_params) do
@@ -216,7 +186,6 @@ defmodule SmartcitydogsWeb.AnimalController do
   ## Upload file when creating
   def upload_file(id, conn) do
     upload = Map.get(conn, :params)
-
 
     upload = Map.get(upload, "files")
 
@@ -254,7 +223,7 @@ defmodule SmartcitydogsWeb.AnimalController do
 
       true ->
         id = String.to_integer(map["id"])
-        animal = DataAnimals.get_animal(id) 
+        animal = DataAnimals.get_animal(id)
         render(conn, "show.html", animals: animal)
     end
   end

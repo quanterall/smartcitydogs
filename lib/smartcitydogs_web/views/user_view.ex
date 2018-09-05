@@ -2,8 +2,10 @@ defmodule SmartcitydogsWeb.UserView do
   use SmartcitydogsWeb, :view
 
   def get_signals_images(signals_id) do
+    signal =
+      Smartcitydogs.DataSignals.get_signal(signals_id)
+      |> Smartcitydogs.Repo.preload(:signal_images)
 
-    signal = Smartcitydogs.DataSignals.get_signal(signals_id) |> Smartcitydogs.Repo.preload(:signal_images)
     if signal.signal_images == [] do
       cond do
         signal.signals_categories_id == 1 -> "images/stray.jpg"
@@ -12,16 +14,25 @@ defmodule SmartcitydogsWeb.UserView do
       end
     else
       cond do
-        List.first(signal.signal_images).url == nil &&  signal.signals_categories_id == 1 -> "images/stray.jpg"
-        List.first(signal.signal_images).url == nil &&  signal.signals_categories_id == 2 -> "images/escaped.jpg"
-        List.first(signal.signal_images).url == nil &&  signal.signals_categories_id == 3 ->  "images/mistreated.jpg"
+        List.first(signal.signal_images).url == nil && signal.signals_categories_id == 1 ->
+          "images/stray.jpg"
+
+        List.first(signal.signal_images).url == nil && signal.signals_categories_id == 2 ->
+          "images/escaped.jpg"
+
+        List.first(signal.signal_images).url == nil && signal.signals_categories_id == 3 ->
+          "images/mistreated.jpg"
       end
-      List.first(signal.signal_images).url 
+
+      List.first(signal.signal_images).url
     end
   end
 
   def get_followed_signals_images(signals_id) do
-    signal = Smartcitydogs.DataSignals.get_signal(signals_id) |> Smartcitydogs.Repo.preload(:signal_images)
+    signal =
+      Smartcitydogs.DataSignals.get_signal(signals_id)
+      |> Smartcitydogs.Repo.preload(:signal_images)
+
     if signal.signal_images == [] do
       cond do
         signal.signals_categories_id == 1 -> "images/stray.jpg"
@@ -30,13 +41,18 @@ defmodule SmartcitydogsWeb.UserView do
       end
     else
       cond do
-        List.first(signal.signal_images).url == nil &&  signal.signals_categories_id == 1 -> "images/stray.jpg"
-        List.first(signal.signal_images).url == nil &&  signal.signals_categories_id == 2 -> "images/escaped.jpg"
-        List.first(signal.signal_images).url == nil &&  signal.signals_categories_id == 3 ->  "images/mistreated.jpg"
-        true -> List.first(signal.signal_images).url 
+        List.first(signal.signal_images).url == nil && signal.signals_categories_id == 1 ->
+          "images/stray.jpg"
+
+        List.first(signal.signal_images).url == nil && signal.signals_categories_id == 2 ->
+          "images/escaped.jpg"
+
+        List.first(signal.signal_images).url == nil && signal.signals_categories_id == 3 ->
+          "images/mistreated.jpg"
+
+        true ->
+          List.first(signal.signal_images).url
       end
     end
   end
-
-
 end

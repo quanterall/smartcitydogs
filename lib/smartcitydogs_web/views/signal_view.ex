@@ -1,27 +1,30 @@
 defmodule SmartcitydogsWeb.SignalView do
   use SmartcitydogsWeb, :view
+  import Scrivener.HTML
 
   def get_signals_images(signals_id) do
-    signal = Smartcitydogs.DataSignals.get_signal(signals_id) |> Smartcitydogs.Repo.preload(:signal_images)
+    signal =
+      Smartcitydogs.DataSignals.get_signal(signals_id)
+      |> Smartcitydogs.Repo.preload(:signal_images)
+
     cond do
-      signal.signal_images == [] -> 
+      signal.signal_images == [] ->
         cond do
           signal.signals_categories_id == 1 -> "images/stray.jpg"
           signal.signals_categories_id == 2 -> "images/escaped.jpg"
           signal.signals_categories_id == 3 -> "images/mistreated.jpg"
         end
+
       List.first(signal.signal_images).url == nil ->
         cond do
           signal.signals_categories_id == 1 -> "images/stray.jpg"
           signal.signals_categories_id == 2 -> "images/escaped.jpg"
           signal.signals_categories_id == 3 -> "images/mistreated.jpg"
         end
+
       true ->
-        List.first(signal.signal_images).url 
-      end
-
-    
-
+        List.first(signal.signal_images).url
+    end
   end
 
   def get_all_signals(user_id) do

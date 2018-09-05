@@ -1,177 +1,11 @@
-
-
-<div class="news-page-index">
-<div class="first-new-page">
-<div class="latest-bg" style="background-image: url('/<%= @last_news.image_url %>')">
-
-  <div class="empty-to-center" >
-  </div>
-
-  <div class=latest-news-data>
-
-    <p class="card-title" >
-     <%=NaiveDateTime.to_date( @last_news.date) %>
-    </p>
-
-  <br>
-  <br>
-
-    <div class="latest-text">
-     <b><%=@last_news.title %></b>
+<div class="row mt-5 mb-3">
+    <div class="col">
+        <h3 class="text-green">Новини</h3>
     </div>
-
-    <div class="latest-text2">
-     <%=@last_news.short_content %>
-    </div>
-  
-  <br>
-  
-    <b> <%= link "Виж още", to: news_path(@conn, :show, @last_news), class: "button-news" %> 
-    </b>
-
- </div>
 </div>
-</div>
-
-<style>
-.latest-bg {
-  margin-top: 5%;
-  top: 0px;
-  width: 98.5%;
-  background-size: cover;
-  background-position-x: center;
-  height: 620px;
-}
-.card{
-  height: 100% !important;
-}
-.col-lg-3 img.card-img-top{
-  height: 40%;
-}
-
-.second-bg {
-  width: 100%;
-  background-size: cover;
-  height: 500px;
-  
-}
-
-.third-bg {
-  width: 55%;
-  background-size: cover;
-  border-left: solid 15px white;
-  height: 500px;
-}
-
-
-
-.empty-to-center2{
-    height:190px;
-}
-
-.latest-news-data{
-   padding-left: 50px;
-}
-
-.nonlatest-news-data{
-   padding-left: 10px;
-}
-
-.row{
-  margin-left: 0;
-  margin-right: 0;
-}
-
-.row -d{
-  margin-left: 0;
-  margin-right: 0;
-}
-
-
-.content-container{
-  margin-top: 0px;
-}
-
-h5, .h5 {
-  font-size: 16px;
-   font-weight: bold;
-}
-
-.col-lg-6{
-  padding-left: 0px;
-}
-.col-lg-3{
-  padding-left: 0px;
-}
-
-
-</style>
- <br>
- <br>
- <%= if @news2 == [] do %>
- <% else %>
-<div class="second-news-div">
- <div class="row">
-   <%= for news <- @news2 do %>
-   <div class="col-lg-6">
-      <div class="second-bg" style="background-image: url('/<%= news.image_url %>')">
-
-        <div class="empty-to-center" >
-        </div>
-
-  <div class=latest-news-data>
-
-    <div class="latest-date">
-     <%=NaiveDateTime.to_date(news.date) %>
-    </div>
-
-  <br>
-  <br>
-
-    <div class="latest-text">
-     <b><%=news.title %></b>
-    </div>
-
-    <div class="latest-text2">
-     <%=
-     
-     
-      text = news.short_content
-      len = String.length(news.short_content)
-      if len > 20 do
-          text_sliced = String.slice(text,0..20)
-          if String.last(text_sliced) == " " do 
-            String.trim_trailing(text_sliced," ")
-            |> Kernel.<> "..."
-          else
-            text_sliced <> "..."
-          end
-          
-      else
-          text
-      end
-     
-      %>
-    </div>
-  
-  <br>
-      <div class="div-for-button-news">
-    <b> <%= link "Виж още", to: news_path(@conn, :show, news.id), class: "button-news" %>
-    </b>
-    </div>
-
- </div>
-
-</div>
-   </div>
-   <% end %>
- </div>
- </div>
-
-<div class= "nnn">
 <div class="row">
     <%= for news <- @news do %>
-    <div class="col-lg-3">
+    <div class="col-lg-3 mb-2 mt-2">
         <div class="card">
             <img class="card-img-top"
                  src="<%= news.image_url%>"
@@ -179,61 +13,25 @@ h5, .h5 {
             <div class="card-body">
                 <p class="text-dark">
                     <small>
-                        <%=NaiveDateTime.to_date( news.date) %>
+                        <%= Timex.format!(news.date, "%d.%m.%y",:strftime)%> г.
                     </small>
                 </p>
-                <h5 class="card-title"><%=  news.title %></h5>
-                <p class="card-text"><%= 
-                
-                text = news.short_content
-                len = String.length(news.short_content)
-                if len > 20 do
-                    text_sliced = String.slice(text,0..20)
-                    if String.last(text_sliced) == " " do 
-                      String.trim_trailing(text_sliced," ")
-                      |> Kernel.<> "..."
-                    else
-                      text_sliced <> "..."
-                    end
-                    
-                else
-                    text
-                end
-                
-                
-                %></p>
-                <%= link "Виж повече »", to: news_path(@conn, :show, news), class: "btn btn-default float-right
-                text-green" %>
+                <h5 class="card-title"><%= news.title %></h5>
+                <p class="card-text">
+                    <%=String.slice(news.short_content,0..30)%> ...
+                </p>
+
+
             </div>
-        </div>  
+            <div class="card-footer text-center border-0 bg-transparent">
+                <a class="btn btn-default float-right text-green" href="<%=news_path(@conn, :show, news.id)%>" role="button">
+                    Виж още
+                </a>
+            </div>
+        </div>
     </div>
     <% end %>
-    </div>
-    <div class="padination">
-    <%= if @page.total_pages > 0 do %>
-      <%= for x <- 1..@page.total_pages do %>
-      <%= link "#{x * 8 - 7} - #{x * 8}  ", to: news_path(@conn, :index, page: x) %>
-      <% end %>  
-      <% end %>
-    </div>
-     
 </div>
-
-
-<% end %>
-<% current_user = @conn.assigns.current_user %>
-<%= if current_user == nil do %>
-
-<% else %>
-  <% current_user.users_types.id  %>
-  <%= if current_user.users_types.id == 4 do %>
-    <div class ="news-button-create">
-      <%= link "Създай новина", to: news_path(@conn, :new), class: "btn btn-primary" %>
-    </div>
-    <% else %>
-
-    <% end %>
-
-<% end %>
-
+<div class="text-center custom-pagination">
+    <%= pagination_links @page , distance: 3  %>
 </div>

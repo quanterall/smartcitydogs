@@ -1,16 +1,4 @@
- .registered-dogs-div{
-     position: absolute;
-     margin-right: 13%;
-     margin-top: 5%;
-    /* margin: 7%; */
-}
-.col-12 .input-group{
-    margin-top: 2%;
-    width: 40%;
-    position: fixed;
-    z-index: 1;
-    /* margin-left: 4%; */
-}
+
 .input-group-append{
     background-color: white;
 }

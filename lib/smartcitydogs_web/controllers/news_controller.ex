@@ -7,38 +7,13 @@ defmodule SmartcitydogsWeb.NewsController do
   alias Smartcitydogs.Repo
   # alias Smartcitydogs.Markdown
 
-  def index(conn, %{"page" => page_number}) do
-    news = DataPages.list_news()
-    ## second and third to last created news
-    news2 = Enum.slice(news, -3..-2)
-    last_news = Repo.one(from(n in News, order_by: [desc: n.id], limit: 1))
-    news = Enum.drop(news, -3)
-    page = Smartcitydogs.Repo.paginate(news, page: String.to_integer(page_number), page_size: 8)
-    render(conn, "index.html", news: page.entries, last_news: last_news, news2: news2, page: page)
-  end
+  def index(conn, params) do
+    page =
+      News
+      |> order_by(desc: :inserted_at)
+      |> Repo.paginate(params)
 
-  def index(conn, %{}) do
-    news = DataPages.list_news()
-
-    news2 =
-      cond do
-        length(news) == 2 ->
-          Enum.slice(news, -2..-2) ++ []
-
-        length(news) == 1 ->
-          []
-
-        length(news) == 0 ->
-          []
-
-        true ->
-          Enum.slice(news, -3..-2)
-      end
-
-    last_news = Repo.one(from(n in News, order_by: [desc: n.id], limit: 1))
-    news = Enum.drop(news, -3)
-    page = Smartcitydogs.Repo.paginate(news, page: 1, page_size: 8)
-    render(conn, "index.html", news: page.entries, last_news: last_news, news2: news2, page: page)
+    render(conn, "index.html", news: page.entries, page: page)
   end
 
   def new(conn, _params) do

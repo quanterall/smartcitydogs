@@ -323,8 +323,10 @@ $(window).scroll(function(e){
 $('.navbar-collapse').on('show.bs.collapse', function() {
     $(".top-navbar").removeClass("navbar-home");
 });
+$(".user-signals-tabs").click(function(){
+    $('.tabs').hide();
+    $(".user-signals-tabs").removeClass("selected");
+    $(this).addClass("selected");
+    $("#"+$(this).data("show")).show();
 
-
-    
-
-
+});

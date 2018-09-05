@@ -6,7 +6,7 @@ defmodule SmartcitydogsWeb.UserController do
   alias Smartcitydogs.Repo
   alias Smartcitydogs.DataSignals
   alias Smartcitydogs.Signals
-
+  import Ecto.Query
   plug(:put_layout, false when action in [:new])
 
   def index(conn, _params) do
@@ -57,86 +57,15 @@ defmodule SmartcitydogsWeb.UserController do
     end
   end
 
-  def show(conn, %{"followed_signals" => _, "id" => _, "page" => page_num}) do
-    user = Repo.get!(User, conn.assigns.current_user.id) |> Repo.preload(:users_types)
+  def show(conn, id) do
+    user_signals =
+      Signals
+      |> limit(6)
+      |> where(users_id: ^conn.assigns.current_user.id)
+      |> Repo.all()
+      |> Repo.preload([:signals_types, :signals_categories, :signals_comments])
 
-    with :ok <-
-           Bodyguard.permit(
-             Smartcitydogs.Users.Policy,
-             :show,
-             conn.assigns.current_user
-           ) do
-      logged_user_id = conn.assigns.current_user.id
-      request_user_id = user.id
-
-      if logged_user_id != request_user_id do
-        render(conn, SmartcitydogsWeb.ErrorView, "401.html")
-      else
-        {page, signals} = Signals.get_button_signals(user.id, page_num)
-        profile_params = %{signals: signals, page: page, conn: conn}   
-        render(conn, "show_my_followed_signals.html", user: user, conn: conn, page: page, profile_params: profile_params)
-      end
-    else
-      {:error, _} -> render(conn, SmartcitydogsWeb.ErrorView, "401.html")
-    end
-  end
-
-  def show(conn, %{"followed_signals" => _, "id" => _}) do
-    
-    user = Repo.get!(User, conn.assigns.current_user.id) |> Repo.preload(:users_types) 
-    with :ok <-
-           Bodyguard.permit(
-             Smartcitydogs.Users.Policy,
-             :show,
-             conn.assigns.current_user
-           ) do
-      logged_user_id = conn.assigns.current_user.id
-      request_user_id = user.id
-
-      if logged_user_id != request_user_id do
-        render(conn, SmartcitydogsWeb.ErrorView, "401.html")
-      else
-          render(conn, "show.html", user: user, conn: conn, page: 1)
-      end
-    else
-      {:error, _} -> render(conn, SmartcitydogsWeb.ErrorView, "401.html")
-    end
-  end
-
-  def show(conn, params) do
-    id = params["id"]
-    user = Repo.get!(User, id) |> Repo.preload(:users_types)
- 
-
-    with :ok <-
-           Bodyguard.permit(
-             Smartcitydogs.Users.Policy,
-             :show,
-             conn.assigns.current_user
-           ) do
-      logged_user_id = conn.assigns.current_user.id
-      request_user_id = user.id
-
-      if logged_user_id != request_user_id do
-        render(conn, SmartcitydogsWeb.ErrorView, "401.html")
-      else
-        
-        signals = DataSignals.get_user_signal(user.id)
-        page = Repo.paginate(signals, page: 1, page_size: 9)
-        profile_params = %{signals: signals, page: page, conn: conn}
-        {page} = Signals.get_button_signals(user.id)
-        profile_liked_params = %{signals: page, page: page, conn: conn}
-
-        if Enum.count(params) == 1 do
-          render(conn, "show.html", user: user, conn: conn, profile_params: profile_params, profile_liked_params: profile_liked_params)
-        else  
-          page_my_signals = Repo.paginate(signals, page: params["page"], page_size: 9)
-          render(conn, "show_my_signals.html", user: user, conn: conn, page: page_my_signals, profile_liked_params: profile_liked_params )
-        end
-      end
-    else
-      {:error, _} -> render(conn, SmartcitydogsWeb.ErrorView, "401.html")
-    end
+    render(conn, "show.html", user_signals: user_signals)
   end
 
   def edit(conn, %{"id" => id}) do

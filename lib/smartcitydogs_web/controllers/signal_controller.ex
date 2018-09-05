@@ -9,28 +9,13 @@ defmodule SmartcitydogsWeb.SignalController do
 
   ## Hanlde regular user page
   def index(conn, params) do
-    page_num =
-      if params == %{} do
-        1
-      else
-        String.to_integer(params["page"])
-      end
+    page =
+      Signals
+      |> order_by(desc: :inserted_at)
+      |> preload([:signals_types, :signals_categories, :signals_comments])
+      |> Repo.paginate(params)
 
-    if conn.assigns.current_user == nil do
-      sorted_signals = DataSignals.sort_signal_by_id()
-      page = Smartcitydogs.Repo.paginate(sorted_signals, page: page_num, page_size: 8)
-      render(conn, "index2_signal.html", signal: page.entries, page: page)
-    end
-
-    sorted_signals =
-      if conn.assigns.current_user.users_types_id == 3 do
-        DataSignals.get_all_cruelty_signals()
-      else
-        DataSignals.sort_signal_by_id()
-      end
-
-    page = Smartcitydogs.Repo.paginate(sorted_signals, page: page_num, page_size: 8)
-    render(conn, "index2_signal.html", signal: page.entries, page: page)
+    render(conn, "index.html", signals: page.entries, page: page)
   end
 
   # All signals page with the checkbox filters, function for the first rendering
@@ -156,15 +141,17 @@ defmodule SmartcitydogsWeb.SignalController do
           upload = Map.get(conn, :params)
 
           upload = Map.get(upload, "url")
-          if upload == nil do
 
+          if upload == nil do
           else
             for n <- upload do
               extension = Path.extname(n.filename)
 
               File.cp(
                 n.path,
-                "../smartcitydogs/assets/static/images/#{Map.get(n, :filename)}-profile#{extension}"
+                "../smartcitydogs/assets/static/images/#{Map.get(n, :filename)}-profile#{
+                  extension
+                }"
               )
 
               args = %{
@@ -187,21 +174,20 @@ defmodule SmartcitydogsWeb.SignalController do
   end
 
   def show(conn, map) do
+    id = String.to_integer(map["id"])
+    comments = DataSignals.get_comment_signal_id(id)
+    signal = DataSignals.get_signal(id)
 
-        id = String.to_integer(map["id"])
-        comments = DataSignals.get_comment_signal_id(id)
-        signal = DataSignals.get_signal(id)
-    
-        ## signal is liked by user
-        sorted_comments = DataSignals.sort_signal_comment_by_id()
+    ## signal is liked by user
+    sorted_comments = DataSignals.sort_signal_comment_by_id()
 
-        render(
-          conn,
-          "show_signal.html",
-          signal: signal,
-          comments: sorted_comments,
-          comments_count: comments
-        )
+    render(
+      conn,
+      "show_signal.html",
+      signal: signal,
+      comments: sorted_comments,
+      comments_count: comments
+    )
   end
 
   def edit(conn, %{"id" => id}) do
@@ -244,8 +230,8 @@ defmodule SmartcitydogsWeb.SignalController do
   end
 
   def followed_signals(conn, _) do
-      {page} = Signals.get_button_signals(conn.assigns.current_user.id)
-      render(conn, "followed_signals.html", signals: page.entries, page: page)
+    {page} = Signals.get_button_signals(conn.assigns.current_user.id)
+    render(conn, "followed_signals.html", signals: page.entries, page: page)
   end
 
   def update_type(conn, %{"id" => id, "signals_types_id" => signals_types_id}) do

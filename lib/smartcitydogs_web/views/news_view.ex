@@ -1,6 +1,7 @@
 defmodule SmartcitydogsWeb.NewsView do
   use SmartcitydogsWeb, :view
   alias Smartcitydogs.Markdown
+  import Scrivener.HTML
 
   def render_markdown(binary) do
     Markdown.to_html(binary)

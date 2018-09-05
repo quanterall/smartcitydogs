@@ -575,28 +575,6 @@ input#search-placeholder:focus{
     text-decoration: none;
     cursor: pointer;
 }
-.signal-type-label{
-  font-weight: bold;
-  display: inline-block;
-  padding: 2px 5px 2px 0px;
-  border-radius: 5px;
-  color: #000;
-  margin-bottom: 5px;
-  font-size: 16px;
-
-}
-.signal-type-label.new{
-  color: red !important;
-}
-.signal-type-label.accepted{
-  color: orange !important;
-}
-.signal-type-label.sent{
-  color: yellow !important;
-}
-.signal-type-label.closed{
-  color: #00ba00 !important;
-}
 
 .padination a{
   color: black;
@@ -697,87 +675,7 @@ background: -ms-linear-gradient(left, rgba(47,214,50,1) 0%, rgba(47,214,50,0.84)
 background: linear-gradient(to right, rgba(47,214,50,1) 0%, rgba(47,214,50,0.84) 74%, rgba(12,245,47,0.81) 85%, rgba(91,209,73,0.78) 100%);
 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#2fd632', endColorstr='#5bd149', GradientType=1 );
 }
-.container-new-signal label-signal{
-  font-size: 20px;
-  color: white;
-  font-family: monospace;
-  font-weight: bold;
-}
-.container-new-signal label-1{
-  font-size: 15px;
-  color: white;
-  font-family: monospace;
-  font-weight: bold;
-  margin-left: 1%;
-}
-.container-new-signal label-2{
-  font-size: 15px;
-  margin-left: 1%;
-  font-weight: bold;
-  color: white;
-  font-family: monospace;
-}
-.container-new-signal label-3{
-  margin-left: 1%;
-  font-size: 15px;
-  font-weight: bold;
-  color: white;
-  font-family: monospace;
-}
-.container-new-signal label-4{
-  margin-left: 1%;
-  font-size: 15px;
-  font-weight: bold;
-  color: white;
-  font-family: monospace;
-}
-.container-new-signal label-5{
-  margin-left: 1%;
-  font-size: 15px;
-  font-weight: bold;
-  color: white;
-  font-family: monospace;
-}
-.container-new-signal .form-group{
-  padding-top: 0px;
-  padding-bottom: 3vh;
-  padding-left: 5px;
-  margin-bottom: 0;
-  margin: 1%;
-  margin-top: 5vh;
-}
-input#autocomplete{
-  margin-left: 0px;
-}
-.container-new-signal .form-group .form-control{
-  padding-left: 5px;
-  margin-bottom: 0; 
-}
-.container-new-signal textarea:focus{
-  border-color: white;
-}
-.container-new-signal textarea{
-  color: white;
-  width: 100%;
-  background-color: transparent;
-  border: 1px solid white;
-}
-.container-new-signal .form-group select{
-  border-color: white;
-  background-color: transparent;
-  color: black;
-}
 
-.container-new-signal input#signals_address, input#signals_title{
-  margin-left: 0px;
-}
-.container-new-signal .under-form{
-  width: 100%;
-  display: inline-block;
-  margin: 0%;
-  padding: 0%
-  
-}
 .btn-submit:hover{
   background-color: white;
   color: rgb(0,201,148);
@@ -788,12 +686,7 @@ input#autocomplete{
   padding-left: 10%;
   padding-right: 10%;
 }
-.container-new-signal{
-  height: 100%;
-  background-color: rgb(0,201,148);
-  padding: 2.5%;
-  margin: 0px;
-}
+
 
 .pull-right{
   font-weight: bold;
@@ -1037,3 +930,18 @@ label-signals-categories{
   opacity: 1;
   cursor: pointer;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

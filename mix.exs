@@ -30,7 +30,9 @@ defmodule Smartcitydogs.Mixfile do
         :ueberauth_facebook,
         :scrivener_ecto,
         :recaptcha,
-        :faker
+        :faker,
+        :scrivener_ecto,
+        :scrivener_html
       ]
     ]
   end
@@ -71,7 +73,7 @@ defmodule Smartcitydogs.Mixfile do
       {:mock, "~> 0.2.0", only: :test},
       {:timex, "~> 3.1"},
       {:scrivener_ecto, "~> 1.0"},
-      {:scrivener_list, "~> 1.0"},
+      {:scrivener_html, "~> 1.7"},
       {:cmark, "~> 0.7"},
       {:recaptcha, "~> 2.3"},
       {:bodyguard, "~> 2.1"},

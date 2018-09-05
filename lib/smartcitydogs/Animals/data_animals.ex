@@ -69,8 +69,6 @@ defmodule Smartcitydogs.DataAnimals do
     Repo.get!(AnimalImages, id)
   end
 
-
-
   def get_animal_image_animals_id(animals_id) do
     query = Ecto.Query.from(c in AnimalImages, where: c.animals_id == ^animals_id)
     Repo.all(query)

@@ -11,7 +11,7 @@ defmodule SmartcitydogsWeb.PageController do
   alias Smartcitydogs.Repo
 
   def index(conn, _params) do
-    signal =
+    signals =
       Signals
       |> limit(6)
       |> Repo.all()
@@ -28,7 +28,7 @@ defmodule SmartcitydogsWeb.PageController do
       |> Repo.all()
       |> Repo.preload([:animals_image, :animals_status])
 
-      adopted_animals =
+    adopted_animals =
       Animals
       |> limit(6)
       |> where(animals_status_id: 3)
@@ -36,7 +36,7 @@ defmodule SmartcitydogsWeb.PageController do
       |> Repo.all()
 
     render(conn, "index.html",
-      signal: signal,
+      signals: signals,
       news: news,
       animals: animal,
       adopted_animals: adopted_animals

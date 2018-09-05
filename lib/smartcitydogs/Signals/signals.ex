@@ -46,11 +46,11 @@ defmodule Smartcitydogs.Signals do
       :address_F
     ])
     |> validate_required([
- #      :title,
-       :address,
-       :description,
-       :signals_categories_id,
-       :signals_types_id
+      #      :title,
+      :address,
+      :description,
+      :signals_categories_id,
+      :signals_types_id
     ])
   end
 
@@ -111,7 +111,10 @@ defmodule Smartcitydogs.Signals do
     followed_signals = DataSignals.get_signal_like(user_id)
     liked_signals = Enum.map(followed_signals, fn x -> x |> Map.get(:signals_id) end)
     followed_signals = []
-    followed_signals = for sig <- liked_signals, do: followed_signals ++ sig |> DataSignals.get_signal()
+
+    followed_signals =
+      for sig <- liked_signals, do: (followed_signals ++ sig) |> DataSignals.get_signal()
+
     page = Repo.paginate(followed_signals, page: 1, page_size: 9)
     {page}
   end
@@ -121,9 +124,11 @@ defmodule Smartcitydogs.Signals do
     followed_signals = DataSignals.get_signal_like(user_id)
     liked_signals = Enum.map(followed_signals, fn x -> x |> Map.get(:signals_id) end)
     followed_signals = []
-    followed_signals = for sig <- liked_signals, do: followed_signals ++ sig |> DataSignals.get_signal()
+
+    followed_signals =
+      for sig <- liked_signals, do: (followed_signals ++ sig) |> DataSignals.get_signal()
+
     page = Repo.paginate(followed_signals, page: page_num, page_size: 9)
     {page, signals}
   end
-
 end

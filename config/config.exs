@@ -49,3 +49,8 @@ config :smartcitydogs, Smartcitydogs.Mailer,
   # can be `true`
   ssl: false,
   retries: 4
+
+config :scrivener_html,
+  routes_helper: MyApp.Router.Helpers,
+  # If you use a single view style everywhere, you can configure it here. See View Styles below for more info.
+  view_style: :bootstrap_v4

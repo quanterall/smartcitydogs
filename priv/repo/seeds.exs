@@ -226,10 +226,13 @@ Enum.each(0..99, fn _ ->
   }
 
   unless Repo.get_by(Animals, chip_number: animals_params[:chip_number]) do
-    animal = %Animals{}
-    |> Animals.changeset(animals_params)
-    |> Repo.insert!()
+    animal =
+      %Animals{}
+      |> Animals.changeset(animals_params)
+      |> Repo.insert!()
+
     animals_images_params = %{animals_id: animal.id}
+
     %AnimalImages{}
     |> AnimalImages.changeset(animals_images_params)
     |> Repo.insert!()
