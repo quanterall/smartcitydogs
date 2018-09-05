@@ -122,7 +122,7 @@ defmodule SmartcitydogsWeb.UserController do
       else
         
         signals = DataSignals.get_user_signal(user.id)
-        page = Repo.paginate(signals, page: 1, page_size: 8)
+        page = Repo.paginate(signals, page: 1, page_size: 9)
         profile_params = %{signals: signals, page: page, conn: conn}
         {page} = Signals.get_button_signals(user.id)
         profile_liked_params = %{signals: page, page: page, conn: conn}
@@ -130,7 +130,7 @@ defmodule SmartcitydogsWeb.UserController do
         if Enum.count(params) == 1 do
           render(conn, "show.html", user: user, conn: conn, profile_params: profile_params, profile_liked_params: profile_liked_params)
         else  
-          page_my_signals = Repo.paginate(signals, page: params["page"], page_size: 8)
+          page_my_signals = Repo.paginate(signals, page: params["page"], page_size: 9)
           render(conn, "show_my_signals.html", user: user, conn: conn, page: page_my_signals, profile_liked_params: profile_liked_params )
         end
       end

@@ -44,7 +44,7 @@ defmodule Smartcitydogs.DataAnimals do
   def get_animals_by_status(id) do
     struct = from(p in Animals, where: p.animals_status_id == ^id)
     all_adopted = Repo.all(struct) |> Repo.preload(:animals_status)
-    Smartcitydogs.Repo.paginate(all_adopted, page: 1, page_size: 8)
+    Smartcitydogs.Repo.paginate(all_adopted, page: 1, page_size: 9)
   end
 
   def get_animal_status(id) do

@@ -77,12 +77,12 @@ defmodule Smartcitydogs.Animals do
           end)
 
         animals_query = List.flatten(animals_query)
-        list_animals = Smartcitydogs.Repo.paginate(animals_query, page: page_num, page_size: 8)
+        list_animals = Smartcitydogs.Repo.paginate(animals_query, page: page_num, page_size: 9)
         [list_animals, data_status]
 
       true ->
         all_animals = DataAnimals.list_animals()
-        page = Smartcitydogs.Repo.paginate(all_animals, page: page_num, page_size: 8)
+        page = Smartcitydogs.Repo.paginate(all_animals, page: page_num, page_size: 9)
         [page, data_status]
     end
   end
