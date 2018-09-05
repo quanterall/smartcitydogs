@@ -28,10 +28,12 @@ defmodule SmartcitydogsWeb.PageController do
       |> Repo.all()
       |> Repo.preload([:animals_image, :animals_status])
 
-    adopted_animals =
-      Repo.all(from(p in Animals, where: p.animals_status_id == 3))
-      |> Smartcitydogs.Repo.preload(:animals_status)
-      |> Repo.preload([:animals_image, :animals_status])
+      adopted_animals =
+      Animals
+      |> limit(6)
+      |> where(animals_status_id: 3)
+      |> preload([:animals_image, :animals_status])
+      |> Repo.all()
 
     render(conn, "index.html",
       signal: signal,

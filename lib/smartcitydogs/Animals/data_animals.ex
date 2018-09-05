@@ -69,13 +69,7 @@ defmodule Smartcitydogs.DataAnimals do
     Repo.get!(AnimalImages, id)
   end
 
-  def get_first_image(animal) do
-    if List.first(animal.animals_image) == nil do
-      "images/2.jpg"
-    else
-      List.first(animal.animals_image).url
-    end
-  end
+
 
   def get_animal_image_animals_id(animals_id) do
     query = Ecto.Query.from(c in AnimalImages, where: c.animals_id == ^animals_id)

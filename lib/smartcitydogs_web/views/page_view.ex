@@ -24,11 +24,5 @@ defmodule SmartcitydogsWeb.PageView do
     Plug.Conn.get_session(conn, :csrf_token)
   end
 
-  def get_first_image(animal) do
-    if List.first(animal.animals_image) == nil do
-      "images/2.jpg"
-    else
-      List.first(animal.animals_image).url
-    end
-  end
+
 end

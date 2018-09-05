@@ -244,20 +244,13 @@ defmodule SmartcitydogsWeb.SignalController do
   end
 
   def followed_signals(conn, _) do
-      followed_signals = DataSignals.get_signal_like(conn.assigns.current_user.id)
-      liked_signals = Enum.map(followed_signals, fn x -> x |> Map.get(:signals_id) end)
-      followed_signals = []
-      followed_signals = for sig <- liked_signals, do: followed_signals ++ sig |> DataSignals.get_signal()
-      page = Repo.paginate(followed_signals, page: 1, page_size: 8)
+      {page} = Signals.get_button_signals(conn.assigns.current_user.id)
       render(conn, "followed_signals.html", signals: page.entries, page: page)
   end
 
   def update_type(conn, %{"id" => id, "signals_types_id" => signals_types_id}) do
-    IO.inspect(id)
-    IO.inspect(signals_types_id)
     signal = DataSignals.get_signal(id)
     DataSignals.update_signal(signal, %{"signals_types_id" => signals_types_id})
-    signals = DataSignals.list_signals()
     redirect(conn, to: signal_path(conn, :minicipality_signals))
   end
 

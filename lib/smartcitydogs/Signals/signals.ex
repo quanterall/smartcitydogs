@@ -106,4 +106,24 @@ defmodule Smartcitydogs.Signals do
         [page, data_category, data_status]
     end
   end
+
+  def get_button_signals(user_id) do
+    followed_signals = DataSignals.get_signal_like(user_id)
+    liked_signals = Enum.map(followed_signals, fn x -> x |> Map.get(:signals_id) end)
+    followed_signals = []
+    followed_signals = for sig <- liked_signals, do: followed_signals ++ sig |> DataSignals.get_signal()
+    page = Repo.paginate(followed_signals, page: 1, page_size: 8)
+    {page}
+  end
+
+  def get_button_signals(user_id, page_num) do
+    signals = DataSignals.get_all_followed_signals(user_id)
+    followed_signals = DataSignals.get_signal_like(user_id)
+    liked_signals = Enum.map(followed_signals, fn x -> x |> Map.get(:signals_id) end)
+    followed_signals = []
+    followed_signals = for sig <- liked_signals, do: followed_signals ++ sig |> DataSignals.get_signal()
+    page = Repo.paginate(followed_signals, page: page_num, page_size: 8)
+    {page, signals}
+  end
+
 end

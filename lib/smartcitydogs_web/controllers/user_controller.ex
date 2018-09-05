@@ -5,6 +5,7 @@ defmodule SmartcitydogsWeb.UserController do
   alias Smartcitydogs.User
   alias Smartcitydogs.Repo
   alias Smartcitydogs.DataSignals
+  alias Smartcitydogs.Signals
 
   plug(:put_layout, false when action in [:new])
 
@@ -71,15 +72,8 @@ defmodule SmartcitydogsWeb.UserController do
       if logged_user_id != request_user_id do
         render(conn, SmartcitydogsWeb.ErrorView, "401.html")
       else
-    
-        signals = DataSignals.get_all_followed_signals(user.id)
-        followed_signals = DataSignals.get_signal_like(user.id)
-        liked_signals = Enum.map(followed_signals, fn x -> x |> Map.get(:signals_id) end)
-        followed_signals = []
-        followed_signals = for sig <- liked_signals, do: followed_signals ++ sig |> DataSignals.get_signal()
-        page = Repo.paginate(followed_signals, page: page_num, page_size: 8)
+        {page, signals} = Signals.get_button_signals(user.id, page_num)
         profile_params = %{signals: signals, page: page, conn: conn}   
-
         render(conn, "show_my_followed_signals.html", user: user, conn: conn, page: page, profile_params: profile_params)
       end
     else
@@ -130,11 +124,7 @@ defmodule SmartcitydogsWeb.UserController do
         signals = DataSignals.get_user_signal(user.id)
         page = Repo.paginate(signals, page: 1, page_size: 8)
         profile_params = %{signals: signals, page: page, conn: conn}
-        followed_signals = DataSignals.get_signal_like(user.id)
-        liked_signals = Enum.map(followed_signals, fn x -> x |> Map.get(:signals_id) end)
-        followed_signals = []
-        followed_signals = for sig <- liked_signals, do: followed_signals ++ sig |> DataSignals.get_signal()
-        page = Repo.paginate(followed_signals, page: 1, page_size: 8)
+        {page} = Signals.get_button_signals(user.id)
         profile_liked_params = %{signals: page, page: page, conn: conn}
 
         if Enum.count(params) == 1 do
