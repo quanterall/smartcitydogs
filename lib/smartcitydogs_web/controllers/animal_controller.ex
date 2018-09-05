@@ -43,7 +43,6 @@ defmodule SmartcitydogsWeb.AnimalController do
              conn.assigns.current_user
            ) do
       page = Smartcitydogs.DataAnimals.get_animals_by_status(2)
-      IO.inspect page
       render(conn, "minicipality_shelter.html", animals: page.entries, page: page)
     else
       {:error, _} -> render(conn, SmartcitydogsWeb.ErrorView, "401.html")
@@ -256,7 +255,6 @@ defmodule SmartcitydogsWeb.AnimalController do
       true ->
         id = String.to_integer(map["id"])
         animal = DataAnimals.get_animal(id) 
-        IO.inspect animal
         render(conn, "show.html", animals: animal)
     end
   end

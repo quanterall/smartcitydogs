@@ -113,7 +113,6 @@
                 </table>  
               
             </div>
-            <% IO.inspect @current_user %>
             
             <div class="buttons-for-signal1">
               <div class="buttons-for-signal">
