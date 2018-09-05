@@ -356,7 +356,7 @@ linked-signals{
     #register-comment-button{
         width: 30%;
     }
-    #show_map {
+    /* #show_map {
         display: inline-block;
         position: absolute !important;
         padding-left: 0px;
@@ -365,7 +365,7 @@ linked-signals{
         width: 75%;
         height: 70vh;
         background: yellow;
-    }
+    } */
     .fa-window-close{
         position: absolute;
         background-color: transparent;
@@ -384,7 +384,7 @@ linked-signals{
         top: 30rem;
         left: 17%;
     }
-    #show_map {
+    /* #show_map {
         top: 29.5rem;
         left: 15.1%;
         width: 70%;
@@ -392,7 +392,7 @@ linked-signals{
         position: absolute !important;
         height: 70vh;
         background: yellow;
-    }
+    } */
     #register-submit-adoption{
         width: 50%;
     }
