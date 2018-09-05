@@ -43,7 +43,6 @@ defmodule SmartcitydogsWeb.AnimalController do
              conn.assigns.current_user
            ) do
       page = Smartcitydogs.DataAnimals.get_animals_by_status(2)
-      IO.inspect page
       render(conn, "minicipality_shelter.html", animals: page.entries, page: page)
     else
       {:error, _} -> render(conn, SmartcitydogsWeb.ErrorView, "401.html")
@@ -81,7 +80,7 @@ defmodule SmartcitydogsWeb.AnimalController do
             (all_query ++ Repo.all(struct)) |> Repo.preload(:animals_status)
           end)
 
-        page = Smartcitydogs.Repo.paginate(List.flatten(query_animals), page: 1, page_size: 8)
+        page = Smartcitydogs.Repo.paginate(List.flatten(query_animals), page: 1, page_size: 9)
 
         render(conn, "minicipality_registered.html",
           animals: page.entries,
@@ -91,7 +90,7 @@ defmodule SmartcitydogsWeb.AnimalController do
 
       true ->
         all_animals = DataAnimals.list_animals()
-        page = Smartcitydogs.Repo.paginate(all_animals, page: 1, page_size: 8)
+        page = Smartcitydogs.Repo.paginate(all_animals, page: 1, page_size: 9)
 
         render(conn, "minicipality_registered.html",
           animals: page.entries,

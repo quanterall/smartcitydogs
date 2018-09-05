@@ -83,7 +83,7 @@ defmodule Smartcitydogs.Signals do
           end)
 
         all_query = List.flatten(all_query)
-        list_signals = Smartcitydogs.Repo.paginate(all_query, page: num, page_size: 8)
+        list_signals = Smartcitydogs.Repo.paginate(all_query, page: num, page_size: 9)
 
         [list_signals, data_category, data_status]
 
@@ -97,12 +97,12 @@ defmodule Smartcitydogs.Signals do
           end)
 
         all_query = List.flatten(all_query)
-        page = Smartcitydogs.Repo.paginate(all_query, page: 1, page_size: 8)
+        page = Smartcitydogs.Repo.paginate(all_query, page: 1, page_size: 9)
         [page, data_category, data_status]
 
       true ->
         all_query = DataSignals.list_signals()
-        page = Smartcitydogs.Repo.paginate(all_query, page: 1, page_size: 8)
+        page = Smartcitydogs.Repo.paginate(all_query, page: 1, page_size: 9)
         [page, data_category, data_status]
     end
   end
@@ -112,7 +112,7 @@ defmodule Smartcitydogs.Signals do
     liked_signals = Enum.map(followed_signals, fn x -> x |> Map.get(:signals_id) end)
     followed_signals = []
     followed_signals = for sig <- liked_signals, do: followed_signals ++ sig |> DataSignals.get_signal()
-    page = Repo.paginate(followed_signals, page: 1, page_size: 8)
+    page = Repo.paginate(followed_signals, page: 1, page_size: 9)
     {page}
   end
 
@@ -122,7 +122,7 @@ defmodule Smartcitydogs.Signals do
     liked_signals = Enum.map(followed_signals, fn x -> x |> Map.get(:signals_id) end)
     followed_signals = []
     followed_signals = for sig <- liked_signals, do: followed_signals ++ sig |> DataSignals.get_signal()
-    page = Repo.paginate(followed_signals, page: page_num, page_size: 8)
+    page = Repo.paginate(followed_signals, page: page_num, page_size: 9)
     {page, signals}
   end
 

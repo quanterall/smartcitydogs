@@ -13,7 +13,7 @@ defmodule SmartcitydogsWeb.MySignalsController do
     user = conn.assigns.current_user.id
     signals = DataSignals.get_user_signal(user)
 
-    page = Smartcitydogs.Repo.paginate(signals, page: page_num, page_size: 8)
+    page = Smartcitydogs.Repo.paginate(signals, page: page_num, page_size: 9)
     render(conn, "my_signals.html", signals: signals, page: page)
   end
 end

@@ -79,7 +79,7 @@ defmodule SmartcitydogsWeb.SignalController do
             all_query ++ Repo.all(struct)
           end)
 
-        page = Smartcitydogs.Repo.paginate(List.flatten(all_query), page: 1, page_size: 8)
+        page = Smartcitydogs.Repo.paginate(List.flatten(all_query), page: 1, page_size: 9)
 
         render(conn, "minicipality_signals.html",
           signal: page.entries,
@@ -98,7 +98,7 @@ defmodule SmartcitydogsWeb.SignalController do
           end)
 
         all_query = List.flatten(all_query)
-        page = Smartcitydogs.Repo.paginate(all_query, page: 1, page_size: 8)
+        page = Smartcitydogs.Repo.paginate(all_query, page: 1, page_size: 9)
 
         render(conn, "minicipality_signals.html",
           signal: page.entries,
@@ -109,7 +109,7 @@ defmodule SmartcitydogsWeb.SignalController do
 
       true ->
         all_query = DataSignals.list_signals()
-        page = Smartcitydogs.Repo.paginate(all_query, page: 1, page_size: 8)
+        page = Smartcitydogs.Repo.paginate(all_query, page: 1, page_size: 9)
 
         render(conn, "minicipality_signals.html",
           signal: page.entries,
