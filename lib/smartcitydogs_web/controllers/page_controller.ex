@@ -14,8 +14,9 @@ defmodule SmartcitydogsWeb.PageController do
     signals =
       Signals
       |> limit(6)
+      |> order_by(desc: :id)
       |> Repo.all()
-      |> Repo.preload([:signals_types, :signals_categories, :signals_comments])
+      |> Repo.preload([:signals_types, :signals_categories, :signals_comments, :signals_likes])
 
     news =
       News

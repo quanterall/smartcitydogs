@@ -1,4 +1,4 @@
-defmodule SmartcitydogsWeb.ForTheProjectController do
+defmodule SmartcitydogsWeb.AboutController do
   use SmartcitydogsWeb, :controller
 
   def index(conn, _params) do

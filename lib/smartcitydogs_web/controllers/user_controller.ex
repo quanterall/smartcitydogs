@@ -6,6 +6,7 @@ defmodule SmartcitydogsWeb.UserController do
   alias Smartcitydogs.Repo
   alias Smartcitydogs.DataSignals
   alias Smartcitydogs.Signals
+  alias Smartcitydogs.SignalsLikes
   import Ecto.Query
   plug(:put_layout, false when action in [:new])
 
@@ -63,9 +64,32 @@ defmodule SmartcitydogsWeb.UserController do
       |> limit(6)
       |> where(users_id: ^conn.assigns.current_user.id)
       |> Repo.all()
-      |> Repo.preload([:signals_types, :signals_categories, :signals_comments])
+      |> Repo.preload([
+        :signals_images,
+        :signals_types,
+        :signals_categories,
+        :signals_comments,
+        :signals_likes
+      ])
 
-    render(conn, "show.html", user_signals: user_signals)
+    followed_signals =
+      SignalsLikes
+      |> limit(6)
+      |> where(users_id: ^conn.assigns.current_user.id)
+      |> Repo.all()
+      |> Repo.preload([:signals])
+      |> Enum.map(fn x -> x.signals end)
+      |> Repo.preload([
+        :signals_images,
+        :signals_types,
+        :signals_categories,
+        :signals_comments,
+        :signals_likes
+      ])
+
+    IO.inspect(followed_signals)
+
+    render(conn, "show.html", user_signals: user_signals, followed_signals: followed_signals)
   end
 
   def edit(conn, %{"id" => id}) do

@@ -12,7 +12,7 @@ defmodule SmartcitydogsWeb.SignalController do
     page =
       Signals
       |> order_by(desc: :inserted_at)
-      |> preload([:signals_types, :signals_categories, :signals_comments])
+      |> preload([:signals_types, :signals_categories, :signals_comments, :signals_likes])
       |> Repo.paginate(params)
 
     render(conn, "index.html", signals: page.entries, page: page)
@@ -173,20 +173,17 @@ defmodule SmartcitydogsWeb.SignalController do
     end
   end
 
-  def show(conn, map) do
-    id = String.to_integer(map["id"])
-    comments = DataSignals.get_comment_signal_id(id)
-    signal = DataSignals.get_signal(id)
-
-    ## signal is liked by user
-    sorted_comments = DataSignals.sort_signal_comment_by_id()
+  def show(conn, params) do
+    signal =
+      Signals
+      |> Repo.get(params["id"])
+      |> Repo.preload([:signals_types, :signals_categories, :signals_likes, :signals_images])
+      |> Repo.preload([:signals_comments, signals_comments: :users])
 
     render(
       conn,
-      "show_signal.html",
-      signal: signal,
-      comments: sorted_comments,
-      comments_count: comments
+      "show.html",
+      signal: signal
     )
   end
 
@@ -219,7 +216,7 @@ defmodule SmartcitydogsWeb.SignalController do
         {:ok, signal} ->
           conn
           |> put_flash(:info, "Signal updated successfully.")
-          |> render("show_signal.html", signal: signal)
+          |> render("show.html", signal: signal)
 
         {:error, %Ecto.Changeset{} = changeset} ->
           render(conn, "edit_signal.html", signal: signal, changeset: changeset)

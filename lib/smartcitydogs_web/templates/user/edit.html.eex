@@ -1,2 +1,0 @@
-
-<%= render "myprofile.html", Map.put(assigns, :action, user_path(@conn, :update, @user)) %>

@@ -22,7 +22,8 @@ defmodule Smartcitydogs.Signals do
     has_many(:signals_comments, Smartcitydogs.SignalsComments)
     belongs_to(:signals_categories, Smartcitydogs.SignalsCategories)
     belongs_to(:signals_types, Smartcitydogs.SignalsTypes)
-    has_many(:signal_images, Smartcitydogs.SignalImages)
+    has_many(:signals_images, Smartcitydogs.SignalsImages)
+    has_many(:signals_likes, Smartcitydogs.SignalsLikes)
     belongs_to(:users, Smartcitydogs.User)
 
     timestamps()
@@ -52,6 +53,32 @@ defmodule Smartcitydogs.Signals do
       :signals_categories_id,
       :signals_types_id
     ])
+  end
+
+  def get_first_image(signal) do
+    signal = signal |> Repo.preload(:signals_images)
+
+    if signal.signals_images == [] do
+      cond do
+        signal.signals_categories_id == 1 -> "images/stray.jpg"
+        signal.signals_categories_id == 2 -> "images/escaped.jpg"
+        signal.signals_categories_id == 3 -> "images/mistreated.jpg"
+      end
+    else
+      cond do
+        List.first(signal.signals_images).url == nil && signal.signals_categories_id == 1 ->
+          "images/stray.jpg"
+
+        List.first(signal.signals_images).url == nil && signal.signals_categories_id == 2 ->
+          "images/escaped.jpg"
+
+        List.first(signal.signals_images).url == nil && signal.signals_categories_id == 3 ->
+          "images/mistreated.jpg"
+
+        true ->
+          List.first(signal.signals_images).url
+      end
+    end
   end
 
   ## Get all of the ticked checkboxes from the filters, handle redirection to pagination pages.

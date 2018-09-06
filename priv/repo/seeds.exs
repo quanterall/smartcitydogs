@@ -29,7 +29,7 @@ alias Smartcitydogs.UsersType
 alias Smartcitydogs.User
 alias Smartcitydogs.Signals
 alias Smartcitydogs.SignalsComments
-alias Smartcitydogs.SignalImages
+alias Smartcitydogs.SignalsImages
 alias Smartcitydogs.Adopt
 
 ############## Users Type Admin #############
@@ -374,17 +374,19 @@ Enum.each(0..99, fn _ ->
     view_count: 0,
     signals_categories_id: Faker.random_between(1, 3),
     signals_types_id: Faker.random_between(1, 4),
-    users_id: 1
+    users_id: Faker.random_between(1, 4)
   }
 
   signal = %Signals{} |> Signals.changeset(signals_params) |> Repo.insert!()
 
   ############## Signals Images #############
-  signal_image_params = %{signals_id: signal.id}
+  Enum.each(0..5, fn _ ->
+    signal_image_params = %{signals_id: signal.id, url: "images/escaped.jpg"}
 
-  %SignalImages{}
-  |> SignalImages.changeset(signal_image_params)
-  |> Repo.insert!()
+    %SignalsImages{}
+    |> SignalsImages.changeset(signal_image_params)
+    |> Repo.insert!()
+  end)
 
   Enum.each(0..5, fn _ ->
     ############## Signals Comments #############

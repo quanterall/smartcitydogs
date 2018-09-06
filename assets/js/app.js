@@ -162,20 +162,14 @@ $("#like").click(function () {
     })
 });
 
-$('.close2').click(function() {
-    $('#show_map').hide();
-    $('.close2').hide();
-
+$('#close-map').click(function() {
+    $('#map_container').hide();
 })
-$('#show-map').click(function() {
-    $('#show_map').show();
-    $('.close2').show();
-    // $('body').css("p","");
-    
-    
-})
+$('.show-map-btn').click(function() {
+    $('#map_container').show();
+});
 
-$('#submit-like1').on('click',function(){
+$('.support-signal-btn').on('click',function(){
     var a = $('#submit-like1').text();
 
   if(a == "ПОСЛЕДВАЙ"){
@@ -328,5 +322,16 @@ $(".user-signals-tabs").click(function(){
     $(".user-signals-tabs").removeClass("selected");
     $(this).addClass("selected");
     $("#"+$(this).data("show")).show();
+
+});
+
+
+
+$('.signal-gallery').slick({
+    slidesToShow: 2,
+    slidesToScroll: 1,
+    prevArrow: `<button class="slick-prev bg-gray border-0"><i class="fas fa-chevron-left"></i></button>`,
+    nextArrow: `<button class="slick-next bg-green border-0 text-white"><i class="fas fa-chevron-right"></i></button>`,
+
 
 });

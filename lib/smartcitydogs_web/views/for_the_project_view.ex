@@ -1,3 +1,3 @@
-defmodule SmartcitydogsWeb.ForTheProjectView do
+defmodule SmartcitydogsWeb.AboutView do
   use SmartcitydogsWeb, :view
 end

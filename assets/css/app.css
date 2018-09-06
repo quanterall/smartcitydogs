@@ -114,13 +114,15 @@
 }
 .slick-card-title {
   margin-top: 10px;
-  color: white;
   font-size: 23px;
   font-weight: bold;
 }
 .signal-photo-container{
   background-repeat:no-repeat;
   background-position: center;
+}
+.signal-statistic{
+  font-size: 14px;
 }
 
 .button-show-hide .btn-secondary{
@@ -199,6 +201,79 @@
   text-decoration: none;
   cursor: pointer;
 }
+
+.signal-gallery .slick-prev,.signal-gallery .slick-next{
+  position: absolute;
+  bottom: 30px;
+  z-index: 1;
+height: 30px;
+  top: 90%;  /* position the top  edge of the element at the middle of the parent */
+  left: 50%; /* position the left edge of the element at the middle of the parent */
+
+  transform: translate(-50%, -50%)
+
+}
+.signal-gallery .slick-prev{
+margin-left: -15px;
+}
+.signal-gallery .slick-next{
+  margin-left: 15px;
+}
+.blue-bold{
+ color:rgb(0,201,148);
+  font-weight: bold;
+}
+#signal_map{
+  width: 100%;
+  height: 500px;
+
+}
+#map_container{
+  position: relative;
+}
+#map_container i{
+  position: absolute;
+  z-index: 9999;
+  right: 0px;
+  background: rgb(0,201,148);
+  width: 30px;
+  padding: 5px 0px 5px 0px;
+  display: block;
+  text-align: center;
+}
+#map_container i:hover{
+  cursor: pointer;
+}
+.signal-comments-title{
+  font-size: 18px;
+  font-weight: bold;
+}
+.comment-container{
+  border-bottom: 1px solid #bababa;
+}
+.comment-user-name{
+  font-size: 14px;
+  font-weight: bold;
+}
+.comment-signal-btn,.support-signal-btn{
+  border:2px solid rgb(0,201,148);
+  color: rgb(0,201,148);
+  padding: 7px;
+}
+.support-signal-btn{
+  color:white;
+  background: rgb(0,201,148);;
+}
+.comment-signal-btn:hover{
+  text-decoration: none;
+  color: rgb(0,201,148);
+}
+.support-signal-btn:hover{
+  text-decoration: none;
+  color: white;
+}
+
+
 
 
 

@@ -1,12 +1,12 @@
 defmodule Smartcitydogs.DataSignals do
-  import Ecto.Query, warn: false
+  import Ecto.Query
   alias Smartcitydogs.Repo
 
   alias Smartcitydogs.Signals
   alias Smartcitydogs.SignalsTypes
   alias Smartcitydogs.SignalsComments
   alias Smartcitydogs.SignalsCategories
-  alias Smartcitydogs.SignalImages
+  alias Smartcitydogs.SignalsImages
   alias Smartcitydogs.SignalsLikes
   alias Smartcitydogs.DataUsers
 
@@ -49,7 +49,7 @@ defmodule Smartcitydogs.DataSignals do
 
   def get_user_signal(users_id) do
     query = Ecto.Query.from(c in Signals, where: c.users_id == ^users_id)
-    Repo.all(query) |> Repo.preload(:signal_images)
+    Repo.all(query) |> Repo.preload(:signals_images)
   end
 
   ### takes the support_count
@@ -93,27 +93,27 @@ defmodule Smartcitydogs.DataSignals do
   # Signal iamges
 
   def get_signal_image_id(signals_id) do
-    query = Ecto.Query.from(c in SignalImages, where: c.signals_id == ^signals_id)
+    query = Ecto.Query.from(c in SignalsImages, where: c.signals_id == ^signals_id)
     Repo.all(query)
   end
 
   def get_signal_images(id) do
-    Repo.get!(SignalImages, id)
+    Repo.get!(SignalsImages, id)
   end
 
   def list_signal_images() do
-    Repo.all(SignalImages)
+    Repo.all(SignalsImages)
   end
 
   def create_signal_images(args \\ %{}) do
-    %SignalImages{}
-    |> SignalImages.changeset(args)
+    %SignalsImages{}
+    |> SignalsImages.changeset(args)
     |> Repo.insert()
   end
 
-  def update_signal_images(%SignalImages{} = images, args) do
+  def update_signal_images(%SignalsImages{} = images, args) do
     images
-    |> SignalImages.changeset(args)
+    |> SignalsImages.changeset(args)
     |> Repo.update()
   end
 

@@ -4,9 +4,9 @@ defmodule SmartcitydogsWeb.PageView do
   def get_signals_images(signals_id) do
     signal =
       Smartcitydogs.DataSignals.get_signal(signals_id)
-      |> Smartcitydogs.Repo.preload(:signal_images)
+      |> Smartcitydogs.Repo.preload(:signals_images)
 
-    if signal.signal_images == [] do
+    if signal.signals_images == [] do
       cond do
         signal.signals_categories_id == 1 -> "images/stray.jpg"
         signal.signals_categories_id == 2 -> "images/escaped.jpg"
@@ -14,17 +14,17 @@ defmodule SmartcitydogsWeb.PageView do
       end
     else
       cond do
-        List.first(signal.signal_images).url == nil && signal.signals_categories_id == 1 ->
+        List.first(signal.signals_images).url == nil && signal.signals_categories_id == 1 ->
           "images/stray.jpg"
 
-        List.first(signal.signal_images).url == nil && signal.signals_categories_id == 2 ->
+        List.first(signal.signals_images).url == nil && signal.signals_categories_id == 2 ->
           "images/escaped.jpg"
 
-        List.first(signal.signal_images).url == nil && signal.signals_categories_id == 3 ->
+        List.first(signal.signals_images).url == nil && signal.signals_categories_id == 3 ->
           "images/mistreated.jpg"
 
         true ->
-          List.first(signal.signal_images).url
+          List.first(signal.signals_images).url
       end
     end
   end

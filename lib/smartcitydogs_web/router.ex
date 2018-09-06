@@ -66,7 +66,7 @@ defmodule SmartcitydogsWeb.Router do
     end
 
     get("/my_signals", MySignalsControllerAPI, :index)
-    resources("/signal_images", SignalImageControllerAPI, except: [:new, :edit])
+    resources("/signals_images", SignalImageControllerAPI, except: [:new, :edit])
     resources("/signals_comments", SignalsCommentControllerAPI, except: [:new, :edit])
 
     scope "/signals_comments", SmartcitydogsWeb do
@@ -105,7 +105,7 @@ defmodule SmartcitydogsWeb.Router do
     resources("/sessions", SessionController, only: [:new, :create, :delete])
     resources("/users", UserController, only: [:new, :create])
     resources("/help", HelpController, only: [:index])
-    resources("/fortheproject", ForTheProjectController, only: [:index])
+    resources("/about", AboutController, only: [:index])
     resources("/news", NewsController)
     resources("/forgoten_password", ForgotenPasswordController)
     resources("/contact", ContactController, only: [:index, :new, :create])

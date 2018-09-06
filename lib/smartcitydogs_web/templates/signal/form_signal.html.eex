@@ -54,7 +54,6 @@
       var placeSearch, autocomplete;
       var Cordinate_a, Cordinate_b;
       function initialize() {
-      console.log(document.getElementById('autocomplete'));
           autocomplete = new google.maps.places.Autocomplete(
               /** @type {!HTMLInputElement} */(document.getElementById('autocomplete')),
               {types: ['geocode']});
@@ -62,7 +61,6 @@
           // When the user selects an address from the dropdown, populate the address
           // fields in the form.
           autocomplete.addListener('place_changed', placeAlabala);
-          console.log(autocomplete);
         }
 
         function placeAlabala(){
