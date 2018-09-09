@@ -17,12 +17,6 @@ defmodule Smartcitydogs.DataSignals do
 
   # Signals
 
-  def create_signal(args \\ %{}) do
-    %Signals{}
-    |> Signals.changeset(args)
-    |> Repo.insert()
-  end
-
   def update_signal(%Signals{} = signals, args) do
     signals
     |> Signals.changeset(args)

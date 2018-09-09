@@ -1,31 +1,25 @@
-<div id="login-form-container" class="register-photo">
-<div id="login-form-errors" >
-    </div>
-  <div class="container">
-
-      <div class="form-group register-form-class">
-      <input id="login-email" type="email" placeholder="Имейл..." class="form-control1" required>
-      <input id="login-password" type="password" placeholder="Парола..." class="form-control1" required min="6">
-
-
-          <div class="nav-link-pass">
-              <a id ="new-signal-btn"  onclick="showModalForm(event, 'forgotten-pass-form')" href="#"> ЗАБРАВЕНА ПАРОЛА
-                    </a>
-          </div>
-        <div class="under-form">
-
-
-
-
-
-         <button class="btn btn-submit" onclick="login()">
-         ВХОД
-         </button>
-         <br>
-
-          <a class="close-modal" href="#">ОТКАЗ</a>
+<div class="col-10 m-auto pt-5 form-sign-in">
+    <h3 class="h3 mb-5 font-weight-normal ">Вход</h3>
+    <div class="row">
+        <div class="col-12">
+            <input type="email" id="login-email" class="form-control" placeholder="Email address" required="" autofocus="">
         </div>
-      </div>
+        <div class="col-12">
+            <input type="password" id="login-password" class="form-control" placeholder="Password" required="">
+        </div>
     </div>
-  </div>
-
+    <div class="row mt-3">
+        <div class="col">
+            <a onclick="showModalForm(event, 'forgotten-pass-form')" href="#"> ЗАБРАВЕНА ПАРОЛА
+            </a>
+        </div>
+    </div>
+    <div class="row mt-5">
+        <div class="col">
+            <a class="close-modal" href="#">ОТКАЗ</a>
+        </div>
+        <div class="col">
+            <button class="btn btn-lg btn-primary btn-block" onclick="login()">Влез</button>
+        </div>
+    </div>
+</div>

@@ -85,7 +85,8 @@ users_params = %{
   last_name: "Admin",
   email: "admin@test.bg",
   phone: "00000000000",
-  users_types_id: 1
+  users_types_id: 1,
+  agreed_to_terms: true
 }
 
 unless Repo.get_by(User, username: users_params[:username]) do
@@ -102,12 +103,13 @@ users_params = %{
   last_name: "citizen",
   email: "citizen@test.bg",
   phone: "00000000000",
-  users_types_id: 2
+  users_types_id: 2,
+  agreed_to_terms: true
 }
 
 unless Repo.get_by(User, username: users_params[:username]) do
   %User{}
-  |> User.registration_changeset(users_params)
+  |> User.changeset(users_params)
   |> Repo.insert!()
 end
 
@@ -119,12 +121,13 @@ users_params = %{
   email: "police@test.bg",
   password: "password",
   phone: "0000000000",
-  users_types_id: 3
+  users_types_id: 3,
+  agreed_to_terms: true
 }
 
 unless Repo.get_by(User, username: users_params[:username]) do
   %User{}
-  |> User.registration_changeset(users_params)
+  |> User.changeset(users_params)
   |> Repo.insert!()
 end
 
@@ -136,12 +139,13 @@ users_params = %{
   email: "municipality@test.bg",
   password: "password",
   phone: "0000000000",
-  users_types_id: 4
+  users_types_id: 4,
+  agreed_to_terms: true
 }
 
 unless Repo.get_by(User, username: users_params[:username]) do
   %User{}
-  |> User.registration_changeset(users_params)
+  |> User.changeset(users_params)
   |> Repo.insert!()
 end
 
@@ -153,12 +157,13 @@ users_params = %{
   email: "shelter@test.bg",
   password: "password",
   phone: "00000000000",
-  users_types_id: 5
+  users_types_id: 5,
+  agreed_to_terms: true
 }
 
 unless Repo.get_by(User, username: users_params[:username]) do
   %User{}
-  |> User.registration_changeset(users_params)
+  |> User.changeset(users_params)
   |> Repo.insert!()
 end
 

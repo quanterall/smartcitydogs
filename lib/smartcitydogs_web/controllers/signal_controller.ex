@@ -3,6 +3,8 @@ defmodule SmartcitydogsWeb.SignalController do
   alias Smartcitydogs.DataSignals
   alias Smartcitydogs.Signals
   alias Smartcitydogs.Repo
+  alias Smartcitydogs.SignalsComments
+  alias Smartcitydogs.DataUsers
   import Ecto.Query
 
   action_fallback(SmartCityDogsWeb.FallbackController)
@@ -120,56 +122,35 @@ defmodule SmartcitydogsWeb.SignalController do
     end
   end
 
-  def create(conn, signal_params) do
-    a = conn.assigns.current_user.id
+  def create(%{:assigns => %{:current_user => %{:id => user_id}}} = conn, %{"signals" => params}) do
+    params
+    |> Map.put("users_id", user_id)
 
-    with :ok <-
-           Bodyguard.permit(
-             Smartcitydogs.Signals.Policy,
-             :create,
-             conn.assigns.current_user
-           ) do
-      signal_params =
-        signal_params
-        |> Map.put("signals_types_id", 1)
-        |> Map.put("view_count", 0)
-        |> Map.put("support_count", 0)
-        |> Map.put("users_id", a)
+    case Signals.create_signal(params) do
+      {:ok, signal} ->
+        if params.url != nil do
+          for n <- params.url do
+            extension = Path.extname(n.filename)
 
-      case DataSignals.create_signal(signal_params) do
-        {:ok, signal} ->
-          upload = Map.get(conn, :params)
+            File.cp(
+              n.path,
+              "../smartcitydogs/assets/static/images/#{Map.get(n, :filename)}-profile#{extension}"
+            )
 
-          upload = Map.get(upload, "url")
-
-          if upload == nil do
-          else
-            for n <- upload do
-              extension = Path.extname(n.filename)
-
-              File.cp(
-                n.path,
-                "../smartcitydogs/assets/static/images/#{Map.get(n, :filename)}-profile#{
-                  extension
-                }"
-              )
-
-              args = %{
-                "url" => "images/#{Map.get(n, :filename)}-profile#{extension}",
-                "signals_id" => "#{signal.id}"
-              }
-
-              DataSignals.create_signal_images(args)
-            end
+            %{
+              "url" => "images/#{Map.get(n, :filename)}-profile#{extension}",
+              "signals_id" => "#{signal.id}"
+            }
+            |> DataSignals.signal_images()
           end
+        end
 
-          redirect(conn, to: signal_path(conn, :show, signal))
+        redirect(conn, to: signal_path(conn, :show, signal))
 
-        {:error, %Ecto.Changeset{} = changeset} ->
-          render(conn, "new_signal.html", changeset: changeset)
-      end
-    else
-      {:error, _} -> render(conn, SmartcitydogsWeb.ErrorView, "401.html")
+      {:error, signal_changeset} ->
+      conn = assign(conn, :signal_changeset,  signal_changeset)
+      require IEx; IEx.pry();
+        Phoenix.Controller.redirect(conn, to: NavigationHistory.last_path(conn))
     end
   end
 
@@ -178,12 +159,24 @@ defmodule SmartcitydogsWeb.SignalController do
       Signals
       |> Repo.get(params["id"])
       |> Repo.preload([:signals_types, :signals_categories, :signals_likes, :signals_images])
-      |> Repo.preload([:signals_comments, signals_comments: :users])
+      |> Repo.preload(
+        signals_comments: from(p in SignalsComments, order_by: [desc: p.inserted_at]),
+        signals_comments: :users
+      )
+
+    signal
+    |> Signals.changeset(%{view_count: signal.view_count + 1})
+    |> Repo.update()
+
+    user_likes_count =
+      Signals.get_like_by_user(signal, conn.assigns.current_user)
+      |> Enum.count()
 
     render(
       conn,
       "show.html",
-      signal: signal
+      signal: signal,
+      user_likes_count: user_likes_count
     )
   end
 
@@ -252,5 +245,15 @@ defmodule SmartcitydogsWeb.SignalController do
     else
       {:error, _} -> render(conn, SmartcitydogsWeb.ErrorView, "401.html")
     end
+  end
+
+  def like(conn, %{"id" => id}) do
+    DataUsers.add_like(conn.assigns.current_user.id, id)
+    redirect(conn, to: signal_path(conn, :show, id))
+  end
+
+  def dislike(conn, %{"id" => id}) do
+    DataUsers.remove_like(conn.assigns.current_user.id, id)
+    redirect(conn, to: signal_path(conn, :show, id))
   end
 end

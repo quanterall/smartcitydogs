@@ -18,9 +18,11 @@ defmodule Smartcitydogs.User do
     field(:liked_signals, {:array, :integer}, default: [])
     field(:liked_comments, {:array, :integer}, default: [])
     field(:disliked_comments, {:array, :integer}, default: [])
+    field(:agreed_to_terms, :boolean, default: [], virtual: true)
 
     has_many(:signals_comments, Smartcitydogs.SignalsComments)
-    belongs_to(:users_types, Smartcitydogs.UsersType)
+    # citizen
+    belongs_to(:users_types, Smartcitydogs.UsersType, defaults: 2)
     has_many(:signals, Smartcitydogs.Signals)
     has_many(:contacts, Smartcitydogs.Contact)
     has_many(:adopt, Smartcitydogs.Adopt)
@@ -46,23 +48,20 @@ defmodule Smartcitydogs.User do
       :users_types_id,
       :liked_signals,
       :liked_comments,
-      :disliked_comments
+      :disliked_comments,
+      :agreed_to_terms
     ])
     |> validate_required([
-      :username,
-      ##  :first_name,
-      ##  :last_name,
+      :first_name,
+      :last_name,
+      :agreed_to_terms,
       :email,
-      :phone,
-      :users_types_id
+      :phone
     ])
-  end
-
-  def registration_changeset(struct, params) do
-    struct
-    |> changeset(params)
-    |> cast(params, ~w(password)a, [])
+    |> validate_acceptance(:agreed_to_terms)
+    |> cast(attrs, ~w(password)a, [])
     |> validate_length(:password, min: 6, max: 100)
+    |> unique_constraint(:email, name: "users_email")
     |> hash_password
   end
 

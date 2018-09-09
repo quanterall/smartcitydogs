@@ -30,31 +30,17 @@ defmodule SmartcitydogsWeb.UserController do
     render(conn, "new.html", changeset: changeset)
   end
 
-  def create(conn, user_params) do
-    if user_params["checked"] != "true" do
-      changeset = %User{} |> User.registration_changeset(user_params)
+  def create(conn, %{"user" => params}) do
+    changeset = User.changeset(%User{}, params)
 
-      conn
-      |> put_flash(:info, "agree with the rules")
+    case Repo.insert(changeset) do
+      {:ok, user} ->
+        conn
+        |> Smartcitydogs.Auth.login(user)
+        |> redirect(to: user_path(conn, :show, user))
 
-      render(conn, "new.html", changeset: changeset)
-    else
-      user_params =
-        user_params
-        |> Map.put("users_types_id", 2)
-
-      changeset = %User{} |> User.registration_changeset(user_params)
-
-      case Repo.insert(changeset) do
-        {:ok, user} ->
-          conn
-          |> Smartcitydogs.Auth.login(user)
-          |> put_flash(:info, "#{user.username} created!")
-          |> redirect(to: user_path(conn, :show, user))
-
-        {:error, changeset} ->
-          render(conn, "new.html", changeset: changeset)
-      end
+      {:error, user_changeset} ->
+        render(conn, "new.html", user_changeset: user_changeset)
     end
   end
 
@@ -86,8 +72,6 @@ defmodule SmartcitydogsWeb.UserController do
         :signals_comments,
         :signals_likes
       ])
-
-    IO.inspect(followed_signals)
 
     render(conn, "show.html", user_signals: user_signals, followed_signals: followed_signals)
   end

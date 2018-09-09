@@ -19,13 +19,11 @@
 .modal-form{
   width: 50%;
   margin-left: 50%;
-  -webkit-box-shadow: inset 0px 45px 7px -45px rgba(0,0,0,0.75);
   display: none;
   height: 100vh;
   background-color: rgb(0,201,148);
 }
 #modal-forms-container{
-  box-shadow: -2px -1px 8px -3px rgba(0,0,0,0.75);
   display: none;
   position: absolute;
   top: 45px;
@@ -262,7 +260,7 @@ margin-left: -15px;
 }
 .support-signal-btn{
   color:white;
-  background: rgb(0,201,148);;
+  background: rgb(0,201,148);
 }
 .comment-signal-btn:hover{
   text-decoration: none;
@@ -272,119 +270,15 @@ margin-left: -15px;
   text-decoration: none;
   color: white;
 }
-
-
-
-
-
-/* NEW SIGNAL MODAL */
-
-.container-new-signal label-signal{
-  font-size: 20px;
+.form-sign-in{
+  color:white;
+  background:rgb(0,201,148) ;
+}
+.form-sign-in .form-control{
+  border-radius: 0px;
+  border:0px;
+  margin-top: 15px;
+}
+.form-sign-in a{
   color: white;
-  font-family: monospace;
-  font-weight: bold;
 }
-.container-new-signal label-1{
-  font-size: 15px;
-  color: white;
-  font-family: monospace;
-  font-weight: bold;
-  margin-left: 1%;
-}
-.container-new-signal label-2{
-  font-size: 15px;
-  margin-left: 1%;
-  font-weight: bold;
-  color: white;
-  font-family: monospace;
-}
-.container-new-signal label-3{
-  margin-left: 1%;
-  font-size: 15px;
-  font-weight: bold;
-  color: white;
-  font-family: monospace;
-}
-.container-new-signal label-4{
-  margin-left: 1%;
-  font-size: 15px;
-  font-weight: bold;
-  color: white;
-  font-family: monospace;
-}
-.container-new-signal label-5{
-  margin-left: 1%;
-  font-size: 15px;
-  font-weight: bold;
-  color: white;
-  font-family: monospace;
-}
-.container-new-signal .form-group{
-  padding-top: 0px;
-  padding-bottom: 3vh;
-  padding-left: 5px;
-  margin-bottom: 0;
-  margin: 1%;
-  margin-top: 5vh;
-}
-input#autocomplete{
-  margin-left: 0px;
-}
-.container-new-signal .form-group .form-control{
-  padding-left: 5px;
-  margin-bottom: 0;
-}
-.container-new-signal textarea:focus{
-  border-color: white;
-}
-.container-new-signal textarea{
-  color: white;
-  width: 100%;
-  background-color: transparent;
-  border: 1px solid white;
-}
-.container-new-signal .form-group select{
-  border-color: white;
-  background-color: transparent;
-  color: black;
-}
-
-.container-new-signal input#signals_address, input#signals_title{
-  margin-left: 0px;
-}
-.container-new-signal .under-form{
-  width: 100%;
-  display: inline-block;
-  margin: 0%;
-  padding: 0%
-
-}
-.container-new-signal{
-  height: 100%;
-  background-color: rgb(0,201,148);
-  padding: 2.5%;
-  margin: 0px;
-}
-
-/* NEW SIGNAL MODAL */
-
-/* SIGNALS SHOW */
-
-.comment_box{
-  margin-top: 40px;
-  margin-bottom: 40px;
-  width: 100%;
-
-}
-
-.comment_box_area{
-  width: 100%;
-  height: 100px;
-  
-}
-
-
-/* SIGNALS SHOW */
-
-

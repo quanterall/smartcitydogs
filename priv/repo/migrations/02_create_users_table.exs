@@ -15,7 +15,7 @@ defmodule Smartcitydogs.Repo.Migrations.Users do
       add(:liked_signals, {:array, :integer})
       add(:liked_comments, {:array, :integer})
       add(:disliked_comments, {:array, :integer})
-      add(:users_types_id, references("users_types"))
+      add(:users_types_id, references("users_types"), default: 2)
       timestamps()
     end
   end

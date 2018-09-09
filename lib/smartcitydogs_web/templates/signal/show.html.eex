@@ -1,4 +1,4 @@
-<div class="row  pt-5 ">
+<div class="row  pt-5 pb-5 ">
     <div class="col-lg-5">
         <div class="signal-gallery">
             <%= for image <- @signal.signals_images do %>
@@ -22,7 +22,8 @@
         <div class="slick-card-small mt-3">
             <div class="row">
                 <div class="col-6"><%=@signal.address%></div>
-                <div class="col-6"><a class="show-map-btn blue-bold" href="#" type="button" id="view_map">ВИЖ НА КАРТА</a></div>
+                <div class="col-6"><a class="show-map-btn blue-bold" href="#" type="button" id="view_map">ВИЖ НА
+                    КАРТА</a></div>
             </div>
         </div>
         <div id="map_container" style="position: relative; display: none;">
@@ -52,23 +53,32 @@
                 <%= @signal.address_B %>
             </hidden-input>
             <hidden-input id="cor_a" style="display: none;">
-                    <%= @signal.address_F %>
+                <%= @signal.address_F %>
             </hidden-input>
-            
+
         </div>
         <div class="row mt-3">
             <div class="col text-right">
-                <div class="d-inline-block">
-                    <a href="" class="comment-signal-btn">
-                        <i class="far fa-comment fa-flip-horizontal"></i>
-                        КОМЕНТИРАЙ</a>
-                </div>
-                <div class="d-inline-block">
-                    <a href="" class="support-signal-btn">
-                        <i class="fas fa-arrow-up"></i>
-                        ПОДКРЕПИ
-                    </a>
-                </div>
+                <a href="#comment_form" class="comment-signal-btn d-inline-block">
+                    <i class="far fa-comment fa-flip-horizontal"></i>
+                    КОМЕНТИРАЙ
+                </a>
+                <%= if @user_likes_count == 0 do %>
+                    <%= form_for @conn, signal_path(@conn, :like ,@signal.id), [class: "d-inline-block"], fn f -> %>
+                    <button type="submit" class="support-signal-btn">
+                       <i class="fas fa-arrow-up"></i>
+                        ПОСЛЕДВАЙ
+                    </button>
+                    <% end %>
+                <% else %>
+                    <%= form_for @conn, signal_path(@conn, :dislike ,@signal.id), [class: "d-inline-block"], fn f -> %>
+                    <button type="submit" class="support-signal-btn">
+                       <i class="fas fa-arrow-up"></i>
+                        ОТСЛЕДВАЙ
+                    </button>
+                    <% end %>
+                <% end %>
+
             </div>
         </div>
         <div class="signal-comments-title mt-3 mb-3">
@@ -83,21 +93,21 @@
             </div>
         </div>
         <% end %>
-        <%= form_for @conn, signals_comment_path(@conn, :create), [class: "Comment_form"], fn f -> %>
-        todo: comment form
-           <div class="form-group-comment comment_box">
-            <%= textarea f, :description, class: "comment_box_area", placeholder: "Въведете коментар...." %>
-            <%= error_tag f, :description %>
-           </div>
-           <div class="form-group-comment col text-right">
-                
+
+        <%= form_for @conn, signals_comment_path(@conn, :create,@signal.id), [class: "Comment_form",id: "comment_form"],
+        fn f -> %>
+        <div class="form-group-comment comment_box">
+            <%= textarea f, :comment, class: "comment_box_area", placeholder: "Въведете коментар...." %>
+            <%= error_tag f, :comment %>
+        </div>
+        <div class="form-group-comment col text-right">
             <div class="d-inline-block">
-                 <button type="submit" class="comment-signal-btn">
+                <button type="submit" class="comment-signal-btn">
                     <i class="far fa-comment fa-flip-horizontal"></i>
-                    <!-- <%= submit "Коментирай", class: "d-inline-block comment-signal-btn" %> -->
-                 КОМЕНТИРАЙ</button>
-             </div>
-           </div>
+                    КОМЕНТИРАЙ
+                </button>
+            </div>
+        </div>
         <% end %>
     </div>
 </div>

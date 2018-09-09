@@ -77,7 +77,8 @@ defmodule Smartcitydogs.Mixfile do
       {:cmark, "~> 0.7"},
       {:recaptcha, "~> 2.3"},
       {:bodyguard, "~> 2.1"},
-      {:faker, "~> 0.10"}
+      {:faker, "~> 0.10"},
+      {:navigation_history, "~> 0.0"}
     ]
   end
 

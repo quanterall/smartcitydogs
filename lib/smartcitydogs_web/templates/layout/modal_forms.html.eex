@@ -13,7 +13,7 @@
     <div class="modal-form <%= if length(@conn.path_info) == 0 do %>
                 shadow-off
             <% end %>" id="signal-form">
-        <%= render SmartcitydogsWeb.SignalView, "form_signal.html", assigns %>
+        <%= render SmartcitydogsWeb.SignalView, "new.html", assigns %>
     </div>
      <div class="modal-form <%= if length(@conn.path_info) == 0 do %>
                 shadow-off
@@ -23,7 +23,5 @@
      <div class="modal-form <%= if length(@conn.path_info) == 0 do %>
                 shadow-off
             <% end %>" id="change-info-form">
-
     </div>
-
 </div>

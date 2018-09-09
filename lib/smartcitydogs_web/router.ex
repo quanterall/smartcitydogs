@@ -7,6 +7,7 @@ defmodule SmartcitydogsWeb.Router do
     plug(:fetch_flash)
     plug(:protect_from_forgery)
     plug(:put_secure_browser_headers)
+    plug NavigationHistory.Tracker
   end
 
   pipeline :api do
@@ -57,12 +58,10 @@ defmodule SmartcitydogsWeb.Router do
 
     resources("/signals", SignalControllerAPI, except: [:new, :edit])
 
-    scope "/signals" do
-      get("/:id/comment", SignalControllerAPI, :comment)
-      get("/:id/unlike", SignalControllerAPI, :unlike)
-      get("/:id/like", SignalControllerAPI, :like)
-      put("/signals/follow", SignalControllerAPI, :follow)
-      put("/signals/unfollow", SignalControllerAPI, :unfollow)
+    scope "/signals/:id" do
+      get("comment", SignalControllerAPI, :comment)
+      get("unlike", SignalControllerAPI, :unlike)
+      get("like", SignalControllerAPI, :like)
     end
 
     get("/my_signals", MySignalsControllerAPI, :index)
@@ -126,7 +125,12 @@ defmodule SmartcitydogsWeb.Router do
       get("/signals/followed_signals", SignalController, :followed_signals)
       get("/signals/:id/update_type", SignalController, :update_type)
       resources("/signals", SignalController)
-      resources("/signal_comment", SignalsCommentController)
+
+      scope "/signals/:id" do
+        resources("/comments", SignalsCommentController)
+        post("dislike", SignalController, :dislike)
+        post("like", SignalController, :like)
+      end
 
       resources("/help", HelpController, only: [:index])
 

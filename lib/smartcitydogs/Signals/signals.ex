@@ -5,6 +5,7 @@ defmodule Smartcitydogs.Signals do
   alias Smartcitydogs.DataSignals
   alias Smartcitydogs.Signals
   alias Smartcitydogs.Repo
+  alias Smartcitydogs.SignalsImages
 
   @timestamps_opts [type: :utc_datetime, usec: false]
 
@@ -13,15 +14,15 @@ defmodule Smartcitydogs.Signals do
     field(:chip_number, :string)
     field(:deleted_at, :naive_datetime)
     field(:description, :string)
-    field(:support_count, :integer)
+    field(:support_count, :integer, default: 0)
     field(:title, :string)
-    field(:view_count, :integer)
+    field(:view_count, :integer, default: 0)
     field(:address_B, :float)
     field(:address_F, :float)
 
     has_many(:signals_comments, Smartcitydogs.SignalsComments)
     belongs_to(:signals_categories, Smartcitydogs.SignalsCategories)
-    belongs_to(:signals_types, Smartcitydogs.SignalsTypes)
+    belongs_to(:signals_types, Smartcitydogs.SignalsTypes, defaults: 1)
     has_many(:signals_images, Smartcitydogs.SignalsImages)
     has_many(:signals_likes, Smartcitydogs.SignalsLikes)
     belongs_to(:users, Smartcitydogs.User)
@@ -41,18 +42,29 @@ defmodule Smartcitydogs.Signals do
       :description,
       :deleted_at,
       :signals_categories_id,
-      :signals_types_id,
       :users_id,
       :address_B,
       :address_F
     ])
     |> validate_required([
-      #      :title,
       :address,
       :description,
       :signals_categories_id,
-      :signals_types_id
     ])
+  end
+
+  def get_like_by_user(signal, user) do
+    case user do
+      nil ->
+        []
+
+      _ ->
+        signal
+        |> Repo.preload(:signals_likes)
+
+        signal.signals_likes
+        |> Enum.filter(fn like -> like.users_id == user.id end)
+    end
   end
 
   def get_first_image(signal) do
@@ -79,6 +91,18 @@ defmodule Smartcitydogs.Signals do
           List.first(signal.signals_images).url
       end
     end
+  end
+
+  def create_signal(args \\ %{}) do
+    %Signals{}
+    |> Signals.changeset(args)
+    |> Repo.insert()
+  end
+
+  def create_signal_images(args \\ %{}) do
+    %SignalsImages{}
+    |> SignalsImages.changeset(args)
+    |> Repo.insert()
   end
 
   ## Get all of the ticked checkboxes from the filters, handle redirection to pagination pages.
