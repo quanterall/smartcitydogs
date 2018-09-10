@@ -108,18 +108,8 @@ defmodule SmartcitydogsWeb.SignalController do
   end
 
   def new(conn, _params) do
-    changeset = Smartcitydogs.DataSignals.change_signal(%Signals{})
-
-    with :ok <-
-           Bodyguard.permit(
-             Smartcitydogs.Signals.Policy,
-             :new,
-             conn.assigns.current_user
-           ) do
-      render(conn, "new_signal.html", changeset: changeset)
-    else
-      {:error, _} -> render(conn, SmartcitydogsWeb.ErrorView, "401.html")
-    end
+    signal_changeset = Smartcitydogs.DataSignals.change_signal(%Signals{})
+    render(conn, "new.html", signal_changeset: signal_changeset)
   end
 
   def create(%{:assigns => %{:current_user => %{:id => user_id}}} = conn, %{"signals" => params}) do
@@ -148,9 +138,7 @@ defmodule SmartcitydogsWeb.SignalController do
         redirect(conn, to: signal_path(conn, :show, signal))
 
       {:error, signal_changeset} ->
-      conn = assign(conn, :signal_changeset,  signal_changeset)
-      require IEx; IEx.pry();
-        Phoenix.Controller.redirect(conn, to: NavigationHistory.last_path(conn))
+        render(conn, "new.html", signal_changeset: signal_changeset)
     end
   end
 
@@ -181,41 +169,27 @@ defmodule SmartcitydogsWeb.SignalController do
   end
 
   def edit(conn, %{"id" => id}) do
-    signal = DataSignals.get_signal(id)
-
-    with :ok <-
-           Bodyguard.permit(
-             Smartcitydogs.Signals.Policy,
-             :edit,
-             conn.assigns.current_user
-           ) do
-      changeset = DataSignals.change_signal(signal)
-      render(conn, "edit_signal.html", signal: signal, changeset: changeset)
-    else
-      {:error, _} -> render(conn, SmartcitydogsWeb.ErrorView, "401.html")
-    end
+    signal = Signals |> Repo.get(id)
+    signal_changeset = signal |> Signals.changeset(%{})
+    render(conn, "edit.html", signal: signal, signal_changeset: signal_changeset)
   end
 
   def update(conn, %{"id" => id, "signals" => signal_params}) do
-    signal = DataSignals.get_signal(id)
+    signal =
+      Signals
+      |> Repo.get(id)
 
-    with :ok <-
-           Bodyguard.permit(
-             Smartcitydogs.Signals.Policy,
-             :update,
-             conn.assigns.current_user
-           ) do
-      case DataSignals.update_signal(signal, signal_params) do
-        {:ok, signal} ->
-          conn
-          |> put_flash(:info, "Signal updated successfully.")
-          |> render("show.html", signal: signal)
+    result =
+      signal
+      |> Signals.changeset(signal_params)
+      |> Repo.update()
 
-        {:error, %Ecto.Changeset{} = changeset} ->
-          render(conn, "edit_signal.html", signal: signal, changeset: changeset)
-      end
-    else
-      {:error, _} -> render(conn, SmartcitydogsWeb.ErrorView, "401.html")
+    case result do
+      {:ok, signal} ->
+        redirect(conn, to: signal_path(conn, :show, signal))
+
+      {:error, %Ecto.Changeset{} = signal_changeset} ->
+        render(conn, "edit.html", signal: signal, signal_changeset: signal_changeset)
     end
   end
 

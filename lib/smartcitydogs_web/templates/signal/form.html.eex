@@ -1,0 +1,57 @@
+<%= form_for signal_changeset(@conn), @action,[multipart: true, class: "form-elixir register-form-class"], fn f -> %>
+<div class="row">
+    <div class="col-12">
+        <label>1. Изберете категория на сигнала</label>
+        <div class="form-group">
+            <label class="form-check-label">
+                <%=radio_button(f, :signals_categories_id, "1") %>
+                Бездомно куче
+            </label>
+            <label class="form-check-labe2">
+                <%=radio_button(f, :signals_categories_id, "2") %>
+                Бездомно куче
+            </label>
+            <label class="form-check-label">
+                <%=radio_button(f, :signals_categories_id, "3") %>
+                Бездомно куче
+            </label>
+        </div>
+    </div>
+    <div class="col-12">
+        <div class="form-group">
+            <label>2. Въведете адрес</label>
+            <%= text_input f, :address, class: "form-control",id: "autocomplete" ,minlength: "2", required: true %>
+            <%= error_tag f, :address %>
+        </div>
+    </div>
+
+    <div class="col-12">
+
+        <div class="form-group">
+            <label>3. Качете налични снимки/видео</label>
+            <%= file_input f, :url, multiple: true, class: "form-control", id: "signals_url" %>
+            <%= error_tag f, :url %>
+        </div>
+    </div>
+    <div class="col-12">
+        <label>4. Опишете ситуацията</label>
+        <div class="form-group">
+            <%= textarea f, :description, class: "form-control", placeholder: "Въведете описание...." %>
+            <%= error_tag f, :description %>
+        </div>
+    </div>
+    <div class="hidden-form-group">
+        <%= hidden_input f, :address_F, id: "address_F" %>
+        <%= hidden_input f, :address_B, id: "address_B" %>
+    </div>
+</div>
+
+<div class="row mt-5 pb-5">
+    <div class="col">
+        <a class="close-modal" href="#">ОТКАЗ</a>
+    </div>
+    <div class="col">
+        <%= submit "ПОДАЙ СИГНАЛ", class: "btn btn-submit m-auto d-block" %> <br>
+    </div>
+</div>
+<% end %>

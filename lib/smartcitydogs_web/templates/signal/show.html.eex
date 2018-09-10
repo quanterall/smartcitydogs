@@ -14,10 +14,10 @@
             <%=Timex.format!( @signal.inserted_at,"%d.%m.%y",:strftime)%> г.
         </div>
         <div class="slick-card-title">
-            <%=@signal.signals_categories.name%>
+            <h1><%=@signal.signals_categories.name%></h1>
         </div>
         <div>
-            <%=@signal.description%>
+            <p><%=@signal.description%></p>
         </div>
         <div class="slick-card-small mt-3">
             <div class="row">
@@ -89,7 +89,7 @@
             <div class="col-6 comment-user-name p-0"><%=comment.users.first_name%> <%=comment.users.last_name%></div>
             <div class="col-6 text-right"><%=Timex.format!( comment.inserted_at,"%d.%m.%y",:strftime)%> г.</div>
             <div class="col-12 mt-2  p-0">
-                <p><%=comment.comment%></p>
+                <%=comment.comment%>
             </div>
         </div>
         <% end %>
@@ -97,10 +97,10 @@
         <%= form_for @conn, signals_comment_path(@conn, :create,@signal.id), [class: "Comment_form",id: "comment_form"],
         fn f -> %>
         <div class="form-group-comment comment_box">
-            <%= textarea f, :comment, class: "comment_box_area", placeholder: "Въведете коментар...." %>
+            <%= textarea f, :comment, class: "comment_box_area form-control", placeholder: "Въведете коментар...." %>
             <%= error_tag f, :comment %>
         </div>
-        <div class="form-group-comment col text-right">
+        <div class="form-group-comment col text-right mt-3">
             <div class="d-inline-block">
                 <button type="submit" class="comment-signal-btn">
                     <i class="far fa-comment fa-flip-horizontal"></i>

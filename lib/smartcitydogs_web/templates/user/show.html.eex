@@ -1,13 +1,16 @@
 <div class="row pt-5">
     <div class="col-lg-3">
-        <div class=" user-profile">ПРОФИЛ</div>
+        <div class=" user-profile">ПРОФИЛ
+            <a href="<%=user_path(@conn,:edit,@current_user.id)%>">
+                <i class="fas fa-pencil-alt"></i>
+            </a>
+        </div>
         <div class="mt-3">Име и фамилия:</div>
         <div class="mb-3 user-profile-text"><%= @current_user.first_name %> <%= @current_user.last_name %></div>
         <div>Имейл:</div>
         <div class="mb-3 user-profile-text"><%= @current_user.email %></div>
         <div>Парола:</div>
         <div class="user-profile-text">***********</div>
-        <div class="mb-3"><a href="" class="text-green">сняма на паролата</a></div>
         <div>Телефонен номер:</div>
         <div class="mb-3 user-profile-text"> <%= @current_user.phone %></div>
     </div>

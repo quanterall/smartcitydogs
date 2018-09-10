@@ -10,16 +10,20 @@
             <% end %>" id="register-form">
         <%= render SmartcitydogsWeb.UserView, "new.html", assigns %>
     </div>
+    <%= if List.first(@conn.path_info) != "signals" && List.last(@conn.path_info) != "new" && List.last(@conn.path_info) != "create" do %>
     <div class="modal-form <%= if length(@conn.path_info) == 0 do %>
                 shadow-off
             <% end %>" id="signal-form">
         <%= render SmartcitydogsWeb.SignalView, "new.html", assigns %>
     </div>
-     <div class="modal-form <%= if length(@conn.path_info) == 0 do %>
+    <% end %>
+
+    <div class="modal-form <%= if length(@conn.path_info) == 0 do %>
                 shadow-off
             <% end %>" id="forgotten-pass-form">
-            <%= render SmartcitydogsWeb.ForgotenPasswordView, "new.html", assigns  %>
+        <%= render SmartcitydogsWeb.ForgotenPasswordView, "new.html", assigns  %>
     </div>
+
      <div class="modal-form <%= if length(@conn.path_info) == 0 do %>
                 shadow-off
             <% end %>" id="change-info-form">

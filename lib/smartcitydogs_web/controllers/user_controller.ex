@@ -11,18 +11,9 @@ defmodule SmartcitydogsWeb.UserController do
   plug(:put_layout, false when action in [:new])
 
   def index(conn, _params) do
-    users = DataUsers.list_users()
+    # todo: for admin
 
-    with :ok <-
-           Bodyguard.permit(
-             Smartcitydogs.Users.Policy,
-             :index,
-             conn.assigns.current_user
-           ) do
-      render(conn, "index.html", users: users)
-    else
-      {:error, _} -> render(conn, SmartcitydogsWeb.ErrorView, "401.html")
-    end
+    # render(conn, "index.html", users: users)
   end
 
   def new(conn, _params) do
@@ -45,18 +36,20 @@ defmodule SmartcitydogsWeb.UserController do
   end
 
   def show(conn, id) do
+    preload = [
+      :signals_images,
+      :signals_types,
+      :signals_categories,
+      :signals_comments,
+      :signals_likes
+    ]
+
     user_signals =
       Signals
       |> limit(6)
       |> where(users_id: ^conn.assigns.current_user.id)
       |> Repo.all()
-      |> Repo.preload([
-        :signals_images,
-        :signals_types,
-        :signals_categories,
-        :signals_comments,
-        :signals_likes
-      ])
+      |> Repo.preload(preload)
 
     followed_signals =
       SignalsLikes
@@ -65,67 +58,36 @@ defmodule SmartcitydogsWeb.UserController do
       |> Repo.all()
       |> Repo.preload([:signals])
       |> Enum.map(fn x -> x.signals end)
-      |> Repo.preload([
-        :signals_images,
-        :signals_types,
-        :signals_categories,
-        :signals_comments,
-        :signals_likes
-      ])
+      |> Repo.preload(preload)
 
     render(conn, "show.html", user_signals: user_signals, followed_signals: followed_signals)
   end
 
   def edit(conn, %{"id" => id}) do
-    user = DataUsers.get_user!(id)
-    changeset = DataUsers.change_user(user)
+    user =
+      User
+      |> Repo.get(id)
 
-    with :ok <-
-           Bodyguard.permit(
-             Smartcitydogs.Users.Policy,
-             :edit,
-             conn.assigns.current_user
-           ) do
-      logged_user_id = conn.assigns.current_user.id
-      request_user_id = user.id
+    user_changeset =
+      user
+      |> User.changeset(%{})
 
-      if logged_user_id != request_user_id do
-        render(conn, SmartcitydogsWeb.ErrorView, "401.html")
-      else
-        render(conn, "edit.html", user: user, changeset: changeset)
-      end
-    else
-      {:error, _} -> render(conn, SmartcitydogsWeb.ErrorView, "401.html")
-    end
+    render(conn, "edit.html", user: user, user_changeset: user_changeset)
   end
 
   def update(conn, %{"id" => id, "user" => user_params}) do
-    user = DataUsers.get_user!(id)
+    user = Repo.get(User, id)
 
-    with :ok <-
-           Bodyguard.permit(
-             Smartcitydogs.Users.Policy,
-             :update,
-             conn.assigns.current_user
-           ) do
-      logged_user_id = conn.assigns.current_user.id
-      request_user_id = user.id
+    result =
+      User.changeset(user, user_params)
+      |> Repo.update()
 
-      if logged_user_id != request_user_id do
-        render(conn, SmartcitydogsWeb.ErrorView, "401.html")
-      else
-        case DataUsers.update_user(user, user_params) do
-          {:ok, user} ->
-            conn
-            |> put_flash(:info, "User updated successfully.")
-            |> redirect(to: user_path(conn, :show, user))
+    case result do
+      {:ok, user} ->
+        redirect(conn, to: user_path(conn, :show, user))
 
-          {:error, %Ecto.Changeset{} = changeset} ->
-            render(conn, "edit.html", user: user, changeset: changeset)
-        end
-      end
-    else
-      {:error, _} -> render(conn, SmartcitydogsWeb.ErrorView, "401.html")
+      {:error, %Ecto.Changeset{} = user_changeset} ->
+        render(conn, "edit.html", user: user, user_changeset: user_changeset)
     end
   end
 

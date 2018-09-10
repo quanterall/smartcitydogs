@@ -49,7 +49,7 @@ defmodule Smartcitydogs.Signals do
     |> validate_required([
       :address,
       :description,
-      :signals_categories_id,
+      :signals_categories_id
     ])
   end
 

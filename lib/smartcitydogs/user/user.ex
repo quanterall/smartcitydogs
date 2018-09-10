@@ -21,16 +21,12 @@ defmodule Smartcitydogs.User do
     field(:agreed_to_terms, :boolean, default: [], virtual: true)
 
     has_many(:signals_comments, Smartcitydogs.SignalsComments)
-    # citizen
     belongs_to(:users_types, Smartcitydogs.UsersType, defaults: 2)
     has_many(:signals, Smartcitydogs.Signals)
     has_many(:contacts, Smartcitydogs.Contact)
     has_many(:adopt, Smartcitydogs.Adopt)
     timestamps()
   end
-
-  # @required_fields ~w(email)a
-  # @optional_fields ~w(name is_admin)a
 
   @doc false
   def changeset(user, attrs \\ %{}) do

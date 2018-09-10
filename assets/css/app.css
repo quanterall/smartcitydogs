@@ -147,7 +147,7 @@
     color: orange !important;
 }
 .signal-type-label.sent{
-    color: yellow !important;
+    color: #bfbf00 !important;
 }
 .signal-type-label.closed{
     color: #00ba00 !important;
@@ -281,4 +281,8 @@ margin-left: -15px;
 }
 .form-sign-in a{
   color: white;
+}
+.show-map-btn{
+  border:none;
+  -webkit-appearance: inherit;
 }
