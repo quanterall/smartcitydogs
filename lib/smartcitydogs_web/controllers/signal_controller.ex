@@ -10,7 +10,6 @@ defmodule SmartcitydogsWeb.SignalController do
 
   action_fallback(SmartCityDogsWeb.FallbackController)
 
-  ## Hanlde regular user page
   def index(conn, params) do
     page =
       Signals
@@ -150,11 +149,14 @@ defmodule SmartcitydogsWeb.SignalController do
     signal =
       Signals
       |> Repo.get(id)
-      |> Repo.preload([:signals_types, :signals_categories, :signals_likes, :signals_images])
-      |> Repo.preload(
+      |> Repo.preload([
+        :signals_types,
+        :signals_categories,
+        :signals_likes,
+        :signals_images,
         signals_comments: from(p in SignalsComments, order_by: [desc: p.inserted_at]),
         signals_comments: :users
-      )
+      ])
 
     signal
     |> Signals.changeset(%{view_count: signal.view_count + 1})
@@ -184,8 +186,7 @@ defmodule SmartcitydogsWeb.SignalController do
       |> Repo.get(id)
 
     result =
-      signal
-      |> Signals.changeset(signal_params)
+      Signals.changeset(signal, signal_params)
       |> Repo.update()
 
     case result do
@@ -209,25 +210,19 @@ defmodule SmartcitydogsWeb.SignalController do
   end
 
   def delete(conn, %{"id" => id}) do
-    with :ok <-
-           Bodyguard.permit(
-             Smartcitydogs.Signals.Policy,
-             :update,
-             conn.assigns.current_user
-           ) do
-      {:ok, _} = DataSignals.delete_signal(id)
+    {:ok, _} = Repo.get!(Signals, id) |> Repo.delete()
 
-      conn
-      |> put_flash(:info, "Signal deleted successfully.")
-      |> redirect(to: signal_path(conn, :index))
-    else
-      {:error, _} -> render(conn, SmartcitydogsWeb.ErrorView, "401.html")
-    end
+    conn
+    |> put_flash(:info, "Signal deleted successfully.")
+    |> redirect(to: signal_path(conn, :index))
   end
 
   def like(conn, %{"id" => id}) do
     Signals.add_like(conn.assigns.current_user.id, id)
-    redirect(conn, to: signal_path(conn, :show, id))
+
+    conn
+    |> put_flash(:info, "Signal liked!")
+    |> redirect(to: signal_path(conn, :show, id))
   end
 
   def dislike(conn, %{"id" => id}) do

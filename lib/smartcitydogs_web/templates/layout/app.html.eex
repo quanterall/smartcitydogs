@@ -77,6 +77,11 @@
                 <%= get_flash(@conn, :error) %>
             </div>
             <% end %>
+            <%= if get_flash(@conn, :info) do %>
+            <div class="alert alert-success custom-fixed-alert" role="alert">
+                <%= get_flash(@conn, :info) %>
+            </div>
+            <% end %>
             <%= render @view_module, @view_template, assigns %>
         </main>
     </div>
