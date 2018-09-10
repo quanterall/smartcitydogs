@@ -236,11 +236,13 @@ Enum.each(0..99, fn _ ->
       |> Animals.changeset(animals_params)
       |> Repo.insert!()
 
-    animals_images_params = %{animals_id: animal.id}
+    animals_images_params = %{animals_id: animal.id, url: "images/escaped.jpg"}
 
-    %AnimalImages{}
-    |> AnimalImages.changeset(animals_images_params)
-    |> Repo.insert!()
+    Enum.each(0..3, fn _ ->
+      %AnimalImages{}
+      |> AnimalImages.changeset(animals_images_params)
+      |> Repo.insert!()
+    end)
   end
 end)
 

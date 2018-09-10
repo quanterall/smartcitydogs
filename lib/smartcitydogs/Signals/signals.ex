@@ -93,6 +93,19 @@ defmodule Smartcitydogs.Signals do
     end
   end
 
+  def add_like(user_id, signal_id) do
+    %Smartcitydogs.SignalsLikes{}
+    |> Smartcitydogs.SignalsLikes.changeset(%{users_id: user_id, signals_id: signal_id})
+    |> Repo.insert()
+  end
+
+  def remove_like(user_id, signal_id) do
+    from(l in Smartcitydogs.SignalsLikes,
+      where: l.users_id == ^user_id and l.signals_id == ^signal_id
+    )
+    |> Repo.delete_all()
+  end
+
   def create_signal(args \\ %{}) do
     %Signals{}
     |> Signals.changeset(args)

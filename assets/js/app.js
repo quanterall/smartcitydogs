@@ -296,8 +296,8 @@ $(document).ready(function(){
     });
 
     $('#view_map').click(function() {
-        var cor_a = $('#cor_a').text();
-        var cor_b = $('#cor_b').text();
+        var cor_a = $('#cor_a').val();
+        var cor_b = $('#cor_b').val();
         var mymap = L.map('signal_map').setView([cor_a, cor_b], 16);
 
         L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {

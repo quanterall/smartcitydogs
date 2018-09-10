@@ -157,7 +157,7 @@
   color: red !important;
 }
 .animal-status-text.shelter{
-  color: yellow !important;
+  color: #bfbf00 !important;
 }
 .animal-status-text.adopted{
   color: #00ba00 !important;
@@ -284,5 +284,15 @@ margin-left: -15px;
 }
 .show-map-btn{
   border:none;
-  -webkit-appearance: inherit;
+  -webkit-appearance: inherit !important;
+}
+.custom-fixed-alert{
+  top: 78px;
+  display: inline-block;
+  width: fit-content;
+  margin: auto;
+  position: absolute !important;
+  z-index: 10;
+  left: 0px;
+  right: 0px;
 }

@@ -10,7 +10,7 @@
             <% end %>" id="register-form">
         <%= render SmartcitydogsWeb.UserView, "new.html", assigns %>
     </div>
-    <%= if List.first(@conn.path_info) != "signals" && List.last(@conn.path_info) != "new" && List.last(@conn.path_info) != "create" do %>
+    <%= if !(List.first(@conn.path_info) == "signals" && Enum.member?(["new", "create","edit"], List.last(@conn.path_info)) ) do %>
     <div class="modal-form <%= if length(@conn.path_info) == 0 do %>
                 shadow-off
             <% end %>" id="signal-form">

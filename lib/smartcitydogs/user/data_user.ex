@@ -59,19 +59,6 @@ defmodule Smartcitydogs.DataUsers do
     User.changeset(user, %{})
   end
 
-  def add_like(user_id, signal_id) do
-    %Smartcitydogs.SignalsLikes{}
-    |> Smartcitydogs.SignalsLikes.changeset(%{users_id: user_id, signals_id: signal_id})
-    |> Repo.insert()
-  end
-
-  def remove_like(user_id, signal_id) do
-    from(l in Smartcitydogs.SignalsLikes,
-      where: l.users_id == ^user_id and l.signals_id == ^signal_id
-    )
-    |> Repo.delete_all()
-  end
-
   def get_likes(signal_id) do
     Repo.one(
       from(l in Smartcitydogs.SignalsLikes, select: count(l.id), where: l.signals_id == ^signal_id)

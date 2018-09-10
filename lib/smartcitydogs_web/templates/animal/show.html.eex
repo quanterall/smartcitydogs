@@ -1,269 +1,59 @@
-
-<meta charset="utf-8">
-<link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/all.css" integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ" crossorigin="anonymous">
-
-<div class="show-signal-container">
-  <div class="show-signal-left-container">
-    <div class="signal-photo-container">
-      <img class="photo-single-signal" src="/<%= get_image_animals_id(@animals.id) %>" alt="Generic placeholder image" width="300" height="200">
+<div class="row  pt-5 pb-5 ">
+    <div class="col-lg-5">
+        <div class="signal-gallery">
+            <%= for image <- @animal.animals_image do %>
+            <img src="/<%= image.url %>" alt="">
+            <% end %>
+        </div>
     </div>
-  </div>
-    <div class="show-signal-right-container">
-      <div id="show_map" style="position: relative; display: none;"></div>
-      
-        <i class="far fa-window-close close2"></i>
-        <show-signal-label-status class="
-          <%= if @animals.animals_status_id == 1 do %>
-          label-type-red
-          <% end %>
-
-          <%= if @animals.animals_status_id == 2 do %>
-          label-type-orange
-          <% end %>
-
-          <%= if @animals.animals_status_id == 3 do %>
-          label-type-green
-          <% end %>
-          ">
-
-          <%= @animals.animals_status_id
-          |> Smartcitydogs.DataAnimals.get_animal_status()
-          |> Map.get(:name)
-          %>
-        </show-signal-label-status>
-       
-        <show-signal-label-adress>
-         <div class="fa fa-map-marker-alt" aria-hidden="false"></div><div class="address-style" id="test-address"><%=@animals.address%></div>
-        </show-signal-label-adress>
-        <a id="show-map" >ВИЖ НА КАРТА</a>
-
-        <show-signal-label-description>
-         <%=@animals.description%>
-        </show-signal-label-description>
-
-        <table class="table-under-form-signal">
-
-          <tr>
-            <td class="title-table-td"> 
-              <label-title-registered>
-                ПОЛ
-              </label-title-registered>
-            </td>
-            <td class="title-table-td">
-
-              <label-title-view-count>
-               ПНОМЕР НА ЧИП
-              </label-title-view-count>
-            </td>
-            <td  class="title-table-td">
-              <label-title-support-count>
-               ДАТА НА РЕГИСТРИРАНЕ
-              </label-title-support-count>
-            </td>
-          </tr>
-
-          <tr>
-            <td class="green-td">
-              <label-description-registered>
-                <%= @animals.sex %>
-              </label-description-registered>
-            </td>
-            <td class="green-td">
-              <label-description-view-count>
-                <%= @animals.chip_number %>
-              </label-description-view-count>
-            </td>
-            <td class="green-td">  
-              <label-description-support-count>
-                <%=
-                animal_time = @animals.inserted_at
-                |> DateTime.truncate(:second)
-                |> DateTime.to_string()
-                count = String.length(animal_time)
-                final_time = String.slice(animal_time,0..count-11)
-                final_time
-                %>
-              </label-description-support-count>
-            </td>
-          </tr>
-        </table>  
-        
-        <% 
-          procedures = Smartcitydogs.DataAnimals.get_procedures(@animals.id)
-          
-        %>
-        <div class="div-procedures">
-        <%= if procedures != [] do %>
-          <b>Извършени процедури</b> 
-          <% else %>
-
-          <% end %>
-            <%= for procedure <- procedures do %>
-            <div class="procedures-all">
-            <i class="fa fa-check"></i> <%= 
-            procedure.procedure_type_id  
-            |> Smartcitydogs.DataProcedure.get_procedure_type!()
-            |> Map.get(:name)
-            %> 
-
-            </div>
-            <% end %>
-        </div> 
-          
-          <div class="buttons-for-signal">
-
-          <%=  cond do %>
-          
-          <%= @current_user == nil -> %>
-            <%= if @animals.animals_status_id == 3 do %>
-              <a input type="button" id="adoption-done"></a>
-            <% else %>
-              <a input type="button" id="register-submit-adoption" onclick="showModalForm(event, 'register-form')"><i class="fa fa-home"></i> ОСИНОВИ </a>
-            <% end %>
-
-          <% @current_user.users_types_id == 2 -> %>
-              <div class="hide_for_ajax">
-
-              <p id="chip_number"><%= @animals.chip_number %></p>
-              <p id="user_name"><%= @current_user.first_name %></p>
-              <p id="user_last_name"><%= @current_user.last_name %></p>
-              <p id="user_email"><%= @current_user.email %></p>
-              <p id="user_phone"><%= @current_user.phone %></p>
-              <p id="animal_id"><%= @animals.id %></p>
-              <p id="user_id"><%= @current_user.id %></p>
-
-              </div>
-            
-            <%= if @animals.animals_status_id == 3 do %>
-              <a input type="button" id="adoption-done"></a>
-            <% else %>
-                <% check = Smartcitydogs.DataAnimals.check_adopt(@current_user.id, @animals.id) %>
-                  <%= if check == false do %>
-                    <a input type="button" id="submit-adoption"><i class="fa fa-home"></i> ОСИНОВИ </a>
-                  <% else %>
-                    <a id="sent-adoption"><i class="fa fa-check check-class"></i> ИЗПРАТЕНА ЗАЯВКА </a>
-                  <% end %>
-
-              <% end %>
-          <% true -> %>
-          <% end %>
-            
-            
-          </div>
-            <%
-             show_under = Smartcitydogs.DataSignals.get_animal_by_chip(@animals.chip_number) 
-            %>
-            <div class="bg-test-signals-dog">
-              <%= if show_under != [] do %>
-                <center><linked-signals>СИГНАЛИ, СВЪРЗАНИ С КУЧЕТО</linked-signals></center> <br>
-                <% else %>
-
-                <% end %>
-                <%= for animal <- show_under do %>  
-                <div class="col-registered-dog">
-                 <div class="col-container" style="background-image: url('/<%= SmartcitydogsWeb.SignalView.get_signals_images(animal.id) %>')">
-                      <div class="col-container-shadow">
-
-                        <label-type class="
-                          <%= if animal.signals_types_id == 1 do %>
-                            label-type-red
-                          <% end %>
-
-                          <%= if animal.signals_types_id == 2 do %>
-                            label-type-orange
-                          <% end %>
-
-                          <%= if animal.signals_types_id == 3 do %>
-                            label-type-yellow
-                          <% end %>
-
-                          <%= if animal.signals_types_id == 4 do %>
-                            label-type-green
-                          <% end %>"><%=animal.signals_types_id
-                        |> Smartcitydogs.DataSignals.get_signal_type()
-                        |> Map.get(:name)
-                        %>
-                      </label-type>
-                        <br />
-
-                        <label-date>
-                        <%=
-                          signal_time = animal.inserted_at
-                          |> DateTime.truncate(:second)
-                          |> DateTime.to_string()
-                          count = String.length(signal_time)
-                          final_time = String.slice(signal_time,0..count-11)
-                          final_time
-                         
-                          %>
-                        <br />
-                        </label-date>
-
-                        <label-title><b><%=animal.title%></b></label-title>
-                        <br />
-
-
-                        <label-adress><%=animal.address%></label-adress>
-                        <br />
-
-                        <div class="icon-scale">
-                          <i class="fas fa-search"></i> : <%=animal.view_count%>
-                          <br />
-                        </div>
-                        <div class="icon-scale">
-                          <i class="fas fa-arrow-up"></i> : <span id="signal-count"><%= animal.support_count %></span>
-                        </div>
-
-                        <div class="icon-scale">
-                          <i class="far fa-comment fa-flip-horizontal"></i> : <%= Enum.count(Smartcitydogs.DataSignals.get_comment_signal_id(animal.id)) %>
-                          <br />
-                        </div>
-                        <center>
-
-                        <center>
-                        <div class="button-show-hide">
-                          <p class="p-button-view">
-                          <%= link "Към сигнала", to: signal_path(@conn, :show, animal.id), class: "btn btn-secondary" %>
-                          </p>
-                      </div></center>
-                      </div>
-                    </div>
+    <div class="col-lg-7">
+        <div class="animal-status-text <%=@animal.animals_status.prefix%> mb-2">
+            <%= @animal.animals_status.name%>
+        </div>
+        <div class="slick-card-small ">
+            <%= Timex.format!(@animal.inserted_at, "%d.%m.%y",:strftime)%> г.
+        </div>
+        <div class="slick-card-small mt-3">
+            <div class="row">
+                <div class="col-6"><%= @animal.address %></div>
+                <div class="col-6">
+                    <a class="show-map-btn blue-bold" href="#" type="button" id="view_map">
+                        ВИЖ НА КАРТА
+                    </a>
                 </div>
-                <% end %>
             </div>
         </div>
-      </div>
+        <input type="hidden" id="cor_b" value="<%= @animal.address_B %>">
+        <input type="hidden" id="cor_a" value="<%= @animal.address_F %>">
+        <div id="map_container" style="position: relative; display: none;">
+            <i id="close-map" class="fa fa-times"></i>
+            <div id="signal_map">
+            </div>
+        </div>
+        <div class="animal-description mt-3">
+            <%= @animal.description %>
+        </div>
+        <div class="row signal-statistic mt-4">
+            <div class="col">
+                <div>Пол</div>
+                <div class="blue-bold"><%= @animal.sex %></div>
+            </div>
+            <div class="col">
+                <div>Номер на марка / чип</div>
+                <div class="blue-bold"><%= @animal.chip_number %></div>
+            </div>
+            <div class="col">
+                <div>дата на регистриране</div>
+                <div class="blue-bold"> <%= Timex.format!(@animal.inserted_at, "%d.%m.%y",:strftime)%> г.</div>
+            </div>
+
+        </div>
+        <div class="row mt-3">
+            <div class="col text-right">
+                <a href="" class="comment-signal-btn d-inline-block">
+                    Осинови
+                </a>
+            </div>
+        </div>
     </div>
-</div>  
-
-
-  <script>
-  $('#show_map').hide();
-  $('.close2').hide();
-  var cor_a = $('#cor-a').text();
-  var cor_b = $('#cor-b').text();
-  function ShowMap() {
-    console.log(cor_a);
-    console.log(cor_b);
-    var mapCanvas = document.getElementById("show_map");
-    var myCenter = new google.maps.LatLng(cor_a, cor_b);
-    var mapOptions = {
-        center: myCenter,
-        zoom: 18,
-        mapTypeId: google.maps.MapTypeId.ROADMAP
-    };
-    
-    var map = new google.maps.Map(mapCanvas, mapOptions);
-    var marker = new google.maps.Marker({
-      position: myCenter,
-      animation: google.maps.Animation.BOUNCE
-    });
-    console.log(marker);
-    marker.setMap(map);
-  }
-</script>
-
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDAnp2RXJIJARIGKIcxtUVdHD7-TyFCfe4&callback=ShowMap"></script>
+</div>

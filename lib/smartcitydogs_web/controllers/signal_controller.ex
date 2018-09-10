@@ -4,6 +4,7 @@ defmodule SmartcitydogsWeb.SignalController do
   alias Smartcitydogs.Signals
   alias Smartcitydogs.Repo
   alias Smartcitydogs.SignalsComments
+  alias Smartcitydogs.SignalsImages
   alias Smartcitydogs.DataUsers
   import Ecto.Query
 
@@ -118,8 +119,9 @@ defmodule SmartcitydogsWeb.SignalController do
 
     case Signals.create_signal(params) do
       {:ok, signal} ->
-        if params.url != nil do
-          for n <- params.url do
+      IO.inspect params
+        if params["url"] != nil do
+          for n <- params["url"] do
             extension = Path.extname(n.filename)
 
             File.cp(
@@ -127,11 +129,14 @@ defmodule SmartcitydogsWeb.SignalController do
               "../smartcitydogs/assets/static/images/#{Map.get(n, :filename)}-profile#{extension}"
             )
 
-            %{
+            signal_image_params = %{
               "url" => "images/#{Map.get(n, :filename)}-profile#{extension}",
               "signals_id" => "#{signal.id}"
             }
-            |> DataSignals.signal_images()
+
+            %SignalsImages{}
+            |> SignalsImages.changeset(signal_image_params)
+            |> Repo.insert()
           end
         end
 
@@ -142,10 +147,10 @@ defmodule SmartcitydogsWeb.SignalController do
     end
   end
 
-  def show(conn, params) do
+  def show(conn, %{"id" => id}) do
     signal =
       Signals
-      |> Repo.get(params["id"])
+      |> Repo.get(id)
       |> Repo.preload([:signals_types, :signals_categories, :signals_likes, :signals_images])
       |> Repo.preload(
         signals_comments: from(p in SignalsComments, order_by: [desc: p.inserted_at]),
@@ -222,12 +227,12 @@ defmodule SmartcitydogsWeb.SignalController do
   end
 
   def like(conn, %{"id" => id}) do
-    DataUsers.add_like(conn.assigns.current_user.id, id)
+    Signals.add_like(conn.assigns.current_user.id, id)
     redirect(conn, to: signal_path(conn, :show, id))
   end
 
   def dislike(conn, %{"id" => id}) do
-    DataUsers.remove_like(conn.assigns.current_user.id, id)
+    Signals.remove_like(conn.assigns.current_user.id, id)
     redirect(conn, to: signal_path(conn, :show, id))
   end
 end

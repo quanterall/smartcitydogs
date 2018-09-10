@@ -211,21 +211,12 @@ defmodule SmartcitydogsWeb.AnimalController do
     end
   end
 
-  def show(conn, map) do
-    id_map = map["id"]
+  def show(conn, %{"id" => id}) do
+    animal =
+      Repo.get(Animals, id)
+      |> Repo.preload([:animals_image,:animals_status])
 
-    cond do
-      id_map == "send_email" ->
-        Smartcitydogs.Animals.send_email(map)
-
-      id_map == "new" ->
-        new(conn, map)
-
-      true ->
-        id = String.to_integer(map["id"])
-        animal = DataAnimals.get_animal(id)
-        render(conn, "show.html", animals: animal)
-    end
+    render(conn, "show.html", animal: animal)
   end
 
   def edit(conn, %{"id" => id}) do

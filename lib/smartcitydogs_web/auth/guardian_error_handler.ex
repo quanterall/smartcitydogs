@@ -3,7 +3,7 @@ defmodule Smartcitydogs.GuardianErrorHandler do
 
   def unauthenticated(conn, _params) do
     conn
-    |> Phoenix.Controller.put_flash(:error, "You must be signed in to access that page.")
-    |> Phoenix.Controller.redirect(to: page_path(conn, :index))
+    |> Phoenix.Controller.put_flash(:error, "За да достъп до тази функционалност е необходимо да се впишете в акаунта Ви или се регистрирайте.")
+    |> Phoenix.Controller.redirect(to: NavigationHistory.last_path(conn))
   end
 end
