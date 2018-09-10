@@ -214,7 +214,7 @@ defmodule SmartcitydogsWeb.AnimalController do
   def show(conn, %{"id" => id}) do
     animal =
       Repo.get(Animals, id)
-      |> Repo.preload([:animals_image,:animals_status])
+      |> Repo.preload([:animals_image, :animals_status])
 
     render(conn, "show.html", animal: animal)
   end

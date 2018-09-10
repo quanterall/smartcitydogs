@@ -119,7 +119,6 @@ defmodule SmartcitydogsWeb.SignalController do
 
     case Signals.create_signal(params) do
       {:ok, signal} ->
-      IO.inspect params
         if params["url"] != nil do
           for n <- params["url"] do
             extension = Path.extname(n.filename)
