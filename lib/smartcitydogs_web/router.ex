@@ -26,6 +26,18 @@ defmodule SmartcitydogsWeb.Router do
     plug(Smartcitydogs.CheckAdmin)
   end
 
+  pipeline :shelter_required do
+    plug(Smartcitydogs.CheckShelter)
+  end
+
+  pipeline :municipality_required do
+    plug(Smartcitydogs.CheckMunicipality)
+  end
+
+  pipeline :police_required do
+    plug(Smartcitydogs.CheckPolice)
+  end
+
   pipeline :api_auth do
     plug(:ensure_authenticated)
   end
@@ -99,13 +111,13 @@ defmodule SmartcitydogsWeb.Router do
     pipe_through([:browser, :with_session])
 
     get("/", PageController, :index)
-    resources("/signals", SignalController)
-    resources("/animals", AnimalController)
+    resources("/signals", SignalController, only: [:index, :new, :create, :show])
+    resources("/animals", AnimalController, obly: [:index, :show])
     resources("/sessions", SessionController, only: [:new, :create, :delete])
     resources("/users", UserController, only: [:new, :create])
     resources("/help", HelpController, only: [:index])
     resources("/about", AboutController, only: [:index])
-    resources("/news", NewsController)
+    resources("/news", NewsController, only: [:index, :show, :new, :create])
     resources("/forgoten_password", ForgotenPasswordController)
     resources("/contact", ContactController, only: [:index, :new, :create])
     ###### REGISTERED USER ZONE #########
@@ -153,7 +165,13 @@ defmodule SmartcitydogsWeb.Router do
 
       ######## MUNICIPALITY ZONE #######
 
+      # scope "/municipality" do
+      #   pipe_through([:municipality_required])
+      #    get("/signals", SignalController, :minicipality_signals)
+      # end
+
       scope "/municipality" do
+        pipe_through([:municipality_required])
         get("/animals", AnimalController, :minicipality_registered)
         get("/filter_registered", AnimalController, :filter_registered)
         get("/animals/shelter", AnimalController, :minicipality_shelter)

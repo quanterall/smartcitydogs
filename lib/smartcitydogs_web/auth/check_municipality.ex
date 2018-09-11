@@ -1,4 +1,4 @@
-defmodule Smartcitydogs.CheckAdmin do
+defmodule Smartcitydogs.CheckMunicipality do
   import Phoenix.Controller
   import Plug.Conn
 
@@ -7,7 +7,7 @@ defmodule Smartcitydogs.CheckAdmin do
   def call(conn, _opts) do
     current_user = Guardian.Plug.current_resource(conn)
 
-    if current_user.users_types_id == 1 do
+    if current_user.users_types_id == 4 do
       conn
     else
       conn

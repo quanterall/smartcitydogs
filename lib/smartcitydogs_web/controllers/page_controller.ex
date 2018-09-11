@@ -36,8 +36,6 @@ defmodule SmartcitydogsWeb.PageController do
       |> preload([:animals_image, :animals_status])
       |> Repo.all()
 
-    IO.inspect(conn.assigns)
-
     render(conn, "index.html",
       signals: signals,
       news: news,
