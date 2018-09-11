@@ -33,19 +33,23 @@ defmodule Smartcitydogs.Signals do
   @doc false
   def changeset(signals, attrs) do
     signals
-    |> cast(attrs, [
-      :title,
-      :view_count,
-      :address,
-      :support_count,
-      :chip_number,
-      :description,
-      :deleted_at,
-      :signals_categories_id,
-      :users_id,
-      :address_B,
-      :address_F
-    ])
+    |> cast(
+      attrs,
+      [
+        :title,
+        :view_count,
+        :address,
+        :support_count,
+        :chip_number,
+        :description,
+        :deleted_at,
+        :signals_categories_id,
+        :signals_types_id,
+        :users_id,
+        :address_B,
+        :address_F
+      ]
+    )
     |> validate_required([
       :address,
       :description,
@@ -68,7 +72,9 @@ defmodule Smartcitydogs.Signals do
   end
 
   def get_first_image(signal) do
-    signal = signal |> Repo.preload(:signals_images)
+    signal =
+      signal
+      |> Repo.preload(:signals_images)
 
     if signal.signals_images == [] do
       cond do
@@ -100,7 +106,8 @@ defmodule Smartcitydogs.Signals do
   end
 
   def remove_like(user_id, signal_id) do
-    from(l in Smartcitydogs.SignalsLikes,
+    from(
+      l in Smartcitydogs.SignalsLikes,
       where: l.users_id == ^user_id and l.signals_id == ^signal_id
     )
     |> Repo.delete_all()
@@ -141,10 +148,13 @@ defmodule Smartcitydogs.Signals do
         all_query = []
 
         all_query =
-          Enum.map(data_status, fn x ->
-            struct = from(p in Signals, where: p.signals_types_id == ^String.to_integer(x))
-            all_query ++ Repo.all(struct)
-          end)
+          Enum.map(
+            data_status,
+            fn x ->
+              struct = from(p in Signals, where: p.signals_types_id == ^String.to_integer(x))
+              all_query ++ Repo.all(struct)
+            end
+          )
 
         all_query = List.flatten(all_query)
         list_signals = Smartcitydogs.Repo.paginate(all_query, page: num, page_size: 9)
@@ -155,10 +165,13 @@ defmodule Smartcitydogs.Signals do
         all_query = []
 
         all_query =
-          Enum.map(data_category, fn x ->
-            struct = from(p in Signals, where: p.signals_categories_id == ^String.to_integer(x))
-            all_query ++ Repo.all(struct)
-          end)
+          Enum.map(
+            data_category,
+            fn x ->
+              struct = from(p in Signals, where: p.signals_categories_id == ^String.to_integer(x))
+              all_query ++ Repo.all(struct)
+            end
+          )
 
         all_query = List.flatten(all_query)
         page = Smartcitydogs.Repo.paginate(all_query, page: 1, page_size: 9)
@@ -173,11 +186,23 @@ defmodule Smartcitydogs.Signals do
 
   def get_button_signals(user_id) do
     followed_signals = DataSignals.get_signal_like(user_id)
-    liked_signals = Enum.map(followed_signals, fn x -> x |> Map.get(:signals_id) end)
+
+    liked_signals =
+      Enum.map(
+        followed_signals,
+        fn x ->
+          x
+          |> Map.get(:signals_id)
+        end
+      )
+
     followed_signals = []
 
     followed_signals =
-      for sig <- liked_signals, do: (followed_signals ++ sig) |> DataSignals.get_signal()
+      for sig <- liked_signals,
+          do:
+            (followed_signals ++ sig)
+            |> DataSignals.get_signal()
 
     page = Repo.paginate(followed_signals, page: 1, page_size: 9)
     {page}
@@ -186,11 +211,23 @@ defmodule Smartcitydogs.Signals do
   def get_button_signals(user_id, page_num) do
     signals = DataSignals.get_all_followed_signals(user_id)
     followed_signals = DataSignals.get_signal_like(user_id)
-    liked_signals = Enum.map(followed_signals, fn x -> x |> Map.get(:signals_id) end)
+
+    liked_signals =
+      Enum.map(
+        followed_signals,
+        fn x ->
+          x
+          |> Map.get(:signals_id)
+        end
+      )
+
     followed_signals = []
 
     followed_signals =
-      for sig <- liked_signals, do: (followed_signals ++ sig) |> DataSignals.get_signal()
+      for sig <- liked_signals,
+          do:
+            (followed_signals ++ sig)
+            |> DataSignals.get_signal()
 
     page = Repo.paginate(followed_signals, page: page_num, page_size: 9)
     {page, signals}

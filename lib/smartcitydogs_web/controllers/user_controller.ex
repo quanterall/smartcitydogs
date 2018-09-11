@@ -1,10 +1,8 @@
 defmodule SmartcitydogsWeb.UserController do
   use SmartcitydogsWeb, :controller
 
-  alias Smartcitydogs.DataUsers
   alias Smartcitydogs.User
   alias Smartcitydogs.Repo
-  alias Smartcitydogs.DataSignals
   alias Smartcitydogs.Signals
   alias Smartcitydogs.SignalsLikes
   import Ecto.Query
@@ -47,14 +45,14 @@ defmodule SmartcitydogsWeb.UserController do
     user_signals =
       Signals
       |> limit(6)
-      |> where(users_id: ^conn.assigns.current_user.id)
+      |> where(users_id: ^id)
       |> Repo.all()
       |> Repo.preload(preload)
 
     followed_signals =
       SignalsLikes
       |> limit(6)
-      |> where(users_id: ^conn.assigns.current_user.id)
+      |> where(users_id: ^id)
       |> Repo.all()
       |> Repo.preload([:signals])
       |> Enum.map(fn x -> x.signals end)

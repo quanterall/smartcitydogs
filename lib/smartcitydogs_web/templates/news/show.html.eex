@@ -1,12 +1,16 @@
-  <div class="show-current-news">
-  <label-headline-news><%= @news.title %></label-headline-news>
-  <label-date-news>Дата: <%= NaiveDateTime.to_date( @news.date) %></label-date-news>
-  
-    <img class="rounded-square" src="/<%= @news.image_url %>" alt="Generic placeholder image" width="50%" height="50%"> 
-    
-  <label-text-news><%= render_markdown @news.content %></label-text-news>
-  
-
-  <%= link "Назад", to: news_path(@conn, :index), class: "btn btn-primary" %>
-
+<div class="row pt-5">
+  <div class="col">
+    <div class="row">
+      <div class="col">
+        <img class="img-fluid" src="/<%= @news.image_url %>" alt="Generic placeholder image">
+      </div>
+      <div class="col">
+        <h1><%= @news.title %></h1>
+        <span>Дата: <%= NaiveDateTime.to_date( @news.date) %></span>
+        <p>
+          <%= render_markdown @news.content %>
+        </p>
+      </div>
+    </div>
+  </div>
 </div>

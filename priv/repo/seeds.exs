@@ -385,7 +385,6 @@ Enum.each(0..99, fn _ ->
   }
 
   signal = %Signals{} |> Signals.changeset(signals_params) |> Repo.insert!()
-
   ############## Signals Images #############
   Enum.each(0..5, fn _ ->
     signal_image_params = %{signals_id: signal.id, url: "images/escaped.jpg"}

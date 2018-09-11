@@ -48,6 +48,10 @@ defmodule SmartcitydogsWeb.Router do
     plug(Smartcitydogs.CurrentUser)
   end
 
+  pipeline :municipality_layout do
+    plug(:put_layout, {SmartcitydogsWeb.Municipality.LayoutView, :app})
+  end
+
   scope "/api", SmartcitydogsWeb do
     pipe_through(:api)
 
@@ -117,7 +121,7 @@ defmodule SmartcitydogsWeb.Router do
     resources("/users", UserController, only: [:new, :create])
     resources("/help", HelpController, only: [:index])
     resources("/about", AboutController, only: [:index])
-    resources("/news", NewsController, only: [:index, :show, :new, :create])
+    resources("/news", NewsController, only: [:index, :show, :new, :create, :edit, :update])
     resources("/forgoten_password", ForgotenPasswordController)
     resources("/contact", ContactController, only: [:index, :new, :create])
     ###### REGISTERED USER ZONE #########
@@ -125,7 +129,6 @@ defmodule SmartcitydogsWeb.Router do
       pipe_through([:login_required])
       resources("/users", UserController)
       resources("/registered", AnimalController)
-      resources("/news", NewsController)
 
       ## not in develop
       get("/show", PageController, :show)
@@ -170,15 +173,14 @@ defmodule SmartcitydogsWeb.Router do
       #    get("/signals", SignalController, :minicipality_signals)
       # end
 
-      scope "/municipality" do
-        pipe_through([:municipality_required])
+      scope "/municipality", Municipality, as: :municipality do
+        pipe_through([:municipality_required, :municipality_layout])
         get("/animals", AnimalController, :minicipality_registered)
         get("/filter_registered", AnimalController, :filter_registered)
         get("/animals/shelter", AnimalController, :minicipality_shelter)
         get("/animals/adopted", AnimalController, :minicipality_adopted)
-        get("/signals", SignalController, :minicipality_signals)
+        get("/signals", SignalController, :index)
         get("/filter_signals", SignalController, :filter_signals)
-        resources("/signals", SignalController)
         resources("/registered", AnimalController)
       end
     end

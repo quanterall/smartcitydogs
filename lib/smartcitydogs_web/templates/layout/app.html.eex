@@ -1,102 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <title>SmartCityDogs!</title>
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css"
-          integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
-    <link rel="stylesheet" href='<%= static_path(@conn, "/css/app.css") %>'>
-    <script src='<%= static_path(@conn, "/js/app.js") %>'></script>
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.4/dist/leaflet.css"
-          integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
-          crossorigin=""/>
-    <script src="https://unpkg.com/leaflet@1.3.4/dist/leaflet.js"
-            integrity="sha512-nMMmRyTVoLYqjP9hrbed9S+FzjZHW5gY1TWCHA5ckwXZBadntCNs8kEqAWdrb9O7rxbCaA4lKTIWjDXZxflOcA=="
-            crossorigin=""></script>
+    <%= render("head.html", %{conn: @conn,current_user: @current_user}) %>
 </head>
 <body>
 <div class="container-fluid">
     <div class="fixed-top-costom">
-        <nav class='navbar navbar-expand-lg bg-transperent top-navbar w-100
-            <%= if length(@conn.path_info) == 0 do %>
-                navbar-home
-            <% end %>'>
-            <div class="container">
-                <a class="navbar-brand bg-green pl-3 pr-3 " href="/">SmartCityDogs</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
-                        aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-                    <i class="fas fa-bars"></i>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNavDropdown">
-                    <ul class="navbar-nav mr-auto text-nowrap">
-                        <%= printNavbar(@conn,@current_user) %>
-                    </ul>
-                    <ul class="navbar-nav text-nowrap">
-                        <%= if @current_user do %>
-                        <li class="nav-item ">
-                            <a class="nav-link user-menu" href="<%=user_path(@conn,:show, @current_user) %>">
-                                Здравей, <b><%= @current_user.first_name%></b>
-                                <i class="fa fa-user"></i>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <%= link "Излез", to: session_path(@conn, :delete, @current_user), method: "delete", class:
-                            "nav-link" %>
-                        </li>
-                        <% else %>
-                        <li class="nav-item ">
-                            <a class="nav-link  <%= if length(@conn.path_info) == 0 do  %> black <% end %>"
-                               id="nav-register"
-                               href="#" onclick="showModalForm(event, 'register-form')">Регистрация</a>
-                        </li>
-                        <li class="nav-item ">
-                            <a class="nav-link" id="nav-sign-in"
-                               href="#" onclick="showModalForm(event, 'login-form')">Вход</a>
-                        </li>
-                        <% end %>
-                        <li class="nav-item ">
-                            <a id="new-signal-btn" class="nav-link " onclick="showModalForm(event, 'signal-form')"
-                               href="#">ПОДАЙ СИГНАЛ
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
+        <%= render("navbar.html", %{conn: @conn,current_user: @current_user}) %>
         <%= render("modal_forms.html", %{conn: @conn,current_user: @current_user}) %>
     </div>
     <div class="container">
         <main role="main" class="content-container">
-
-            <%= if get_flash(@conn, :error) do %>
-            <div class="alert alert-danger custom-fixed-alert" role="alert">
-                <%= get_flash(@conn, :error) %>
-            </div>
-            <% end %>
-            <%= if get_flash(@conn, :info) do %>
-            <div class="alert alert-success custom-fixed-alert" role="alert">
-                <%= get_flash(@conn, :info) %>
-            </div>
-            <% end %>
+            <%= render("flash_message.html", %{conn: @conn,current_user: @current_user}) %>
             <%= render @view_module, @view_template, assigns %>
         </main>
     </div>
 </div>
-
-<script>
-    $.ajaxSetup({
-        beforeSend: function (xhr, settings) {
-            xhr.setRequestHeader("x-csrf-token", "<%=Plug.CSRFProtection.get_csrf_token() %>");
-        }
-    });
-
-    $(document).ready(function () {
-        window.showModalForm(null, '<%=@conn.query_params["modal"] %>')
-    });
-</script>
+<%= render("script.html", %{conn: @conn,current_user: @current_user}) %>
 </body>
 </html>

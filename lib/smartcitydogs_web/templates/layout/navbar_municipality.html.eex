@@ -1,9 +1,5 @@
-
-<li class="nav-item active">
-    <a class="nav-link" href="/municipality/signals">Начало</a>
-</li>
 <li class="nav-item">
-    <a class="nav-link" href="/municipality/signals">Подадени сигнали</a>
+    <a class="nav-link" href="<%=municipality_signal_path(@conn, :index)%>">Подадени сигнали</a>
 </li>
 <li class="nav-item">
     <a class="nav-link" href="/municipality/animals">Регистрирани кучета</a>
