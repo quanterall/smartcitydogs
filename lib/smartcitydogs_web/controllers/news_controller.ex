@@ -68,10 +68,8 @@ defmodule SmartcitydogsWeb.NewsController do
     render(conn, "edit.html", news: news, changeset: changeset)
   end
 
-  def update(conn, %{"id" => id, "news" => news_params} =  params ) do
-    IO.inspect params
+  def update(conn, %{"id" => id, "news" => news_params} = params) do
     news = DataPages.get_news(id)
-
     news_params = Map.put(news_params, "date", DateTime.utc_now())
 
     case DataPages.update_news(news, news_params) do
