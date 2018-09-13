@@ -21,7 +21,7 @@ defmodule SmartcitydogsWeb.Municipality.AnimalController do
       else
         page
       end
-
+IO.inspect params
     page =
       if params["animals_filters"]["adopted"] == "true" do
         page
@@ -39,9 +39,10 @@ defmodule SmartcitydogsWeb.Municipality.AnimalController do
 
     pagination_params = [
       {
-        :signals_filters,
+        :animals_filters,
         [
-          {:animals_status_id, params["animals_filters"]["animals_status_id"]}
+          {:animals_status_id, params["animals_filters"]["animals_status_id"]},
+          {:adopted, params["animals_filters"]["adopted"]}
         ]
       }
     ]
