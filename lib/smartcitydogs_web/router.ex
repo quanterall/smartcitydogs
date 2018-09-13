@@ -34,7 +34,7 @@ defmodule SmartcitydogsWeb.Router do
     plug(Smartcitydogs.CheckMunicipality)
   end
 
-  pipeline :police_required do
+  pipeline :zoo_police_required do
     plug(Smartcitydogs.CheckPolice)
   end
 
@@ -50,6 +50,14 @@ defmodule SmartcitydogsWeb.Router do
 
   pipeline :municipality_layout do
     plug(:put_layout, {SmartcitydogsWeb.Municipality.LayoutView, :app})
+  end
+
+  pipeline :shelter_layout do
+    plug(:put_layout, {SmartcitydogsWeb.Shelter.LayoutView, :app})
+  end
+
+  pipeline :zoo_police_layout do
+    plug(:put_layout, {SmartcitydogsWeb.ZooPolice.LayoutView, :app})
   end
 
   scope "/api", SmartcitydogsWeb do
@@ -182,6 +190,18 @@ defmodule SmartcitydogsWeb.Router do
         get("/signals", SignalController, :index)
         get("/filter_signals", SignalController, :filter_signals)
         resources("/registered", AnimalController)
+      end
+
+      ################## Shelter ZONE ####################
+      scope "/shelter", Shelter, as: :shelter do
+        pipe_through([:shelter_required, :shelter_layout])
+        get("/signals", SignalController, :index)
+      end
+
+      ################## Zoo Police ####################
+      scope "/zoo_police", ZooPolice, as: :zoo_police do
+        pipe_through([:zoo_police_required, :zoo_police_layout])
+        get("/signals", SignalController, :index)
       end
     end
   end

@@ -20,7 +20,7 @@
 
     <div class="form-group">
         <div id="editor">
-            <%=@news.content%>
+            <%=#@news.content%>
         </div>
         <%= textarea f, :content, class: "form-control d-none", id: "editor_input" %>
     </div>
@@ -40,8 +40,7 @@
             ]
         },
         placeholder: 'Добави съдържание',
-        theme: 'snow',
-        name: "asdasd"
+        theme: 'snow'
     });
     quill.on('text-change', function () {
         var justHtml = quill.root.innerHTML;

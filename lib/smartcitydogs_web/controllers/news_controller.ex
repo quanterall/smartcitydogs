@@ -21,28 +21,24 @@ defmodule SmartcitydogsWeb.NewsController do
     render(conn, "new.html", changeset: changeset)
   end
 
-  def create(conn, %{"news" => news_params}) do
-    image_name = String.split(news_params["image_url"], "\\") |> List.last()
-    extension = Path.extname(image_name)
+  def create(conn, %{"news" => news_params} = params) do
+    extension = Path.extname(params["files"].filename)
 
-    upload = %Plug.Upload{
-      content_type: "image/jpeg",
-      filename: image_name,
-      path: "./smartcitydogs/assets/static/images/#{image_name}-profile#{extension}"
-    }
-
-    news_params = Map.put(news_params, "date", DateTime.utc_now())
+    File.cp(
+      params["files"].path,
+      "../smartcitydogs/assets/static/images/#{Map.get(params["files"], :filename)}-profile#{
+        extension
+      }"
+    )
 
     news_params =
       Map.put(
         news_params,
         "image_url",
-        "images/#{Map.get(upload, :filename)}-profile#{extension}"
+        "images/#{Map.get(params["files"], :filename)}-profile#{extension}"
       )
 
-    if news_params["image_url"] == "images/-profile" do
-      Map.put(news_params, "image_url", "")
-    end
+    news_params = Map.put(news_params, "date", DateTime.utc_now())
 
     case DataPages.create_news(news_params) do
       {:ok, _} ->
@@ -69,6 +65,22 @@ defmodule SmartcitydogsWeb.NewsController do
   end
 
   def update(conn, %{"id" => id, "news" => news_params} = params) do
+    extension = Path.extname(params["files"].filename)
+
+    File.cp(
+      params["files"].path,
+      "../smartcitydogs/assets/static/images/#{Map.get(params["files"], :filename)}-profile#{
+        extension
+      }"
+    )
+
+    news_params =
+      Map.put(
+        news_params,
+        "image_url",
+        "images/#{Map.get(params["files"], :filename)}-profile#{extension}"
+      )
+
     news = DataPages.get_news(id)
     news_params = Map.put(news_params, "date", DateTime.utc_now())
 
