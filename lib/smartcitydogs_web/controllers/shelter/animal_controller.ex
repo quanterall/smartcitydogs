@@ -3,10 +3,8 @@ defmodule SmartcitydogsWeb.Shelter.AnimalController do
   alias Smartcitydogs.{Signals, Repo, SignalsFilters}
   import Ecto.Query
 
-    action_fallback(SmartcitydogsWeb.FallbackController)
+  action_fallback(SmartcitydogsWeb.FallbackController)
 
-    def index(conn ,params) do
-        
-    end
-
+  def index(conn, params) do
   end
+end

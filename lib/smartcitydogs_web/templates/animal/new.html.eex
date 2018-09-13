@@ -1,3 +1,0 @@
-<link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
-
-<%= render "form.html", Map.put(assigns, :action, animal_path(@conn, :create)) %>

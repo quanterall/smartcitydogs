@@ -6,7 +6,7 @@
       </div>
       <div class="col">
         <h1><%= @news.title %></h1>
-        <span>Дата: <%= NaiveDateTime.to_date( @news.date) %></span>
+        <span>Дата: <%= Timex.format!(@news.date, "%d.%m.%y",:strftime)%> г.</span>
         <p>
           <%= render_markdown @news.content %>
         </p>

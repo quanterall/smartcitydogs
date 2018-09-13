@@ -20,93 +20,6 @@ defmodule SmartcitydogsWeb.SignalController do
     render(conn, "index.html", signals: page.entries, page: page)
   end
 
-  # All signals page with the checkbox filters, function for the first rendering
-  def minicipality_signals(conn, params) do
-    with :ok <-
-           Bodyguard.permit(
-             Smartcitydogs.Signals.Policy,
-             :minicipality_signals,
-             conn.assigns.current_user
-           ) do
-      data_status =
-        case Map.fetch(params, "page") do
-          {:ok, num} -> {params["data_status"], params["data_category"], num}
-          _ -> {[], [], "1"}
-        end
-
-      [page, data_category, data_status] = Signals.get_ticked_checkboxes(data_status)
-
-      render(conn, "minicipality_signals.html",
-        signal: page.entries,
-        page: page,
-        data_category: data_category,
-        data_status: data_status
-      )
-    else
-      {:error, _} -> render(conn, SmartcitydogsWeb.ErrorView, "401.html")
-    end
-  end
-
-  ## When the search button is clicked, for rendering the first page of the query.
-  def filter_signals(conn, %{
-        "_utf8" => "✓",
-        "sig_category" => data_category,
-        "sig_status" => data_status
-      }) do
-    data_status = Enum.filter(data_status, fn x -> x != "false" end)
-    data_category = Enum.filter(data_category, fn x -> x != "false" end)
-
-    cond do
-      data_status != [] ->
-        all_query = []
-
-        all_query =
-          Enum.map(data_status, fn x ->
-            struct = from(p in Signals, where: p.signals_types_id == ^String.to_integer(x))
-            all_query ++ Repo.all(struct)
-          end)
-
-        page = Smartcitydogs.Repo.paginate(List.flatten(all_query), page: 1, page_size: 9)
-
-        render(conn, "minicipality_signals.html",
-          signal: page.entries,
-          page: page,
-          data_status: data_status,
-          data_category: data_category
-        )
-
-      data_category != [] ->
-        all_query = []
-
-        all_query =
-          Enum.map(data_category, fn x ->
-            struct = from(p in Signals, where: p.signals_categories_id == ^String.to_integer(x))
-            all_query ++ Repo.all(struct)
-          end)
-
-        all_query = List.flatten(all_query)
-        page = Smartcitydogs.Repo.paginate(all_query, page: 1, page_size: 9)
-
-        render(conn, "minicipality_signals.html",
-          signal: page.entries,
-          page: page,
-          data_category: data_category,
-          data_status: data_status
-        )
-
-      true ->
-        all_query = DataSignals.list_signals()
-        page = Smartcitydogs.Repo.paginate(all_query, page: 1, page_size: 9)
-
-        render(conn, "minicipality_signals.html",
-          signal: page.entries,
-          page: page,
-          data_status: data_status,
-          data_category: data_category
-        )
-    end
-  end
-
   def new(conn, _params) do
     signal_changeset = Smartcitydogs.DataSignals.change_signal(%Signals{})
     render(conn, "new.html", signal_changeset: signal_changeset)
@@ -119,23 +32,7 @@ defmodule SmartcitydogsWeb.SignalController do
     case Signals.create_signal(params) do
       {:ok, signal} ->
         if params["url"] != nil do
-          for n <- params["url"] do
-            extension = Path.extname(n.filename)
-
-            File.cp(
-              n.path,
-              "../smartcitydogs/assets/static/images/#{Map.get(n, :filename)}-profile#{extension}"
-            )
-
-            signal_image_params = %{
-              "url" => "images/#{Map.get(n, :filename)}-profile#{extension}",
-              "signals_id" => "#{signal.id}"
-            }
-
-            %SignalsImages{}
-            |> SignalsImages.changeset(signal_image_params)
-            |> Repo.insert()
-          end
+          SignalsImages.insert_images(signal, params["url"])
         end
 
         redirect(conn, to: signal_path(conn, :show, signal))
@@ -196,11 +93,6 @@ defmodule SmartcitydogsWeb.SignalController do
       {:error, %Ecto.Changeset{} = signal_changeset} ->
         render(conn, "edit.html", signal: signal, signal_changeset: signal_changeset)
     end
-  end
-
-  def followed_signals(conn, _) do
-    {page} = Signals.get_button_signals(conn.assigns.current_user.id)
-    render(conn, "followed_signals.html", signals: page.entries, page: page)
   end
 
   def update_type(conn, %{"id" => id, "signals_types_id" => signals_types_id}) do

@@ -2,12 +2,7 @@ defmodule Smartcitydogs.Animals do
   use Ecto.Schema
   import Ecto.Changeset
   import Ecto.Query
-  alias Smartcitydogs.DataAnimals
-  alias Smartcitydogs.Animals
-  alias Smartcitydogs.Repo
-  ## alias SmartcitydogsWeb.AnimalController
-
-  alias Smartcitydogs.DataAnimals
+  alias Smartcitydogs.{DataAnimals, Animals, AnimalImages, Repo}
 
   @timestamps_opts [type: :utc_datetime, usec: false]
 
@@ -19,11 +14,11 @@ defmodule Smartcitydogs.Animals do
     field(:chip_number, :string)
     field(:deleted_at, :naive_datetime)
     field(:sex, :string)
-    has_many(:animals_image, Smartcitydogs.AnimalImages)
-    has_many(:performed_procedure, Smartcitydogs.PerformedProcedures)
-    has_many(:rescues, Smartcitydogs.Rescues)
+    has_many(:animals_image, Smartcitydogs.AnimalImages, on_delete: :delete_all)
+    has_many(:performed_procedure, Smartcitydogs.PerformedProcedures, on_delete: :delete_all)
+    has_many(:rescues, Smartcitydogs.Rescues, on_delete: :delete_all)
     belongs_to(:animals_status, Smartcitydogs.AnimalStatus)
-    has_many(:adopt, Smartcitydogs.Adopt)
+    has_many(:adopt, Smartcitydogs.Adopt, on_delete: :delete_all)
 
     timestamps()
   end
@@ -51,39 +46,9 @@ defmodule Smartcitydogs.Animals do
     DataAnimals.insert_adopt(data["user_id"], data["animal_id"])
   end
 
-  ## Get all of the ticked checkboxes from the filters, handle redirection to pagination pages.
-  def get_ticked_checkboxes(params) do
-    {data_status, page_num} = params
-
-    data_status =
-      case data_status do
-        nil -> []
-        _ -> data_status
-      end
-
-    page_num = String.to_integer(page_num)
-
-    cond do
-      data_status != [] ->
-        all_query = []
-
-        animals_query =
-          Enum.map(data_status, fn x ->
-            struct = from(p in Animals, where: p.animals_status_id == ^String.to_integer(x))
-
-            (all_query ++ Repo.all(struct))
-            |> Repo.preload(:animals_status)
-            |> Repo.preload(:animals_image)
-          end)
-
-        animals_query = List.flatten(animals_query)
-        list_animals = Smartcitydogs.Repo.paginate(animals_query, page: page_num, page_size: 9)
-        [list_animals, data_status]
-
-      true ->
-        all_animals = DataAnimals.list_animals()
-        page = Smartcitydogs.Repo.paginate(all_animals, page: page_num, page_size: 9)
-        [page, data_status]
-    end
+  def create_animal(args \\ %{}) do
+    %Animals{}
+    |> Animals.changeset(args)
+    |> Repo.insert()
   end
 end

@@ -137,12 +137,6 @@ defmodule Smartcitydogs.DataAnimals do
     |> Repo.insert()
   end
 
-  def create_animal_image(args) do
-    %AnimalImages{}
-    |> AnimalImages.changeset(args)
-    |> Repo.insert()
-  end
-
   def update_animal(%Animals{} = animal, args) do
     animal
     |> Animals.changeset(args)

@@ -3,38 +3,3 @@
 
     <%=  render "form.html", Map.put(assigns, :action, signal_path(@conn, :update, @signal)) %>
 </div>
-<script>
-
-    var placeSearch, autocomplete;
-    var Cordinate_a, Cordinate_b;
-
-    function initialize() {
-        autocomplete = new google.maps.places.Autocomplete(
-            /** @type {!HTMLInputElement} */(document.getElementById('autocomplete')),
-            {types: ['geocode']});
-
-        // When the user selects an address from the dropdown, populate the address
-        // fields in the form.
-        autocomplete.addListener('place_changed', placeAlabala);
-    }
-
-    function placeAlabala() {
-        var place = autocomplete.getPlace();
-        console.log(place);
-        var a_a = place.geometry.viewport.f.b;
-        var a_b = place.geometry.viewport.f.f;
-        var b_a = place.geometry.viewport.b.b;
-        var b_b = place.geometry.viewport.b.f;
-        var res_a = (a_a + a_b) / 2;
-        var res_b = (b_a + b_b) / 2;
-        Cordinate_a = res_a  //place.geometry.viewport.f.b;
-        Cordinate_b = res_b   //place.geometry.viewport.b.b;
-        console.log(Cordinate_a);
-        console.log(Cordinate_b);
-        $('#address_F').val(Cordinate_a);
-        $('#address_B').val(Cordinate_b);
-
-    }
-</script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDAnp2RXJIJARIGKIcxtUVdHD7-TyFCfe4&libraries=places&callback=initialize"
-        async defer></script>

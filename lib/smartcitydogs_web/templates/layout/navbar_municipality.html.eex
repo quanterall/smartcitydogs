@@ -1,16 +1,13 @@
 <li class="nav-item">
-    <a class="nav-link" href="<%=municipality_signal_path(@conn, :index)%>">Подадени сигнали</a>
+    <a class="nav-link" href="<%=municipality_signal_path(@conn, :index)%>">Сигнали</a>
 </li>
 <li class="nav-item">
-    <a class="nav-link" href="/municipality/animals">Регистрирани кучета</a>
-</li>
-<li class="nav-item">
-    <a class="nav-link" href="/municipality/animals/adopted">Осиновени кучета</a>
-</li>
-<li class="nav-item">
-    <a class="nav-link" href="/municipality/animals/shelter">Кучета в приюта</a>
+    <a class="nav-link" href="/municipality/animals">Кучета</a>
 </li>
 <li class="nav-item">
     <a class="nav-link" href="/news">Новини</a>
 </li>
+<div class="nav-item">
+    <%= link "Добавяне на новина", to: news_path(@conn, :new), class: "nav-link"%>
+</div>
            

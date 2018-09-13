@@ -183,13 +183,8 @@ defmodule SmartcitydogsWeb.Router do
 
       scope "/municipality", Municipality, as: :municipality do
         pipe_through([:municipality_required, :municipality_layout])
-        get("/animals", AnimalController, :minicipality_registered)
-        get("/filter_registered", AnimalController, :filter_registered)
-        get("/animals/shelter", AnimalController, :minicipality_shelter)
-        get("/animals/adopted", AnimalController, :minicipality_adopted)
+        resources("/animals", AnimalController)
         get("/signals", SignalController, :index)
-        get("/filter_signals", SignalController, :filter_signals)
-        resources("/registered", AnimalController)
       end
 
       ################## Shelter ZONE ####################

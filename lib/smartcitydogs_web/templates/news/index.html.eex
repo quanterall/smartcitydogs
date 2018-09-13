@@ -36,6 +36,3 @@
     <%= pagination_links @page , distance: 3  %>
 </div>
 
-<div class="new_news">
-    <span><%= link "Добавяне на новина", to: news_path(@conn, :new) %></span>
-</div>
