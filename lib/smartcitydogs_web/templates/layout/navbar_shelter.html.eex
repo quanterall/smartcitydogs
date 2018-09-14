@@ -1,12 +1,20 @@
-
 <li class="nav-item active">
-    <a class="nav-link" href="/shelter/signals">Начало</a>
+    <a class="nav-link" href="/">Начало</a>
 </li>
 <li class="nav-item">
-    <a class="nav-link" href="/registered/new">Регистриране на куче</a>
+    <a class="nav-link" href="<%=shelter_signal_path(@conn, :index)%>">Сигнали</a>
 </li>
-
 <li class="nav-item">
-    <a class="nav-link" href="/news">Новини</a>
+    <%= link "Новини", to: news_path(@conn, :index), class: "nav-link"%>
 </li>
-           
+<li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+       aria-haspopup="true" aria-expanded="false">
+        Кучета
+    </a>
+    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+        <%= link "Кучета", to: shelter_animal_path(@conn, :index), class: "nav-link"%>
+        <div class="dropdown-divider"></div>
+        <%= link "Регистриране на ново", to: shelter_animal_path(@conn, :new), class: "nav-link"%>
+    </div>
+</li>

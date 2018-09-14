@@ -46,13 +46,18 @@
                 <div>дата на регистриране</div>
                 <div class="blue-bold"> <%= Timex.format!(@animal.inserted_at, "%d.%m.%y",:strftime)%> г.</div>
             </div>
-
         </div>
         <div class="row mt-3">
-            <div class="col text-right">
-                <a href="" class="comment-signal-btn d-inline-block">
-                    Осинови
-                </a>
+            <div class="col text-center">
+                <%=if Smartcitydogs.Adopt.adopt_exist(@animal,@conn.assigns.current_user) do %>
+                    <%= form_for @conn, animal_path(@conn,:adopt, @animal.id), [class: "d-inline-block"], fn f -> %>
+                        <%= hidden_input f, :animals_id, value: @animal.id %>
+                        <%= submit "Осинови", class: "comment-signal-btn d-inline-block" %>
+                    <% end %>
+                <% else %>
+                    Заявката за осиновяване е изпратена.<br>
+                    Наш сътрудник ще се свърже с Вас за повече информация.
+                <% end %>
             </div>
         </div>
     </div>

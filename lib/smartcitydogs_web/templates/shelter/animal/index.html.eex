@@ -22,6 +22,7 @@
                     <th>Дата</th>
                     <th>Номер на чип</th>
                     <th>Пол</th>
+                    <th>Процедури</th>
                     <th></th>
                 </tr>
                 </thead>
@@ -45,6 +46,33 @@
                         <%=animal.sex%>
                     </td>
                     <td class="align-middle">
+                        <ul class="list-group">
+                            <%= for performed_procedure <- animal.performed_procedure do %>
+                            <li class="list-group-item p-0 pl-2">
+                                <%= Timex.format!(performed_procedure.inserted_at, "%d.%m.%y",:strftime)%> г.
+                                <%=performed_procedure.procedure_type.name%>
+                                <%= form_for @conn,
+                                shelter_performed_procedure_path(@conn,:delete,performed_procedure.id), [class:
+                                "pull-right"], fn f -> %>
+                                <input name="_method" type="hidden" value="delete">
+                                <button type="submit" class="text-danger btn btn-default bg-transparent btn-sm">
+                                    <i class='fas fa-trash'></i>
+                                </button>
+                                <% end %>
+                            </li>
+                            <% end %>
+                        </ul>
+                        <div>
+                            <%= form_for @performed_procedure_changeset, shelter_performed_procedure_path(@conn,
+                            :create), [class: "d-inline-block"], fn f -> %>
+                            <%= hidden_input f, :animals_id, value: animal.id %>
+                            <%= select f, :procedure_type_id, [[key: "Кастрирано", value: "1"], [key: "Обезпаразитено",
+                            value: "2"], [key: "Ваксинирано", value: "3"] ], class: "form-control d-inline-block" %>
+                            <%= submit "Добави", class: "btn btn-default d-inline-block" %>
+                            <% end %>
+                        </div>
+                    </td>
+                    <td class="align-middle">
                         <a class="btn  btn-primary d-inline-block"
                            href="<%=municipality_animal_path(@conn,:edit,animal.id)%>">
                             <i class="fas fa-edit"></i>
@@ -52,7 +80,8 @@
                         <a class="btn btn-info d-inline-block" href="<%=animal_path(@conn,:show,animal.id)%>">
                             <i class="fas fa-arrow-right"></i>
                         </a>
-                        <%= form_for @conn, municipality_animal_path(@conn,:delete,animal.id), [class: "d-inline-block"], fn f -> %>
+                        <%= form_for @conn, shelter_animal_path(@conn,:delete,animal.id), [class:
+                        "d-inline-block"], fn f -> %>
                         <input name="_method" type="hidden" value="delete">
                         <button type="submit" class="btn btn-danger">
                             <i class='fas fa-trash'></i>

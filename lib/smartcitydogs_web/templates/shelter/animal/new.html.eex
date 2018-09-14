@@ -2,7 +2,7 @@
     <div class="col-10 m-auto pt-3">
         <h3 class="h3 mb-5 font-weight-normal ">Регистриране на куче</h3>
     </div>
-    <%= render "form.html", Map.put(assigns, :action, municipality_animal_path(@conn, :create)) %>
+    <%= render "form.html", Map.put(assigns, :action, shelter_animal_path(@conn, :create)) %>
 </div>
 
 

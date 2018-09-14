@@ -341,3 +341,9 @@
     z-index: 10;
     right: 66px;
 }
+.pull-right{
+    float:right;
+}
+.dropdown-menu .nav-link{
+    color: black !important;
+}

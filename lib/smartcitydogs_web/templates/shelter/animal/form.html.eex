@@ -10,12 +10,6 @@
                 </div>
             </div>
             <div>
-                <label>Извършени процедури</label>
-                <div class="form-group">
-                    <%= multiple_select f, :procedure_type_ids,[{ "Кастрирано" ,1 },{ "Обезпаразитено" ,2 },{ "Ваксинирано" ,3 }], [class: "form-control", required: false,multiple: true] %>
-                </div>
-            </div>
-            <div>
                 <label>Пол</label>
                 <div class="form-group">
                     <%= select f, :sex, [[key: "Мъжко", value: "M"], [key: "Женско", value: "F"] ], class:

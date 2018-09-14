@@ -24,20 +24,20 @@ defmodule Smartcitydogs.Email do
        телефонен номер: #{user.phone}")
   end
 
-  def send_email(data) do
+  def send_adopt_email(animal, user) do
     new_email()
     |> to("smartcitydogs@gmail.com")
-    |> from(data["user_email"])
+    |> from(user.email)
     |> subject("Заявка за осиновяване.")
     |> text_body("
-      Желая да осиновя куче с номер на чипа: #{data["chip_number"]} .
+      Желая да осиновя куче с номер на чипа: #{animal.chip_number} .
 
       Данни:
 
-      Име: #{data["user_name"]},
-      Фамилия: #{data["user_last_name"]},
-      Имейл: #{data["user_email"]},
-      Телефонен номер: #{data["user_phone"]}
+      Име: #{user.first_name},
+      Фамилия: #{user.last_name},
+      Имейл: #{user.email},
+      Телефонен номер: #{user.phone}
       ")
     |> Smartcitydogs.Mailer.deliver_now()
   end

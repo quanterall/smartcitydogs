@@ -3,7 +3,7 @@
     <a class="nav-link" href="/">Начало</a>
 </li>
 <li class="nav-item">
-    <a class="nav-link" href="/signals">Подадени сигнали</a>
+    <a class="nav-link" href="<%=zoo_police_signal_path(@conn,:index)%>">Подадени сигнали</a>
 </li>
 <li class="nav-item active">
     <a class="nav-link" href="/contact">Контакти</a>

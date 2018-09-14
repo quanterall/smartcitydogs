@@ -83,9 +83,9 @@ defmodule SmartcitydogsWeb.Router do
     resources("/signals", SignalControllerAPI, except: [:new, :edit])
 
     scope "/signals/:id" do
-      get("comment", SignalControllerAPI, :comment)
-      get("unlike", SignalControllerAPI, :unlike)
-      get("like", SignalControllerAPI, :like)
+      get("/comment", SignalControllerAPI, :comment)
+      get("/unlike", SignalControllerAPI, :unlike)
+      get("/like", SignalControllerAPI, :like)
     end
 
     get("/my_signals", MySignalsControllerAPI, :index)
@@ -124,7 +124,8 @@ defmodule SmartcitydogsWeb.Router do
 
     get("/", PageController, :index)
     resources("/signals", SignalController, only: [:index, :new, :create, :show])
-    resources("/animals", AnimalController, obly: [:index, :show])
+    resources("/animals", AnimalController, only: [:index, :show])
+
     resources("/sessions", SessionController, only: [:new, :create, :delete])
     resources("/users", UserController, only: [:new, :create])
     resources("/help", HelpController, only: [:index])
@@ -136,8 +137,7 @@ defmodule SmartcitydogsWeb.Router do
     scope "/" do
       pipe_through([:login_required])
       resources("/users", UserController)
-      resources("/registered", AnimalController)
-
+      post("/animals/:id/adopt", AnimalController, :adopt)
       ## not in develop
       get("/show", PageController, :show)
 
@@ -151,8 +151,8 @@ defmodule SmartcitydogsWeb.Router do
 
       scope "/signals/:id" do
         resources("/comments", SignalsCommentController)
-        post("dislike", SignalController, :dislike)
-        post("like", SignalController, :like)
+        post("/dislike", SignalController, :dislike)
+        post("/like", SignalController, :like)
       end
 
       resources("/help", HelpController, only: [:index])
@@ -191,6 +191,7 @@ defmodule SmartcitydogsWeb.Router do
       scope "/shelter", Shelter, as: :shelter do
         pipe_through([:shelter_required, :shelter_layout])
         resources("/animals", AnimalController)
+        resources("/performed_procedure", PerformedProcedureController, only: [:create, :delete])
         get("/signals", SignalController, :index)
       end
 

@@ -37,4 +37,12 @@ defmodule SmartcitydogsWeb.AnimalController do
 
     render(conn, "show.html", animal: animal)
   end
+
+  def adopt(conn, %{"animals_id" => animals_id}) do
+    animal = Repo.get(Animals, animals_id)
+    Smartcitydogs.Animals.adopt(animal, conn.assigns.current_user)
+
+    conn
+    |> redirect(to: NavigationHistory.last_path(conn, []))
+  end
 end
