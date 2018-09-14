@@ -190,6 +190,7 @@ defmodule SmartcitydogsWeb.Router do
       ################## Shelter ZONE ####################
       scope "/shelter", Shelter, as: :shelter do
         pipe_through([:shelter_required, :shelter_layout])
+        resources("/animals", AnimalController)
         get("/signals", SignalController, :index)
       end
 
