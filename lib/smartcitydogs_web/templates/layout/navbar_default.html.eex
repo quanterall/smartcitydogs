@@ -1,0 +1,21 @@
+<li class="nav-item active">
+    <a class="nav-link" href="/">Начало</a>
+</li>
+<li class="nav-item">
+    <a class="nav-link" href="/about">За проекта</a>
+</li>
+<li class="nav-item">
+    <a class="nav-link" href="/signals">Подадени сигнали</a>
+</li>
+<li class="nav-item">
+    <a class="nav-link" href="/animals">Регистрирани кучета</a>
+</li>
+<li class="nav-item">
+    <a class="nav-link" href="/news">Новини</a>
+</li>
+<li class="nav-item">
+    <a class="nav-link" href="/help">Помощ</a>
+</li>
+<li class="nav-item">
+    <a class="nav-link" href="/contact/new">Контакти</a>
+</li>

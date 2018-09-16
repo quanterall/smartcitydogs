@@ -1,0 +1,22 @@
+<div class="row mb-3 pt-3">
+    <div class="col-6">
+        <%= form_for @conn, animal_path(@conn, :index), [method: :get, class: "input-group"], fn f -> %>
+        <%= search_input f, :chip_number, placeholder: "Chip number",class: "form-control border-secondary py-2" %>
+        <div class="input-group-append">
+            <button class="btn btn-outline-secondary" type="submit">
+                <i class="fa fa-search"></i>
+            </button>
+        </div>
+        <% end %>
+    </div>
+</div>
+<div class="row">
+    <%= for animal <- @animals do %>
+    <div class="col-lg-3 mb-2 mt-2">
+        <%= render SmartcitydogsWeb.AnimalView, "animal_slide.html" , %{conn: @conn,animal: animal} %>
+    </div>
+    <% end %>
+</div>
+<div class="text-center custom-pagination">
+    <%= pagination_links @page , distance: 3  %>
+</div>

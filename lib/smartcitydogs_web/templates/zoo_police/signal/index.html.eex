@@ -1,0 +1,26 @@
+<div class="row">
+    <div class="col-3">
+        <%= form_for @filter_changeset, zoo_police_signal_path(@conn, :index),[class: "register-form-class",method: "get"], fn f -> %>
+        <h5>Филтрирай по статус</h5>
+        <%= multiple_select f, :signals_types_id,[ { "Нов" ,1 },{ "Приет" ,2 },{ "Изпратен" ,3 },{ "Приключен" ,4 } ], [class: "form-control", required: false  , multiple: true] %>
+        <h5>Филтрирай по категория</h5>
+        <%= multiple_select f, :signals_categories_id,[ { "Бездомно куче" ,1 },{ "Избягало куче" ,2 },{ "Малтретиране на куче" ,3 } ], [class: "form-control", required: false  , multiple: true] %>
+        <div class="mt-2">
+            <%= submit "Филтрирай", class: "btn btn-primary m-auto d-block" %>
+        </div>
+        <% end %>
+    </div>
+    <div class="col-9">
+        <div class="row">
+            <%= for signal <- @signals do %>
+            <div class="col-lg-3 mb-2 mt-2">
+                <%= render SmartcitydogsWeb.SignalView, "signal_card.html" , %{conn: @conn,signal: signal} %>
+            </div>
+            <% end %>
+        </div>
+        <div class="text-center custom-pagination">
+            <%= pagination_links @page %>
+        </div>
+    </div>
+</div>
+

@@ -5,12 +5,13 @@ defmodule Smartcitydogs.Mixfile do
     [
       app: :smartcitydogs,
       version: "0.0.1",
-      elixir: "~> 1.4",
+      elixir: "~> 1.7.3",
       elixirc_paths: elixirc_paths(Mix.env()),
       compilers: [:phoenix, :gettext] ++ Mix.compilers(),
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
-      deps: deps()
+      deps: deps(),
+      xref: xref()
     ]
   end
 
@@ -20,13 +21,33 @@ defmodule Smartcitydogs.Mixfile do
   def application do
     [
       mod: {Smartcitydogs.Application, []},
-      extra_applications: [:logger, :runtime_tools]
+      extra_applications: [
+        :logger,
+        :runtime_tools,
+        :bamboo,
+        :timex,
+        :bamboo_smtp,
+        :ueberauth_facebook,
+        :scrivener_ecto,
+        :recaptcha,
+        :faker,
+        :scrivener_ecto,
+        :scrivener_html
+      ]
     ]
   end
 
   # Specifies which paths to compile per environment.
   defp elixirc_paths(:test), do: ["lib", "test/support"]
   defp elixirc_paths(_), do: ["lib"]
+
+  defp xref do
+    [
+      exclude: [
+        {Plug.Conn.WrapperError, :reraise, 3}
+      ]
+    ]
+  end
 
   # Specifies your project dependencies.
   #
@@ -40,7 +61,24 @@ defmodule Smartcitydogs.Mixfile do
       {:phoenix_html, "~> 2.10"},
       {:phoenix_live_reload, "~> 1.0", only: :dev},
       {:gettext, "~> 0.11"},
-      {:cowboy, "~> 1.0"}
+      {:bcrypt_elixir, "~> 1.0"},
+      {:cowboy, "~> 1.0"},
+      {:calendar, "~> 0.17.2"},
+      {:comeonin, "~> 2.5"},
+      {:guardian, "~> 0.12.0"},
+      {:ueberauth_facebook, "~> 0.3"},
+      {:oauth, github: "tim/erlang-oauth"},
+      {:bamboo, "~> 0.7"},
+      {:bamboo_smtp, "~> 1.4.0"},
+      {:mock, "~> 0.2.0", only: :test},
+      {:timex, "~> 3.1"},
+      {:scrivener_ecto, "~> 1.0"},
+      {:scrivener_html, "~> 1.7"},
+      {:cmark, "~> 0.7"},
+      {:recaptcha, "~> 2.3"},
+      {:bodyguard, "~> 2.1"},
+      {:faker, "~> 0.10"},
+      {:navigation_history, "~> 0.0"}
     ]
   end
 

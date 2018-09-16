@@ -1,0 +1,108 @@
+<div class="row  pt-5 pb-5 ">
+    <div class="col-lg-5">
+        <div class="signal-gallery">
+            <%= for image <- @signal.signals_images do %>
+            <img src="/<%= image.url %>" alt="">
+            <% end %>
+        </div>
+    </div>
+    <div class="col-lg-7">
+        <div class="signal-type-label <%=@signal.signals_types.prefix%>">
+            <%=@signal.signals_types.name%>
+        </div>
+        <div class="slick-card-small ">
+            <%=Timex.format!( @signal.inserted_at,"%d.%m.%y",:strftime)%> г.
+        </div>
+        <div class="slick-card-title">
+            <h1><%=@signal.signals_categories.name%></h1>
+        </div>
+        <div>
+            <p><%=@signal.description%></p>
+        </div>
+        <div class="slick-card-small mt-3">
+            <div class="row">
+                <div class="col-6"><%=@signal.address%></div>
+                <div class="col-6">
+                    <a class="show-map-btn blue-bold" href="#" type="button" id="view_map">ВИЖ НА
+                        КАРТА
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div id="map_container" style="position: relative; display: none;">
+            <i id="close-map" class="fa fa-times"></i>
+            <div id="signal_map">
+            </div>
+        </div>
+        <div class="row signal-statistic mt-4">
+            <div class="col">
+                <div>дата на пускане</div>
+                <div class="blue-bold"><%=Timex.format!( @signal.inserted_at,"%d.%m.%y",:strftime)%> г.</div>
+            </div>
+            <div class="col">
+                <div>преглеждания</div>
+                <div class="blue-bold"><%=@signal.view_count%></div>
+            </div>
+            <div class="col">
+                <div>подкрепи</div>
+                <div class="blue-bold"><%= Enum.count(@signal.signals_likes) %></div>
+            </div>
+            <div class="col">
+                <div>коментари</div>
+                <div class="blue-bold"><%=Enum.count(@signal.signals_comments)%></div>
+            </div>
+            <input type="hidden" id="cor_b" value="<%= @signal.address_B %>">
+            <input type="hidden" id="cor_a" value="<%= @signal.address_F %>">
+        </div>
+        <div class="row mt-3">
+            <div class="col text-right">
+                <a href="#comment_form" class="comment-signal-btn d-inline-block">
+                    <i class="far fa-comment fa-flip-horizontal"></i>
+                    КОМЕНТИРАЙ
+                </a>
+                <%= if @user_likes_count == 0 do %>
+                <%= form_for @conn, signal_path(@conn, :like ,@signal.id), [class: "d-inline-block"], fn f -> %>
+                <button type="submit" class="support-signal-btn">
+                    <i class="fas fa-arrow-up"></i>
+                    ПОСЛЕДВАЙ
+                </button>
+                <% end %>
+                <% else %>
+                <%= form_for @conn, signal_path(@conn, :dislike ,@signal.id), [class: "d-inline-block"], fn f -> %>
+                <button type="submit" class="support-signal-btn">
+                    <i class="fas fa-arrow-down"></i>
+                    ОТСЛЕДВАЙ
+                </button>
+                <% end %>
+                <% end %>
+            </div>
+        </div>
+        <div class="signal-comments-title mt-3 mb-3">
+            Коментари(<%=Enum.count(@signal.signals_comments)%>)
+        </div>
+        <%= for comment <- @signal.signals_comments do %>
+        <div class="row comment-container mb-3 mt-2 m-0">
+            <div class="col-6 comment-user-name p-0"><%=comment.users.first_name%> <%=comment.users.last_name%></div>
+            <div class="col-6 text-right"><%=Timex.format!( comment.inserted_at,"%d.%m.%y",:strftime)%> г.</div>
+            <div class="col-12 mt-2  p-0">
+                <%=comment.comment%>
+            </div>
+        </div>
+        <% end %>
+        <%= form_for @conn, signals_comment_path(@conn, :create,@signal.id), [class: "Comment_form",id: "comment_form"],
+        fn f -> %>
+        <div class="form-group-comment comment_box">
+            <%= textarea f, :comment, class: "comment_box_area form-control", placeholder: "Въведете коментар...." %>
+            <%= error_tag f, :comment %>
+        </div>
+        <div class="form-group-comment col text-right mt-3">
+            <div class="d-inline-block">
+                <button type="submit" class="comment-signal-btn">
+                    <i class="far fa-comment fa-flip-horizontal"></i>
+                    КОМЕНТИРАЙ
+                </button>
+            </div>
+        </div>
+        <% end %>
+    </div>
+</div>

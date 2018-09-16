@@ -1,4 +1,8 @@
 exports.config = {
+  notifications: false,
+watcher: {
+    usePolling: true
+},
   // See http://brunch.io/#documentation for docs.
   files: {
     javascripts: {
@@ -20,7 +24,24 @@ exports.config = {
       // }
     },
     stylesheets: {
-      joinTo: "css/app.css"
+      joinTo: {
+      "css/app.css": [
+          "css/app.css",
+          "css/login_user.css",
+          "css/register_user.css",
+          "node_modules/bootstrap/dist/css/bootstrap.css",
+          "node_modules/slick-carousel/slick/slick.css",
+          "css/show_user.css",
+          "css/my_profile.css",
+          //"css/index_signal.css",
+          "css/nav_bar.css",
+          "css/show_signal.css",
+          "css/registered_dogs.css",
+          "css/contact.css",
+          "css/project.css",
+           "css/help-page/main.css"
+        ]
+      }
     },
     templates: {
       joinTo: "js/app.js"
@@ -42,6 +63,7 @@ exports.config = {
     public: "../priv/static"
   },
 
+  
   // Configure your plugins
   plugins: {
     babel: {
@@ -57,6 +79,17 @@ exports.config = {
   },
 
   npm: {
-    enabled: true
+    enabled: true,
+      globals: {
+          jQuery: 'jquery',
+          $: 'jquery',
+          bootstrap: 'bootstrap'
+      },
+      styles: {
+          bootstrap: ['dist/css/bootstrap.css'],
+          "slick-carousel": ['slick/slick.css']
+      }
+      
   }
+  
 };

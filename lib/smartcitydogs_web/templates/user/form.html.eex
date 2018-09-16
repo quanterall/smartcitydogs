@@ -1,0 +1,43 @@
+<%= form_for user_changeset(@conn), @action,[class: "register-form-class"], fn f -> %>
+    <div class="row">
+    <%= text_input f, :first_name, placeholder: "Име", class: "form-control", required: true %>
+    <%= error_tag f, :first_name %>
+
+    <%= text_input f, :last_name, placeholder: "Фамилия", class: "form-control", required: true %>
+    <%= error_tag f, :last_name %>
+
+    <%= password_input f, :password, placeholder: "Парола", class: "form-control", required: true, minlength: 6 %>
+    <%= error_tag f, :password %>
+
+    <%= email_input f, :email, placeholder: "Имейл", class: "form-control", required: true %>
+    <%= error_tag f, :email %>
+
+    <%= text_input f, :phone, placeholder: "Телефонен номер", class: "form-control", required: true,minlength: 10, maxlength: 10 %>
+    <%= error_tag f, :phone %>
+
+    <div class="d-block mt-3">
+        <label class="">
+            <%= checkbox f, :agreed_to_terms, class: "", required: false %>
+            Съгласен съм с условията.
+        </label>
+        <div>
+            <%= error_tag f, :agreed_to_terms %>
+        </div>
+    </div>
+    </div>
+    <div class="row mt-5">
+        <%= if List.first(@conn.path_info) == "users" && List.last(@conn.path_info) == "edit"  do %>
+        <div class="col text-right">
+            <%= submit "Редактирай", class: "btn btn-submit" %>
+        </div>
+        <% else %>
+        <div class="col">
+            <a class="close-modal" href="#">ОТКАЗ</a>
+        </div>
+        <div class="col text-right">
+            <%= submit "РЕГИСТРИРАЙ МЕ", class: "btn btn-submit" %>
+        </div>
+        <% end %>
+
+    </div>
+<% end %>

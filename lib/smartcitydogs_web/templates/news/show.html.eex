@@ -1,0 +1,16 @@
+<div class="row pt-5">
+  <div class="col">
+    <div class="row">
+      <div class="col">
+        <img class="img-fluid" src="/<%= @news.image_url %>" alt="Generic placeholder image">
+      </div>
+      <div class="col">
+        <h1><%= @news.title %></h1>
+        <span>Дата: <%= Timex.format!(@news.date, "%d.%m.%y",:strftime)%> г.</span>
+        <p>
+          <%= render_markdown @news.content %>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

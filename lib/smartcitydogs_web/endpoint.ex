@@ -15,6 +15,7 @@ defmodule SmartcitydogsWeb.Endpoint do
     only: ~w(css fonts images js favicon.ico robots.txt)
   )
 
+  # plug Plug.Static, at: "/animals/new", from: "/home/sonyft/smartcitydog/smartcitydogs/assets/static/images/"
   # Code reloading can be explicitly enabled under the
   # :code_reloader configuration of your endpoint.
   if code_reloading? do
@@ -29,7 +30,8 @@ defmodule SmartcitydogsWeb.Endpoint do
     Plug.Parsers,
     parsers: [:urlencoded, :multipart, :json],
     pass: ["*/*"],
-    json_decoder: Poison
+    json_decoder: Poison,
+    length: 100_000_000
   )
 
   plug(Plug.MethodOverride)
@@ -42,7 +44,7 @@ defmodule SmartcitydogsWeb.Endpoint do
     Plug.Session,
     store: :cookie,
     key: "_smartcitydogs_key",
-    signing_salt: "3fgc2JfG"
+    signing_salt: "aBhcdNyI"
   )
 
   plug(SmartcitydogsWeb.Router)

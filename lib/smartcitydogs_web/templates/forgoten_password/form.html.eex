@@ -1,0 +1,10 @@
+<%= form_for @conn, forgoten_password_path(@conn, :create), fn f -> %>
+<div class="form-group">
+    <label for="forget_email">Въведете E-mail</label>
+    <%= text_input f, :email, placeholder: "Email ",id: "forget_email", class: "form-control" %>
+    <%= error_tag f, :email %>
+</div>
+<div class="form-group">
+    <%= submit "ИЗПРАТИ", class: "btn btn-submit" %><br>
+</div>
+<% end %>

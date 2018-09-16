@@ -20,6 +20,37 @@ config :logger, :console,
   format: "$time $metadata[$level] $message\n",
   metadata: [:user_id]
 
+# RECAPTCHA
+config :recaptcha,
+  public_key: {:system, "6LeC1mkUAAAAAEX_aVOwFFByXgT3FNnMLnfdR0gf"},
+  secret: {:system, "6LeC1mkUAAAAAEaLMesIocRsy2oKwHHZZJjv3dA3"}
+
+config :guardian, Guardian,
+  issuer: "SimpleAuth.#{Mix.env()}",
+  ttl: {30, :days},
+  verify_issuer: true,
+  serializer: Smartcitydogs.GuardianSerializer,
+  secret_key: to_string(Mix.env()) <> "SuPerseCret_aBraCadabrA"
+
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env()}.exs"
+
+# In your config file
+config :smartcitydogs, Smartcitydogs.Mailer,
+  adapter: Bamboo.SMTPAdapter,
+  server: System.get_env("SES_SERVER"),
+  ## hostname: System.get_env("SES_HOSTNAME"),
+  port: System.get_env("SES_PORT"),
+  username: System.get_env("SMTP_USERNAME"),
+  password: System.get_env("SMTP_PASSWORD"),
+  # can be `:always` or `:never`
+  tls: :if_available,
+  # can be `true`
+  ssl: false,
+  retries: 4
+
+config :scrivener_html,
+  routes_helper: MyApp.Router.Helpers,
+  # If you use a single view style everywhere, you can configure it here. See View Styles below for more info.
+  view_style: :bootstrap_v4

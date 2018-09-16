@@ -1,0 +1,4 @@
+<div class="col m-auto p-5 form-sign-in">
+  <h3 class="h3 mb-5 font-weight-normal ">Забравена парола</h3>
+  <%=  render "form.html", Map.put(assigns, :action, user_path(@conn, :create)) %>
+</div>

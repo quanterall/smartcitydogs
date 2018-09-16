@@ -1,0 +1,64 @@
+<div class="row  pt-5 pb-5 ">
+    <div class="col-lg-5">
+        <div class="signal-gallery">
+            <%= for image <- @animal.animals_image do %>
+            <img src="/<%= image.url %>" alt="">
+            <% end %>
+        </div>
+    </div>
+    <div class="col-lg-7">
+        <div class="animal-status-text <%=@animal.animals_status.prefix%> mb-2">
+            <%= @animal.animals_status.name%>
+        </div>
+        <div class="slick-card-small ">
+            <%= Timex.format!(@animal.inserted_at, "%d.%m.%y",:strftime)%> г.
+        </div>
+        <div class="slick-card-small mt-3">
+            <div class="row">
+                <div class="col-6"><%= @animal.address %></div>
+                <div class="col-6">
+                    <a class="show-map-btn blue-bold" href="#" type="button" id="view_map">
+                        ВИЖ НА КАРТА
+                    </a>
+                </div>
+            </div>
+        </div>
+        <input type="hidden" id="cor_b" value="<%= @animal.address_B %>">
+        <input type="hidden" id="cor_a" value="<%= @animal.address_F %>">
+        <div id="map_container" style="position: relative; display: none;">
+            <i id="close-map" class="fa fa-times"></i>
+            <div id="signal_map">
+            </div>
+        </div>
+        <div class="animal-description mt-3">
+            <%= @animal.description %>
+        </div>
+        <div class="row signal-statistic mt-4">
+            <div class="col">
+                <div>Пол</div>
+                <div class="blue-bold"><%= @animal.sex %></div>
+            </div>
+            <div class="col">
+                <div>Номер на марка / чип</div>
+                <div class="blue-bold"><%= @animal.chip_number %></div>
+            </div>
+            <div class="col">
+                <div>дата на регистриране</div>
+                <div class="blue-bold"> <%= Timex.format!(@animal.inserted_at, "%d.%m.%y",:strftime)%> г.</div>
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col text-center">
+                <%=if Smartcitydogs.Adopt.adopt_exist(@animal,@conn.assigns.current_user) do %>
+                    <%= form_for @conn, animal_path(@conn,:adopt, @animal.id), [class: "d-inline-block"], fn f -> %>
+                        <%= hidden_input f, :animals_id, value: @animal.id %>
+                        <%= submit "Осинови", class: "comment-signal-btn d-inline-block" %>
+                    <% end %>
+                <% else %>
+                    Заявката за осиновяване е изпратена.<br>
+                    Наш сътрудник ще се свърже с Вас за повече информация.
+                <% end %>
+            </div>
+        </div>
+    </div>
+</div>
