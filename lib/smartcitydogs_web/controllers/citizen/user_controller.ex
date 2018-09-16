@@ -33,7 +33,7 @@ defmodule SmartcitydogsWeb.UserController do
     end
   end
 
-  def show(conn, %{"id" => id}) do
+  def show(conn, _) do
     preload = [
       :signals_images,
       :signals_types,
@@ -45,14 +45,15 @@ defmodule SmartcitydogsWeb.UserController do
     user_signals =
       Signals
       |> limit(6)
-      |> where(users_id: ^id)
+      |> where(users_id: ^conn.assigns.current_user.id)
       |> Repo.all()
       |> Repo.preload(preload)
+
 
     followed_signals =
       SignalsLikes
       |> limit(6)
-      |> where(users_id: ^id)
+      |> where(users_id: ^conn.assigns.current_user.id)
       |> Repo.all()
       |> Repo.preload([:signals])
       |> Enum.map(fn x -> x.signals end)
@@ -61,10 +62,10 @@ defmodule SmartcitydogsWeb.UserController do
     render(conn, "show.html", user_signals: user_signals, followed_signals: followed_signals)
   end
 
-  def edit(conn, %{"id" => id}) do
+  def edit(conn, _) do
     user =
       User
-      |> Repo.get(id)
+      |> Repo.get(conn.assigns.current_user.id)
 
     user_changeset =
       user
@@ -73,8 +74,8 @@ defmodule SmartcitydogsWeb.UserController do
     render(conn, "edit.html", user: user, user_changeset: user_changeset)
   end
 
-  def update(conn, %{"id" => id, "user" => user_params}) do
-    user = Repo.get(User, id)
+  def update(conn, %{"user" => user_params}) do
+    user = Repo.get(User, conn.assigns.current_user.id)
 
     result =
       User.changeset(user, user_params)
@@ -82,7 +83,7 @@ defmodule SmartcitydogsWeb.UserController do
 
     case result do
       {:ok, user} ->
-        redirect(conn, to: user_path(conn, :show, user))
+        redirect(conn, to: user_path(conn, :show))
 
       {:error, %Ecto.Changeset{} = user_changeset} ->
         render(conn, "edit.html", user: user, user_changeset: user_changeset)

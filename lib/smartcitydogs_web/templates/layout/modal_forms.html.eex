@@ -1,5 +1,6 @@
 <div id="modal-forms-container" class="col-lg-6 col-md-8 col-sm-12 col-xs-12" >
 
+    <%= if @conn.assigns.current_user == nil do %>
     <div class="modal-form <%= if length(@conn.path_info) == 0 do %>
                 shadow-off
             <% end %>" id="login-form">
@@ -10,6 +11,15 @@
             <% end %>" id="register-form">
         <%= render SmartcitydogsWeb.UserView, "new.html", assigns %>
     </div>
+
+
+    <div class="modal-form <%= if length(@conn.path_info) == 0 do %>
+                shadow-off
+            <% end %>" id="forgotten-pass-form">
+        <%= render SmartcitydogsWeb.ForgotenPasswordView, "new.html", assigns  %>
+    </div>
+    <% end %>
+
     <%= if !(List.first(@conn.path_info) == "signals" && Enum.member?(["new", "create","edit"], List.last(@conn.path_info)) ) do %>
     <div class="modal-form <%= if length(@conn.path_info) == 0 do %>
                 shadow-off
@@ -18,14 +28,5 @@
     </div>
     <% end %>
 
-    <div class="modal-form <%= if length(@conn.path_info) == 0 do %>
-                shadow-off
-            <% end %>" id="forgotten-pass-form">
-        <%= render SmartcitydogsWeb.ForgotenPasswordView, "new.html", assigns  %>
-    </div>
 
-     <div class="modal-form <%= if length(@conn.path_info) == 0 do %>
-                shadow-off
-            <% end %>" id="change-info-form">
-    </div>
 </div>

@@ -1,6 +1,6 @@
 <div class="col-10 m-auto form-sign-in  p-5">
     <h3 class="h3 mb-5 font-weight-normal ">Редакция на потребител</h3>
 
-    <%=  render "form.html", Map.put(assigns, :action, user_path(@conn, :update, @user)) %>
+    <%=  render "form.html", Map.put(assigns, :action, user_path(@conn, :update)) %>
 </div>
 

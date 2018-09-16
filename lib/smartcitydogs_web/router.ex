@@ -136,9 +136,12 @@ defmodule SmartcitydogsWeb.Router do
     ###### REGISTERED USER ZONE #########
     scope "/" do
       pipe_through([:login_required])
-      resources("/users", UserController)
+
+      get("/profile", UserController, :show)
+      get("/profile/edit", UserController, :edit)
+      put("/profile/update", UserController, :update)
+
       post("/animals/:id/adopt", AnimalController, :adopt)
-      ## not in develop
       get("/show", PageController, :show)
 
       resources("/my_signals", MySignalsController)
@@ -157,33 +160,12 @@ defmodule SmartcitydogsWeb.Router do
 
       resources("/help", HelpController, only: [:index])
 
-      ####### ADMIN ZONE #########
-
-      scope "/admin", Admin, as: :admin do
-        pipe_through([:admin_required])
-
-        resources("/users", UserController)
-        get("/show", PageController, :show)
-
-        get("/signals/get_signals_support_count", SignalController, :get_signals_support_count)
-
-        resources("/signals", SignalController)
-      end
-
-      ######## MUNICIPALITY ZONE #######
-
-      # scope "/municipality" do
-      #   pipe_through([:municipality_required])
-      #    get("/signals", SignalController, :minicipality_signals)
-      # end
-
       scope "/municipality", Municipality, as: :municipality do
         pipe_through([:municipality_required, :municipality_layout])
         resources("/animals", AnimalController)
         get("/signals", SignalController, :index)
       end
 
-      ################## Shelter ZONE ####################
       scope "/shelter", Shelter, as: :shelter do
         pipe_through([:shelter_required, :shelter_layout])
         resources("/animals", AnimalController)
@@ -191,7 +173,6 @@ defmodule SmartcitydogsWeb.Router do
         get("/signals", SignalController, :index)
       end
 
-      ################## Zoo Police ####################
       scope "/zoo_police", ZooPolice, as: :zoo_police do
         pipe_through([:zoo_police_required, :zoo_police_layout])
         get("/signals", SignalController, :index)
@@ -214,9 +195,8 @@ defmodule SmartcitydogsWeb.Router do
       conn
     else
       conn
-      |> put_status(:unauthorized)
-      |> render(SmartcitydogsWeb.ErrorView, "401.json", message: "Unauthenticated user")
-      |> halt()
+      |> put_flash(:info, "Моля впишете се!")
+      |> redirect(to: "/")
     end
   end
 end

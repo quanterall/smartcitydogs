@@ -9,20 +9,18 @@ defmodule SmartcitydogsWeb.SessionController do
     case Smartcitydogs.Auth.login_by_email_and_pass(conn, email, password) do
       {:ok, conn} ->
         conn
-        |> put_flash(:info, "You’re now signed in!")
         |> redirect(to: NavigationHistory.last_path(conn, []))
 
       {:error, _reason, conn} ->
         conn
-        |> put_flash(:error, "Invalid email/password combination")
-        |> redirect(to: page_path(conn, :index, show_login: true))
+        |> put_flash(:error, "Невалиден Email или парола!")
+        |> redirect(to: page_path(conn, :index, modal: "login-form"))
     end
   end
 
   def delete(conn, _) do
     conn
     |> Smartcitydogs.Auth.logout()
-    |> put_flash(:info, "See you later!")
     |> redirect(to: page_path(conn, :index))
   end
 end

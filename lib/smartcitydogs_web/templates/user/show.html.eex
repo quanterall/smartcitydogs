@@ -1,7 +1,7 @@
 <div class="row pt-5">
     <div class="col-lg-3">
         <div class=" user-profile">ПРОФИЛ
-            <a href="<%=user_path(@conn,:edit,@current_user.id)%>">
+            <a href="<%=user_path(@conn,:edit)%>">
                 <i class="fas fa-pencil-alt"></i>
             </a>
         </div>
