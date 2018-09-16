@@ -2,8 +2,17 @@ defmodule Smartcitydogs.GuardianErrorHandler do
   import SmartcitydogsWeb.Router.Helpers
 
   def unauthenticated(conn, _params) do
+    last_path = if NavigationHistory.last_path(conn) == Phoenix.Controller.current_path(conn) do
+      "/"
+    else
+      NavigationHistory.last_path(conn)
+    end
+
     conn
-    |> Phoenix.Controller.put_flash(:error, "You must be signed in to access that page.")
-    |> Phoenix.Controller.redirect(to: page_path(conn, :index))
+    |> Phoenix.Controller.put_flash(
+      :error,
+      "За достъп до тази функционалност е необходимо да се впишете в акаунта Ви или да се регистрирате."
+    )
+    |> Phoenix.Controller.redirect(to: last_path)
   end
 end

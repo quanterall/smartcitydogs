@@ -12,7 +12,7 @@ defmodule Smartcitydogs.CheckAdmin do
     else
       conn
       |> put_status(:not_found)
-      |> render(Smartcitydogs.ErrorView, "404.html")
+      |> render(SmartcitydogsWeb.ErrorView, "404.html")
       |> halt
     end
   end

@@ -31,8 +31,8 @@ defmodule Smartcitydogs.News do
       :date,
       :short_content
     ])
-    |> validate_length(:title, min: 5, max: 50)
+    |> validate_length(:title, min: 5)
     |> validate_length(:content, min: 15)
-    |> validate_length(:short_content, min: 5, max: 50)
+    |> validate_length(:short_content, min: 5)
   end
 end

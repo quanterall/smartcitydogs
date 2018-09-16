@@ -5,7 +5,7 @@ defmodule Smartcitydogs.Mixfile do
     [
       app: :smartcitydogs,
       version: "0.0.1",
-      elixir: "~> 1.6.6",
+      elixir: "~> 1.7.3",
       elixirc_paths: elixirc_paths(Mix.env()),
       compilers: [:phoenix, :gettext] ++ Mix.compilers(),
       start_permanent: Mix.env() == :prod,
@@ -28,10 +28,11 @@ defmodule Smartcitydogs.Mixfile do
         :timex,
         :bamboo_smtp,
         :ueberauth_facebook,
-       ## :ueberauth_twitter,
         :scrivener_ecto,
-      ##  :httpoison,
-        :recaptcha
+        :recaptcha,
+        :faker,
+        :scrivener_ecto,
+        :scrivener_html
       ]
     ]
   end
@@ -39,6 +40,7 @@ defmodule Smartcitydogs.Mixfile do
   # Specifies which paths to compile per environment.
   defp elixirc_paths(:test), do: ["lib", "test/support"]
   defp elixirc_paths(_), do: ["lib"]
+
   defp xref do
     [
       exclude: [
@@ -65,19 +67,18 @@ defmodule Smartcitydogs.Mixfile do
       {:comeonin, "~> 2.5"},
       {:guardian, "~> 0.12.0"},
       {:ueberauth_facebook, "~> 0.3"},
-     ## {:ueberauth_twitter, "~> 0.2"},
       {:oauth, github: "tim/erlang-oauth"},
       {:bamboo, "~> 0.7"},
       {:bamboo_smtp, "~> 1.4.0"},
       {:mock, "~> 0.2.0", only: :test},
       {:timex, "~> 3.1"},
       {:scrivener_ecto, "~> 1.0"},
-      {:scrivener_list, "~> 1.0"},
-     ## {:httpoison, "~> 1.0", override: true},
-     ## {:html_entities, "~> 0.4"},
+      {:scrivener_html, "~> 1.7"},
       {:cmark, "~> 0.7"},
       {:recaptcha, "~> 2.3"},
-      {:bodyguard, "~> 2.1"}
+      {:bodyguard, "~> 2.1"},
+      {:faker, "~> 0.10"},
+      {:navigation_history, "~> 0.0"}
     ]
   end
 

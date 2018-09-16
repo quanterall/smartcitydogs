@@ -11,54 +11,32 @@ defmodule Smartcitydogs.Email do
     )
   end
 
-  def send_contact_email(user, contact_params) do
-    text = contact_params.text
+  def send_contact_email(contact_params) do
+    new_email()
+    |> to("smartcitydogs@gmail.com")
+    |> from(contact_params["email"])
+    |> subject(contact_params["topic"])
+    |> text_body("Запитване:
+       #{contact_params["text"]} \n\n\n\n
+       Изпратено от: #{contact_params["first_name"]} #{contact_params["last_name"]},
+       телефонен номер: #{contact_params["phone"]}")
+  end
 
+  def send_adopt_email(animal, user) do
     new_email()
     |> to("smartcitydogs@gmail.com")
     |> from(user.email)
-    |> subject(contact_params.topic)
-    |> text_body(
-      "Запитване:
-       #{text} \n\n\n\n 
-       Изпратено от: #{user.first_name} #{user.last_name}, 
-       телефонен номер: #{user.phone}"
-    )
-  end
-
-  def send_email(data) do
-    new_email()
-    |> to("smartcitydogs@gmail.com")
-    |> from(data["user_email"])
     |> subject("Заявка за осиновяване.")
-    |> text_body(
-      "
-      Желая да осиновя куче с номер на чипа: #{data["chip_number"]} .
+    |> text_body("
+      Желая да осиновя куче с номер на чипа: #{animal.chip_number} .
 
       Данни:
 
-      Име: #{data["user_name"]},
-      Фамилия: #{data["user_last_name"]},
-      Имейл: #{data["user_email"]},
-      Телефонен номер: #{data["user_phone"]}
-      "
-    )
+      Име: #{user.first_name},
+      Фамилия: #{user.last_name},
+      Имейл: #{user.email},
+      Телефонен номер: #{user.phone}
+      ")
     |> Smartcitydogs.Mailer.deliver_now()
-    
-  end
-
-  def send_unauth_contact_email(topic, text, user_data) do
-    new_email()
-    |> to(System.get_env("SMTP_USERNAME"))
-    |> from(System.get_env("SMTP_USERNAME"))
-    |> subject(topic)
-    |> text_body(
-      "Запитване:
-       #{text}  \n\n\n\n 
-       Изпратено от: #{user_data["first_name"]} #{user_data["last_name"]},
-       телефонен номер: #{
-        user_data["phone"]
-      }"
-    )
   end
 end

@@ -54,7 +54,7 @@ config :smartcitydogs, SmartcitydogsWeb.Endpoint,
   ]
 
 # Do not include metadata nor timestamps in development logs
-config :logger, :console, format: "[$level] $message\n"
+config :logger, :console, level: :info, format: "[$level] $message\n"
 
 # Set a higher stacktrace during development. Avoid configuring such
 # in production as building large stacktraces may be expensive.
@@ -71,8 +71,8 @@ config :smartcitydogs, Smartcitydogs.Repo,
 
 config :ueberauth, Ueberauth,
   providers: [
-    facebook: {Ueberauth.Strategy.Facebook, [profile_fields: "name,email,first_name,last_name"]},
-    ##twitter: {Ueberauth.Strategy.Twitter, [profile_fields: "name,email,first_name,last_name"]}
+    facebook: {Ueberauth.Strategy.Facebook, [profile_fields: "name,email,first_name,last_name"]}
+    ## twitter: {Ueberauth.Strategy.Twitter, [profile_fields: "name,email,first_name,last_name"]}
   ]
 
 config :ueberauth, Ueberauth.Strategy.Facebook.OAuth,

@@ -1,18 +1,18 @@
 defmodule SmartcitydogsWeb.SignalImageControllerAPI do
   use SmartcitydogsWeb, :controller
 
-  alias Smartcitydogs.SignalImages
+  alias Smartcitydogs.SignalsImages
   alias Smartcitydogs.DataSignals
 
   action_fallback(SmartcitydogsWeb.FallbackController)
 
   def index(conn, _params) do
-    signal_images = DataSignals.list_signal_images()
-    render(conn, "index.json", signal_images: signal_images)
+    signals_images = DataSignals.list_signal_images()
+    render(conn, "index.json", signals_images: signals_images)
   end
 
   def create(conn, %{"signal_image" => signal_image_params}) do
-    with {:ok, %SignalImages{} = signal_image} <-
+    with {:ok, %SignalsImages{} = signal_image} <-
            DataSignals.create_signal_images(signal_image_params) do
       conn
       |> put_status(:created)
@@ -29,14 +29,14 @@ defmodule SmartcitydogsWeb.SignalImageControllerAPI do
   def update(conn, %{"id" => id, "signal_image" => signal_image_params}) do
     signal_image = DataSignals.get_signal_images(id)
 
-    with {:ok, %SignalImages{} = signal_image} <-
+    with {:ok, %SignalsImages{} = signal_image} <-
            DataSignals.update_signal_images(signal_image, signal_image_params) do
       render(conn, "show.json", signal_image: signal_image)
     end
   end
 
   def delete(conn, %{"id" => id}) do
-    with {:ok, %SignalImages{}} <- DataSignals.delete_signal_images(id) do
+    with {:ok, %SignalsImages{}} <- DataSignals.delete_signal_images(id) do
       send_resp(conn, :no_content, "")
     end
   end

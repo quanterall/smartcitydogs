@@ -36,8 +36,6 @@ defmodule SmartcitydogsWeb.SignalsCommentControllerAPIView do
     %{error: "Signal comment has already been liked."}
   end
 
-
-
   def render("unfollowed.json", %{signal_comment: signals_comment}) do
     %{
       id: signals_comment.id,

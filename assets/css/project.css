@@ -1,11 +1,11 @@
 .project
 {
-   
-    background-image: url('/images/ForTheProject.png');
-background-size: 100%;
+background-image: url('/images/About.png');
+background-size: 80%;
 background-repeat:no-repeat;
 height: -webkit-fill-available;
-margin-top: 30px;
+background-position: center;
+background-position-y: 25px;
 }
 
 

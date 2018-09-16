@@ -12,11 +12,12 @@ defmodule Smartcitydogs.Contact.Policy do
   def authorize(_, %User{users_types_id: 4}, _), do: false
 
   # Shelter users can do anything
-  def authorize(_, %User{users_types_id: 5}, _) ,do: false
+  def authorize(_, %User{users_types_id: 5}, _), do: false
 
   # when action in [:new, :index, ]
 
   # Regular users can create posts
-  def authorize(action, _, _) 
-        when action in [:index, :create, :new, :edit, :update],do: true
+  def authorize(action, _, _)
+      when action in [:index, :create, :new, :edit, :update],
+      do: true
 end

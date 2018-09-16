@@ -1,117 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <title>SmartCityDogs!</title>
-    
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css"
-          integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
-    <link rel="stylesheet" href='<%= static_path(@conn, "/css/app.css") %>'>
-
+    <%= render("head.html", %{conn: @conn,current_user: @current_user}) %>
 </head>
 <body>
 <div class="container-fluid">
-
-    
     <div class="fixed-top-costom">
-    <nav class='navbar navbar-expand-lg bg-transperent top-navbar w-100
-            <%= if length(@conn.path_info) == 0 do %>
-                navbar-home
-            <% end %>'>
-        <div class="container">
-
-
-        <a class="navbar-brand bg-green pl-3 pr-3 " href="/">SmartCityDogs</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
-                aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-            <i class="fas fa-bars"></i>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNavDropdown">
-            <ul class="navbar-nav mr-auto text-nowrap">
-              
-              <%= 
-                if @current_user do
-                  cond do 
-                    @current_user.users_types_id == 2 ->
-                      render("navbar.html", %{conn: @conn,current_user: @current_user})
-
-                    @current_user.users_types_id == 3 ->
-                      render("navbar_zoo.html", %{conn: @conn,current_user: @current_user})
-
-                    @current_user.users_types_id == 4 || @current_user.users_types_id == 1 ->
-                      render("navbar_municipality.html", %{conn: @conn,current_user: @current_user})
-
-                    @current_user.users_types_id == 5 ->
-                      render("navbar_shelter.html", %{conn: @conn,current_user: @current_user})
-                  end
-
-
-                else
-                  render("navbar_no_user.html", %{conn: @conn, current_user: @current_user})
-
-                end
-              %>
-
-
-            </ul>
-            <ul class="navbar-nav text-nowrap">
-                <%= if @current_user do %>
-                <li class="nav-item ">
-                    <a class="nav-link user-menu" href="/users/<%= @current_user.id %>">
-                        Здравей, <b><%= @current_user.first_name%></b>
-                        <i class="fa fa-user"></i>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <%= link "Sign out", to: session_path(@conn, :delete, @current_user), method: "delete", class:
-                    "nav-link" %>
-                </li>
-                <% else %>
-                <li class="nav-item ">
-                    <a class="nav-link  <%= if length(@conn.path_info) == 0 do  %> black <% end %>" id="nav-register"
-                       href="#" onclick="showModalForm(event, 'register-form')">Регистрация</a>
-                </li>
-                <li class="nav-item ">
-                    <a class="nav-link" id="nav-sign-in"
-                       href="#" onclick="showModalForm(event, 'login-form')">Вход</a>
-                </li>
-                <% end %>
-                <li class="nav-item ">
-                    <a id ="new-signal-btn" class="nav-link " onclick="showModalForm(event, 'signal-form')" href="#">ПОДАЙ СИГНАЛ
-                    </a>
-                </li>
-            </ul>
-        </div>
-        </div>
-    </nav>
-    <%= render("modal_forms.html", %{conn: @conn,current_user: @current_user}) %>
-</div>
-
+        <%= render("navbar.html", %{conn: @conn,current_user: @current_user}) %>
+        <%= render("modal_forms.html", %{conn: @conn,current_user: @current_user}) %>
+    </div>
     <div class="container">
         <main role="main" class="content-container">
+            <%= render("flash_message.html", %{conn: @conn,current_user: @current_user}) %>
             <%= render @view_module, @view_template, assigns %>
         </main>
     </div>
 </div>
-
-
-
-<script src='<%= static_path(@conn, "/js/app.js") %>'></script>
-<p id="get_token">
-
-<p id="get_token">
-</p>
-<script>
-$.ajaxSetup({
-        beforeSend: function(xhr, settings) {
-            xhr.setRequestHeader("x-csrf-token", "<%=Plug.CSRFProtection.get_csrf_token() %>" );
-        }
-   });
-</script>
-
+<%= render("script.html", %{conn: @conn,current_user: @current_user}) %>
 </body>
 </html>

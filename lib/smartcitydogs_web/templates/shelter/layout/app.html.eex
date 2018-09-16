@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%= render( SmartcitydogsWeb.LayoutView, "head.html", %{conn: @conn,current_user: @current_user}) %>
+</head>
+<body>
+<div class="container-fluid">
+    <div class="fixed-top-costom">
+        <%= render( SmartcitydogsWeb.LayoutView, "navbar.html", %{conn: @conn,current_user: @current_user}) %>
+        <%= render( SmartcitydogsWeb.LayoutView, "modal_forms.html", %{conn: @conn,current_user: @current_user}) %>
+    </div>
+    <div class="container-fluid">
+        <main role="main" class="content-container pt-4">
+            <%= render(SmartcitydogsWeb.LayoutView, "flash_message.html", %{conn: @conn,current_user: @current_user}) %>
+            <%= render @view_module, @view_template, assigns %>
+        </main>
+    </div>
+</div>
+<%= render(SmartcitydogsWeb.LayoutView, "script.html", %{conn: @conn,current_user: @current_user}) %>
+</body>
+</html>

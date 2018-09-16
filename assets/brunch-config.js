@@ -33,7 +33,7 @@ watcher: {
           "node_modules/slick-carousel/slick/slick.css",
           "css/show_user.css",
           "css/my_profile.css",
-          "css/index_signal.css",
+          //"css/index_signal.css",
           "css/nav_bar.css",
           "css/show_signal.css",
           "css/registered_dogs.css",

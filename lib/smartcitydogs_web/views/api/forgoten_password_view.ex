@@ -11,7 +11,6 @@ defmodule SmartcitydogsWeb.ForgotenPasswordControllerAPIView do
   end
 
   def render("forgoten_password.json", %{forgoten_password: user}) do
-
     %{
       id: user.id,
       username: user.username,

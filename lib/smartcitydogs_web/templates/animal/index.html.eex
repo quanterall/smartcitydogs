@@ -1,113 +1,22 @@
-<style>
-.container{
-  margin-left: 5.5%;
-}
-</style>
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-
-<div class="container" >
-
-
-
-
-    <div class="row">
-        <div class="col-12">
-                <%= form_for @conn, animal_path(@conn, :index), [method: :get, class: "input-group"], fn f -> %>
-                  <%= search_input f, :chip_number, placeholder: "Chip number",class: "form-control border-secondary py-2" %>
-                  
-                <div class="input-group-append">
-                    <button class="btn btn-outline-secondary" type="submit">
-                        <i class="fa fa-search"></i>
-                    </button>
-                </div>
-               <% end %>
+<div class="row mb-3 pt-3">
+    <div class="col-6">
+        <%= form_for @conn, animal_path(@conn, :index), [method: :get, class: "input-group"], fn f -> %>
+        <%= search_input f, :chip_number, placeholder: "Chip number",class: "form-control border-secondary py-2" %>
+        <div class="input-group-append">
+            <button class="btn btn-outline-secondary" type="submit">
+                <i class="fa fa-search"></i>
+            </button>
         </div>
+        <% end %>
     </div>
-
-    <div class="registered-dogs-div">
-      <div class="row">
-        <%= for animal <- @animals do %>
-          
-            <div class="col-lg-3">
-              <div class="col-container" style="background-image: url('/<%= SmartcitydogsWeb.AnimalView.get_image_animals_id(animal.id) %>')">
-                <div class="col-container-shadow">
-
-                  <label-type class="
-                    <%= if animal.animals_status_id == 1 do %>
-                        label-type-red
-                    <% end %>
-
-                    <%= if animal.animals_status_id == 2 do %>
-                        label-type-orange
-                    <% end %>
-
-                    <%= if animal.animals_status_id == 3 do %>
-                        label-type-green
-                    <% end %>"><%= animal.animals_status_id 
-                    |> Smartcitydogs.DataAnimals.get_animal_status
-                    |> Map.get(:name)
-                    %>
-                  </label-type>
-                  <br />
-                  <label-text-grey>
-                    ПОЛ
-                  </label-text-grey>
-                  <br>
-                  <label-text-white>
-                    <%= animal.sex %>
-                  </label-text-white>
-                  <br><br>
-                  <label-text-grey>
-                    НОМЕР НА МАРКА/ЧИП
-                  </label-text-grey>
-                  <br>
-                  <label-text-white>
-                    <%= animal.chip_number %>
-                  </label-text-white>
-                  <br><br>
-                  <label-text-grey>
-                    ДАТА НА РЕГИСТРАЦИЯ
-                  </label-text-grey><br>
-                  <label-text-white>
-                  <%=
-                    signal_time = animal.inserted_at
-                    |> DateTime.truncate(:second)
-                    |> DateTime.to_string()
-                    count = String.length(signal_time)
-                    final_time = String.slice(signal_time,0..count-11)
-                    final_time
-                  %>
-                  </label-text-white>
-                  <br><br>
-                  <label-text-grey>
-                    ПОСЛЕДНА ЛОКАЦИЯ
-                  </label-text-grey>
-                  <br>
-                  <label-text-white>
-                    <%= animal.address %>
-                  </label-text-white>
-
-                    <center>
-                      <div class="button-show-hide">
-                        <div class="adopted_button">
-                          <%= link "Виж още »", to: animal_path(@conn, :show, animal), class: "btn btn-secondary" %>
-                        </div>
-                      </div>
-                    </center>
-                </div>
-              </div>
-            </div>
-        <%end%>
-      </div>
-      
-    <div class="padination">
-    <%= if @page.total_pages > 0 do %>
-      <%= for x <- 1..@page.total_pages do %>
-      <%= link "#{x * 8 - 7} - #{x * 8}  ", to: animal_path(@conn, :index, page: x, chip_number: @chip_number) %>
-      <% end %>  
-      <% end %>
+</div>
+<div class="row">
+    <%= for animal <- @animals do %>
+    <div class="col-lg-3 mb-2 mt-2">
+        <%= render SmartcitydogsWeb.AnimalView, "animal_slide.html" , %{conn: @conn,animal: animal} %>
     </div>
-    </div>
-    <br>
+    <% end %>
+</div>
+<div class="text-center custom-pagination">
+    <%= pagination_links @page , distance: 3  %>
 </div>

@@ -1,122 +1,358 @@
 
-.bg-transperent{
-  background: transparent;
+.bg-transperent {
+    background: transparent;
 }
 
 .home-bg {
-  position: absolute;
-  top: 0px;
-  width: 100%;
-  left: 0px;
-  right: 0px;
-  background: url(https://topdoghub.com/wp-content/uploads/2017/12/Best-Tough-Toys-For-Dogs-1140x624.jpg) no-repeat;
-  background-size: cover;
-  background-position-x: center;
-  background-color: black;
-  height: 620px;
+    position: absolute;
+    top: 0px;
+    width: 100%;
+    left: 0px;
+    right: 0px;
+    background: url(https://topdoghub.com/wp-content/uploads/2017/12/Best-Tough-Toys-For-Dogs-1140x624.jpg) no-repeat;
+    background-size: cover;
+    background-position-x: center;
+    background-color: black;
+    height: 620px;
 }
 
-.modal-form{
-  width: 50%;
-  margin-left: 50%;
-  -webkit-box-shadow: inset 0px 45px 7px -45px rgba(0,0,0,0.75);
-  display: none;
-  height: 100vh;
-  background-color: rgb(0,201,148);
-}
-#modal-forms-container{
-  box-shadow: -2px -1px 8px -3px rgba(0,0,0,0.75);
-  display: none;
-  position: absolute;
-  top: 45px;
-  right: 0px;
-  height: 9999999999px;
-  padding: 0px;
-}
-.content-container{
-  margin-top: 2.9rem;
+.modal-form {
+    width: 50%;
+    margin-left: 50%;
+    display: none;
+    height: 100vh;
+    background-color: rgb(0, 201, 148);
 }
 
-.bg-green{
-  background: rgb(0,201,148);
-}
-.bg-gray{
-  background: rgb(226, 226, 226);
-}
-.text-gray{
-  color: #c6c6c6;
-}
-.text-green{
-  color: rgb(0,201,148) !important;
+#modal-forms-container {
+    display: none;
+    position: absolute;
+    top: 45px;
+    right: 0px;
+    height: 9999999999px;
+    padding: 0px;
 }
 
-
-
-.homepage-slider{
-
-}
-.homepage-slider .carousel-item{
-  font-weight: bold;
-  color: white;
-}
-.homepage-slider .carousel-indicators{
-  margin-left: 0rem;
-  right: auto;
-  bottom: 0rem;
-  position: relative;
-  float: left;
-  margin-top: 4rem;
-}
-.homepage-slider .carousel-indicators li{
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  margin-right: 10px;
-}
-.fixed-top-costom{
-  position: fixed;
-  top: 0;
-  right: 0;
-  left: 0;
-  z-index: 16;
+.content-container {
+    margin-top: 2.9rem;
 }
 
-
-
-
-
-.slick-prev,.slick-next{
-  position: absolute;
-  bottom: 30px;
-  z-index: 1;
-  width: 30px;
+.bg-green {
+    background: rgb(0, 201, 148);
 }
 
-.slick-prev{
-  left: -15px;
+.bg-gray {
+    background: rgb(226, 226, 226);
 }
-.slick-next{
-  left: 15px;
+
+.text-gray {
+    color: #c6c6c6;
 }
-.slick-card{
-  height: 400px;
-  background: no-repeat center center fixed;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
+
+.text-green {
+    color: rgb(0, 201, 148) !important;
 }
-.slick-card-status{
-  color:red;
-  font-weight: bold;
-  font-size: 12px;
+
+.homepage-slider {
+    text-shadow: 2px 2px 5px #202020;
 }
-.slick-card-small{
-  font-size: 12px;
+
+.homepage-slider .carousel-item {
+    font-weight: bold;
+    color: white;
 }
+
+.homepage-slider .carousel-indicators {
+    margin-left: 0rem;
+    right: auto;
+    bottom: 0rem;
+    position: relative;
+    float: left;
+    margin-top: 4rem;
+}
+
+.homepage-slider .carousel-indicators li {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.fixed-top-costom {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 16;
+}
+
+.slick-prev, .slick-next {
+    position: absolute;
+    bottom: 30px;
+    z-index: 1;
+    width: 30px;
+}
+
+.slick-prev {
+    left: -15px;
+}
+
+.slick-next {
+    left: 15px;
+}
+
+.slick-card {
+    background: no-repeat center center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    min-height: 350px;
+    border: 0px !important;
+
+}
+
+.slick-card-status {
+    color: red;
+    font-weight: bold;
+    font-size: 12px;
+}
+
+.slick-card-small {
+    font-size: 12px;
+}
+
 .slick-card-title {
-  margin-top: 10px;
-  color: white;
-  font-size: 23px;
-  font-weight: bold;
+    margin-top: 10px;
+    font-size: 23px;
+    font-weight: bold;
+}
+
+.signal-photo-container {
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.signal-statistic {
+    font-size: 14px;
+}
+
+.button-show-hide .btn-secondary {
+    margin-top: 0px;
+}
+
+.col-container {
+    width: 250px;
+    height: 400px;
+}
+
+.signal-type-label {
+    font-weight: bold;
+    display: inline-block;
+    padding: 2px 5px 2px 0px;
+    border-radius: 5px;
+    color: #000;
+    margin-bottom: 5px;
+    font-size: 16px;
+
+}
+
+.signal-type-label.new {
+    color: red !important;
+}
+
+.signal-type-label.accepted {
+    color: orange !important;
+}
+
+.signal-type-label.sent {
+    color: #bfbf00 !important;
+}
+
+.signal-type-label.closed {
+    color: #00ba00 !important;
+}
+
+.animal-status-text.free {
+    color: red !important;
+}
+
+.animal-status-text.shelter {
+    color: #bfbf00 !important;
+}
+
+.animal-status-text.adopted {
+    color: #00ba00 !important;
+}
+
+.btn.custom-btn {
+    background-color: rgb(0, 201, 148);
+    color: white;
+}
+
+.home-animal-slide {
+    color: white;
+    padding: 10px;
+}
+
+.animal-slide-sm-text {
+    font-size: 12px;
+}
+
+.custom-pagination nav {
+    display: inline-block;
+}
+
+.user-profile-text {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.user-profile {
+    font-size: 1.1rem;
+    font-weight: bold;
+    border-bottom: 1px solid gray;
+    color: black;
+    display: inline-block;
+    margin-left: 5px;
+    padding: 0px 5px 0px 5px;
+}
+
+.user-signals-tabs {
+    color: black;
+}
+
+.user-signals-tabs:hover, .user-signals-tabs.selected {
+    color: rgb(0, 201, 148);
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.signal-gallery .slick-prev, .signal-gallery .slick-next {
+    position: absolute;
+    bottom: 30px;
+    z-index: 1;
+    height: 30px;
+    top: 90%; /* position the top  edge of the element at the middle of the parent */
+    left: 50%; /* position the left edge of the element at the middle of the parent */
+
+    transform: translate(-50%, -50%)
+
+}
+
+.signal-gallery .slick-prev {
+    margin-left: -15px;
+}
+
+.signal-gallery .slick-next {
+    margin-left: 15px;
+}
+
+.blue-bold {
+    color: rgb(0, 201, 148);
+    font-weight: bold;
+}
+
+#signal_map {
+    width: 100%;
+    height: 500px;
+
+}
+
+#map_container {
+    position: relative;
+}
+
+#map_container i {
+    position: absolute;
+    z-index: 9999;
+    right: 0px;
+    background: rgb(0, 201, 148);
+    width: 30px;
+    padding: 5px 0px 5px 0px;
+    display: block;
+    text-align: center;
+}
+
+#map_container i:hover {
+    cursor: pointer;
+}
+
+.signal-comments-title {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.comment-container {
+    border-bottom: 1px solid #bababa;
+}
+
+.comment-user-name {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.comment-signal-btn, .support-signal-btn {
+    border: 2px solid rgb(0, 201, 148);
+    color: rgb(0, 201, 148);
+    padding: 7px;
+}
+
+.support-signal-btn {
+    color: white;
+    background: rgb(0, 201, 148);
+}
+
+.comment-signal-btn:hover {
+    text-decoration: none;
+    color: rgb(0, 201, 148);
+}
+
+.support-signal-btn:hover {
+    text-decoration: none;
+    color: white;
+}
+
+.form-sign-in {
+    color: white;
+    background: rgb(0, 201, 148);
+}
+
+.form-sign-in .form-control {
+    border-radius: 0px;
+    border: 0px;
+    margin-top: 15px;
+}
+
+.form-sign-in a {
+    color: white;
+}
+
+.show-map-btn {
+    border: none;
+    -webkit-appearance: inherit !important;
+}
+
+.custom-fixed-alert {
+    top: 78px;
+    display: inline-block;
+    width: fit-content;
+    position: absolute !important;
+    z-index: 30;
+    right: 66px;
+}
+.pull-right{
+    float:right;
+}
+.dropdown-menu .nav-link{
+    color: black !important;
+}
+.contacts-link{
+    font-weight: bold;
+    color:rgb(0, 201, 148);
+    font-size:22px;
+}
+.contacts-link:hover{
+    color: rgb(0, 141, 104);
+    text-decoration: none;
 }

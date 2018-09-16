@@ -1,0 +1,62 @@
+<div class="row">
+    <div class="col-lg-6 pt-5 pb-5">
+        <h1>За контакти с нас:</h1>
+        <table class="mt-4">
+            <tr>
+                <td class="p-lg-3"><i class="fab fa-facebook-f mr-lg-2 fa-fw fa-3x"></i></td>
+                <td><a class="contacts-link" href="https://www.facebook.com/smartcitydogs">www.facebook.com/smartcitydogs</a>
+                </td>
+            </tr>
+            <tr>
+                <td class="p-lg-3"><i class="fa fa-phone mr-lg-2 ma-fw fa-3x"></i></td>
+                <td><a class="contacts-link" href="tel:+359 887 307 616">+359 /887 307 616</a></td>
+            </tr>
+            <tr>
+                <td class="p-lg-3"><i class="fa fa-envelope mr-lg-2 fa-fw fa-3x"></i></td>
+                <td><a class="contacts-link" href="mailto:smartcitydogs@gmail.com">smartcitydogs@gmail.com</a></td>
+            </tr>
+        </table>
+    </div>
+    <div class="col-lg-6 pt-5 pb-5 bg-green form-sign-in ">
+        <h2 class="top-contacts-right">Изпращане на съобщение:</h2>
+        <%= form_for @conn, contact_path(@conn,:create), fn f -> %>
+        <%= if @conn.assigns.current_user == nil do %>
+        <div class="form-group">
+            <label>Име:</label>
+            <%= text_input f, :first_name, class: "form-control", required: true  %>
+            <%= error_tag f, :first_name %>
+        </div>
+        <div class="form-group">
+            <label>Фамилия:</label>
+            <%= text_input f, :last_name, class: "form-control", required: true  %>
+            <%= error_tag f, :last_name %>
+        </div>
+        <div class="form-group">
+            <label>E-mail:</label>
+            <%= text_input f, :email, class: "form-control" , type: "email", required: true %>
+            <%= error_tag f, :email %>
+        </div>
+        <div class="form-group">
+            <label>Телефонен номер:</label>
+            <%= text_input f, :phone, class: "form-control", required: true  %>
+            <%= error_tag f, :phone %>
+        </div>
+        <% end %>
+        <div class="form-group">
+            <label>Заглавие:</label>
+            <%= text_input f, :topic, class: "form-control", required: true  %>
+            <%= error_tag f, :topic %>
+        </div>
+        <div class="form-group">
+            <label>Текст:</label>
+            <%= textarea f, :text, [class: "form-control", required: nil, required: true ] %>
+        </div>
+        <div class="form-group">
+            <%= raw(Recaptcha.Template.display([public_key: @public_key])) %>
+        </div>
+        <div class="form-group">
+            <%= submit "ИЗПРАТИ", class: "btn btn-primary" %>
+        </div>
+        <% end %>
+    </div>
+</div>
