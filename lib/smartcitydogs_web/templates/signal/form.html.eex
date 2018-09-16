@@ -46,10 +46,7 @@
 
 <div class="row mt-5 pb-5">
     <div class="col">
-        <a class="close-modal" href="#">ОТКАЗ</a>
-    </div>
-    <div class="col">
-        <%= submit "ПОДАЙ СИГНАЛ", class: "btn btn-submit m-auto d-block" %> <br>
+        <%= submit "ПОДАЙ СИГНАЛ", class: "btn btn-submit m-auto d-block bg-white" %> <br>
     </div>
 </div>
 <% end %>

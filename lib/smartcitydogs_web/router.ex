@@ -157,8 +157,6 @@ defmodule SmartcitydogsWeb.Router do
 
       resources("/help", HelpController, only: [:index])
 
-      resources("/contact", ContactController, only: [:new, :create, :edit, :update])
-
       ####### ADMIN ZONE #########
 
       scope "/admin", Admin, as: :admin do
@@ -168,8 +166,6 @@ defmodule SmartcitydogsWeb.Router do
         get("/show", PageController, :show)
 
         get("/signals/get_signals_support_count", SignalController, :get_signals_support_count)
-
-        resources("/contact", ContactController, only: [:new, :create, :edit, :update])
 
         resources("/signals", SignalController)
       end

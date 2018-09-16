@@ -1,143 +1,16 @@
-
 import "phoenix_html";
 import $ from "jquery";
 import "slick-carousel";
 
-
-function myOnLoadCallback() {
-    alert("Captcha is OK");
-}
-$(document).ready(function(){
-
-    $('.change-status').click(function(){
-        $(".modal").css("display","block");
-    });
-    $('.close').click(function(){
-        $(".modal").css("display","none");
-    });
-
-    $(function(){
-
-        var modal = document.getElementById('myModal');
-        //   var span = document.getElementsByClassName("close")[0];
-        var id;
-        var SelectedType;
-
-        $('.change-status').on('click',function() {
-            id = $(this).attr('id');
-            console.log("Buttton: "+id);
-
-
-        });
-
-        $('.asdf-test').on('click',function(){
-
-            SelectedType = $(".select-type option:selected").val()
-            console.log(SelectedType);
-            console.log("Buttton1: "+id);
-
-            $.ajax({
-                method: "GET",
-                url: "/signals/"+id+"/update_type",
-                data: {
-                    "id": id,
-                    "signals_types_id": SelectedType
-                }
-            })
-
-            setTimeout(function() {
-                location.reload();
-            }, 1000);
-
-
-        });
-    });
-
-
-
-    $('#submit-adoption').click(function(){
-
-        $.ajax({
-            method: "POST",
-            url: "/api/animals/:id/send_email",
-            credentials: 'same-origin',
-            data: {
-                "chip_number": $("#chip_number").text(),
-                "user_name": $("#user_name").text(),
-                "user_last_name": $("#user_last_name").text(),
-                "user_email": $("#user_email").text(),
-                "user_phone": $("#user_phone").text(),
-                "animal_id": $("#animal_id").text(),
-                "user_id": $("#user_id").text()
-            },
-            success: function (msg) {
-                alert("Имейлът ви беше успешно изпратен!");
-            },
-            error: function (xhr, status) {
-                alert("ГРЕШКА!");
-            }
-
-        }).done(function(){
-            location.reload();
-        })
-    });
-
-
-
-
-
-    $('#close-map').click(function() {
+$(document).ready(function () {
+    $('#close-map').click(function () {
         $('#map_container').hide();
     })
-    $('.show-map-btn').click(function() {
+    $('.show-map-btn').click(function () {
         $('#map_container').show();
     });
 
 
-
-    $('#comment').click(function() {
-
-        $('#comment').hide();
-        $('.comment_section').show();
-    });
-
-    $('.close_comment').click(function() {
-
-        $('#comment').show();
-        $('.comment_section').hide();
-    });
-
-
-    $(".submit_comment").click(function() {
-        $.ajax({
-            method: "GET",
-            url: "/api/signals/:id/comment",
-            data: {
-                "show-comment": $("#comment-id").val(),
-                "show-id": $("#signal-id").text()
-            }
-        }).done(function(){
-            location.reload();
-        })
-    });
-
-
-    window.login = function () {
-        var params = {email: $("#login-email").val(), password: $("#login-password").val()};
-        $.post("/api/users/sign_in", params)
-            .done(function (data) {
-                if ((data.users_types_id == 4) || (data.users_types_id == 5)) {
-                    window.location.href = "municipality/signals";
-                }
-                else {
-                    location.reload();
-                }
-            })
-            .fail(function (text) {
-                $("#login-form-errors").text("Невалиден Имейл или Парола!");
-            });
-
-    };
 
 
     $('.slick').slick({
@@ -182,25 +55,38 @@ $(document).ready(function(){
     });
 
     window.showModalForm = function (event, formId) {
+        if (!is_mobile()) {
+            if (event) {
+                event.preventDefault();
+            }
+            if ($("#" + formId).is(":visible")) {
+                $("#modal-forms-container").hide();
+            } else {
+                $(".modal-form").hide();
+                $("#modal-forms-container").show();
+                $("#" + formId).show();
 
-        if ($("#" + formId).is(":visible")) {
-            $("#modal-forms-container" ).hide();
-        } else {
-            $(".modal-form").hide();
-            $("#modal-forms-container" ).show();
-            $("#" + formId).show();
-
+            }
+            console.log("asdasd");
         }
+        return true
+
     };
 
+    window.is_mobile = function () {
+        if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+            return true;
+        }
+        return false
+    };
 
     $('.close-modal').on('click', function (event) {
         event.preventDefault();
-        $("#modal-forms-container" ).hide();
+        $("#modal-forms-container").hide();
     });
 
-    $(window).scroll(function(e){
-        if ( window.location.pathname == '/' ) {
+    $(window).scroll(function (e) {
+        if (window.location.pathname == '/') {
             if ($(document).scrollTop() == 0) {
                 $(".top-navbar").addClass("navbar-home");
                 $(".modal-form").addClass("shadow-off");
@@ -215,17 +101,16 @@ $(document).ready(function(){
             }
         }
     });
-    $('.navbar-collapse').on('show.bs.collapse', function() {
+    $('.navbar-collapse').on('show.bs.collapse', function () {
         $(".top-navbar").removeClass("navbar-home");
     });
-    $(".user-signals-tabs").click(function(){
+    $(".user-signals-tabs").click(function () {
         $('.tabs').hide();
         $(".user-signals-tabs").removeClass("selected");
         $(this).addClass("selected");
-        $("#"+$(this).data("show")).show();
+        $("#" + $(this).data("show")).show();
 
     });
-
 
 
     $('.signal-gallery').slick({
@@ -237,7 +122,7 @@ $(document).ready(function(){
 
     });
 
-    $('#view_map').click(function() {
+    $('#view_map').click(function () {
         var cor_a = $('#cor_a').val();
         var cor_b = $('#cor_b').val();
         var mymap = L.map('signal_map').setView([cor_a, cor_b], 16);

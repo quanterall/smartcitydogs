@@ -113,7 +113,6 @@ defmodule SmartcitydogsWeb.SignalController do
     Signals.add_like(conn.assigns.current_user.id, id)
 
     conn
-    |> put_flash(:info, "Signal liked!")
     |> redirect(to: signal_path(conn, :show, id))
   end
 

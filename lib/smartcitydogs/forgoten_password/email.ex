@@ -11,17 +11,15 @@ defmodule Smartcitydogs.Email do
     )
   end
 
-  def send_contact_email(user, contact_params) do
-    text = contact_params.text
-
+  def send_contact_email(contact_params) do
     new_email()
     |> to("smartcitydogs@gmail.com")
-    |> from(user.email)
-    |> subject(contact_params.topic)
+    |> from(contact_params["email"])
+    |> subject(contact_params["topic"])
     |> text_body("Запитване:
-       #{text} \n\n\n\n 
-       Изпратено от: #{user.first_name} #{user.last_name}, 
-       телефонен номер: #{user.phone}")
+       #{contact_params["text"]} \n\n\n\n
+       Изпратено от: #{contact_params["first_name"]} #{contact_params["last_name"]},
+       телефонен номер: #{contact_params["phone"]}")
   end
 
   def send_adopt_email(animal, user) do
@@ -40,16 +38,5 @@ defmodule Smartcitydogs.Email do
       Телефонен номер: #{user.phone}
       ")
     |> Smartcitydogs.Mailer.deliver_now()
-  end
-
-  def send_unauth_contact_email(topic, text, user_data) do
-    new_email()
-    |> to(System.get_env("SMTP_USERNAME"))
-    |> from(System.get_env("SMTP_USERNAME"))
-    |> subject(topic)
-    |> text_body("Запитване:
-       #{text}  \n\n\n\n 
-       Изпратено от: #{user_data["first_name"]} #{user_data["last_name"]},
-       телефонен номер: #{user_data["phone"]}")
   end
 end

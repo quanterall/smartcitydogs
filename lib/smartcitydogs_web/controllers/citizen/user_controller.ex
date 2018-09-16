@@ -33,7 +33,7 @@ defmodule SmartcitydogsWeb.UserController do
     end
   end
 
-  def show(conn, id) do
+  def show(conn, %{"id" => id}) do
     preload = [
       :signals_images,
       :signals_types,
@@ -92,12 +92,6 @@ defmodule SmartcitydogsWeb.UserController do
   def delete(conn, %{"id" => id}) do
     user = DataUsers.get_user!(id)
 
-    with :ok <-
-           Bodyguard.permit(
-             Smartcitydogs.Users.Policy,
-             :delete,
-             conn.assigns.current_user
-           ) do
       logged_user_id = conn.assigns.current_user.id
       request_user_id = user.id
 
@@ -110,8 +104,5 @@ defmodule SmartcitydogsWeb.UserController do
         |> put_flash(:info, "User deleted successfully.")
         |> redirect(to: user_path(conn, :index))
       end
-    else
-      {:error, _} -> render(conn, SmartcitydogsWeb.ErrorView, "401.html")
-    end
   end
 end

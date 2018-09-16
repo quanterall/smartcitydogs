@@ -1,12 +1,13 @@
 <div class="col m-auto p-5 form-sign-in">
     <h3 class="h3 mb-5 font-weight-normal ">Регистрация</h3>
-    <%=  render "form.html", Map.put(assigns, :action, user_path(@conn, :create)) %>
-</div>
-<div class="row mt-3">
-    <div class="col text-right">
-        <a class="btn btn-primary" href='<%=session_url(@conn, :request,"facebook")%>'
-           rel="no-follow">
-            <i class="fab fa-facebook-f"></i> ВХОД</a>
-        <br>
+
+    <div class="row mt-3">
+        <div class="col-6 ml-auto text-right">
+            <a class="btn btn-primary d-block" href='<%=session_url(@conn, :request,"facebook")%>'
+               rel="no-follow">
+                <i class="fab fa-facebook-f"></i> ВХОД</a>
+            <br>
+        </div>
     </div>
+    <%=  render "form.html", Map.put(assigns, :action, user_path(@conn, :create)) %>
 </div>

@@ -13,33 +13,10 @@ defmodule SmartcitydogsWeb.ForgotenPasswordController do
     render(conn, "new.html", changeset: changeset, action: forgoten_password_path(conn, :create))
   end
 
-  def create(conn, pw_params) do
-    reset_parameter = pw_params["reset_parameter"]
-    reset_password_radio = String.to_integer(pw_params["reset_password_radio"])
-
+  def create(conn, %{"email" => email} = params) do
     user =
-      cond do
-        reset_password_radio == 2 ->
-          if String.trim(reset_parameter) != "" do
-            User
-            |> Repo.get_by(email: reset_parameter)
-          end
-
-        reset_password_radio == 3 ->
-          if String.trim(reset_parameter) != "" do
-            User
-            |> Repo.get_by(phone: reset_parameter)
-          end
-
-        reset_password_radio == 1 ->
-          if String.trim(reset_parameter) != "" do
-            User
-            |> Repo.get_by(username: reset_parameter)
-          end
-
-        true ->
-          nil
-      end
+      User
+      |> Repo.get_by(email: email)
 
     case user do
       nil ->
@@ -54,13 +31,13 @@ defmodule SmartcitydogsWeb.ForgotenPasswordController do
         Smartcitydogs.Email.send_reset_email(email, user.reset_password_token)
         |> Smartcitydogs.Mailer.deliver_now()
 
-        redirect(conn, to: page_path(conn, :index))
-
         put_flash(
           conn,
           :info,
           "If your email address exists in our database, you will receive a password reset link at your email address in a few minutes."
         )
+
+        redirect(conn, to: page_path(conn, :index))
     end
   end
 

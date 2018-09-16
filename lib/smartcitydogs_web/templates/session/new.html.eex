@@ -1,11 +1,12 @@
-<div class="col-10 m-auto pt-5 form-sign-in">
+<div class="col-lg-10 m-auto pt-5 form-sign-in">
     <h3 class="h3 mb-5 font-weight-normal ">Вход</h3>
+    <%= form_for @conn, session_path(@conn , :create),[ class: "form-elixir register-form-class" ], fn f -> %>
     <div class="row">
         <div class="col-12">
-            <input type="email" id="login-email" class="form-control" placeholder="Email address" required="" autofocus="">
+            <%= text_input f, :email, [ class: "form-control" ,minlength: "2", required: true , placeholder: "Email адрес",  type: "email"] %>
         </div>
         <div class="col-12">
-            <input type="password" id="login-password" class="form-control" placeholder="Password" required="">
+            <%= text_input f, :password, [ class: "form-control" ,minlength: "2", required: true , placeholder: "Парола",  type: "password"] %>
         </div>
     </div>
     <div class="row mt-3">
@@ -15,11 +16,9 @@
         </div>
     </div>
     <div class="row mt-5">
-        <div class="col">
-            <a class="close-modal" href="#">ОТКАЗ</a>
-        </div>
-        <div class="col">
-            <button class="btn btn-lg btn-primary btn-block" onclick="login()">Влез</button>
+        <div class="col pb-4 text-center">
+            <button class="btn btn-primary" >Влез</button>
         </div>
     </div>
+    <% end %>
 </div>

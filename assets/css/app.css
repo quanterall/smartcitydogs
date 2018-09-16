@@ -347,3 +347,12 @@
 .dropdown-menu .nav-link{
     color: black !important;
 }
+.contacts-link{
+    font-weight: bold;
+    color:rgb(0, 201, 148);
+    font-size:22px;
+}
+.contacts-link:hover{
+    color: rgb(0, 141, 104);
+    text-decoration: none;
+}

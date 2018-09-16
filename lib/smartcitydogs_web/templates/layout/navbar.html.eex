@@ -28,16 +28,16 @@
                 <li class="nav-item ">
                     <a class="nav-link  <%= if length(@conn.path_info) == 0 do  %> black <% end %>"
                        id="nav-register"
-                       href="#" onclick="showModalForm(event, 'register-form')">Регистрация</a>
+                       href="<%=user_path(@conn,:new)%>" onclick="showModalForm(event, 'register-form')">Регистрация</a>
                 </li>
                 <li class="nav-item ">
                     <a class="nav-link" id="nav-sign-in"
-                       href="#" onclick="showModalForm(event, 'login-form')">Вход</a>
+                       href="<%=session_path(@conn,:new)%>" onclick="showModalForm(event, 'login-form')">Вход</a>
                 </li>
                 <% end %>
                 <li class="nav-item ">
                     <a id="new-signal-btn" class="nav-link " onclick="showModalForm(event, 'signal-form')"
-                       href="#">ПОДАЙ СИГНАЛ
+                       href="<%=signal_path(@conn,:new)%>">ПОДАЙ СИГНАЛ
                     </a>
                 </li>
             </ul>
