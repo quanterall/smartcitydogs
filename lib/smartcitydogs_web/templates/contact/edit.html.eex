@@ -1,2 +1,0 @@
-
-<%= render "newcontact.html", Map.put(assigns, :action, contact_path(@conn, :update, @user)) %>
