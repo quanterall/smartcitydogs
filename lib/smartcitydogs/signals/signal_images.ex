@@ -3,6 +3,7 @@ defmodule Smartcitydogs.SignalsImages do
   import Ecto.Changeset
   alias Smartcitydogs.SignalsImages
   alias Smartcitydogs.SignalsImages
+  alias Smartcitydogs.Repo
 
   @timestamps_opts [type: :utc_datetime, usec: false]
 

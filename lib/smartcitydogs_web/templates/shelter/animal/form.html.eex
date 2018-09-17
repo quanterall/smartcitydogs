@@ -27,8 +27,12 @@
             <div>
                 <label>Последен адрес</label>
                 <div class="form-group">
-                    <%= text_input f, :address, class: "form-control", placeholder: "Адрес" %>
+                    <%= text_input f, :address, class: "form-control",id: "autocomplete_animals", placeholder: "Адрес" %>
                     <%= error_tag f, :address %>
+                </div>
+                <div class="hidden-form-group">
+                    <%= hidden_input f, :address_F, id: "animal_address_F" %>
+                    <%= hidden_input f, :address_B, id: "animal_address_B" %>
                 </div>
             </div>
             <div>
@@ -62,25 +66,29 @@
 
     function initialize() {
         autocomplete = new google.maps.places.Autocomplete(
-            (document.getElementById('autocomplete1')),
+            /** @type {!HTMLInputElement} */(document.getElementById('autocomplete_animals')),
             {types: ['geocode']});
-        autocomplete.addListener('place_changed', place);
+
+        // When the user selects an address from the dropdown, populate the address
+        // fields in the form.
+        autocomplete.addListener('place_changed', placeLocation);
     }
 
-    function place() {
+    function placeLocation() {
         var place = autocomplete.getPlace();
+        console.log(place);
         var a_a = place.geometry.viewport.f.b;
         var a_b = place.geometry.viewport.f.f;
         var b_a = place.geometry.viewport.b.b;
         var b_b = place.geometry.viewport.b.f;
         var res_a = (a_a + a_b) / 2;
         var res_b = (b_a + b_b) / 2;
-        Cordinate_a = res_a;
-        Cordinate_b = res_b;
-        $('#address_F').val(Cordinate_a);
-        $('#address_B').val(Cordinate_b);
+        Cordinate_a = res_a  //place.geometry.viewport.f.b;
+        Cordinate_b = res_b   //place.geometry.viewport.b.b;
+        console.log(Cordinate_a);
+        console.log(Cordinate_b);
+        $('#animal_address_F').val(Cordinate_a);
+        $('#animal_address_B').val(Cordinate_b);
 
     }
-
-    initialize();
 </script>
