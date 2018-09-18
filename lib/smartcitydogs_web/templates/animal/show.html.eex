@@ -49,15 +49,19 @@
         </div>
         <div class="row mt-3">
             <div class="col text-center">
-                <%=if Smartcitydogs.Adopt.adopt_exist(@animal,@conn.assigns.current_user) do %>
-                    <%= form_for @conn, animal_path(@conn,:adopt, @animal.id), [class: "d-inline-block"], fn f -> %>
-                        <%= hidden_input f, :animals_id, value: @animal.id %>
-                        <%= submit "Осинови", class: "comment-signal-btn d-inline-block" %>
-                    <% end %>
+                <%=if @conn.assigns.current_user == nil do %>
+
                 <% else %>
-                    Заявката за осиновяване е изпратена.<br>
-                    Наш сътрудник ще се свърже с Вас за повече информация.
-                <% end %>
+                    <%=if Smartcitydogs.Adopt.adopt_exist(@animal,@conn.assigns.current_user) do %>
+                        <%= form_for @conn, animal_path(@conn,:adopt, @animal.id), [class: "d-inline-block"], fn f -> %>
+                            <%= hidden_input f, :animals_id, value: @animal.id %>
+                            <%= submit "Осинови", class: "comment-signal-btn d-inline-block" %>
+                        <% end %>
+                    <% else %>
+                        Заявката за осиновяване е изпратена.<br>
+                        Наш сътрудник ще се свърже с Вас за повече информация.
+                    <% end %>
+                <%end%>
             </div>
         </div>
     </div>
