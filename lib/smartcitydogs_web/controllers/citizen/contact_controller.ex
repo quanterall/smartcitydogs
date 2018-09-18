@@ -15,19 +15,19 @@ defmodule SmartcitydogsWeb.ContactController do
 
     case Recaptcha.verify(params["g-recaptcha-response"], secret: secret) do
       {:ok, _} ->
-        if conn.assigns.current_user != nil do
-          params =
+        params = 
+          if conn.assigns.current_user != nil do
             params
-            |> Map.put("first_name", conn.assigns.current_user.first_name)
-            |> Map.put("last_name", conn.assigns.current_user.last_name)
-            |> Map.put("phone", conn.assigns.current_user.phone)
-        end
-
+              |> Map.put("first_name", conn.assigns.current_user.first_name)
+              |> Map.put("last_name", conn.assigns.current_user.last_name)
+              |> Map.put("phone", conn.assigns.current_user.phone)
+              |> Map.put("email", conn.assigns.current_user.email)
+          end
         Email.send_contact_email(params)
         |> Smartcitydogs.Mailer.deliver_now()
 
         conn
-        |> redirect(to: page_path(conn, :new))
+        |> redirect(to: page_path(conn, :index))
         |> put_flash(:info, "Съобщението е изпратено успешно")
 
       {:error, _} ->

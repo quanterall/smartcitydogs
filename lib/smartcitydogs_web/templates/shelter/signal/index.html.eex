@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col-3">
-        <%= form_for @filter_changeset, municipality_signal_path(@conn, :index),[class: "register-form-class",method: "get"], fn f -> %>
+        <%= form_for @filter_changeset, shelter_signal_path(@conn, :index),[class: "register-form-class",method: "get"], fn f -> %>
         <h5>Филтрирай по статус</h5>
         <%= multiple_select f, :signals_types_id,[ { "Нов" ,1 },{ "Приет" ,2 },{ "Изпратен" ,3 },{ "Приключен" ,4 } ], [class: "form-control", required: false  , multiple: true] %>
         <h5>Филтрирай по категория</h5>
