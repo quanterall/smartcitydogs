@@ -80,7 +80,7 @@ defmodule SmartcitydogsWeb.Router do
     resources("/users", UserControllerAPI, except: [:new, :edit])
     post("/users/logout", UserControllerAPI, :logout)
 
-    resources("/signals", SignalControllerAPI, except: [:new, :edit])
+    resources("/signals", SignalControllerAPI)#, except: [:new, :edit])
 
     scope "/signals/:id" do
       get("/comment", SignalControllerAPI, :comment)

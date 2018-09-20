@@ -356,3 +356,12 @@
     color: rgb(0, 141, 104);
     text-decoration: none;
 }
+
+.card{
+    height: 27rem;
+    width: 16.5rem;
+}
+
+.radio_buttons_signals{
+    margin-left: 10%;
+}

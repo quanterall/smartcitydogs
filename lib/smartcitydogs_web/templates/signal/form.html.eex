@@ -3,17 +3,17 @@
     <div>
         <label>1. Изберете категория на сигнала</label>
         <div class="form-group">
-            <label class="form-check-label">
+            <label class="form-check-label radio_buttons_signals">
                 <%=radio_button(f, :signals_categories_id, "1") %>
                 Бездомно куче
             </label>
-            <label class="form-check-labe2">
+            <label class="form-check-labe2 radio_buttons_signals ">
                 <%=radio_button(f, :signals_categories_id, "2") %>
-                Бездомно куче
+                Избягало куче
             </label>
-            <label class="form-check-label">
+            <label class="form-check-label radio_buttons_signals">
                 <%=radio_button(f, :signals_categories_id, "3") %>
-                Бездомно куче
+                Малтретиране на куче
             </label>
         </div>
     </div>

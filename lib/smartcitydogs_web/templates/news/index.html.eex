@@ -16,9 +16,13 @@
                         <%= Timex.format!(news.date, "%d.%m.%y",:strftime)%> г.
                     </small>
                 </p>
-                <h5 class="card-title"><%= news.title %></h5>
+                <h5 class="card-title"><%=String.slice(news.title,0..40)%> 
+                    <%= if String.length(news.title) > 42 do %>
+                        ...
+                    <% end %>    
+                </h5>
                 <p class="card-text">
-                    <%=String.slice(news.short_content,0..30)%> ...
+                    <%=String.slice(news.short_content,0..40)%>  ...
                 </p>
 
 

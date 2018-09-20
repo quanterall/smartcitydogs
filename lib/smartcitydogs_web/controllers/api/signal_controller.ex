@@ -29,57 +29,44 @@ defmodule SmartcitydogsWeb.SignalControllerAPI do
       |> Map.put("support_count", 0)
       |> Map.put("users_id", user_id)
 
-    case DataSignals.create_signal(signal_params) do
+    case Signals.create_signal(signal_params) do
       {:ok, signal} ->
-        upload = Map.get(conn, :params)
+        # upload = Map.get(conn, :params)
+        # upload = Map.get(upload, "url")
 
-        upload = Map.get(upload, "url")
+        # for n <- upload do
+        #   extension = Path.extname(n.filename)
 
-        for n <- upload do
-          extension = Path.extname(n.filename)
+        #   File.cp(
+        #     n.path,
+        #     "../smartcitydogs/assets/static/images/#{Map.get(n, :filename)}-profile#{extension}"
+        #   )
 
-          File.cp(
-            n.path,
-            "../smartcitydogs/assets/static/images/#{Map.get(n, :filename)}-profile#{extension}"
-          )
+        #   args = %{
+        #     "url" => "images/#{Map.get(n, :filename)}-profile#{extension}",
+        #     "signals_id" => "#{signal.id}"
+        #   }
 
-          args = %{
-            "url" => "images/#{Map.get(n, :filename)}-profile#{extension}",
-            "signals_id" => "#{signal.id}"
-          }
+        #   DataSignals.create_signal_images(args)
+        # end
 
-          DataSignals.create_signal_images(args)
-        end
-
-        render("show.json", signal: signal)
-
-      # redirect(conn, to: signal_path(conn, :show, signal))
+        render(conn,"show.json", signal: signal)
 
       {:error, %Ecto.Changeset{} = changeset} ->
-        render(conn, "new_signal.html", changeset: changeset)
+        render(conn, "error.json", changeset: changeset)
+        # render(conn, "new_signal.html", changeset: changeset)
     end
 
-    # with {:ok, %Signals{} = signal} <- DataSignals.create_signal(signal_params) do
-    #   conn
-    #   |> put_status(:created)
-    #   |> put_resp_header("location", signal_path(conn, :show, signal))
-    #   |> render("show.json", signal: signal)
-    # end
   end
 
   def show(conn, map) do
     id = String.to_integer(map["id"])
-    comments = DataSignals.get_comment_signal_id(id)
     signal = DataSignals.get_signal(id)
-    ## signal is liked by user
-    sorted_comments = DataSignals.sort_signal_comment_by_id()
 
     render(
       conn,
       "show.json",
-      signal: signal,
-      comments: sorted_comments,
-      comments_count: comments
+      signal: signal
     )
   end
 
