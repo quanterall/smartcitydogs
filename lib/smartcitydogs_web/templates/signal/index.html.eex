@@ -4,6 +4,7 @@
         <%= render SmartcitydogsWeb.SignalView, "signal_card.html" , %{conn: @conn,signal: signal} %>
     </div>
     <% end %>
+    
 </div>
 <div class="text-center custom-pagination">
     <%= pagination_links @page,distance: 3 %>

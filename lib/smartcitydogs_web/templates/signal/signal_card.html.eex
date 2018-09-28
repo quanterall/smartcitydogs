@@ -24,6 +24,10 @@
         </div>
     </div>
     <div class="card-footer text-center  border-0 bg-transparent">
+        <%= if @conn.assigns.current_user != nil do %>  
+            <a class="btn status-btn" id="<%= @signal.id%>" role="button" href="#">Промяна на статуса</a>
+                <!-- href="<%= #signal_path(@conn,:update_type, @signal.signals_types.name)%>" -->
+            <% end %>
         <a class="btn custom-btn" href="<%=signal_path(@conn,:show,@signal.id)%>" role="button">Виж още</a>
     </div>
 </div>

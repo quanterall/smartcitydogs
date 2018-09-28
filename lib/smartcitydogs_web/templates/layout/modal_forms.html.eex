@@ -20,6 +20,7 @@
     </div>
     <% end %>
 
+    
     <%= if !(List.first(@conn.path_info) == "signals" && Enum.member?(["new", "create","edit"], List.last(@conn.path_info)) ) do %>
     <div class="modal-form <%= if length(@conn.path_info) == 0 do %>
                 shadow-off

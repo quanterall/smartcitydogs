@@ -73,6 +73,15 @@ $(document).ready(function () {
 
     };
 
+   $('.status-btn').on('click', function(){
+    console.log("Hello");
+    $(".signal_change_type").css("display", "flex");
+   });
+
+   $('.close-btn').on("click", function(){
+    $(".signal_change_type").css("display", "none");
+   });
+
     window.is_mobile = function () {
         if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
             return true;

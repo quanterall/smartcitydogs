@@ -18,6 +18,11 @@
             </div>
             <% end %>
         </div>
+        
+        <div class="signal_change_type">
+            <a class="btn close-btn" href="#">Close</a>
+        </div>
+
         <div class="text-center custom-pagination">
             <%= pagination_links @page , @pagination_params %>
         </div>

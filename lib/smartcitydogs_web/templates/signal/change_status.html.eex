@@ -1,0 +1,25 @@
+<!-- <%= form_for signal_changeset(@conn), signal_path(@conn, :update_type, @signal), [class: "form-elixir register-form-class"], fn f -> %>
+
+<div>
+    <div class="form-group">
+        <label>2. Въведете адрес</label>
+        <%= text_input f, :address, class: "form-control",id: "autocomplete" ,minlength: "2", required: true %>
+        <%= error_tag f, :address %>
+    </div>
+</div>
+
+<div>
+    <div class="form-group">
+        <label>2. Въведете адрес</label>
+        <%= text_input f, :address, class: "form-control",id: "autocomplete" ,minlength: "2", required: true %>
+        <%= error_tag f, :address %>
+    </div>
+</div>
+
+<div class="row mt-5 pb-5">
+    <div class="col">
+        <%= submit "ПОДАЙ СИГНАЛ", class: "btn btn-submit m-auto d-block bg-white" %> <br>
+    </div>
+</div>
+
+<% end %>  -->

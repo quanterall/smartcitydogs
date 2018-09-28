@@ -56,4 +56,12 @@ defmodule SmartcitydogsWeb.Municipality.SignalController do
       filter_changeset: filter_changeset
     )
   end
+
+  def update_type(conn, %{"id" => id, "signals_types_id" => signals_types_id}) do
+    signal = DataSignals.get_signal(id)
+    DataSignals.update_signal(signal, %{"signals_types_id" => signals_types_id})
+    redirect(conn, to: signal_path(conn, :minicipality_signals))
+  end
+
+
 end

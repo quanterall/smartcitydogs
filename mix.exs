@@ -78,7 +78,9 @@ defmodule Smartcitydogs.Mixfile do
       {:recaptcha, "~> 2.3"},
       {:bodyguard, "~> 2.1"},
       {:faker, "~> 0.10"},
-      {:navigation_history, "~> 0.0"}
+      {:navigation_history, "~> 0.0"},
+      {:enacl, github: "aeternity/enacl", ref: "2f50ba6"},
+      {:ex_rlp, "~> 0.2.1"}
     ]
   end
 
