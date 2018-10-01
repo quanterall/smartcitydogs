@@ -1,31 +1,57 @@
 <div class="row">
-    <div class="col-3">
-        <%= form_for @filter_changeset, municipality_signal_path(@conn, :index),[class: "register-form-class",method: "get"], fn f -> %>
-        <h5>Филтрирай по статус</h5>
-        <%= select f, :signals_types_id,[ { "Всички" ,"" },{ "Нов" ,1 },{ "Приет" ,2 },{ "Изпратен" ,3 },{ "Приключен" ,4 } ], [class: "form-control", required: false] %>
-        <h5>Филтрирай по категория</h5>
-        <%= select f, :signals_categories_id,[ { "Всички" ,"" },{"Бездомно куче" ,1 },{ "Избягало куче" ,2 },{ "Малтретиране на куче" ,3 } ], [class: "form-control", required: false] %>
-        <div class="mt-2">
-            <%= submit "Филтрирай", class: "btn btn-primary m-auto d-block" %>
-        </div>
-        <% end %>
+  <div class="col-3">
+    <%= form_for @filter_changeset, municipality_signal_path(@conn, :index),[class: "register-form-class",method: "get"], fn f -> %>
+    <h5>Филтрирай по статус</h5>
+    <%= select f, :signals_types_id,[ { "Всички" ,"" },{ "Нов" ,1 },{ "Приет" ,2 },{ "Изпратен" ,3 },{ "Приключен" ,4 } ], [class: "form-control", required: false] %>
+    <h5>Филтрирай по категория</h5>
+    <%= select f, :signals_categories_id,[ { "Всички" ,"" },{"Бездомно куче" ,1 },{ "Избягало куче" ,2 },{ "Малтретиране на куче" ,3 } ], [class: "form-control", required: false] %>
+    <div class="mt-2">
+        <%= submit "Филтрирай", class: "btn btn-primary m-auto d-block" %>
     </div>
-    <div class="col-9">
-        <div class="row">
-            <%= for signal <- @signals do %>
-            <div class="col-lg-3 mb-2 mt-2">
-                <%= render SmartcitydogsWeb.SignalView, "signal_card.html" , %{conn: @conn,signal: signal} %>
-            </div>
-            <% end %>
-        </div>
-        
-        <div class="signal_change_type">
-            <a class="btn close-btn" href="#">Close</a>
-        </div>
+    <% end %>
+  </div>
+  <div class="col-9">
+    <div class="row">
+      <%= for signal <- @signals do %>
+      <div class="col-lg-3 mb-2 mt-2">
+          <%= render SmartcitydogsWeb.SignalView, "signal_card.html" , %{conn: @conn,signal: signal} %>
+      </div>
+      <% end %>
+    </div>
+    
+    <div class="signal_change_type">
+      <%= form_for @filter_changeset, municipality_signal_path(@conn, :update_type, :id), fn f -> %>
+      <%= hidden_input f, :id, id: "signal_id" %>
+      <div>
+          <label>1. Промяна на статуса на сигнала</label>
+          <div class="form-group">
+              <label class="form-check-label radio_buttons_signals">
+                  <%=radio_button(f, :signals_types_id, "1") %>
+                  НОВ
+              </label>
+              <label class="form-check-labe2 radio_buttons_signals ">
+                  <%=radio_button(f, :signals_types_id, "2") %>
+                  Приет
+              </label>
+              <label class="form-check-label radio_buttons_signals">
+                  <%=radio_button(f, :signals_types_id, "3") %>
+                  Изпратен
+              </label>
+              <label class="form-check-label radio_buttons_signals">
+                  <%=radio_button(f, :signals_types_id, "4") %>
+                  Приключен
+              </label>
+          </div>
 
-        <div class="text-center custom-pagination">
-            <%= pagination_links @page , @pagination_params %>
-        </div>
+      </div>
+        <%= submit "Submit" %>
+      <% end %>
+      <a class="btn close-btn" href="#">Close</a>
     </div>
+
+    <div class="text-center custom-pagination">
+      <%= pagination_links @page , @pagination_params %>
+    </div>
+  </div>
 </div>
 

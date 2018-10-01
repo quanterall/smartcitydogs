@@ -149,7 +149,6 @@ defmodule SmartcitydogsWeb.Router do
 
       get("/signals/get_signals_support_count", SignalController, :get_signals_support_count)
       get("/signals/followed_signals", SignalController, :followed_signals)
-      get("/signals/:id/update_type", SignalController, :update_type)
       resources("/signals", SignalController)
 
       scope "/signals/:id" do
@@ -164,6 +163,7 @@ defmodule SmartcitydogsWeb.Router do
         pipe_through([:municipality_required, :municipality_layout])
         resources("/animals", AnimalController)
         get("/signals", SignalController, :index)
+        post("/signals/:id/update_type", SignalController, :update_type)
       end
 
       scope "/shelter", Shelter, as: :shelter do

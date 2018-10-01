@@ -74,8 +74,9 @@ $(document).ready(function () {
     };
 
    $('.status-btn').on('click', function(){
-    console.log("Hello");
     $(".signal_change_type").css("display", "flex");
+    $("#signal_id").text($(this).attr('id'))
+    console.log($(this).attr('id') );
    });
 
    $('.close-btn').on("click", function(){
