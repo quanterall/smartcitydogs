@@ -7,6 +7,22 @@ defmodule Smartcitydogs.Signals do
   alias Smartcitydogs.Repo
   alias Smartcitydogs.SignalsImages
 
+  @required_fields [
+      :address,
+      :description,
+      :signals_categories_id
+    ]
+  @fields [
+        :title,
+        :view_count,
+        :support_count,
+        :chip_number,
+        :deleted_at,
+        :signals_types_id,
+        :users_id,
+        :address_B,
+        :address_F
+      ] ++ @required_fields
   @timestamps_opts [type: :utc_datetime, usec: false]
 
   schema "signals" do
@@ -33,28 +49,8 @@ defmodule Smartcitydogs.Signals do
   @doc false
   def changeset(signals, attrs) do
     signals
-    |> cast(
-      attrs,
-      [
-        :title,
-        :view_count,
-        :address,
-        :support_count,
-        :chip_number,
-        :description,
-        :deleted_at,
-        :signals_categories_id,
-        :signals_types_id,
-        :users_id,
-        :address_B,
-        :address_F
-      ]
-    )
-    |> validate_required([
-      :address,
-      :description,
-      :signals_categories_id
-    ])
+    |> cast(attrs, @fields)
+    |> validate_required(@required_fields)
   end
 
   def get_like_by_user(signal, user) do
@@ -123,5 +119,11 @@ defmodule Smartcitydogs.Signals do
     %SignalsImages{}
     |> SignalsImages.changeset(args)
     |> Repo.insert()
+  end
+
+  def signal_to_string_for_blockchain_tx(id) do
+    DataSignals.get_signal(id)
+    |> Map.take(@fields)
+    |> Poison.encode!()
   end
 end

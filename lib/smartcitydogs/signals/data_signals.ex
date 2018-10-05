@@ -9,6 +9,7 @@ defmodule Smartcitydogs.DataSignals do
   alias Smartcitydogs.SignalsImages
   alias Smartcitydogs.SignalsLikes
   alias Smartcitydogs.DataUsers
+  alias Smartcitydogs.TXHashSignals
 
   def get_animal_by_chip(chip_number) do
     query = Ecto.Query.from(c in Signals, where: c.chip_number == ^chip_number)
@@ -245,5 +246,13 @@ defmodule Smartcitydogs.DataSignals do
   def delete_signal_like(id) do
     get_signal_like(id)
     |> Repo.delete()
+  end
+
+  ## For TXHashSignals
+
+  def create_tx_hash_signals(args) do
+    %TXHashSignals{}
+    |> TXHashSignals.changeset(args)
+    |> Repo.insert()
   end
 end

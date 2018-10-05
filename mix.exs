@@ -32,7 +32,8 @@ defmodule Smartcitydogs.Mixfile do
         :recaptcha,
         :faker,
         :scrivener_ecto,
-        :scrivener_html
+        :scrivener_html,
+        :httpotion
       ]
     ]
   end
@@ -79,8 +80,10 @@ defmodule Smartcitydogs.Mixfile do
       {:bodyguard, "~> 2.1"},
       {:faker, "~> 0.10"},
       {:navigation_history, "~> 0.0"},
-      {:enacl, github: "aeternity/enacl", ref: "2f50ba6"},
-      {:ex_rlp, "~> 0.2.1"}
+      {:httpotion, "~> 3.1.0"},
+      # {:enacl, github: "aeternity/enacl", ref: "2f50ba6"},
+      # {:ex_rlp, "~> 0.2.1"},
+      {:ed25519, git: "https://github.com/gspasov/sign_ed25519"}
     ]
   end
 

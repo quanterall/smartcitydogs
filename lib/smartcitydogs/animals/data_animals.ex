@@ -9,6 +9,7 @@ defmodule Smartcitydogs.DataAnimals do
   alias Smartcitydogs.AnimalStatus
   alias Smartcitydogs.Adopt
   alias Smartcitydogs.ProcedureType
+  alias Smartcitydogs.TXHashAnimals
 
   ## gets the current time in Sofia
   def get_current_time() do
@@ -53,20 +54,6 @@ defmodule Smartcitydogs.DataAnimals do
 
   def get_animal(id) do
     Repo.get!(Animals, id) |> Repo.preload(:animals_status)
-  end
-
-  def get_animal_to_hash(id) do
-    data = Repo.get!(Animals, id) 
-        |> Repo.preload(:animals_status) 
-        |> Repo.preload(:animals_image)
-        |> Repo.preload(:adopt)
-        |> Repo.preload(:performed_procedure)
-        |> Repo.preload(:rescues)
-     data = [data.address, #data.address_B, data.address_F, 
-    #  data.adopt, [data.animals_image], data.performed_procedure, data.rescues,
-     data.chip_number, data.description, data.animals_status_id, DateTime.to_string(data.inserted_at),  data.sex]
-      |> ExRLP.encode 
-      :enacl.generichash 32, data 
   end
 
   def get_adopted_animals() do
@@ -234,4 +221,13 @@ defmodule Smartcitydogs.DataAnimals do
       end
     end
   end
+
+  ## For TXHashAnimals
+
+  def create_tx_hash_animals(args) do
+    %TXHashAnimals{}
+    |> TXHashAnimals.changeset(args)
+    |> Repo.insert()
+  end
+  
 end

@@ -5,9 +5,11 @@ defmodule SmartcitydogsWeb.Shelter.AnimalController do
     Signals,
     Repo,
     Animals,
+    DataAnimals,
     AnimalsFilters,
     PerformedProcedures,
-    AnimalImages
+    AnimalImages,
+    TXHashAnimals
   }
 
   import Ecto.Query
@@ -114,6 +116,14 @@ defmodule SmartcitydogsWeb.Shelter.AnimalController do
   def create(conn, %{"animals" => animal_params}) do
     case Animals.create_animal(animal_params) do
       {:ok, animal} ->
+        data = Animals.animal_to_string_for_blockchain_tx(animal.id)
+        data_tx = BlockchainValidation.create_dogs_tx(data)
+        sig = BlockchainValidation.sign_tx(data_tx)
+        tx_hash = BlockchainValidation.add_dogs_tx_to_blockchain(data_tx, sig)
+        tx_table_struct = %{tx_hash: tx_hash, animals_id: animal.id }
+        DataAnimals.create_tx_hash_animals(tx_table_struct)
+        IO.inspect(tx_hash, label: "Animals")
+
         if animal_params["animal_image"] != nil do
           AnimalImages.store_images(animal, animal_params["animal_image"])
         end

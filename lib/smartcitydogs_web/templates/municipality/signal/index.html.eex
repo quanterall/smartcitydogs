@@ -23,25 +23,25 @@
       <%= form_for @filter_changeset, municipality_signal_path(@conn, :update_type, :id), fn f -> %>
       <%= hidden_input f, :id, id: "signal_id" %>
       <div>
-          <label>1. Промяна на статуса на сигнала</label>
-          <div class="form-group">
-              <label class="form-check-label radio_buttons_signals">
-                  <%=radio_button(f, :signals_types_id, "1") %>
-                  НОВ
-              </label>
-              <label class="form-check-labe2 radio_buttons_signals ">
-                  <%=radio_button(f, :signals_types_id, "2") %>
-                  Приет
-              </label>
-              <label class="form-check-label radio_buttons_signals">
-                  <%=radio_button(f, :signals_types_id, "3") %>
-                  Изпратен
-              </label>
-              <label class="form-check-label radio_buttons_signals">
-                  <%=radio_button(f, :signals_types_id, "4") %>
-                  Приключен
-              </label>
-          </div>
+        <label>1. Промяна на статуса на сигнала</label>
+        <div class="form-group">
+            <label class="form-check-label radio_buttons_signals">
+              <%=radio_button(f, :signals_types_id, "1") %>
+              НОВ
+            </label>
+            <label class="form-check-labe2 radio_buttons_signals ">
+              <%=radio_button(f, :signals_types_id, "2") %>
+              Приет
+            </label>
+            <label class="form-check-label radio_buttons_signals">
+              <%=radio_button(f, :signals_types_id, "3") %>
+              Изпратен
+            </label>
+            <label class="form-check-label radio_buttons_signals">
+              <%=radio_button(f, :signals_types_id, "4") %>
+              Приключен
+            </label>
+         </div>
 
       </div>
         <%= submit "Submit" %>

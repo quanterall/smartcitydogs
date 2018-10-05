@@ -1,6 +1,6 @@
 defmodule SmartcitydogsWeb.Municipality.SignalController do
   use SmartcitydogsWeb, :controller
-  alias Smartcitydogs.{Signals, Repo, SignalsFilters}
+  alias Smartcitydogs.{Signals, Repo, SignalsFilters, DataSignals}
   import Ecto.Query
 
   action_fallback(SmartcitydogsWeb.FallbackController)
@@ -57,11 +57,9 @@ defmodule SmartcitydogsWeb.Municipality.SignalController do
     )
   end
 
-  def update_type(conn, %{"id" => id, "signals_types_id" => signals_types_id}) do
+  def update_type(conn, %{ "signals_filters" => %{"id" => id, "signals_types_id" => signals_types_id}}) do
     signal = DataSignals.get_signal(id)
     DataSignals.update_signal(signal, %{"signals_types_id" => signals_types_id})
     redirect(conn, to: signal_path(conn, :minicipality_signals))
   end
-
-
 end

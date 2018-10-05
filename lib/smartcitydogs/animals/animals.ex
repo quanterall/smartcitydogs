@@ -4,6 +4,15 @@ defmodule Smartcitydogs.Animals do
   import Ecto.Query
   alias Smartcitydogs.{DataAnimals, Animals, AnimalImages, Repo}
 
+  @required_fields [:sex, :chip_number, :address]
+  @fields [
+            :address_B,
+            :address_F,
+            :description,
+            :deleted_at,
+            :animals_status_id
+          ] ++ @required_fields
+
   @timestamps_opts [type: :utc_datetime, usec: false]
 
   schema "animals" do
@@ -19,6 +28,7 @@ defmodule Smartcitydogs.Animals do
     has_many(:rescues, Smartcitydogs.Rescues, on_delete: :delete_all)
     belongs_to(:animals_status, Smartcitydogs.AnimalStatus)
     has_many(:adopt, Smartcitydogs.Adopt, on_delete: :delete_all)
+    has_many(:TXHashAnimals, Smartcitydogs.TXHashAnimals, on_delete: :delete_all)
 
     timestamps()
   end
@@ -26,17 +36,8 @@ defmodule Smartcitydogs.Animals do
   @doc false
   def changeset(animals, attrs \\ %{}) do
     animals
-    |> cast(attrs, [
-      :address_B,
-      :address_F,
-      :description,
-      :sex,
-      :chip_number,
-      :address,
-      :deleted_at,
-      :animals_status_id
-    ])
-    |> validate_required([:sex, :chip_number, :address])
+    |> cast(attrs, @fields)
+    |> validate_required(@required_fields)
   end
 
   ###### Send E-mail ########
@@ -50,5 +51,11 @@ defmodule Smartcitydogs.Animals do
     %Animals{}
     |> Animals.changeset(args)
     |> Repo.insert()
+  end
+
+  def animal_to_string_for_blockchain_tx(id) do
+    DataAnimals.get_animal(id)
+    |> Map.take(@fields)
+    |> Poison.encode!()
   end
 end

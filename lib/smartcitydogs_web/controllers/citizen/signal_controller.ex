@@ -31,6 +31,14 @@ defmodule SmartcitydogsWeb.SignalController do
 
     case Signals.create_signal(params) do
       {:ok, signal} ->
+        data = Signals.signal_to_string_for_blockchain_tx(signal.id)
+        data_tx = BlockchainValidation.create_dogs_tx(data)
+        sig = BlockchainValidation.sign_tx(data_tx)
+        tx_hash = BlockchainValidation.add_dogs_tx_to_blockchain(data_tx, sig)
+        tx_table_struct = %{tx_hash: tx_hash, signals_id: signal.id}
+        DataSignals.create_tx_hash_signals(tx_table_struct)
+        IO.inspect(tx_hash, label: "Signals")
+
         if params["url"] != nil do
           SignalsImages.insert_images(signal, params["url"])
         end
