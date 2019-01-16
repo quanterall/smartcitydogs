@@ -5,7 +5,7 @@ defmodule Smartcitydogs.Mixfile do
     [
       app: :smartcitydogs,
       version: "0.0.1",
-      elixir: "~> 1.7.3",
+      elixir: "~> 1.8.0",
       elixirc_paths: elixirc_paths(Mix.env()),
       compilers: [:phoenix, :gettext] ++ Mix.compilers(),
       start_permanent: Mix.env() == :prod,
@@ -78,7 +78,9 @@ defmodule Smartcitydogs.Mixfile do
       {:recaptcha, "~> 2.3"},
       {:bodyguard, "~> 2.1"},
       {:faker, "~> 0.10"},
-      {:navigation_history, "~> 0.0"}
+      {:navigation_history, "~> 0.0"},
+      {:plug_cowboy, "~> 1.0"},
+      {:jason, "~> 1.1"}
     ]
   end
 

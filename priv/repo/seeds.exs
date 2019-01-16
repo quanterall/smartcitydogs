@@ -252,7 +252,6 @@ animals_count = length(Repo.all(Animals))
 
 Enum.each(0..99, fn _ ->
   performed_paramas = %{
-    date: Ecto.DateTime.utc() |> Ecto.DateTime.to_string(),
     animals_id: Faker.random_between(1, animals_count),
     procedure_type_id: Faker.random_between(1, 3)
   }

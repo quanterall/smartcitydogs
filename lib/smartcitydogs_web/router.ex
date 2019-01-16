@@ -75,7 +75,7 @@ defmodule SmartcitydogsWeb.Router do
   end
 
   scope "/api", SmartcitydogsWeb do
-    pipe_through([:api, :api_auth])
+    pipe_through([:api])
 
     resources("/users", UserControllerAPI, except: [:new, :edit])
     post("/users/logout", UserControllerAPI, :logout)

@@ -71,8 +71,7 @@ config :smartcitydogs, Smartcitydogs.Repo,
 
 config :ueberauth, Ueberauth,
   providers: [
-    facebook: {Ueberauth.Strategy.Facebook, [profile_fields: "name,email,first_name,last_name"]}
-    ## twitter: {Ueberauth.Strategy.Twitter, [profile_fields: "name,email,first_name,last_name"]}
+    facebook: {Ueberauth.Strategy.Facebook, []}
   ]
 
 config :ueberauth, Ueberauth.Strategy.Facebook.OAuth,

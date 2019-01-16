@@ -4,7 +4,7 @@ defmodule SmartcitydogsWeb.SignalControllerAPI do
   alias Smartcitydogs.Signals
   alias Smartcitydogs.DataSignals
   alias Smartcitydogs.DataUsers
-
+  alias Smartcitydogs.Repo
   action_fallback(SmartcitydogsWeb.FallbackController)
 
   plug(:put_layout, false when action in [:minicipality_signals])
@@ -14,8 +14,18 @@ defmodule SmartcitydogsWeb.SignalControllerAPI do
   plug(:put_layout, false when action in [:new])
 
   def index(conn, _params) do
-    signals = DataSignals.list_signals()
-    render(conn, "index.json", signals: signals)
+    signals =
+      Repo.all(Signals)
+      |> Repo.preload([
+        :users,
+        :signals_images,
+        :signals_comments,
+        :signals_categories,
+        :signals_types
+      ])
+      |> SmartcitydogsWeb.Encoder.encode()
+
+    json(conn, signals)
   end
 
   def create(conn, %{"signal" => signal_params}) do
@@ -108,14 +118,14 @@ defmodule SmartcitydogsWeb.SignalControllerAPI do
   #   user_id = conn.private.plug_session["current_user_id"]
   #   user_liked_signals = DataUsers.get_user!(user_id) |> Map.get(:liked_signals)
   #   cond do
-  #     Enum.member?(user_liked_signals, id) -> 
+  #     Enum.member?(user_liked_signals, id) ->
   #       signal = DataSignals.get_signal(id)
   #       render(conn, "already_followed.json", signal: signal)
   #     Enum.member?(user_liked_signals, id) == false ->
   #         DataUsers.add_like(user_id, id)
   #        {:ok, signal} = DataSignals.follow_signal(id)
   #         render(conn, "followed.json", signal: signal)
-  #   end 
+  #   end
   # end
 
   # def unfollow(conn, %{"id" => id}) do
@@ -123,7 +133,7 @@ defmodule SmartcitydogsWeb.SignalControllerAPI do
   #   user_id = conn.private.plug_session["current_user_id"]
   #   user_liked_signals = DataUsers.get_user!(user_id) |> Map.get(:liked_signals)
   #   cond do
-  #     Enum.member?(user_liked_signals, id) -> 
+  #     Enum.member?(user_liked_signals, id) ->
   #       DataUsers.remove_liked_signal(user_id, id)
   #       {:ok, signal} = DataSignals.unfollow_signal(id)
   #       render(conn, "unfollowed.json", signal: signal)
@@ -131,7 +141,7 @@ defmodule SmartcitydogsWeb.SignalControllerAPI do
   #     Enum.member?(user_liked_signals, id) == false ->
   #       signal = DataSignals.get_signal(id)
   #       render(conn, "already_unfollowed.json", signal: signal)
-  #   end 
+  #   end
   # end
 
   def like(conn, params) do

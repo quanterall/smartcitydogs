@@ -22,7 +22,7 @@ defmodule Smartcitydogs.Signals do
 
     has_many(:signals_comments, Smartcitydogs.SignalsComments)
     belongs_to(:signals_categories, Smartcitydogs.SignalsCategories)
-    belongs_to(:signals_types, Smartcitydogs.SignalsTypes, defaults: 1)
+    belongs_to(:signals_types, Smartcitydogs.SignalsTypes)
     has_many(:signals_images, Smartcitydogs.SignalsImages)
     has_many(:signals_likes, Smartcitydogs.SignalsLikes)
     belongs_to(:users, Smartcitydogs.User)
