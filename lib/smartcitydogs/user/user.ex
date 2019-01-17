@@ -20,9 +20,9 @@ defmodule Smartcitydogs.User do
     field(:disliked_comments, {:array, :integer}, default: [])
     field(:agreed_to_terms, :boolean, default: [], virtual: true)
 
-    has_many(:signal_comments, Smartcitydogs.SignalsComments)
+    has_many(:signal_comments, Smartcitydogs.SignalComments)
     belongs_to(:user_type, Smartcitydogs.UsersType)
-    has_many(:signals, Smartcitydogs.Signals)
+    has_many(:signals, Smartcitydogs.Signal)
     has_many(:contacts, Smartcitydogs.Contact)
     has_many(:adopts, Smartcitydogs.Adopt)
     timestamps()

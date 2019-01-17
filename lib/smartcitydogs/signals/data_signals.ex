@@ -1,25 +1,25 @@
-defmodule Smartcitydogs.DataSignals do
+defmodule Smartcitydogs.DataSignal do
   import Ecto.Query
   alias Smartcitydogs.Repo
 
-  alias Smartcitydogs.Signals
-  alias Smartcitydogs.SignalsTypes
-  alias Smartcitydogs.SignalsComments
-  alias Smartcitydogs.SignalsCategories
-  alias Smartcitydogs.SignalsImages
-  alias Smartcitydogs.SignalsLikes
+  alias Smartcitydogs.Signal
+  alias Smartcitydogs.SignalTypes
+  alias Smartcitydogs.SignalComments
+  alias Smartcitydogs.SignalCategories
+  alias Smartcitydogs.SignalImages
+  alias Smartcitydogs.SignalLikes
   alias Smartcitydogs.DataUsers
 
   def get_animal_by_chip(chip_number) do
-    query = Ecto.Query.from(c in Signals, where: c.chip_number == ^chip_number)
+    query = Ecto.Query.from(c in Signal, where: c.chip_number == ^chip_number)
     Repo.all(query)
   end
 
-  # Signals
+  # Signal
 
-  def update_signal(%Signals{} = signals, args) do
+  def update_signal(%Signal{} = signals, args) do
     signals
-    |> Signals.changeset(args)
+    |> Signal.changeset(args)
     |> Repo.update()
   end
 
@@ -28,7 +28,7 @@ defmodule Smartcitydogs.DataSignals do
     follow_number = Map.get(signal, :support_count)
 
     signal
-    |> Signals.changeset(%{support_count: follow_number + 1})
+    |> Signal.changeset(%{support_count: follow_number + 1})
     |> Repo.update()
   end
 
@@ -37,31 +37,31 @@ defmodule Smartcitydogs.DataSignals do
     follow_number = Map.get(signal, :support_count)
 
     signal
-    |> Signals.changeset(%{support_count: follow_number - 1})
+    |> Signal.changeset(%{support_count: follow_number - 1})
     |> Repo.update()
   end
 
   def get_user_signal(user_id) do
-    query = Ecto.Query.from(c in Signals, where: c.user_id == ^user_id)
-    Repo.all(query) |> Repo.preload(:signals_images)
+    query = Ecto.Query.from(c in Signal, where: c.user_id == ^user_id)
+    Repo.all(query) |> Repo.preload(:signal_images)
   end
 
   ### takes the support_count
   def get_signal_support_count(signal_id) do
-    query = Ecto.Query.from(c in Signals, where: c.id == ^signal_id)
+    query = Ecto.Query.from(c in Signal, where: c.id == ^signal_id)
     Repo.all(query)
   end
 
   def list_signals() do
-    Repo.all(Signals)
+    Repo.all(Signal)
   end
 
-  def change_signal(%Signals{} = signal) do
-    Signals.changeset(signal, %{})
+  def change_signal(%Signal{} = signal) do
+    Signal.changeset(signal, %{})
   end
 
   def get_signal(id) do
-    Repo.get!(Signals, id)
+    Repo.get!(Signal, id)
   end
 
   def delete_signal(id) do
@@ -70,12 +70,12 @@ defmodule Smartcitydogs.DataSignals do
   end
 
   def sort_signal_by_id() do
-    query = Ecto.Query.from(c in Signals, order_by: [c.id])
+    query = Ecto.Query.from(c in Signal, order_by: [c.id])
     Repo.all(query)
   end
 
   def sort_signal_comment_by_id() do
-    query = Ecto.Query.from(c in SignalsComments, order_by: [desc: c.inserted_at])
+    query = Ecto.Query.from(c in SignalComments, order_by: [desc: c.inserted_at])
     Repo.all(query) |> Repo.preload(:users)
   end
 
@@ -87,27 +87,27 @@ defmodule Smartcitydogs.DataSignals do
   # Signal iamges
 
   def get_signal_image_id(signal_id) do
-    query = Ecto.Query.from(c in SignalsImages, where: c.signal_id == ^signal_id)
+    query = Ecto.Query.from(c in SignalImages, where: c.signal_id == ^signal_id)
     Repo.all(query)
   end
 
   def get_signal_images(id) do
-    Repo.get!(SignalsImages, id)
+    Repo.get!(SignalImages, id)
   end
 
   def list_signal_images() do
-    Repo.all(SignalsImages)
+    Repo.all(SignalImages)
   end
 
   def create_signal_images(args \\ %{}) do
-    %SignalsImages{}
-    |> SignalsImages.changeset(args)
+    %SignalImages{}
+    |> SignalImages.changeset(args)
     |> Repo.insert()
   end
 
-  def update_signal_images(%SignalsImages{} = images, args) do
+  def update_signal_images(%SignalImages{} = images, args) do
     images
-    |> SignalsImages.changeset(args)
+    |> SignalImages.changeset(args)
     |> Repo.update()
   end
 
@@ -117,29 +117,29 @@ defmodule Smartcitydogs.DataSignals do
   end
 
   def get_all_cruelty_signals() do
-    Ecto.Query.from(c in Signals, where: c.signal_category_id == ^3)
+    Ecto.Query.from(c in Signal, where: c.signal_category_id == ^3)
     |> Repo.all()
   end
 
-  # Signals types
+  # Signal types
 
   def get_signal_type(id) do
-    Repo.get!(SignalsTypes, id)
+    Repo.get!(SignalTypes, id)
   end
 
   def list_signal_types() do
-    Repo.all(SignalsTypes)
+    Repo.all(SignalTypes)
   end
 
   def create_signal_type(args \\ %{}) do
-    %SignalsTypes{}
-    |> SignalsTypes.changeset(args)
+    %SignalTypes{}
+    |> SignalTypes.changeset(args)
     |> Repo.insert()
   end
 
-  def update_signal_type(%SignalsTypes{} = types, args) do
+  def update_signal_type(%SignalTypes{} = types, args) do
     types
-    |> SignalsTypes.changeset(args)
+    |> SignalTypes.changeset(args)
     |> Repo.update()
   end
 
@@ -151,33 +151,33 @@ defmodule Smartcitydogs.DataSignals do
   # Signal comments
 
   def get_signal_comment(id) do
-    Repo.get!(SignalsComments, id) |> Repo.preload(:users)
+    Repo.get!(SignalComments, id) |> Repo.preload(:users)
   end
 
   def list_signal_comment() do
-    Repo.all(SignalsComments) |> Repo.preload(:users)
+    Repo.all(SignalComments) |> Repo.preload(:users)
   end
 
   def get_comment_signal_id(signal_id) do
-    Ecto.Query.from(c in SignalsComments, where: c.signal_id == ^signal_id)
+    Ecto.Query.from(c in SignalComments, where: c.signal_id == ^signal_id)
     |> Repo.all()
   end
 
   def get_one_signal_comment(signal_id, comment_id) do
-    Ecto.Query.from(c in SignalsComments, where: c.signal_id == ^signal_id)
+    Ecto.Query.from(c in SignalComments, where: c.signal_id == ^signal_id)
     |> Repo.all()
     |> Enum.at(comment_id - 1)
   end
 
   def create_signal_comment(args \\ %{}) do
-    %SignalsComments{}
-    |> SignalsComments.changeset(args)
+    %SignalComments{}
+    |> SignalComments.changeset(args)
     |> Repo.insert()
   end
 
-  def update_signal_comment(%SignalsComments{} = comments, args) do
+  def update_signal_comment(%SignalComments{} = comments, args) do
     comments
-    |> SignalsComments.changeset(args)
+    |> SignalComments.changeset(args)
     |> Repo.update()
   end
 
@@ -186,25 +186,25 @@ defmodule Smartcitydogs.DataSignals do
     |> Repo.delete()
   end
 
-  # Signals category
+  # Signal category
 
   def get_signal_category(id) do
-    Repo.get!(SignalsCategories, id)
+    Repo.get!(SignalCategories, id)
   end
 
   def list_signal_category() do
-    Repo.all(SignalsCategories)
+    Repo.all(SignalCategories)
   end
 
   def create_signal_category(args \\ %{}) do
-    %SignalsCategories{}
-    |> SignalsCategories.changeset(args)
+    %SignalCategories{}
+    |> SignalCategories.changeset(args)
     |> Repo.insert()
   end
 
-  def update_signal_category(%SignalsCategories{} = category, args) do
+  def update_signal_category(%SignalCategories{} = category, args) do
     category
-    |> SignalsCategories.changeset(args)
+    |> SignalCategories.changeset(args)
     |> Repo.update()
   end
 
@@ -213,32 +213,32 @@ defmodule Smartcitydogs.DataSignals do
     |> Repo.delete()
   end
 
-  # Signals likes
-  def get_signals_user_like(user_id, signal_id) do
-    Ecto.Query.from(c in SignalsLikes,
+  # Signal likes
+  def get_signal_user_like(user_id, signal_id) do
+    Ecto.Query.from(c in SignalLikes,
       where: c.user_id == ^user_id and c.signal_id == ^signal_id
     )
     |> Repo.all()
   end
 
   def get_signal_like(id) do
-    query = Ecto.Query.from(c in SignalsLikes, where: c.user_id == ^id)
+    query = Ecto.Query.from(c in SignalLikes, where: c.user_id == ^id)
     Repo.all(query)
   end
 
   def list_signal_like() do
-    Repo.all(SignalsLikes)
+    Repo.all(SignalLikes)
   end
 
   def create_signal_like(args \\ %{}) do
-    %SignalsLikes{}
-    |> SignalsLikes.changeset(args)
+    %SignalLikes{}
+    |> SignalLikes.changeset(args)
     |> Repo.insert()
   end
 
-  def update_signal_like(%SignalsLikes{} = like, args) do
+  def update_signal_like(%SignalLikes{} = like, args) do
     like
-    |> SignalsLikes.changeset(args)
+    |> SignalLikes.changeset(args)
     |> Repo.update()
   end
 

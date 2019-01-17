@@ -5,7 +5,7 @@
             <div>
                 <div class="form-group">
                     <label>Снимка</label>
-                    <%= file_input f, :animal_image, multiple: true, class: "form-control", id: "signals_url" %>
+                    <%= file_input f, :animal_image, multiple: true, class: "form-control", id: "signal_url" %>
                     <%= error_tag f, :url %>
                 </div>
             </div>
@@ -41,11 +41,11 @@
             <div>
                 <label>Статус на кучето</label>
                 <div class="form-group">
-                    <%= select( f, :animals_status_id, [
+                    <%= select( f, :animal_status_id, [
                     [key: "На свобода", value: "1"],
                     [key: "Осиновено", value: "3"],
                     [key: "В приюта", value: "2"]] , class: "form-control") %>
-                    <%= error_tag f, :animals_status_id %>
+                    <%= error_tag f, :animal_status_id %>
                 </div>
             </div>
             <div class="form-group registered-group pb-3 text-center">

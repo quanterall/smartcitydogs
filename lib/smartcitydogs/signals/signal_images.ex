@@ -1,20 +1,20 @@
-defmodule Smartcitydogs.SignalsImages do
+defmodule Smartcitydogs.SignalImages do
   use Ecto.Schema
   import Ecto.Changeset
-  alias Smartcitydogs.SignalsImages
-  alias Smartcitydogs.SignalsImages
+  alias Smartcitydogs.SignalImages
+  alias Smartcitydogs.SignalImages
 
   @timestamps_opts [type: :utc_datetime, usec: false]
 
   schema "signal_images" do
     field(:url, :string)
-    belongs_to(:signal, Smartcitydogs.Signals)
+    belongs_to(:signal, Smartcitydogs.Signal)
     timestamps()
   end
 
   @doc false
-  def changeset(signals_images, attrs) do
-    signals_images
+  def changeset(signal_images, attrs) do
+    signal_images
     |> cast(attrs, [
       :url,
       :signal_id
@@ -39,8 +39,8 @@ defmodule Smartcitydogs.SignalsImages do
         "signal_id" => "#{signal.id}"
       }
 
-      %SignalsImages{}
-      |> SignalsImages.changeset(signal_image_params)
+      %SignalImages{}
+      |> SignalImages.changeset(signal_image_params)
       |> Repo.insert()
     end
   end

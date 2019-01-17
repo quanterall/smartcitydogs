@@ -2,21 +2,21 @@ defmodule SmartcitydogsWeb.AnimalControllerAPI do
   use SmartcitydogsWeb, :controller
 
   alias Smartcitydogs.Repo
-  alias Smartcitydogs.Animals
-  alias Smartcitydogs.DataAnimals
+  alias Smartcitydogs.Animal
+  alias Smartcitydogs.DataAnimal
 
   action_fallback(SmartCityDogsWeb.FallbackController)
 
   def send_email(conn, data) do
     int = String.to_integer(data["animal_id"])
-    Smartcitydogs.Animals.send_email(data)
+    Smartcitydogs.Animal.send_email(data)
     redirect(conn, to: "/registered/#{int}")
   end
 
   def index(conn, params) do
     cond do
       params == %{} || params["chip_number"] == "" ->
-        list_animals = DataAnimals.list_animals()
+        list_animals = DataAnimal.list_animals()
 
         render(
           conn,
@@ -26,7 +26,7 @@ defmodule SmartcitydogsWeb.AnimalControllerAPI do
         )
 
       params != %{} ->
-        animals = DataAnimals.get_animal_by_chip(params["chip_number"])
+        animals = DataAnimal.get_animal_by_chip(params["chip_number"])
 
         render(
           conn,
@@ -39,9 +39,9 @@ defmodule SmartcitydogsWeb.AnimalControllerAPI do
         chip = params["chip_number"]
 
         animals =
-          DataAnimals.get_animal_by_chip(chip)
-          |> Repo.preload(:animals_status)
-          |> Repo.preload(:animals_image)
+          DataAnimal.get_animal_by_chip(chip)
+          |> Repo.preload(:animal_status)
+          |> Repo.preload(:animal_images)
 
         render(
           conn,
@@ -62,16 +62,16 @@ defmodule SmartcitydogsWeb.AnimalControllerAPI do
     list_procedures =
       Enum.map(map_procedures, fn x ->
         case x do
-          {_, "true"} -> DataAnimals.get_procedure_id_by_name(x)
+          {_, "true"} -> DataAnimal.get_procedure_id_by_name(x)
           _ -> nil
         end
       end)
 
-    case DataAnimals.create_animal(animal_params) do
+    case DataAnimal.create_animal(animal_params) do
       {:ok, animal} ->
         # SmartcitydogsWeb.AnimalController.upload_file(animal.id, conn)
 
-        DataAnimals.insert_performed_procedure(list_procedures, animal.id)
+        DataAnimal.insert_performed_procedure(list_procedures, animal.id)
 
         render(conn, "show.json", animal: animal)
 
@@ -81,22 +81,22 @@ defmodule SmartcitydogsWeb.AnimalControllerAPI do
   end
 
   def show(conn, %{"id" => id}) do
-    animal = DataAnimals.get_animal(id)
+    animal = DataAnimal.get_animal(id)
     render(conn, "show.json", animal: animal)
   end
 
   def update(conn, %{"id" => id, "animal" => animal_params}) do
-    animal = DataAnimals.get_animal(id)
+    animal = DataAnimal.get_animal(id)
 
-    with {:ok, %Animals{} = animal} <- DataAnimals.update_animal(animal, animal_params) do
+    with {:ok, %Animal{} = animal} <- DataAnimal.update_animal(animal, animal_params) do
       render(conn, "show.json", animal: animal)
     end
   end
 
   def delete(conn, %{"id" => id}) do
-    animal = DataAnimals.get_animal(id)
+    animal = DataAnimal.get_animal(id)
 
-    with {:ok, %Animals{}} <- DataAnimals.delete_animal(animal) do
+    with {:ok, %Animal{}} <- DataAnimal.delete_animal(animal) do
       send_resp(conn, :no_content, "")
     end
   end

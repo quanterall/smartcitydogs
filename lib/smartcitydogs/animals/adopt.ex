@@ -7,7 +7,7 @@ defmodule Smartcitydogs.Adopt do
 
   schema "adopt" do
     belongs_to(:user, Smartcitydogs.User)
-    belongs_to(:animal, Smartcitydogs.Animals)
+    belongs_to(:animal, Smartcitydogs.Animal)
     timestamps()
   end
 

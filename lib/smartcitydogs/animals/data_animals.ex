@@ -1,8 +1,8 @@
-defmodule Smartcitydogs.DataAnimals do
+defmodule Smartcitydogs.DataAnimal do
   import Ecto.Query, warn: false
   alias Smartcitydogs.Repo
 
-  alias Smartcitydogs.Animals
+  alias Smartcitydogs.Animal
   alias Smartcitydogs.AnimalImages
   alias Smartcitydogs.AnimalStatus
   alias Smartcitydogs.PerformedProcedures
@@ -42,8 +42,8 @@ defmodule Smartcitydogs.DataAnimals do
   end
 
   def get_animals_by_status(id) do
-    struct = from(p in Animals, where: p.animals_status_id == ^id)
-    all_adopted = Repo.all(struct) |> Repo.preload(:animals_status)
+    struct = from(p in Animal, where: p.animal_status_id == ^id)
+    all_adopted = Repo.all(struct) |> Repo.preload(:animal_status)
     Smartcitydogs.Repo.paginate(all_adopted, page: 1, page_size: 9)
   end
 
@@ -52,16 +52,16 @@ defmodule Smartcitydogs.DataAnimals do
   end
 
   def get_animal(id) do
-    Repo.get!(Animals, id) |> Repo.preload(:animals_status)
+    Repo.get!(Animal, id) |> Repo.preload(:animal_status)
   end
 
   def get_adopted_animals() do
-    query = Ecto.Query.from(c in Animals, where: c.animals_status_id == 2)
+    query = Ecto.Query.from(c in Animal, where: c.animal_status_id == 2)
     Repo.all(query)
   end
 
   def get_shelter_animals() do
-    query = Ecto.Query.from(c in Animals, where: c.animals_status_id == 3)
+    query = Ecto.Query.from(c in Animal, where: c.animal_status_id == 3)
     Repo.all(query)
   end
 
@@ -75,14 +75,14 @@ defmodule Smartcitydogs.DataAnimals do
   end
 
   def sort_animals_by_id() do
-    query = Ecto.Query.from(c in Animals, order_by: [c.id])
-    Repo.all(query) |> Repo.preload(:animals_status) |> Repo.preload(:animals_image)
+    query = Ecto.Query.from(c in Animal, order_by: [c.id])
+    Repo.all(query) |> Repo.preload(:animal_status) |> Repo.preload(:animal_images)
   end
 
   def get_animal_by_chip(chip_number) do
     chip_number = "%#{chip_number}%"
-    query = Ecto.Query.from(c in Animals, where: ilike(c.chip_number, ^chip_number))
-    Repo.all(query) |> Repo.preload(:animals_status)
+    query = Ecto.Query.from(c in Animal, where: ilike(c.chip_number, ^chip_number))
+    Repo.all(query) |> Repo.preload(:animal_status)
   end
 
   def get_performed_procedure(id) do
@@ -94,7 +94,7 @@ defmodule Smartcitydogs.DataAnimals do
   end
 
   def list_animals do
-    Repo.all(Animals) |> Repo.preload(:animals_status)
+    Repo.all(Animal) |> Repo.preload(:animal_status)
   end
 
   def list_animal_images do
@@ -104,14 +104,14 @@ defmodule Smartcitydogs.DataAnimals do
   ## Adds image to existing animal, takes image url and animal id
   def add_animal_image(args \\ %{}) do
     get_animal(args.animal_id)
-    |> Ecto.build_assoc(:animals_image, %{url: args.url})
+    |> Ecto.build_assoc(:animal_images, %{url: args.url})
     |> Repo.insert()
   end
 
   ## Adds image to existing animal, takes image id and animal id
   def add_animal_image_by_id(animal_id, image_id) do
     img = get_animal_image(image_id)
-    Ecto.build_assoc(get_animal(animal_id), :animals_image, %{url: img.url})
+    Ecto.build_assoc(get_animal(animal_id), :animal_images, %{url: img.url})
   end
 
   ## Adds performed procedure to existing animal, takes animal id and procedure id
@@ -126,8 +126,8 @@ defmodule Smartcitydogs.DataAnimals do
   end
 
   def create_animal(args \\ %{}) do
-    %Animals{}
-    |> Animals.changeset(args)
+    %Animal{}
+    |> Animal.changeset(args)
     |> Repo.insert()
   end
 
@@ -137,9 +137,9 @@ defmodule Smartcitydogs.DataAnimals do
     |> Repo.insert()
   end
 
-  def update_animal(%Animals{} = animal, args) do
+  def update_animal(%Animal{} = animal, args) do
     animal
-    |> Animals.changeset(args)
+    |> Animal.changeset(args)
     |> Repo.update()
   end
 
@@ -159,7 +159,7 @@ defmodule Smartcitydogs.DataAnimals do
     get_animal(id) |> Repo.delete()
   end
 
-  def delete_animal(%Animals{} = animal) do
+  def delete_animal(%Animal{} = animal) do
     Repo.delete(animal)
   end
 
@@ -179,8 +179,8 @@ defmodule Smartcitydogs.DataAnimals do
     Repo.delete(animal_status)
   end
 
-  def change_animal(%Animals{} = animal) do
-    Animals.changeset(animal, %{})
+  def change_animal(%Animal{} = animal) do
+    Animal.changeset(animal, %{})
   end
 
   def change_animal_status(%AnimalStatus{} = animal_status) do

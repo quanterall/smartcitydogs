@@ -1,4 +1,4 @@
-defmodule Smartcitydogs.SignalsTypes do
+defmodule Smartcitydogs.SignalTypes do
   use Ecto.Schema
   import Ecto.Changeset
 
@@ -8,7 +8,7 @@ defmodule Smartcitydogs.SignalsTypes do
     field(:deleted_at, :naive_datetime)
     field(:name, :string)
     field(:prefix, :string)
-    has_many(:signals, Smartcitydogs.Signals)
+    has_many(:signals, Smartcitydogs.Signal)
 
     timestamps()
   end

@@ -1,4 +1,4 @@
-defmodule Smartcitydogs.SignalsFilters do
+defmodule Smartcitydogs.SignalFilters do
   use Ecto.Schema
   import Ecto.Changeset
 

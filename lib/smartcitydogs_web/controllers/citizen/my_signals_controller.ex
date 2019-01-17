@@ -1,6 +1,6 @@
-defmodule SmartcitydogsWeb.MySignalsController do
+defmodule SmartcitydogsWeb.MySignalController do
   use SmartcitydogsWeb, :controller
-  alias Smartcitydogs.DataSignals
+  alias Smartcitydogs.DataSignal
 
   def index(conn, params) do
     page_num =
@@ -11,7 +11,7 @@ defmodule SmartcitydogsWeb.MySignalsController do
       end
 
     user = conn.assigns.current_user.id
-    signals = DataSignals.get_user_signal(user)
+    signals = DataSignal.get_user_signal(user)
 
     page = Smartcitydogs.Repo.paginate(signals, page: page_num, page_size: 9)
     render(conn, "my_signals.html", signals: signals, page: page)

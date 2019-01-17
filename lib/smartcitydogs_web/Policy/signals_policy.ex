@@ -1,4 +1,4 @@
-defmodule Smartcitydogs.Signals.Policy do
+defmodule Smartcitydogs.Signal.Policy do
   @behaviour Bodyguard.Policy
   alias Smartcitydogs.User
 

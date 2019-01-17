@@ -1,10 +1,10 @@
 defmodule SmartcitydogsWeb.SignalController do
   use SmartcitydogsWeb, :controller
-  alias Smartcitydogs.DataSignals
-  alias Smartcitydogs.Signals
+  alias Smartcitydogs.DataSignal
+  alias Smartcitydogs.Signal
   alias Smartcitydogs.Repo
-  alias Smartcitydogs.SignalsComments
-  alias Smartcitydogs.SignalsImages
+  alias Smartcitydogs.SignalComments
+  alias Smartcitydogs.SignalImages
   alias Smartcitydogs.DataUsers
   import Ecto.Query
 
@@ -12,7 +12,7 @@ defmodule SmartcitydogsWeb.SignalController do
 
   def index(conn, params) do
     page =
-      Signals
+      Signal
       |> order_by(desc: :inserted_at)
       |> preload([:signal_type, :signal_category, :signal_comments, :signal_likes])
       |> Repo.paginate(params)
@@ -21,7 +21,7 @@ defmodule SmartcitydogsWeb.SignalController do
   end
 
   def new(conn, _params) do
-    signal_changeset = Smartcitydogs.DataSignals.change_signal(%Signals{})
+    signal_changeset = Smartcitydogs.DataSignal.change_signal(%Signal{})
     render(conn, "new.html", signal_changeset: signal_changeset)
   end
 
@@ -29,10 +29,10 @@ defmodule SmartcitydogsWeb.SignalController do
     params
     |> Map.put("user_id", user_id)
 
-    case Signals.create_signal(params) do
+    case Signal.create_signal(params) do
       {:ok, signal} ->
         if params["url"] != nil do
-          SignalsImages.insert_images(signal, params["url"])
+          SignalImages.insert_images(signal, params["url"])
         end
 
         redirect(conn, to: signal_path(conn, :show, signal))
@@ -44,23 +44,23 @@ defmodule SmartcitydogsWeb.SignalController do
 
   def show(conn, %{"id" => id}) do
     signal =
-      Signals
+      Signal
       |> Repo.get(id)
       |> Repo.preload([
         :signal_type,
         :signal_category,
         :signal_likes,
-        :signals_images,
-        signal_comments: from(p in SignalsComments, order_by: [desc: p.inserted_at]),
+        :signal_images,
+        signal_comments: from(p in SignalComments, order_by: [desc: p.inserted_at]),
         signal_comments: :users
       ])
 
     signal
-    |> Signals.changeset(%{view_count: signal.view_count + 1})
+    |> Signal.changeset(%{view_count: signal.view_count + 1})
     |> Repo.update()
 
     user_likes_count =
-      Signals.get_like_by_user(signal, conn.assigns.current_user)
+      Signal.get_like_by_user(signal, conn.assigns.current_user)
       |> Enum.count()
 
     render(
@@ -72,18 +72,18 @@ defmodule SmartcitydogsWeb.SignalController do
   end
 
   def edit(conn, %{"id" => id}) do
-    signal = Signals |> Repo.get(id)
-    signal_changeset = signal |> Signals.changeset(%{})
+    signal = Signal |> Repo.get(id)
+    signal_changeset = signal |> Signal.changeset(%{})
     render(conn, "edit.html", signal: signal, signal_changeset: signal_changeset)
   end
 
   def update(conn, %{"id" => id, "signals" => signal_params}) do
     signal =
-      Signals
+      Signal
       |> Repo.get(id)
 
     result =
-      Signals.changeset(signal, signal_params)
+      Signal.changeset(signal, signal_params)
       |> Repo.update()
 
     case result do
@@ -96,13 +96,13 @@ defmodule SmartcitydogsWeb.SignalController do
   end
 
   def update_type(conn, %{"id" => id, "signal_type_id" => signal_type_id}) do
-    signal = DataSignals.get_signal(id)
-    DataSignals.update_signal(signal, %{"signal_type_id" => signal_type_id})
+    signal = DataSignal.get_signal(id)
+    DataSignal.update_signal(signal, %{"signal_type_id" => signal_type_id})
     redirect(conn, to: signal_path(conn, :minicipality_signals))
   end
 
   def delete(conn, %{"id" => id}) do
-    {:ok, _} = Repo.get!(Signals, id) |> Repo.delete()
+    {:ok, _} = Repo.get!(Signal, id) |> Repo.delete()
 
     conn
     |> put_flash(:info, "Signal deleted successfully.")
@@ -110,14 +110,14 @@ defmodule SmartcitydogsWeb.SignalController do
   end
 
   def like(conn, %{"id" => id}) do
-    Signals.add_like(conn.assigns.current_user.id, id)
+    Signal.add_like(conn.assigns.current_user.id, id)
 
     conn
     |> redirect(to: signal_path(conn, :show, id))
   end
 
   def dislike(conn, %{"id" => id}) do
-    Signals.remove_like(conn.assigns.current_user.id, id)
+    Signal.remove_like(conn.assigns.current_user.id, id)
     redirect(conn, to: signal_path(conn, :show, id))
   end
 end

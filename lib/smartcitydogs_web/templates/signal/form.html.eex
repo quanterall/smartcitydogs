@@ -27,7 +27,7 @@
     <div>
         <div class="form-group">
             <label>3. Качете налични снимки/видео</label>
-            <%= file_input f, :url, multiple: true, class: "form-control", id: "signals_url" %>
+            <%= file_input f, :url, multiple: true, class: "form-control", id: "signal_url" %>
             <%= error_tag f, :url %>
         </div>
     </div>

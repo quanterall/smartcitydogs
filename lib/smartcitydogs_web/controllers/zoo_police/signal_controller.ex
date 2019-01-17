@@ -1,36 +1,36 @@
 defmodule SmartcitydogsWeb.ZooPolice.SignalController do
   use SmartcitydogsWeb, :controller
-  alias Smartcitydogs.{Signals, Repo, SignalsFilters}
+  alias Smartcitydogs.{Signal, Repo, SignalFilters}
   import Ecto.Query
 
   action_fallback(SmartCityDogsWeb.FallbackController)
 
   def index(conn, params) do
     page =
-      Signals
+      Signal
       |> order_by(desc: :inserted_at)
       |> preload([:signal_type, :signal_category, :signal_comments, :signal_likes])
 
     filter_changeset =
-      if params["signals_filters"] != nil do
-        SignalsFilters.changeset(%SignalsFilters{}, params["signals_filters"])
+      if params["signal_filters"] != nil do
+        SignalFilters.changeset(%SignalFilters{}, params["signal_filters"])
       else
-        SignalsFilters.changeset(%SignalsFilters{}, %{})
+        SignalFilters.changeset(%SignalFilters{}, %{})
       end
 
     page =
-      if params["signals_filters"]["signal_type_id"] do
-        page |> where([p], p.signal_type_id in ^params["signals_filters"]["signal_type_id"])
+      if params["signal_filters"]["signal_type_id"] do
+        page |> where([p], p.signal_type_id in ^params["signal_filters"]["signal_type_id"])
       else
         page
       end
 
     page =
-      if params["signals_filters"]["signal_category_id"] do
+      if params["signal_filters"]["signal_category_id"] do
         page
         |> where(
           [p],
-          p.signal_category_id in ^params["signals_filters"]["signal_category_id"]
+          p.signal_category_id in ^params["signal_filters"]["signal_category_id"]
         )
       else
         page

@@ -23,13 +23,13 @@ alias Smartcitydogs.Rescues
 alias Smartcitydogs.HeaderSlides
 alias Smartcitydogs.News
 alias Smartcitydogs.StaticPages
-alias Smartcitydogs.SignalsCategories
-alias Smartcitydogs.SignalsTypes
+alias Smartcitydogs.SignalCategories
+alias Smartcitydogs.SignalTypes
 alias Smartcitydogs.UsersType
 alias Smartcitydogs.User
-alias Smartcitydogs.Signals
-alias Smartcitydogs.SignalsComments
-alias Smartcitydogs.SignalsImages
+alias Smartcitydogs.Signal
+alias Smartcitydogs.SignalComments
+alias Smartcitydogs.SignalImages
 alias Smartcitydogs.Adopt
 
 ############## Users Type Admin #############
@@ -303,74 +303,74 @@ unless Repo.get_by(StaticPages, content: static_params[:content]) do
   |> Repo.insert!()
 end
 
-############## Signals Categories #############
+############## Signal Categories #############
 signal_categori_params = %{name: "Бездомно куче", prefix: "homeless"}
 
-unless Repo.get_by(SignalsCategories, name: signal_categori_params[:name]) do
-  %SignalsCategories{}
-  |> SignalsCategories.changeset(signal_categori_params)
+unless Repo.get_by(SignalCategories, name: signal_categori_params[:name]) do
+  %SignalCategories{}
+  |> SignalCategories.changeset(signal_categori_params)
   |> Repo.insert!()
 end
 
-############## Signals Categories #############
+############## Signal Categories #############
 signal_categori_params = %{name: "Избягало куче", prefix: "escaped"}
 
-unless Repo.get_by(SignalsCategories, name: signal_categori_params[:name]) do
-  %SignalsCategories{}
-  |> SignalsCategories.changeset(signal_categori_params)
+unless Repo.get_by(SignalCategories, name: signal_categori_params[:name]) do
+  %SignalCategories{}
+  |> SignalCategories.changeset(signal_categori_params)
   |> Repo.insert!()
 end
 
-############## Signals Categories #############
+############## Signal Categories #############
 signal_categori_params = %{name: "Малтретиране на куче", prefix: "mistreatment"}
 
-unless Repo.get_by(SignalsCategories, name: signal_categori_params[:name]) do
-  %SignalsCategories{}
-  |> SignalsCategories.changeset(signal_categori_params)
+unless Repo.get_by(SignalCategories, name: signal_categori_params[:name]) do
+  %SignalCategories{}
+  |> SignalCategories.changeset(signal_categori_params)
   |> Repo.insert!()
 end
 
-############## Signals Types #############
+############## Signal Types #############
 signal_type_params = %{name: "Нов", prefix: "new"}
 
-unless Repo.get_by(SignalsTypes, name: signal_type_params[:name]) do
-  %SignalsTypes{}
-  |> SignalsTypes.changeset(signal_type_params)
+unless Repo.get_by(SignalTypes, name: signal_type_params[:name]) do
+  %SignalTypes{}
+  |> SignalTypes.changeset(signal_type_params)
   |> Repo.insert!()
 end
 
-############## Signals Types #############
+############## Signal Types #############
 
 signal_type_params = %{name: "Приет", prefix: "accepted"}
 
-unless Repo.get_by(SignalsTypes, name: signal_type_params[:name]) do
-  %SignalsTypes{}
-  |> SignalsTypes.changeset(signal_type_params)
+unless Repo.get_by(SignalTypes, name: signal_type_params[:name]) do
+  %SignalTypes{}
+  |> SignalTypes.changeset(signal_type_params)
   |> Repo.insert!()
 end
 
-############## Signals Types #############
+############## Signal Types #############
 
 signal_type_params = %{name: "Изпратен", prefix: "sent"}
 
-unless Repo.get_by(SignalsTypes, name: signal_type_params[:name]) do
-  %SignalsTypes{}
-  |> SignalsTypes.changeset(signal_type_params)
+unless Repo.get_by(SignalTypes, name: signal_type_params[:name]) do
+  %SignalTypes{}
+  |> SignalTypes.changeset(signal_type_params)
   |> Repo.insert!()
 end
 
-############## Signals Types #############
+############## Signal Types #############
 
 signal_type_params = %{name: "Приключен", prefix: "closed"}
 
-unless Repo.get_by(SignalsTypes, name: signal_type_params[:name]) do
-  %SignalsTypes{}
-  |> SignalsTypes.changeset(signal_type_params)
+unless Repo.get_by(SignalTypes, name: signal_type_params[:name]) do
+  %SignalTypes{}
+  |> SignalTypes.changeset(signal_type_params)
   |> Repo.insert!()
 end
 
 Enum.each(0..99, fn _ ->
-  ############## Signals #############
+  ############## Signal #############
   signals_params = %{
     address: Faker.Address.street_address(),
     chip_number: Faker.Address.postcode(),
@@ -383,25 +383,25 @@ Enum.each(0..99, fn _ ->
     user_id: Faker.random_between(1, 4)
   }
 
-  signal = %Signals{} |> Signals.changeset(signals_params) |> Repo.insert!()
-  ############## Signals Images #############
+  signal = %Signal{} |> Signal.changeset(signals_params) |> Repo.insert!()
+  ############## Signal Images #############
   Enum.each(0..5, fn _ ->
     signal_image_params = %{signal_id: signal.id, url: "images/escaped.jpg"}
 
-    %SignalsImages{}
-    |> SignalsImages.changeset(signal_image_params)
+    %SignalImages{}
+    |> SignalImages.changeset(signal_image_params)
     |> Repo.insert!()
   end)
 
   Enum.each(0..5, fn _ ->
-    ############## Signals Comments #############
+    ############## Signal Comments #############
     signal_comment_params = %{
       comment: Faker.Lorem.sentence(),
       user_id: Faker.random_between(1, 4),
       signal_id: signal.id
     }
 
-    %SignalsComments{} |> SignalsComments.changeset(signal_comment_params) |> Repo.insert!()
+    %SignalComments{} |> SignalComments.changeset(signal_comment_params) |> Repo.insert!()
   end)
 end)
 

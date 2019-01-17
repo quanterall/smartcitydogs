@@ -2,10 +2,10 @@ defmodule SmartcitydogsWeb.Shelter.AnimalController do
   use SmartcitydogsWeb, :controller
 
   alias Smartcitydogs.{
-    Signals,
+    Signal,
     Repo,
-    Animals,
-    AnimalsFilters,
+    Animal,
+    AnimalFilters,
     PerformedProcedures,
     AnimalImages
   }
@@ -14,17 +14,17 @@ defmodule SmartcitydogsWeb.Shelter.AnimalController do
 
   def index(conn, params) do
     page =
-      Animals
+      Animal
       |> order_by(desc: :inserted_at)
-      |> preload([:animals_status, :performed_procedure, performed_procedure: :procedure_type])
+      |> preload([:animal_status, :performed_procedure, performed_procedure: :procedure_type])
 
     page =
-      if params["animals_filters"]["animals_status_id"] &&
-           params["animals_filters"]["animals_status_id"] != "" do
+      if params["animals_filters"]["animal_status_id"] &&
+           params["animals_filters"]["animal_status_id"] != "" do
         page
         |> where(
           [animal],
-          animal.animals_status_id == ^params["animals_filters"]["animals_status_id"]
+          animal.animal_status_id == ^params["animals_filters"]["animal_status_id"]
         )
       else
         page
@@ -40,9 +40,9 @@ defmodule SmartcitydogsWeb.Shelter.AnimalController do
 
     filter_changeset =
       if params["animals_filters"] != nil do
-        AnimalsFilters.changeset(%AnimalsFilters{}, params["animals_filters"])
+        AnimalFilters.changeset(%AnimalFilters{}, params["animals_filters"])
       else
-        AnimalsFilters.changeset(%AnimalsFilters{}, %{})
+        AnimalFilters.changeset(%AnimalFilters{}, %{})
       end
 
     performed_procedure_changeset = PerformedProcedures.changeset(%PerformedProcedures{}, %{})
@@ -51,7 +51,7 @@ defmodule SmartcitydogsWeb.Shelter.AnimalController do
       {
         :animals_filters,
         [
-          {:animals_status_id, params["animals_filters"]["animals_status_id"]},
+          {:animal_status_id, params["animals_filters"]["animal_status_id"]},
           {:adopted, params["animals_filters"]["adopted"]}
         ]
       }
@@ -72,22 +72,22 @@ defmodule SmartcitydogsWeb.Shelter.AnimalController do
 
   def edit(conn, %{"id" => id}) do
     animal =
-      Animals
+      Animal
       |> Repo.get(id)
       |> Repo.preload([
         :performed_procedure
       ])
 
-    changeset = Animals.changeset(animal)
+    changeset = Animal.changeset(animal)
 
     render(conn, "edit.html", animals: animal, changeset: changeset)
   end
 
   def update(conn, %{"id" => id, "animals" => animal_params}) do
     animal =
-      Animals
+      Animal
       |> Repo.get(id)
-      |> Animals.changeset(animal_params)
+      |> Animal.changeset(animal_params)
       |> Repo.update()
 
     case animal do
@@ -103,7 +103,7 @@ defmodule SmartcitydogsWeb.Shelter.AnimalController do
 
   def delete(conn, %{"id" => id}) do
     animal =
-      Animals
+      Animal
       |> Repo.get(id)
       |> Repo.delete()
 
@@ -112,7 +112,7 @@ defmodule SmartcitydogsWeb.Shelter.AnimalController do
   end
 
   def create(conn, %{"animals" => animal_params}) do
-    case Animals.create_animal(animal_params) do
+    case Animal.create_animal(animal_params) do
       {:ok, animal} ->
         if animal_params["animal_image"] != nil do
           AnimalImages.store_images(animal, animal_params["animal_image"])
@@ -127,14 +127,14 @@ defmodule SmartcitydogsWeb.Shelter.AnimalController do
   end
 
   def new(conn, _params) do
-    changeset = Animals.changeset(%Animals{})
+    changeset = Animal.changeset(%Animal{})
     render(conn, "new.html", changeset: changeset)
   end
 
   def show(conn, %{"id" => id}) do
     animal =
-      Repo.get(Animals, id)
-      |> Repo.preload([:animals_image, :animals_status])
+      Repo.get(Animal, id)
+      |> Repo.preload([:animal_images, :animal_status])
 
     render(conn, SmartcitydogsWeb.AnimalView, "show.html", animal: animal)
   end

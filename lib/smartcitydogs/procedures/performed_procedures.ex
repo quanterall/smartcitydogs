@@ -8,7 +8,7 @@ defmodule Smartcitydogs.PerformedProcedures do
   schema "performed_procedures" do
     field(:date, :naive_datetime)
     field(:deleted_at, :naive_datetime)
-    belongs_to(:animal, Smartcitydogs.Animals)
+    belongs_to(:animal, Smartcitydogs.Animal)
     belongs_to(:procedure_type, Smartcitydogs.ProcedureType)
 
     timestamps()

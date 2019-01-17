@@ -8,7 +8,7 @@ defmodule Smartcitydogs.AnimalImages do
   schema "animal_images" do
     field(:deleted_at, :naive_datetime)
     field(:url, :string)
-    belongs_to(:animal, Smartcitydogs.Animals)
+    belongs_to(:animal, Smartcitydogs.Animal)
 
     timestamps()
   end

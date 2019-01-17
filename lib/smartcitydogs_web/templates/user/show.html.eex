@@ -18,17 +18,17 @@
         <div class="row justify-content-start">
             <div class="">
                 <div class="user-profile">
-                    <span class="user-signals-tabs selected" data-show="mySignals">МОИТЕ СИГНАЛИ</span>
+                    <span class="user-signals-tabs selected" data-show="mySignal">МОИТЕ СИГНАЛИ</span>
                 </div>
             </div>
             <div class="ml-3">
                 <div class="user-profile">
-                    <span class="user-signals-tabs" data-show="followedSignals">СЛЕДЕНИ СИГНАЛИ</span>
+                    <span class="user-signals-tabs" data-show="followedSignal">СЛЕДЕНИ СИГНАЛИ</span>
                 </div>
             </div>
         </div>
         <div class="row mt-3">
-            <div id="mySignals" class=" tabs col">
+            <div id="mySignal" class=" tabs col">
                 <div class="row">
                     <%= for signal <- @user_signals do %>
                     <div class="col-lg-4 mb-3">
@@ -37,7 +37,7 @@
                     <% end %>
                 </div>
             </div>
-            <div id="followedSignals" style="display: none;" class="tabs col">
+            <div id="followedSignal" style="display: none;" class="tabs col">
                 <div class="row">
                     <%= for signal <- @followed_signals do %>
                     <div class="col-lg-4 mb-3">

@@ -1,4 +1,4 @@
-<div class="card slick-card w-100" style="background-image:linear-gradient(rgba(0, 0, 0, 0.7),rgba(0, 0, 0, 0.7)), url('/<%= Smartcitydogs.Signals.get_first_image(@signal) %>')">
+<div class="card slick-card w-100" style="background-image:linear-gradient(rgba(0, 0, 0, 0.7),rgba(0, 0, 0, 0.7)), url('/<%= Smartcitydogs.Signal.get_first_image(@signal) %>')">
     <div class="card-body">
         <div class="signal-type-label <%=@signal.signal_type.prefix%>">
             <%=@signal.signal_type.name%>

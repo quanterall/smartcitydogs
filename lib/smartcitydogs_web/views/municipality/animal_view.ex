@@ -1,5 +1,5 @@
 defmodule SmartcitydogsWeb.Municipality.AnimalView do
   use SmartcitydogsWeb, :view
   import Scrivener.HTML
-  alias Smartcitydogs.Animals
+  alias Smartcitydogs.Animal
 end

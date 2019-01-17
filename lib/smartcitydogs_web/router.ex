@@ -88,18 +88,18 @@ defmodule SmartcitydogsWeb.Router do
       get("/like", SignalControllerAPI, :like)
     end
 
-    get("/my_signals", MySignalsControllerAPI, :index)
-    resources("/signals_images", SignalImageControllerAPI, except: [:new, :edit])
-    resources("/signal_comments", SignalsCommentControllerAPI, except: [:new, :edit])
+    get("/my_signals", MySignalControllerAPI, :index)
+    resources("/signal_images", SignalImageControllerAPI, except: [:new, :edit])
+    resources("/signal_comments", SignalCommentControllerAPI, except: [:new, :edit])
 
     scope "/signal_comments", SmartcitydogsWeb do
-      put("/follow", SignalsCommentControllerAPI, :follow)
-      put("/unfollow", SignalsCommentControllerAPI, :unfollow)
+      put("/follow", SignalCommentControllerAPI, :follow)
+      put("/unfollow", SignalCommentControllerAPI, :unfollow)
     end
 
-    resources("/signal_type", SignalsTypeControllerAPI, except: [:new, :edit])
+    resources("/signal_type", SignalTypeControllerAPI, except: [:new, :edit])
     resources("/signal_category", SignalCategoryControllerAPI, except: [:new, :edit])
-    resources("/signal_likes", SignalsLikeControllerAPI, except: [:new, :edit])
+    resources("/signal_likes", SignalLikeControllerAPI, except: [:new, :edit])
     resources("/animals", AnimalControllerAPI, except: [:new, :edit])
     post("/animals/:id/send_email", AnimalControllerAPI, :send_email)
     resources("/contacts", ContactControllerAPI, except: [:new, :edit, :delete])
@@ -144,16 +144,16 @@ defmodule SmartcitydogsWeb.Router do
       post("/animals/:id/adopt", AnimalController, :adopt)
       get("/show", PageController, :show)
 
-      resources("/my_signals", MySignalsController)
+      resources("/my_signals", MySignalController)
       get("/followed_signals", SignalController, :followed_signals)
 
-      get("/signals/get_signals_support_count", SignalController, :get_signals_support_count)
+      get("/signals/get_signal_support_count", SignalController, :get_signal_support_count)
       get("/signals/followed_signals", SignalController, :followed_signals)
       get("/signals/:id/update_type", SignalController, :update_type)
       resources("/signals", SignalController)
 
       scope "/signals/:id" do
-        resources("/comments", SignalsCommentController)
+        resources("/comments", SignalCommentController)
         post("/dislike", SignalController, :dislike)
         post("/like", SignalController, :like)
       end

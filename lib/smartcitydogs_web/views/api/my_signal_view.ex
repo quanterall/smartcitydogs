@@ -1,4 +1,4 @@
-defmodule SmartcitydogsWeb.MySignalsControllerAPIView do
+defmodule SmartcitydogsWeb.MySignalControllerAPIView do
   use SmartcitydogsWeb, :view
   alias SmartcitydogsWeb.SignalControllerAPIView
 

@@ -1,6 +1,6 @@
 defmodule SmartcitydogsWeb.ZooPolice.AnimalController do
   use SmartcitydogsWeb, :controller
-  alias Smartcitydogs.{Signals, Repo, SignalsFilters}
+  alias Smartcitydogs.{Signal, Repo, SignalFilters}
   import Ecto.Query
 
   action_fallback(SmartcitydogsWeb.FallbackController)

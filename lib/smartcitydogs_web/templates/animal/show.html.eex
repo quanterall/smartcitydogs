@@ -7,8 +7,8 @@
         </div>
     </div>
     <div class="col-lg-7">
-        <div class="animal-status-text <%=@animal.animals_status.prefix%> mb-2">
-            <%= @animal.animals_status.name%>
+        <div class="animal-status-text <%=@animal.animal_status.prefix%> mb-2">
+            <%= @animal.animal_status.name%>
         </div>
         <div class="slick-card-small ">
             <%= Timex.format!(@animal.inserted_at, "%d.%m.%y",:strftime)%> г.

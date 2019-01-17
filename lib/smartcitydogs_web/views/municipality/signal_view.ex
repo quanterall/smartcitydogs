@@ -1,5 +1,5 @@
 defmodule SmartcitydogsWeb.Municipality.SignalView do
   use SmartcitydogsWeb, :view
   import Scrivener.HTML
-  alias Smartcitydogs.Signals
+  alias Smartcitydogs.Signal
 end

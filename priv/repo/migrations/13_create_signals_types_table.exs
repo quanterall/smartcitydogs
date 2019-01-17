@@ -1,4 +1,4 @@
-defmodule Smartcitydogs.Repo.Migrations.SignalsTypes do
+defmodule Smartcitydogs.Repo.Migrations.SignalTypes do
   use Ecto.Migration
 
   def change do

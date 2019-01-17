@@ -1,7 +1,7 @@
-defmodule Smartcitydogs.Animals do
+defmodule Smartcitydogs.Animal do
   use Ecto.Schema
   import Ecto.Changeset
-  alias Smartcitydogs.{DataAnimals, Animals, Repo}
+  alias Smartcitydogs.{DataAnimal, Animal, Repo}
 
   @timestamps_opts [type: :utc_datetime, usec: false]
 
@@ -41,13 +41,13 @@ defmodule Smartcitydogs.Animals do
   ###### Send E-mail ########
 
   def adopt(animal, user) do
-    DataAnimals.insert_adopt(user.id, animal.id)
+    DataAnimal.insert_adopt(user.id, animal.id)
     Smartcitydogs.Email.send_adopt_email(animal, user)
   end
 
   def create_animal(args \\ %{}) do
-    %Animals{}
-    |> Animals.changeset(args)
+    %Animal{}
+    |> Animal.changeset(args)
     |> Repo.insert()
   end
 end

@@ -8,7 +8,7 @@ defmodule Smartcitydogs.AnimalStatus do
     field(:deleted_at, :naive_datetime)
     field(:name, :string)
     field(:prefix, :string)
-    has_many(:animals, Smartcitydogs.Animals)
+    has_many(:animals, Smartcitydogs.Animal)
 
     timestamps()
   end

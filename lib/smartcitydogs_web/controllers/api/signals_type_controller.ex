@@ -1,42 +1,42 @@
-defmodule SmartcitydogsWeb.SignalsTypeControllerAPI do
+defmodule SmartcitydogsWeb.SignalTypeControllerAPI do
   use SmartcitydogsWeb, :controller
 
-  alias Smartcitydogs.SignalsTypes
-  alias Smartcitydogs.DataSignals
+  alias Smartcitydogs.SignalTypes
+  alias Smartcitydogs.DataSignal
 
   action_fallback(SmartcitydogsWeb.FallbackController)
 
   def index(conn, _params) do
-    signal_type = DataSignals.list_signal_types()
+    signal_type = DataSignal.list_signal_types()
     render(conn, "index.json", signal_type: signal_type)
   end
 
-  def create(conn, %{"signals_type" => signals_type_params}) do
-    with {:ok, %SignalsTypes{} = signals_type} <-
-           DataSignals.create_signal_type(signals_type_params) do
+  def create(conn, %{"signal_type" => signal_type_params}) do
+    with {:ok, %SignalTypes{} = signal_type} <-
+           DataSignal.create_signal_type(signal_type_params) do
       conn
       |> put_status(:created)
-      |> put_resp_header("location", signals_type_controller_api_path(conn, :show, signals_type))
-      |> render("show.json", signals_type: signals_type)
+      |> put_resp_header("location", signal_type_controller_api_path(conn, :show, signal_type))
+      |> render("show.json", signal_type: signal_type)
     end
   end
 
   def show(conn, %{"id" => id}) do
-    signals_type = DataSignals.get_signal_type(id)
-    render(conn, "show.json", signals_type: signals_type)
+    signal_type = DataSignal.get_signal_type(id)
+    render(conn, "show.json", signal_type: signal_type)
   end
 
-  def update(conn, %{"id" => id, "signals_type" => signals_type_params}) do
-    signals_type = DataSignals.get_signal_type(id)
+  def update(conn, %{"id" => id, "signal_type" => signal_type_params}) do
+    signal_type = DataSignal.get_signal_type(id)
 
-    with {:ok, %SignalsTypes{} = signals_type} <-
-           DataSignals.update_signal_type(signals_type, signals_type_params) do
-      render(conn, "show.json", signals_type: signals_type)
+    with {:ok, %SignalTypes{} = signal_type} <-
+           DataSignal.update_signal_type(signal_type, signal_type_params) do
+      render(conn, "show.json", signal_type: signal_type)
     end
   end
 
   def delete(conn, %{"id" => id}) do
-    with {:ok, %SignalsTypes{}} <- DataSignals.delete_signal_type(id) do
+    with {:ok, %SignalTypes{}} <- DataSignal.delete_signal_type(id) do
       send_resp(conn, :no_content, "")
     end
   end

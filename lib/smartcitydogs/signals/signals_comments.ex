@@ -1,4 +1,4 @@
-defmodule Smartcitydogs.SignalsComments do
+defmodule Smartcitydogs.SignalComments do
   use Ecto.Schema
   import Ecto.Changeset
 
@@ -9,7 +9,7 @@ defmodule Smartcitydogs.SignalsComments do
     field(:deleted_at, :naive_datetime)
     field(:likes_number, :integer, default: 0)
     belongs_to(:user, Smartcitydogs.User)
-    belongs_to(:signal, Smartcitydogs.Signals)
+    belongs_to(:signal, Smartcitydogs.Signal)
 
     timestamps()
   end

@@ -61,7 +61,7 @@ defmodule Smartcitydogs.DataUsers do
 
   def get_likes(signal_id) do
     Repo.one(
-      from(l in Smartcitydogs.SignalsLikes, select: count(l.id), where: l.signal_id == ^signal_id)
+      from(l in Smartcitydogs.SignalLikes, select: count(l.id), where: l.signal_id == ^signal_id)
     )
   end
 

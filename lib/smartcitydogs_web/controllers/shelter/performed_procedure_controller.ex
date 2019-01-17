@@ -2,11 +2,11 @@ defmodule SmartcitydogsWeb.Shelter.PerformedProcedureController do
   use SmartcitydogsWeb, :controller
 
   alias Smartcitydogs.{
-    Signals,
+    Signal,
     Repo,
-    SignalsFilters,
-    Animals,
-    AnimalsFilters,
+    SignalFilters,
+    Animal,
+    AnimalFilters,
     PerformedProcedures
   }
 

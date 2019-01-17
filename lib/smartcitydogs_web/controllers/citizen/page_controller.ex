@@ -2,17 +2,17 @@ defmodule SmartcitydogsWeb.PageController do
   use SmartcitydogsWeb, :controller
 
   import Ecto.Query
-  alias Smartcitydogs.DataSignals
+  alias Smartcitydogs.DataSignal
   alias Smartcitydogs.DataPages
-  alias Smartcitydogs.DataAnimals
-  alias Smartcitydogs.Animals
-  alias Smartcitydogs.Signals
+  alias Smartcitydogs.DataAnimal
+  alias Smartcitydogs.Animal
+  alias Smartcitydogs.Signal
   alias Smartcitydogs.News
   alias Smartcitydogs.Repo
 
   def index(conn, _params) do
     signals =
-      Signals
+      Signal
       |> limit(6)
       |> order_by(desc: :id)
       |> Repo.all()
@@ -24,16 +24,16 @@ defmodule SmartcitydogsWeb.PageController do
       |> Repo.all()
 
     animal =
-      Animals
+      Animal
       |> limit(6)
       |> Repo.all()
-      |> Repo.preload([:animals_image, :animals_status])
+      |> Repo.preload([:animal_images, :animal_status])
 
     adopted_animals =
-      Animals
+      Animal
       |> limit(6)
-      |> where(animals_status_id: 3)
-      |> preload([:animals_image, :animals_status])
+      |> where(animal_status_id: 3)
+      |> preload([:animal_images, :animal_status])
       |> Repo.all()
 
     render(conn, "index.html",

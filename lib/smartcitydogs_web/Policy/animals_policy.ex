@@ -1,4 +1,4 @@
-defmodule Smartcitydogs.Animals.Policy do
+defmodule Smartcitydogs.Animal.Policy do
   @behaviour Bodyguard.Policy
   alias Smartcitydogs.User
 
@@ -36,5 +36,5 @@ defmodule Smartcitydogs.Animals.Policy do
 end
 
 #  user = Smartcitydogs.DataUsers.get_user!(7)
-# Bodyguard.permit(Smartcitydogs.Animals.Policy, :new, user)
+# Bodyguard.permit(Smartcitydogs.Animal.Policy, :new, user)
 #    - проверка за достъп (модул, функция, потребител)

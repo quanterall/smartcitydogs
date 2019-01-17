@@ -1,7 +1,7 @@
 <div class="row  pt-5 pb-5 ">
     <div class="col-lg-5">
         <div class="signal-gallery">
-            <%= for image <- @signal.signals_images do %>
+            <%= for image <- @signal.signal_images do %>
             <img src="/<%= image.url %>" alt="">
             <% end %>
         </div>
@@ -89,7 +89,7 @@
             </div>
         </div>
         <% end %>
-        <%= form_for @conn, signals_comment_path(@conn, :create,@signal.id), [class: "Comment_form",id: "comment_form"],
+        <%= form_for @conn, signal_comment_path(@conn, :create,@signal.id), [class: "Comment_form",id: "comment_form"],
         fn f -> %>
         <div class="form-group-comment comment_box">
             <%= textarea f, :comment, class: "comment_box_area form-control", placeholder: "Въведете коментар...." %>

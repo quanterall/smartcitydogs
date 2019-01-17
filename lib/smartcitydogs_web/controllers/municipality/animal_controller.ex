@@ -1,22 +1,22 @@
 defmodule SmartcitydogsWeb.Municipality.AnimalController do
   use SmartcitydogsWeb, :controller
-  alias Smartcitydogs.{Animals, Repo, AnimalsFilters}
+  alias Smartcitydogs.{Animal, Repo, AnimalFilters}
   import Ecto.Query
   alias Smartcitydogs.PerformedProcedures
 
   def index(conn, params) do
     page =
-      Animals
+      Animal
       |> order_by(desc: :inserted_at)
-      |> preload([:animals_status])
+      |> preload([:animal_status])
 
     page =
-      if params["animals_filters"]["animals_status_id"] &&
-           params["animals_filters"]["animals_status_id"] != "" do
+      if params["animals_filters"]["animal_status_id"] &&
+           params["animals_filters"]["animal_status_id"] != "" do
         page
         |> where(
           [animal],
-          animal.animals_status_id == ^params["animals_filters"]["animals_status_id"]
+          animal.animal_status_id == ^params["animals_filters"]["animal_status_id"]
         )
       else
         page
@@ -32,16 +32,16 @@ defmodule SmartcitydogsWeb.Municipality.AnimalController do
 
     filter_changeset =
       if params["animals_filters"] != nil do
-        AnimalsFilters.changeset(%AnimalsFilters{}, params["animals_filters"])
+        AnimalFilters.changeset(%AnimalFilters{}, params["animals_filters"])
       else
-        AnimalsFilters.changeset(%AnimalsFilters{}, %{})
+        AnimalFilters.changeset(%AnimalFilters{}, %{})
       end
 
     pagination_params = [
       {
         :animals_filters,
         [
-          {:animals_status_id, params["animals_filters"]["animals_status_id"]},
+          {:animal_status_id, params["animals_filters"]["animal_status_id"]},
           {:adopted, params["animals_filters"]["adopted"]}
         ]
       }

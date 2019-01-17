@@ -1,8 +1,8 @@
 defmodule SmartcitydogsWeb.SignalControllerAPI do
   use SmartcitydogsWeb, :controller
 
-  alias Smartcitydogs.Signals
-  alias Smartcitydogs.DataSignals
+  alias Smartcitydogs.Signal
+  alias Smartcitydogs.DataSignal
   alias Smartcitydogs.DataUsers
   alias Smartcitydogs.Repo
   action_fallback(SmartcitydogsWeb.FallbackController)
@@ -15,10 +15,10 @@ defmodule SmartcitydogsWeb.SignalControllerAPI do
 
   def index(conn, _params) do
     signals =
-      Repo.all(Signals)
+      Repo.all(Signal)
       |> Repo.preload([
         :users,
-        :signals_images,
+        :signal_images,
         :signal_comments,
         :signal_category,
         :signal_type
@@ -39,7 +39,7 @@ defmodule SmartcitydogsWeb.SignalControllerAPI do
       |> Map.put("support_count", 0)
       |> Map.put("user_id", user_id)
 
-    case DataSignals.create_signal(signal_params) do
+    case DataSignal.create_signal(signal_params) do
       {:ok, signal} ->
         upload = Map.get(conn, :params)
 
@@ -58,7 +58,7 @@ defmodule SmartcitydogsWeb.SignalControllerAPI do
             "signal_id" => "#{signal.id}"
           }
 
-          DataSignals.create_signal_images(args)
+          DataSignal.create_signal_images(args)
         end
 
         render("show.json", signal: signal)
@@ -69,7 +69,7 @@ defmodule SmartcitydogsWeb.SignalControllerAPI do
         render(conn, "new_signal.html", changeset: changeset)
     end
 
-    # with {:ok, %Signals{} = signal} <- DataSignals.create_signal(signal_params) do
+    # with {:ok, %Signal{} = signal} <- DataSignal.create_signal(signal_params) do
     #   conn
     #   |> put_status(:created)
     #   |> put_resp_header("location", signal_path(conn, :show, signal))
@@ -79,10 +79,10 @@ defmodule SmartcitydogsWeb.SignalControllerAPI do
 
   def show(conn, map) do
     id = String.to_integer(map["id"])
-    comments = DataSignals.get_comment_signal_id(id)
-    signal = DataSignals.get_signal(id)
+    comments = DataSignal.get_comment_signal_id(id)
+    signal = DataSignal.get_signal(id)
     ## signal is liked by user
-    sorted_comments = DataSignals.sort_signal_comment_by_id()
+    sorted_comments = DataSignal.sort_signal_comment_by_id()
 
     render(
       conn,
@@ -100,15 +100,15 @@ defmodule SmartcitydogsWeb.SignalControllerAPI do
     # if id == "unfollow" do
     #   SmartcitydogsWeb.SignalControllerAPI.unfollow(conn, %{"id" => signal_params})
     # end
-    signal = DataSignals.get_signal(id)
+    signal = DataSignal.get_signal(id)
 
-    with {:ok, %Signals{} = signal} <- DataSignals.update_signal(signal, signal_params) do
+    with {:ok, %Signal{} = signal} <- DataSignal.update_signal(signal, signal_params) do
       render(conn, "show.json", signal: signal)
     end
   end
 
   def delete(conn, %{"id" => id}) do
-    with {:ok, %Signals{}} <- DataSignals.delete_signal(id) do
+    with {:ok, %Signal{}} <- DataSignal.delete_signal(id) do
       send_resp(conn, :no_content, "")
     end
   end
@@ -119,11 +119,11 @@ defmodule SmartcitydogsWeb.SignalControllerAPI do
   #   user_liked_signals = DataUsers.get_user!(user_id) |> Map.get(:liked_signals)
   #   cond do
   #     Enum.member?(user_liked_signals, id) ->
-  #       signal = DataSignals.get_signal(id)
+  #       signal = DataSignal.get_signal(id)
   #       render(conn, "already_followed.json", signal: signal)
   #     Enum.member?(user_liked_signals, id) == false ->
   #         DataUsers.add_like(user_id, id)
-  #        {:ok, signal} = DataSignals.follow_signal(id)
+  #        {:ok, signal} = DataSignal.follow_signal(id)
   #         render(conn, "followed.json", signal: signal)
   #   end
   # end
@@ -135,18 +135,18 @@ defmodule SmartcitydogsWeb.SignalControllerAPI do
   #   cond do
   #     Enum.member?(user_liked_signals, id) ->
   #       DataUsers.remove_liked_signal(user_id, id)
-  #       {:ok, signal} = DataSignals.unfollow_signal(id)
+  #       {:ok, signal} = DataSignal.unfollow_signal(id)
   #       render(conn, "unfollowed.json", signal: signal)
 
   #     Enum.member?(user_liked_signals, id) == false ->
-  #       signal = DataSignals.get_signal(id)
+  #       signal = DataSignal.get_signal(id)
   #       render(conn, "already_unfollowed.json", signal: signal)
   #   end
   # end
 
   def like(conn, params) do
     user_id = conn.private.plug_session["current_user_id"]
-    signal = DataSignals.get_signal(params["id"])
+    signal = DataSignal.get_signal(params["id"])
     DataUsers.add_like(user_id, signal.id)
 
     conn
@@ -155,7 +155,7 @@ defmodule SmartcitydogsWeb.SignalControllerAPI do
 
   def unlike(conn, map) do
     show_id = String.to_integer(map["id"])
-    signal = DataSignals.get_signal(show_id)
+    signal = DataSignal.get_signal(show_id)
 
     user_id = conn.private.plug_session["current_user_id"]
     DataUsers.remove_like(user_id, signal.id)
@@ -169,15 +169,15 @@ defmodule SmartcitydogsWeb.SignalControllerAPI do
     show_id = String.to_integer(map["show-id"])
     user_id = conn.private.plug_session["current_user_id"]
 
-    Smartcitydogs.DataSignals.create_signal_comment(%{
+    Smartcitydogs.DataSignal.create_signal_comment(%{
       comment: show_comment,
       signal_id: show_id,
       user_id: user_id
     })
 
-    comments = Smartcitydogs.DataSignals.get_comment_signal_id(show_id)
-    signal = Smartcitydogs.DataSignals.get_signal(show_id)
-    sorted_comments = Smartcitydogs.DataSignals.sort_signal_comment_by_id()
+    comments = Smartcitydogs.DataSignal.get_comment_signal_id(show_id)
+    signal = Smartcitydogs.DataSignal.get_signal(show_id)
+    sorted_comments = Smartcitydogs.DataSignal.sort_signal_comment_by_id()
 
     redirect(conn,
       to:

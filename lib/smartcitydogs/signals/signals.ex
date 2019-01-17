@@ -1,11 +1,11 @@
-defmodule Smartcitydogs.Signals do
+defmodule Smartcitydogs.Signal do
   use Ecto.Schema
   import Ecto.Changeset
   import Ecto.Query
-  alias Smartcitydogs.DataSignals
-  alias Smartcitydogs.Signals
+  alias Smartcitydogs.DataSignal
+  alias Smartcitydogs.Signal
   alias Smartcitydogs.Repo
-  alias Smartcitydogs.SignalsImages
+  alias Smartcitydogs.SignalImages
 
   @timestamps_opts [type: :utc_datetime, usec: false]
 
@@ -20,11 +20,11 @@ defmodule Smartcitydogs.Signals do
     field(:address_B, :float)
     field(:address_F, :float)
 
-    has_many(:signal_comments, Smartcitydogs.SignalsComments)
-    belongs_to(:signal_category, Smartcitydogs.SignalsCategories)
-    belongs_to(:signal_type, Smartcitydogs.SignalsTypes)
-    has_many(:signal_images, Smartcitydogs.SignalsImages)
-    has_many(:signal_likes, Smartcitydogs.SignalsLikes)
+    has_many(:signal_comments, Smartcitydogs.SignalComments)
+    belongs_to(:signal_category, Smartcitydogs.SignalCategories)
+    belongs_to(:signal_type, Smartcitydogs.SignalTypes)
+    has_many(:signal_images, Smartcitydogs.SignalImages)
+    has_many(:signal_likes, Smartcitydogs.SignalLikes)
     belongs_to(:user, Smartcitydogs.User)
 
     timestamps()
@@ -74,9 +74,9 @@ defmodule Smartcitydogs.Signals do
   def get_first_image(signal) do
     signal =
       signal
-      |> Repo.preload(:signals_images)
+      |> Repo.preload(:signal_images)
 
-    if signal.signals_images == [] do
+    if signal.signal_images == [] do
       cond do
         signal.signal_category_id == 1 -> "images/stray.jpg"
         signal.signal_category_id == 2 -> "images/escaped.jpg"
@@ -84,44 +84,44 @@ defmodule Smartcitydogs.Signals do
       end
     else
       cond do
-        List.first(signal.signals_images).url == nil && signal.signal_category_id == 1 ->
+        List.first(signal.signal_images).url == nil && signal.signal_category_id == 1 ->
           "images/stray.jpg"
 
-        List.first(signal.signals_images).url == nil && signal.signal_category_id == 2 ->
+        List.first(signal.signal_images).url == nil && signal.signal_category_id == 2 ->
           "images/escaped.jpg"
 
-        List.first(signal.signals_images).url == nil && signal.signal_category_id == 3 ->
+        List.first(signal.signal_images).url == nil && signal.signal_category_id == 3 ->
           "images/mistreated.jpg"
 
         true ->
-          List.first(signal.signals_images).url
+          List.first(signal.signal_images).url
       end
     end
   end
 
   def add_like(user_id, signal_id) do
-    %Smartcitydogs.SignalsLikes{}
-    |> Smartcitydogs.SignalsLikes.changeset(%{user_id: user_id, signal_id: signal_id})
+    %Smartcitydogs.SignalLikes{}
+    |> Smartcitydogs.SignalLikes.changeset(%{user_id: user_id, signal_id: signal_id})
     |> Repo.insert()
   end
 
   def remove_like(user_id, signal_id) do
     from(
-      l in Smartcitydogs.SignalsLikes,
+      l in Smartcitydogs.SignalLikes,
       where: l.user_id == ^user_id and l.signal_id == ^signal_id
     )
     |> Repo.delete_all()
   end
 
   def create_signal(args \\ %{}) do
-    %Signals{}
-    |> Signals.changeset(args)
+    %Signal{}
+    |> Signal.changeset(args)
     |> Repo.insert()
   end
 
   def create_signal_images(args \\ %{}) do
-    %SignalsImages{}
-    |> SignalsImages.changeset(args)
+    %SignalImages{}
+    |> SignalImages.changeset(args)
     |> Repo.insert()
   end
 end

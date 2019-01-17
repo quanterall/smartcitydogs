@@ -1,8 +1,8 @@
 defmodule SmartcitydogsWeb.AnimalController do
   use SmartcitydogsWeb, :controller
 
-  alias Smartcitydogs.DataAnimals
-  alias Smartcitydogs.Animals
+  alias Smartcitydogs.DataAnimal
+  alias Smartcitydogs.Animal
   alias Smartcitydogs.Repo
   import Ecto.Query
 
@@ -16,8 +16,8 @@ defmodule SmartcitydogsWeb.AnimalController do
       end
 
     page =
-      Animals
-      |> preload(:animals_status)
+      Animal
+      |> preload(:animal_status)
       |> where(^chip)
       |> order_by(desc: :inserted_at)
       |> Repo.paginate(params)
@@ -32,15 +32,15 @@ defmodule SmartcitydogsWeb.AnimalController do
 
   def show(conn, %{"id" => id}) do
     animal =
-      Repo.get(Animals, id)
-      |> Repo.preload([:animals_image, :animals_status])
+      Repo.get(Animal, id)
+      |> Repo.preload([:animal_images, :animal_status])
 
     render(conn, "show.html", animal: animal)
   end
 
   def adopt(conn, %{"animal_id" => animal_id}) do
-    animal = Repo.get(Animals, animal_id)
-    Smartcitydogs.Animals.adopt(animal, conn.assigns.current_user)
+    animal = Repo.get(Animal, animal_id)
+    Smartcitydogs.Animal.adopt(animal, conn.assigns.current_user)
 
     conn
     |> redirect(to: NavigationHistory.last_path(conn, []))

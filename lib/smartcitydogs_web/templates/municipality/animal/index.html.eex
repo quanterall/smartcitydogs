@@ -2,7 +2,7 @@
     <div class="col-3">
         <%= form_for @filter_changeset, municipality_animal_path(@conn, :index), [method: "get"], fn f -> %>
         <label>Филтрирай по статус</label>
-        <%= select f, :animals_status_id,[ { "Всички" ,"" },{ "На свобода" ,1 },{ "В приюта" ,2 },{ "Осиновено" ,3 }],
+        <%= select f, :animal_status_id,[ { "Всички" ,"" },{ "На свобода" ,1 },{ "В приюта" ,2 },{ "Осиновено" ,3 }],
         [class: "form-control", required: false] %>
         <label for="animals_filters_adopted">
             <%=checkbox(f, :adopted)%> Осиновени
@@ -33,7 +33,7 @@
                              alt="">
                     </td>
                     <td class=" align-middle">
-                        <%=animal.animals_status.name%>
+                        <%=animal.animal_status.name%>
                     </td>
                     <td class="align-middle">
                         <%= Timex.format!(animal.inserted_at, "%d.%m.%y",:strftime)%> г.
