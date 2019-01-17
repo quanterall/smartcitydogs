@@ -23,6 +23,12 @@ defmodule Smartcitydogs.DataSignal do
     |> Repo.update()
   end
 
+  def create_signal(args) do
+    %Signal{}
+    |> Signal.changeset(args)
+    |> Repo.insert!()
+  end
+
   def follow_signal(id) do
     signal = get_signal(id)
     follow_number = Map.get(signal, :support_count)

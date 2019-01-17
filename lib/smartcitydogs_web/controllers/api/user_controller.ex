@@ -23,7 +23,8 @@ defmodule SmartcitydogsWeb.UserControllerAPI do
 
       _ ->
         conn
-        |> render(SmartcitydogsWeb.ErrorView, "401.json", message: "User already exists!")
+        |> put_view(SmartcitydogsWeb.ErrorView)
+        |> render("401.json", message: "User already exists!")
     end
   end
 

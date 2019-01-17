@@ -5,10 +5,11 @@ defmodule SmartcitydogsWeb.UserController do
   alias Smartcitydogs.Repo
   alias Smartcitydogs.Signal
   alias Smartcitydogs.SignalLike
+  alias Smartcitydogs.DataUsers
   import Ecto.Query
   plug(:put_layout, false when action in [:new])
 
-  def index(conn, _params) do
+  def index(_, _params) do
     # todo: for admin
 
     # render(conn, "index.html", users: users)
@@ -81,7 +82,7 @@ defmodule SmartcitydogsWeb.UserController do
       |> Repo.update()
 
     case result do
-      {:ok, user} ->
+      {:ok, _} ->
         redirect(conn, to: user_path(conn, :show))
 
       {:error, %Ecto.Changeset{} = user_changeset} ->
@@ -96,7 +97,9 @@ defmodule SmartcitydogsWeb.UserController do
     request_user_id = user.id
 
     if logged_user_id != request_user_id do
-      render(conn, SmartcitydogsWeb.ErrorView, "401.html")
+      conn
+      |> put_view(SmartcitydogsWeb.ErrorView)
+      |> render("401.html")
     else
       {:ok, _user} = DataUsers.delete_user(user)
 
