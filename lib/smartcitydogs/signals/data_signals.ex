@@ -4,7 +4,7 @@ defmodule Smartcitydogs.DataSignal do
 
   alias Smartcitydogs.Signal
   alias Smartcitydogs.SignalTypes
-  alias Smartcitydogs.SignalComments
+  alias Smartcitydogs.SignalComment
   alias Smartcitydogs.SignalCategories
   alias Smartcitydogs.SignalImages
   alias Smartcitydogs.SignalLikes
@@ -75,8 +75,8 @@ defmodule Smartcitydogs.DataSignal do
   end
 
   def sort_signal_comment_by_id() do
-    query = Ecto.Query.from(c in SignalComments, order_by: [desc: c.inserted_at])
-    Repo.all(query) |> Repo.preload(:users)
+    query = Ecto.Query.from(c in SignalComment, order_by: [desc: c.inserted_at])
+    Repo.all(query) |> Repo.preload(:user)
   end
 
   def get_all_followed_signals(user_id) do
@@ -151,33 +151,33 @@ defmodule Smartcitydogs.DataSignal do
   # Signal comments
 
   def get_signal_comment(id) do
-    Repo.get!(SignalComments, id) |> Repo.preload(:users)
+    Repo.get!(SignalComment, id) |> Repo.preload(:user)
   end
 
   def list_signal_comment() do
-    Repo.all(SignalComments) |> Repo.preload(:users)
+    Repo.all(SignalComment) |> Repo.preload(:user)
   end
 
   def get_comment_signal_id(signal_id) do
-    Ecto.Query.from(c in SignalComments, where: c.signal_id == ^signal_id)
+    Ecto.Query.from(c in SignalComment, where: c.signal_id == ^signal_id)
     |> Repo.all()
   end
 
   def get_one_signal_comment(signal_id, comment_id) do
-    Ecto.Query.from(c in SignalComments, where: c.signal_id == ^signal_id)
+    Ecto.Query.from(c in SignalComment, where: c.signal_id == ^signal_id)
     |> Repo.all()
     |> Enum.at(comment_id - 1)
   end
 
   def create_signal_comment(args \\ %{}) do
-    %SignalComments{}
-    |> SignalComments.changeset(args)
+    %SignalComment{}
+    |> SignalComment.changeset(args)
     |> Repo.insert()
   end
 
-  def update_signal_comment(%SignalComments{} = comments, args) do
+  def update_signal_comment(%SignalComment{} = comments, args) do
     comments
-    |> SignalComments.changeset(args)
+    |> SignalComment.changeset(args)
     |> Repo.update()
   end
 

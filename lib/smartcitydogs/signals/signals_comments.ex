@@ -1,4 +1,4 @@
-defmodule Smartcitydogs.SignalComments do
+defmodule Smartcitydogs.SignalComment do
   use Ecto.Schema
   import Ecto.Changeset
 

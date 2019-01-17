@@ -1,7 +1,7 @@
 <div class="row  pt-5 pb-5 ">
     <div class="col-lg-5">
         <div class="signal-gallery">
-            <%= for image <- @animal.animals_image do %>
+            <%= for image <- @animal.animal_images do %>
             <img src="/<%= image.url %>" alt="">
             <% end %>
         </div>

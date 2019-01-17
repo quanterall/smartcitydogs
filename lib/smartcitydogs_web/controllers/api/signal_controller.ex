@@ -17,7 +17,7 @@ defmodule SmartcitydogsWeb.SignalControllerAPI do
     signals =
       Repo.all(Signal)
       |> Repo.preload([
-        :users,
+        :user,
         :signal_images,
         :signal_comments,
         :signal_category,

@@ -3,7 +3,7 @@ defmodule SmartcitydogsWeb.SignalController do
   alias Smartcitydogs.DataSignal
   alias Smartcitydogs.Signal
   alias Smartcitydogs.Repo
-  alias Smartcitydogs.SignalComments
+  alias Smartcitydogs.SignalComment
   alias Smartcitydogs.SignalImages
   alias Smartcitydogs.DataUsers
   import Ecto.Query
@@ -51,8 +51,8 @@ defmodule SmartcitydogsWeb.SignalController do
         :signal_category,
         :signal_likes,
         :signal_images,
-        signal_comments: from(p in SignalComments, order_by: [desc: p.inserted_at]),
-        signal_comments: :users
+        signal_comments: from(p in SignalComment, order_by: [desc: p.inserted_at]),
+        signal_comments: :user
       ])
 
     signal

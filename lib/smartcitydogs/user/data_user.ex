@@ -7,11 +7,11 @@ defmodule Smartcitydogs.DataUsers do
   alias Smartcitydogs.Contact
 
   def list_users do
-    Repo.all(User) |> Repo.preload(:users_types)
+    Repo.all(User) |> Repo.preload(:user_types)
   end
 
   def get_user!(id) do
-    Repo.get!(User, id) |> Repo.preload(:users_types)
+    Repo.get!(User, id) |> Repo.preload(:user_types)
   end
 
   def get_user_by_email!(email) do

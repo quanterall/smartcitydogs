@@ -20,7 +20,7 @@ defmodule Smartcitydogs.Signal do
     field(:address_B, :float)
     field(:address_F, :float)
 
-    has_many(:signal_comments, Smartcitydogs.SignalComments)
+    has_many(:signal_comments, Smartcitydogs.SignalComment)
     belongs_to(:signal_category, Smartcitydogs.SignalCategories)
     belongs_to(:signal_type, Smartcitydogs.SignalTypes)
     has_many(:signal_images, Smartcitydogs.SignalImages)

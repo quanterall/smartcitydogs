@@ -8,7 +8,7 @@ defmodule Smartcitydogs.UsersType do
     field(:deleted_at, :naive_datetime)
     field(:name, :string)
     field(:prefix, :string)
-    has_many(:users, Smartcitydogs.User)
+    has_many(:user, Smartcitydogs.User)
 
     timestamps()
   end

@@ -1,7 +1,7 @@
 defmodule SmartcitydogsWeb.SignalCommentControllerAPI do
   use SmartcitydogsWeb, :controller
 
-  alias Smartcitydogs.SignalComments
+  alias Smartcitydogs.SignalComment
   alias Smartcitydogs.DataSignal
 
   action_fallback(SmartcitydogsWeb.FallbackController)
@@ -12,7 +12,7 @@ defmodule SmartcitydogsWeb.SignalCommentControllerAPI do
   end
 
   def create(conn, %{"signal_comment" => signal_comment_params}) do
-    with {:ok, %SignalComments{} = signal_comment} <-
+    with {:ok, %SignalComment{} = signal_comment} <-
            DataSignal.create_signal_comment(signal_comment_params) do
       conn
       |> put_status(:created)
@@ -32,14 +32,14 @@ defmodule SmartcitydogsWeb.SignalCommentControllerAPI do
   def update(conn, %{"id" => id, "signal_comment" => signal_comment_params}) do
     signal_comment = DataSignal.get_signal_comment(id)
 
-    with {:ok, %SignalComments{} = signal_comment} <-
+    with {:ok, %SignalComment{} = signal_comment} <-
            DataSignal.update_signal_comment(signal_comment, signal_comment_params) do
       render(conn, "show.json", signal_comment: signal_comment)
     end
   end
 
   def delete(conn, %{"id" => id}) do
-    with {:ok, %SignalComments{}} <- DataSignal.delete_signal_comment(id) do
+    with {:ok, %SignalComment{}} <- DataSignal.delete_signal_comment(id) do
       send_resp(conn, :no_content, "")
     end
   end

@@ -82,7 +82,7 @@
         </div>
         <%= for comment <- @signal.signal_comments do %>
         <div class="row comment-container mb-3 mt-2 m-0">
-            <div class="col-6 comment-user-name p-0"><%=comment.users.first_name%> <%=comment.users.last_name%></div>
+            <div class="col-6 comment-user-name p-0"><%=comment.user.first_name%> <%=comment.user.last_name%></div>
             <div class="col-6 text-right"><%=Timex.format!( comment.inserted_at,"%d.%m.%y",:strftime)%> г.</div>
             <div class="col-12 mt-2  p-0">
                 <%=comment.comment%>
