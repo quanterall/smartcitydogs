@@ -91,7 +91,7 @@ defmodule SmartcitydogsWeb.ForgotenPasswordControllerAPI do
           IO.puts("Password reset token expired")
           render(conn, "token_exp.json", forgoten_password: user)
         else
-          changeset = User.registration_changeset(user, pw_params)
+          changeset = User.changeset(user, pw_params)
 
           case Repo.update(changeset) do
             {:ok, _user} ->

@@ -1,8 +1,6 @@
 defmodule SmartcitydogsWeb.ContactController do
   use SmartcitydogsWeb, :controller
 
-  alias Smartcitydogs.User
-  alias Smartcitydogs.DataUsers
   alias Smartcitydogs.Email
 
   def new(conn, _params) do
@@ -15,13 +13,13 @@ defmodule SmartcitydogsWeb.ContactController do
 
     case Recaptcha.verify(params["g-recaptcha-response"], secret: secret) do
       {:ok, _} ->
-        if conn.assigns.current_user != nil do
-          params =
+        params =
+          if conn.assigns.current_user != nil do
             params
             |> Map.put("first_name", conn.assigns.current_user.first_name)
             |> Map.put("last_name", conn.assigns.current_user.last_name)
             |> Map.put("phone", conn.assigns.current_user.phone)
-        end
+          end
 
         Email.send_contact_email(params)
         |> Smartcitydogs.Mailer.deliver_now()

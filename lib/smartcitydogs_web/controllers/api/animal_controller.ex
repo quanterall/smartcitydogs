@@ -9,7 +9,6 @@ defmodule SmartcitydogsWeb.AnimalControllerAPI do
 
   def send_email(conn, data) do
     int = String.to_integer(data["animal_id"])
-    Smartcitydogs.Animal.send_email(data)
     redirect(conn, to: "/registered/#{int}")
   end
 

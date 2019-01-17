@@ -1,12 +1,11 @@
 defmodule Smartcitydogs.GuardianErrorHandler do
-  import SmartcitydogsWeb.Router.Helpers
-
   def unauthenticated(conn, _params) do
-    last_path = if NavigationHistory.last_path(conn) == Phoenix.Controller.current_path(conn) do
-      "/"
-    else
-      NavigationHistory.last_path(conn)
-    end
+    last_path =
+      if NavigationHistory.last_path(conn) == Phoenix.Controller.current_path(conn) do
+        "/"
+      else
+        NavigationHistory.last_path(conn)
+      end
 
     conn
     |> Phoenix.Controller.put_flash(

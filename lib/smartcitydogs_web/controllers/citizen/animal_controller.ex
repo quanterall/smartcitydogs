@@ -1,7 +1,6 @@
 defmodule SmartcitydogsWeb.AnimalController do
   use SmartcitydogsWeb, :controller
 
-  alias Smartcitydogs.DataAnimal
   alias Smartcitydogs.Animal
   alias Smartcitydogs.Repo
   import Ecto.Query
