@@ -1,6 +1,6 @@
 defmodule SmartcitydogsWeb.Shelter.SignalController do
   use SmartcitydogsWeb, :controller
-  alias Smartcitydogs.{Signal, Repo, SignalFilters}
+  alias Smartcitydogs.{Signal, Repo, SignalFilter}
   import Ecto.Query
 
   def index(conn, params) do
@@ -11,9 +11,9 @@ defmodule SmartcitydogsWeb.Shelter.SignalController do
 
     filter_changeset =
       if params["signal_filters"] != nil do
-        SignalFilters.changeset(%SignalFilters{}, params["signal_filters"])
+        SignalFilter.changeset(%SignalFilter{}, params["signal_filters"])
       else
-        SignalFilters.changeset(%SignalFilters{}, %{})
+        SignalFilter.changeset(%SignalFilter{}, %{})
       end
 
     page =

@@ -1,7 +1,7 @@
 defmodule SmartcitydogsWeb.SignalLikeControllerAPI do
   use SmartcitydogsWeb, :controller
 
-  alias Smartcitydogs.SignalLikes
+  alias Smartcitydogs.SignalLike
   alias Smartcitydogs.DataSignal
 
   action_fallback(SmartcitydogsWeb.FallbackController)
@@ -12,7 +12,7 @@ defmodule SmartcitydogsWeb.SignalLikeControllerAPI do
   end
 
   def create(conn, %{"signal_like" => signal_like_params}) do
-    with {:ok, %SignalLikes{} = signal_like} <-
+    with {:ok, %SignalLike{} = signal_like} <-
            DataSignal.create_signal_like(signal_like_params) do
       conn
       |> put_status(:created)
@@ -29,14 +29,14 @@ defmodule SmartcitydogsWeb.SignalLikeControllerAPI do
   def update(conn, %{"id" => id, "signal_like" => signal_like_params}) do
     signal_like = DataSignal.get_signal_like(id)
 
-    with {:ok, %SignalLikes{} = signal_like} <-
+    with {:ok, %SignalLike{} = signal_like} <-
            DataSignal.update_signal_like(signal_like, signal_like_params) do
       render(conn, "show.json", signal_like: signal_like)
     end
   end
 
   def delete(conn, %{"id" => id}) do
-    with {:ok, %SignalLikes{}} <- DataSignal.delete_signal_like(id) do
+    with {:ok, %SignalLike{}} <- DataSignal.delete_signal_like(id) do
       send_resp(conn, :no_content, "")
     end
   end

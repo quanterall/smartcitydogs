@@ -23,7 +23,7 @@ defmodule Smartcitydogs.Adopt do
     |> validate_required([:user_id, :animal_id])
   end
 
-  def adopt_exist(animal, user) do
+  def adopt_exist(animal, user) when user != nil and animal != nil do
     adopt =
       Adopt
       |> where([p], p.animal_id == ^animal.id)
@@ -35,5 +35,9 @@ defmodule Smartcitydogs.Adopt do
     else
       false
     end
+  end
+
+  def adopt_exist(_, _) do
+    true
   end
 end

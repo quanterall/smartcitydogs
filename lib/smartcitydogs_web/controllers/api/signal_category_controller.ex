@@ -1,7 +1,7 @@
 defmodule SmartcitydogsWeb.SignalCategoryControllerAPI do
   use SmartcitydogsWeb, :controller
 
-  alias Smartcitydogs.SignalCategories
+  alias Smartcitydogs.SignalCategory
   alias Smartcitydogs.DataSignal
 
   action_fallback(SmartcitydogsWeb.FallbackController)
@@ -12,7 +12,7 @@ defmodule SmartcitydogsWeb.SignalCategoryControllerAPI do
   end
 
   def create(conn, %{"signal_category" => signal_category_params}) do
-    with {:ok, %SignalCategories{} = signal_category} <-
+    with {:ok, %SignalCategory{} = signal_category} <-
            DataSignal.create_signal_category(signal_category_params) do
       conn
       |> put_status(:created)
@@ -32,7 +32,7 @@ defmodule SmartcitydogsWeb.SignalCategoryControllerAPI do
   def update(conn, %{"id" => id, "signal_category" => signal_category_params}) do
     signal_category = DataSignal.get_signal_category(id)
 
-    with {:ok, %SignalCategories{} = signal_category} <-
+    with {:ok, %SignalCategory{} = signal_category} <-
            DataSignal.update_signal_category(signal_category, signal_category_params) do
       render(conn, "show.json", signal_category: signal_category)
     end
@@ -41,7 +41,7 @@ defmodule SmartcitydogsWeb.SignalCategoryControllerAPI do
   def delete(conn, %{"id" => id}) do
     ## signal_category = DataSignal.get_signal_category(id)
 
-    with {:ok, %SignalCategories{}} <- DataSignal.delete_signal_category(id) do
+    with {:ok, %SignalCategory{}} <- DataSignal.delete_signal_category(id) do
       send_resp(conn, :no_content, "")
     end
   end

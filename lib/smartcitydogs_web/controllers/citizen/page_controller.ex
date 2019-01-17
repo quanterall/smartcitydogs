@@ -3,7 +3,7 @@ defmodule SmartcitydogsWeb.PageController do
 
   import Ecto.Query
   alias Smartcitydogs.DataSignal
-  alias Smartcitydogs.DataPages
+  alias Smartcitydogs.DataPage
   alias Smartcitydogs.DataAnimal
   alias Smartcitydogs.Animal
   alias Smartcitydogs.Signal

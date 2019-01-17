@@ -1,22 +1,21 @@
-defmodule Smartcitydogs.UsersType do
+defmodule Smartcitydogs.SignalCategory do
   use Ecto.Schema
   import Ecto.Changeset
 
   @timestamps_opts [type: :utc_datetime, usec: false]
 
-  schema "user_types" do
+  schema "signal_categories" do
     field(:deleted_at, :naive_datetime)
     field(:name, :string)
-    field(:prefix, :string)
-    has_many(:user, Smartcitydogs.User)
+    has_many(:signals, Smartcitydogs.Signal)
 
     timestamps()
   end
 
   @doc false
-  def changeset(users_type, attrs) do
-    users_type
-    |> cast(attrs, [:name, :prefix, :deleted_at])
+  def changeset(signal_category, attrs) do
+    signal_category
+    |> cast(attrs, [:name, :deleted_at])
     |> validate_required([:name])
   end
 end

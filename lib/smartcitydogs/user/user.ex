@@ -21,7 +21,7 @@ defmodule Smartcitydogs.User do
     field(:agreed_to_terms, :boolean, default: [], virtual: true)
 
     has_many(:signal_comments, Smartcitydogs.SignalComment)
-    belongs_to(:user_type, Smartcitydogs.UsersType)
+    belongs_to(:user_type, Smartcitydogs.UserType)
     has_many(:signals, Smartcitydogs.Signal)
     has_many(:contacts, Smartcitydogs.Contact)
     has_many(:adopts, Smartcitydogs.Adopt)

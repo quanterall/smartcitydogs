@@ -1,4 +1,4 @@
-defmodule Smartcitydogs.Repo.Migrations.CreateSignalLikesUniqueIndex do
+defmodule Smartcitydogs.Repo.Migrations.CreateSignalLikeUniqueIndex do
   use Ecto.Migration
 
   def change do

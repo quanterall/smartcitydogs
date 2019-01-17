@@ -1,8 +1,8 @@
 defmodule SmartcitydogsWeb.Municipality.AnimalController do
   use SmartcitydogsWeb, :controller
-  alias Smartcitydogs.{Animal, Repo, AnimalFilters}
+  alias Smartcitydogs.{Animal, Repo, AnimalFilter}
   import Ecto.Query
-  alias Smartcitydogs.PerformedProcedures
+  alias Smartcitydogs.PerformedProcedure
 
   def index(conn, params) do
     page =
@@ -32,9 +32,9 @@ defmodule SmartcitydogsWeb.Municipality.AnimalController do
 
     filter_changeset =
       if params["animals_filters"] != nil do
-        AnimalFilters.changeset(%AnimalFilters{}, params["animals_filters"])
+        AnimalFilter.changeset(%AnimalFilter{}, params["animals_filters"])
       else
-        AnimalFilters.changeset(%AnimalFilters{}, %{})
+        AnimalFilter.changeset(%AnimalFilter{}, %{})
       end
 
     pagination_params = [

@@ -1,4 +1,4 @@
-defmodule Smartcitydogs.StaticPages do
+defmodule Smartcitydogs.StaticPage do
   use Ecto.Schema
   import Ecto.Changeset
 

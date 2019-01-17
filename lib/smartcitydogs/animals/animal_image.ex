@@ -1,7 +1,7 @@
-defmodule Smartcitydogs.AnimalImages do
+defmodule Smartcitydogs.AnimalImage do
   use Ecto.Schema
   import Ecto.Changeset
-  alias Smartcitydogs.AnimalImages
+  alias Smartcitydogs.AnimalImage
   alias Smartcitydogs.Repo
   @timestamps_opts [type: :utc_datetime, usec: false]
 
@@ -39,8 +39,8 @@ defmodule Smartcitydogs.AnimalImages do
   end
 
   def create_animal_image(params) do
-    %AnimalImages{}
-    |> AnimalImages.changeset(params)
+    %AnimalImage{}
+    |> AnimalImage.changeset(params)
     |> Repo.insert()
   end
 end

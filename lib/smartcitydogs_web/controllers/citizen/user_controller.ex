@@ -4,7 +4,7 @@ defmodule SmartcitydogsWeb.UserController do
   alias Smartcitydogs.User
   alias Smartcitydogs.Repo
   alias Smartcitydogs.Signal
-  alias Smartcitydogs.SignalLikes
+  alias Smartcitydogs.SignalLike
   import Ecto.Query
   plug(:put_layout, false when action in [:new])
 
@@ -50,7 +50,7 @@ defmodule SmartcitydogsWeb.UserController do
       |> Repo.preload(preload)
 
     followed_signals =
-      SignalLikes
+      SignalLike
       |> limit(6)
       |> where(user_id: ^conn.assigns.current_user.id)
       |> Repo.all()

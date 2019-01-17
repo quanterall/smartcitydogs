@@ -3,7 +3,7 @@ defmodule SmartcitydogsWeb.NewsController do
 
   import Ecto.Query
   alias Smartcitydogs.News
-  alias Smartcitydogs.DataPages
+  alias Smartcitydogs.DataPage
   alias Smartcitydogs.Repo
   # alias Smartcitydogs.Markdown
 
@@ -40,7 +40,7 @@ defmodule SmartcitydogsWeb.NewsController do
 
     news_params = Map.put(news_params, "date", DateTime.utc_now())
 
-    case DataPages.create_news(news_params) do
+    case DataPage.create_news(news_params) do
       {:ok, _} ->
         conn
         |> put_flash(:info, " News is created!")
@@ -54,13 +54,13 @@ defmodule SmartcitydogsWeb.NewsController do
   end
 
   def show(conn, %{"id" => id}) do
-    news = DataPages.get_news(id)
+    news = DataPage.get_news(id)
     render(conn, "show.html", news: news)
   end
 
   def edit(conn, %{"id" => id}) do
-    news = DataPages.get_news(id)
-    changeset = DataPages.change_news(news)
+    news = DataPage.get_news(id)
+    changeset = DataPage.change_news(news)
     render(conn, "edit.html", news: news, changeset: changeset)
   end
 
@@ -81,10 +81,10 @@ defmodule SmartcitydogsWeb.NewsController do
         "images/#{Map.get(params["files"], :filename)}-profile#{extension}"
       )
 
-    news = DataPages.get_news(id)
+    news = DataPage.get_news(id)
     news_params = Map.put(news_params, "date", DateTime.utc_now())
 
-    case DataPages.update_news(news, news_params) do
+    case DataPage.update_news(news, news_params) do
       {:ok, news} ->
         conn
         |> put_flash(:info, "News is updated successfully.")

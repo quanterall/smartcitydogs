@@ -1,7 +1,7 @@
-defmodule Smartcitydogs.PerformedProcedures do
+defmodule Smartcitydogs.PerformedProcedure do
   use Ecto.Schema
   import Ecto.Changeset
-  alias Smartcitydogs.{PerformedProcedures, Repo}
+  alias Smartcitydogs.{PerformedProcedure, Repo}
 
   @timestamps_opts [type: :utc_datetime, usec: false]
 
@@ -22,8 +22,8 @@ defmodule Smartcitydogs.PerformedProcedures do
   end
 
   def create_procedure(params) do
-    %PerformedProcedures{}
-    |> PerformedProcedures.changeset(params)
+    %PerformedProcedure{}
+    |> PerformedProcedure.changeset(params)
     |> Repo.insert()
   end
 end

@@ -1,4 +1,4 @@
-defmodule Smartcitydogs.Repo.Migrations.UsersTypes do
+defmodule Smartcitydogs.Repo.Migrations.UserTypes do
   use Ecto.Migration
 
   def up do

@@ -1,21 +1,22 @@
-defmodule Smartcitydogs.Rescues do
+defmodule Smartcitydogs.SignalType do
   use Ecto.Schema
   import Ecto.Changeset
 
   @timestamps_opts [type: :utc_datetime, usec: false]
 
-  schema "rescues" do
+  schema "signal_types" do
     field(:deleted_at, :naive_datetime)
     field(:name, :string)
-    belongs_to(:animal, Smartcitydogs.Animal)
+    field(:prefix, :string)
+    has_many(:signals, Smartcitydogs.Signal)
 
     timestamps()
   end
 
   @doc false
-  def changeset(rescues, attrs) do
-    rescues
-    |> cast(attrs, [:name, :deleted_at, :animal_id])
+  def changeset(signal_type, attrs) do
+    signal_type
+    |> cast(attrs, [:name, :prefix, :deleted_at])
     |> validate_required([:name])
   end
 end

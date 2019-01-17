@@ -4,7 +4,7 @@ defmodule SmartcitydogsWeb.SignalController do
   alias Smartcitydogs.Signal
   alias Smartcitydogs.Repo
   alias Smartcitydogs.SignalComment
-  alias Smartcitydogs.SignalImages
+  alias Smartcitydogs.SignalImage
   alias Smartcitydogs.DataUsers
   import Ecto.Query
 
@@ -32,7 +32,7 @@ defmodule SmartcitydogsWeb.SignalController do
     case Signal.create_signal(params) do
       {:ok, signal} ->
         if params["url"] != nil do
-          SignalImages.insert_images(signal, params["url"])
+          SignalImage.insert_images(signal, params["url"])
         end
 
         redirect(conn, to: signal_path(conn, :show, signal))

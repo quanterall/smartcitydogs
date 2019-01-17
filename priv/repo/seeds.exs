@@ -16,64 +16,64 @@ alias Smartcitydogs.Repo
 
 alias Smartcitydogs.Animals
 alias Smartcitydogs.AnimalStatus
-alias Smartcitydogs.AnimalImages
-alias Smartcitydogs.PerformedProcedures
+alias Smartcitydogs.AnimalImage
+alias Smartcitydogs.PerformedProcedure
 alias Smartcitydogs.ProcedureType
-alias Smartcitydogs.Rescues
-alias Smartcitydogs.HeaderSlides
+alias Smartcitydogs.Rescue
+alias Smartcitydogs.HeaderSlide
 alias Smartcitydogs.News
-alias Smartcitydogs.StaticPages
-alias Smartcitydogs.SignalCategories
-alias Smartcitydogs.SignalTypes
-alias Smartcitydogs.UsersType
+alias Smartcitydogs.StaticPage
+alias Smartcitydogs.SignalCategory
+alias Smartcitydogs.SignalType
+alias Smartcitydogs.UserType
 alias Smartcitydogs.User
 alias Smartcitydogs.Signal
 alias Smartcitydogs.SignalComments
-alias Smartcitydogs.SignalImages
+alias Smartcitydogs.SignalImage
 alias Smartcitydogs.Adopt
 
 ############## Users Type Admin #############
 users_type_params = %{name: "Admin", prefix: "admin"}
 
-unless Repo.get_by(UsersType, name: users_type_params[:name]) do
-  %UsersType{}
-  |> UsersType.changeset(users_type_params)
+unless Repo.get_by(UserType, name: users_type_params[:name]) do
+  %UserType{}
+  |> UserType.changeset(users_type_params)
   |> Repo.insert!()
 end
 
 ############## Users Type User #############
 users_type_params = %{name: "User", prefix: "citizen"}
 
-unless Repo.get_by(UsersType, name: users_type_params[:name]) do
-  %UsersType{}
-  |> UsersType.changeset(users_type_params)
+unless Repo.get_by(UserType, name: users_type_params[:name]) do
+  %UserType{}
+  |> UserType.changeset(users_type_params)
   |> Repo.insert!()
 end
 
 ############## Users Type Zoo Police#############
 users_type_params = %{name: "zoo police", prefix: "police"}
 
-unless Repo.get_by(UsersType, name: users_type_params[:name]) do
-  %UsersType{}
-  |> UsersType.changeset(users_type_params)
+unless Repo.get_by(UserType, name: users_type_params[:name]) do
+  %UserType{}
+  |> UserType.changeset(users_type_params)
   |> Repo.insert!()
 end
 
 ############## Users Type  representative of the municipality#############
 users_type_params = %{name: "representative of the municipality", prefix: "municipality"}
 
-unless Repo.get_by(UsersType, name: users_type_params[:name]) do
-  %UsersType{}
-  |> UsersType.changeset(users_type_params)
+unless Repo.get_by(UserType, name: users_type_params[:name]) do
+  %UserType{}
+  |> UserType.changeset(users_type_params)
   |> Repo.insert!()
 end
 
 ############## Users Type  representative of a municipal shelter#############
 users_type_params = %{name: "representative of a municipal shelter", prefix: "shelter"}
 
-unless Repo.get_by(UsersType, name: users_type_params[:name]) do
-  %UsersType{}
-  |> UsersType.changeset(users_type_params)
+unless Repo.get_by(UserType, name: users_type_params[:name]) do
+  %UserType{}
+  |> UserType.changeset(users_type_params)
   |> Repo.insert!()
 end
 
@@ -239,8 +239,8 @@ Enum.each(0..99, fn _ ->
     animals_images_params = %{animal_id: animal.id, url: "images/escaped.jpg"}
 
     Enum.each(0..3, fn _ ->
-      %AnimalImages{}
-      |> AnimalImages.changeset(animals_images_params)
+      %AnimalImage{}
+      |> AnimalImage.changeset(animals_images_params)
       |> Repo.insert!()
     end)
   end
@@ -256,26 +256,26 @@ Enum.each(0..99, fn _ ->
     procedure_type_id: Faker.random_between(1, 3)
   }
 
-  %PerformedProcedures{}
-  |> PerformedProcedures.changeset(performed_paramas)
+  %PerformedProcedure{}
+  |> PerformedProcedure.changeset(performed_paramas)
   |> Repo.insert!()
 end)
 
-#########    Rescues    ##############
+#########    Rescue    ##############
 Enum.each(0..99, fn _ ->
   rescue_param = %{name: Faker.Name.name(), animal_id: Faker.random_between(1, animals_count)}
 
-  %Rescues{}
-  |> Rescues.changeset(rescue_param)
+  %Rescue{}
+  |> Rescue.changeset(rescue_param)
   |> Repo.insert!()
 end)
 
 ###########   Header Slides ############
 header_params = %{image_url: "images/2.jpg", text: "Hello Phoenix"}
 
-unless Repo.get_by(HeaderSlides, image_url: header_params[:image_url]) do
-  %HeaderSlides{}
-  |> HeaderSlides.changeset(header_params)
+unless Repo.get_by(HeaderSlide, image_url: header_params[:image_url]) do
+  %HeaderSlide{}
+  |> HeaderSlide.changeset(header_params)
   |> Repo.insert!()
 end
 
@@ -297,45 +297,45 @@ end)
 ############## Static Pages #############
 static_params = %{content: "Home", keywords: "smart, dogs", meta: "wertrs", title: "Начало"}
 
-unless Repo.get_by(StaticPages, content: static_params[:content]) do
-  %StaticPages{}
-  |> StaticPages.changeset(static_params)
+unless Repo.get_by(StaticPage, content: static_params[:content]) do
+  %StaticPage{}
+  |> StaticPage.changeset(static_params)
   |> Repo.insert!()
 end
 
 ############## Signal Categories #############
 signal_categori_params = %{name: "Бездомно куче", prefix: "homeless"}
 
-unless Repo.get_by(SignalCategories, name: signal_categori_params[:name]) do
-  %SignalCategories{}
-  |> SignalCategories.changeset(signal_categori_params)
+unless Repo.get_by(SignalCategory, name: signal_categori_params[:name]) do
+  %SignalCategory{}
+  |> SignalCategory.changeset(signal_categori_params)
   |> Repo.insert!()
 end
 
 ############## Signal Categories #############
 signal_categori_params = %{name: "Избягало куче", prefix: "escaped"}
 
-unless Repo.get_by(SignalCategories, name: signal_categori_params[:name]) do
-  %SignalCategories{}
-  |> SignalCategories.changeset(signal_categori_params)
+unless Repo.get_by(SignalCategory, name: signal_categori_params[:name]) do
+  %SignalCategory{}
+  |> SignalCategory.changeset(signal_categori_params)
   |> Repo.insert!()
 end
 
 ############## Signal Categories #############
 signal_categori_params = %{name: "Малтретиране на куче", prefix: "mistreatment"}
 
-unless Repo.get_by(SignalCategories, name: signal_categori_params[:name]) do
-  %SignalCategories{}
-  |> SignalCategories.changeset(signal_categori_params)
+unless Repo.get_by(SignalCategory, name: signal_categori_params[:name]) do
+  %SignalCategory{}
+  |> SignalCategory.changeset(signal_categori_params)
   |> Repo.insert!()
 end
 
 ############## Signal Types #############
 signal_type_params = %{name: "Нов", prefix: "new"}
 
-unless Repo.get_by(SignalTypes, name: signal_type_params[:name]) do
-  %SignalTypes{}
-  |> SignalTypes.changeset(signal_type_params)
+unless Repo.get_by(SignalType, name: signal_type_params[:name]) do
+  %SignalType{}
+  |> SignalType.changeset(signal_type_params)
   |> Repo.insert!()
 end
 
@@ -343,9 +343,9 @@ end
 
 signal_type_params = %{name: "Приет", prefix: "accepted"}
 
-unless Repo.get_by(SignalTypes, name: signal_type_params[:name]) do
-  %SignalTypes{}
-  |> SignalTypes.changeset(signal_type_params)
+unless Repo.get_by(SignalType, name: signal_type_params[:name]) do
+  %SignalType{}
+  |> SignalType.changeset(signal_type_params)
   |> Repo.insert!()
 end
 
@@ -353,9 +353,9 @@ end
 
 signal_type_params = %{name: "Изпратен", prefix: "sent"}
 
-unless Repo.get_by(SignalTypes, name: signal_type_params[:name]) do
-  %SignalTypes{}
-  |> SignalTypes.changeset(signal_type_params)
+unless Repo.get_by(SignalType, name: signal_type_params[:name]) do
+  %SignalType{}
+  |> SignalType.changeset(signal_type_params)
   |> Repo.insert!()
 end
 
@@ -363,9 +363,9 @@ end
 
 signal_type_params = %{name: "Приключен", prefix: "closed"}
 
-unless Repo.get_by(SignalTypes, name: signal_type_params[:name]) do
-  %SignalTypes{}
-  |> SignalTypes.changeset(signal_type_params)
+unless Repo.get_by(SignalType, name: signal_type_params[:name]) do
+  %SignalType{}
+  |> SignalType.changeset(signal_type_params)
   |> Repo.insert!()
 end
 
@@ -388,8 +388,8 @@ Enum.each(0..99, fn _ ->
   Enum.each(0..5, fn _ ->
     signal_image_params = %{signal_id: signal.id, url: "images/escaped.jpg"}
 
-    %SignalImages{}
-    |> SignalImages.changeset(signal_image_params)
+    %SignalImage{}
+    |> SignalImage.changeset(signal_image_params)
     |> Repo.insert!()
   end)
 

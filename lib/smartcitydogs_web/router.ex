@@ -103,7 +103,7 @@ defmodule SmartcitydogsWeb.Router do
     resources("/animals", AnimalControllerAPI, except: [:new, :edit])
     post("/animals/:id/send_email", AnimalControllerAPI, :send_email)
     resources("/contacts", ContactControllerAPI, except: [:new, :edit, :delete])
-    resources("/users_types", UsersTypeControllerAPI, except: [:new, :edit])
+    resources("/users_types", UserTypeControllerAPI, except: [:new, :edit])
     resources("/performed_procedure", PerformedProcedureControllerAPI, except: [:new, :edit])
     resources("/animal_statuses", AnimalStatusControllerAPI, except: [:new, :edit])
     resources("/animal_images", AnimalImageControllerAPI, except: [:new, :edit])

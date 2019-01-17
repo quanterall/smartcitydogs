@@ -1,4 +1,4 @@
-defmodule Smartcitydogs.HeaderSlides do
+defmodule Smartcitydogs.HeaderSlide do
   use Ecto.Schema
   import Ecto.Changeset
 

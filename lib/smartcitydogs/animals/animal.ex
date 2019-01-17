@@ -13,9 +13,9 @@ defmodule Smartcitydogs.Animal do
     field(:chip_number, :string)
     field(:deleted_at, :naive_datetime)
     field(:sex, :string)
-    has_many(:animal_images, Smartcitydogs.AnimalImages, on_delete: :delete_all)
-    has_many(:performed_procedures, Smartcitydogs.PerformedProcedures, on_delete: :delete_all)
-    has_many(:rescues, Smartcitydogs.Rescues, on_delete: :delete_all)
+    has_many(:animal_images, Smartcitydogs.AnimalImage, on_delete: :delete_all)
+    has_many(:performed_procedures, Smartcitydogs.PerformedProcedure, on_delete: :delete_all)
+    has_many(:rescues, Smartcitydogs.Rescue, on_delete: :delete_all)
     belongs_to(:animal_status, Smartcitydogs.AnimalStatus)
     has_many(:adopts, Smartcitydogs.Adopt, on_delete: :delete_all)
 

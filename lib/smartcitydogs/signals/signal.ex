@@ -2,10 +2,9 @@ defmodule Smartcitydogs.Signal do
   use Ecto.Schema
   import Ecto.Changeset
   import Ecto.Query
-  alias Smartcitydogs.DataSignal
   alias Smartcitydogs.Signal
   alias Smartcitydogs.Repo
-  alias Smartcitydogs.SignalImages
+  alias Smartcitydogs.SignalImage
 
   @timestamps_opts [type: :utc_datetime, usec: false]
 
@@ -21,10 +20,10 @@ defmodule Smartcitydogs.Signal do
     field(:address_F, :float)
 
     has_many(:signal_comments, Smartcitydogs.SignalComment)
-    belongs_to(:signal_category, Smartcitydogs.SignalCategories)
-    belongs_to(:signal_type, Smartcitydogs.SignalTypes)
-    has_many(:signal_images, Smartcitydogs.SignalImages)
-    has_many(:signal_likes, Smartcitydogs.SignalLikes)
+    belongs_to(:signal_category, Smartcitydogs.SignalCategory)
+    belongs_to(:signal_type, Smartcitydogs.SignalType)
+    has_many(:signal_images, Smartcitydogs.SignalImage)
+    has_many(:signal_likes, Smartcitydogs.SignalLike)
     belongs_to(:user, Smartcitydogs.User)
 
     timestamps()
@@ -100,14 +99,14 @@ defmodule Smartcitydogs.Signal do
   end
 
   def add_like(user_id, signal_id) do
-    %Smartcitydogs.SignalLikes{}
-    |> Smartcitydogs.SignalLikes.changeset(%{user_id: user_id, signal_id: signal_id})
+    %Smartcitydogs.SignalLike{}
+    |> Smartcitydogs.SignalLike.changeset(%{user_id: user_id, signal_id: signal_id})
     |> Repo.insert()
   end
 
   def remove_like(user_id, signal_id) do
     from(
-      l in Smartcitydogs.SignalLikes,
+      l in Smartcitydogs.SignalLike,
       where: l.user_id == ^user_id and l.signal_id == ^signal_id
     )
     |> Repo.delete_all()
@@ -120,8 +119,8 @@ defmodule Smartcitydogs.Signal do
   end
 
   def create_signal_images(args \\ %{}) do
-    %SignalImages{}
-    |> SignalImages.changeset(args)
+    %SignalImage{}
+    |> SignalImage.changeset(args)
     |> Repo.insert()
   end
 end

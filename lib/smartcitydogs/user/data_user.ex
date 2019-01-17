@@ -3,7 +3,7 @@ defmodule Smartcitydogs.DataUsers do
   alias Smartcitydogs.Repo
 
   alias Smartcitydogs.User
-  alias Smartcitydogs.UsersType
+  alias Smartcitydogs.UserType
   alias Smartcitydogs.Contact
 
   def list_users do
@@ -47,7 +47,7 @@ defmodule Smartcitydogs.DataUsers do
 
   def update_user(%User{} = user, args) do
     user
-    |> User.registration_changeset(args)
+    |> User.changeset(args)
     |> Repo.update()
   end
 
@@ -61,7 +61,7 @@ defmodule Smartcitydogs.DataUsers do
 
   def get_likes(signal_id) do
     Repo.one(
-      from(l in Smartcitydogs.SignalLikes, select: count(l.id), where: l.signal_id == ^signal_id)
+      from(l in Smartcitydogs.SignalLike, select: count(l.id), where: l.signal_id == ^signal_id)
     )
   end
 
@@ -96,31 +96,31 @@ defmodule Smartcitydogs.DataUsers do
   # Users types functions
 
   def list_users_types do
-    Repo.all(UsersType)
+    Repo.all(UserType)
   end
 
   def create_user_type(args \\ %{}) do
-    %UsersType{}
-    |> UsersType.changeset(args)
+    %UserType{}
+    |> UserType.changeset(args)
     |> Repo.insert()
   end
 
   def get_user_type(id) do
-    Repo.get!(UsersType, id)
+    Repo.get!(UserType, id)
   end
 
-  def update_users_type(%UsersType{} = users_type, args) do
+  def update_users_type(%UserType{} = users_type, args) do
     users_type
-    |> UsersType.changeset(args)
+    |> UserType.changeset(args)
     |> Repo.update()
   end
 
-  def delete_user_type(%UsersType{} = users_type) do
+  def delete_user_type(%UserType{} = users_type) do
     Repo.delete(users_type)
   end
 
-  def change_user_type(%UsersType{} = users_type) do
-    UsersType.changeset(users_type, %{})
+  def change_user_type(%UserType{} = users_type) do
+    UserType.changeset(users_type, %{})
   end
 
   # Contact functions

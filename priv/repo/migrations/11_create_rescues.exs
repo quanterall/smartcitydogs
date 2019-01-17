@@ -1,4 +1,4 @@
-defmodule Smartcitydogs.Repo.Migrations.Rescues do
+defmodule Smartcitydogs.Repo.Migrations.Rescue do
   use Ecto.Migration
 
   def change do

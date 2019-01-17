@@ -1,4 +1,4 @@
-defmodule SmartcitydogsWeb.UsersTypeControllerAPI do
+defmodule SmartcitydogsWeb.UserTypeControllerAPI do
   use SmartcitydogsWeb, :controller
 
   alias Smartcitydogs.DataUsers

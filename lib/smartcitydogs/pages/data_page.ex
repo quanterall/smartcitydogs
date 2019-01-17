@@ -1,21 +1,21 @@
-defmodule Smartcitydogs.DataPages do
+defmodule Smartcitydogs.DataPage do
   import Ecto.Query, warn: false
   alias Smartcitydogs.Repo
 
   alias Smartcitydogs.News
-  alias Smartcitydogs.StaticPages
-  alias Smartcitydogs.HeaderSlides
+  alias Smartcitydogs.StaticPage
+  alias Smartcitydogs.HeaderSlide
 
   def get_news(id) do
     Repo.get!(News, id)
   end
 
   def get_static_pages(id) do
-    Repo.get!(StaticPages, id)
+    Repo.get!(StaticPage, id)
   end
 
   def get_header_slides(id) do
-    Repo.get!(HeaderSlides, id)
+    Repo.get!(HeaderSlide, id)
   end
 
   def list_news do
@@ -23,11 +23,11 @@ defmodule Smartcitydogs.DataPages do
   end
 
   def list_static_pages do
-    Repo.all(StaticPages)
+    Repo.all(StaticPage)
   end
 
   def list_header_slides do
-    Repo.all(HeaderSlides)
+    Repo.all(HeaderSlide)
   end
 
   def create_news(args \\ %{}) do
@@ -37,14 +37,14 @@ defmodule Smartcitydogs.DataPages do
   end
 
   def create_static_page(args \\ %{}) do
-    %StaticPages{}
-    |> StaticPages.changeset(args)
+    %StaticPage{}
+    |> StaticPage.changeset(args)
     |> Repo.insert()
   end
 
   def create_header_slide(args \\ %{}) do
-    %HeaderSlides{}
-    |> HeaderSlides.changeset(args)
+    %HeaderSlide{}
+    |> HeaderSlide.changeset(args)
     |> Repo.insert()
   end
 
@@ -54,15 +54,15 @@ defmodule Smartcitydogs.DataPages do
     |> Repo.update()
   end
 
-  def update_static_page(%StaticPages{} = static_page, args) do
+  def update_static_page(%StaticPage{} = static_page, args) do
     static_page
-    |> StaticPages.changeset(args)
+    |> StaticPage.changeset(args)
     |> Repo.update()
   end
 
-  def update_header_slide(%HeaderSlides{} = header_slide, args) do
+  def update_header_slide(%HeaderSlide{} = header_slide, args) do
     header_slide
-    |> HeaderSlides.changeset(args)
+    |> HeaderSlide.changeset(args)
     |> Repo.update()
   end
 
@@ -78,7 +78,7 @@ defmodule Smartcitydogs.DataPages do
     get_static_pages(id) |> Repo.delete()
   end
 
-  def delete_static_page(%StaticPages{} = static_page) do
+  def delete_static_page(%StaticPage{} = static_page) do
     Repo.delete(static_page)
   end
 
@@ -86,7 +86,7 @@ defmodule Smartcitydogs.DataPages do
     get_header_slides(id) |> Repo.delete()
   end
 
-  def delete_header_slide(%HeaderSlides{} = header_slide) do
+  def delete_header_slide(%HeaderSlide{} = header_slide) do
     Repo.delete(header_slide)
   end
 
@@ -94,11 +94,11 @@ defmodule Smartcitydogs.DataPages do
     News.changeset(news, %{})
   end
 
-  def change_static_pages(%StaticPages{} = static_pages) do
-    StaticPages.changeset(static_pages, %{})
+  def change_static_pages(%StaticPage{} = static_pages) do
+    StaticPage.changeset(static_pages, %{})
   end
 
-  def change_header_slide(%HeaderSlides{} = header_slide) do
-    HeaderSlides.changeset(header_slide, %{})
+  def change_header_slide(%HeaderSlide{} = header_slide) do
+    HeaderSlide.changeset(header_slide, %{})
   end
 end

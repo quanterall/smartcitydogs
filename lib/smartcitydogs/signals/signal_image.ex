@@ -1,8 +1,8 @@
-defmodule Smartcitydogs.SignalImages do
+defmodule Smartcitydogs.SignalImage do
   use Ecto.Schema
   import Ecto.Changeset
-  alias Smartcitydogs.SignalImages
-  alias Smartcitydogs.SignalImages
+  alias Smartcitydogs.SignalImage
+  alias Smartcitydogs.Repo
 
   @timestamps_opts [type: :utc_datetime, usec: false]
 
@@ -39,8 +39,8 @@ defmodule Smartcitydogs.SignalImages do
         "signal_id" => "#{signal.id}"
       }
 
-      %SignalImages{}
-      |> SignalImages.changeset(signal_image_params)
+      %SignalImage{}
+      |> SignalImage.changeset(signal_image_params)
       |> Repo.insert()
     end
   end

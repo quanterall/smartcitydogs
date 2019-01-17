@@ -3,9 +3,9 @@ defmodule Smartcitydogs.DataAnimal do
   alias Smartcitydogs.Repo
 
   alias Smartcitydogs.Animal
-  alias Smartcitydogs.AnimalImages
+  alias Smartcitydogs.AnimalImage
   alias Smartcitydogs.AnimalStatus
-  alias Smartcitydogs.PerformedProcedures
+  alias Smartcitydogs.PerformedProcedure
   alias Smartcitydogs.AnimalStatus
   alias Smartcitydogs.Adopt
   alias Smartcitydogs.ProcedureType
@@ -18,21 +18,21 @@ defmodule Smartcitydogs.DataAnimal do
   def get_procedure_id_by_name(name) do
     {name_query, _} = name
     name_query = "%#{name_query}%"
-    query = Ecto.Query.from(c in ProcedureType, where: ilike(c.name, ^name_query))
+    query = from(c in ProcedureType, where: ilike(c.name, ^name_query))
     [procedure] = Repo.all(query)
     procedure |> Map.get(:id)
   end
 
   def get_procedures(id) do
-    query = Ecto.Query.from(c in PerformedProcedures, where: c.animal_id == ^id)
+    query = from(c in PerformedProcedure, where: c.animal_id == ^id)
     Repo.all(query)
   end
 
   def insert_performed_procedure(procedure_list, animal_id) do
     for procedure <- procedure_list do
       if procedure != nil do
-        %PerformedProcedures{}
-        |> PerformedProcedures.changeset(%{
+        %PerformedProcedure{}
+        |> PerformedProcedure.changeset(%{
           animal_id: animal_id,
           procedure_type_id: procedure
         })
@@ -56,37 +56,37 @@ defmodule Smartcitydogs.DataAnimal do
   end
 
   def get_adopted_animals() do
-    query = Ecto.Query.from(c in Animal, where: c.animal_status_id == 2)
+    query = from(c in Animal, where: c.animal_status_id == 2)
     Repo.all(query)
   end
 
   def get_shelter_animals() do
-    query = Ecto.Query.from(c in Animal, where: c.animal_status_id == 3)
+    query = from(c in Animal, where: c.animal_status_id == 3)
     Repo.all(query)
   end
 
   def get_animal_image(id) do
-    Repo.get!(AnimalImages, id)
+    Repo.get!(AnimalImage, id)
   end
 
   def get_animal_image_animal_id(animal_id) do
-    query = Ecto.Query.from(c in AnimalImages, where: c.animal_id == ^animal_id)
+    query = from(c in AnimalImage, where: c.animal_id == ^animal_id)
     Repo.all(query)
   end
 
   def sort_animals_by_id() do
-    query = Ecto.Query.from(c in Animal, order_by: [c.id])
+    query = from(c in Animal, order_by: [c.id])
     Repo.all(query) |> Repo.preload(:animal_status) |> Repo.preload(:animal_images)
   end
 
   def get_animal_by_chip(chip_number) do
     chip_number = "%#{chip_number}%"
-    query = Ecto.Query.from(c in Animal, where: ilike(c.chip_number, ^chip_number))
+    query = from(c in Animal, where: ilike(c.chip_number, ^chip_number))
     Repo.all(query) |> Repo.preload(:animal_status)
   end
 
   def get_performed_procedure(id) do
-    Repo.get!(PerformedProcedures, id)
+    Repo.get!(PerformedProcedure, id)
   end
 
   def list_animal_statuses do
@@ -98,11 +98,11 @@ defmodule Smartcitydogs.DataAnimal do
   end
 
   def list_animal_images do
-    Repo.all(AnimalImages) |> Repo.preload(:animals)
+    Repo.all(AnimalImage) |> Repo.preload(:animals)
   end
 
   ## Adds image to existing animal, takes image url and animal id
-  def add_animal_image(args \\ %{}) do
+  def add_animal_image(args) do
     get_animal(args.animal_id)
     |> Ecto.build_assoc(:animal_images, %{url: args.url})
     |> Repo.insert()
@@ -149,9 +149,9 @@ defmodule Smartcitydogs.DataAnimal do
     |> Repo.update()
   end
 
-  def update_animal_image(%AnimalImages{} = animal_image, args) do
+  def update_animal_image(%AnimalImage{} = animal_image, args) do
     animal_image
-    |> AnimalImages.changeset(args)
+    |> AnimalImage.changeset(args)
     |> Repo.update()
   end
 
@@ -167,7 +167,7 @@ defmodule Smartcitydogs.DataAnimal do
     get_animal_image(id) |> Repo.delete()
   end
 
-  def delete_animal_image(%AnimalImages{} = animal_image) do
+  def delete_animal_image(%AnimalImage{} = animal_image) do
     Repo.delete(animal_image)
   end
 
@@ -187,8 +187,8 @@ defmodule Smartcitydogs.DataAnimal do
     AnimalStatus.changeset(animal_status, %{})
   end
 
-  def change_animal_image(%AnimalImages{} = animal_image) do
-    AnimalImages.changeset(animal_image, %{})
+  def change_animal_image(%AnimalImage{} = animal_image) do
+    AnimalImage.changeset(animal_image, %{})
   end
 
   ################ ADOPT INSERT #####################
@@ -200,7 +200,7 @@ defmodule Smartcitydogs.DataAnimal do
   end
 
   def check_adopt(user_id, animal_id) do
-    query_user = Ecto.Query.from(c in Adopt, where: c.user_id == ^user_id)
+    query_user = from(c in Adopt, where: c.user_id == ^user_id)
     list = Repo.all(query_user)
     check_list(list, animal_id)
   end

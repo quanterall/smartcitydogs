@@ -1,7 +1,7 @@
 defmodule SmartcitydogsWeb.RescueControllerAPI do
   use SmartcitydogsWeb, :controller
 
-  alias Smartcitydogs.Rescues
+  alias Smartcitydogs.Rescue
   alias Smartcitydogs.DataProcedure
 
   action_fallback(SmartcitydogsWeb.FallbackController)
@@ -12,7 +12,7 @@ defmodule SmartcitydogsWeb.RescueControllerAPI do
   end
 
   def create(conn, %{"rescue" => rescue_params}) do
-    with {:ok, %Rescues{} = rescues} <- DataProcedure.create_rescues(rescue_params) do
+    with {:ok, %Rescue{} = rescues} <- DataProcedure.create_rescues(rescue_params) do
       conn
       |> put_status(:created)
       |> put_resp_header("location", rescue_controller_api_path(conn, :show, rescues))
@@ -28,7 +28,7 @@ defmodule SmartcitydogsWeb.RescueControllerAPI do
   def update(conn, %{"id" => id, "rescue" => rescue_params}) do
     rescues = DataProcedure.get_rescues!(id)
 
-    with {:ok, %Rescues{} = rescues} <- DataProcedure.update_rescues(rescues, rescue_params) do
+    with {:ok, %Rescue{} = rescues} <- DataProcedure.update_rescues(rescues, rescue_params) do
       render(conn, "show.json", rescue: rescues)
     end
   end
@@ -36,7 +36,7 @@ defmodule SmartcitydogsWeb.RescueControllerAPI do
   def delete(conn, %{"id" => id}) do
     rescues = DataProcedure.get_rescues!(id)
 
-    with {:ok, %Rescues{}} <- DataProcedure.delete_rescues(rescues) do
+    with {:ok, %Rescue{}} <- DataProcedure.delete_rescues(rescues) do
       send_resp(conn, :no_content, "")
     end
   end

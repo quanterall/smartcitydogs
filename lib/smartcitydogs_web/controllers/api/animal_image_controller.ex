@@ -1,7 +1,7 @@
 defmodule SmartcitydogsWeb.AnimalImageControllerAPI do
   use SmartcitydogsWeb, :controller
 
-  alias Smartcitydogs.AnimalImages
+  alias Smartcitydogs.AnimalImage
   alias Smartcitydogs.DataAnimal
 
   action_fallback(SmartcitydogsWeb.FallbackController)
@@ -12,8 +12,8 @@ defmodule SmartcitydogsWeb.AnimalImageControllerAPI do
   end
 
   def create(conn, %{"animal_image" => animal_image_params}) do
-    with {:ok, %AnimalImages{} = animal_image} <-
-           AnimalImages.create_animal_image(animal_image_params) do
+    with {:ok, %AnimalImage{} = animal_image} <-
+           AnimalImage.create_animal_image(animal_image_params) do
       conn
       |> put_status(:created)
       |> put_resp_header("location", animal_image_controller_api_path(conn, :show, animal_image))
@@ -29,7 +29,7 @@ defmodule SmartcitydogsWeb.AnimalImageControllerAPI do
   def update(conn, %{"id" => id, "animal_image" => animal_image_params}) do
     animal_image = DataAnimal.get_animal_image(id)
 
-    with {:ok, %AnimalImages{} = animal_image} <-
+    with {:ok, %AnimalImage{} = animal_image} <-
            DataAnimal.update_animal_image(animal_image, animal_image_params) do
       render(conn, "show.json", animal_image: animal_image)
     end
@@ -38,7 +38,7 @@ defmodule SmartcitydogsWeb.AnimalImageControllerAPI do
   def delete(conn, %{"id" => id}) do
     animal_image = DataAnimal.get_animal_image(id)
 
-    with {:ok, %AnimalImages{}} <- DataAnimal.delete_animal_image(animal_image) do
+    with {:ok, %AnimalImage{}} <- DataAnimal.delete_animal_image(animal_image) do
       send_resp(conn, :no_content, "")
     end
   end

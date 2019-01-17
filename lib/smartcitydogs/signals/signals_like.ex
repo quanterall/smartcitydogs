@@ -1,4 +1,4 @@
-defmodule Smartcitydogs.SignalLikes do
+defmodule Smartcitydogs.SignalLike do
   use Ecto.Schema
   import Ecto.Changeset
 

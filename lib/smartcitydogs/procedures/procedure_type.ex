@@ -8,7 +8,7 @@ defmodule Smartcitydogs.ProcedureType do
     field(:deleted_at, :naive_datetime)
     field(:name, :string)
     field(:prefix, :string)
-    has_many(:performed_procedures, Smartcitydogs.PerformedProcedures)
+    has_many(:performed_procedures, Smartcitydogs.PerformedProcedure)
 
     timestamps()
   end

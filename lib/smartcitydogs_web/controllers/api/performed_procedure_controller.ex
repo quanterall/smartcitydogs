@@ -2,7 +2,7 @@ defmodule SmartcitydogsWeb.PerformedProcedureControllerAPI do
   use SmartcitydogsWeb, :controller
 
   alias Smartcitydogs.DataProcedure
-  alias Smartcitydogs.PerformedProcedures
+  alias Smartcitydogs.PerformedProcedure
 
   action_fallback(SmartcitydogsWeb.FallbackController)
 
@@ -12,7 +12,7 @@ defmodule SmartcitydogsWeb.PerformedProcedureControllerAPI do
   end
 
   def create(conn, %{"performed_procedure" => performed_procedure_params}) do
-    with {:ok, %PerformedProcedures{} = performed_procedure} <-
+    with {:ok, %PerformedProcedure{} = performed_procedure} <-
            DataProcedure.create_performed_procedure(performed_procedure_params) do
       conn
       |> put_status(:created)
@@ -32,7 +32,7 @@ defmodule SmartcitydogsWeb.PerformedProcedureControllerAPI do
   def update(conn, %{"id" => id, "performed_procedure" => performed_procedure_params}) do
     performed_procedure = DataProcedure.get_performed_procedure!(id)
 
-    with {:ok, %PerformedProcedures{} = performed_procedure} <-
+    with {:ok, %PerformedProcedure{} = performed_procedure} <-
            DataProcedure.update_performed_procedure(
              performed_procedure,
              performed_procedure_params
@@ -44,7 +44,7 @@ defmodule SmartcitydogsWeb.PerformedProcedureControllerAPI do
   def delete(conn, %{"id" => id}) do
     performed_procedure = DataProcedure.get_performed_procedure!(id)
 
-    with {:ok, %PerformedProcedures{}} <-
+    with {:ok, %PerformedProcedure{}} <-
            DataProcedure.delete_performed_procedure(performed_procedure) do
       send_resp(conn, :no_content, "")
     end

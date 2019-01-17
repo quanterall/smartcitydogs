@@ -2,40 +2,40 @@ defmodule Smartcitydogs.DataProcedure do
   import Ecto.Query, warn: false
   alias Smartcitydogs.Repo
 
-  alias Smartcitydogs.PerformedProcedures
+  alias Smartcitydogs.PerformedProcedure
   alias Smartcitydogs.ProcedureType
-  alias Smartcitydogs.Rescues
+  alias Smartcitydogs.Rescue
 
   ### Performed Procedures function
   def list_performed_procedure do
-    Repo.all(PerformedProcedures)
+    Repo.all(PerformedProcedure)
   end
 
   def get_performed_procedure!(id) do
-    Repo.get!(PerformedProcedures, id)
+    Repo.get!(PerformedProcedure, id)
   end
 
   def create_performed_procedure(args \\ %{}) do
-    %PerformedProcedures{}
-    |> PerformedProcedures.changeset(args)
+    %PerformedProcedure{}
+    |> PerformedProcedure.changeset(args)
     |> Repo.insert()
   end
 
-  def update_performed_procedure(%PerformedProcedures{} = procedure, args) do
+  def update_performed_procedure(%PerformedProcedure{} = procedure, args) do
     procedure
-    |> PerformedProcedures.changeset(args)
+    |> PerformedProcedure.changeset(args)
     |> Repo.update()
   end
 
-  def delete_performed_procedure(%PerformedProcedures{} = procedure) do
+  def delete_performed_procedure(%PerformedProcedure{} = procedure) do
     Repo.delete(procedure)
   end
 
-  def change_performed_procedure(%PerformedProcedures{} = procedure) do
-    PerformedProcedures.changeset(procedure, %{})
+  def change_performed_procedure(%PerformedProcedure{} = procedure) do
+    PerformedProcedure.changeset(procedure, %{})
   end
 
-  ### Procedure Type function 
+  ### Procedure Type function
   def list_procedure_type do
     Repo.all(ProcedureType)
   end
@@ -64,32 +64,32 @@ defmodule Smartcitydogs.DataProcedure do
     ProcedureType.changeset(procedure, %{})
   end
 
-  ###  Rescues function 
+  ###  Rescue function
   def list_rescues do
-    Repo.all(Rescues)
+    Repo.all(Rescue)
   end
 
   def get_rescues!(id) do
-    Repo.get!(Rescues, id)
+    Repo.get!(Rescue, id)
   end
 
   def create_rescues(args \\ %{}) do
-    %Rescues{}
-    |> Rescues.changeset(args)
+    %Rescue{}
+    |> Rescue.changeset(args)
     |> Repo.insert()
   end
 
-  def update_rescues(%Rescues{} = rescues, args) do
+  def update_rescues(%Rescue{} = rescues, args) do
     rescues
-    |> Rescues.changeset(args)
+    |> Rescue.changeset(args)
     |> Repo.update()
   end
 
-  def delete_rescues(%Rescues{} = rescues) do
+  def delete_rescues(%Rescue{} = rescues) do
     Repo.delete(rescues)
   end
 
-  def change_rescues(%Rescues{} = rescues) do
-    Rescues.changeset(rescues, %{})
+  def change_rescues(%Rescue{} = rescues) do
+    Rescue.changeset(rescues, %{})
   end
 end

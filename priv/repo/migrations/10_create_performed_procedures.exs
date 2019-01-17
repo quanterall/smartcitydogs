@@ -1,4 +1,4 @@
-defmodule Smartcitydogs.Repo.Migrations.PerformedProcedures do
+defmodule Smartcitydogs.Repo.Migrations.PerformedProcedure do
   use Ecto.Migration
 
   def change do

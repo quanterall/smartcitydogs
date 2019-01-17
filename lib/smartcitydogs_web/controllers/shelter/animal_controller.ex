@@ -5,9 +5,9 @@ defmodule SmartcitydogsWeb.Shelter.AnimalController do
     Signal,
     Repo,
     Animal,
-    AnimalFilters,
-    PerformedProcedures,
-    AnimalImages
+    AnimalFilter,
+    PerformedProcedure,
+    AnimalImage
   }
 
   import Ecto.Query
@@ -40,12 +40,12 @@ defmodule SmartcitydogsWeb.Shelter.AnimalController do
 
     filter_changeset =
       if params["animals_filters"] != nil do
-        AnimalFilters.changeset(%AnimalFilters{}, params["animals_filters"])
+        AnimalFilter.changeset(%AnimalFilter{}, params["animals_filters"])
       else
-        AnimalFilters.changeset(%AnimalFilters{}, %{})
+        AnimalFilter.changeset(%AnimalFilter{}, %{})
       end
 
-    performed_procedure_changeset = PerformedProcedures.changeset(%PerformedProcedures{}, %{})
+    performed_procedure_changeset = PerformedProcedure.changeset(%PerformedProcedure{}, %{})
 
     pagination_params = [
       {
@@ -115,7 +115,7 @@ defmodule SmartcitydogsWeb.Shelter.AnimalController do
     case Animal.create_animal(animal_params) do
       {:ok, animal} ->
         if animal_params["animal_image"] != nil do
-          AnimalImages.store_images(animal, animal_params["animal_image"])
+          AnimalImage.store_images(animal, animal_params["animal_image"])
         end
 
         conn
