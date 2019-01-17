@@ -54,3 +54,12 @@ config :scrivener_html,
   routes_helper: MyApp.Router.Helpers,
   # If you use a single view style everywhere, you can configure it here. See View Styles below for more info.
   view_style: :bootstrap_v4
+
+config :ueberauth, Ueberauth,
+  providers: [
+    facebook: {Ueberauth.Strategy.Facebook, []}
+  ]
+
+config :ueberauth, Ueberauth.Strategy.Facebook.OAuth,
+  client_id: System.get_env("FACEBOOK_ID"),
+  client_secret: System.get_env("FACEBOOK_SECRET")

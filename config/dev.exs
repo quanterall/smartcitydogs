@@ -69,15 +69,6 @@ config :smartcitydogs, Smartcitydogs.Repo,
   hostname: System.get_env("DB_HOST"),
   pool_size: 10
 
-config :ueberauth, Ueberauth,
-  providers: [
-    facebook: {Ueberauth.Strategy.Facebook, []}
-  ]
-
-config :ueberauth, Ueberauth.Strategy.Facebook.OAuth,
-  client_id: System.get_env("FACEBOOK_ID"),
-  client_secret: System.get_env("FACEBOOK_SECRET")
-
 # config :ueberauth, Ueberauth.Strategy.Twitter.OAuth,
 #   consumer_key: System.get_env("TWITTER_ID"),
 #   consumer_secret: System.get_env("TWITTER_SECRET")
