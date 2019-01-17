@@ -21,7 +21,7 @@ defmodule SmartcitydogsWeb.ForgotenPasswordControllerAPIView do
       phone: user.phone,
       reset_password_token: user.reset_password_token,
       deleted_at: user.deleted_at,
-      users_types_id: user.users_types_id
+      user_type_id: user.user_type_id
     }
   end
 

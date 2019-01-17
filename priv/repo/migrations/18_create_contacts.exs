@@ -5,7 +5,7 @@ defmodule Smartcitydogs.Repo.Migrations.CreateContacts do
     create table(:contacts) do
       add(:topic, :text)
       add(:text, :text)
-      add(:users_id, references("users"))
+      add(:user_id, references("users"))
       timestamps()
     end
   end

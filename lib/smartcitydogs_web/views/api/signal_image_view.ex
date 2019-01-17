@@ -11,6 +11,6 @@ defmodule SmartcitydogsWeb.SignalImageControllerAPIView do
   end
 
   def render("signal_image.json", %{signal_image_controller_api: signal_image}) do
-    %{id: signal_image.id, url: signal_image.url, signals_id: signal_image.signals_id}
+    %{id: signal_image.id, url: signal_image.url, signal_id: signal_image.signal_id}
   end
 end

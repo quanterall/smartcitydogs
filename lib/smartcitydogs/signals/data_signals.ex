@@ -41,8 +41,8 @@ defmodule Smartcitydogs.DataSignals do
     |> Repo.update()
   end
 
-  def get_user_signal(users_id) do
-    query = Ecto.Query.from(c in Signals, where: c.users_id == ^users_id)
+  def get_user_signal(user_id) do
+    query = Ecto.Query.from(c in Signals, where: c.user_id == ^user_id)
     Repo.all(query) |> Repo.preload(:signals_images)
   end
 
@@ -86,8 +86,8 @@ defmodule Smartcitydogs.DataSignals do
 
   # Signal iamges
 
-  def get_signal_image_id(signals_id) do
-    query = Ecto.Query.from(c in SignalsImages, where: c.signals_id == ^signals_id)
+  def get_signal_image_id(signal_id) do
+    query = Ecto.Query.from(c in SignalsImages, where: c.signal_id == ^signal_id)
     Repo.all(query)
   end
 
@@ -117,7 +117,7 @@ defmodule Smartcitydogs.DataSignals do
   end
 
   def get_all_cruelty_signals() do
-    Ecto.Query.from(c in Signals, where: c.signals_categories_id == ^3)
+    Ecto.Query.from(c in Signals, where: c.signal_category_id == ^3)
     |> Repo.all()
   end
 
@@ -158,13 +158,13 @@ defmodule Smartcitydogs.DataSignals do
     Repo.all(SignalsComments) |> Repo.preload(:users)
   end
 
-  def get_comment_signal_id(signals_id) do
-    Ecto.Query.from(c in SignalsComments, where: c.signals_id == ^signals_id)
+  def get_comment_signal_id(signal_id) do
+    Ecto.Query.from(c in SignalsComments, where: c.signal_id == ^signal_id)
     |> Repo.all()
   end
 
-  def get_one_signal_comment(signals_id, comment_id) do
-    Ecto.Query.from(c in SignalsComments, where: c.signals_id == ^signals_id)
+  def get_one_signal_comment(signal_id, comment_id) do
+    Ecto.Query.from(c in SignalsComments, where: c.signal_id == ^signal_id)
     |> Repo.all()
     |> Enum.at(comment_id - 1)
   end
@@ -216,13 +216,13 @@ defmodule Smartcitydogs.DataSignals do
   # Signals likes
   def get_signals_user_like(user_id, signal_id) do
     Ecto.Query.from(c in SignalsLikes,
-      where: c.users_id == ^user_id and c.signals_id == ^signal_id
+      where: c.user_id == ^user_id and c.signal_id == ^signal_id
     )
     |> Repo.all()
   end
 
   def get_signal_like(id) do
-    query = Ecto.Query.from(c in SignalsLikes, where: c.users_id == ^id)
+    query = Ecto.Query.from(c in SignalsLikes, where: c.user_id == ^id)
     Repo.all(query)
   end
 

@@ -3,15 +3,15 @@ defmodule Smartcitydogs.Signals.Policy do
   alias Smartcitydogs.User
 
   # Admin users can do anything
-  def authorize(_, %User{users_types_id: 1}, _), do: true
+  def authorize(_, %User{user_type_id: 1}, _), do: true
 
   # Zoo users can do anything
-  def authorize(action, %User{users_types_id: 3}, _)
+  def authorize(action, %User{user_type_id: 3}, _)
       when action in [:index, :show, :edit, :update],
       do: true
 
   # Municipality users can do anything
-  def authorize(action, %User{users_types_id: 4}, _)
+  def authorize(action, %User{user_type_id: 4}, _)
       when action in [
              :index,
              :show,
@@ -24,7 +24,7 @@ defmodule Smartcitydogs.Signals.Policy do
       do: true
 
   # Shelter users can do anything
-  def authorize(action, %User{users_types_id: 5}, _)
+  def authorize(action, %User{user_type_id: 5}, _)
       when action in [
              :index,
              :show,

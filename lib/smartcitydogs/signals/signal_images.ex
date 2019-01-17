@@ -6,9 +6,9 @@ defmodule Smartcitydogs.SignalsImages do
 
   @timestamps_opts [type: :utc_datetime, usec: false]
 
-  schema "signals_images" do
+  schema "signal_images" do
     field(:url, :string)
-    belongs_to(:signals, Smartcitydogs.Signals)
+    belongs_to(:signal, Smartcitydogs.Signals)
     timestamps()
   end
 
@@ -17,11 +17,11 @@ defmodule Smartcitydogs.SignalsImages do
     signals_images
     |> cast(attrs, [
       :url,
-      :signals_id
+      :signal_id
     ])
     |> validate_required([
       :url,
-      :signals_id
+      :signal_id
     ])
   end
 
@@ -36,7 +36,7 @@ defmodule Smartcitydogs.SignalsImages do
 
       signal_image_params = %{
         "url" => "images/#{Map.get(n, :filename)}-profile#{extension}",
-        "signals_id" => "#{signal.id}"
+        "signal_id" => "#{signal.id}"
       }
 
       %SignalsImages{}

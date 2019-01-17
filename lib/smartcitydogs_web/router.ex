@@ -90,16 +90,16 @@ defmodule SmartcitydogsWeb.Router do
 
     get("/my_signals", MySignalsControllerAPI, :index)
     resources("/signals_images", SignalImageControllerAPI, except: [:new, :edit])
-    resources("/signals_comments", SignalsCommentControllerAPI, except: [:new, :edit])
+    resources("/signal_comments", SignalsCommentControllerAPI, except: [:new, :edit])
 
-    scope "/signals_comments", SmartcitydogsWeb do
+    scope "/signal_comments", SmartcitydogsWeb do
       put("/follow", SignalsCommentControllerAPI, :follow)
       put("/unfollow", SignalsCommentControllerAPI, :unfollow)
     end
 
-    resources("/signals_types", SignalsTypeControllerAPI, except: [:new, :edit])
-    resources("/signals_categories", SignalCategoryControllerAPI, except: [:new, :edit])
-    resources("/signals_likes", SignalsLikeControllerAPI, except: [:new, :edit])
+    resources("/signal_type", SignalsTypeControllerAPI, except: [:new, :edit])
+    resources("/signal_category", SignalCategoryControllerAPI, except: [:new, :edit])
+    resources("/signal_likes", SignalsLikeControllerAPI, except: [:new, :edit])
     resources("/animals", AnimalControllerAPI, except: [:new, :edit])
     post("/animals/:id/send_email", AnimalControllerAPI, :send_email)
     resources("/contacts", ContactControllerAPI, except: [:new, :edit, :delete])

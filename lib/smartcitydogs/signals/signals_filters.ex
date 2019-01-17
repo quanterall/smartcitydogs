@@ -5,13 +5,13 @@ defmodule Smartcitydogs.SignalsFilters do
   @timestamps_opts [type: :naive_datetime, usec: false]
 
   embedded_schema do
-    field(:signals_categories_id, {:array, :string})
-    field(:signals_types_id, {:array, :string})
+    field(:signal_category_id, {:array, :string})
+    field(:signal_typ_id, {:array, :string})
   end
 
   @doc false
   def changeset(filter, attrs) do
     filter
-    |> cast(attrs, [:signals_categories_id, :signals_types_id])
+    |> cast(attrs, [:signal_category_id, :signal_type_id])
   end
 end

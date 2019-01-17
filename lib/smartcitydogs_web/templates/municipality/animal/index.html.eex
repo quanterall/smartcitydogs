@@ -29,7 +29,7 @@
                 <%= for animal <- @animals do %>
                 <tr>
                     <td class="align-middle">
-                        <img height="100px" src="/<%=SmartcitydogsWeb.AnimalView.get_image_animals_id(animal.id)%>"
+                        <img height="100px" src="/<%=SmartcitydogsWeb.AnimalView.get_image_animal_id(animal.id)%>"
                              alt="">
                     </td>
                     <td class=" align-middle">

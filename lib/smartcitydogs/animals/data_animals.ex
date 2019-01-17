@@ -24,7 +24,7 @@ defmodule Smartcitydogs.DataAnimals do
   end
 
   def get_procedures(id) do
-    query = Ecto.Query.from(c in PerformedProcedures, where: c.animals_id == ^id)
+    query = Ecto.Query.from(c in PerformedProcedures, where: c.animal_id == ^id)
     Repo.all(query)
   end
 
@@ -33,7 +33,7 @@ defmodule Smartcitydogs.DataAnimals do
       if procedure != nil do
         %PerformedProcedures{}
         |> PerformedProcedures.changeset(%{
-          animals_id: animal_id,
+          animal_id: animal_id,
           procedure_type_id: procedure
         })
         |> Repo.insert()
@@ -69,8 +69,8 @@ defmodule Smartcitydogs.DataAnimals do
     Repo.get!(AnimalImages, id)
   end
 
-  def get_animal_image_animals_id(animals_id) do
-    query = Ecto.Query.from(c in AnimalImages, where: c.animals_id == ^animals_id)
+  def get_animal_image_animal_id(animal_id) do
+    query = Ecto.Query.from(c in AnimalImages, where: c.animal_id == ^animal_id)
     Repo.all(query)
   end
 
@@ -103,7 +103,7 @@ defmodule Smartcitydogs.DataAnimals do
 
   ## Adds image to existing animal, takes image url and animal id
   def add_animal_image(args \\ %{}) do
-    get_animal(args.animals_id)
+    get_animal(args.animal_id)
     |> Ecto.build_assoc(:animals_image, %{url: args.url})
     |> Repo.insert()
   end
@@ -193,30 +193,30 @@ defmodule Smartcitydogs.DataAnimals do
 
   ################ ADOPT INSERT #####################
 
-  def insert_adopt(users_id, animals_id) do
+  def insert_adopt(user_id, animal_id) do
     %Adopt{}
-    |> Adopt.changeset(%{users_id: users_id, animals_id: animals_id})
+    |> Adopt.changeset(%{user_id: user_id, animal_id: animal_id})
     |> Repo.insert!()
   end
 
-  def check_adopt(users_id, animals_id) do
-    query_user = Ecto.Query.from(c in Adopt, where: c.users_id == ^users_id)
+  def check_adopt(user_id, animal_id) do
+    query_user = Ecto.Query.from(c in Adopt, where: c.user_id == ^user_id)
     list = Repo.all(query_user)
-    check_list(list, animals_id)
+    check_list(list, animal_id)
   end
 
   def check_list([], _) do
     false
   end
 
-  def check_list([head | tail], animals_id) do
+  def check_list([head | tail], animal_id) do
     if head == [] do
       false
     else
-      if head.animals_id == animals_id do
+      if head.animal_id == animal_id do
         true
       else
-        check_list(tail, animals_id)
+        check_list(tail, animal_id)
       end
     end
   end

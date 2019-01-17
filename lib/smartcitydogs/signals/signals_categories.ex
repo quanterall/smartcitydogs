@@ -4,7 +4,7 @@ defmodule Smartcitydogs.SignalsCategories do
 
   @timestamps_opts [type: :utc_datetime, usec: false]
 
-  schema "signals_categories" do
+  schema "signal_category" do
     field(:deleted_at, :naive_datetime)
     field(:name, :string)
     has_many(:signals, Smartcitydogs.Signals)
@@ -13,8 +13,8 @@ defmodule Smartcitydogs.SignalsCategories do
   end
 
   @doc false
-  def changeset(signals_categories, attrs) do
-    signals_categories
+  def changeset(signal_category, attrs) do
+    signal_category
     |> cast(attrs, [:name, :deleted_at])
     |> validate_required([:name])
   end

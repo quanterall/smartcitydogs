@@ -85,7 +85,7 @@ users_params = %{
   last_name: "Admin",
   email: "admin@test.bg",
   phone: "00000000000",
-  users_types_id: 1,
+  user_type_id: 1,
   agreed_to_terms: true
 }
 
@@ -103,7 +103,7 @@ users_params = %{
   last_name: "citizen",
   email: "citizen@test.bg",
   phone: "00000000000",
-  users_types_id: 2,
+  user_type_id: 2,
   agreed_to_terms: true
 }
 
@@ -121,7 +121,7 @@ users_params = %{
   email: "police@test.bg",
   password: "password",
   phone: "0000000000",
-  users_types_id: 3,
+  user_type_id: 3,
   agreed_to_terms: true
 }
 
@@ -139,7 +139,7 @@ users_params = %{
   email: "municipality@test.bg",
   password: "password",
   phone: "0000000000",
-  users_types_id: 4,
+  user_type_id: 4,
   agreed_to_terms: true
 }
 
@@ -157,7 +157,7 @@ users_params = %{
   email: "shelter@test.bg",
   password: "password",
   phone: "00000000000",
-  users_types_id: 5,
+  user_type_id: 5,
   agreed_to_terms: true
 }
 
@@ -227,7 +227,7 @@ Enum.each(0..99, fn _ ->
     chip_number: Faker.Address.building_number(),
     address: Faker.Address.street_address(),
     description: Faker.Lorem.paragraph(),
-    animals_status_id: Faker.random_between(1, 3)
+    animal_status_id: Faker.random_between(1, 3)
   }
 
   unless Repo.get_by(Animals, chip_number: animals_params[:chip_number]) do
@@ -236,7 +236,7 @@ Enum.each(0..99, fn _ ->
       |> Animals.changeset(animals_params)
       |> Repo.insert!()
 
-    animals_images_params = %{animals_id: animal.id, url: "images/escaped.jpg"}
+    animals_images_params = %{animal_id: animal.id, url: "images/escaped.jpg"}
 
     Enum.each(0..3, fn _ ->
       %AnimalImages{}
@@ -252,7 +252,7 @@ animals_count = length(Repo.all(Animals))
 
 Enum.each(0..99, fn _ ->
   performed_paramas = %{
-    animals_id: Faker.random_between(1, animals_count),
+    animal_id: Faker.random_between(1, animals_count),
     procedure_type_id: Faker.random_between(1, 3)
   }
 
@@ -263,7 +263,7 @@ end)
 
 #########    Rescues    ##############
 Enum.each(0..99, fn _ ->
-  rescue_param = %{name: Faker.Name.name(), animals_id: Faker.random_between(1, animals_count)}
+  rescue_param = %{name: Faker.Name.name(), animal_id: Faker.random_between(1, animals_count)}
 
   %Rescues{}
   |> Rescues.changeset(rescue_param)
@@ -378,15 +378,15 @@ Enum.each(0..99, fn _ ->
     support_count: 0,
     title: Faker.Lorem.sentence(),
     view_count: 0,
-    signals_categories_id: Faker.random_between(1, 3),
-    signals_types_id: Faker.random_between(1, 4),
-    users_id: Faker.random_between(1, 4)
+    signal_category_id: Faker.random_between(1, 3),
+    signal_type_id: Faker.random_between(1, 4),
+    user_id: Faker.random_between(1, 4)
   }
 
   signal = %Signals{} |> Signals.changeset(signals_params) |> Repo.insert!()
   ############## Signals Images #############
   Enum.each(0..5, fn _ ->
-    signal_image_params = %{signals_id: signal.id, url: "images/escaped.jpg"}
+    signal_image_params = %{signal_id: signal.id, url: "images/escaped.jpg"}
 
     %SignalsImages{}
     |> SignalsImages.changeset(signal_image_params)
@@ -397,8 +397,8 @@ Enum.each(0..99, fn _ ->
     ############## Signals Comments #############
     signal_comment_params = %{
       comment: Faker.Lorem.sentence(),
-      users_id: Faker.random_between(1, 4),
-      signals_id: signal.id
+      user_id: Faker.random_between(1, 4),
+      signal_id: signal.id
     }
 
     %SignalsComments{} |> SignalsComments.changeset(signal_comment_params) |> Repo.insert!()
@@ -408,8 +408,8 @@ end)
 Enum.each(0..15, fn _ ->
   ################## Adopt ####################
   adopt_params = %{
-    users_id: Faker.random_between(1, 4),
-    animals_id: Faker.random_between(1, animals_count)
+    user_id: Faker.random_between(1, 4),
+    animal_id: Faker.random_between(1, animals_count)
   }
 
   %Adopt{}

@@ -30,7 +30,7 @@
                 <%= for animal <- @animals do %>
                 <tr>
                     <td class="align-middle">
-                        <img height="100px" src="/<%=SmartcitydogsWeb.AnimalView.get_image_animals_id(animal.id)%>"
+                        <img height="100px" src="/<%=SmartcitydogsWeb.AnimalView.get_image_animal_id(animal.id)%>"
                              alt="">
                     </td>
                     <td class=" align-middle">
@@ -65,7 +65,7 @@
                         <div>
                             <%= form_for @performed_procedure_changeset, shelter_performed_procedure_path(@conn,
                             :create), [class: "d-inline-block"], fn f -> %>
-                            <%= hidden_input f, :animals_id, value: animal.id %>
+                            <%= hidden_input f, :animal_id, value: animal.id %>
                             <%= select f, :procedure_type_id, [[key: "Кастрирано", value: "1"], [key: "Обезпаразитено",
                             value: "2"], [key: "Ваксинирано", value: "3"] ], class: "form-control d-inline-block" %>
                             <%= submit "Добави", class: "btn btn-default d-inline-block" %>

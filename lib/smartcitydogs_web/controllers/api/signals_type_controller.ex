@@ -7,8 +7,8 @@ defmodule SmartcitydogsWeb.SignalsTypeControllerAPI do
   action_fallback(SmartcitydogsWeb.FallbackController)
 
   def index(conn, _params) do
-    signals_types = DataSignals.list_signal_types()
-    render(conn, "index.json", signals_types: signals_types)
+    signal_type = DataSignals.list_signal_types()
+    render(conn, "index.json", signal_type: signal_type)
   end
 
   def create(conn, %{"signals_type" => signals_type_params}) do

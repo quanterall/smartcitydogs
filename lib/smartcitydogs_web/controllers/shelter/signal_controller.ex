@@ -7,7 +7,7 @@ defmodule SmartcitydogsWeb.Shelter.SignalController do
     page =
       Signals
       |> order_by(desc: :inserted_at)
-      |> preload([:signals_types, :signals_categories, :signals_comments, :signals_likes])
+      |> preload([:signal_type, :signal_category, :signal_comments, :signal_likes])
 
     filter_changeset =
       if params["signals_filters"] != nil do
@@ -17,18 +17,18 @@ defmodule SmartcitydogsWeb.Shelter.SignalController do
       end
 
     page =
-      if params["signals_filters"]["signals_types_id"] do
-        page |> where([p], p.signals_types_id in ^params["signals_filters"]["signals_types_id"])
+      if params["signals_filters"]["signal_type_id"] do
+        page |> where([p], p.signal_type_id in ^params["signals_filters"]["signal_type_id"])
       else
         page
       end
 
     page =
-      if params["signals_filters"]["signals_categories_id"] do
+      if params["signals_filters"]["signal_category_id"] do
         page
         |> where(
           [p],
-          p.signals_categories_id in ^params["signals_filters"]["signals_categories_id"]
+          p.signal_category_id in ^params["signals_filters"]["signal_category_id"]
         )
       else
         page

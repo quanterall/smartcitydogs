@@ -20,11 +20,11 @@ defmodule Smartcitydogs.User do
     field(:disliked_comments, {:array, :integer}, default: [])
     field(:agreed_to_terms, :boolean, default: [], virtual: true)
 
-    has_many(:signals_comments, Smartcitydogs.SignalsComments)
-    belongs_to(:users_types, Smartcitydogs.UsersType)
+    has_many(:signal_comments, Smartcitydogs.SignalsComments)
+    belongs_to(:user_type, Smartcitydogs.UsersType)
     has_many(:signals, Smartcitydogs.Signals)
     has_many(:contacts, Smartcitydogs.Contact)
-    has_many(:adopt, Smartcitydogs.Adopt)
+    has_many(:adopts, Smartcitydogs.Adopt)
     timestamps()
   end
 
@@ -41,7 +41,7 @@ defmodule Smartcitydogs.User do
       :reset_password_token,
       :reset_token_sent_at,
       :deleted_at,
-      :users_types_id,
+      :user_type_id,
       :liked_signals,
       :liked_comments,
       :disliked_comments,

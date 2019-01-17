@@ -12,9 +12,9 @@ defmodule Smartcitydogs.Repo.Migrations.Signals do
       add(:deleted_at, :naive_datetime)
       add(:address_B, :float)
       add(:address_F, :float)
-      add(:signals_categories_id, references("signals_categories"))
-      add(:signals_types_id, references("signals_types"), default: 2)
-      add(:users_id, references("users"))
+      add(:signal_category_id, references("signal_category"))
+      add(:signal_type_id, references("signal_types"), default: 2)
+      add(:user_id, references("users"))
       timestamps()
     end
   end

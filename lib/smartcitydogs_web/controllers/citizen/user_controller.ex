@@ -36,24 +36,23 @@ defmodule SmartcitydogsWeb.UserController do
   def show(conn, _) do
     preload = [
       :signals_images,
-      :signals_types,
-      :signals_categories,
-      :signals_comments,
-      :signals_likes
+      :signal_type,
+      :signal_category,
+      :signal_comments,
+      :signal_likes
     ]
 
     user_signals =
       Signals
       |> limit(6)
-      |> where(users_id: ^conn.assigns.current_user.id)
+      |> where(user_id: ^conn.assigns.current_user.id)
       |> Repo.all()
       |> Repo.preload(preload)
-
 
     followed_signals =
       SignalsLikes
       |> limit(6)
-      |> where(users_id: ^conn.assigns.current_user.id)
+      |> where(user_id: ^conn.assigns.current_user.id)
       |> Repo.all()
       |> Repo.preload([:signals])
       |> Enum.map(fn x -> x.signals end)
@@ -93,17 +92,17 @@ defmodule SmartcitydogsWeb.UserController do
   def delete(conn, %{"id" => id}) do
     user = DataUsers.get_user!(id)
 
-      logged_user_id = conn.assigns.current_user.id
-      request_user_id = user.id
+    logged_user_id = conn.assigns.current_user.id
+    request_user_id = user.id
 
-      if logged_user_id != request_user_id do
-        render(conn, SmartcitydogsWeb.ErrorView, "401.html")
-      else
-        {:ok, _user} = DataUsers.delete_user(user)
+    if logged_user_id != request_user_id do
+      render(conn, SmartcitydogsWeb.ErrorView, "401.html")
+    else
+      {:ok, _user} = DataUsers.delete_user(user)
 
-        conn
-        |> put_flash(:info, "User deleted successfully.")
-        |> redirect(to: user_path(conn, :index))
-      end
+      conn
+      |> put_flash(:info, "User deleted successfully.")
+      |> redirect(to: user_path(conn, :index))
+    end
   end
 end

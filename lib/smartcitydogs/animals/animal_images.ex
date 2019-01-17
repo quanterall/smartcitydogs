@@ -8,7 +8,7 @@ defmodule Smartcitydogs.AnimalImages do
   schema "animal_images" do
     field(:deleted_at, :naive_datetime)
     field(:url, :string)
-    belongs_to(:animals, Smartcitydogs.Animals)
+    belongs_to(:animal, Smartcitydogs.Animals)
 
     timestamps()
   end
@@ -16,8 +16,8 @@ defmodule Smartcitydogs.AnimalImages do
   @doc false
   def changeset(animal_images, attrs) do
     animal_images
-    |> cast(attrs, [:url, :deleted_at, :animals_id])
-    |> validate_required([:url, :animals_id])
+    |> cast(attrs, [:url, :deleted_at, :animal_id])
+    |> validate_required([:url, :animal_id])
   end
 
   def store_images(animal, images) do
@@ -31,7 +31,7 @@ defmodule Smartcitydogs.AnimalImages do
 
       animal_image_params = %{
         "url" => "images/#{Map.get(n, :filename)}-profile#{extension}",
-        "animals_id" => "#{animal.id}"
+        "animal_id" => "#{animal.id}"
       }
 
       create_animal_image(animal_image_params)

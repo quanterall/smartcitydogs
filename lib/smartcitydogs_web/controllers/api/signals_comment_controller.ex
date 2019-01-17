@@ -7,8 +7,8 @@ defmodule SmartcitydogsWeb.SignalsCommentControllerAPI do
   action_fallback(SmartcitydogsWeb.FallbackController)
 
   def index(conn, _params) do
-    signals_comments = DataSignals.list_signal_comment()
-    render(conn, "index.json", signals_comments: signals_comments)
+    signal_comments = DataSignals.list_signal_comment()
+    render(conn, "index.json", signal_comments: signal_comments)
   end
 
   def create(conn, %{"signals_comment" => signals_comment_params}) do

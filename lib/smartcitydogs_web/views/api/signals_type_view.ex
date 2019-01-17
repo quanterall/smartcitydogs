@@ -2,8 +2,8 @@ defmodule SmartcitydogsWeb.SignalsTypeControllerAPIView do
   use SmartcitydogsWeb, :view
   alias SmartcitydogsWeb.SignalsTypeControllerAPIView
 
-  def render("index.json", %{signals_types: signals_types}) do
-    %{data: render_many(signals_types, SignalsTypeControllerAPIView, "signals_type.json")}
+  def render("index.json", %{signal_type: signal_type}) do
+    %{data: render_many(signal_type, SignalsTypeControllerAPIView, "signals_type.json")}
   end
 
   def render("show.json", %{signals_type: signals_type}) do

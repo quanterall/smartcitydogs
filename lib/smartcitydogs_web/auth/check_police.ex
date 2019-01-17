@@ -7,7 +7,7 @@ defmodule Smartcitydogs.CheckPolice do
   def call(conn, _opts) do
     current_user = Guardian.Plug.current_resource(conn)
 
-    if current_user.users_types_id == 3 do
+    if current_user.user_type_id == 3 do
       conn
     else
       conn

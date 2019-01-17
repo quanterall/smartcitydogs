@@ -20,12 +20,12 @@ defmodule Smartcitydogs.Signals do
     field(:address_B, :float)
     field(:address_F, :float)
 
-    has_many(:signals_comments, Smartcitydogs.SignalsComments)
-    belongs_to(:signals_categories, Smartcitydogs.SignalsCategories)
-    belongs_to(:signals_types, Smartcitydogs.SignalsTypes)
-    has_many(:signals_images, Smartcitydogs.SignalsImages)
-    has_many(:signals_likes, Smartcitydogs.SignalsLikes)
-    belongs_to(:users, Smartcitydogs.User)
+    has_many(:signal_comments, Smartcitydogs.SignalsComments)
+    belongs_to(:signal_category, Smartcitydogs.SignalsCategories)
+    belongs_to(:signal_type, Smartcitydogs.SignalsTypes)
+    has_many(:signal_images, Smartcitydogs.SignalsImages)
+    has_many(:signal_likes, Smartcitydogs.SignalsLikes)
+    belongs_to(:user, Smartcitydogs.User)
 
     timestamps()
   end
@@ -43,9 +43,9 @@ defmodule Smartcitydogs.Signals do
         :chip_number,
         :description,
         :deleted_at,
-        :signals_categories_id,
-        :signals_types_id,
-        :users_id,
+        :signal_category_id,
+        :signal_type_id,
+        :user_id,
         :address_B,
         :address_F
       ]
@@ -53,7 +53,7 @@ defmodule Smartcitydogs.Signals do
     |> validate_required([
       :address,
       :description,
-      :signals_categories_id
+      :signal_category_id
     ])
   end
 
@@ -64,10 +64,10 @@ defmodule Smartcitydogs.Signals do
 
       _ ->
         signal
-        |> Repo.preload(:signals_likes)
+        |> Repo.preload(:signal_likes)
 
-        signal.signals_likes
-        |> Enum.filter(fn like -> like.users_id == user.id end)
+        signal.signal_likes
+        |> Enum.filter(fn like -> like.user_id == user.id end)
     end
   end
 
@@ -78,19 +78,19 @@ defmodule Smartcitydogs.Signals do
 
     if signal.signals_images == [] do
       cond do
-        signal.signals_categories_id == 1 -> "images/stray.jpg"
-        signal.signals_categories_id == 2 -> "images/escaped.jpg"
-        signal.signals_categories_id == 3 -> "images/mistreated.jpg"
+        signal.signal_category_id == 1 -> "images/stray.jpg"
+        signal.signal_category_id == 2 -> "images/escaped.jpg"
+        signal.signal_category_id == 3 -> "images/mistreated.jpg"
       end
     else
       cond do
-        List.first(signal.signals_images).url == nil && signal.signals_categories_id == 1 ->
+        List.first(signal.signals_images).url == nil && signal.signal_category_id == 1 ->
           "images/stray.jpg"
 
-        List.first(signal.signals_images).url == nil && signal.signals_categories_id == 2 ->
+        List.first(signal.signals_images).url == nil && signal.signal_category_id == 2 ->
           "images/escaped.jpg"
 
-        List.first(signal.signals_images).url == nil && signal.signals_categories_id == 3 ->
+        List.first(signal.signals_images).url == nil && signal.signal_category_id == 3 ->
           "images/mistreated.jpg"
 
         true ->
@@ -101,14 +101,14 @@ defmodule Smartcitydogs.Signals do
 
   def add_like(user_id, signal_id) do
     %Smartcitydogs.SignalsLikes{}
-    |> Smartcitydogs.SignalsLikes.changeset(%{users_id: user_id, signals_id: signal_id})
+    |> Smartcitydogs.SignalsLikes.changeset(%{user_id: user_id, signal_id: signal_id})
     |> Repo.insert()
   end
 
   def remove_like(user_id, signal_id) do
     from(
       l in Smartcitydogs.SignalsLikes,
-      where: l.users_id == ^user_id and l.signals_id == ^signal_id
+      where: l.user_id == ^user_id and l.signal_id == ^signal_id
     )
     |> Repo.delete_all()
   end

@@ -5,12 +5,12 @@ defmodule Smartcitydogs.AnimalsFilters do
   @timestamps_opts [type: :naive_datetime, usec: false]
 
   embedded_schema do
-    field(:animals_status_id, :string)
+    field(:animal_status_id, :string)
   end
 
   @doc false
   def changeset(filter, attrs) do
     filter
-    |> cast(attrs, [:animals_status_id])
+    |> cast(attrs, [:animal_status_id])
   end
 end

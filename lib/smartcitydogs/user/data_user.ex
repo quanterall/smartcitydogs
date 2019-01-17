@@ -25,7 +25,7 @@ defmodule Smartcitydogs.DataUsers do
   end
 
   # def create_user_contact(id, args) do
-  #   Repo.get!(User, id) 
+  #   Repo.get!(User, id)
   #   |> Ecto.Changeset.change()
   #   |> Ecto.Changeset.put_embed( :contact, args)
   #   |> Repo.update!().contact
@@ -41,7 +41,7 @@ defmodule Smartcitydogs.DataUsers do
       last_name: String.split(auth.info.name, " ") |> List.first(),
       email: auth.info.email,
       phone: "0000000000000",
-      users_types_id: 1
+      user_type_id: 1
     })
   end
 
@@ -61,7 +61,7 @@ defmodule Smartcitydogs.DataUsers do
 
   def get_likes(signal_id) do
     Repo.one(
-      from(l in Smartcitydogs.SignalsLikes, select: count(l.id), where: l.signals_id == ^signal_id)
+      from(l in Smartcitydogs.SignalsLikes, select: count(l.id), where: l.signal_id == ^signal_id)
     )
   end
 

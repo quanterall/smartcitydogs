@@ -1,8 +1,7 @@
 defmodule Smartcitydogs.Animals do
   use Ecto.Schema
   import Ecto.Changeset
-  import Ecto.Query
-  alias Smartcitydogs.{DataAnimals, Animals, AnimalImages, Repo}
+  alias Smartcitydogs.{DataAnimals, Animals, Repo}
 
   @timestamps_opts [type: :utc_datetime, usec: false]
 
@@ -14,11 +13,11 @@ defmodule Smartcitydogs.Animals do
     field(:chip_number, :string)
     field(:deleted_at, :naive_datetime)
     field(:sex, :string)
-    has_many(:animals_image, Smartcitydogs.AnimalImages, on_delete: :delete_all)
-    has_many(:performed_procedure, Smartcitydogs.PerformedProcedures, on_delete: :delete_all)
+    has_many(:animal_images, Smartcitydogs.AnimalImages, on_delete: :delete_all)
+    has_many(:performed_procedures, Smartcitydogs.PerformedProcedures, on_delete: :delete_all)
     has_many(:rescues, Smartcitydogs.Rescues, on_delete: :delete_all)
-    belongs_to(:animals_status, Smartcitydogs.AnimalStatus)
-    has_many(:adopt, Smartcitydogs.Adopt, on_delete: :delete_all)
+    belongs_to(:animal_status, Smartcitydogs.AnimalStatus)
+    has_many(:adopts, Smartcitydogs.Adopt, on_delete: :delete_all)
 
     timestamps()
   end
@@ -34,7 +33,7 @@ defmodule Smartcitydogs.Animals do
       :chip_number,
       :address,
       :deleted_at,
-      :animals_status_id
+      :animal_status_id
     ])
     |> validate_required([:sex, :chip_number, :address])
   end

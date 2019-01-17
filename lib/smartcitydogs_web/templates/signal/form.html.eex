@@ -4,15 +4,15 @@
         <label>1. Изберете категория на сигнала</label>
         <div class="form-group">
             <label class="form-check-label">
-                <%=radio_button(f, :signals_categories_id, "1") %>
+                <%=radio_button(f, :signal_category_id, "1") %>
                 Бездомно куче
             </label>
             <label class="form-check-labe2">
-                <%=radio_button(f, :signals_categories_id, "2") %>
+                <%=radio_button(f, :signal_category_id, "2") %>
                 Бездомно куче
             </label>
             <label class="form-check-label">
-                <%=radio_button(f, :signals_categories_id, "3") %>
+                <%=radio_button(f, :signal_category_id, "3") %>
                 Бездомно куче
             </label>
         </div>

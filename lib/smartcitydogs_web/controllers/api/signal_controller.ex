@@ -19,9 +19,9 @@ defmodule SmartcitydogsWeb.SignalControllerAPI do
       |> Repo.preload([
         :users,
         :signals_images,
-        :signals_comments,
-        :signals_categories,
-        :signals_types
+        :signal_comments,
+        :signal_category,
+        :signal_type
       ])
       |> SmartcitydogsWeb.Encoder.encode()
 
@@ -34,10 +34,10 @@ defmodule SmartcitydogsWeb.SignalControllerAPI do
 
     signal_params =
       signal_params
-      |> Map.put("signals_types_id", 1)
+      |> Map.put("signal_type_id", 1)
       |> Map.put("view_count", 0)
       |> Map.put("support_count", 0)
-      |> Map.put("users_id", user_id)
+      |> Map.put("user_id", user_id)
 
     case DataSignals.create_signal(signal_params) do
       {:ok, signal} ->
@@ -55,7 +55,7 @@ defmodule SmartcitydogsWeb.SignalControllerAPI do
 
           args = %{
             "url" => "images/#{Map.get(n, :filename)}-profile#{extension}",
-            "signals_id" => "#{signal.id}"
+            "signal_id" => "#{signal.id}"
           }
 
           DataSignals.create_signal_images(args)
@@ -171,8 +171,8 @@ defmodule SmartcitydogsWeb.SignalControllerAPI do
 
     Smartcitydogs.DataSignals.create_signal_comment(%{
       comment: show_comment,
-      signals_id: show_id,
-      users_id: user_id
+      signal_id: show_id,
+      user_id: user_id
     })
 
     comments = Smartcitydogs.DataSignals.get_comment_signal_id(show_id)

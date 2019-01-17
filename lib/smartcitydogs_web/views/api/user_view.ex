@@ -21,7 +21,7 @@ defmodule SmartcitydogsWeb.UserControllerAPIView do
       reset_password_token: user.reset_password_token,
       ##  reset_password_token_sent_at: user.reset_password_token_sent_at,
       deleted_at: user.deleted_at,
-      users_types_id: user.users_types_id
+      user_type_id: user.user_type_id
     }
   end
 
@@ -44,7 +44,7 @@ defmodule SmartcitydogsWeb.UserControllerAPIView do
 
   def render("municipality_sign_in.json", %{user: user}) do
     %{
-      users_types_id: user.users_types_id
+      user_type_id: user.user_type_id
     }
   end
 

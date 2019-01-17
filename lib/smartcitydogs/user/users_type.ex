@@ -4,7 +4,7 @@ defmodule Smartcitydogs.UsersType do
 
   @timestamps_opts [type: :utc_datetime, usec: false]
 
-  schema "users_types" do
+  schema "user_types" do
     field(:deleted_at, :naive_datetime)
     field(:name, :string)
     field(:prefix, :string)

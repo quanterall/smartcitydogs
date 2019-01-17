@@ -4,7 +4,7 @@ defmodule Smartcitydogs.ProcedureType do
 
   @timestamps_opts [type: :utc_datetime, usec: false]
 
-  schema "procedure_type" do
+  schema "procedure_types" do
     field(:deleted_at, :naive_datetime)
     field(:name, :string)
     field(:prefix, :string)

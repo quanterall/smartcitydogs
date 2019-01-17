@@ -4,7 +4,7 @@ defmodule Smartcitydogs.AnimalStatus do
 
   @timestamps_opts [type: :utc_datetime, usec: false]
 
-  schema "animal_status" do
+  schema "animal_statuses" do
     field(:deleted_at, :naive_datetime)
     field(:name, :string)
     field(:prefix, :string)

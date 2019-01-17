@@ -14,7 +14,7 @@ defmodule SmartcitydogsWeb.SignalController do
     page =
       Signals
       |> order_by(desc: :inserted_at)
-      |> preload([:signals_types, :signals_categories, :signals_comments, :signals_likes])
+      |> preload([:signal_type, :signal_category, :signal_comments, :signal_likes])
       |> Repo.paginate(params)
 
     render(conn, "index.html", signals: page.entries, page: page)
@@ -27,7 +27,7 @@ defmodule SmartcitydogsWeb.SignalController do
 
   def create(%{:assigns => %{:current_user => %{:id => user_id}}} = conn, %{"signals" => params}) do
     params
-    |> Map.put("users_id", user_id)
+    |> Map.put("user_id", user_id)
 
     case Signals.create_signal(params) do
       {:ok, signal} ->
@@ -47,12 +47,12 @@ defmodule SmartcitydogsWeb.SignalController do
       Signals
       |> Repo.get(id)
       |> Repo.preload([
-        :signals_types,
-        :signals_categories,
-        :signals_likes,
+        :signal_type,
+        :signal_category,
+        :signal_likes,
         :signals_images,
-        signals_comments: from(p in SignalsComments, order_by: [desc: p.inserted_at]),
-        signals_comments: :users
+        signal_comments: from(p in SignalsComments, order_by: [desc: p.inserted_at]),
+        signal_comments: :users
       ])
 
     signal
@@ -95,9 +95,9 @@ defmodule SmartcitydogsWeb.SignalController do
     end
   end
 
-  def update_type(conn, %{"id" => id, "signals_types_id" => signals_types_id}) do
+  def update_type(conn, %{"id" => id, "signal_type_id" => signal_type_id}) do
     signal = DataSignals.get_signal(id)
-    DataSignals.update_signal(signal, %{"signals_types_id" => signals_types_id})
+    DataSignals.update_signal(signal, %{"signal_type_id" => signal_type_id})
     redirect(conn, to: signal_path(conn, :minicipality_signals))
   end
 

@@ -7,7 +7,7 @@ defmodule Smartcitydogs.Contact do
   schema "contacts" do
     field(:text, :string)
     field(:topic, :string)
-    belongs_to(:users, Smartcitydogs.User)
+    belongs_to(:user, Smartcitydogs.User)
 
     timestamps()
   end
@@ -15,7 +15,7 @@ defmodule Smartcitydogs.Contact do
   @doc false
   def changeset(contact, attrs) do
     contact
-    |> cast(attrs, [:topic, :text, :users_id])
+    |> cast(attrs, [:topic, :text, :user_id])
     |> validate_required([:topic, :text])
   end
 end

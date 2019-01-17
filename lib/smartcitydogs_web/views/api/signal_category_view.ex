@@ -2,10 +2,9 @@ defmodule SmartcitydogsWeb.SignalCategoryControllerAPIView do
   use SmartcitydogsWeb, :view
   alias SmartcitydogsWeb.SignalCategoryControllerAPIView
 
-  def render("index.json", %{signals_categories: signals_categories}) do
+  def render("index.json", %{signal_category: signal_category}) do
     %{
-      data:
-        render_many(signals_categories, SignalCategoryControllerAPIView, "signal_category.json")
+      data: render_many(signal_category, SignalCategoryControllerAPIView, "signal_category.json")
     }
   end
 

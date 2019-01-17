@@ -2,8 +2,8 @@ defmodule SmartcitydogsWeb.SignalsLikeControllerAPIView do
   use SmartcitydogsWeb, :view
   alias SmartcitydogsWeb.SignalsLikeControllerAPIView
 
-  def render("index.json", %{signals_likes: signals_likes}) do
-    %{data: render_many(signals_likes, SignalsLikeControllerAPIView, "signals_like.json")}
+  def render("index.json", %{signal_likes: signal_likes}) do
+    %{data: render_many(signal_likes, SignalsLikeControllerAPIView, "signals_like.json")}
   end
 
   def render("show.json", %{signals_like: signals_like}) do
@@ -15,8 +15,8 @@ defmodule SmartcitydogsWeb.SignalsLikeControllerAPIView do
       id: signals_like.id,
       like: signals_like.like,
       deleted_at: signals_like.deleted_at,
-      signals_id: signals_like.signals_id,
-      users_id: signals_like.users_id
+      signal_id: signals_like.signal_id,
+      user_id: signals_like.user_id
     }
   end
 end

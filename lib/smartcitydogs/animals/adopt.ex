@@ -6,8 +6,8 @@ defmodule Smartcitydogs.Adopt do
   @timestamps_opts [type: :utc_datetime, usec: false]
 
   schema "adopt" do
-    belongs_to(:users, Smartcitydogs.User)
-    belongs_to(:animals, Smartcitydogs.Animals)
+    belongs_to(:user, Smartcitydogs.User)
+    belongs_to(:animal, Smartcitydogs.Animals)
     timestamps()
   end
 
@@ -16,18 +16,18 @@ defmodule Smartcitydogs.Adopt do
     |> cast(
       attrs,
       [
-        :users_id,
-        :animals_id
+        :user_id,
+        :animal_id
       ]
     )
-    |> validate_required([:users_id, :animals_id])
+    |> validate_required([:user_id, :animal_id])
   end
 
   def adopt_exist(animal, user) do
     adopt =
       Adopt
-      |> where([p], p.animals_id == ^animal.id)
-      |> where([p], p.users_id == ^user.id)
+      |> where([p], p.animal_id == ^animal.id)
+      |> where([p], p.user_id == ^user.id)
       |> Repo.all()
 
     if adopt == [] do

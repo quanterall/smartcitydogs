@@ -7,13 +7,13 @@ defmodule SmartcitydogsWeb.LayoutView do
 
   def printNavbar(conn, current_user) do
     case current_user do
-      %{users_types_id: 3} ->
+      %{user_type_id: 3} ->
         render("navbar_zoo.html", %{conn: conn, current_user: current_user})
 
-      %{users_types_id: 4} ->
+      %{user_type_id: 4} ->
         render("navbar_municipality.html", %{conn: conn, current_user: current_user})
 
-      %{users_types_id: 5} ->
+      %{user_type_id: 5} ->
         render("navbar_shelter.html", %{conn: conn, current_user: current_user})
 
       _ ->

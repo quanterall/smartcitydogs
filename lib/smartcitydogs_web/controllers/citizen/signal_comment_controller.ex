@@ -6,7 +6,7 @@ defmodule SmartcitydogsWeb.SignalsCommentController do
   action_fallback(SmartcitydogsWeb.FallbackController)
 
   def create(conn, %{"id" => id, "comment" => comment}) do
-    data = %{signals_id: id, comment: comment, users_id: conn.assigns.current_user.id}
+    data = %{signal_id: id, comment: comment, user_id: conn.assigns.current_user.id}
 
     %SignalsComments{}
     |> SignalsComments.changeset(data)

@@ -3,13 +3,13 @@ defmodule Smartcitydogs.Animals.Policy do
   alias Smartcitydogs.User
 
   # Admin users can do anything
-  def authorize(_, %User{users_types_id: 1}, _), do: true
+  def authorize(_, %User{user_type_id: 1}, _), do: true
 
   # Zoo users can do anything
-  def authorize(_, %User{users_types_id: 3}, _), do: false
+  def authorize(_, %User{user_type_id: 3}, _), do: false
 
   # Municipality users can do anything
-  def authorize(action, %User{users_types_id: 4}, _)
+  def authorize(action, %User{user_type_id: 4}, _)
       when action in [
              :index,
              :show,
@@ -20,7 +20,7 @@ defmodule Smartcitydogs.Animals.Policy do
       do: true
 
   # Shelter users can do anything
-  def authorize(_, %User{users_types_id: 5}, _), do: true
+  def authorize(_, %User{user_type_id: 5}, _), do: true
 
   # when action in [:new, :index, ]
 
@@ -35,6 +35,6 @@ defmodule Smartcitydogs.Animals.Policy do
   def authorize(_, _, _), do: false
 end
 
-#  user = Smartcitydogs.DataUsers.get_user!(7) 
-# Bodyguard.permit(Smartcitydogs.Animals.Policy, :new, user) 
+#  user = Smartcitydogs.DataUsers.get_user!(7)
+# Bodyguard.permit(Smartcitydogs.Animals.Policy, :new, user)
 #    - проверка за достъп (модул, функция, потребител)

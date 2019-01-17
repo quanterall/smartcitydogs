@@ -11,7 +11,7 @@ defmodule Smartcitydogs.Repo.Migrations.CreateAnimalsTable do
       add(:description, :text)
       add(:deleted_at, :naive_datetime)
       add(:adopted_at, :naive_datetime)
-      add(:animals_status_id, references("animal_status"))
+      add(:animal_status_id, references("animal_statuses"))
       timestamps()
     end
   end

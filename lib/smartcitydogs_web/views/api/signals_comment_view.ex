@@ -2,9 +2,9 @@ defmodule SmartcitydogsWeb.SignalsCommentControllerAPIView do
   use SmartcitydogsWeb, :view
   alias SmartcitydogsWeb.SignalsCommentControllerAPIView
 
-  def render("index.json", %{signals_comments: signals_comments}) do
+  def render("index.json", %{signal_comments: signal_comments}) do
     %{
-      data: render_many(signals_comments, SignalsCommentControllerAPIView, "signals_comment.json")
+      data: render_many(signal_comments, SignalsCommentControllerAPIView, "signals_comment.json")
     }
   end
 
@@ -17,8 +17,8 @@ defmodule SmartcitydogsWeb.SignalsCommentControllerAPIView do
       id: signals_comment.id,
       comment: signals_comment.comment,
       deleted_at: signals_comment.deleted_at,
-      signals_id: signals_comment.signals_id,
-      users_id: signals_comment.users_id
+      signal_id: signals_comment.signal_id,
+      user_id: signals_comment.user_id
     }
   end
 
@@ -27,8 +27,8 @@ defmodule SmartcitydogsWeb.SignalsCommentControllerAPIView do
       id: signals_comment.id,
       comment: signals_comment.comment,
       deleted_at: signals_comment.deleted_at,
-      signals_id: signals_comment.signals_id,
-      users_id: signals_comment.users_id
+      signal_id: signals_comment.signal_id,
+      user_id: signals_comment.user_id
     }
   end
 
@@ -41,8 +41,8 @@ defmodule SmartcitydogsWeb.SignalsCommentControllerAPIView do
       id: signals_comment.id,
       comment: signals_comment.comment,
       deleted_at: signals_comment.deleted_at,
-      signals_id: signals_comment.signals_id,
-      users_id: signals_comment.users_id
+      signal_id: signals_comment.signal_id,
+      user_id: signals_comment.user_id
     }
   end
 

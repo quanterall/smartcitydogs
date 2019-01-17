@@ -2,19 +2,19 @@ defmodule Smartcitydogs.Repo.Migrations.AddPrefixToSignalTypes do
   use Ecto.Migration
 
   def change do
-    alter table(:signals_types) do
+    alter table(:signal_types) do
       add(:prefix, :text)
     end
 
-    alter table(:animal_status) do
+    alter table(:animal_statuses) do
       add(:prefix, :text)
     end
 
-    alter table(:procedure_type) do
+    alter table(:procedure_types) do
       add(:prefix, :text)
     end
 
-    alter table(:users_types) do
+    alter table(:user_types) do
       add(:prefix, :text)
     end
   end

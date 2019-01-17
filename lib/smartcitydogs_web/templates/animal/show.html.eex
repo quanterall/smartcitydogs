@@ -51,7 +51,7 @@
             <div class="col text-center">
                 <%=if Smartcitydogs.Adopt.adopt_exist(@animal,@conn.assigns.current_user) do %>
                     <%= form_for @conn, animal_path(@conn,:adopt, @animal.id), [class: "d-inline-block"], fn f -> %>
-                        <%= hidden_input f, :animals_id, value: @animal.id %>
+                        <%= hidden_input f, :animal_id, value: @animal.id %>
                         <%= submit "Осинови", class: "comment-signal-btn d-inline-block" %>
                     <% end %>
                 <% else %>

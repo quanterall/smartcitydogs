@@ -7,14 +7,14 @@
         </div>
     </div>
     <div class="col-lg-7">
-        <div class="signal-type-label <%=@signal.signals_types.prefix%>">
-            <%=@signal.signals_types.name%>
+        <div class="signal-type-label <%=@signal.signal_type.prefix%>">
+            <%=@signal.signal_type.name%>
         </div>
         <div class="slick-card-small ">
             <%=Timex.format!( @signal.inserted_at,"%d.%m.%y",:strftime)%> г.
         </div>
         <div class="slick-card-title">
-            <h1><%=@signal.signals_categories.name%></h1>
+            <h1><%=@signal.signal_category.name%></h1>
         </div>
         <div>
             <p><%=@signal.description%></p>
@@ -45,11 +45,11 @@
             </div>
             <div class="col">
                 <div>подкрепи</div>
-                <div class="blue-bold"><%= Enum.count(@signal.signals_likes) %></div>
+                <div class="blue-bold"><%= Enum.count(@signal.signal_likes) %></div>
             </div>
             <div class="col">
                 <div>коментари</div>
-                <div class="blue-bold"><%=Enum.count(@signal.signals_comments)%></div>
+                <div class="blue-bold"><%=Enum.count(@signal.signal_comments)%></div>
             </div>
             <input type="hidden" id="cor_b" value="<%= @signal.address_B %>">
             <input type="hidden" id="cor_a" value="<%= @signal.address_F %>">
@@ -78,9 +78,9 @@
             </div>
         </div>
         <div class="signal-comments-title mt-3 mb-3">
-            Коментари(<%=Enum.count(@signal.signals_comments)%>)
+            Коментари(<%=Enum.count(@signal.signal_comments)%>)
         </div>
-        <%= for comment <- @signal.signals_comments do %>
+        <%= for comment <- @signal.signal_comments do %>
         <div class="row comment-container mb-3 mt-2 m-0">
             <div class="col-6 comment-user-name p-0"><%=comment.users.first_name%> <%=comment.users.last_name%></div>
             <div class="col-6 text-right"><%=Timex.format!( comment.inserted_at,"%d.%m.%y",:strftime)%> г.</div>

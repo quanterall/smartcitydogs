@@ -2,9 +2,9 @@ defmodule SmartcitydogsWeb.AnimalView do
   use SmartcitydogsWeb, :view
   import Scrivener.HTML
   ## add more cond cluases if anumas statuses exceed
-  def get_image_animals_id(animals_id) do
+  def get_image_animal_id(animal_id) do
     animal =
-      Smartcitydogs.DataAnimals.get_animal(animals_id)
+      Smartcitydogs.DataAnimals.get_animal(animal_id)
       |> Smartcitydogs.Repo.preload(:animals_image)
 
     cond do

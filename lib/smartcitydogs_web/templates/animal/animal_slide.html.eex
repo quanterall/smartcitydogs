@@ -1,6 +1,6 @@
 <div class="col-lg-12">
     <div class="card"
-         style="background-image:linear-gradient(rgba(0, 0, 0, 0.7),rgba(0, 0, 0, 0.7)), url('/<%=SmartcitydogsWeb.AnimalView.get_image_animals_id(@animal.id) %>')">
+         style="background-image:linear-gradient(rgba(0, 0, 0, 0.7),rgba(0, 0, 0, 0.7)), url('/<%=SmartcitydogsWeb.AnimalView.get_image_animal_id(@animal.id) %>')">
         <div class="home-animal-slide card-body">
             <div class="animal-status-text <%=@animal.animals_status.prefix%> mb-2">
                 <%= @animal.animals_status.name%>

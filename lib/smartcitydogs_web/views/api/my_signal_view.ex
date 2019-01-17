@@ -16,9 +16,9 @@ defmodule SmartcitydogsWeb.MySignalsControllerAPIView do
       chip_number: signal.chip_number,
       description: signal.description,
       deleted_at: signal.deleted_at,
-      signals_types_id: signal.signals_types_id,
-      signals_categories_id: signal.signals_categories_id,
-      users_id: signal.users_id
+      signal_type_id: signal.signal_type_id,
+      signal_category_id: signal.signal_category_id,
+      user_id: signal.user_id
     }
   end
 end

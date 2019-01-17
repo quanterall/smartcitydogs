@@ -43,7 +43,7 @@ defmodule SmartcitydogsWeb.UserControllerAPI do
       {:ok, conn} ->
         user = Guardian.Plug.current_resource(conn)
 
-        if user.users_types_id == 4 || user.users_types_id == 5 do
+        if user.user_type_id == 4 || user.user_type_id == 5 do
           conn
           |> put_session(:current_user_id, user.id)
           |> put_status(:ok)

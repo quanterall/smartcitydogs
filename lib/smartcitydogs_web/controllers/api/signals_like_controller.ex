@@ -7,8 +7,8 @@ defmodule SmartcitydogsWeb.SignalsLikeControllerAPI do
   action_fallback(SmartcitydogsWeb.FallbackController)
 
   def index(conn, _params) do
-    signals_likes = DataSignals.list_signal_like()
-    render(conn, "index.json", signals_likes: signals_likes)
+    signal_likes = DataSignals.list_signal_like()
+    render(conn, "index.json", signal_likes: signal_likes)
   end
 
   def create(conn, %{"signals_like" => signals_like_params}) do

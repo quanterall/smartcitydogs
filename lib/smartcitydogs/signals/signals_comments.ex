@@ -4,20 +4,20 @@ defmodule Smartcitydogs.SignalsComments do
 
   @timestamps_opts [type: :utc_datetime, usec: false]
 
-  schema "signals_comments" do
+  schema "signal_comments" do
     field(:comment, :string)
     field(:deleted_at, :naive_datetime)
     field(:likes_number, :integer, default: 0)
-    belongs_to(:users, Smartcitydogs.User)
-    belongs_to(:signals, Smartcitydogs.Signals)
+    belongs_to(:user, Smartcitydogs.User)
+    belongs_to(:signal, Smartcitydogs.Signals)
 
     timestamps()
   end
 
   @doc false
-  def changeset(signals_comments, attrs) do
-    signals_comments
-    |> cast(attrs, [:comment, :deleted_at, :likes_number, :signals_id, :users_id])
-    |> validate_required([:comment, :signals_id])
+  def changeset(signal_comments, attrs) do
+    signal_comments
+    |> cast(attrs, [:comment, :deleted_at, :likes_number, :signal_id, :user_id])
+    |> validate_required([:comment, :signal_id])
   end
 end
