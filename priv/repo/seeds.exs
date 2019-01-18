@@ -14,7 +14,7 @@
 
 alias Smartcitydogs.Repo
 
-alias Smartcitydogs.Animals
+alias Smartcitydogs.Animal
 alias Smartcitydogs.AnimalStatus
 alias Smartcitydogs.AnimalImage
 alias Smartcitydogs.PerformedProcedure
@@ -28,7 +28,7 @@ alias Smartcitydogs.SignalType
 alias Smartcitydogs.UserType
 alias Smartcitydogs.User
 alias Smartcitydogs.Signal
-alias Smartcitydogs.SignalComments
+alias Smartcitydogs.SignalComment
 alias Smartcitydogs.SignalImage
 alias Smartcitydogs.Adopt
 
@@ -230,10 +230,10 @@ Enum.each(0..99, fn _ ->
     animal_status_id: Faker.random_between(1, 3)
   }
 
-  unless Repo.get_by(Animals, chip_number: animals_params[:chip_number]) do
+  unless Repo.get_by(Animal, chip_number: animals_params[:chip_number]) do
     animal =
-      %Animals{}
-      |> Animals.changeset(animals_params)
+      %Animal{}
+      |> Animal.changeset(animals_params)
       |> Repo.insert!()
 
     animals_images_params = %{animal_id: animal.id, url: "images/escaped.jpg"}
@@ -248,7 +248,7 @@ end)
 
 ###############  Performed Procedures #################
 
-animals_count = length(Repo.all(Animals))
+animals_count = length(Repo.all(Animal))
 
 Enum.each(0..99, fn _ ->
   performed_paramas = %{
@@ -304,11 +304,11 @@ unless Repo.get_by(StaticPage, content: static_params[:content]) do
 end
 
 ############## Signal Categories #############
-signal_categori_params = %{name: "Бездомно куче", prefix: "homeless"}
+signal_category_params = %{name: "Бездомно куче", prefix: "homeless"}
 
-unless Repo.get_by(SignalCategory, name: signal_categori_params[:name]) do
+unless Repo.get_by(SignalCategory, name: signal_category_params[:name]) do
   %SignalCategory{}
-  |> SignalCategory.changeset(signal_categori_params)
+  |> SignalCategory.changeset(signal_category_params)
   |> Repo.insert!()
 end
 
@@ -401,7 +401,7 @@ Enum.each(0..99, fn _ ->
       signal_id: signal.id
     }
 
-    %SignalComments{} |> SignalComments.changeset(signal_comment_params) |> Repo.insert!()
+    %SignalComment{} |> SignalComment.changeset(signal_comment_params) |> Repo.insert!()
   end)
 end)
 

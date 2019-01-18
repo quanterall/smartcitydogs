@@ -12,7 +12,7 @@ defmodule Smartcitydogs.Repo.Migrations.Signal do
       add(:deleted_at, :naive_datetime)
       add(:address_B, :float)
       add(:address_F, :float)
-      add(:signal_category_id, references("signal_category"))
+      add(:signal_category_id, references("signal_categories"))
       add(:signal_type_id, references("signal_types"), default: 2)
       add(:user_id, references("users"))
       timestamps()
