@@ -23,8 +23,8 @@
                 </div>
             </div>
         </div>
-        <input type="hidden" id="cor_b" value="<%= @animal.address_B %>">
-        <input type="hidden" id="cor_a" value="<%= @animal.address_F %>">
+        <input type="hidden" id="cor_b" value="<%= @animal.longitude %>">
+        <input type="hidden" id="cor_a" value="<%= @animal.latitude %>">
         <div id="map_container" style="position: relative; display: none;">
             <i id="close-map" class="fa fa-times"></i>
             <div id="signal_map">
@@ -47,6 +47,7 @@
                 <div class="blue-bold"> <%= Timex.format!(@animal.inserted_at, "%d.%m.%y",:strftime)%> г.</div>
             </div>
         </div>
+        <%= if Application.get_env(:smartcitydogs, :show_deleted_content) do %>
         <div class="row mt-3">
             <div class="col text-center">
                 <%=if Smartcitydogs.Adopt.adopt_exist(@animal,@conn.assigns.current_user) do %>
@@ -60,5 +61,6 @@
                 <% end %>
             </div>
         </div>
+        <% end %>
     </div>
 </div>

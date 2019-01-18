@@ -16,8 +16,8 @@ defmodule Smartcitydogs.Signal do
     field(:support_count, :integer, default: 0)
     field(:title, :string)
     field(:view_count, :integer, default: 0)
-    field(:address_B, :float)
-    field(:address_F, :float)
+    field(:longitude, :float)
+    field(:latitude, :float)
 
     has_many(:signal_comments, Smartcitydogs.SignalComment)
     belongs_to(:signal_category, Smartcitydogs.SignalCategory)
@@ -45,8 +45,8 @@ defmodule Smartcitydogs.Signal do
         :signal_category_id,
         :signal_type_id,
         :user_id,
-        :address_B,
-        :address_F
+        :longitude,
+        :latitude
       ]
     )
     |> validate_required([

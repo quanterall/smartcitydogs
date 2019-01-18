@@ -27,13 +27,11 @@ defmodule SmartcitydogsWeb.UserControllerAPIView do
 
   def render("sign_in.json", %{user: user}) do
     %{
-      data: %{
-        user: %{
-          id: user.id,
-          email: user.email,
-          username: user.username,
-          first_name: user.first_name
-        }
+      user: %{
+        id: user.id,
+        email: user.email,
+        username: user.username,
+        first_name: user.first_name
       }
     }
   end
@@ -50,9 +48,7 @@ defmodule SmartcitydogsWeb.UserControllerAPIView do
 
   def render("logout.json", _) do
     %{
-      data: %{
-        message: "successfully logged out"
-      }
+      message: "successfully logged out"
     }
   end
 end

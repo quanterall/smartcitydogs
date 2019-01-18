@@ -16,7 +16,6 @@ defmodule SmartcitydogsWeb.SignalLikeControllerAPI do
            DataSignal.create_signal_like(signal_like_params) do
       conn
       |> put_status(:created)
-      |> put_resp_header("location", signal_like_controller_api_path(conn, :show, signal_like))
       |> render("show.json", signal_like: signal_like)
     end
   end

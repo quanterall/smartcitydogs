@@ -61,60 +61,36 @@ defmodule SmartcitydogsWeb.Router do
   end
 
   scope "/api", SmartcitydogsWeb do
-    pipe_through(:api)
+    scope "/" do
+      pipe_through(:api)
 
-    post("/users/sign_in", UserControllerAPI, :sign_in)
+      post("/users/sign_in", UserControllerAPI, :sign_in)
+      resources("/signals", SignalControllerAPI, except: [:new, :edit])
 
-    resources(
-      "/forgoten_password",
-      ForgotenPasswordControllerAPI,
-      only: [:new, :create, :edit, :update]
-    )
+      resources(
+        "/forgoten_password",
+        ForgotenPasswordControllerAPI,
+        only: [:new, :create, :edit, :update]
+      )
 
-    resources("/users", UserControllerAPI, only: [:create])
-  end
-
-  scope "/api", SmartcitydogsWeb do
-    pipe_through([:api])
-
-    resources("/users", UserControllerAPI, except: [:new, :edit])
-    post("/users/logout", UserControllerAPI, :logout)
-
-    resources("/signals", SignalControllerAPI, except: [:new, :edit])
-
-    scope "/signals/:id" do
-      get("/comment", SignalControllerAPI, :comment)
-      get("/unlike", SignalControllerAPI, :unlike)
-      get("/like", SignalControllerAPI, :like)
+      resources("/users", UserControllerAPI, only: [:create])
     end
 
-    get("/my_signals", MySignalControllerAPI, :index)
-    resources("/signal_images", SignalImageControllerAPI, except: [:new, :edit])
-    resources("/signal_comments", SignalCommentControllerAPI, except: [:new, :edit])
+    scope "/" do
+      pipe_through([:api, :api_auth])
 
-    scope "/signal_comments", SmartcitydogsWeb do
-      put("/follow", SignalCommentControllerAPI, :follow)
-      put("/unfollow", SignalCommentControllerAPI, :unfollow)
+      get("/users/:id", UserControllerAPI, :show)
+      post("/users/logout", UserControllerAPI, :logout)
+      resources("/signals", SignalControllerAPI)
+      get("/my_signals", MySignalControllerAPI, :index)
+
+      resources("/signal_type", SignalTypeControllerAPI, except: [:new, :edit])
+      resources("/signal_category", SignalCategoryControllerAPI, except: [:new, :edit])
+
+      resources("/animals", AnimalControllerAPI, except: [:new, :edit])
+      post("/animals/:id/send_email", AnimalControllerAPI, :send_email)
+      resources("/contacts", ContactControllerAPI, except: [:new, :edit, :delete])
     end
-
-    resources("/signal_type", SignalTypeControllerAPI, except: [:new, :edit])
-    resources("/signal_category", SignalCategoryControllerAPI, except: [:new, :edit])
-    resources("/signal_likes", SignalLikeControllerAPI, except: [:new, :edit])
-    resources("/animals", AnimalControllerAPI, except: [:new, :edit])
-    post("/animals/:id/send_email", AnimalControllerAPI, :send_email)
-    resources("/contacts", ContactControllerAPI, except: [:new, :edit, :delete])
-    resources("/users_types", UserTypeControllerAPI, except: [:new, :edit])
-    resources("/performed_procedure", PerformedProcedureControllerAPI, except: [:new, :edit])
-    resources("/animal_statuses", AnimalStatusControllerAPI, except: [:new, :edit])
-    resources("/animal_images", AnimalImageControllerAPI, except: [:new, :edit])
-    resources("/rescues", RescueControllerAPI, except: [:new, :edit])
-    resources("/procedure_types", ProcedureTypeControllerAPI, except: [:new, :edit])
-    resources("/header_slides", HeaderSlideControllerAPI, except: [:new, :edit])
-    resources("/news", NewsSchemaControllerAPI, except: [:new, :edit])
-    resources("/static_pages", StaticPageControllerAPI, except: [:new, :edit])
-
-    # post("/signals/add_comment_like", SignalController, :add_comment_like)
-    # post("/signals/add_comment_dislike", SignalController, :add_comment_dislike)
   end
 
   ###### DEFAULT BROWSER STACK #####
@@ -195,8 +171,9 @@ defmodule SmartcitydogsWeb.Router do
       conn
     else
       conn
-      |> put_flash(:info, "Моля впишете се!")
-      |> redirect(to: "/")
+      |> put_status(:unauthorized)
+      |> render(SmartcitydogsWeb.ErrorView, "401.json", message: "Unauthenticated user")
+      |> halt()
     end
   end
 end

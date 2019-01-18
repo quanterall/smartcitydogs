@@ -39,8 +39,8 @@
         </div>
     </div>
     <div class="hidden-form-group">
-        <%= hidden_input f, :address_F, id: "address_F" %>
-        <%= hidden_input f, :address_B, id: "address_B" %>
+        <%= hidden_input f, :latitude, id: "latitude" %>
+        <%= hidden_input f, :longitude, id: "longitude" %>
     </div>
 </div>
 
@@ -64,10 +64,10 @@
 
         // When the user selects an address from the dropdown, populate the address
         // fields in the form.
-        autocomplete.addListener('place_changed', placeAlabala);
+        autocomplete.addListener('place_changed', place);
     }
 
-    function placeAlabala() {
+    function place() {
         var place = autocomplete.getPlace();
         console.log(place);
         var a_a = place.geometry.viewport.f.b;
@@ -80,8 +80,8 @@
         Cordinate_b = res_b   //place.geometry.viewport.b.b;
         console.log(Cordinate_a);
         console.log(Cordinate_b);
-        $('#address_F').val(Cordinate_a);
-        $('#address_B').val(Cordinate_b);
+        $('#latitude').val(Cordinate_a);
+        $('#longitude').val(Cordinate_b);
 
     }
 </script>

@@ -12,6 +12,7 @@
             <ul class="navbar-nav mr-auto text-nowrap">
                 <%= printNavbar(@conn,@current_user) %>
             </ul>
+            <%= if Application.get_env(:smartcitydogs, :show_deleted_content) do %>
             <ul class="navbar-nav text-nowrap">
                 <%= if @current_user do %>
                 <li class="nav-item ">
@@ -41,6 +42,7 @@
                     </a>
                 </li>
             </ul>
+            <% end %>
         </div>
     </div>
 </nav>

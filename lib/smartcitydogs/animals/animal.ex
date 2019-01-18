@@ -7,8 +7,8 @@ defmodule Smartcitydogs.Animal do
 
   schema "animals" do
     field(:address, :string)
-    field(:address_B, :float)
-    field(:address_F, :float)
+    field(:longitude, :float)
+    field(:latitude, :float)
     field(:description, :string)
     field(:chip_number, :string)
     field(:deleted_at, :naive_datetime)
@@ -26,8 +26,8 @@ defmodule Smartcitydogs.Animal do
   def changeset(animals, attrs \\ %{}) do
     animals
     |> cast(attrs, [
-      :address_B,
-      :address_F,
+      :longitude,
+      :latitude,
       :description,
       :sex,
       :chip_number,

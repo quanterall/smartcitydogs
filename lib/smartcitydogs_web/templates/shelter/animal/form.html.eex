@@ -77,8 +77,8 @@
         var res_b = (b_a + b_b) / 2;
         Cordinate_a = res_a;
         Cordinate_b = res_b;
-        $('#address_F').val(Cordinate_a);
-        $('#address_B').val(Cordinate_b);
+        $('#latitude').val(Cordinate_a);
+        $('#longitude').val(Cordinate_b);
 
     }
 
