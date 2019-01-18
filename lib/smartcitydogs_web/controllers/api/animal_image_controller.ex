@@ -16,7 +16,6 @@ defmodule SmartcitydogsWeb.AnimalImageControllerAPI do
            AnimalImage.create_animal_image(animal_image_params) do
       conn
       |> put_status(:created)
-      |> put_resp_header("location", animal_image_controller_api_path(conn, :show, animal_image))
       |> render("show.json", animal_image: animal_image)
     end
   end

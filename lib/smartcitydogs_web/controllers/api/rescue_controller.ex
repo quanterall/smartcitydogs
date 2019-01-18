@@ -15,7 +15,6 @@ defmodule SmartcitydogsWeb.RescueControllerAPI do
     with {:ok, %Rescue{} = rescues} <- DataProcedure.create_rescues(rescue_params) do
       conn
       |> put_status(:created)
-      |> put_resp_header("location", rescue_controller_api_path(conn, :show, rescues))
       |> render("show.json", rescue: rescues)
     end
   end

@@ -65,7 +65,7 @@ defmodule SmartcitydogsWeb.Router do
       pipe_through(:api)
 
       post("/users/sign_in", UserControllerAPI, :sign_in)
-      resources("/signals", SignalControllerAPI, except: [:new, :edit])
+      resources("/signals", SignalControllerAPI, only: [:index, :show])
 
       resources(
         "/forgoten_password",

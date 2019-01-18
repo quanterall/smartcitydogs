@@ -1,7 +1,11 @@
 defmodule SmartcitydogsWeb.Encoder do
-  def encode(list) do
+  def struct_to_map(list) when is_list(list) do
     list
     |> Enum.map(&sanitize_recursive(&1))
+  end
+
+  def struct_to_map(map) when is_map(map) do
+    sanitize_recursive(map)
   end
 
   defp sanitize_recursive(map) do
@@ -11,7 +15,7 @@ defmodule SmartcitydogsWeb.Encoder do
     |> Enum.map(fn
       {key, %DateTime{} = value} when is_map(value) -> {key, DateTime.to_string(value)}
       {key, value} when is_map(value) -> {key, sanitize_recursive(value)}
-      {key, value} when is_list(value) -> {key, encode(value)}
+      {key, value} when is_list(value) -> {key, struct_to_map(value)}
       x -> x
     end)
     |> Map.new()

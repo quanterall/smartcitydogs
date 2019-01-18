@@ -16,7 +16,6 @@ defmodule SmartcitydogsWeb.SignalImageControllerAPI do
            DataSignal.create_signal_images(signal_image_params) do
       conn
       |> put_status(:created)
-      |> put_resp_header("location", signal_image_controller_api_path(conn, :show, signal_image))
       |> render("show.json", signal_image: signal_image)
     end
   end

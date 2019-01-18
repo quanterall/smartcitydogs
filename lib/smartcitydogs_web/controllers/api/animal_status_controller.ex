@@ -16,10 +16,6 @@ defmodule SmartcitydogsWeb.AnimalStatusControllerAPI do
            DataAnimal.create_animal_status(animal_status_params) do
       conn
       |> put_status(:created)
-      |> put_resp_header(
-        "location",
-        animal_status_controller_api_path(conn, :show, animal_status)
-      )
       |> render("show.json", animal_status: animal_status)
     end
   end

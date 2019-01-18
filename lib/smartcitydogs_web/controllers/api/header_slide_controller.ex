@@ -16,7 +16,6 @@ defmodule SmartcitydogsWeb.HeaderSlideControllerAPI do
            DataPage.create_header_slide(header_slide_params) do
       conn
       |> put_status(:created)
-      |> put_resp_header("location", header_slide_controller_api_path(conn, :show, header_slide))
       |> render("show.json", header_slide: header_slide)
     end
   end

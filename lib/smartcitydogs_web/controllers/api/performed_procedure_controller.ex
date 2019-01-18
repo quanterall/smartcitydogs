@@ -16,10 +16,6 @@ defmodule SmartcitydogsWeb.PerformedProcedureControllerAPI do
            DataProcedure.create_performed_procedure(performed_procedure_params) do
       conn
       |> put_status(:created)
-      |> put_resp_header(
-        "location",
-        performed_procedure_controller_api_path(conn, :show, performed_procedure)
-      )
       |> render("show.json", performed_procedure: performed_procedure)
     end
   end

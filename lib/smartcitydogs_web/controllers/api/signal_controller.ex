@@ -23,9 +23,24 @@ defmodule SmartcitydogsWeb.SignalControllerAPI do
         :signal_category,
         :signal_type
       ])
-      |> SmartcitydogsWeb.Encoder.encode()
+      |> SmartcitydogsWeb.Encoder.struct_to_map()
 
     json(conn, signals)
+  end
+
+  def show(conn, %{"id" => id}) do
+    signal =
+      Repo.get(Signal, id)
+      |> Repo.preload([
+        :user,
+        :signal_images,
+        :signal_comments,
+        :signal_category,
+        :signal_type
+      ])
+      |> SmartcitydogsWeb.Encoder.struct_to_map()
+
+    json(conn, signal)
   end
 
   def create(conn, %{"signal" => signal_params}) do
@@ -68,29 +83,6 @@ defmodule SmartcitydogsWeb.SignalControllerAPI do
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "new_signal.html", changeset: changeset)
     end
-
-    # with {:ok, %Signal{} = signal} <- DataSignal.create_signal(signal_params) do
-    #   conn
-    #   |> put_status(:created)
-    #   |> put_resp_header("location", signal_path(conn, :show, signal))
-    #   |> render("show.json", signal: signal)
-    # end
-  end
-
-  def show(conn, map) do
-    id = String.to_integer(map["id"])
-    comments = DataSignal.get_comment_signal_id(id)
-    signal = DataSignal.get_signal(id)
-    ## signal is liked by user
-    sorted_comments = DataSignal.sort_signal_comment_by_id()
-
-    render(
-      conn,
-      "show.json",
-      signal: signal,
-      comments: sorted_comments,
-      comments_count: comments
-    )
   end
 
   def update(conn, %{"id" => id, "signal" => signal_params}) do

@@ -15,7 +15,6 @@ defmodule SmartcitydogsWeb.StaticPageControllerAPI do
     with {:ok, %StaticPage{} = static_page} <- DataPage.create_static_page(static_page_params) do
       conn
       |> put_status(:created)
-      |> put_resp_header("location", static_page_controller_api_path(conn, :show, static_page))
       |> render("show.json", static_page: static_page)
     end
   end
