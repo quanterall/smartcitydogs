@@ -30,4 +30,4 @@ npm-debug.log
 
 # Environment Variables
 /.env
-/.source.env
+source.env
