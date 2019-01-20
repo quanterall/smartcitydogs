@@ -1,13 +1,13 @@
-defmodule SmartcitydogsWeb.StaticPageControllerAPIView do
+defmodule SmartcitydogsWeb.StaticHomeControllerAPIView do
   use SmartcitydogsWeb, :view
-  alias SmartcitydogsWeb.StaticPageControllerAPIView
+  alias SmartcitydogsWeb.StaticHomeControllerAPIView
 
   def render("index.json", %{static_pages: static_pages}) do
-    %{data: render_many(static_pages, StaticPageControllerAPIView, "static_page.json")}
+    %{data: render_many(static_pages, StaticHomeControllerAPIView, "static_page.json")}
   end
 
   def render("show.json", %{static_page: static_page}) do
-    %{data: render_one(static_page, StaticPageControllerAPIView, "static_page.json")}
+    %{data: render_one(static_page, StaticHomeControllerAPIView, "static_page.json")}
   end
 
   def render("static_page.json", %{static_page_controller_api: static_page}) do

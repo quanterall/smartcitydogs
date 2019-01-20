@@ -4,37 +4,37 @@ defmodule SmartcitydogsWeb.Shelter.SignalController do
   import Ecto.Query
 
   def index(conn, params) do
-    page =
+    signals =
       Signal
       |> order_by(desc: :inserted_at)
       |> preload([:signal_type, :signal_category, :signal_comments, :signal_likes])
 
     filter_changeset =
-      if params["signal_filters"] != nil do
-        SignalFilter.changeset(%SignalFilter{}, params["signal_filters"])
+      if params["signal_filter"] != nil do
+        SignalFilter.changeset(%SignalFilter{}, params["signal_filter"])
       else
         SignalFilter.changeset(%SignalFilter{}, %{})
       end
 
-    page =
-      if params["signal_filters"]["signal_type_id"] do
-        page |> where([p], p.signal_type_id in ^params["signal_filters"]["signal_type_id"])
+    signals =
+      if params["signal_filter"]["signal_type_id"] do
+        signals |> where([p], p.signal_type_id in ^params["signal_filter"]["signal_type_id"])
       else
-        page
+        signals
       end
 
-    page =
-      if params["signal_filters"]["signal_category_id"] do
-        page
+    signals =
+      if params["signal_filter"]["signal_category_id"] do
+        signals
         |> where(
           [p],
-          p.signal_category_id in ^params["signal_filters"]["signal_category_id"]
+          p.signal_category_id in ^params["signal_filter"]["signal_category_id"]
         )
       else
-        page
+        signals
       end
 
-    page = Repo.paginate(page, params)
+    page = Repo.paginate(signals, params)
 
     render(conn, "index.html",
       params: params,

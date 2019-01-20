@@ -13,7 +13,7 @@ defmodule SmartcitydogsWeb.ForgotenPasswordController do
     render(conn, "new.html", changeset: changeset, action: forgoten_password_path(conn, :create))
   end
 
-  def create(conn, %{"email" => email} = params) do
+  def create(conn, %{"email" => email}) do
     user =
       User
       |> Repo.get_by(email: email)
@@ -22,7 +22,7 @@ defmodule SmartcitydogsWeb.ForgotenPasswordController do
       nil ->
         conn
         |> put_flash(:error, "Could not send reset email. Please try again later")
-        |> redirect(to: page_path(conn, :index))
+        |> redirect(to: home_path(conn, :index))
 
       user ->
         user = reset_password_token(user)
@@ -37,7 +37,7 @@ defmodule SmartcitydogsWeb.ForgotenPasswordController do
           "If your email address exists in our database, you will receive a password reset link at your email address in a few minutes."
         )
 
-        redirect(conn, to: page_path(conn, :index))
+        redirect(conn, to: home_path(conn, :index))
     end
   end
 
@@ -62,7 +62,7 @@ defmodule SmartcitydogsWeb.ForgotenPasswordController do
           |> Repo.update!()
 
           conn
-          |> redirect(to: page_path(conn, :index))
+          |> redirect(to: home_path(conn, :index))
         else
           changeset = User.changeset(%User{})
 
@@ -95,7 +95,7 @@ defmodule SmartcitydogsWeb.ForgotenPasswordController do
           |> put_flash(:error, "Password reset token expired")
           |> redirect(to: forgoten_password_path(conn, :new))
         else
-          changeset = User.registration_changeset(user, pw_params)
+          changeset = User.changeset(user, pw_params)
 
           case Repo.update(changeset) do
             {:ok, _user} ->
@@ -108,7 +108,7 @@ defmodule SmartcitydogsWeb.ForgotenPasswordController do
               |> Repo.update!()
 
               conn
-              |> redirect(to: page_path(conn, :index))
+              |> redirect(to: home_path(conn, :index))
 
             {:error, changeset} ->
               conn

@@ -4,6 +4,7 @@ defmodule SmartcitydogsWeb.FallbackController do
   def call(conn, {:error, :unauthorized}) do
     conn
     |> put_status(:forbidden)
-    |> render(SmartcitydogsWeb.ErrorView, :"403")
+    |> put_view(SmartcitydogsWeb.ErrorView)
+    |> render("404.html")
   end
 end

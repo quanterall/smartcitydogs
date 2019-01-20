@@ -12,7 +12,6 @@
             <ul class="navbar-nav mr-auto text-nowrap">
                 <%= printNavbar(@conn,@current_user) %>
             </ul>
-            <%= if Application.get_env(:smartcitydogs, :show_deleted_content) do %>
             <ul class="navbar-nav text-nowrap">
                 <%= if @current_user do %>
                 <li class="nav-item ">
@@ -25,7 +24,8 @@
                     <%= link "Излез", to: session_path(@conn, :delete, @current_user), method: "delete", class:
                     "nav-link" %>
                 </li>
-                <% else %>
+                <% end %>
+                <%= if Application.get_env(:smartcitydogs, :show_deleted_content) do %>
                 <li class="nav-item ">
                     <a class="nav-link  <%= if length(@conn.path_info) == 0 do  %> black <% end %>"
                        id="nav-register"
@@ -35,14 +35,15 @@
                     <a class="nav-link" id="nav-sign-in"
                        href="<%=session_path(@conn,:new)%>" onclick="showModalForm(event, 'login-form')">Вход</a>
                 </li>
-                <% end %>
+             
                 <li class="nav-item ">
                     <a id="new-signal-btn" class="nav-link " onclick="showModalForm(event, 'signal-form')"
                        href="<%=signal_path(@conn,:new)%>">ПОДАЙ СИГНАЛ
                     </a>
                 </li>
+                <% end %>
             </ul>
-            <% end %>
+
         </div>
     </div>
 </nav>

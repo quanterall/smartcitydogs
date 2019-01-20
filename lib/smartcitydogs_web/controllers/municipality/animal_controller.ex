@@ -2,7 +2,6 @@ defmodule SmartcitydogsWeb.Municipality.AnimalController do
   use SmartcitydogsWeb, :controller
   alias Smartcitydogs.{Animal, Repo, AnimalFilter}
   import Ecto.Query
-  alias Smartcitydogs.PerformedProcedure
 
   def index(conn, params) do
     page =

@@ -1,10 +1,7 @@
-defmodule SmartcitydogsWeb.PageController do
+defmodule SmartcitydogsWeb.HomeController do
   use SmartcitydogsWeb, :controller
 
   import Ecto.Query
-  alias Smartcitydogs.DataSignal
-  alias Smartcitydogs.DataPage
-  alias Smartcitydogs.DataAnimal
   alias Smartcitydogs.Animal
   alias Smartcitydogs.Signal
   alias Smartcitydogs.News

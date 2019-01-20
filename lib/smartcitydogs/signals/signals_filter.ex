@@ -6,7 +6,7 @@ defmodule Smartcitydogs.SignalFilter do
 
   embedded_schema do
     field(:signal_category_id, {:array, :string})
-    field(:signal_typ_id, {:array, :string})
+    field(:signal_type_id, {:array, :string})
   end
 
   @doc false

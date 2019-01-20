@@ -1,4 +1,4 @@
-defmodule SmartcitydogsWeb.PageView do
+defmodule SmartcitydogsWeb.HomeView do
   use SmartcitydogsWeb, :view
 
   def get_signal_images(signal_id) do

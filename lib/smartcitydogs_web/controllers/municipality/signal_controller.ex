@@ -12,37 +12,38 @@ defmodule SmartcitydogsWeb.Municipality.SignalController do
       |> preload([:signal_type, :signal_category, :signal_comments, :signal_likes])
 
     filter_changeset =
-      if params["signal_filters"] != nil do
-        SignalFilter.changeset(%SignalFilter{}, params["signal_filters"])
+      if params["signal_filter"] != nil do
+        SignalFilter.changeset(%SignalFilter{}, params["signal_filter"])
       else
         SignalFilter.changeset(%SignalFilter{}, %{})
       end
 
     page =
-      if params["signal_filters"]["signal_type_id"] &&
-           params["signal_filters"]["signal_type_id"] != "" do
-        page |> where([p], p.signal_type_id == ^params["signal_filters"]["signal_type_id"])
+      if params["signal_filter"]["signal_type_id"] &&
+           params["signal_filter"]["signal_type_id"] != "" do
+        IO.inspect("asdasd")
+        page |> where([p], p.signal_type_id == ^params["signal_filter"]["signal_type_id"])
       else
         page
       end
 
     page =
-      if params["signal_filters"]["signal_category_id"] &&
-           params["signal_filters"]["signal_category_id"] != "" do
+      if params["signal_filter"]["signal_category_id"] &&
+           params["signal_filter"]["signal_category_id"] != "" do
         page
         |> where(
           [p],
-          p.signal_category_id == ^params["signal_filters"]["signal_category_id"]
+          p.signal_category_id == ^params["signal_filter"]["signal_category_id"]
         )
       else
         page
       end
 
     pagination_params = [
-      {:signal_filters,
+      {:signal_filter,
        [
-         {:signal_type_id, params["signal_filters"]["signal_type_id"]},
-         {:signal_category_id, params["signal_filters"]["signal_category_id"]}
+         {:signal_type_id, params["signal_filter"]["signal_type_id"]},
+         {:signal_category_id, params["signal_filter"]["signal_category_id"]}
        ]}
     ]
 

@@ -25,8 +25,8 @@ defmodule SmartcitydogsWeb.ContactController do
         |> Smartcitydogs.Mailer.deliver_now()
 
         conn
-        |> redirect(to: page_path(conn, :new))
         |> put_flash(:info, "Съобщението е изпратено успешно")
+        |> redirect(to: home_path(conn, :index))
 
       {:error, _} ->
         conn

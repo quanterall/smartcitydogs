@@ -2,17 +2,13 @@ defmodule SmartcitydogsWeb.Shelter.PerformedProcedureController do
   use SmartcitydogsWeb, :controller
 
   alias Smartcitydogs.{
-    Signal,
     Repo,
-    SignalFilter,
-    Animal,
-    AnimalFilter,
     PerformedProcedure
   }
 
   import Ecto.Query
 
-  def create(conn, %{"performed_procedures" => performed_procedures_params} = params) do
+  def create(conn, %{"performed_procedures" => performed_procedures_params}) do
     PerformedProcedure.create_procedure(performed_procedures_params)
 
     conn

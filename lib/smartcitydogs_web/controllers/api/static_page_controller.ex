@@ -1,4 +1,4 @@
-defmodule SmartcitydogsWeb.StaticPageControllerAPI do
+defmodule SmartcitydogsWeb.StaticHomeControllerAPI do
   use SmartcitydogsWeb, :controller
 
   alias Smartcitydogs.StaticPage

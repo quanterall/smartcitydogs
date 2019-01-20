@@ -56,6 +56,10 @@ defmodule Smartcitydogs.Signal do
     ])
   end
 
+  def get_all_preloaded() do
+
+  end
+
   def get_like_by_user(signal, user) do
     case user do
       nil ->

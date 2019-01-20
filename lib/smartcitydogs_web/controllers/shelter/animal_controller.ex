@@ -2,7 +2,6 @@ defmodule SmartcitydogsWeb.Shelter.AnimalController do
   use SmartcitydogsWeb, :controller
 
   alias Smartcitydogs.{
-    Signal,
     Repo,
     Animal,
     AnimalFilter,
@@ -102,10 +101,9 @@ defmodule SmartcitydogsWeb.Shelter.AnimalController do
   end
 
   def delete(conn, %{"id" => id}) do
-    animal =
-      Animal
-      |> Repo.get(id)
-      |> Repo.delete()
+    Animal
+    |> Repo.get(id)
+    |> Repo.delete()
 
     conn
     |> redirect(to: shelter_animal_path(conn, :index))

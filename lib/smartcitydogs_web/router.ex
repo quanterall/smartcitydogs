@@ -63,7 +63,6 @@ defmodule SmartcitydogsWeb.Router do
   scope "/api", SmartcitydogsWeb do
     scope "/" do
       pipe_through(:api)
-
       post("/users/sign_in", UserControllerAPI, :sign_in)
       resources("/signals", SignalControllerAPI, only: [:index, :show])
 
@@ -78,15 +77,12 @@ defmodule SmartcitydogsWeb.Router do
 
     scope "/" do
       pipe_through([:api, :api_auth])
-
       get("/users/:id", UserControllerAPI, :show)
       post("/users/logout", UserControllerAPI, :logout)
       resources("/signals", SignalControllerAPI)
       get("/my_signals", MySignalControllerAPI, :index)
-
       resources("/signal_type", SignalTypeControllerAPI, except: [:new, :edit])
       resources("/signal_category", SignalCategoryControllerAPI, except: [:new, :edit])
-
       resources("/animals", AnimalControllerAPI, except: [:new, :edit])
       post("/animals/:id/send_email", AnimalControllerAPI, :send_email)
       resources("/contacts", ContactControllerAPI, except: [:new, :edit, :delete])
@@ -98,8 +94,8 @@ defmodule SmartcitydogsWeb.Router do
   scope "/", SmartcitydogsWeb do
     pipe_through([:browser, :with_session])
 
-    get("/", PageController, :index)
-    resources("/signals", SignalController, only: [:index, :new, :create, :show])
+    get("/", HomeController, :index)
+    resources("/signals", SignalController, only: [:index, :show])
     resources("/animals", AnimalController, only: [:index, :show])
 
     resources("/sessions", SessionController, only: [:new, :create, :delete])
@@ -118,7 +114,7 @@ defmodule SmartcitydogsWeb.Router do
       put("/profile/update", UserController, :update)
 
       post("/animals/:id/adopt", AnimalController, :adopt)
-      get("/show", PageController, :show)
+      get("/show", HomeController, :show)
 
       resources("/my_signals", MySignalController)
       get("/followed_signals", SignalController, :followed_signals)
