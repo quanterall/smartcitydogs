@@ -12,8 +12,8 @@ config :logger, level: :warn
 # Configure your database
 config :smartcitydogs, Smartcitydogs.Repo,
   adapter: Ecto.Adapters.Postgres,
-  username: "postgres",
-  password: "postgres",
-  database: "smartcitydogs_test",
-  hostname: "localhost",
+  username: System.get_env("SMARTCITYDOGS_DB_USER"),
+  password: System.get_env("SMARTCITYDOGS_DB_PASSWORD"),
+  database: System.get_env("SMARTCITYDOGS_DB_NAME"),
+  hostname: System.get_env("SMARTCITYDOGS_DB_HOST"),
   pool: Ecto.Adapters.SQL.Sandbox
