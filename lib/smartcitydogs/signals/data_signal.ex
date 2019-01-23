@@ -232,6 +232,11 @@ defmodule Smartcitydogs.DataSignal do
     Repo.all(query)
   end
 
+  def get_signal_like_by_user_and_signal(user_id, signal_id) do
+    from(c in SignalLike, where: c.user_id == ^user_id and c.signal_id == ^signal_id)
+    |> Repo.all()
+  end
+
   def list_signal_like() do
     Repo.all(SignalLike)
   end
