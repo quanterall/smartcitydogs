@@ -43,46 +43,43 @@ defmodule SmartcitydogsWeb.SignalControllerAPI do
     json(conn, signal)
   end
 
-  def create(conn, %{"signal" => signal_params}) do
+  def create(conn, params) do
     #  a = conn.assigns.current_user.id
     user_id = conn.private.plug_session["current_user_id"]
+    IO.inspect(params)
 
     signal_params =
-      signal_params
+      params
       |> Map.put("signal_type_id", 1)
+      |> Map.put("signal_category_id", 1)
       |> Map.put("view_count", 0)
       |> Map.put("support_count", 0)
       |> Map.put("user_id", user_id)
 
-    case DataSignal.create_signal(signal_params) do
-      {:ok, signal} ->
-        upload = Map.get(conn, :params)
+    signal = DataSignal.create_signal(signal_params)
+    images = Map.get(params, "images")
 
-        upload = Map.get(upload, "url")
+    if images do
+      for n <- images do
+        extension = Path.extname(n.filename)
 
-        for n <- upload do
-          extension = Path.extname(n.filename)
+        File.cp(
+          n.path,
+          File.cwd!() <> "/priv/static/images/#{Map.get(n, :filename)}-profile#{extension}"
+        )
 
-          File.cp(
-            n.path,
-            "../smartcitydogs/assets/static/images/#{Map.get(n, :filename)}-profile#{extension}"
-          )
+        args = %{
+          "url" => "images/#{Map.get(n, :filename)}-profile#{extension}",
+          "signal_id" => "#{signal.id}"
+        }
 
-          args = %{
-            "url" => "images/#{Map.get(n, :filename)}-profile#{extension}",
-            "signal_id" => "#{signal.id}"
-          }
-
-          DataSignal.create_signal_images(args)
-        end
-
-        render("show.json", signal: signal)
-
-      # redirect(conn, to: signal_path(conn, :show, signal))
-
-      {:error, %Ecto.Changeset{} = changeset} ->
-        render(conn, "new_signal.html", changeset: changeset)
+        DataSignal.create_signal_images(args)
+      end
     end
+
+    redirect(conn, to: signal_controller_api_path(conn, :show, signal))
+
+    # redirect(conn, to: signal_path(conn, :show, signal))
   end
 
   def update(conn, %{"id" => id, "signal" => signal_params}) do
