@@ -20,6 +20,7 @@ defmodule SmartcitydogsWeb.SignalControllerAPI do
         :user,
         :signal_images,
         :signal_comments,
+        {:signal_comments, :user},
         :signal_category,
         :signal_type
       ])
