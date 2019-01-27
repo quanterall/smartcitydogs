@@ -1,10 +1,6 @@
 defmodule SmartcitydogsWeb.LayoutView do
   use SmartcitydogsWeb, :view
 
-  def get_csrf_token(conn) do
-    Plug.Conn.get_session(conn, :csrf_token)
-  end
-
   def printNavbar(conn, current_user) do
     case current_user do
       %{user_type_id: 3} ->

@@ -9,7 +9,6 @@ defmodule Smartcitydogs.Repo.Migrations.Signal do
       add(:support_count, :integer, default: 0)
       add(:chip_number, :text)
       add(:description, :text)
-      add(:deleted_at, :naive_datetime)
       add(:longitude, :float)
       add(:latitude, :float)
       add(:signal_category_id, references("signal_categories"))

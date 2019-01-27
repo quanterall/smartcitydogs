@@ -13,9 +13,5 @@ defmodule Smartcitydogs.Repo.Migrations.AddPrefixToSignalType do
     alter table(:procedure_types) do
       add(:prefix, :text)
     end
-
-    alter table(:user_types) do
-      add(:prefix, :text)
-    end
   end
 end

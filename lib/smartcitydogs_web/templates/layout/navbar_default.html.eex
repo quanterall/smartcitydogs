@@ -1,21 +1,21 @@
 <li class="nav-item active">
-    <a class="nav-link" href="/">Начало</a>
+    <a class="nav-link" href="<%= Routes.home_path(@conn, :index) %>">Начало</a>
 </li>
 <li class="nav-item">
-    <a class="nav-link" href="/about">За проекта</a>
+    <a class="nav-link" href="<%= Routes.page_path(@conn, :about) %>">За проекта</a>
 </li>
 <li class="nav-item">
-    <a class="nav-link" href="/signals">Подадени сигнали</a>
+    <a class="nav-link" href="<%= Routes.signal_path(@conn, :index) %>">Подадени сигнали</a>
 </li>
 <li class="nav-item">
-    <a class="nav-link" href="/animals">Регистрирани кучета</a>
+    <a class="nav-link" href="<%= Routes.animal_path(@conn, :index) %>">Регистрирани кучета</a>
 </li>
 <li class="nav-item">
-    <a class="nav-link" href="/news">Новини</a>
+    <a class="nav-link" href="<%= Routes.news_path(@conn, :index) %>">Новини</a>
 </li>
 <li class="nav-item">
-    <a class="nav-link" href="/help">Помощ</a>
+    <a class="nav-link" href="<%= Routes.page_path(@conn, :help) %>">Помощ</a>
 </li>
 <li class="nav-item">
-    <a class="nav-link" href="/contact/new">Контакти</a>
+    <a class="nav-link" href="<%= Routes.contact_path(@conn, :new) %>">Контакти</a>
 </li>

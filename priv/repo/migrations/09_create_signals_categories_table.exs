@@ -4,6 +4,7 @@ defmodule Smartcitydogs.Repo.Migrations.SignalCategory do
   def change do
     create table("signal_categories") do
       add(:name, :text)
+      add(:prefix, :text)
       add(:deleted_at, :naive_datetime)
       timestamps()
     end

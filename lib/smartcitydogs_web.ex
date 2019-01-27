@@ -14,15 +14,16 @@ defmodule SmartcitydogsWeb do
 
   Do NOT define functions inside the quoted expressions
   below. Instead, define any helper function in modules
-  and import those modules         here.
+  and import those modules here.
   """
 
   def controller do
     quote do
       use Phoenix.Controller, namespace: SmartcitydogsWeb
+
       import Plug.Conn
-      import SmartcitydogsWeb.Router.Helpers
       import SmartcitydogsWeb.Gettext
+      alias SmartcitydogsWeb.Router.Helpers, as: Routes
     end
   end
 
@@ -33,14 +34,14 @@ defmodule SmartcitydogsWeb do
         namespace: SmartcitydogsWeb
 
       # Import convenience functions from controllers
-      import Phoenix.Controller, only: [get_flash: 2, view_module: 1]
+      import Phoenix.Controller, only: [get_flash: 1, get_flash: 2, view_module: 1]
 
       # Use all HTML functionality (forms, tags, etc)
       use Phoenix.HTML
 
-      import SmartcitydogsWeb.Router.Helpers
       import SmartcitydogsWeb.ErrorHelpers
       import SmartcitydogsWeb.Gettext
+      alias SmartcitydogsWeb.Router.Helpers, as: Routes
     end
   end
 
@@ -55,10 +56,6 @@ defmodule SmartcitydogsWeb do
   def channel do
     quote do
       use Phoenix.Channel
-
-      alias SmartcitydogsWeb.Repo
-      import Ecto
-      import Ecto.Query
       import SmartcitydogsWeb.Gettext
     end
   end

@@ -75,6 +75,7 @@
 
 .navbar-home .nav-link, .navbar .navbar-brand {
     color: white;
+    border-radius: 4px;
 }
 .navbar-home #new-signal-btn{
     color: rgb(0,201,148);

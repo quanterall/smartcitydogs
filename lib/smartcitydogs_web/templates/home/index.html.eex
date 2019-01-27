@@ -68,7 +68,7 @@
 
             </div>
             <div class="card-footer text-center border-0 bg-transparent">
-                <a class="btn btn-default float-right text-green" href="<%=news_path(@conn, :show, news.id)%>" role="button">
+                <a class="btn btn-default float-right text-green" href="<%=Routes.news_path(@conn, :show, news.id)%>" role="button">
                     Виж още
                 </a>
             </div>

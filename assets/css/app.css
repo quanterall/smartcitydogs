@@ -1,4 +1,7 @@
-
+@import "../node_modules/bootstrap/dist/css/bootstrap.css";
+@import "../node_modules/@fortawesome/fontawesome-free/css/all.min.css";
+@import "../node_modules/slick-carousel/slick/slick.css";
+@import "nav_bar.css";
 .bg-transperent {
     background: transparent;
 }
@@ -355,4 +358,21 @@
 .contacts-link:hover{
     color: rgb(0, 141, 104);
     text-decoration: none;
+}
+
+
+.project
+{
+background-image: url('/images/About.png');
+background-size: 80%;
+background-repeat:no-repeat;
+height: -webkit-fill-available;
+background-position: center;
+background-position-y: 25px;
+}
+
+.help-icon{
+    text-align: center;
+    font-size: 80px;
+    color: #00cc99;
 }

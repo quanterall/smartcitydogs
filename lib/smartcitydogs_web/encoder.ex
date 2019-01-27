@@ -11,7 +11,7 @@ defmodule SmartcitydogsWeb.Encoder do
   defp sanitize_recursive(map) do
     map
     |> Map.from_struct()
-    |> Map.drop([:__meta__, :__cardinality__, :__field__, :__owner__, :password])
+    |> Map.drop([:__meta__, :__cardinality__, :__field__, :__owner__, :password_hash])
     |> Enum.map(fn
       {key, %DateTime{} = value} when is_map(value) -> {key, DateTime.to_string(value)}
       {key, value} when is_map(value) -> {key, sanitize_recursive(value)}

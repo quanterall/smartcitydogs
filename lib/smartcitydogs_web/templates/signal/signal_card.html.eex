@@ -24,6 +24,6 @@
         </div>
     </div>
     <div class="card-footer text-center  border-0 bg-transparent">
-        <a class="btn custom-btn" href="<%=signal_path(@conn,:show,@signal.id)%>" role="button">Виж още</a>
+        <a class="btn custom-btn" href="<%=Routes.signal_path(@conn,:show,@signal.id)%>" role="button">Виж още</a>
     </div>
 </div>
