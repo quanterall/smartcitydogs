@@ -10,13 +10,12 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav mr-auto text-nowrap">
-                <%= printNavbar(@conn,@current_user) %>
+                <%= printNavbar(@conn,current_user(@conn)) %>
             </ul>
             <ul class="navbar-nav text-nowrap">
-                <%= if @current_user do %>
+                <%= if current_user(@conn) do %>
                 <li class="nav-item">
-                    <%= link "Излез", to: Routes.session_path(@conn, :delete, @current_user), method: "delete", class:
-                    "nav-link" %>
+                    <%= link "Излез", to: Routes.session_path(@conn, :delete),  class: "nav-link" %>
                 </li>
                 <% end %>
             </ul>

@@ -1,0 +1,25 @@
+<li class="nav-item active">
+    <a class="nav-link" href="<%= Routes.home_path(@conn, :index) %>">Начало</a>
+</li>
+
+<li class="nav-item">
+    <a class="nav-link" href="<%= Routes.signal_path(@conn, :index) %>">Сигнали</a>
+</li>
+<li class="nav-item">
+    <a class="nav-link" href="<%= Routes.animal_path(@conn, :index) %>">Кучета</a>
+</li>
+<li class="nav-item">
+    <a class="nav-link" href="<%= Routes.news_path(@conn, :index) %>">Новини</a>
+</li>
+<li class="nav-item dropdown">
+  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      Новини
+  </a>
+  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+    <a class="nav-link" href="<%= Routes.news_path(@conn, :index) %>">Новини</a>
+    <div class="dropdown-divider"></div>
+    <a class="nav-link" href="<%= Routes.news_path(@conn, :new) %>">
+      Добавяне на новина
+    </a>    
+  </div>
+</li>
