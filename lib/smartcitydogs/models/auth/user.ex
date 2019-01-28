@@ -40,7 +40,6 @@ defmodule Smartcitydogs.User do
       :phone,
       :reset_password_token,
       :reset_token_sent_at,
-      :deleted_at,
       :user_type,
       :agreed_to_terms
     ])
