@@ -68,8 +68,8 @@ config :phoenix, :plug_init_mode, :runtime
 
 # Configure your database
 config :smartcitydogs, Smartcitydogs.Repo,
-  username: "postgres",
-  password: "postgres",
+  username: System.get_env("SMARTCITYDOGS_DB_USERNAME") || "postgres",
+  password: System.get_env("SMARTCITYDOGS_DB_PASSWORD") || "postgres",
   database: "smartcitydogs_dev_new",
   hostname: "localhost",
   pool_size: 10

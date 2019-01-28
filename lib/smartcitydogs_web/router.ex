@@ -34,7 +34,6 @@ defmodule SmartcitydogsWeb.Router do
     pipe_through([:browser, :auth])
 
     scope "/" do
-      pipe_through([:ensure_municipality])
       resources("/news", NewsController, only: [:new, :edit, :create, :delete])
     end
 
