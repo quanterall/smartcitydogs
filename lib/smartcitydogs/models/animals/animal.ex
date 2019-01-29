@@ -1,9 +1,7 @@
 defmodule Smartcitydogs.Animal do
   use Ecto.Schema
-  import Ecto.Changeset
-  import Ecto.Query
-  alias Smartcitydogs.Repo
-  alias Smartcitydogs.QueryFilter
+  import Ecto.{Changeset, Query}
+  alias Smartcitydogs.{Repo, QueryFilter, AnimalImage, AnimalStatus, Adopt}
 
   @timestamps_opts [type: :utc_datetime, usec: false]
   @preload [
@@ -17,11 +15,11 @@ defmodule Smartcitydogs.Animal do
     field(:description, :string)
     field(:chip_number, :string)
     field(:sex, :string)
-    has_many(:animal_images, Smartcitydogs.AnimalImage, on_delete: :delete_all)
+    has_many(:animal_images, AnimalImage, on_delete: :delete_all)
     # has_many(:performed_procedures, Smartcitydogs.PerformedProcedure, on_delete: :delete_all)
     # has_many(:rescues, Smartcitydogs.Rescue, on_delete: :delete_all)
-    belongs_to(:animal_status, Smartcitydogs.AnimalStatus)
-    # has_many(:adopts, Smartcitydogs.Adopt, on_delete: :delete_all)
+    belongs_to(:animal_status, AnimalStatus)
+    has_many(:adopts, Adopt, on_delete: :delete_all)
 
     timestamps()
   end

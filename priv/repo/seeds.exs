@@ -15,6 +15,8 @@
 alias Smartcitydogs.SignalCategory
 alias Smartcitydogs.SignalType
 alias Smartcitydogs.AnimalStatus
+alias Smartcitydogs.Animal
+alias Smartcitydogs.Signal
 
 alias Smartcitydogs.User
 
@@ -104,4 +106,105 @@ end)
 ]
 |> Enum.each(fn params ->
   AnimalStatus.create(params)
+end)
+
+############## Animal Status #############
+[
+  %{
+    sex: "male",
+    chip_number: "1",
+    address: "lorem asd asda",
+    longitude: "123123.123",
+    latitude: "1231.123123",
+    description: "adja sd alsjkdh laksjdhlaks",
+    adopted_at: nil,
+    animal_status_id: 1
+  },
+  %{
+    sex: "male",
+    chip_number: "2",
+    address: "lorem asd asda",
+    longitude: "123123.123",
+    latitude: "1231.123123",
+    description: "adja sd alsjkdh laksjdhlaks",
+    adopted_at: nil,
+    animal_status_id: 2
+  },
+  %{
+    sex: "male",
+    chip_number: "3",
+    address: "lorem asd asda",
+    longitude: "123123.123",
+    latitude: "1231.123123",
+    description: "adja sd alsjkdh laksjdhlaks",
+    adopted_at: nil,
+    animal_status_id: 3
+  },
+  %{
+    sex: "male",
+    chip_number: "4",
+    address: "lorem asd asda",
+    longitude: "123123.123",
+    latitude: "1231.123123",
+    description: "adja sd alsjkdh laksjdhlaks",
+    adopted_at: nil,
+    animal_status_id: 3
+  }
+]
+|> Enum.each(fn params ->
+  Animal.create(params)
+end)
+
+[
+  %{
+    address: "nov adrees",
+    chip_number: "1",
+    description: "asdfasfasdasd",
+    latitude: nil,
+    longitude: nil,
+    signal_category_id: 1,
+    signal_type_id: 1,
+    title: "new dog",
+    user_id: 1,
+    view_count: 1
+  },
+  %{
+    address: "nov adrees",
+    chip_number: "2",
+    description: "asdfasfasdasd",
+    latitude: nil,
+    longitude: nil,
+    signal_category_id: 2,
+    signal_type_id: 2,
+    title: "new dog",
+    user_id: 1,
+    view_count: 1
+  },
+  %{
+    address: "nov adrees",
+    chip_number: "3",
+    description: "asdfasfasdasd",
+    latitude: nil,
+    longitude: nil,
+    signal_category_id: 3,
+    signal_type_id: 3,
+    title: "new dog",
+    user_id: 1,
+    view_count: 1
+  },
+  %{
+    address: "nov adrees",
+    chip_number: "4",
+    description: "asdfasfasdasd",
+    latitude: nil,
+    longitude: nil,
+    signal_category_id: 3,
+    signal_type_id: 4,
+    title: "new dog",
+    user_id: 1,
+    view_count: 1
+  }
+]
+|> Enum.each(fn params ->
+  Signal.create(params)
 end)

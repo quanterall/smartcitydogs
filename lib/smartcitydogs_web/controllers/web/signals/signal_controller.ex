@@ -14,6 +14,8 @@ defmodule SmartcitydogsWeb.SignalController do
 
   def show(conn, %{"id" => id}) do
     signal = Signal.get_preloaded(id)
+
+    {:ok, signal} = Signal.update(signal, %{"view_count" => signal.view_count + 1})
     render(conn, "show.html", signal: signal)
   end
 end
