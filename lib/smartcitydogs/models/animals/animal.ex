@@ -51,6 +51,12 @@ defmodule Smartcitydogs.Animal do
     Repo.preload(query, @preload)
   end
 
+  def get_all(filters \\ %{}) do
+    from(a in __MODULE__)
+    |> QueryFilter.filter(filters)
+    |> Repo.all()
+  end
+
   def get_all_preloaded() do
     __MODULE__
     |> Repo.all()
@@ -85,5 +91,14 @@ defmodule Smartcitydogs.Animal do
     else
       "images/stray.jpg"
     end
+  end
+
+  defp count() do
+    from(p in __MODULE__, select: count(p.id))
+  end
+
+  def get_count() do
+    count()
+    |> Repo.one()
   end
 end

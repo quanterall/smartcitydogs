@@ -72,6 +72,14 @@ defmodule SmartcitydogsWeb.Router do
         resources("/likes", SignalLikeController, only: [:create, :delete])
       end
 
+      scope "/statistics" do
+        get("/count", StatisticController, :count)
+      end
+
+      scope "/animals/:animal_id" do
+        post("/adopt", AdoptController, :create)
+      end
+
       get("/profile", UserController, :show)
     end
   end

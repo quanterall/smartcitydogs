@@ -3,9 +3,9 @@ defmodule SmartcitydogsWeb.Api.AnimalController do
 
   alias Smartcitydogs.Animal
 
-  def index(conn, _params) do
+  def index(conn, params) do
     animals =
-      Animal.get_all_preloaded()
+      Animal.get_all(params)
       |> SmartcitydogsWeb.Encoder.struct_to_map()
 
     json(conn, animals)
@@ -21,7 +21,7 @@ defmodule SmartcitydogsWeb.Api.AnimalController do
     end
   end
 
-  def wrong_animal_id(conn, id) do
+  defp wrong_animal_id(conn, id) do
     json(conn, %{error: "There is no animal with id: " <> id})
   end
 end

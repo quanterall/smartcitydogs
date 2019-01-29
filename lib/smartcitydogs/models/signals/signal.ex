@@ -88,6 +88,21 @@ defmodule Smartcitydogs.Signal do
     Repo.get(__MODULE__, id)
   end
 
+  defp count() do
+    from(p in __MODULE__, select: count(p.id))
+  end
+
+  def get_count() do
+    count()
+    |> Repo.one()
+  end
+
+  def get_count_by_user_id(user_id) do
+    count()
+    |> where([s], s.user_id == ^user_id)
+    |> Repo.one()
+  end
+
   def create(params) do
     %__MODULE__{}
     |> changeset(params)
