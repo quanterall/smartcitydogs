@@ -108,7 +108,7 @@ end)
   AnimalStatus.create(params)
 end)
 
-############## Animal Status #############
+############## Animal #############
 [
   %{
     sex: "male",

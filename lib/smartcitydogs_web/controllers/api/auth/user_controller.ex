@@ -16,7 +16,7 @@ defmodule SmartcitydogsWeb.Api.UserController do
         end
 
       _ ->
-        json(conn, %{error: "user exist"})
+        send_resp(conn, 401, %{error: "user exist"})
     end
   end
 
@@ -35,7 +35,7 @@ defmodule SmartcitydogsWeb.Api.UserController do
         json(conn, %{token: token, user: Encoder.struct_to_map(user)})
 
       _ ->
-        json(conn, %{error: :unauthorized})
+        send_resp(conn, 401, %{error: :unauthorized})
     end
   end
 end
