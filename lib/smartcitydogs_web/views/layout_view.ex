@@ -5,7 +5,7 @@ defmodule SmartcitydogsWeb.LayoutView do
   def printNavbar(conn) do
     case Guardian.Plug.current_resource(conn) do
       %{user_type: "police"} ->
-        render("navbar_zoo.html", %{conn: conn})
+        render("navbar_police.html", %{conn: conn})
 
       %{user_type: "municipality"} ->
         render("navbar_municipality.html", %{conn: conn})

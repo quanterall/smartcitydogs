@@ -2,8 +2,8 @@ defmodule Smartcitydogs.Signal do
   use Ecto.Schema
   import Ecto.Changeset
   import Ecto.Query
-  alias Smartcitydogs.Repo
-  alias Smartcitydogs.QueryFilter
+  alias Smartcitydogs.{Repo, QueryFilter}
+
   @timestamps_opts [type: :utc_datetime, usec: true]
   schema "signals" do
     field(:address, :string)

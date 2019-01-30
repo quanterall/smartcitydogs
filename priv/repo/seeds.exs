@@ -17,6 +17,7 @@ alias Smartcitydogs.SignalType
 alias Smartcitydogs.AnimalStatus
 alias Smartcitydogs.Animal
 alias Smartcitydogs.Signal
+alias Smartcitydogs.ProcedureType
 
 alias Smartcitydogs.User
 
@@ -196,3 +197,11 @@ alias Smartcitydogs.User
   }
 ]
 |> Enum.each(&Signal.create(&1))
+
+############## Animal Status #############
+[
+  %{name: "Кастрирано", prefix: "castrated"},
+  %{name: "Обезпаразитено", prefix: "deworm"},
+  %{name: "Ваксинирано", prefix: "vaccinated"}
+]
+|> Enum.each(&ProcedureType.create(&1))

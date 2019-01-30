@@ -2,12 +2,12 @@ defmodule SmartcitydogsWeb.SignalController do
   use SmartcitydogsWeb, :controller
 
   alias Smartcitydogs.Signal
-  alias Smartcitydogs.Convertor
+  alias Smartcitydogs.Converter
 
   def index(conn, params) do
     filters = Map.get(params, "filters", %{})
     page = Signal.paginate_preloaded(params, filters)
-    keyword_params = params |> Map.delete("page") |> Convertor.to_keyword_list()
+    keyword_params = params |> Map.delete("page") |> Converter.to_keyword_list()
 
     render(conn, "index.html", page: page, params: keyword_params)
   end

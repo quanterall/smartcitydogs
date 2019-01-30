@@ -1,8 +1,7 @@
 defmodule Smartcitydogs.Adopt do
   use Ecto.Schema
   import Ecto.Changeset
-  import Ecto.Query
-  alias Smartcitydogs.{Adopt, Repo, Animal, User}
+  alias Smartcitydogs.{Repo, Animal, User}
   @timestamps_opts [type: :utc_datetime, usec: false]
 
   schema "adopt" do

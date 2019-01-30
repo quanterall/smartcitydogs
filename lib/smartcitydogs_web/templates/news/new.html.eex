@@ -1,0 +1,2 @@
+
+<%= render "form.html", Map.put(assigns, :action, Routes.news_path(@conn, :create)) %>

@@ -7,7 +7,6 @@ defmodule Smartcitydogs.News do
 
   schema "news" do
     field(:content, :string)
-    field(:date, :naive_datetime)
     field(:image_url, :string)
     field(:short_content, :string)
     field(:title, :string)
@@ -22,19 +21,14 @@ defmodule Smartcitydogs.News do
       :image_url,
       :title,
       :content,
-      :short_content,
-      :date
+      :short_content
     ])
     |> validate_required([
       :image_url,
       :title,
       :content,
-      :date,
       :short_content
     ])
-    |> validate_length(:title, min: 5)
-    |> validate_length(:content, min: 15)
-    |> validate_length(:short_content, min: 5)
   end
 
   def paginate_preloaded(params) do
@@ -48,5 +42,29 @@ defmodule Smartcitydogs.News do
 
   def get(id) do
     Repo.get(__MODULE__, id)
+  end
+
+  def create(params) do
+    %__MODULE__{}
+    |> changeset(params)
+    |> Repo.insert()
+  end
+
+  def update(news, params) do
+    news
+    |> changeset(params)
+    |> Repo.update()
+  end
+
+  def store_image(upload) do
+    extension = Path.extname(upload.filename)
+    filename = to_string(:erlang.unique_integer()) <> extension
+
+    File.cp(
+      upload.path,
+      File.cwd!() <> "/priv/static/images/news/#{filename}"
+    )
+
+    "images/news/#{filename}"
   end
 end

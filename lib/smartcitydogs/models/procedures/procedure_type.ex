@@ -1,22 +1,22 @@
-defmodule Smartcitydogs.AnimalStatus do
+defmodule Smartcitydogs.ProcedureType do
   use Ecto.Schema
   import Ecto.Changeset
   alias Smartcitydogs.Repo
 
   @timestamps_opts [type: :utc_datetime, usec: false]
 
-  schema "animal_statuses" do
+  schema "procedure_types" do
+    field(:deleted_at, :naive_datetime)
     field(:name, :string)
     field(:prefix, :string)
-    has_many(:animals, Smartcitydogs.Animal)
+    has_many(:performed_procedures, Smartcitydogs.PerformedProcedure)
 
     timestamps()
   end
 
-  @doc false
-  def changeset(animal_status, attrs) do
-    animal_status
-    |> cast(attrs, [:name, :prefix])
+  def changeset(procedure_type, attrs) do
+    procedure_type
+    |> cast(attrs, [:name, :prefix, :deleted_at])
     |> validate_required([:name])
   end
 
@@ -27,7 +27,6 @@ defmodule Smartcitydogs.AnimalStatus do
   end
 
   def get_all() do
-    __MODULE__
-    |> Repo.all()
+    Repo.all(__MODULE__)
   end
 end

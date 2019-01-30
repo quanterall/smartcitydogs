@@ -3,7 +3,9 @@ import 'bootstrap';
 import css from '../css/app.css';
 import $ from "jquery";
 import "slick-carousel";
-
+import Quill from "quill";
+window.Quill = Quill
+window.$ = $
 $(document).ready(function () {
   $('#close-map').click(function () {
     $('#map_container').hide();

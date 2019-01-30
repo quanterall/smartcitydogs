@@ -5,6 +5,7 @@ defmodule Smartcitydogs.Plugs.CheckPermission do
 
   def call(conn, %{user_type: user_type}) do
     user = Guardian.Plug.current_resource(conn)
+    IO.inspect(conn)
 
     if user.user_type == user_type do
       conn

@@ -23,4 +23,9 @@ defmodule Smartcitydogs.SignalType do
     |> changeset(params)
     |> Repo.insert()
   end
+
+  def get_all() do
+    __MODULE__
+    |> Repo.all()
+  end
 end

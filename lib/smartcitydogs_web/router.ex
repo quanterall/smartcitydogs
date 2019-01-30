@@ -25,21 +25,26 @@ defmodule SmartcitydogsWeb.Router do
     plug(Guardian.Plug.EnsureAuthenticated)
   end
 
-  pipeline :ensure_municipality do
-    plug(Smartcitydogs.Plugs.CheckPermission, %{user_type: "municipality"})
-  end
-
   ## Browser ##
   scope "/", SmartcitydogsWeb do
     pipe_through([:browser, :auth])
 
     scope "/" do
-      resources("/news", NewsController, only: [:new, :edit, :create, :delete])
+      pipe_through([:ensure_auth])
+      get("/profile", UserController, :show)
+      resources("/news", NewsController, except: [:show, :index])
+      resources("/animals", AnimalController, except: [:show, :index])
+
+      scope "/animals/:animal_id" do
+        resources("/performed-procedure", PerformedProcedureController)
+      end
     end
+
+    resources("/news", NewsController, only: [:show, :index])
 
     get("/", HomeController, :index)
     resources("/signals", SignalController, only: [:show, :index])
-    resources("/news", NewsController, only: [:show, :index])
+
     resources("/animals", AnimalController, only: [:show, :index])
     get("/about", PageController, :about)
     get("/help", PageController, :help)
@@ -48,11 +53,6 @@ defmodule SmartcitydogsWeb.Router do
     get("/login", SessionController, :new)
     post("/login", SessionController, :create)
     get("/logout", SessionController, :delete)
-
-    scope "/" do
-      pipe_through([:ensure_auth])
-      get("/profile", UserController, :show)
-    end
   end
 
   scope "/api", SmartcitydogsWeb.Api, as: :api do

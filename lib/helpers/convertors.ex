@@ -1,4 +1,4 @@
-defmodule Smartcitydogs.Convertor do
+defmodule Smartcitydogs.Converter do
   def to_keyword_list(map) do
     Enum.map(map, fn {k, v} ->
       v =

@@ -37,11 +37,11 @@ defmodule Smartcitydogs.SignalImage do
 
       File.cp(
         upload.path,
-        File.cwd!() <> "/priv/static/images/#{filename}"
+        File.cwd!() <> "/priv/static/images/signals/#{filename}"
       )
 
       create(%{
-        "url" => "images/#{filename}",
+        "url" => "images/signals/#{filename}",
         "signal_id" => "#{signal_id}"
       })
     end

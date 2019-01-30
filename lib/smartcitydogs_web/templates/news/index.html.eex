@@ -13,7 +13,7 @@
             <div class="card-body">
               <p class="text-dark">
                   <small>
-                      <%= Timex.format!(news.date, "%d.%m.%y",:strftime)%> г.
+                      <%= Timex.format!(news.inserted_at, "%d.%m.%y",:strftime)%> г.
                   </small>
               </p>
               <h5 class="card-title"><%= news.title %></h5>

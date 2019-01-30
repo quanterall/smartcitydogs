@@ -6,7 +6,8 @@ defmodule Smartcitydogs.Animal do
   @timestamps_opts [type: :utc_datetime, usec: false]
   @preload [
     :animal_images,
-    :animal_status
+    :animal_status,
+    {:performed_procedures, :procedure_type}
   ]
   schema "animals" do
     field(:address, :string)
@@ -15,8 +16,9 @@ defmodule Smartcitydogs.Animal do
     field(:description, :string)
     field(:chip_number, :string)
     field(:sex, :string)
+    field(:adopted_at, :utc_datetime)
     has_many(:animal_images, AnimalImage, on_delete: :delete_all)
-    # has_many(:performed_procedures, Smartcitydogs.PerformedProcedure, on_delete: :delete_all)
+    has_many(:performed_procedures, Smartcitydogs.PerformedProcedure, on_delete: :delete_all)
     # has_many(:rescues, Smartcitydogs.Rescue, on_delete: :delete_all)
     belongs_to(:animal_status, AnimalStatus)
     has_many(:adopts, Adopt, on_delete: :delete_all)
@@ -37,6 +39,7 @@ defmodule Smartcitydogs.Animal do
       :animal_status_id
     ])
     |> validate_required([:sex, :chip_number, :address])
+    |> validate_inclusion(:sex, ["male", "famele"])
   end
 
   def create(args \\ %{}) do
@@ -98,5 +101,22 @@ defmodule Smartcitydogs.Animal do
   def get_count() do
     count()
     |> Repo.one()
+  end
+
+  def delete(animal) do
+    animal
+    |> Repo.delete()
+  end
+
+  def create(params) do
+    %__MODULE__{}
+    |> changeset(params)
+    |> Repo.insert()
+  end
+
+  def update(animal, params) do
+    animal
+    |> changeset(params)
+    |> Repo.update()
   end
 end
