@@ -12,7 +12,7 @@ defmodule SmartcitydogsWeb.SessionController do
   defp login_reply({:error, error}, conn) do
     conn
     |> put_flash(:error, error)
-    |> redirect(to: "/")
+    |> redirect(to: "/login")
   end
 
   defp login_reply({:ok, user}, conn) do

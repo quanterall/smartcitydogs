@@ -2,19 +2,19 @@ defmodule SmartcitydogsWeb.LayoutView do
   use SmartcitydogsWeb, :view
   alias Smartcitydogs.Guardian
 
-  def printNavbar(conn, current_user) do
+  def printNavbar(conn) do
     case Guardian.Plug.current_resource(conn) do
       %{user_type: "police"} ->
-        render("navbar_zoo.html", %{conn: conn, current_user: current_user})
+        render("navbar_zoo.html", %{conn: conn})
 
       %{user_type: "municipality"} ->
-        render("navbar_municipality.html", %{conn: conn, current_user: current_user})
+        render("navbar_municipality.html", %{conn: conn})
 
       %{user_type: "shelter"} ->
-        render("navbar_shelter.html", %{conn: conn, current_user: current_user})
+        render("navbar_shelter.html", %{conn: conn})
 
       _ ->
-        render("navbar_default.html", %{conn: conn, current_user: current_user})
+        render("navbar_default.html", %{conn: conn})
     end
   end
 

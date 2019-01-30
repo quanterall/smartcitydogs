@@ -54,7 +54,7 @@ defmodule Smartcitydogs.User do
     |> validate_acceptance(:agreed_to_terms)
     |> cast(attrs, ~w(password)a, [])
     |> validate_length(:password, min: 6, max: 100)
-    |> validate_inclusion(:user_type, ["admin", "citizen", "shelter", "police"])
+    |> validate_inclusion(:user_type, ["admin", "citizen", "shelter", "police", "municipality"])
     |> unique_constraint(:email, name: "users_email")
     |> put_password_hash()
   end

@@ -29,7 +29,7 @@ alias Smartcitydogs.User
     last_name: "Admin",
     email: "admin@test.bg",
     phone: "00000000000",
-    user_type_id: 1,
+    user_type: "admin",
     agreed_to_terms: true
   },
   %{
@@ -39,7 +39,7 @@ alias Smartcitydogs.User
     last_name: "citizen",
     email: "citizen@test.bg",
     phone: "00000000000",
-    user_type_id: 2,
+    user_type: "citizen",
     agreed_to_terms: true
   },
   %{
@@ -49,7 +49,7 @@ alias Smartcitydogs.User
     email: "police@test.bg",
     password: "password",
     phone: "0000000000",
-    user_type_id: 3,
+    user_type: "police",
     agreed_to_terms: true
   },
   %{
@@ -59,7 +59,7 @@ alias Smartcitydogs.User
     email: "municipality@test.bg",
     password: "password",
     phone: "0000000000",
-    user_type_id: 4,
+    user_type: "municipality",
     agreed_to_terms: true
   },
   %{
@@ -69,13 +69,11 @@ alias Smartcitydogs.User
     email: "shelter@test.bg",
     password: "password",
     phone: "00000000000",
-    user_type_id: 5,
+    user_type: "shelter",
     agreed_to_terms: true
   }
 ]
-|> Enum.each(fn params ->
-  User.create(params)
-end)
+|> Enum.each(&User.create(&1))
 
 ############## Signal Categories #############
 [
@@ -83,9 +81,7 @@ end)
   %{name: "Избягало куче", prefix: "escaped"},
   %{name: "Малтретиране на куче", prefix: "mistreatment"}
 ]
-|> Enum.each(fn params ->
-  SignalCategory.create(params)
-end)
+|> Enum.each(&SignalCategory.create(&1))
 
 ############## Signal Types #############
 [
@@ -94,9 +90,7 @@ end)
   %{name: "Изпратен", prefix: "sent"},
   %{name: "Приключен", prefix: "closed"}
 ]
-|> Enum.each(fn params ->
-  SignalType.create(params)
-end)
+|> Enum.each(&SignalType.create(&1))
 
 ############## Animal Status #############
 [
@@ -104,9 +98,7 @@ end)
   %{name: "В приюта", prefix: "shelter"},
   %{name: "Осиновено", prefix: "adopted"}
 ]
-|> Enum.each(fn params ->
-  AnimalStatus.create(params)
-end)
+|> Enum.each(&AnimalStatus.create(&1))
 
 ############## Animal #############
 [
@@ -151,9 +143,7 @@ end)
     animal_status_id: 3
   }
 ]
-|> Enum.each(fn params ->
-  Animal.create(params)
-end)
+|> Enum.each(&Animal.create(&1))
 
 [
   %{
@@ -205,6 +195,4 @@ end)
     view_count: 1
   }
 ]
-|> Enum.each(fn params ->
-  Signal.create(params)
-end)
+|> Enum.each(&Signal.create(&1))
