@@ -1,4 +1,4 @@
-defmodule Smartcitydogs.Repo.Migrations.StaticPages do
+defmodule Smartcitydogs.Repo.Migrations.StaticPage do
   use Ecto.Migration
 
   def change do

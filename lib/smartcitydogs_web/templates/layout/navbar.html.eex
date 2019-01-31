@@ -1,4 +1,4 @@
-<nav class='navbar navbar-expand-lg bg-transperent top-navbar w-100
+<nav class='navbar navbar-expand-lg top-navbar w-100
             <%= if length(@conn.path_info) == 0 do %>
                 navbar-home
             <% end %>'>
@@ -10,37 +10,22 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav mr-auto text-nowrap">
-                <%= printNavbar(@conn,@current_user) %>
+                <li class="nav-item active">
+                    <a class="nav-link" href="<%= Routes.home_path(@conn, :index) %>">Начало</a>
+                </li>
+                <%= printNavbar(@conn) %>
             </ul>
             <ul class="navbar-nav text-nowrap">
-                <%= if @current_user do %>
-                <li class="nav-item ">
-                    <a class="nav-link user-menu" href="<%=user_path(@conn,:show) %>">
-                        Здравей, <b><%= @current_user.first_name%></b>
-                        <i class="fa fa-user"></i>
-                    </a>
+                <%= if user = current_user(@conn) do %>
+                <li class="nav-item">
+                  <div class="nav-link"> <%= user.email %> </div> 
                 </li>
                 <li class="nav-item">
-                    <%= link "Излез", to: session_path(@conn, :delete, @current_user), method: "delete", class:
-                    "nav-link" %>
-                </li>
-                <% else %>
-                <li class="nav-item ">
-                    <a class="nav-link  <%= if length(@conn.path_info) == 0 do  %> black <% end %>"
-                       id="nav-register"
-                       href="<%=user_path(@conn,:new)%>" onclick="showModalForm(event, 'register-form')">Регистрация</a>
-                </li>
-                <li class="nav-item ">
-                    <a class="nav-link" id="nav-sign-in"
-                       href="<%=session_path(@conn,:new)%>" onclick="showModalForm(event, 'login-form')">Вход</a>
+                   <%= link "Излез", to: Routes.session_path(@conn, :delete),  class: "nav-link" %>
                 </li>
                 <% end %>
-                <li class="nav-item ">
-                    <a id="new-signal-btn" class="nav-link " onclick="showModalForm(event, 'signal-form')"
-                       href="<%=signal_path(@conn,:new)%>">ПОДАЙ СИГНАЛ
-                    </a>
-                </li>
             </ul>
+
         </div>
     </div>
 </nav>

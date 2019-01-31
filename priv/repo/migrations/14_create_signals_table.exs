@@ -1,4 +1,4 @@
-defmodule Smartcitydogs.Repo.Migrations.Signals do
+defmodule Smartcitydogs.Repo.Migrations.Signal do
   use Ecto.Migration
 
   def change do
@@ -9,12 +9,11 @@ defmodule Smartcitydogs.Repo.Migrations.Signals do
       add(:support_count, :integer, default: 0)
       add(:chip_number, :text)
       add(:description, :text)
-      add(:deleted_at, :naive_datetime)
-      add(:address_B, :float)
-      add(:address_F, :float)
-      add(:signals_categories_id, references("signals_categories"))
-      add(:signals_types_id, references("signals_types"), default: 2)
-      add(:users_id, references("users"))
+      add(:longitude, :float)
+      add(:latitude, :float)
+      add(:signal_category_id, references("signal_categories"))
+      add(:signal_type_id, references("signal_types"), default: 2)
+      add(:user_id, references("users"))
       timestamps()
     end
   end

@@ -4,33 +4,27 @@
     </div>
 </div>
 <div class="row">
-    <%= for news <- @news do %>
+    <%= for news <- @page.entries do %>
     <div class="col-lg-3 mb-2 mt-2">
         <div class="card">
             <img class="card-img-top"
                  src="<%= news.image_url%>"
                  alt="Card image cap">
             <div class="card-body">
-                <p class="text-dark">
-                    <small>
-                        <%= Timex.format!(news.date, "%d.%m.%y",:strftime)%> г.
-                    </small>
-                </p>
-                <h5 class="card-title"><%=String.slice(news.title,0..37)%> 
-                    <%= if String.length(news.title) > 40 do %>
-                        ...
-                    <% end %>    
-                </h5>
-                <p class="card-text">
-                    <%=String.slice(news.short_content,0..40)%>  ...
-                </p>
-
-
+              <p class="text-dark">
+                  <small>
+                      <%= Timex.format!(news.inserted_at, "%d.%m.%y",:strftime)%> г.
+                  </small>
+              </p>
+              <h5 class="card-title"><%= news.title %></h5>
+              <p class="card-text">
+                  <%=String.slice(news.short_content,0..30)%> ...
+              </p>
             </div>
             <div class="card-footer text-center border-0 bg-transparent">
-                <a class="btn btn-default float-right text-green" href="<%=news_path(@conn, :show, news.id)%>" role="button">
-                    Виж още
-                </a>
+              <a class="btn btn-default float-right text-green" href="<%=Routes.news_path(@conn, :show, news.id)%>" role="button">
+                  Виж още
+              </a>
             </div>
         </div>
     </div>

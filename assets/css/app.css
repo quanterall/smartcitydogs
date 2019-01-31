@@ -1,4 +1,8 @@
-
+@import "../node_modules/bootstrap/dist/css/bootstrap.css";
+@import "../node_modules/@fortawesome/fontawesome-free/css/all.min.css";
+@import "../node_modules/slick-carousel/slick/slick.css";
+@import "../node_modules/quill/dist/quill.snow.css";
+@import "nav_bar.css";
 .bg-transperent {
     background: transparent;
 }
@@ -33,31 +37,6 @@
     padding: 0px;
 }
 
-.signal_change_type{
-    display: none;
-    position: absolute;
-    margin: 0;
-    width: 45%;
-    background-color: #e0e0e0;
-    border: 2px solid black;
-    height: 30%;
-    top: 32%;
-    left: 25%;
-    flex-direction: column;
-
-}
-
-.status-btn {
-    color: #aaaaa7;
-}
-
-.close-btn{
-    display: flex;
-    flex-direction: column;
-    top: 90%;
-    left: 70%;
-    color: black;
-}
 .content-container {
     margin-top: 2.9rem;
 }
@@ -353,16 +332,6 @@
     color: white;
 }
 
-/* .form-control{
-    background-color: transparent !important;
-    color: white !important;
-}
-
-#autocomplete::placeholder{
-    color: white;
-    border: 0px;
-} */
-
 .show-map-btn {
     border: none;
     -webkit-appearance: inherit !important;
@@ -392,11 +361,31 @@
     text-decoration: none;
 }
 
-.card{
-    height: 27rem;
-    width: 16.5rem;
+
+.project
+{
+background-image: url('/images/About.png');
+background-size: 80%;
+background-repeat:no-repeat;
+height: -webkit-fill-available;
+background-position: center;
+background-position-y: 25px;
 }
 
-.radio_buttons_signals{
-    margin-left: 10%;
+.help-icon{
+    text-align: center;
+    font-size: 80px;
+    color: #00cc99;
+}
+.animal-image-container{
+    position: relative;
+}
+.animal-image-container form{
+    position: absolute;
+    right: 0px;
+    bottom:0px;
+}
+.animal-image-container form button{
+    font-size: 10px;
+    padding: 5px;
 }

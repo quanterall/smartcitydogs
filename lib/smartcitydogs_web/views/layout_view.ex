@@ -1,23 +1,24 @@
 defmodule SmartcitydogsWeb.LayoutView do
   use SmartcitydogsWeb, :view
+  alias Smartcitydogs.Guardian
 
-  def get_csrf_token(conn) do
-    Plug.Conn.get_session(conn, :csrf_token)
-  end
+  def printNavbar(conn) do
+    case Guardian.Plug.current_resource(conn) do
+      %{user_type: "police"} ->
+        render("navbar_police.html", %{conn: conn})
 
-  def printNavbar(conn, current_user) do
-    case current_user do
-      %{users_types_id: 3} ->
-        render("navbar_zoo.html", %{conn: conn, current_user: current_user})
+      %{user_type: "municipality"} ->
+        render("navbar_municipality.html", %{conn: conn})
 
-      %{users_types_id: 4} ->
-        render("navbar_municipality.html", %{conn: conn, current_user: current_user})
-
-      %{users_types_id: 5} ->
-        render("navbar_shelter.html", %{conn: conn, current_user: current_user})
+      %{user_type: "shelter"} ->
+        render("navbar_shelter.html", %{conn: conn})
 
       _ ->
-        render("navbar_default.html", %{conn: conn, current_user: current_user})
+        render("navbar_default.html", %{conn: conn})
     end
+  end
+
+  def current_user(conn) do
+    Guardian.Plug.current_resource(conn)
   end
 end

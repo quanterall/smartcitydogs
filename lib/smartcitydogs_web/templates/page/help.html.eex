@@ -1,0 +1,37 @@
+<div class="pt-5">
+  <h2 class="text-center pb-5">Как да подадем сигнал?</h2>
+  <div class="row">
+    <div class="col">
+      <div class="help-icon">
+        <span class="fas fa-user-circle"></span>
+      </div>
+      <div>
+        1. Направете си акаунт, ако вече нямате и се логнете.
+      </div>
+    </div>
+    <div class="col">
+      <div class="help-icon">
+        <span class="fas fa-mobile-alt"></span>
+      </div>
+      <div>
+        2. Подайте сигнал от телефона си, за кучето което ви притеснява
+      </div>
+    </div>
+    <div class="col">
+      <div class="help-icon">
+        <span class="fas fa-spinner"></span>
+      </div>
+      <div>
+        3. Сигнала ще бъде обработен и мерки ще се вземат веднага
+      </div>
+    </div>
+    <div class="col">
+      <div class="help-icon">
+        <span class="fas fa-paw"></span>
+      </div>
+      <div>
+        4. Кучето ще бъде маркирано и прибрано в приюта
+      </div>
+    </div>
+  </div>
+</div>

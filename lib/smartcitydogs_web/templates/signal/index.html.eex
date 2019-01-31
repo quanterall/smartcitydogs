@@ -1,11 +1,26 @@
-<div class="row">
-    <%= for signal <- @signals do %>
-    <div class="col-lg-3 mb-2 mt-2">
-        <%= render SmartcitydogsWeb.SignalView, "signal_card.html" , %{conn: @conn,signal: signal} %>
+<div class="row pt-3">
+    <div class="col-3">
+        <%= form_for @conn, "",[class: "register-form-class",method: "get", as: "filters"], fn f -> %>
+        <h5>Филтрирай по статус</h5>
+        <%= multiple_select f, :signal_type_id,[ { "Всички" ,nil },{ "Нов" ,1 },{ "Приет" ,2 },{ "Изпратен" ,3 },{ "Приключен" ,4 } ], [class: "form-control", required: false  , multiple: true] %>
+        <h5>Филтрирай по категория</h5>
+        <%= multiple_select f, :signal_category_id,[ { "Всички" ,nil },{ "Бездомно куче" ,1 },{ "Избягало куче" ,2 },{ "Малтретиране на куче" ,3 } ], [class: "form-control", required: false  , multiple: true] %>
+        <div class="mt-2">
+            <%= submit "Филтрирай", class: "btn btn-primary m-auto d-block" %>
+        </div>
+        <% end %>
     </div>
-    <% end %>
-    
+    <div class="col-9">
+    <div class="row">
+            <%= for signal <- @page.entries do %>
+            <div class="col-lg-4 mb-2 mt-2">
+                <%= render SmartcitydogsWeb.SignalView, "signal_card.html" , %{conn: @conn,signal: signal} %>
+            </div>
+            <% end %>
+        </div>
+        <div class="text-center custom-pagination">
+            <%= pagination_links @page , @params %>
+        </div>
+    </div>
 </div>
-<div class="text-center custom-pagination">
-    <%= pagination_links @page,distance: 3 %>
-</div>
+

@@ -1,6 +1,6 @@
 <div class="row mb-3 pt-3">
     <div class="col-6">
-        <%= form_for @conn, animal_path(@conn, :index), [method: :get, class: "input-group"], fn f -> %>
+        <%= form_for @conn, Routes.animal_path(@conn, :index), [as: :animal_filter, method: :get, class: "input-group"], fn f -> %>
         <%= search_input f, :chip_number, placeholder: "Chip number",class: "form-control border-secondary py-2" %>
         <div class="input-group-append">
             <button class="btn btn-outline-secondary" type="submit">
@@ -11,7 +11,7 @@
     </div>
 </div>
 <div class="row">
-    <%= for animal <- @animals do %>
+    <%= for animal <- @page.entries do %>
     <div class="col-lg-3 mb-2 mt-2">
         <%= render SmartcitydogsWeb.AnimalView, "animal_slide.html" , %{conn: @conn,animal: animal} %>
     </div>

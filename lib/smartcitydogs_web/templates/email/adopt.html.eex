@@ -1,0 +1,15 @@
+Запитване от <%= assigns.user.first_name %> <%= assigns.user.last_name %> <br>
+
+<table border="1">
+  <tr>
+    <td colspan="2">Данни</td>
+  </tr>
+  <tr>
+    <td> Номер на чип:</td>
+    <td> <%= assigns.animal.chip_number %></td>
+  </tr>
+  <tr>
+    <td> Описание :</td>
+    <td> <%= assigns.animal.description %></td>
+  </tr>
+</table>

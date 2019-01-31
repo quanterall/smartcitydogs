@@ -1,8 +1,8 @@
-<li class="nav-item active">
-    <a class="nav-link" href="/">Начало</a>
+<li class="nav-item">
+    <a class="nav-link" href="<%=Routes.signal_path(@conn, :index)%>">Сигнали</a>
 </li>
 <li class="nav-item">
-    <a class="nav-link" href="<%=shelter_signal_path(@conn, :index)%>">Сигнали</a>
+    <%= link "Новини", to: Routes.news_path(@conn, :index), class: "nav-link"%>
 </li>
 <li class="nav-item dropdown">
     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
@@ -10,11 +10,8 @@
         Кучета
     </a>
     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-        <%= link "Кучета", to: shelter_animal_path(@conn, :index), class: "nav-link"%>
+        <%= link "Кучета", to: Routes.animal_path(@conn, :index), class: "nav-link"%>
         <div class="dropdown-divider"></div>
-        <%= link "Регистриране на ново", to: shelter_animal_path(@conn, :new), class: "nav-link"%>
+        <%= link "Регистриране на ново", to: Routes.animal_path(@conn, :new), class: "nav-link"%>
     </div>
-</li>
-<li class="nav-item">
-    <%= link "Новини", to: news_path(@conn, :index), class: "nav-link"%>
 </li>

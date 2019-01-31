@@ -1,7 +1,11 @@
-import "phoenix_html";
+
+import 'bootstrap';
+import css from '../css/app.css';
 import $ from "jquery";
 import "slick-carousel";
-
+import Quill from "quill";
+window.Quill = Quill
+window.$ = $
 $(document).ready(function () {
   $('#close-map').click(function () {
     $('#map_container').hide();
@@ -73,92 +77,68 @@ $(document).ready(function () {
 
   };
 
-  $('.status-btn').on('click', function () {
-    $(".signal_change_type").css("display", "flex");
-    $("#signal_id").text($(this).attr('id'))
-    console.log($(this).attr('id'));
-  });
-
-  $(document).ready(function(){
-    $("#button").click(function() {
-      var post = $("#newPost").html();
-  
-      $.post( "/posts/post", { title: post })
-       .done(function() {
-          alert( "Data Loaded: " );
-      });
-    });
-  });
-
-$('.close-btn').on("click", function () {
-  $(".signal_change_type").css("display", "none");
-});
-
-window.is_mobile = function () {
-  if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-    return true;
-  }
-  return false
-};
-
-$('.close-modal').on('click', function (event) {
-  event.preventDefault();
-  $("#modal-forms-container").hide();
-});
-
-$(window).scroll(function (e) {
-  if (window.location.pathname == '/') {
-    if ($(document).scrollTop() == 0) {
-      $(".top-navbar").addClass("navbar-home");
-      $(".modal-form").addClass("shadow-off");
-      $(".container-new-signal").addClass("shadow-off");
-      $("#top-navbar-container").removeClass("bg-white");
-    } else {
-      $(".modal-form").removeClass("shadow-off");
-      $(".container-new-signal").removeClass("shadow-off");
-      $(".container-new-signal").addClass("shadow-on");
-      $(".top-navbar").removeClass("navbar-home");
-      $("#top-navbar-container").addClass("bg-white");
+  window.is_mobile = function () {
+    if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+      return true;
     }
-  }
-});
-$('.navbar-collapse').on('show.bs.collapse', function () {
-  $(".top-navbar").removeClass("navbar-home");
-});
-$(".user-signals-tabs").click(function () {
-  $('.tabs').hide();
-  $(".user-signals-tabs").removeClass("selected");
-  $(this).addClass("selected");
-  $("#" + $(this).data("show")).show();
+    return false
+  };
 
-});
+  $('.close-modal').on('click', function (event) {
+    event.preventDefault();
+    $("#modal-forms-container").hide();
+  });
+
+  $(window).scroll(function (e) {
+    if (window.location.pathname == '/') {
+      if ($(document).scrollTop() == 0) {
+        $(".top-navbar").addClass("navbar-home");
+        $(".modal-form").addClass("shadow-off");
+        $(".container-new-signal").addClass("shadow-off");
+        $("#top-navbar-container").removeClass("bg-white");
+      } else {
+        $(".modal-form").removeClass("shadow-off");
+        $(".container-new-signal").removeClass("shadow-off");
+        $(".container-new-signal").addClass("shadow-on");
+        $(".top-navbar").removeClass("navbar-home");
+        $("#top-navbar-container").addClass("bg-white");
+      }
+    }
+  });
+  $('.navbar-collapse').on('show.bs.collapse', function () {
+    $(".top-navbar").removeClass("navbar-home");
+  });
+  $(".user-signals-tabs").click(function () {
+    $('.tabs').hide();
+    $(".user-signals-tabs").removeClass("selected");
+    $(this).addClass("selected");
+    $("#" + $(this).data("show")).show();
+
+  });
 
 
-$('.signal-gallery').slick({
-  slidesToShow: 2,
-  slidesToScroll: 1,
-  prevArrow: `<button class="slick-prev bg-gray border-0"><i class="fas fa-chevron-left"></i></button>`,
-  nextArrow: `<button class="slick-next bg-green border-0 text-white"><i class="fas fa-chevron-right"></i></button>`,
+  $('.signal-gallery').slick({
+    slidesToShow: 2,
+    slidesToScroll: 1,
+    prevArrow: `<button class="slick-prev bg-gray border-0"><i class="fas fa-chevron-left"></i></button>`,
+    nextArrow: `<button class="slick-next bg-green border-0 text-white"><i class="fas fa-chevron-right"></i></button>`,
 
 
-});
+  });
 
-$('#view_map').click(function () {
-  var cor_a = $('#cor_a').val();
-  var cor_b = $('#cor_b').val();
-  console.log(cor_a + "Cor B: " + cor_b);
-  var mymap = L.map('signal_map').setView([cor_a, cor_b], 16);
+  $('#view_map').click(function () {
+    var cor_a = $('#cor_a').val();
+    var cor_b = $('#cor_b').val();
+    var mymap = L.map('signal_map').setView([cor_a, cor_b], 16);
 
-  L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
-    maxZoom: 20,
-    attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
-      '<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
-      'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-    id: 'mapbox.streets'
-  }).addTo(mymap);
+    L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
+      maxZoom: 20,
+      attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
+        '<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
+        'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+      id: 'mapbox.streets'
+    }).addTo(mymap);
 
-  L.marker([cor_a, cor_b]).addTo(mymap);
-});
-
-    
+    L.marker([cor_a, cor_b]).addTo(mymap);
+  });
 });

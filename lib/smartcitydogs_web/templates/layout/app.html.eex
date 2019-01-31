@@ -1,21 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <%= render("head.html", %{conn: @conn,current_user: @current_user}) %>
+    <%= render("head.html", %{conn: @conn}) %>
 </head>
 <body>
 <div class="container-fluid">
     <div class="fixed-top-costom">
-        <%= render("navbar.html", %{conn: @conn,current_user: @current_user}) %>
-        <%= render("modal_forms.html", %{conn: @conn,current_user: @current_user}) %>
+        <%= render("navbar.html", %{conn: @conn}) %>
     </div>
     <div class="container">
         <main role="main" class="content-container">
-            <%= render("flash_message.html", %{conn: @conn,current_user: @current_user}) %>
+            <%= render("flash_message.html", %{conn: @conn}) %>
             <%= render @view_module, @view_template, assigns %>
         </main>
     </div>
 </div>
-<%= render("script.html", %{conn: @conn,current_user: @current_user}) %>
 </body>
 </html>

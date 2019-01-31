@@ -1,12 +1,12 @@
-defmodule Smartcitydogs.Repo.Migrations.SignalsLikes do
+defmodule Smartcitydogs.Repo.Migrations.SignalLike do
   use Ecto.Migration
 
   def change do
-    create table(:signals_likes) do
+    create table(:signal_likes) do
       add(:like, :integer)
       add(:deleted_at, :naive_datetime)
-      add(:signals_id, references("signals"))
-      add(:users_id, references("users"))
+      add(:signal_id, references("signals"))
+      add(:user_id, references("users"))
       timestamps()
     end
   end

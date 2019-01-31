@@ -1,14 +1,18 @@
 <div class="row  pt-5 pb-5 ">
     <div class="col-lg-5">
         <div class="signal-gallery">
-            <%= for image <- @animal.animals_image do %>
-            <img src="/<%= image.url %>" alt="">
+            <%= if @animal.animal_images ==[] do %>
+                <img src="/<%= Animal.get_first_image(@animal) %>" alt="">
+            <% else %>
+            <%= for image <- @animal.animal_images do %>
+                <img src="/<%= image.url %>" alt="">
+                <% end %>
             <% end %>
         </div>
     </div>
     <div class="col-lg-7">
-        <div class="animal-status-text <%=@animal.animals_status.prefix%> mb-2">
-            <%= @animal.animals_status.name%>
+        <div class="animal-status-text <%=@animal.animal_status.prefix%> mb-2">
+            <%= @animal.animal_status.name%>
         </div>
         <div class="slick-card-small ">
             <%= Timex.format!(@animal.inserted_at, "%d.%m.%y",:strftime)%> г.
@@ -16,20 +20,10 @@
         <div class="slick-card-small mt-3">
             <div class="row">
                 <div class="col-6"><%= @animal.address %></div>
-                <div class="col-6">
-                    <a class="show-map-btn blue-bold" href="#" type="button" id="view_map">
-                        ВИЖ НА КАРТА
-                    </a>
-                </div>
             </div>
         </div>
-        <input type="hidden" id="cor_b" value="<%= @animal.address_B %>">
-        <input type="hidden" id="cor_a" value="<%= @animal.address_F %>">
-        <div id="map_container" style="position: relative; display: none;">
-            <i id="close-map" class="fa fa-times"></i>
-            <div id="signal_map">
-            </div>
-        </div>
+        <input type="hidden" id="cor_b" value="<%= @animal.longitude %>">
+        <input type="hidden" id="cor_a" value="<%= @animal.latitude %>">
         <div class="animal-description mt-3">
             <%= @animal.description %>
         </div>
@@ -47,22 +41,20 @@
                 <div class="blue-bold"> <%= Timex.format!(@animal.inserted_at, "%d.%m.%y",:strftime)%> г.</div>
             </div>
         </div>
-        <div class="row mt-3">
-            <div class="col text-center">
-                <%=if @conn.assigns.current_user == nil do %>
-
-                <% else %>
-                    <%=if Smartcitydogs.Adopt.adopt_exist(@animal,@conn.assigns.current_user) do %>
-                        <%= form_for @conn, animal_path(@conn,:adopt, @animal.id), [class: "d-inline-block"], fn f -> %>
-                            <%= hidden_input f, :animals_id, value: @animal.id %>
-                            <%= submit "Осинови", class: "comment-signal-btn d-inline-block" %>
-                        <% end %>
-                    <% else %>
-                        Заявката за осиновяване е изпратена.<br>
-                        Наш сътрудник ще се свърже с Вас за повече информация.
-                    <% end %>
-                <%end%>
+        <div class="slick-card-title mt-5 mb-3">
+            <h4>Извърщени процедури:</h4>
+        </div>
+        <%= for performed_procedure <- @animal.performed_procedures do %>
+        <div class="row  m-0">
+            <div class="col-6 comment-user-name p-0">
+                <%=performed_procedure.procedure_type.name%>
+            </div>
+            <div class="col-6">
+                <%=Timex.format!( performed_procedure.inserted_at,"%d.%m.%y",:strftime)%> г.
             </div>
         </div>
+    <% end %>
     </div>
+
+    
 </div>

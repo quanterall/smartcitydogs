@@ -1,0 +1,103 @@
+<div class="home-bg"></div>
+<div class="row">
+    <div class="col-lg-12 mt-5">
+        <div class="homepage-slider ">
+            <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <h1 class="">Време е да поемем<br> отговорност за щастието на<br> най-добрите ни
+                            приятели
+                        </h1>
+                    </div>
+                    <div class="carousel-item">
+                        <h1 class="">Време е да поемем<br> отговорност за щастието на<br> най-добрите ни
+                            приятели
+                        </h1>
+                    </div>
+                    <div class="carousel-item">
+                        <h1 class="">Време е да поемем<br> отговорност за щастието на<br> най-добрите ни
+                            приятели
+                        </h1>
+                    </div>
+                </div>
+                <ol class="carousel-indicators">
+                    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row mt-5 mb-3">
+    <div class="col">
+        <h3 class="text-white">Последни сигнали</h3>
+    </div>
+</div>
+<div class="row slick ">
+    <%= for signal <- @signals do %>
+    <div class="col-lg-12" >
+        <%= render SmartcitydogsWeb.SignalView, "signal_card.html" , %{conn: @conn,signal: signal} %>
+    </div>
+    <% end %>
+</div>
+
+<div class="row mt-5 mb-3">
+    <div class="col">
+        <h3 class="text-green">Новини</h3>
+    </div>
+</div>
+<div class="row">
+    <%= for news <- @news do %>
+    <div class="col-lg-3">
+        <div class="card">
+            <img class="card-img-top"
+                 src="<%= news.image_url%>"
+                 alt="Card image cap">
+            <div class="card-body">
+                <p class="text-dark">
+                    <small>
+                        <%= Timex.format!(news.inserted_at, "%d.%m.%y",:strftime)%> г.
+                    </small>
+                </p>
+                <h5 class="card-title"><%= news.title %></h5>
+                <p class="card-text">
+                    <%=String.slice(news.short_content,0..30)%> ...
+                </p>
+
+
+            </div>
+            <div class="card-footer text-center border-0 bg-transparent">
+                <a class="btn btn-default float-right text-green" href="<%=Routes.news_path(@conn, :show, news.id)%>" role="button">
+                    Виж още
+                </a>
+            </div>
+        </div>
+    </div>
+    <% end %>
+</div>
+ <a class="btn btn-default float-left text-green" href="<%=Routes.news_path(@conn, :index)%>" role="button">
+        Виж всички 
+    </a>
+<div class="row mt-5 mb-3">
+    <div class="col">
+        <h3 class="text-green">Последни регистрирани кучета</h3>
+    </div>
+</div>
+<div class="row slick ">
+    <%= for animal <- @animals do %>
+    <%= render SmartcitydogsWeb.AnimalView, "animal_slide.html" , %{conn: @conn,animal: animal} %>
+    <% end %>
+</div>
+
+<div class="row mt-5 mb-3">
+    <div class="col">
+        <h3 class="text-green">Последно осиновени кучета</h3>
+    </div>
+</div>
+
+<div class="row slick">
+    <%= for animal <- @adopted_animals do %>
+    <%= render SmartcitydogsWeb.AnimalView, "animal_slide.html" , %{conn: @conn,animal: animal} %>
+    <% end %>
+</div>

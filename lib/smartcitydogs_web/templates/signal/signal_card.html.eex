@@ -1,13 +1,13 @@
-<div class="card slick-card w-100" style="background-image:linear-gradient(rgba(0, 0, 0, 0.7),rgba(0, 0, 0, 0.7)), url('/<%= Smartcitydogs.Signals.get_first_image(@signal) %>')">
+<div class="card slick-card w-100" style="background-image:linear-gradient(rgba(0, 0, 0, 0.7),rgba(0, 0, 0, 0.7)), url('/<%= Smartcitydogs.Signal.get_first_image(@signal) %>')">
     <div class="card-body">
-        <div class="signal-type-label <%=@signal.signals_types.prefix%>">
-            <%=@signal.signals_types.name%>
+        <div class="signal-type-label <%=@signal.signal_type.prefix%>">
+            <%=@signal.signal_type.name%>
         </div>
         <div class="slick-card-small text-gray">
             <%=Timex.format!( @signal.inserted_at,"%d.%m.%y",:strftime)%> г.
         </div>
         <div class="slick-card-title text-white">
-            <%=@signal.signals_categories.name%>
+            <%=@signal.signal_category.name%>
         </div>
         <div class="slick-card-small text-gray mt-3">
             <%=@signal.address%>
@@ -16,18 +16,14 @@
             <i class="fas fa-search"></i> : <%=@signal.view_count%>
         </div>
         <div class="slick-card-small text-white">
-            <i class="fas fa-arrow-up"></i> : <span id="signal-count"><%= Enum.count(@signal.signals_likes) %></span>
+            <i class="fas fa-arrow-up"></i> : <span id="signal-count"><%= Enum.count(@signal.signal_likes) %></span>
         </div>
         <div class="slick-card-small text-white">
             <i class="far fa-comment fa-flip-horizontal"></i> :
-            <%=Enum.count(@signal.signals_comments)%>
+            <%=Enum.count(@signal.signal_comments)%>
         </div>
     </div>
     <div class="card-footer text-center  border-0 bg-transparent">
-        <%= if @conn.assigns.current_user != nil do %>  
-            <a class="btn status-btn" id="<%= @signal.id%>" role="button" href="#">Промяна на статуса</a>
-                <!-- href="<%= #signal_path(@conn,:update_type, @signal.signals_types.name)%>" -->
-            <% end %>
-        <a class="btn custom-btn" href="<%=signal_path(@conn,:show,@signal.id)%>" role="button">Виж още</a>
+        <a class="btn custom-btn" href="<%=Routes.signal_path(@conn,:show,@signal.id)%>" role="button">Виж още</a>
     </div>
 </div>

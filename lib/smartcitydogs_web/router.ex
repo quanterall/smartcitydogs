@@ -7,196 +7,85 @@ defmodule SmartcitydogsWeb.Router do
     plug(:fetch_flash)
     plug(:protect_from_forgery)
     plug(:put_secure_browser_headers)
-    plug(NavigationHistory.Tracker)
   end
 
   pipeline :api do
     plug(:accepts, ["json"])
-    plug(:fetch_session)
   end
 
-  pipeline :login_required do
-    plug(
-      Guardian.Plug.EnsureAuthenticated,
-      handler: Smartcitydogs.GuardianErrorHandler
-    )
+  pipeline :jwt_authenticated do
+    plug(Smartcitydogs.Guardian.ApiAuthPipeline)
   end
 
-  pipeline :admin_required do
-    plug(Smartcitydogs.CheckAdmin)
+  pipeline :auth do
+    plug(Smartcitydogs.Guardian.AuthPipeline)
   end
 
-  pipeline :shelter_required do
-    plug(Smartcitydogs.CheckShelter)
+  pipeline :ensure_auth do
+    plug(Guardian.Plug.EnsureAuthenticated)
   end
 
-  pipeline :municipality_required do
-    plug(Smartcitydogs.CheckMunicipality)
+  pipeline :ensure_staff do
+    plug(Smartcitydogs.Plugs.CheckStaff)
   end
 
-  pipeline :zoo_police_required do
-    plug(Smartcitydogs.CheckPolice)
+  ## Browser ##
+  scope "/", SmartcitydogsWeb do
+    pipe_through([:browser, :auth])
+
+    scope "/" do
+      pipe_through([:ensure_auth, :ensure_staff])
+      get("/profile", UserController, :show)
+      resources("/news", NewsController, except: [:show, :index])
+      resources("/animals", AnimalController, except: [:show, :index])
+
+      scope "/animals/:animal_id" do
+        resources("/performed-procedure", PerformedProcedureController)
+        resources("/images", AnimalImageController)
+      end
+    end
+
+    resources("/news", NewsController, only: [:show, :index])
+
+    get("/", HomeController, :index)
+    resources("/signals", SignalController, only: [:show, :index])
+
+    resources("/animals", AnimalController, only: [:show, :index])
+    get("/about", PageController, :about)
+    get("/help", PageController, :help)
+    get("/contact", ContactController, :new)
+    post("/contact", ContactController, :send)
+    get("/login", SessionController, :new)
+    post("/login", SessionController, :create)
+    get("/logout", SessionController, :delete)
   end
 
-  pipeline :api_auth do
-    plug(:ensure_authenticated)
-  end
-
-  pipeline :with_session do
-    plug(Guardian.Plug.VerifySession)
-    plug(Guardian.Plug.LoadResource)
-    plug(Smartcitydogs.CurrentUser)
-  end
-
-  pipeline :municipality_layout do
-    plug(:put_layout, {SmartcitydogsWeb.Municipality.LayoutView, :app})
-  end
-
-  pipeline :shelter_layout do
-    plug(:put_layout, {SmartcitydogsWeb.Shelter.LayoutView, :app})
-  end
-
-  pipeline :zoo_police_layout do
-    plug(:put_layout, {SmartcitydogsWeb.ZooPolice.LayoutView, :app})
-  end
-
-  scope "/api", SmartcitydogsWeb do
+  scope "/api", SmartcitydogsWeb.Api, as: :api do
     pipe_through(:api)
 
-    post("/users/sign_in", UserControllerAPI, :sign_in)
+    post("/sign_up", UserController, :create)
+    post("/sign_in", UserController, :sign_in)
+    resources("/signals", SignalController, only: [:show, :index])
+    resources("/animals", AnimalController, only: [:show, :index])
 
-    resources(
-      "/forgoten_password",
-      ForgotenPasswordControllerAPI,
-      only: [:new, :create, :edit, :update]
-    )
-
-    resources("/users", UserControllerAPI, only: [:create])
-  end
-
-  scope "/api", SmartcitydogsWeb do
-    pipe_through([:api, :api_auth])
-
-    resources("/users", UserControllerAPI, except: [:new, :edit])
-    post("/users/logout", UserControllerAPI, :logout)
-
-    resources("/signals", SignalControllerAPI)#, except: [:new, :edit])
-
-    scope "/signals/:id" do
-      get("/comment", SignalControllerAPI, :comment)
-      get("/unlike", SignalControllerAPI, :unlike)
-      get("/like", SignalControllerAPI, :like)
-    end
-
-    get("/my_signals", MySignalsControllerAPI, :index)
-    resources("/signals_images", SignalImageControllerAPI, except: [:new, :edit])
-    resources("/signals_comments", SignalsCommentControllerAPI, except: [:new, :edit])
-
-    scope "/signals_comments", SmartcitydogsWeb do
-      put("/follow", SignalsCommentControllerAPI, :follow)
-      put("/unfollow", SignalsCommentControllerAPI, :unfollow)
-    end
-
-    resources("/signals_types", SignalsTypeControllerAPI, except: [:new, :edit])
-    resources("/signals_categories", SignalCategoryControllerAPI, except: [:new, :edit])
-    resources("/signals_likes", SignalsLikeControllerAPI, except: [:new, :edit])
-    resources("/animals", AnimalControllerAPI, except: [:new, :edit])
-    post("/animals/:id/send_email", AnimalControllerAPI, :send_email)
-    resources("/contacts", ContactControllerAPI, except: [:new, :edit, :delete])
-    resources("/users_types", UsersTypeControllerAPI, except: [:new, :edit])
-    resources("/performed_procedure", PerformedProcedureControllerAPI, except: [:new, :edit])
-    resources("/animal_statuses", AnimalStatusControllerAPI, except: [:new, :edit])
-    resources("/animal_images", AnimalImageControllerAPI, except: [:new, :edit])
-    resources("/rescues", RescueControllerAPI, except: [:new, :edit])
-    resources("/procedure_types", ProcedureTypeControllerAPI, except: [:new, :edit])
-    resources("/header_slides", HeaderSlideControllerAPI, except: [:new, :edit])
-    resources("/news", NewsSchemaControllerAPI, except: [:new, :edit])
-    resources("/static_pages", StaticPageControllerAPI, except: [:new, :edit])
-
-    # post("/signals/add_comment_like", SignalController, :add_comment_like)
-    # post("/signals/add_comment_dislike", SignalController, :add_comment_dislike)
-  end
-
-  ###### DEFAULT BROWSER STACK #####
-
-  scope "/", SmartcitydogsWeb do
-    pipe_through([:browser, :with_session])
-
-    get("/", PageController, :index)
-    resources("/signals", SignalController, only: [:index, :new, :create, :show])
-    resources("/animals", AnimalController, only: [:index, :show])
-
-    resources("/sessions", SessionController, only: [:new, :create, :delete])
-    resources("/users", UserController, only: [:new, :create])
-    resources("/help", HelpController, only: [:index])
-    resources("/about", AboutController, only: [:index])
-    resources("/news", NewsController, only: [:index, :show, :new, :create, :edit, :update])
-    resources("/forgoten_password", ForgotenPasswordController)
-    resources("/contact", ContactController, only: [:index, :new, :create])
-    ###### REGISTERED USER ZONE #########
     scope "/" do
-      pipe_through([:login_required])
+      pipe_through([:jwt_authenticated])
+      resources("/signals", SignalController, only: [:create, :update])
+
+      scope "/signals/:signal_id" do
+        resources("/comments", SignalCommentController, only: [:create, :update])
+        resources("/likes", SignalLikeController, only: [:create, :delete])
+      end
+
+      scope "/statistics" do
+        get("/count", StatisticController, :count)
+      end
+
+      scope "/animals/:animal_id" do
+        post("/adopt", AdoptController, :create)
+      end
 
       get("/profile", UserController, :show)
-      get("/profile/edit", UserController, :edit)
-      put("/profile/update", UserController, :update)
-
-      post("/animals/:id/adopt", AnimalController, :adopt)
-      get("/show", PageController, :show)
-
-      resources("/my_signals", MySignalsController)
-      get("/followed_signals", SignalController, :followed_signals)
-
-      get("/signals/get_signals_support_count", SignalController, :get_signals_support_count)
-      get("/signals/followed_signals", SignalController, :followed_signals)
-      resources("/signals", SignalController)
-
-      scope "/signals/:id" do
-        resources("/comments", SignalsCommentController)
-        post("/dislike", SignalController, :dislike)
-        post("/like", SignalController, :like)
-      end
-
-      resources("/help", HelpController, only: [:index])
-
-      scope "/municipality", Municipality, as: :municipality do
-        pipe_through([:municipality_required, :municipality_layout])
-        resources("/animals", AnimalController)
-        get("/signals", SignalController, :index)
-        post("/signals/:id/update_type", SignalController, :update_type)
-      end
-
-      scope "/shelter", Shelter, as: :shelter do
-        pipe_through([:shelter_required, :shelter_layout])
-        resources("/animals", AnimalController)
-        resources("/performed_procedure", PerformedProcedureController, only: [:create, :delete])
-        get("/signals", SignalController, :index)
-      end
-
-      scope "/zoo_police", ZooPolice, as: :zoo_police do
-        pipe_through([:zoo_police_required, :zoo_police_layout])
-        get("/signals", SignalController, :index)
-      end
-    end
-  end
-
-  scope "/auth", SmartcitydogsWeb do
-    pipe_through(:browser)
-
-    get("/:provider", SessionController, :request)
-    get("/:provider/callback", SessionController, :callback)
-  end
-
-  # Plug function
-  defp ensure_authenticated(conn, _opts) do
-    current_user_id = get_session(conn, :current_user_id)
-
-    if current_user_id do
-      conn
-    else
-      conn
-      |> put_flash(:info, "Моля впишете се!")
-      |> redirect(to: "/")
     end
   end
 end

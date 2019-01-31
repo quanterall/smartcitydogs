@@ -1,17 +1,16 @@
-defmodule Smartcitydogs.Mixfile do
+defmodule Smartcitydogs.MixProject do
   use Mix.Project
 
   def project do
     [
       app: :smartcitydogs,
-      version: "0.0.1",
-      elixir: "~> 1.7.3",
+      version: "0.1.0",
+      elixir: "~> 1.5",
       elixirc_paths: elixirc_paths(Mix.env()),
       compilers: [:phoenix, :gettext] ++ Mix.compilers(),
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
-      deps: deps(),
-      xref: xref()
+      deps: deps()
     ]
   end
 
@@ -21,20 +20,7 @@ defmodule Smartcitydogs.Mixfile do
   def application do
     [
       mod: {Smartcitydogs.Application, []},
-      extra_applications: [
-        :logger,
-        :runtime_tools,
-        :bamboo,
-        :timex,
-        :bamboo_smtp,
-        :ueberauth_facebook,
-        :scrivener_ecto,
-        :recaptcha,
-        :faker,
-        :scrivener_ecto,
-        :scrivener_html,
-        :httpotion
-      ]
+      extra_applications: [:logger, :runtime_tools, :scrivener_ecto, :scrivener_html, :recaptcha,:bamboo,:bamboo_smtp]
     ]
   end
 
@@ -42,48 +28,30 @@ defmodule Smartcitydogs.Mixfile do
   defp elixirc_paths(:test), do: ["lib", "test/support"]
   defp elixirc_paths(_), do: ["lib"]
 
-  defp xref do
-    [
-      exclude: [
-        {Plug.Conn.WrapperError, :reraise, 3}
-      ]
-    ]
-  end
-
   # Specifies your project dependencies.
   #
   # Type `mix help deps` for examples and options.
   defp deps do
     [
-      {:phoenix, "~> 1.3.2"},
-      {:phoenix_pubsub, "~> 1.0"},
-      {:phoenix_ecto, "~> 3.2"},
+      {:phoenix, "~> 1.4.0"},
+      {:phoenix_pubsub, "~> 1.1"},
+      {:phoenix_ecto, "~> 4.0"},
+      {:ecto_sql, "~> 3.0"},
       {:postgrex, ">= 0.0.0"},
-      {:phoenix_html, "~> 2.10"},
-      {:phoenix_live_reload, "~> 1.0", only: :dev},
+      {:phoenix_html, "~> 2.11"},
+      {:phoenix_live_reload, "~> 1.2", only: :dev},
       {:gettext, "~> 0.11"},
+      {:jason, "~> 1.0"},
+      {:plug_cowboy, "~> 2.0"},
+      {:guardian, "~> 1.0"},
+      {:comeonin, "~> 4.0"},
       {:bcrypt_elixir, "~> 1.0"},
-      {:cowboy, "~> 1.0"},
-      {:calendar, "~> 0.17.2"},
-      {:comeonin, "~> 2.5"},
-      {:guardian, "~> 0.12.0"},
-      {:ueberauth_facebook, "~> 0.3"},
-      {:oauth, github: "tim/erlang-oauth"},
-      {:bamboo, "~> 0.7"},
-      {:bamboo_smtp, "~> 1.4.0"},
-      {:mock, "~> 0.2.0", only: :test},
       {:timex, "~> 3.1"},
-      {:scrivener_ecto, "~> 1.0"},
+      {:scrivener_ecto, "~> 2.0"},
       {:scrivener_html, "~> 1.7"},
-      {:cmark, "~> 0.7"},
       {:recaptcha, "~> 2.3"},
-      {:bodyguard, "~> 2.1"},
-      {:faker, "~> 0.10"},
-      {:navigation_history, "~> 0.0"},
-      {:httpotion, "~> 3.1.0"},
-      # {:enacl, github: "aeternity/enacl", ref: "2f50ba6"},
-      # {:ex_rlp, "~> 0.2.1"},
-      {:ed25519, git: "https://github.com/gspasov/sign_ed25519"}
+      {:bamboo, "~> 1.1"},
+      {:bamboo_smtp, "~> 1.6.0"}
     ]
   end
 
