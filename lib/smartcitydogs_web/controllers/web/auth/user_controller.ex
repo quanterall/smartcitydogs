@@ -1,6 +1,6 @@
 defmodule SmartcitydogsWeb.UserController do
   use SmartcitydogsWeb, :controller
-  alias Smartcitydogs.{Guardian, User}
+  alias Smartcitydogs.Guardian
   alias SmartcitydogsWeb.Encoder
 
   def show(conn, _) do

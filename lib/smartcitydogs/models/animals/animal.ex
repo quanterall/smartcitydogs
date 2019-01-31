@@ -107,12 +107,6 @@ defmodule Smartcitydogs.Animal do
     |> Repo.delete()
   end
 
-  def create(params) do
-    %__MODULE__{}
-    |> changeset(params)
-    |> Repo.insert()
-  end
-
   def update(animal, params) do
     animal
     |> changeset(params)

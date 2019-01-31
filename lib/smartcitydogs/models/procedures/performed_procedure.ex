@@ -1,7 +1,7 @@
 defmodule Smartcitydogs.PerformedProcedure do
   use Ecto.Schema
   import Ecto.Changeset
-  alias Smartcitydogs.{PerformedProcedure, Repo}
+  alias Smartcitydogs.Repo
 
   @timestamps_opts [type: :utc_datetime, usec: false]
 

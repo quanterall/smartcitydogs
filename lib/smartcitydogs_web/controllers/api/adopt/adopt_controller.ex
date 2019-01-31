@@ -1,7 +1,7 @@
 defmodule SmartcitydogsWeb.Api.AdoptController do
   use SmartcitydogsWeb, :controller
 
-  alias Smartcitydogs.{Animal, Adopt, User, Mailer, Email}
+  alias Smartcitydogs.{Adopt, Mailer, Email}
 
   @contact_email Application.fetch_env!(:smartcitydogs, :contact_email)
   def create(conn, %{"animal_id" => animal_id} = params) do

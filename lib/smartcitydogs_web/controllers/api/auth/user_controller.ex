@@ -1,22 +1,20 @@
 defmodule SmartcitydogsWeb.Api.UserController do
   use SmartcitydogsWeb, :controller
   alias Smartcitydogs.User
-  alias Smartcitydogs.Repo
   alias SmartcitydogsWeb.Encoder
 
-  def create(conn, %{"user" => %{"email" => email} = params}) do
-    case Repo.get_by(User, email: email) do
-      nil ->
-        with {:ok, %User{} = user} <- User.create(params),
-             {:ok, token, _claims} <- Smartcitydogs.Guardian.encode_and_sign(user) do
-          data = %{token: token, user: Encoder.struct_to_map(user)}
+  def create(conn, %{"user" => params}) do
+    with {:ok, %User{} = user} <- User.create(params),
+         {:ok, token, _claims} <- Smartcitydogs.Guardian.encode_and_sign(user) do
+      data = %{token: token, user: Encoder.struct_to_map(user)}
 
-          conn
-          |> json(data)
-        end
-
-      _ ->
-        send_resp(conn, 401, %{error: "user exist"})
+      conn
+      |> json(data)
+    else
+      {:error, changeset} ->
+        conn
+        |> put_status(:unprocessable_entity)
+        |> render(SmartcitydogsWeb.ErrorView, "error.json", changeset: changeset)
     end
   end
 
@@ -36,7 +34,9 @@ defmodule SmartcitydogsWeb.Api.UserController do
         json(conn, %{token: token, user: Encoder.struct_to_map(user)})
 
       _ ->
-        send_resp(conn, 401, %{error: :unauthorized})
+        conn
+        |> put_status(403)
+        |> json(%{error: :unauthorized})
     end
   end
 end

@@ -1,6 +1,5 @@
 defmodule SmartcitydogsWeb.PerformedProcedureController do
   use SmartcitydogsWeb, :controller
-  import SmartcitydogsWeb.TemplateResolver
   alias Smartcitydogs.PerformedProcedure
 
   def create(conn, %{"performed_procedure" => params, "animal_id" => animal_id}) do
