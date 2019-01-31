@@ -25,12 +25,16 @@ defmodule SmartcitydogsWeb.Router do
     plug(Guardian.Plug.EnsureAuthenticated)
   end
 
+  pipeline :ensure_staff do
+    plug(Smartcitydogs.Plugs.CheckStaff)
+  end
+
   ## Browser ##
   scope "/", SmartcitydogsWeb do
     pipe_through([:browser, :auth])
 
     scope "/" do
-      pipe_through([:ensure_auth])
+      pipe_through([:ensure_auth, :ensure_staff])
       get("/profile", UserController, :show)
       resources("/news", NewsController, except: [:show, :index])
       resources("/animals", AnimalController, except: [:show, :index])

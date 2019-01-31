@@ -1,13 +1,12 @@
-defmodule Smartcitydogs.Plugs.CheckPermission do
+defmodule Smartcitydogs.Plugs.CheckStaff do
   import Phoenix.Controller
   import Plug.Conn
   def init(options), do: Map.new(options)
 
-  def call(conn, %{user_type: user_type}) do
+  def call(conn, _) do
     user = Guardian.Plug.current_resource(conn)
-    IO.inspect(conn)
 
-    if user.user_type == user_type do
+    if Enum.member?(["police", "municipality", "shelter", "admin"], user.user_type) do
       conn
     else
       conn
