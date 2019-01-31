@@ -76,6 +76,9 @@
     </div>
     <% end %>
 </div>
+ <a class="btn btn-default float-left text-green" href="<%=Routes.news_path(@conn, :index)%>" role="button">
+        Виж всички 
+    </a>
 <div class="row mt-5 mb-3">
     <div class="col">
         <h3 class="text-green">Последни регистрирани кучета</h3>

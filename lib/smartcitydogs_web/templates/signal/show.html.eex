@@ -1,9 +1,13 @@
 <div class="row  pt-5 pb-5 ">
     <div class="col-lg-5">
         <div class="signal-gallery">
-            <%= for image <- @signal.signal_images do %>
+            <%= if @signal.signal_images ==[] do %>
+                <img src="/<%= Signal.get_first_image(@signal) %>" alt="">
+            <% else %>
+             <%= for image <- @signal.signal_images do %>
             <img src="/<%= image.url %>" alt="">
             <% end %>
+             <% end %>
         </div>
     </div>
     <div class="col-lg-7">
@@ -21,18 +25,27 @@
         </div>
         <div class="slick-card-small mt-3">
             <div class="row">
-                <div class="col-6"><%=@signal.address%></div>
-                <div class="col-6">
-                    <a class="show-map-btn blue-bold" href="#" type="button" id="view_map">ВИЖ НА
-                        КАРТА
-                    </a>
+                <div class="col-6"><%=@signal.address%></div> 
+            </div>
+        </div>
+        <div class="slick-card-title mt-3 mb-3 ">
+            <h4>Коментари: (<%= length(@signal.signal_comments) %>) </h4>
+        </div>
+        <%= for comment <- @signal.signal_comments do %>
+            <div class="row comment-container mb-3 mt-2 m-0">
+                <div class="col-6 comment-user-name p-0">
+                    <%=comment.user.first_name%> <%=comment.user.last_name%>
+                </div>
+                <div class="col-6 text-right">
+                    <%=Timex.format!( comment.inserted_at,"%d.%m.%y",:strftime)%> г.
+                </div>
+                <div class="col-12 mt-2  p-0">
+                    <%=comment.comment%>
                 </div>
             </div>
-        </div>
-        <div id="map_container" style="position: relative; display: none;">
-            <i id="close-map" class="fa fa-times"></i>
-            <div id="signal_map">
-            </div>
-        </div>
+        <% end %>
+        <p class="alert alert-info">
+            Можете да кментирате през Android приложението ни.
+        </p>
     </div>
 </div>
