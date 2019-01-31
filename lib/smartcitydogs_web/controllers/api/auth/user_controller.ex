@@ -23,6 +23,7 @@ defmodule SmartcitydogsWeb.Api.UserController do
   def show(conn, _) do
     data =
       Guardian.Plug.current_resource(conn)
+      |> User.preload()
       |> Encoder.struct_to_map()
 
     json(conn, data)

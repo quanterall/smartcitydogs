@@ -5,7 +5,7 @@ defmodule SmartcitydogsWeb.Api.AnimalController do
 
   def index(conn, params) do
     animals =
-      Animal.get_all(params)
+      Animal.get_all_preloaded(params)
       |> SmartcitydogsWeb.Encoder.struct_to_map()
 
     json(conn, animals)

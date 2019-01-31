@@ -109,4 +109,18 @@ defmodule Smartcitydogs.User do
       {:error, :invalid_password}
     end
   end
+
+  def preload(user) do
+    user
+    |> Repo.preload(
+      signals: [
+        :signal_images,
+        :signal_comments,
+        :signal_likes,
+        {:signal_comments, :user},
+        :signal_category,
+        :signal_type
+      ]
+    )
+  end
 end

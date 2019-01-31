@@ -58,10 +58,9 @@ defmodule Smartcitydogs.Animal do
     |> Repo.all()
   end
 
-  def get_all_preloaded() do
-    __MODULE__
-    |> Repo.all()
-    |> preload()
+  def get_all_preloaded(filters \\ %{}) do
+    get_all(filters)
+    |> preload
   end
 
   def paginate_preloaded(params, filters) do
