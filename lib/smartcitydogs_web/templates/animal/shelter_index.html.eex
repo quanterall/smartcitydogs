@@ -1,5 +1,5 @@
 <div class="row pt-3">
-    <div class="col-3">
+    <div class="col-2">
         <%= form_for @conn, Routes.animal_path(@conn, :index), [method: "get",as: :animal_filter], fn f -> %>
             <label>Филтрирай по статус</label>
             <%= select f, :animal_status_id, @animal_statuses, [class: "form-control", required: false] %>
@@ -8,9 +8,9 @@
             </div>
         <% end %>
     </div>
-    <div class="col-9">
+    <div class="col-10">
         <div class="row">
-            <table class="table table-striped table-hover table-sm table-bordered">
+            <table class="table table-striped table-hover table-sm table-bordered text-nowrap">
                 <thead>
                 <tr>
                     <th>Снимка</th>
@@ -25,11 +25,38 @@
                 <%= for animal <- @page.entries do %>
                 <tr>
                     <td class="align-middle">
-                        <img height="100px" src="/<%=Animal.get_first_image(animal)%>"
-                             alt="">
+                    <div class="row m-0">
+                    
+                    <%= if animal.animal_images != [] do %>
+                        <%= for image <- animal.animal_images do %>
+                           <div class="col-6 animal-image-container p-0"> 
+                            <img src="/<%= image.url %>" class="w-100">
+                            <%= form_for @conn, Routes.animal_image_path(@conn,:delete,animal.id,image.id), [class: "d-inline-block"], fn f -> %>
+                                <input name="_method" type="hidden" value="delete">
+                                <button type="submit" class="btn btn-danger">
+                                <i class='fas fa-trash'></i>
+                                </button>
+                            <% end %>
+                           </div>
+                        <% end %>
+                    <%= else %>
+                        Няма снимка!
+                    <% end %>
+                    </div>
+                    <%= form_for @conn, Routes.animal_image_path(@conn, :create, animal.id), [as: :animal_image, multipart: true], fn f -> %>
+                        <div>
+                        
+                            <div>
+                                <%= file_input f, :image, class: "form-control d-inline-block form-control-sm" %>
+                            </div>
+                            <div>
+                                <%= submit "Добави", class: "btn btn-primary d-inline-block btn-sm  w-100" %>
+                            </div>
+                        </div>
+                    <% end %>
                     </td>
                     <td class=" align-middle">
-                        <%=animal.animal_status.name%>
+                        <%= animal.animal_status.name %>
                     </td>
                     <td class="align-middle">
                         <%= Timex.format!(animal.inserted_at, "%d.%m.%y",:strftime)%> г.
@@ -43,7 +70,7 @@
                     <td class="align-middle">
                         <ul class="list-group">
                             <%= for performed_procedure <- animal.performed_procedures do %>
-                            <li class="list-group-item p-0 pl-2">
+                            <li class="list-group-item p-0 pl-2 text-nowrap"">
                                 <%= Timex.format!(performed_procedure.inserted_at, "%d.%m.%y",:strftime)%> г.
                                 <%=performed_procedure.procedure_type.name%>
                                 <%= form_for @conn, Routes.performed_procedure_path(@conn, :delete, animal.id, performed_procedure.id), [class: "pull-right"], fn f -> %>
@@ -56,9 +83,8 @@
                             <% end %>
                         </ul>
                         <div class="mt-2 ">
-                            <%= form_for @conn, Routes.performed_procedure_path(@conn, :create,animal.id), [class: "", as: :performed_procedure], fn f -> %>
-                            <%= hidden_input f, :animal_id, value: animal.id %>
-                            <div class="row m-0">
+                            <%= form_for @conn, Routes.performed_procedure_path(@conn, :create,animal.id), [as: :performed_procedure], fn f -> %>
+                           <div class="row m-0">
                                 <div class="col-8 p-0"><%= select f, :procedure_type_id, @procedure_types, class: "form-control d-inline-block form-control-sm" %></div>
                                 <div class="col-4 p-0"><%= submit "Добави", class: "btn btn-primary d-inline-block btn-sm  w-100" %></div>
                             </div>

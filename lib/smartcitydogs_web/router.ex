@@ -41,6 +41,7 @@ defmodule SmartcitydogsWeb.Router do
 
       scope "/animals/:animal_id" do
         resources("/performed-procedure", PerformedProcedureController)
+        resources("/images", AnimalImageController)
       end
     end
 

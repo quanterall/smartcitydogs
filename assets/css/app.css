@@ -377,3 +377,15 @@ background-position-y: 25px;
     font-size: 80px;
     color: #00cc99;
 }
+.animal-image-container{
+    position: relative;
+}
+.animal-image-container form{
+    position: absolute;
+    right: 0px;
+    bottom:0px;
+}
+.animal-image-container form button{
+    font-size: 10px;
+    padding: 5px;
+}
