@@ -51,8 +51,7 @@ defmodule Smartcitydogs.Signal do
         :latitude
       ]
     )
-    |> validate_required([
-      :address,
+    |> validate_required([`
       :description,
       :signal_category_id
     ])
