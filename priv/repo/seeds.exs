@@ -147,54 +147,54 @@ alias Smartcitydogs.User
 |> Enum.each(&Animal.create(&1))
 
 [
-  %{
-    address: "nov adrees",
-    chip_number: "1",
-    description: "asdfasfasdasd",
-    latitude: nil,
-    longitude: nil,
-    signal_category_id: 1,
-    signal_type_id: 1,
-    title: "new dog",
-    user_id: 1,
-    view_count: 1
-  },
-  %{
-    address: "nov adrees",
-    chip_number: "2",
-    description: "asdfasfasdasd",
-    latitude: nil,
-    longitude: nil,
-    signal_category_id: 2,
-    signal_type_id: 2,
-    title: "new dog",
-    user_id: 1,
-    view_count: 1
-  },
-  %{
-    address: "nov adrees",
-    chip_number: "3",
-    description: "asdfasfasdasd",
-    latitude: nil,
-    longitude: nil,
-    signal_category_id: 3,
-    signal_type_id: 3,
-    title: "new dog",
-    user_id: 1,
-    view_count: 1
-  },
-  %{
-    address: "nov adrees",
-    chip_number: "4",
-    description: "asdfasfasdasd",
-    latitude: nil,
-    longitude: nil,
-    signal_category_id: 3,
-    signal_type_id: 4,
-    title: "new dog",
-    user_id: 1,
-    view_count: 1
-  }
+  #  %{
+  #    address: "nov adrees",
+  #    chip_number: "1",
+  #    description: "asdfasfasdasd",
+  #    latitude: nil,
+  #    longitude: nil,
+  #    signal_category_id: 1,
+  #    signal_type_id: 1,
+  #    title: "new dog",
+  #    user_id: 1,
+  #    view_count: 1
+  #  },
+  #  %{
+  #    address: "nov adrees",
+  #    chip_number: "2",
+  #    description: "asdfasfasdasd",
+  #    latitude: nil,
+  #    longitude: nil,
+  #    signal_category_id: 2,
+  #    signal_type_id: 2,
+  #    title: "new dog",
+  #    user_id: 1,
+  #    view_count: 1
+  #  },
+  #  %{
+  #    address: "nov adrees",
+  #    chip_number: "3",
+  #    description: "asdfasfasdasd",
+  #    latitude: nil,
+  #    longitude: nil,
+  #    signal_category_id: 3,
+  #    signal_type_id: 3,
+  #    title: "new dog",
+  #    user_id: 1,
+  #    view_count: 1
+  #  },
+  #  %{
+  #    address: "nov adrees",
+  #    chip_number: "4",
+  #    description: "asdfasfasdasd",
+  #    latitude: nil,
+  #    longitude: nil,
+  #    signal_category_id: 3,
+  #    signal_type_id: 4,
+  #    title: "new dog",
+  #    user_id: 1,
+  #    view_count: 1
+  #  }
 ]
 |> Enum.each(&Signal.create(&1))
 
