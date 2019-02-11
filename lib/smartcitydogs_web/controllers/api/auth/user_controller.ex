@@ -18,6 +18,14 @@ defmodule SmartcitydogsWeb.Api.UserController do
     end
   end
 
+  def update(conn, %{"user" => params}) do
+    %{id: id} = Guardian.Plug.current_resource(conn)
+    user = User.update(id, params)
+
+    conn
+    |> json(%{user: Encoder.struct_to_map(user)})
+  end
+
   def show(conn, _) do
     data =
       Guardian.Plug.current_resource(conn)

@@ -51,7 +51,6 @@ defmodule Smartcitydogs.User do
       :phone,
       :user_type
     ])
-    |> validate_acceptance(:agreed_to_terms)
     |> cast(attrs, ~w(password)a, [])
     |> validate_length(:password, min: 6, max: 100)
     |> validate_inclusion(:user_type, ["admin", "citizen", "shelter", "police", "municipality"])
@@ -76,6 +75,12 @@ defmodule Smartcitydogs.User do
     |> Repo.insert()
   end
 
+  def update(id, params) do
+    get(id)
+    |> changeset(params)
+    |> Repo.update!()
+  end
+
   def token_sign_in(email, password) do
     case email_password_auth(email, password) do
       {:ok, user} ->
@@ -89,6 +94,10 @@ defmodule Smartcitydogs.User do
   def email_password_auth(email, password) when is_binary(email) and is_binary(password) do
     with {:ok, user} <- get_by_email(email),
          do: verify_password(password, user)
+  end
+
+  def get(id) do
+    Repo.get!(__MODULE__, id)
   end
 
   def get_by_email(email) when is_binary(email) do

@@ -70,6 +70,7 @@ defmodule SmartcitydogsWeb.Router do
 
     scope "/" do
       pipe_through([:jwt_authenticated])
+      post("/update", UserController, :update)
       resources("/signals", SignalController, only: [:create, :update])
 
       scope "/signals/:signal_id" do
