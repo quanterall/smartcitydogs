@@ -2,6 +2,7 @@ defmodule SmartcitydogsWeb.Api.UserController do
   use SmartcitydogsWeb, :controller
   alias Smartcitydogs.User
   alias SmartcitydogsWeb.Encoder
+  alias Smartcitydogs.{Mailer, Email}
 
   def create(conn, %{"user" => params}) do
     with {:ok, %User{} = user} <- User.create(params),
@@ -46,5 +47,26 @@ defmodule SmartcitydogsWeb.Api.UserController do
         |> put_status(403)
         |> json(%{error: :unauthorized})
     end
+  end
+
+  def forget_password(conn, %{"email" => email}) do
+    token =
+      Phoenix.Token.sign(
+        SmartcitydogsWeb.Endpoint,
+        Application.fetch_env!(:smartcitydogs, :secret_salt),
+        email
+      )
+
+    Email.send_email(
+      email,
+      "Забравена парола от Smartcitydogs",
+      "forget_password.html",
+      email: email,
+      token: token,
+      conn: conn
+    )
+    |> Mailer.deliver_later()
+
+    json(conn, %{success: "E-mail with password is send!"})
   end
 end

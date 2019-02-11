@@ -32,6 +32,8 @@ defmodule SmartcitydogsWeb.Router do
   ## Browser ##
   scope "/", SmartcitydogsWeb do
     pipe_through([:browser, :auth])
+    get("/forget_password", UserController, :forget_password)
+    post("/forget_password", UserController, :reset_password)
 
     scope "/" do
       pipe_through([:ensure_auth, :ensure_staff])
@@ -65,6 +67,8 @@ defmodule SmartcitydogsWeb.Router do
 
     post("/sign_up", UserController, :create)
     post("/sign_in", UserController, :sign_in)
+    post("/forget_password", UserController, :forget_password)
+
     resources("/signals", SignalController, only: [:show, :index])
     resources("/animals", AnimalController, only: [:show, :index])
 

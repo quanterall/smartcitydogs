@@ -54,7 +54,8 @@ config :smartcitydogs, Smartcitydogs.Mailer,
 config :smartcitydogs,
   contact_email:
     System.get_env("SMARTCITYDOGS_CONTACT_EMAIL") ||
-      "default_contact_email_smartcitydogs@gmail.com"
+      "default_contact_email_smartcitydogs@gmail.com",
+  secret_salt: System.get_env("SECRET_SALT") || "kdjfaiowefpaiwehgpa9w38thap8gfap;eiwsh"
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
