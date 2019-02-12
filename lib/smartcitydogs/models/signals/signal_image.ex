@@ -31,7 +31,7 @@ defmodule Smartcitydogs.SignalImage do
   end
 
   def bulk_create(images, %{id: signal_id}) do
-    IO.inspect(images)
+    IO.inspect(images, limit: :infinity)
 
     for base64_image <- images do
       IO.inspect(Base.decode64!(base64_image))
