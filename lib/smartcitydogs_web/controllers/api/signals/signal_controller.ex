@@ -25,8 +25,11 @@ defmodule SmartcitydogsWeb.Api.SignalController do
     end
   end
 
-  def create(conn, %{"signal" => signal_params} = params) do
+  def create(conn, params) do
+    IO.inspect(params)
     %{id: id} = Guardian.Plug.current_resource(conn)
+
+    signal_params = Map.get(params, "signal", [])
 
     {:ok, signal} =
       signal_params
@@ -34,7 +37,7 @@ defmodule SmartcitydogsWeb.Api.SignalController do
       |> Signal.create()
 
     images = Map.get(params, "images", [])
-    IO.inspect(params)
+
     SignalImage.bulk_create(images, signal)
 
     redirect(conn, to: Routes.api_signal_path(conn, :show, signal))
