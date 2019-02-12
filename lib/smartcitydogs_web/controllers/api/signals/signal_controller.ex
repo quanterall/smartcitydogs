@@ -34,6 +34,7 @@ defmodule SmartcitydogsWeb.Api.SignalController do
       |> Signal.create()
 
     images = Map.get(params, "images", [])
+    IO.inspect(params)
     SignalImage.bulk_create(images, signal)
 
     redirect(conn, to: Routes.api_signal_path(conn, :show, signal))
