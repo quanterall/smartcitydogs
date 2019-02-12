@@ -31,15 +31,12 @@ defmodule Smartcitydogs.SignalImage do
   end
 
   def bulk_create(images, %{id: signal_id}) do
-    IO.inspect(images, limit: :infinity, printable_limit: :infinity)
-
     for base64_image <- images do
-      IO.inspect(Base.decode64!(base64_image))
       filename = to_string(:erlang.unique_integer()) <> ".jpg"
 
       File.write!(
         File.cwd!() <> "/priv/static/images/signals/#{filename}",
-        Base.decode64!(base64_image)
+        Base.decode64!(base64_image, padding: false)
       )
 
       create(%{
