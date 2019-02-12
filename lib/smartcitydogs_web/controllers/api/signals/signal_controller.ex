@@ -29,7 +29,7 @@ defmodule SmartcitydogsWeb.Api.SignalController do
     IO.inspect(params)
     %{id: id} = Guardian.Plug.current_resource(conn)
 
-    signal_params = Map.get(params, "signal", [])
+    signal_params = Map.get(params, "signal", %{})
 
     {:ok, signal} =
       signal_params
