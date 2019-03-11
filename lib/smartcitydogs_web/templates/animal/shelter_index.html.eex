@@ -31,7 +31,7 @@
                         <%= for image <- animal.animal_images do %>
                            <div class="col-6 animal-image-container p-0"> 
                             <img src="/<%= image.url %>" class="w-100">
-                            <%= form_for @conn, Routes.animal_image_path(@conn,:delete,animal.id,image.id), [class: "d-inline-block"], fn f -> %>
+                            <%= form_for @conn, Routes.animal_image_path(@conn,:delete,animal.id,image.id), [class: "d-inline-block"], fn _ -> %>
                                 <input name="_method" type="hidden" value="delete">
                                 <button type="submit" class="btn btn-danger">
                                 <i class='fas fa-trash'></i>
@@ -39,7 +39,7 @@
                             <% end %>
                            </div>
                         <% end %>
-                    <%= else %>
+                    <% else %>
                         Няма снимка!
                     <% end %>
                     </div>
@@ -70,12 +70,12 @@
                     <td class="align-middle">
                         <ul class="list-group">
                             <%= for performed_procedure <- animal.performed_procedures do %>
-                            <li class="list-group-item p-0 pl-2 text-nowrap"">
+                            <li class="list-group-item p-0 pl-2 text-nowrap" data-table="performed_procedures" data-id="<%= performed_procedure.id %>">
                                 <div>
                                     <%= Timex.format!(performed_procedure.inserted_at, "%d.%m.%y",:strftime)%> г.
                                     <%=performed_procedure.procedure_type.name%>
                                 </div>
-                                <%= form_for @conn, Routes.performed_procedure_path(@conn, :delete, animal.id, performed_procedure.id), [class: "pull-right"], fn f -> %>
+                                <%= form_for @conn, Routes.performed_procedure_path(@conn, :delete, animal.id, performed_procedure.id), [class: "pull-right"], fn _ -> %>
                                 <input name="_method" type="hidden" value="delete">
                                 <button type="submit" class="text-danger btn btn-default bg-transparent btn-sm">
                                     <i class='fas fa-trash'></i>
@@ -93,7 +93,7 @@
                             <% end %>
                         </div>
                     </td>
-                    <td class="align-middle">
+                    <td class="align-middle" data-table="animals" data-id="<%= animal.id %>">
                         <a class="btn  btn-primary d-inline-block"
                            href="<%=Routes.animal_path(@conn,:edit,animal.id)%>">
                             <i class="fas fa-edit"></i>

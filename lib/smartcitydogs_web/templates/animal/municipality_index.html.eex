@@ -48,7 +48,7 @@
                         <a class="btn btn-info d-inline-block" href="<%= Routes.animal_path(@conn,:show,animal.id) %>">
                             <i class="fas fa-arrow-right"></i>
                         </a>
-                        <%= form_for @conn, Routes.animal_path(@conn, :delete, animal.id), [class: "d-inline-block"], fn f -> %>
+                        <%= form_for @conn, Routes.animal_path(@conn, :delete, animal.id), [class: "d-inline-block"], fn _ -> %>
                         <input name="_method" type="hidden" value="delete">
                         <button type="submit" class="btn btn-danger">
                             <i class='fas fa-trash'></i>

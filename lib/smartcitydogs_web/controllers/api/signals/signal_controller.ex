@@ -28,7 +28,7 @@ defmodule SmartcitydogsWeb.Api.SignalController do
   def create(conn, %{"signal" => signal_params} = params) do
     %{id: id} = Guardian.Plug.current_resource(conn)
 
-    {:ok, signal} =
+    signal =
       signal_params
       |> Map.put("user_id", id)
       |> Signal.create()

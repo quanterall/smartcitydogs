@@ -1,7 +1,7 @@
 defmodule Smartcitydogs.Animal do
   use Ecto.Schema
   import Ecto.{Changeset, Query}
-  alias Smartcitydogs.{Repo, QueryFilter, AnimalImage, AnimalStatus, Adopt}
+  alias Smartcitydogs.{Repo, QueryFilter, AnimalImage, AnimalStatus, Adopt, Blockchain}
 
   @timestamps_opts [type: :utc_datetime, usec: false]
   @preload [
@@ -23,6 +23,11 @@ defmodule Smartcitydogs.Animal do
     belongs_to(:animal_status, AnimalStatus)
     has_many(:adopts, Adopt, on_delete: :delete_all)
 
+    has_many(:hashes, Blockchain,
+      foreign_key: :table_id,
+      where: [table_name: "animals"]
+    )
+
     timestamps()
   end
 
@@ -39,13 +44,14 @@ defmodule Smartcitydogs.Animal do
       :animal_status_id
     ])
     |> validate_required([:sex, :chip_number, :address])
-    |> validate_inclusion(:sex, ["male", "famele"])
+    |> validate_inclusion(:sex, ["male", "female"])
   end
 
   def create(args \\ %{}) do
     %__MODULE__{}
     |> changeset(args)
-    |> Repo.insert()
+    |> Repo.insert!()
+    |> Blockchain.create()
   end
 
   def preload(query) do
@@ -110,6 +116,7 @@ defmodule Smartcitydogs.Animal do
   def update(animal, params) do
     animal
     |> changeset(params)
-    |> Repo.update()
+    |> Repo.update!()
+    |> Blockchain.create()
   end
 end

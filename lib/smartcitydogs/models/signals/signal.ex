@@ -2,7 +2,7 @@ defmodule Smartcitydogs.Signal do
   use Ecto.Schema
   import Ecto.Changeset
   import Ecto.Query
-  alias Smartcitydogs.{Repo, QueryFilter}
+  alias Smartcitydogs.{Repo, QueryFilter, Blockchain}
 
   @timestamps_opts [type: :utc_datetime, usec: true]
   schema "signals" do
@@ -105,13 +105,15 @@ defmodule Smartcitydogs.Signal do
   def create(params) do
     %__MODULE__{}
     |> changeset(params)
-    |> Repo.insert()
+    |> Repo.insert!()
+    |> Blockchain.create()
   end
 
   def update(signal, params) do
     signal
     |> changeset(params)
-    |> Repo.update()
+    |> Repo.update!()
+    |> Blockchain.create()
   end
 
   def get_first_image(signal) do

@@ -24,7 +24,7 @@ defmodule SmartcitydogsWeb.HomeController do
       Animal
       |> limit(6)
       |> Repo.all()
-      |> Repo.preload([:animal_images, :animal_status])
+      |> Repo.preload([:animal_images, :animal_status, :hashes])
 
     adopted_animals =
       Animal

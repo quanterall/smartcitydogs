@@ -11,9 +11,10 @@ defmodule Smartcitydogs.Application do
       # Start the Ecto repository
       Smartcitydogs.Repo,
       # Start the endpoint when the application starts
-      SmartcitydogsWeb.Endpoint
+      SmartcitydogsWeb.Endpoint,
       # Starts a worker by calling: Smartcitydogs.Worker.start_link(arg)
       # {Smartcitydogs.Worker, arg},
+      {Task.Supervisor, name: Smartcitydogs.TaskSupervisor}
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

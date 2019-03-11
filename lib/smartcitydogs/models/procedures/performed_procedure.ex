@@ -1,7 +1,7 @@
 defmodule Smartcitydogs.PerformedProcedure do
   use Ecto.Schema
   import Ecto.Changeset
-  alias Smartcitydogs.Repo
+  alias Smartcitydogs.{Repo, Blockchain}
 
   @timestamps_opts [type: :utc_datetime, usec: false]
 
@@ -23,7 +23,8 @@ defmodule Smartcitydogs.PerformedProcedure do
   def create(params) do
     %__MODULE__{}
     |> changeset(params)
-    |> Repo.insert()
+    |> Repo.insert!()
+    |> Blockchain.create()
   end
 
   def get(id) do
