@@ -60,6 +60,7 @@ defmodule Smartcitydogs.Animal do
 
   def get_all(filters \\ %{}) do
     from(a in __MODULE__)
+    |> order_by(desc: :inserted_at)
     |> QueryFilter.filter(filters)
     |> Repo.all()
   end

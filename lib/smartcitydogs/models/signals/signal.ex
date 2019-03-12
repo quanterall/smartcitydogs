@@ -63,6 +63,7 @@ defmodule Smartcitydogs.Signal do
 
   def get_all_preloaded() do
     __MODULE__
+    |> order_by(desc: :inserted_at)
     |> Repo.all()
     |> preload()
   end

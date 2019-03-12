@@ -15,9 +15,12 @@ defmodule SmartcitydogsWeb.RoomChannel do
   end
 
   def handle_in("check_validation", %{"body" => body}, socket) do
-    Task.Supervisor.start_child(Smartcitydogs.TaskSupervisor, __MODULE__, :async_check, [
-      body
-    ])
+    Task.Supervisor.start_child(
+      Smartcitydogs.TaskSupervisor,
+      __MODULE__,
+      :async_check,
+      [body]
+    )
 
     {:noreply, socket}
   end
