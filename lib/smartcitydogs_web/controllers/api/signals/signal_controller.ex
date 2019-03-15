@@ -19,7 +19,7 @@ defmodule SmartcitydogsWeb.Api.SignalController do
         wrong_signal_id(conn, id)
 
       signal ->
-        {:ok, signal} = Signal.update(signal, %{"view_count" => signal.view_count + 1})
+        signal = Signal.update(signal, %{"view_count" => signal.view_count + 1})
 
         json(conn, SmartcitydogsWeb.Encoder.struct_to_map(signal))
     end
