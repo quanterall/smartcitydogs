@@ -54,7 +54,9 @@ defmodule SmartcitydogsWeb.RoomChannel do
               )
             end
 
-          _ ->
+          error ->
+            IO.inspect(error)
+
             SmartcitydogsWeb.Endpoint.broadcast(
               @topic,
               "validation_error",

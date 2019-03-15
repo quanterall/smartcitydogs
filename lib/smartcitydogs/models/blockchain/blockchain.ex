@@ -80,7 +80,10 @@ defmodule Smartcitydogs.Blockchain do
     headers = [Authorization: "Bearer #{token}", "Content-type": "application/json"]
     options = [recv_timeout: 100_000]
     body = %{id: id, entry_type: table, hash: hash} |> Poison.encode!()
-    {:ok, %{body: key}} = HTTPoison.post(@blockchain_url, body, headers, options)
-    key
+
+    case HTTPoison.post(@blockchain_url, body, headers, options) do
+      {:ok, %{body: key}} -> key
+      error -> IO.inspect(error)
+    end
   end
 end
