@@ -389,7 +389,10 @@ background-position-y: 25px;
     font-size: 10px;
     padding: 5px;
 }
-
+.news-card-container{
+    display: flex;
+    align-items: stretch;
+}
 [data-table]{
     position: relative;
 }
